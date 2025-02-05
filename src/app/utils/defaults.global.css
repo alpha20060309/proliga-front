@@ -1,0 +1,296 @@
+.html-page {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  color: #e0e0e0;
+  background-color: #121212;
+  line-height: 1.6;
+  overflow-wrap: break-word;
+  padding: 20px;
+  max-width: 896px;
+  margin: 0 auto;
+
+  h1 {
+    font-size: 2.2rem;
+    line-height: 2.6rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+  }
+  h2 {
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    color: #f0f0f0;
+  }
+  h3 {
+    font-size: 1.5rem;
+    line-height: 1.9rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #e8e8e8;
+  }
+  h4 {
+    font-size: 1.3rem;
+    line-height: 1.7rem;
+    font-weight: 500;
+    margin-bottom: 0.8rem;
+    color: #e0e0e0;
+  }
+  p {
+    font-size: 1.1rem;
+    line-height: 1.7rem;
+    margin-bottom: 1.2rem;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  table th,
+  table td {
+    border: 1px solid #333333;
+    padding: 0.8rem;
+    text-align: left;
+  }
+
+  table th {
+    background-color: #2a2a2a;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  .strong,
+  b {
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  ol,
+  ul {
+    margin: 0 0 1.2rem 2rem;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+
+  a {
+    color: #4da6ff;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  blockquote {
+    border-left: 4px solid #444444;
+    padding: 0.5rem 1rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: #b0b0b0;
+    background-color: #1e1e1e;
+  }
+
+  code {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #2a2a2a;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.9em;
+  }
+
+  @media screen and (max-width: 640px) {
+    h1 {
+      font-size: 1.5rem;
+      line-height: 1.9rem;
+    }
+    h2 {
+      font-size: 1.3rem;
+      line-height: 1.7rem;
+    }
+    h3 {
+      font-size: 1.2rem;
+      line-height: 1.6rem;
+    }
+    h4 {
+      font-size: 1rem;
+      line-height: 1.4rem;
+    }
+    p {
+      font-size: 0.9rem;
+      line-height: 1.4rem;
+    }
+
+    table {
+      font-size: 0.8rem;
+    }
+
+    table th,
+    table td {
+      padding: 0.3rem;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    table {
+      font-size: 0.7rem;
+    }
+
+    table th,
+    table td {
+      padding: 0.2rem;
+    }
+  }
+}
+
+.modal-news {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  color: #e0e0e0;
+  background-color: #1a1a1a;
+  line-height: 1.5;
+  overflow-wrap: break-word;
+  max-width: fit-content;
+
+  img {
+    border-radius: 2px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #ffffff;
+  }
+  h2 {
+    font-size: 1.5rem;
+    line-height: 1.9rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    color: #f0f0f0;
+  }
+  h3 {
+    font-size: 1.3rem;
+    line-height: 1.7rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    color: #e8e8e8;
+  }
+  h4 {
+    font-size: 1.1rem;
+    line-height: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #e0e0e0;
+  }
+  p {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    margin-bottom: 1rem;
+    overflow-wrap: break-word;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  table th,
+  table td {
+    border: 1px solid #333333;
+    padding: 0.5rem;
+    text-align: left;
+  }
+
+  table th {
+    background-color: #2a2a2a;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  .strong,
+  b {
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  ol,
+  ul {
+    margin: 0 0 1rem 1.5rem;
+  }
+
+  a {
+    color: #4da6ff;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  blockquote {
+    border-left: 3px solid #444444;
+    padding-left: 1rem;
+    margin: 1rem 0;
+    font-style: italic;
+    color: #b0b0b0;
+  }
+
+  @media screen and (max-width: 640px) {
+    h1 {
+      font-size: 1.5rem;
+      line-height: 1.9rem;
+    }
+    h2 {
+      font-size: 1.3rem;
+      line-height: 1.7rem;
+    }
+    h3 {
+      font-size: 1.2rem;
+      line-height: 1.6rem;
+    }
+    h4 {
+      font-size: 1rem;
+      line-height: 1.4rem;
+    }
+    p {
+      font-size: 0.9rem;
+      line-height: 1.4rem;
+    }
+
+    table,
+    table tbody,
+    table tr,
+    table td {
+      display: block;
+      width: 100%;
+    }
+    table tr {
+      margin-bottom: 0.5rem;
+    }
+    table td {
+      text-align: right;
+      padding-left: 50%;
+      position: relative;
+    }
+    table td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 6px;
+      width: 45%;
+      text-align: left;
+      font-weight: 600;
+      color: #b0b0b0;
+    }
+  }
+}
+
+.modal-news * {
+  max-width: 92vw;
+}

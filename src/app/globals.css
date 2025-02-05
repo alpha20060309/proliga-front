@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('./utils/animations.global.css');
+@import url('./utils/filters.global.css');
+@import url('./utils/defaults.global.css');
+
+@layer base {
+  ::-webkit-scrollbar {
+    width: 20px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 5px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px rgb(35, 35, 25) inset !important;
+    -webkit-text-fill-color: rgb(240, 200, 50);
+  }
+  select option:checked,
+  select option:hover {
+    box-shadow: 0 0 10px 100px #000 inset;
+  }
+}
+
+@layer components {
+  .auth-container {
+    @apply mx-4 flex w-full flex-col gap-4 rounded-xl bg-neutral-950 px-6 py-8 shadow shadow-neutral-500 xs:w-3/4 sm:mx-0 sm:w-1/2 md:w-[28rem] md:p-8;
+  }
+  .auth-input {
+    @apply h-10 w-full rounded border border-yellow-700 bg-neutral-900 px-2 py-1 text-sm text-neutral-200 placeholder:text-neutral-500 md:text-base;
+  }
+  .text-shadow {
+    text-shadow: 2px 1px 1px #000;
+  }
+  .promotion-text {
+    @apply text-sm xs:text-base md:text-lg lg:text-lg xl:text-xl 2xl:text-xl;
+  }
+  .promotion-header {
+    @apply text-lg uppercase xs:text-xl md:text-2xl xl:text-3xl 2xl:text-4xl;
+  }
+  .carousel-header {
+    @apply text-base xs:text-lg md:text-xl xl:text-2xl 2xl:text-3xl;
+  }
+  .carousel-text {
+    @apply text-xs text-neutral-300 xs:text-sm lg:text-base xl:text-lg;
+  }
+  .loader {
+    border: 16px solid #121212;
+    border-top: 16px solid #fff400;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+  }
+}
