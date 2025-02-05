@@ -8,7 +8,6 @@ const ChampionshipsTitle = dynamic(() => import('./components/Title'), {
   ssr: false,
   loading: () => <Skeleton className="mb-6 h-7 w-48" />,
 })
-import Gutter from '../../../components/Gutter'
 import dynamic from 'next/dynamic'
 import { cn } from '@/lib/utils'
 import { useEffect, useMemo } from 'react'
@@ -62,33 +61,31 @@ const Championships = () => {
   )
 
   return (
-    <Gutter>
-      <section
-        className={cn(
-          'mb-4 mt-8 min-h-[30rem] w-full rounded-lg border border-neutral-700',
-          'bg-black/10 p-4 backdrop-blur sm:p-5 md:mt-6 md:min-h-48'
-        )}
-      >
-        {isLoading ? (
-          <Skeleton className="mb-6 h-7 w-48" />
-        ) : (
-          <ChampionshipsTitle />
-        )}
-        {isLoading ? (
-          <section className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-            {[...Array(4)].map((_, index) => (
-              <ChampionshipSkeleton key={index} />
-            ))}
-          </section>
-        ) : (
-          <section className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-            {competitions.map((game, index) => (
-              <Championship key={index} game={game} />
-            ))}
-          </section>
-        )}
-      </section>
-    </Gutter>
+    <section
+      className={cn(
+        'mb-4 mt-8 min-h-[30rem] w-full rounded-lg border border-neutral-700',
+        'bg-black/10 p-4 backdrop-blur sm:p-5 md:mt-6 md:min-h-48'
+      )}
+    >
+      {isLoading ? (
+        <Skeleton className="mb-6 h-7 w-48" />
+      ) : (
+        <ChampionshipsTitle />
+      )}
+      {isLoading ? (
+        <section className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+          {[...Array(4)].map((_, index) => (
+            <ChampionshipSkeleton key={index} />
+          ))}
+        </section>
+      ) : (
+        <section className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+          {competitions.map((game, index) => (
+            <Championship key={index} game={game} />
+          ))}
+        </section>
+      )}
+    </section>
   )
 }
 

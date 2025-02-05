@@ -609,5 +609,9 @@
   "Refresh": "Обновить",
   "Iltimos to'lov usulini tanlang": "Пожалуйста, выберите способ оплаты.",
   "Or": "Или",
-  "Eski parol noto'g'ri": "Старый пароль неверный\n"
+  "Eski parol noto'g'ri": "Старый пароль неверный\n",
+  "Match Start": "Матч начался",
+  "Halftime": "Перерыв",
+  "2nd Match Start": "Второй матч начался",
+  "Game Ends": "Матч завершён"
 }
