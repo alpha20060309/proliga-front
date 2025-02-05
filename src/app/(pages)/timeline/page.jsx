@@ -1,20 +1,7 @@
 'use client'
 
-import {
-  ArrowLeft,
-  Share2,
-  X,
-  Goal,
-  Swap,
-  ArrowUpDown,
-  AlertTriangle,
-} from 'lucide-react'
+import { ArrowLeft, Share2, X, Goal, AlertTriangle } from 'lucide-react'
 import { useState } from 'react'
-import {
-  VerticalTimeline,
-  VerticalTimelineElement,
-} from 'react-vertical-timeline-component'
-import 'react-vertical-timeline-component/style.min.css'
 
 export default function MatchDetails() {
   const [activeTab, setActiveTab] = useState('online')
@@ -43,11 +30,11 @@ export default function MatchDetails() {
     },
     { name: 'Парти', time: 56, goal: true, team: 'home' },
     { name: 'Холанд', subtext: 'Савио', time: 55, goal: true, team: 'away' },
-    { text: 'Начало второго тайма.' },
-    { text: 'Перерыв.' },
+    { text: 'Начало второго тайма.', stop: true },
+    { text: 'Перерыв.', stop: true },
     { name: 'Тимбер', time: 25, yellowCard: true, team: 'away' },
     { name: 'Эдегор', subtext: 'Хавертц', time: 2, goal: true, team: 'home' },
-    { text: 'Начало первого тайма.' },
+    { text: 'Начало первого тайма.', stop: true },
   ]
 
   return (
@@ -114,58 +101,57 @@ export default function MatchDetails() {
           Конец матча.
         </div>
 
-        <VerticalTimeline layout="2-columns" lineColor="rgba(255,255,255,0.2)">
-          {events.map((event, i) => (
-            <VerticalTimelineElement
-              key={i}
-              className="vertical-timeline-element"
-              contentStyle={{
-                background: event.team === 'home' ? '#047857' : '#1E40AF',
-                color: '#fff',
-                padding: '10px',
-                boxShadow: 'none',
-                visibility: event.text ? 'hidden' : 'visible',
-              }}
-              contentArrowStyle={{
-                borderRight:
-                  event.team === 'home' ? '7px solid #047857' : 'none',
-                borderLeft:
-                  event.team === 'away' ? '7px solid #1E40AF' : 'none',
-              }}
-              date={event.time ? `${event.time}'` : ''}
-              iconStyle={{
-                background: event.goal
-                  ? '#00DC82'
-                  : event.yellowCard
-                    ? '#FCD34D'
-                    : '#374151',
-                color: '#fff',
-                boxShadow: 'none',
-              }}
-              icon={
-                event.goal ? (
-                  <ArrowUpDown className="h-4 w-4" />
-                ) : event.yellowCard ? (
-                  <AlertTriangle className="h-4 w-4" />
-                ) : null
-              }
-              position={event.team === 'home' ? 'left' : 'right'}
+        <div className="relative">
+          {/* Center line */}
+          <div className="absolute bottom-0 left-1/2 top-0 w-px -translate-x-1/2 transform bg-white/20"></div>
+
+          {events.map((event, index) => (
+            <div
+              key={index}
+              className={`my-4 flex items-center justify-center ${event.stop ? 'flex-col' : event.team === 'home' ? 'flex-row' : 'flex-row-reverse'}`}
             >
-              {event.text ? (
-                <p className="text-center text-sm text-white/50">
+              {event.stop ? (
+                <div className="z-10 bg-black px-2 text-center text-sm text-white/50">
                   {event.text}
-                </p>
+                </div>
               ) : (
                 <>
-                  <h3 className="text-base font-medium">{event.name}</h3>
-                  {event.subtext && (
-                    <p className="text-sm text-white/70">{event.subtext}</p>
-                  )}
+                  <div
+                    className={`w-5/12 ${event.team === 'home' ? 'pr-4 text-right' : 'pl-4 text-left'}`}
+                  >
+                    <div className="font-medium">{event.name}</div>
+                    {event.subtext && (
+                      <div className="text-sm text-white/50">
+                        {event.subtext}
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex w-2/12 items-center justify-center">
+                    <div
+                      className={`z-10 flex size-10 items-center justify-center rounded-full ${
+                        event.goal
+                          ? 'bg-[#00DC82]'
+                          : event.yellowCard
+                            ? 'bg-yellow-400'
+                            : 'bg-gray-700'
+                      }`}
+                    >
+                      {event.goal && <Goal className="size-6 text-white" />}
+                      {event.yellowCard && (
+                        <AlertTriangle className="size-6 text-white" />
+                      )}
+                    </div>
+                  </div>
+                  <div
+                    className={`w-5/12 ${event.team === 'home' ? 'pl-4 text-left' : 'pr-4 text-right'}`}
+                  >
+                    <div className="text-sm text-white/70">{event.time}`</div>
+                  </div>
                 </>
               )}
-            </VerticalTimelineElement>
+            </div>
           ))}
-        </VerticalTimeline>
+        </div>
       </div>
 
       {/* Bottom Vote Section */}
