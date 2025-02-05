@@ -9,17 +9,34 @@ import {
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { Timer } from 'lucide-react'
-import { MATCH_EVENTS } from 'app/utils/players.util'
+import { MATCH_EVENTS, MATCH_STATUS } from 'app/utils/players.util'
 import { cn } from '@/lib/utils'
 import { useTranslation } from 'react-i18next'
 import { DialogDescription } from '@radix-ui/react-dialog'
+import { formatDate } from 'app/utils/formatDate.util'
 
 function App() {
+  const { t } = useTranslation()
+
   const [isOpen, setIsOpen] = useState(false)
-  const [activeTab, setActiveTab] = useState('online')
+
+  const renderMatchStatus = (status) => {
+    switch (status) {
+      case MATCH_STATUS.NOT_STARTED:
+        return t('Boshlanmagan')
+      case MATCH_STATUS.INPROCESS:
+        return t('Jarayonda')
+      case MATCH_STATUS.FINISHED:
+        return t('Tugagan')
+      default:
+        return null
+    }
+  }
+
+  const date = '2025-01-04 17:30:00+05'
 
   return (
-    <div className="flex min-h-screen items-center justify-center gap-0 space-y-0 bg-gray-950">
+    <div className="flex min-h-screen items-center justify-center bg-gray-950">
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
           <Button
@@ -29,32 +46,34 @@ function App() {
             View Match Details
           </Button>
         </DialogTrigger>
-        <DialogContent className="max-h-[90vh] max-w-2xl gap-0 space-y-0 rounded-xl bg-gradient-to-b from-gray-900 via-neutral-950 to-black p-0 text-white shadow-sm shadow-neutral-700">
+        <DialogContent className="max-h-[90vh] max-w-2xl gap-0 rounded-xl border border-neutral-800 bg-gradient-to-b from-gray-900 via-neutral-950 to-black p-0 text-white">
           <section className="relative border-b border-white/10 p-4">
             <DialogTitle className="text-center text-xl font-semibold">
-              Premier League
+              Англия | Премьер-лига
             </DialogTitle>
-            <div className="mt-1 text-center text-sm text-gray-400">
-              Matchday 26 • Emirates Stadium
+            <div className="mt-1 flex justify-center gap-2 text-center text-sm text-gray-400">
+              <time>{formatDate(date, 'notifications')}</time>
+              <span>&#9679;</span>
+              <div>{renderMatchStatus(MATCH_STATUS.FINISHED)}</div>
             </div>
           </section>
           <DialogDescription className="hidden"></DialogDescription>
           {/* Score Section */}
-          <div className="bg-gradient-to-r from-blue-800/20 via-yellow-800/20 to-red-800/20 py-4">
-            <div className="] flex items-center justify-center gap-8">
+          <section className="bg-gradient-to-r from-blue-800/20 via-yellow-800/20 to-red-800/20 py-4">
+            <div className="flex items-center justify-center gap-4">
               <div className="flex w-[40%] flex-col items-center justify-center gap-2 text-center">
                 <img
                   src="../static/club-jpeg/arsenal/logo.jpeg"
                   alt="Arsenal"
                   className="size-16 rounded-full"
                 />
-                <div className="font-bold">Arsenal</div>
+                <h3 className="font-bold">Arsenal</h3>
               </div>
-              <div className="w-[20%] text-center">
-                <div className="mb-2 flex items-center justify-center gap-3">
-                  <span className="text-4xl font-bold">2</span>
+              <div className="flex w-[20%] flex-col items-center justify-center gap-2 text-center">
+                <div className="flex items-center justify-center gap-3">
+                  <span className="text-4xl font-bold text-neutral-50">2</span>
                   <span className="text-4xl font-light text-gray-400">:</span>
-                  <span className="text-4xl font-bold">1</span>
+                  <span className="text-4xl font-bold text-neutral-50">1</span>
                 </div>
                 <div className="flex items-center justify-center gap-1 rounded-full bg-green-500/20 px-2 py-1 text-sm text-green-400">
                   <Timer className="h-4 w-4" />
@@ -67,10 +86,10 @@ function App() {
                   alt="Manchester City"
                   className="size-16 rounded-full"
                 />
-                <div className="font-bold">Manchester City</div>
+                <h3 className="font-bold">Manchester City</h3>
               </div>
             </div>
-          </div>
+          </section>
 
           <section className="relative flex h-full max-h-[calc(90vh-300px)] flex-col gap-4 overflow-y-auto px-4 py-4">
             {/* Center line */}
@@ -91,8 +110,8 @@ function App() {
 
 const MatchEvent = ({ event }) => {
   const { t } = useTranslation()
+
   const renderIcon = (type) => {
-    // <span className="flex size-8 items-center justify-center rounded-md bg-neutral-800 p-1"></span>
     switch (type) {
       case MATCH_EVENTS.GOAL:
         return (

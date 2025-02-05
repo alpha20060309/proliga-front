@@ -4,7 +4,6 @@
 @import url('./utils/animations.global.css');
 @import url('./utils/filters.global.css');
 @import url('./utils/defaults.global.css');
-@import url('./utils/timeline.globa.css');
 
 @layer base {
   ::-webkit-scrollbar {

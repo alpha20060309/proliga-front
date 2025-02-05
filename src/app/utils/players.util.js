@@ -17,3 +17,9 @@ export const MATCH_EVENTS = {
   SECOND_TIME_START: 'second_time_start',
   SECOND_TIME_END: 'second_time_end',
 }
+
+export const MATCH_STATUS = {
+  NOT_STARTED: 'not_started',
+  INPROCESS: 'in_process',
+  FINISHED: 'finished',
+}

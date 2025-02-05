@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next'
 import { formatDate } from 'app/utils/formatDate.util'
 import { useMemo } from 'react'
 import { getUrl } from 'app/utils/static.util'
+import { MATCH_STATUS } from 'app/utils/players.util'
 
 const Match = ({ match }) => {
   const { t } = useTranslation()
@@ -131,7 +132,7 @@ const MatchStatus = ({ status, homeScore, awayScore }) => {
   const { t } = useTranslation()
 
   switch (status) {
-    case MATCHSTATUS.NOT_STARTED:
+    case MATCH_STATUS.NOT_STARTED:
       return (
         <Badge
           variant="secondary"
@@ -140,7 +141,7 @@ const MatchStatus = ({ status, homeScore, awayScore }) => {
           {t('Boshlanmagan')}
         </Badge>
       )
-    case MATCHSTATUS.INPROCESS:
+    case MATCH_STATUS.INPROCESS:
       return (
         <Badge
           variant="default"
@@ -149,7 +150,7 @@ const MatchStatus = ({ status, homeScore, awayScore }) => {
           {homeScore} - {awayScore}
         </Badge>
       )
-    case MATCHSTATUS.FINISHED:
+    case MATCH_STATUS.FINISHED:
       return (
         <Badge variant="outline text-[11px] sm:text-xs py-px">
           {homeScore} - {awayScore}
@@ -158,12 +159,6 @@ const MatchStatus = ({ status, homeScore, awayScore }) => {
     default:
       return null
   }
-}
-
-const MATCHSTATUS = {
-  NOT_STARTED: 'not_started',
-  INPROCESS: 'in_process',
-  FINISHED: 'finished',
 }
 
 export default Match
