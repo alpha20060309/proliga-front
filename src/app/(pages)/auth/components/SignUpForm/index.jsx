@@ -13,6 +13,7 @@ import { Eye, EyeOff, Lock, Mail } from 'lucide-react'
 import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
 import { useAuthRegister } from 'app/hooks/auth/useAuthRegister/useAuthRegister'
 import { isEmail } from 'validator'
+import { cn } from '@/lib/utils'
 
 const SignUpForm = ({ setShouldRedirect }) => {
   const { t } = useTranslation()
@@ -204,7 +205,11 @@ const SignUpForm = ({ setShouldRedirect }) => {
       <Button
         type="submit"
         disabled={isLoading}
-        className="h-12 w-full rounded border border-yellow-400 bg-neutral-900 font-bold text-neutral-100 transition-all duration-300 hover:bg-yellow-400 hover:text-neutral-900"
+        className={cn(
+          'h-12 w-full rounded border border-yellow-400 bg-neutral-900 font-bold',
+          'text-neutral-100 transition-all duration-300 hover:bg-yellow-400 hover:text-neutral-900',
+          isLoading && 'bg-yellow-400 text-neutral-900'
+        )}
       >
         {isLoading ? (
           <Image
@@ -212,7 +217,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
             width={24}
             height={24}
             alt="loading"
-            className="mx-auto size-6 animate-spin"
+            className="filter-black mx-auto size-6 animate-spin"
           />
         ) : (
           t('Akkaunt Ochish')

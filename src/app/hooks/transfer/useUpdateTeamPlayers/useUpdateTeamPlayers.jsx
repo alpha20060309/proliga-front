@@ -15,9 +15,6 @@ export const useUpdateTeamPlayers = () => {
     async ({ team, team_id, tour_id, userTable, currentCompetition }) => {
       setIsLoading(false)
       setError(null)
-      const condition = Boolean(
-        process.env.NEXT_PUBLIC_TRANSFER_SAVE_BUTTON_USE_RPC
-      )
 
       try {
         setIsLoading(true)
@@ -31,14 +28,10 @@ export const useUpdateTeamPlayers = () => {
           is_captain: player.is_captain,
         }))
 
-        const { error } = condition
-          ? await supabase.rpc('update__team_player', {
-              players: newTeam,
-            })
-          : await supabase
-              .from('team_player')
-              .upsert(newTeam)
-              .is('deleted_at', null)
+        const { error } = await supabase
+          .from('team_player')
+          .upsert(newTeam)
+          .is('deleted_at', null)
 
         if (error) {
           setError(
