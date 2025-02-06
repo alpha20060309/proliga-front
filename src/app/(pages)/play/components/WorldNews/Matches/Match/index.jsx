@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Badge } from '@/components/ui/badge'
 import {
   Tooltip,
@@ -12,8 +13,14 @@ import { formatDate } from 'app/utils/formatDate.util'
 import { useMemo } from 'react'
 import { getUrl } from 'app/utils/static.util'
 import { MATCH_STATUS } from 'app/utils/players.util'
+import { useDispatch } from 'react-redux'
+import {
+  setCurrentMatch,
+  setMatchModalOpen,
+} from 'app/lib/features/matches/matches.slice'
 
 const Match = ({ match }) => {
+  const dispatch = useDispatch()
   const { t } = useTranslation()
   const homeClub = match?.home_club_id ?? null
   const awayClub = match?.away_club_id ?? null
@@ -34,8 +41,16 @@ const Match = ({ match }) => {
   const isAwayWinner = awayScore > homeScore
   const isDraw = match?.status === 'finished' && homeScore === awayScore
 
+  const handleClick = () => {
+    dispatch(setCurrentMatch(match))
+    dispatch(setMatchModalOpen(true))
+  }
+
   return (
-    <article className="flex h-12 w-full items-center rounded-lg border border-neutral-800 bg-neutral-900/80 px-1 xs:px-2">
+    <article
+      onClick={handleClick}
+      className="flex h-12 w-full items-center rounded-lg border border-neutral-800 bg-neutral-900/80 px-1 xs:px-2"
+    >
       <TeamDisplay
         name={homeClub?.name}
         logo={homeImg}
