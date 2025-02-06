@@ -1,96 +1,44 @@
 'use client'
 
-import { useState } from 'react'
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
-import { Timer } from 'lucide-react'
+import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { MATCH_EVENTS, MATCH_STATUS } from 'app/utils/players.util'
 import { cn } from '@/lib/utils'
 import { useTranslation } from 'react-i18next'
 import { DialogDescription } from '@radix-ui/react-dialog'
-import { formatDate } from 'app/utils/formatDate.util'
+import { useDispatch, useSelector } from 'react-redux'
+import { setMatchModalOpen } from 'app/lib/features/matches/matches.slice'
+import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
+import { selectCurrentMatch } from 'app/lib/features/matches/matches.selector'
+import MatchEventHeader from './Header'
+import MatchEventSkeleton from './Content/Skeleton'
+import MatchEventScore from './Score'
 
-function App() {
+function MatchEventModal() {
+  const dispatch = useDispatch()
+  const { lang } = useSelector((store) => store.systemLanguage)
+  const { isModalOpen } = useSelector((store) => store.matches)
+  const currentMatch = useSelector(selectCurrentMatch)
+  const currentCompetition = useSelector(selectCurrentCompetition)
   const { t } = useTranslation()
 
-  const [isOpen, setIsOpen] = useState(false)
-
-  const renderMatchStatus = (status) => {
-    switch (status) {
-      case MATCH_STATUS.NOT_STARTED:
-        return t('Boshlanmagan')
-      case MATCH_STATUS.INPROCESS:
-        return t('Jarayonda')
-      case MATCH_STATUS.FINISHED:
-        return t('Tugagan')
-      default:
-        return null
-    }
+  const setModalOpen = () => {
+    dispatch(setMatchModalOpen(false))
   }
 
-  const date = '2025-01-04 17:30:00+05'
+  const isLoading = true
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-950">
-      <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogTrigger asChild>
-          <Button
-            variant="outline"
-            className="bg-black text-white hover:bg-black/90"
-          >
-            View Match Details
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="max-h-[90vh] max-w-2xl gap-0 rounded-xl border border-neutral-800 bg-gradient-to-b from-gray-900 via-neutral-950 to-black p-0 text-white">
-          <section className="relative border-b border-white/10 p-4">
-            <DialogTitle className="text-center text-xl font-semibold">
-              Англия | Премьер-лига
-            </DialogTitle>
-            <div className="mt-1 flex justify-center gap-2 text-center text-sm text-gray-400">
-              <time>{formatDate(date, 'notifications')}</time>
-              <span>&#9679;</span>
-              <div>{renderMatchStatus(MATCH_STATUS.FINISHED)}</div>
-            </div>
-          </section>
-          <DialogDescription className="hidden"></DialogDescription>
-          {/* Score Section */}
-          <section className="bg-gradient-to-r from-blue-800/20 via-yellow-800/20 to-red-800/20 py-4">
-            <div className="flex items-center justify-center gap-4">
-              <div className="flex w-[40%] flex-col items-center justify-center gap-2 text-center">
-                <img
-                  src="../static/club-jpeg/arsenal/logo.jpeg"
-                  alt="Arsenal"
-                  className="size-16 rounded-full"
-                />
-                <h3 className="font-bold">Arsenal</h3>
-              </div>
-              <div className="flex w-[20%] flex-col items-center justify-center gap-2 text-center">
-                <div className="flex items-center justify-center gap-3">
-                  <span className="text-4xl font-bold text-neutral-50">2</span>
-                  <span className="text-4xl font-light text-gray-400">:</span>
-                  <span className="text-4xl font-bold text-neutral-50">1</span>
-                </div>
-                <div className="flex items-center justify-center gap-1 rounded-full bg-green-500/20 px-2 py-1 text-sm text-green-400">
-                  <Timer className="h-4 w-4" />
-                  <span>90`+4</span>
-                </div>
-              </div>
-              <div className="flex w-[40%] flex-col items-center justify-center gap-2 text-center">
-                <img
-                  src="../static/club-jpeg/manchester-city/logo.jpeg"
-                  alt="Manchester City"
-                  className="size-16 rounded-full"
-                />
-                <h3 className="font-bold">Manchester City</h3>
-              </div>
-            </div>
-          </section>
-
+    <Dialog open={isModalOpen && currentMatch?.id} onOpenChange={setModalOpen}>
+      <DialogContent className="max-h-[90vh] max-w-2xl gap-0 rounded-xl border border-neutral-800 bg-gradient-to-b from-gray-900 via-neutral-950 to-black p-0 text-white">
+        <MatchEventHeader
+          started_date={currentMatch?.started_date}
+          finished_date={currentMatch?.finished_date}
+        />
+        <DialogDescription className="hidden"></DialogDescription>
+        <MatchEventScore />
+        {isLoading ? (
+          <MatchEventSkeleton />
+        ) : (
           <section className="relative flex h-full max-h-[calc(90vh-300px)] flex-col gap-4 overflow-y-auto px-4 py-4">
             {/* Center line */}
             <span
@@ -102,9 +50,9 @@ function App() {
               <MatchEvent key={index} event={event} />
             ))}
           </section>
-        </DialogContent>
-      </Dialog>
-    </div>
+        )}
+      </DialogContent>
+    </Dialog>
   )
 }
 
@@ -114,42 +62,44 @@ const MatchEvent = ({ event }) => {
   const renderIcon = (type) => {
     switch (type) {
       case MATCH_EVENTS.GOAL:
-        return (
-          <img src="./icons/football.svg" alt="Arsenal" className="size-7" />
-        )
+        return <img src="/icons/football.svg" alt="GOAL" className="size-7" />
       case MATCH_EVENTS.MISSED_PENALTY:
         return (
           <img
-            src="./icons/missed-penalty.svg"
-            alt="Arsenal"
+            src="/icons/missed-penalty.svg"
+            alt="missed penalty"
             className="size-6"
           />
         )
       case MATCH_EVENTS.HIT_PENALTY:
         return (
-          <img src="./icons/hit-penalty.svg" alt="Arsenal" className="size-6" />
+          <img
+            src="/icons/hit-penalty.svg"
+            alt="Penalty hit"
+            className="size-6"
+          />
         )
       case MATCH_EVENTS.TRANSFER:
         return (
           <img
-            src="./icons/arrows-transfer.svg"
-            alt="Arsenal"
+            src="/icons/arrows-transfer.svg"
+            alt="transfer players"
             className="size-7"
           />
         )
       case MATCH_EVENTS.RED_CARD:
         return (
           <img
-            src="./icons/soccer-card.svg"
-            alt="Arsenal"
+            src="/icons/soccer-card.svg"
+            alt="red card"
             className="filter-red-600 size-7"
           />
         )
       case MATCH_EVENTS.YELLOW_CARD:
         return (
           <img
-            src="./icons/soccer-card.svg"
-            alt="Arsenal"
+            src="/icons/soccer-card.svg"
+            alt="yellow card"
             className="filter-yellow-500 size-7"
           />
         )
@@ -179,6 +129,10 @@ const MatchEvent = ({ event }) => {
     event.type === MATCH_EVENTS.SECOND_TIME_START ||
     event.type === MATCH_EVENTS.SECOND_TIME_END
 
+  const hasSecondName =
+    event.type === MATCH_EVENTS.TRANSFER || event.type === MATCH_EVENTS.GOAL
+  const isTransfer = event.type === MATCH_EVENTS.TRANSFER
+
   return (
     <div
       className={cn(
@@ -201,9 +155,18 @@ const MatchEvent = ({ event }) => {
               event.team === 'home' ? 'pr-4 text-right' : 'pl-4 text-left'
             }`}
           >
-            <div className="font-medium">{event.player_name}</div>
-            {event.second_player_name && (
-              <div className="text-sm text-white/50">
+            <div
+              className={cn('text-neutral-50', isTransfer && 'text-green-600')}
+            >
+              {event.player_name}
+            </div>
+            {event?.second_player_name && hasSecondName && (
+              <div
+                className={cn(
+                  'text-sm text-white/50',
+                  isTransfer && 'text-red-600/90'
+                )}
+              >
                 {event.second_player_name}
               </div>
             )}
@@ -255,6 +218,7 @@ const events = [
   {
     player_name: 'Эдегор',
     minute: 90,
+    second_player_name: 'Троссард',
     team: 'away',
     type: MATCH_EVENTS.GOAL,
   },
@@ -304,4 +268,4 @@ const events = [
   },
 ]
 
-export default App
+export default MatchEventModal

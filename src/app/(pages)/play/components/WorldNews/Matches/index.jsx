@@ -135,7 +135,11 @@ const Matches = () => {
             <SelectContent>
               {tours.map((tour) => (
                 <SelectItem key={tour.id} value={tour.id}>
-                  {getCorrectName({ lang, uz: tour?.name, ru: tour?.name_ru })}
+                  {getCorrectName({
+                    lang,
+                    uz: tour?.name,
+                    ru: tour?.name_ru,
+                  })}
                 </SelectItem>
               ))}
             </SelectContent>
