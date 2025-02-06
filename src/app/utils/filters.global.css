@@ -42,3 +42,7 @@
   filter: brightness(0) saturate(100%) invert(13%) sepia(75%) saturate(4699%)
     hue-rotate(352deg) brightness(120%) contrast(86%);
 }
+.filter-yellow-500 {
+  filter: brightness(0) saturate(100%) invert(63%) sepia(12%) saturate(3805%)
+    hue-rotate(11deg) brightness(109%) contrast(94%);
+}

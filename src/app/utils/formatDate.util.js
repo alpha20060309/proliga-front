@@ -10,10 +10,11 @@ export const formatDate = (dateString, style = 'default') => {
     case 'matches':
       return `${day}.${month}. ${hours}:${minutes}`
     case 'news':
-      return `${day}/${month}/${year}`
+      return `${day}.${month}.${year}`
     case 'notifications':
-      return `${day}/${month}/${year} ${hours}:${minutes}`
+      return `${day}.${month}.${year} ${hours}:${minutes}`
+
     default:
-      return `${day}/${month}/${year}-${hours}:${minutes}`
+      return `${day}.${month}.${year} ${hours}:${minutes}`
   }
 }
