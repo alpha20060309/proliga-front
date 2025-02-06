@@ -1,21 +1,23 @@
 'use client'
 
-import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
-import { Timer } from 'lucide-react'
+import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { MATCH_EVENTS, MATCH_STATUS } from 'app/utils/players.util'
 import { cn } from '@/lib/utils'
 import { useTranslation } from 'react-i18next'
 import { DialogDescription } from '@radix-ui/react-dialog'
-import { formatDate } from 'app/utils/formatDate.util'
 import { useDispatch, useSelector } from 'react-redux'
 import { setMatchModalOpen } from 'app/lib/features/matches/matches.slice'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { selectCurrentMatch } from 'app/lib/features/matches/matches.selector'
+import MatchEventHeader from './Header'
+import MatchEventSkeleton from './Content/Skeleton'
+import MatchEventScore from './Score'
 
 function MatchEventModal() {
   const dispatch = useDispatch()
   const { lang } = useSelector((store) => store.systemLanguage)
-  const { currentMatch, isModalOpen } = useSelector((store) => store.matches)
+  const { isModalOpen } = useSelector((store) => store.matches)
+  const currentMatch = useSelector(selectCurrentMatch)
   const currentCompetition = useSelector(selectCurrentCompetition)
   const { t } = useTranslation()
 
@@ -23,87 +25,32 @@ function MatchEventModal() {
     dispatch(setMatchModalOpen(false))
   }
 
-  console.log(currentMatch)
-
-  const renderMatchStatus = (status) => {
-    switch (status) {
-      case MATCH_STATUS.NOT_STARTED:
-        return <p>{t('Boshlanmagan')}</p>
-      case MATCH_STATUS.INPROCESS:
-        return (
-          <p className="animate-pulse text-neutral-400">{t('Jarayonda')}</p>
-        )
-      case MATCH_STATUS.FINISHED:
-        return <p>{t('Tugagan')}</p>
-      default:
-        return null
-    }
-  }
-
-  const date = '2025-01-04 17:30:00+05'
+  const isLoading = true
 
   return (
     <Dialog open={isModalOpen && currentMatch?.id} onOpenChange={setModalOpen}>
       <DialogContent className="max-h-[90vh] max-w-2xl gap-0 rounded-xl border border-neutral-800 bg-gradient-to-b from-gray-900 via-neutral-950 to-black p-0 text-white">
-        <section className="relative border-b border-white/10 p-4">
-          <DialogTitle className="text-center text-xl font-semibold">
-            {getCorrectName({
-              lang,
-              uz: currentCompetition?.name,
-              ru: currentCompetition?.name_ru,
-            })}
-          </DialogTitle>
-          <div className="mt-1 flex justify-center gap-2 text-center text-sm text-gray-400">
-            <time>{formatDate(date, 'notifications')}</time>
-            <span>&#9679;</span>
-            {renderMatchStatus(MATCH_STATUS.NOT_STARTED)}
-          </div>
-        </section>
+        <MatchEventHeader
+          started_date={currentMatch?.started_date}
+          finished_date={currentMatch?.finished_date}
+        />
         <DialogDescription className="hidden"></DialogDescription>
-        {/* Score Section */}
-        <section className="bg-gradient-to-r from-blue-800/20 via-yellow-800/20 to-red-800/20 py-4">
-          <div className="flex items-center justify-center gap-4">
-            <div className="flex w-[40%] flex-col items-center justify-center gap-2 text-center">
-              <img
-                src="../static/club-jpeg/arsenal/logo.jpeg"
-                alt="Arsenal"
-                className="size-16 rounded-full"
-              />
-              <h3 className="font-bold">Arsenal</h3>
-            </div>
-            <div className="flex w-[20%] flex-col items-center justify-center gap-2 text-center">
-              <div className="flex items-center justify-center gap-3">
-                <span className="text-4xl font-bold text-neutral-50">2</span>
-                <span className="text-4xl font-light text-gray-400">:</span>
-                <span className="text-4xl font-bold text-neutral-50">1</span>
-              </div>
-              <div className="flex items-center justify-center gap-1 rounded-full bg-green-500/20 px-2 py-1 text-sm text-green-400">
-                <Timer className="h-4 w-4" />
-                <span>90`+4</span>
-              </div>
-            </div>
-            <div className="flex w-[40%] flex-col items-center justify-center gap-2 text-center">
-              <img
-                src="../static/club-jpeg/manchester-city/logo.jpeg"
-                alt="Manchester City"
-                className="size-16 rounded-full"
-              />
-              <h3 className="font-bold">Manchester City</h3>
-            </div>
-          </div>
-        </section>
+        <MatchEventScore />
+        {isLoading ? (
+          <MatchEventSkeleton />
+        ) : (
+          <section className="relative flex h-full max-h-[calc(90vh-300px)] flex-col gap-4 overflow-y-auto px-4 py-4">
+            {/* Center line */}
+            <span
+              style={{ height: `${events?.length * 3.65 || 0}rem` }}
+              className="absolute bottom-0 left-1/2 top-0 w-px -translate-x-1/2 transform bg-white/25"
+            />
 
-        <section className="relative flex h-full max-h-[calc(90vh-300px)] flex-col gap-4 overflow-y-auto px-4 py-4">
-          {/* Center line */}
-          <span
-            style={{ height: `${events?.length * 3.65 || 0}rem` }}
-            className="absolute bottom-0 left-1/2 top-0 w-px -translate-x-1/2 transform bg-white/25"
-          />
-
-          {events.map((event, index) => (
-            <MatchEvent key={index} event={event} />
-          ))}
-        </section>
+            {events.map((event, index) => (
+              <MatchEvent key={index} event={event} />
+            ))}
+          </section>
+        )}
       </DialogContent>
     </Dialog>
   )

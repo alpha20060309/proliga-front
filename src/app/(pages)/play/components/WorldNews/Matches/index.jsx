@@ -21,7 +21,6 @@ import { selectMatches } from 'app/lib/features/matches/matches.selector'
 import { selectTours } from 'app/lib/features/tours/tours.selector'
 import { usePathname } from 'next/navigation'
 import { RefreshCcw } from 'lucide-react'
-import MatchEventModal from 'components/MatchEventModal'
 
 const Matches = () => {
   const path = usePathname()
@@ -114,84 +113,81 @@ const Matches = () => {
   }
 
   return (
-    <>
-      <section className="relative mx-auto flex h-min min-h-[42rem] w-full max-w-lg flex-1 flex-col justify-between space-y-4 rounded-xl border border-neutral-600 bg-black px-4 py-6 lg:mx-0 lg:w-auto lg:min-w-72 xl:flex-grow 2xl:max-w-lg">
-        <div className="flex w-full items-center justify-center">
-          <div className="mx-auto ml-9 flex flex-1 items-center justify-center gap-2">
-            <Button
-              variant="outline"
-              size="icon"
-              className="size-9 border-neutral-400"
-              onClick={handleDecrementTourIndex}
-              disabled={tourIndex === 0}
-            >
-              <ChevronLeft className="size-5" />
-            </Button>
-            <Select value={currentTour?.id} onValueChange={handleChangeTour}>
-              <SelectTrigger
-                showIcon={false}
-                className="h-9 w-20 rounded-sm border-2 border-x-0 border-t-0 border-neutral-400 text-center text-base outline-none ring-0 ring-offset-0 hover:outline-none"
-              >
-                <SelectValue placeholder={t('Tur')} />
-              </SelectTrigger>
-              <SelectContent>
-                {tours.map((tour) => (
-                  <SelectItem key={tour.id} value={tour.id}>
-                    {getCorrectName({
-                      lang,
-                      uz: tour?.name,
-                      ru: tour?.name_ru,
-                    })}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <Button
-              variant="outline"
-              size="icon"
-              className="size-9 border-neutral-400"
-              onClick={handleIncrementTourIndex}
-              disabled={tourIndex === tours.length - 1}
-            >
-              <ChevronRight className="size-5" />
-            </Button>
-          </div>
+    <section className="relative mx-auto flex h-min min-h-[42rem] w-full max-w-lg flex-1 flex-col justify-between space-y-4 rounded-xl border border-neutral-600 bg-black px-4 py-6 lg:mx-0 lg:w-auto lg:min-w-72 xl:flex-grow 2xl:max-w-lg">
+      <div className="flex w-full items-center justify-center">
+        <div className="mx-auto ml-9 flex flex-1 items-center justify-center gap-2">
           <Button
-            onClick={refreshData}
             variant="outline"
             size="icon"
             className="size-9 border-neutral-400"
+            onClick={handleDecrementTourIndex}
+            disabled={tourIndex === 0}
           >
-            <RefreshCcw className="size-5" />
+            <ChevronLeft className="size-5" />
+          </Button>
+          <Select value={currentTour?.id} onValueChange={handleChangeTour}>
+            <SelectTrigger
+              showIcon={false}
+              className="h-9 w-20 rounded-sm border-2 border-x-0 border-t-0 border-neutral-400 text-center text-base outline-none ring-0 ring-offset-0 hover:outline-none"
+            >
+              <SelectValue placeholder={t('Tur')} />
+            </SelectTrigger>
+            <SelectContent>
+              {tours.map((tour) => (
+                <SelectItem key={tour.id} value={tour.id}>
+                  {getCorrectName({
+                    lang,
+                    uz: tour?.name,
+                    ru: tour?.name_ru,
+                  })}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Button
+            variant="outline"
+            size="icon"
+            className="size-9 border-neutral-400"
+            onClick={handleIncrementTourIndex}
+            disabled={tourIndex === tours.length - 1}
+          >
+            <ChevronRight className="size-5" />
           </Button>
         </div>
-        <div className="flex-1 space-y-1">
-          {isLoading ? (
-            Array.from({ length: 10 }).map((_, index) => (
-              <MatchSkeleton key={index} />
-            ))
-          ) : (
-            <>
-              {matches?.length === 0 ? (
-                <p className="text-muted-foreground text-center">
-                  {t('Matchlar topilmadi!')}
-                </p>
-              ) : (
-                matches?.map((match, index) => (
-                  <Match key={index} match={match} />
-                ))
-              )}
-            </>
-          )}
-        </div>
-        <Pagination
-          onPageChange={setPage}
-          currentPage={page}
-          totalPages={pages}
-        />
-      </section>
-      <MatchEventModal />
-    </>
+        <Button
+          onClick={refreshData}
+          variant="outline"
+          size="icon"
+          className="size-9 border-neutral-400"
+        >
+          <RefreshCcw className="size-5" />
+        </Button>
+      </div>
+      <div className="flex-1 space-y-1">
+        {isLoading ? (
+          Array.from({ length: 10 }).map((_, index) => (
+            <MatchSkeleton key={index} />
+          ))
+        ) : (
+          <>
+            {matches?.length === 0 ? (
+              <p className="text-muted-foreground text-center">
+                {t('Matchlar topilmadi!')}
+              </p>
+            ) : (
+              matches?.map((match, index) => (
+                <Match key={index} match={match} />
+              ))
+            )}
+          </>
+        )}
+      </div>
+      <Pagination
+        onPageChange={setPage}
+        currentPage={page}
+        totalPages={pages}
+      />
+    </section>
   )
 }
 
