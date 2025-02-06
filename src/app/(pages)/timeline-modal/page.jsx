@@ -235,8 +235,7 @@ const events = [
   },
   {
     player_name: 'Калафьори',
-    second_player_name: 'Льюис-Скелли',
-    minute: 90,
+    minute: 5,
     team: 'home',
     type: MATCH_EVENTS.HIT_PENALTY,
   },
