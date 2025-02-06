@@ -9,3 +9,5 @@
 .env*
 
 /.idea
+
+next-env.d.ts
