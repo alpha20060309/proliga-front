@@ -63,7 +63,7 @@ export const updateTeamPlayerReducer = (state, action) => {
     toast.warning(t('Max players count reached from the same club!'), {
       theme: 'dark',
     })
-    state.modals[playerId] = false
+    state.transferModal = false
     return state
   }
 
@@ -75,7 +75,7 @@ export const updateTeamPlayerReducer = (state, action) => {
       ),
       { theme: 'dark' }
     )
-    state.modals[playerId] = false
+    state.transferModal = false
     state.clubModal = transfer_show_modals
     return state
   }

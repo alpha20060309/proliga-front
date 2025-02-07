@@ -51,13 +51,12 @@ export const swapTeamPlayerReducer = (state, action) => {
   })
 
   const clubId = player?.club?.id || player.club_id.id
-  const playerId = previousPlayer.id
 
   if (state.duplicatesMap[clubId] === max_same_team_players) {
     toast.warning(t('Max players count reached from the same club!'), {
       theme: 'dark',
     })
-    state.modals[playerId] = false
+    state.transferModal = false
     return state
   }
   if (state.duplicatesMap[clubId] > maxTeamPlayers - 1) {
@@ -68,7 +67,7 @@ export const swapTeamPlayerReducer = (state, action) => {
       ),
       { theme: 'dark' }
     )
-    state.modals[playerId] = false
+    state.transferModal = false
     state.clubModal = transfer_show_modals
     return state
   }
@@ -81,7 +80,7 @@ export const swapTeamPlayerReducer = (state, action) => {
     state.GOA[prevPlayerIndex] = createUpdatedPlayer(prevPlayer, player)
     evaluateTeamClubId()
     calcTeamPrice()
-    state.modals[playerId] = false
+    state.transferModal = false
     toast.success(t("Oyinchi muvaffaqiyatli o'zgartirildi!"), { theme: 'dark' })
     return state
   }
@@ -93,7 +92,7 @@ export const swapTeamPlayerReducer = (state, action) => {
     state.DEF[prevPlayerIndex] = createUpdatedPlayer(prevPlayer, player)
     evaluateTeamClubId()
     calcTeamPrice()
-    state.modals[playerId] = false
+    state.transferModal = false
     toast.success(t("Oyinchi muvaffaqiyatli o'zgartirildi!"), { theme: 'dark' })
     return state
   }
@@ -105,7 +104,7 @@ export const swapTeamPlayerReducer = (state, action) => {
     state.MID[prevPlayerIndex] = createUpdatedPlayer(prevPlayer, player)
     evaluateTeamClubId()
     calcTeamPrice()
-    state.modals[playerId] = false
+    state.transferModal = false
     toast.success(t("Oyinchi muvaffaqiyatli o'zgartirildi!"), { theme: 'dark' })
     return state
   }
@@ -117,7 +116,7 @@ export const swapTeamPlayerReducer = (state, action) => {
     state.STR[prevPlayerIndex] = createUpdatedPlayer(prevPlayer, player)
     evaluateTeamClubId()
     calcTeamPrice()
-    state.modals[playerId] = false
+    state.transferModal = false
     toast.success(t("Oyinchi muvaffaqiyatli o'zgartirildi!"), { theme: 'dark' })
     return state
   }

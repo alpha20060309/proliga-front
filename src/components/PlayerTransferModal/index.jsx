@@ -8,18 +8,31 @@ import {
   Dialog,
   DialogDescription,
 } from '@/components/ui/dialog'
+import { useDispatch, useSelector } from 'react-redux'
+import { setPlayerTransferModal } from 'app/lib/features/teamPlayers/teamPlayers.slice'
+import { selectCurrentPlayer } from 'app/lib/features/players/players.selector'
 
-const PlayerTransferModal = ({ prevPlayer, isModalOpen, setModalOpen }) => {
+const PlayerTransferModal = () => {
+  const dispatch = useDispatch()
   const { t } = useTranslation()
+  const { transferModal } = useSelector((store) => store.teamPlayers)
+  const currentPlayer = useSelector(selectCurrentPlayer)
+
+  const setModalOpen = () => {
+    dispatch(setPlayerTransferModal(false))
+  }
 
   return (
-    <Dialog open={isModalOpen} onOpenChange={setModalOpen}>
+    <Dialog
+      open={transferModal && currentPlayer?.id}
+      onOpenChange={setModalOpen}
+    >
       <DialogContent
         onOpenAutoFocus={(e) => e.preventDefault()}
         className="mx-auto flex max-h-[90vh] min-h-[50vh] w-full max-w-3xl flex-col gap-4 overflow-y-auto rounded-xl bg-black px-4 py-6 text-neutral-200 md:p-6 xl:max-h-[45rem]"
       >
         <DialogTitle>{t('Transfer Amalga Oshirish')}</DialogTitle>
-        <PlayerTable prevPlayer={prevPlayer} />
+        <PlayerTable />
         <DialogDescription className="hidden">
           This is a players transfer table
         </DialogDescription>

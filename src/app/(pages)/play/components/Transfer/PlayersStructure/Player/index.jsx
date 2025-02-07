@@ -1,21 +1,21 @@
 'use client'
 
-import PlayerTransferModal from 'components/PlayerTransferModal'
 import ConfirmationModal from 'components/ConfirmationModal'
 import Image from 'next/image'
 import { useMemo, useState } from 'react'
-import { setCurrentPlayer } from 'app/lib/features/players/players.slice'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteTeamPlayer } from 'app/lib/features/teamPlayers/teamPlayers.slice'
-import { setModals } from 'app/lib/features/teamPlayers/teamPlayers.slice'
+import {
+  deleteTeamPlayer,
+  setPlayerTransferModal,
+} from 'app/lib/features/teamPlayers/teamPlayers.slice'
 import { staticPath } from 'app/utils/static.util'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { useTranslation } from 'react-i18next'
+import { setCurrentPlayer } from 'app/lib/features/players/players.slice'
 
 const Player = ({ player }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { modals } = useSelector((store) => store.teamPlayers)
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
   const currentTeam = useSelector(selectCurrentTeam)
   const clubPath = useMemo(
@@ -25,8 +25,6 @@ const Player = ({ player }) => {
   const tShirt = staticPath + '/club-svg/' + clubPath + '/app.svg'
   const firstName = player.name ? player?.name?.split(' ')[0] : ''
   const lastName = player?.name?.split(' ')[1] ?? ''
-
-  const isModalOpen = useMemo(() => modals[player.id], [modals, player?.id])
 
   const imageErr = (e) => {
     e.target.src = '/icons/player.svg'
@@ -44,16 +42,12 @@ const Player = ({ player }) => {
   }
 
   const handleTransfer = () => {
-    setCurrentPlayer(player)
-    toggleModal()
+    dispatch(setCurrentPlayer(player?.player_id))
+    dispatch(setPlayerTransferModal(true))
   }
 
   const toggleDeleteModal = () => {
     setDeleteModalOpen(!isDeleteModalOpen)
-  }
-
-  const toggleModal = () => {
-    dispatch(setModals({ id: player.id, value: !isModalOpen }))
   }
 
   return (
@@ -80,7 +74,6 @@ const Player = ({ player }) => {
                 width={48}
                 height={48}
                 onError={imageErr}
-                onClick={toggleModal}
                 draggable={false}
                 className="h-full w-full"
               />
@@ -125,11 +118,6 @@ const Player = ({ player }) => {
           </>
         )}
       </div>
-      <PlayerTransferModal
-        prevPlayer={player}
-        isModalOpen={isModalOpen}
-        setModalOpen={toggleModal}
-      />
       <ConfirmationModal
         onConfirm={handleDeletePlayer}
         onCancel={toggleDeleteModal}

@@ -10,7 +10,7 @@ import {
 } from '@tanstack/react-table'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { selectPlayers } from 'app/lib/features/players/players.selector'
+import { selectCurrentPlayer, selectPlayers } from 'app/lib/features/players/players.selector'
 import { createColumnHelper } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
 import TransferTableHead from './Head'
@@ -21,10 +21,11 @@ import { getCorrentPlayerPosition } from 'app/utils/getCorrectPlayerPosition.uti
 
 const columnHelper = createColumnHelper()
 
-function PlayerTable({ prevPlayer }) {
+function PlayerTable() {
   const { t } = useTranslation()
   const { lang } = useSelector((state) => state.systemLanguage)
   const players = useSelector(selectPlayers)
+  const currentPlayer = useSelector(selectCurrentPlayer)
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: 10,
@@ -102,7 +103,7 @@ function PlayerTable({ prevPlayer }) {
       columnFilters: [
         {
           id: 'position',
-          value: getCorrentPlayerPosition(prevPlayer?.position || '', lang),
+          value: getCorrentPlayerPosition(currentPlayer?.position || '', lang),
         },
       ],
     },
@@ -121,11 +122,7 @@ function PlayerTable({ prevPlayer }) {
       </div>
       <table className="mt-2 w-full min-w-80 table-auto text-sm">
         <TransferTableHead table={table} />
-        <TransferTableBody
-          prevPlayer={prevPlayer}
-          table={table}
-          flexRender={flexRender}
-        />
+        <TransferTableBody table={table} flexRender={flexRender} />
       </table>
       <TanStackPagination
         table={table}

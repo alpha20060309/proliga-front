@@ -7,6 +7,7 @@ import TransferStadiumForm from './TransferStadiumForm'
 import { useSelector } from 'react-redux'
 import { TOUR } from 'app/utils/tour.util'
 import { selectCurrentTour } from 'app/lib/features/tours/tours.selector'
+import PlayerTransferModal from 'components/PlayerTransferModal'
 
 const Transfer = () => {
   const currentTour = useSelector(selectCurrentTour)
@@ -31,6 +32,7 @@ const Transfer = () => {
         <TransferStadiumForm />
       </div>
       <PlayersTable />
+      <PlayerTransferModal />
     </main>
   )
 }

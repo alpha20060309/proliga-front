@@ -41,7 +41,7 @@ const PlayLinks = () => {
   }
 
   return (
-    <section className="hidden items-center gap-1.5 text-neutral-400 sm:text-sm lg:flex xl:gap-4 xl:text-base 2xl:gap-6">
+    <section className="hidden items-center gap-2 text-neutral-400 sm:text-sm lg:flex xl:gap-4 xl:text-base 2xl:gap-6">
       {path.includes('play') && (
         <>
           <Tab title={'Profil'} styling={styling} tab={TABS.GameProfile} />

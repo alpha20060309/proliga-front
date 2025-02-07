@@ -2,13 +2,11 @@
 
 import { useEffect, useState, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  setCurrentPlayer,
-  setPlayerModalOpen,
-} from 'app/lib/features/players/players.slice'
 import Image from 'next/image'
 import { staticPath } from 'app/utils/static.util'
 import { selectPlayerPoint } from 'app/lib/features/playerPoint/playerPoint.selector'
+import { setPlayerInfoModal } from 'app/lib/features/teamPlayers/teamPlayers.slice'
+import { setCurrentPlayer } from 'app/lib/features/players/players.slice'
 
 const Player = ({ player }) => {
   const dispatch = useDispatch()
@@ -30,8 +28,8 @@ const Player = ({ player }) => {
   }
 
   const handleInfoModal = () => {
-    dispatch(setCurrentPlayer(player.player_id))
-    dispatch(setPlayerModalOpen(true))
+    dispatch(setCurrentPlayer(player?.player_id))
+    dispatch(setPlayerInfoModal(true))
   }
 
   const clubPath = useMemo(
@@ -83,7 +81,7 @@ const Player = ({ player }) => {
           <p className="text-shadow line-clamp-1 text-[10px] text-white xs:text-[11px] xs:text-xs md:text-sm">
             {firstName} {lastName.slice(0, 1).toUpperCase()} {lastName && '.'}
           </p>
-          <div className="flex items-center gap-0.5 md:gap-1">
+          <div className="flex items-center gap-0.5">
             <button onClick={handleInfoModal}>
               <Image
                 width={16}
@@ -91,10 +89,10 @@ const Player = ({ player }) => {
                 draggable={false}
                 src="/icons/info.svg"
                 alt="additional info"
-                className="size-3.5 rounded bg-black p-[1px] transition-all hover:bg-primary xs:size-4 md:size-5 2xl:size-[18px]"
+                className="size-4 rounded bg-black p-px transition-all hover:bg-primary sm:size-5"
               />
             </button>
-            <div className="flex h-3.5 w-6 cursor-default items-center justify-center rounded bg-primary text-center text-[11px] font-bold shadow shadow-neutral-600 xs:h-4 xs:w-8 xs:text-xs md:h-5 md:text-sm">
+            <div className="h-4 w-6 cursor-default rounded border border-neutral-800 bg-primary text-center text-xs font-bold text-neutral-950 sm:h-5 sm:w-8 md:text-sm">
               {player.is_captain
                 ? (currentPlayerPoint?.point ?? 0) * 2
                 : (currentPlayerPoint?.point ?? 0)}

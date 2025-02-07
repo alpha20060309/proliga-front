@@ -1,34 +1,31 @@
 import Image from 'next/image'
 import { useDispatch, useSelector } from 'react-redux'
 import { setBalanceModal } from 'app/lib/features/currentTeam/currentTeam.slice'
-import { setModals } from 'app/lib/features/teamPlayers/teamPlayers.slice'
+import { setPlayerTransferModal } from 'app/lib/features/teamPlayers/teamPlayers.slice'
 import { configKey } from 'app/utils/config.util'
 import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
 import { selectTeamConcat } from 'app/lib/features/teamPlayers/teamPlayers.selector'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
+import { selectCurrentPlayer } from 'app/lib/features/players/players.selector'
 import { cn } from '@/lib/utils'
 
-const SwapPlayerButton = ({
-  cell,
-  handleSwapPlayer,
-  teamBalance,
-  prevPlayer,
-}) => {
+const SwapPlayerButton = ({ cell, handleSwapPlayer, teamBalance }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const teamConcat = useSelector(selectTeamConcat)
   const currentTeam = useSelector(selectCurrentTeam)
+  const currentPlayer = useSelector(selectCurrentPlayer)
   const { config } = useSelector((store) => store.systemConfig)
 
   const max_balance = +config[configKey.max_balance]?.value
   const transfer_show_modals =
     config[configKey.transfer_show_modals]?.value?.toLowerCase() === 'true'
 
-  const condition = teamBalance + prevPlayer.price >= cell.row.original.price
+  const condition = teamBalance + currentPlayer.price >= cell.row.original.price
 
   const toggleModal = () => {
-    dispatch(setModals({ id: prevPlayer.id, value: false }))
+    dispatch(setPlayerTransferModal(false))
   }
 
   const handleClick = () => {

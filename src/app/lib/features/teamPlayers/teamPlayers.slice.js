@@ -21,11 +21,12 @@ const initialState = {
   },
   teamPrice: 0,
   duplicatesMap: {},
-  prevTeam: [],
+  transferModal: false,
+  infoModal: false,
   clubModal: false,
+  prevTeam: [],
   error: null,
   isLoading: false,
-  modals: {},
 }
 
 const teamPlayersSlice = createSlice({
@@ -43,10 +44,11 @@ const teamPlayersSlice = createSlice({
     setClubModal: (state, action) => {
       state.clubModal = action.payload
     },
-    setModals: (state, action) => {
-      const { id, value } = action.payload
-
-      state.modals[id] = value
+    setPlayerTransferModal: (state, action) => {
+      state.transferModal = action.payload
+    },
+    setPlayerInfoModal: (state, action) => {
+      state.infoModal = action.payload
     },
   },
   extraReducers: teamPlayersExtraReducer,
@@ -62,7 +64,8 @@ export const {
   swapTeamPlayer,
   autoAssembleTeam,
   setClubModal,
-  setModals,
+  setPlayerInfoModal,
+  setPlayerTransferModal,
 } = teamPlayersSlice.actions
 
 export default teamPlayersSlice.reducer

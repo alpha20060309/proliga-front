@@ -5,6 +5,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog'
+import { Button } from '@/components/ui/button'
 
 const ConfirmationModal = ({
   onConfirm,
@@ -21,20 +22,20 @@ const ConfirmationModal = ({
           {t('Ishonchingiz komilmi')}
         </DialogTitle>
         <div className="flex items-center gap-1">
-          <button
+          <Button
             className="h-auto w-36 select-none rounded-md border-2 border-red-600 bg-red-600 py-2 font-medium text-neutral-50 transition-all hover:bg-red-800 focus:outline-white md:w-44"
             onClick={onConfirm}
             tabIndex={0}
             autoFocus={true}
           >
             {t('Tasdiqlash')}
-          </button>
-          <button
-            className="h-auto w-36 select-none rounded-md border-2 border-neutral-600 py-2 font-medium transition-all hover:border-neutral-700 hover:bg-neutral-800 hover:text-neutral-50 md:w-44"
+          </Button>
+          <Button
+            className="h-auto w-36 select-none rounded-md border-2 border-neutral-600 bg-neutral-900 py-2 font-medium text-neutral-200 transition-all hover:border-neutral-700 hover:bg-neutral-800 hover:text-neutral-50 md:w-44"
             onClick={onCancel}
           >
             {t('Qaytish')}
-          </button>
+          </Button>
         </div>
         <DialogDescription className="hidden">
           {t('Ishonchingizni tasdiqlaysizmi')}

@@ -2,9 +2,12 @@ import { DialogTitle } from '@radix-ui/react-dialog'
 import { staticPath, getUrl } from 'app/utils/static.util'
 import { User, DollarSign, Percent } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { useSelector } from 'react-redux'
 
 const PlayerPhoto = ({ currentPlayer, position }) => {
   const { t } = useTranslation()
+  const { lang } = useSelector((store) => store.systemLanguage)
   const image = staticPath + '/player-png/' + currentPlayer?.slug + '/app.png'
   const club =
     staticPath + '/club-jpeg/' + currentPlayer?.club?.slug + '/logo.jpeg'
@@ -25,7 +28,11 @@ const PlayerPhoto = ({ currentPlayer, position }) => {
       <section className="flex flex-1 flex-col justify-between gap-2">
         <div>
           <DialogTitle className="mb-1 truncate text-lg font-bold text-primary sm:text-xl md:text-2xl">
-            {currentPlayer?.name}
+            {getCorrectName({
+              lang,
+              uz: currentPlayer?.name,
+              ru: currentPlayer?.name_ru,
+            })}
           </DialogTitle>
           <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
             <img
@@ -39,7 +46,11 @@ const PlayerPhoto = ({ currentPlayer, position }) => {
               className="size-5 rounded-full bg-neutral-700 md:size-6 lg:size-7"
             />
             <p className="text-sm font-medium text-neutral-200 md:text-base">
-              {currentPlayer?.club?.name}
+              {getCorrectName({
+                lang,
+                uz: currentPlayer?.club?.name,
+                ru: currentPlayer?.club?.name_ru,
+              })}
             </p>
             <span className="text-neutral-500">|</span>
             <p className="text-sm text-neutral-300 md:text-base">{position}</p>
