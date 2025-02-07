@@ -11,8 +11,8 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import TransferTableHead from './Head'
-import TransferTableBody from './Body'
+import Head from './Head'
+import Body from './Body'
 import TanStackPagination from 'components/Table/TanStackPagination'
 import { createColumnHelper } from '@tanstack/react-table'
 import { selectCurrentPlayer } from 'app/lib/features/players/players.selector'
@@ -24,7 +24,6 @@ function PlayerStatisticsTable({ matches }) {
   const { t } = useTranslation()
   const clubs = useSelector(selectClubs)
   const currentPlayer = useSelector(selectCurrentPlayer)
-  const [styles, setStyles] = useState('border-neutral-400')
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: 10,
@@ -44,24 +43,9 @@ function PlayerStatisticsTable({ matches }) {
 
   const getCorrectScore = (match) => {
     if (match.home_club_id === currentPlayer?.club?.id) {
-      if (match.home_club_result > match?.away_club_result) {
-        setStyles('border-green-500')
-      } else if (match.home_club_result < match?.away_club_result) {
-        setStyles('border-red-500')
-      } else {
-        setStyles('border-yellow-500')
-      }
-      return `${match.home_club_result ?? 0}-${match.away_club_result ?? 0}`
+      return `${match.home_club_result ?? 0} : ${match.away_club_result ?? 0}`
     } else if (match.away_club_id === currentPlayer?.club?.id) {
-      if (match?.away_club_result > match?.home_club_result) {
-        setStyles('border-green-500')
-      } else if (match?.away_club_result < match?.home_club_result) {
-        setStyles('border-red-500')
-      } else {
-        setStyles('border-yellow-500')
-
-        return `${match.away_club_result ?? 0}-${match.home_club_result ?? 0}`
-      }
+      return `${match.away_club_result ?? 0} : ${match.home_club_result ?? 0}`
     }
   }
 
@@ -77,7 +61,7 @@ function PlayerStatisticsTable({ matches }) {
       id: 'competitor',
     }),
     columnHelper.accessor('Score', {
-      accessorFn: (row) => getCorrectScore(row.match_id) ?? '0-0',
+      accessorFn: (row) => getCorrectScore(row.match_id) ?? '0 : 0',
       header: t('Hisob'),
       id: 'score',
     }),
@@ -157,12 +141,8 @@ function PlayerStatisticsTable({ matches }) {
   return (
     <section className="h-auto">
       <table className="h-full w-full min-w-80 table-auto text-[10px] 2xs:text-[11px] md:text-xs xl:text-sm">
-        <TransferTableHead table={table} />
-        <TransferTableBody
-          scoreStyles={styles}
-          table={table}
-          flexRender={flexRender}
-        />
+        <Head table={table} />
+        <Body table={table} flexRender={flexRender} />
       </table>
       {matches?.length > 9 && <TanStackPagination table={table} />}
     </section>

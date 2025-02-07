@@ -10,6 +10,7 @@ const GameBrief = dynamic(() => import('./GameBrief'), {
   ssr: false,
   loading: () => <GameBriefContainerSkeleton />,
 })
+import PlayerInfoModal from 'components/PlayerInfoModal'
 
 const GameProfile = () => {
   const currentTour = useSelector(selectCurrentTour)
@@ -33,6 +34,7 @@ const GameProfile = () => {
         )}
       </div>
       <GameBrief />
+      <PlayerInfoModal />
     </main>
   )
 }

@@ -6,6 +6,7 @@ const initialState = {
   topPlayersLoading: false,
   topPlayersError: null,
   currentPlayer: {},
+  isModalOpen: false,
   players: [],
   isLoading: false,
   error: null,
@@ -20,13 +21,13 @@ export const playersSlice = createSlice({
       state.currentPlayer =
         state.players.find((p) => p.id === action.payload) ?? {}
     },
-    addPlayersToStore: (state, action) => {
-      state.players = [...state.players, action.payload]
+    setPlayerModalOpen: (state, action) => {
+      state.isModalOpen = action.payload
     },
   },
   extraReducers: playersExtraReducer,
 })
 
-export const { setCurrentPlayer } = playersSlice.actions
+export const { setCurrentPlayer, setPlayerModalOpen } = playersSlice.actions
 
 export default playersSlice.reducer
