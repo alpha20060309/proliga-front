@@ -17,11 +17,13 @@ import TanStackPagination from 'components/Table/TanStackPagination'
 import { createColumnHelper } from '@tanstack/react-table'
 import { selectClubs } from 'app/lib/features/club/club.selector'
 import { selectCurrentPlayer } from 'app/lib/features/players/players.selector'
+import { getCorrectName } from 'app/utils/getCorrectName.util'
 
 const columnHelper = createColumnHelper()
 
 function PlayerStatisticsTable({ matches }) {
   const { t } = useTranslation()
+  const { lang } = useSelector((store) => store.systemLanguage)
   const clubs = useSelector(selectClubs)
   const currentPlayer = useSelector(selectCurrentPlayer)
   const [pagination, setPagination] = useState({
@@ -35,9 +37,17 @@ function PlayerStatisticsTable({ matches }) {
 
   const getCorrectCompetitor = (match) => {
     if (match.home_club_id === currentPlayer?.club?.id) {
-      return getClubInfoById(match.away_club_id)?.name
+      return getCorrectName({
+        lang,
+        ru: getClubInfoById(match.away_club_id)?.name_ru,
+        uz: getClubInfoById(match.away_club_id)?.name,
+      })
     } else if (match.away_club_id === currentPlayer?.club?.id) {
-      return getClubInfoById(match.home_club_id)?.name
+      return getCorrectName({
+        lang,
+        uz: getClubInfoById(match.home_club_id)?.name,
+        ru: getClubInfoById(match.home_club_id)?.name_ru,
+      })
     }
   }
 
@@ -51,7 +61,12 @@ function PlayerStatisticsTable({ matches }) {
 
   const columns = [
     columnHelper.accessor('', {
-      accessorFn: (row) => row?.tour_id?.name,
+      accessorFn: (row) =>
+        getCorrectName({
+          lang,
+          uz: row?.tour_id?.name,
+          ru: row?.tour_id?.name_ru,
+        }),
       id: 'sana',
       header: t('Tur'),
     }),
@@ -66,7 +81,8 @@ function PlayerStatisticsTable({ matches }) {
       id: 'score',
     }),
     columnHelper.accessor('Quriq Oyin', {
-      accessorFn: (row) => (row?.player_result_id?.is_shutout ? 'ha' : 'yoq'),
+      accessorFn: (row) =>
+        row?.player_result_id?.is_shutout ? t('Ha') : t('Yoq'),
       header: t('QO’'),
       id: 'QO’',
       meta: {

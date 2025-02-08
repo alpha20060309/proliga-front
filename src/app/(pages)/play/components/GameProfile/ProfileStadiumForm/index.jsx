@@ -18,6 +18,7 @@ import { selectTeamConcat } from 'app/lib/features/teamPlayers/teamPlayers.selec
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
+import { getCorrectName } from 'app/utils/getCorrectName.util'
 
 const ProfileStadiumForm = () => {
   const { t } = useTranslation()
@@ -125,7 +126,11 @@ const ProfileStadiumForm = () => {
                   key={player.id}
                   selected={player.is_captain}
                 >
-                  {player.name}
+                  {getCorrectName({
+                    lang,
+                    uz: player?.player?.name,
+                    ru: player?.player?.name_ru,
+                  })}
                 </SelectItem>
               )
           )}

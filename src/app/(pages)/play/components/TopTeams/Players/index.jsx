@@ -4,6 +4,7 @@ import { useMemo } from 'react'
 import { staticPath } from 'app/utils/static.util'
 import { selectTopPlayers } from 'app/lib/features/players/players.selector'
 import { getUrl } from 'app/utils/static.util'
+import { getCorrectName } from 'app/utils/getCorrectName.util'
 
 const RankingPlayers = () => {
   const { t } = useTranslation()
@@ -32,6 +33,7 @@ const RankingPlayers = () => {
 }
 
 const PlayerPlace = ({ player, index }) => {
+  const { lang } = useSelector((store) => store.systemLanguage)
   const image = useMemo(
     () => staticPath + '/player-png/' + player?.slug + '/app.png',
     [player?.slug]
@@ -53,10 +55,14 @@ const PlayerPlace = ({ player, index }) => {
         </span>
       </div>
       <h4 className="line-clamp-2 max-w-28 break-words text-sm font-bold text-black">
-        {player?.name}
+        {getCorrectName({ lang, uz: player?.name, ru: player?.name_ru })}
       </h4>
       <p className="line-clamp-2 max-w-28 break-words text-sm font-medium text-black">
-        {player?.club?.name ?? ''}
+        {getCorrectName({
+          lang,
+          uz: player?.club?.name,
+          ru: player?.club?.name_ru,
+        })}
       </p>
       <span className="absolute bottom-0 right-0 flex size-6 items-center justify-center rounded-br-lg rounded-tl-lg bg-primary text-sm font-extrabold text-black">
         {index + 1}

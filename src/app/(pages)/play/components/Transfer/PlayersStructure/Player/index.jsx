@@ -82,6 +82,7 @@ const Player = ({ player }) => {
                 alt="player tshirt"
                 width={48}
                 height={48}
+                onClick={handleTransfer}
                 onError={imageErr}
                 draggable={false}
                 className="h-full w-full"
@@ -111,7 +112,7 @@ const Player = ({ player }) => {
                   className="size-4 rounded bg-black p-px transition-all hover:bg-primary sm:size-5"
                 />
               </button>
-              <div className="h-4 w-6 flex justify-center items-center cursor-default rounded border border-neutral-800 bg-neutral-50 text-center text-xs font-bold text-neutral-950 sm:h-5 sm:w-8 md:text-sm">
+              <div className="flex h-4 w-6 cursor-default items-center justify-center rounded border border-neutral-800 bg-neutral-50 text-center text-xs font-bold text-neutral-950 sm:h-5 sm:w-8 md:text-sm">
                 {player.price ?? '00'}
               </div>
               <button onClick={toggleDeleteModal}>

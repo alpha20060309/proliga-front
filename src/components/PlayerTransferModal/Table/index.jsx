@@ -21,6 +21,7 @@ import TransferTableBody from './Body'
 import TransferTableFilters from './Filters'
 import TanStackPagination from 'components/Table/TanStackPagination'
 import { getCorrentPlayerPosition } from 'app/utils/getCorrectPlayerPosition.utils'
+import { getCorrectName } from 'app/utils/getCorrectName.util'
 
 const columnHelper = createColumnHelper()
 
@@ -42,16 +43,18 @@ function PlayerTable() {
 
   const columns = [
     columnHelper.accessor('name', {
-      accessorKey: 'name',
-      cell: (info) => info.getValue(),
+      accessorFn: (row) =>
+        getCorrectName({ lang, uz: row?.name, ru: row?.name_ru }),
       header: t('Ism'),
+      id: 'name',
       meta: {
         filterVariant: 'name',
       },
     }),
     columnHelper.accessor('club.name', {
-      accessorKey: 'club.name',
       header: t('Klub'),
+      accessorFn: (row) =>
+        getCorrectName({ lang, uz: row?.club?.name, ru: row?.club?.name_ru }),
       meta: {
         filterVariant: 'club',
       },

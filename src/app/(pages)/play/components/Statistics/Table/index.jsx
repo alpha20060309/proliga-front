@@ -18,6 +18,7 @@ import TransferTableHead from './Head'
 import TransferTableBody from './Body'
 import StatisticsTableFilters from '../Filters'
 import TanStackPagination from 'components/Table/TanStackPagination'
+import { getCorrectName } from 'app/utils/getCorrectName.util'
 
 const columnHelper = createColumnHelper()
 
@@ -40,7 +41,8 @@ function StatisticsTable() {
       },
     }),
     columnHelper.accessor('player_id.name', {
-      accessorFn: (row) => row?.name,
+      accessorFn: (row) =>
+        getCorrectName({ lang, uz: row?.name, ru: row?.name_ru }),
       header: t("O'yinchi ismi"),
       id: 'player-name',
       meta: {
@@ -49,7 +51,8 @@ function StatisticsTable() {
       },
     }),
     columnHelper.accessor('club_id.name', {
-      accessorFn: (row) => row.club?.name,
+      accessorFn: (row) =>
+        getCorrectName({ lang, uz: row?.club?.name, ru: row?.club?.name_ru }),
       header: t('Klub'),
       id: 'club',
       meta: {
@@ -130,8 +133,8 @@ function StatisticsTable() {
   })
 
   return (
-    <>
-      <div className="relative flex flex-col mb-1 gap-2 p-2 text-xs xs:text-sm sm:flex-row lg:p-0">
+    <section className="flex flex-col gap-2">
+      <div className="relative flex gap-1 text-xs xs:text-sm">
         {table
           .getHeaderGroups()
           .map((headerGroup) =>
@@ -140,7 +143,7 @@ function StatisticsTable() {
             ))
           )}
       </div>
-      <table className="min-w-[310px] text-[10px] xs:text-xs md:text-sm">
+      <table className="min-w-[22rem] text-[11px] xs:text-xs md:text-sm">
         <TransferTableHead table={table} />
         <TransferTableBody table={table} flexRender={flexRender} />
       </table>
@@ -149,7 +152,7 @@ function StatisticsTable() {
         active="bg-neutral-300 text-black"
         className={'mt-auto'}
       />
-    </>
+    </section>
   )
 }
 

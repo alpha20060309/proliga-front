@@ -30,6 +30,7 @@ import { selectCurrentTour } from 'app/lib/features/tours/tours.selector'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { selectPlayers } from 'app/lib/features/players/players.selector'
+import { getCorrectName } from 'app/utils/getCorrectName.util'
 
 const TransferStadiumForm = () => {
   const { t } = useTranslation()
@@ -209,7 +210,7 @@ const TransferStadiumForm = () => {
         value={teamConcat.find((player) => player.is_captain)?.player_id ?? ''}
         onValueChange={(value) => dispatch(setCaptain(value))}
       >
-        <SelectTrigger className="w-full min-w-36 max-w-56 rounded border-neutral-400 bg-neutral-950 px-2 text-xs text-neutral-100 hover:border-primary xs:text-sm md:text-base">
+        <SelectTrigger className="h-10 w-full min-w-36 max-w-56 rounded border-neutral-400 bg-neutral-950 px-2 text-xs text-neutral-100 hover:border-primary xs:text-sm md:text-base">
           <SelectValue placeholder={t('Kapitan tanlang')} />
         </SelectTrigger>
         <SelectContent>
@@ -221,7 +222,11 @@ const TransferStadiumForm = () => {
                   key={player.id}
                   selected={player.is_captain}
                 >
-                  {player.name}
+                  {getCorrectName({
+                    lang,
+                    uz: player?.player?.name,
+                    ru: player?.player?.name_ru,
+                  })}
                 </SelectItem>
               )
           )}

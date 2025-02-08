@@ -13,14 +13,16 @@ import { formatDate } from 'app/utils/formatDate.util'
 import { useMemo } from 'react'
 import { getUrl } from 'app/utils/static.util'
 import { MATCH_STATUS } from 'app/utils/players.util'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   setCurrentMatch,
   setMatchModalOpen,
 } from 'app/lib/features/matches/matches.slice'
+import { getCorrectName } from 'app/utils/getCorrectName.util'
 
 const Match = ({ match }) => {
   const dispatch = useDispatch()
+  const { lang } = useSelector((store) => store.systemLanguage)
   const { t } = useTranslation()
   const homeClub = match?.home_club_id ?? null
   const awayClub = match?.away_club_id ?? null
@@ -52,7 +54,11 @@ const Match = ({ match }) => {
       className="flex h-12 w-full items-center rounded-lg border border-neutral-800 bg-neutral-900/80 px-1 xs:px-2"
     >
       <TeamDisplay
-        name={homeClub?.name}
+        name={getCorrectName({
+          lang,
+          uz: homeClub?.name,
+          ru: homeClub?.name_ru,
+        })}
         logo={homeImg}
         isWinner={isHomeWinner}
         isDraw={isDraw}
@@ -76,7 +82,11 @@ const Match = ({ match }) => {
         </TooltipProvider>
       </div>
       <TeamDisplay
-        name={awayClub?.name}
+        name={getCorrectName({
+          lang,
+          uz: awayClub?.name,
+          ru: awayClub?.name_ru,
+        })}
         logo={awayImg}
         isWinner={isAwayWinner}
         isDraw={isDraw}

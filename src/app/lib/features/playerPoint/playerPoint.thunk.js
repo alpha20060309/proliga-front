@@ -9,7 +9,7 @@ export const fetchPlayerPoint = createAsyncThunk(
     const { data, error } = await supabase
       .from('player_point')
       .select(
-        'id, point, player_id, match_id(*), player_result_id(*), tour_id(id, name)'
+        'id, point, player_id, match_id(*), player_result_id(*), tour_id(id, name,name_ru)'
       )
       .eq('competition_id', competition_id)
       .eq('tour_id', tour_id)
