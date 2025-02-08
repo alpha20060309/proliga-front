@@ -5,8 +5,10 @@ import { useSelector } from 'react-redux'
 import { useEffect, useState, useMemo } from 'react'
 import { staticPath } from 'app/utils/static.util'
 import Image from 'next/image'
+import { getCorrectName } from 'app/utils/getCorrectName.util'
 
 const Player = ({ player }) => {
+  const { lang } = useSelector((store) => store.systemLanguage)
   const playerPoint = useSelector(selectPlayerPoint)
   const [currentPlayerPoint, setCurrentPlayerPoint] = useState(null)
 
@@ -28,8 +30,14 @@ const Player = ({ player }) => {
     () => (player.name ? player?.club_id?.slug : ''),
     [player]
   )
-  const firstName = player.name ? player?.name?.split(' ')[0] : ''
-  const lastName = player?.name?.split(' ')[1] ?? ''
+  const name = getCorrectName({
+    lang,
+    uz: player?.player?.name,
+    ru: player?.player?.name_ru,
+  })
+
+  const firstName = player.name ? name?.split(' ')[0] : ''
+  const lastName = name?.split(' ')[1] ?? ''
   const tShirt = staticPath + '/club-svg/' + clubPath + '/app.svg'
 
   return (
@@ -73,7 +81,7 @@ const Player = ({ player }) => {
             {firstName} {lastName.slice(0, 1).toUpperCase()} {lastName && '.'}
           </p>
           <div className="flex items-center gap-0.5">
-            <div className="h-4 w-6 cursor-default rounded border border-neutral-800 bg-primary text-center text-xs font-bold text-neutral-950 sm:h-5 sm:w-8 md:text-sm">
+            <div className="flex h-4 w-6 cursor-default items-center justify-center rounded border border-neutral-800 bg-primary text-center text-xs font-bold text-neutral-950 sm:h-5 sm:w-8 md:text-sm">
               {player.is_captain
                 ? (currentPlayerPoint?.point ?? 0) * 2
                 : (currentPlayerPoint?.point ?? 0)}

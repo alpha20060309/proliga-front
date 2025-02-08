@@ -7,11 +7,13 @@ import { staticPath } from 'app/utils/static.util'
 import { selectPlayerPoint } from 'app/lib/features/playerPoint/playerPoint.selector'
 import { setPlayerInfoModal } from 'app/lib/features/teamPlayers/teamPlayers.slice'
 import { setCurrentPlayer } from 'app/lib/features/players/players.slice'
+import { getCorrectName } from 'app/utils/getCorrectName.util'
 
 const Player = ({ player }) => {
   const dispatch = useDispatch()
   const playerPoint = useSelector(selectPlayerPoint)
   const [currentPlayerPoint, setCurrentPlayerPoint] = useState(null)
+  const { lang } = useSelector((store) => store.systemLanguage)
 
   useEffect(() => {
     if (playerPoint?.length > 0) {
@@ -32,13 +34,19 @@ const Player = ({ player }) => {
     dispatch(setPlayerInfoModal(true))
   }
 
+  const name = getCorrectName({
+    lang,
+    uz: player?.player?.name,
+    ru: player?.player?.name_ru,
+  })
+
   const clubPath = useMemo(
     () => (player.name ? player?.club_id?.slug : ''),
     [player]
   )
   const tShirt = staticPath + '/club-svg/' + clubPath + '/app.svg'
-  const firstName = player.name ? player?.name?.split(' ')[0] : ''
-  const lastName = player?.name?.split(' ')[1] ?? ''
+  const firstName = player.name ? name?.split(' ')[0] : ''
+  const lastName = name?.split(' ')[1] ?? ''
 
   return (
     <div className="flex h-min select-none flex-col items-center justify-center text-sm text-neutral-700 sm:text-base">
@@ -92,7 +100,7 @@ const Player = ({ player }) => {
                 className="size-4 rounded bg-black p-px transition-all hover:bg-primary sm:size-5"
               />
             </button>
-            <div className="h-4 w-6 cursor-default rounded border border-neutral-800 bg-primary text-center text-xs font-bold text-neutral-950 sm:h-5 sm:w-8 md:text-sm">
+            <div className="flex h-4 w-6 cursor-default items-center justify-center rounded border border-neutral-800 bg-primary text-center text-xs font-bold text-neutral-950 sm:h-5 sm:w-8 md:text-sm">
               {player.is_captain
                 ? (currentPlayerPoint?.point ?? 0) * 2
                 : (currentPlayerPoint?.point ?? 0)}

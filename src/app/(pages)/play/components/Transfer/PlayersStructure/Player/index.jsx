@@ -12,6 +12,7 @@ import { staticPath } from 'app/utils/static.util'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { useTranslation } from 'react-i18next'
 import { setCurrentPlayer } from 'app/lib/features/players/players.slice'
+import { getCorrectName } from 'app/utils/getCorrectName.util'
 
 const Player = ({ player }) => {
   const dispatch = useDispatch()
@@ -22,9 +23,17 @@ const Player = ({ player }) => {
     () => (player.name ? player?.club_id?.slug : ''),
     [player]
   )
+  const { lang } = useSelector((store) => store.systemLanguage)
+
+  const name = getCorrectName({
+    lang,
+    uz: player?.player?.name,
+    ru: player?.player?.name_ru,
+  })
+
   const tShirt = staticPath + '/club-svg/' + clubPath + '/app.svg'
-  const firstName = player.name ? player?.name?.split(' ')[0] : ''
-  const lastName = player?.name?.split(' ')[1] ?? ''
+  const firstName = player.name ? name?.split(' ')[0] : ''
+  const lastName = name?.split(' ')[1] ?? ''
 
   const imageErr = (e) => {
     e.target.src = '/icons/player.svg'
@@ -99,10 +108,10 @@ const Player = ({ player }) => {
                   draggable={false}
                   src="/icons/swap.svg"
                   alt="additional info"
-                  className="size-3.5 rounded bg-black p-[1px] transition-all hover:bg-primary xs:size-4 md:size-5 2xl:size-[18px]"
+                  className="size-4 rounded bg-black p-px transition-all hover:bg-primary sm:size-5"
                 />
               </button>
-              <div className="flex h-3.5 w-6 cursor-default items-center justify-center rounded bg-white text-center text-[11px] font-bold shadow shadow-neutral-600 xs:h-4 xs:w-8 xs:text-xs md:h-5 md:text-sm">
+              <div className="h-4 w-6 flex justify-center items-center cursor-default rounded border border-neutral-800 bg-neutral-50 text-center text-xs font-bold text-neutral-950 sm:h-5 sm:w-8 md:text-sm">
                 {player.price ?? '00'}
               </div>
               <button onClick={toggleDeleteModal}>
@@ -111,7 +120,7 @@ const Player = ({ player }) => {
                   height={16}
                   src="/icons/close-red-circle.svg"
                   alt="delete player"
-                  className="size-3.5 rounded transition-all hover:opacity-75 xs:size-4 md:size-5 2xl:size-[18px]"
+                  className="size-4 rounded bg-black p-px transition-all hover:bg-primary sm:size-5"
                 />
               </button>
             </div>

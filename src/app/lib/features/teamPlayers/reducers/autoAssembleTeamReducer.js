@@ -37,6 +37,10 @@ export const autoAssembleTeamReducer = (state, action) => {
     user_id: team.user_id,
     percentage: player.percentage ?? null,
     image: player.image,
+    player: {
+      name: player.name,
+      name_ru: player.name_ru,
+    },
   })
 
   allPlayers.forEach((player) => {

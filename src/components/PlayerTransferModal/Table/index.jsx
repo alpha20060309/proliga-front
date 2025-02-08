@@ -10,7 +10,10 @@ import {
 } from '@tanstack/react-table'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { selectCurrentPlayer, selectPlayers } from 'app/lib/features/players/players.selector'
+import {
+  selectCurrentPlayer,
+  selectPlayers,
+} from 'app/lib/features/players/players.selector'
 import { createColumnHelper } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
 import TransferTableHead from './Head'

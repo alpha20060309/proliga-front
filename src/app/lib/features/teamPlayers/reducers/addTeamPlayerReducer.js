@@ -46,6 +46,10 @@ export const addTeamPlayerReducer = (state, action) => {
     user_id: team.user_id,
     image: player.image,
     percentage: player.percentage ?? null,
+    player: {
+      name: player.name,
+      name_ru: player.name_ru,
+    },
   })
 
   const softDeleteEmptyPlayer = (emptyPlayer) => {

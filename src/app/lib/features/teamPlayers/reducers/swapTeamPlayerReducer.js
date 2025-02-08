@@ -33,6 +33,8 @@ export const swapTeamPlayerReducer = (state, action) => {
       state.STR.reduce((acc, player) => acc + player.price, 0)
   }
 
+  console.log(previousPlayer)
+
   const createUpdatedPlayer = (prevPlayer, newPlayer) => ({
     ...prevPlayer,
     id: prevPlayer.id,
@@ -48,9 +50,13 @@ export const swapTeamPlayerReducer = (state, action) => {
     user_id: team.user_id,
     image: newPlayer.image,
     percentage: newPlayer.percentage ?? null,
+    player: {
+      name: newPlayer.name,
+      name_ru: newPlayer.name_ru,
+    },
   })
 
-  const clubId = player?.club?.id || player.club_id.id
+  const clubId = player.club.id || player.club_id.id
 
   if (state.duplicatesMap[clubId] === max_same_team_players) {
     toast.warning(t('Max players count reached from the same club!'), {
@@ -73,7 +79,7 @@ export const swapTeamPlayerReducer = (state, action) => {
   }
 
   if (state.GOA.length > 0 && player.position === PLAYERS.GOA) {
-    const prevPlayer = state.GOA.find((p) => previousPlayer.id === p.id)
+    const prevPlayer = state.GOA.find((p) => previousPlayer.id === p.player_id)
     const prevPlayerIndex = state.GOA.findIndex(
       (p) => previousPlayer.id === p.id
     )
@@ -85,7 +91,7 @@ export const swapTeamPlayerReducer = (state, action) => {
     return state
   }
   if (player.position === PLAYERS.DEF && state.DEF.length > 0) {
-    const prevPlayer = state.DEF.find((p) => previousPlayer.id === p.id)
+    const prevPlayer = state.DEF.find((p) => previousPlayer.id === p.player_id)
     const prevPlayerIndex = state.DEF.findIndex(
       (p) => previousPlayer.id === p.id
     )
@@ -97,7 +103,7 @@ export const swapTeamPlayerReducer = (state, action) => {
     return state
   }
   if (player.position === PLAYERS.MID && state.MID.length > 0) {
-    const prevPlayer = state.MID.find((p) => previousPlayer.id === p.id)
+    const prevPlayer = state.MID.find((p) => previousPlayer.id === p.player_id)
     const prevPlayerIndex = state.MID.findIndex(
       (p) => previousPlayer.id === p.id
     )
@@ -109,7 +115,7 @@ export const swapTeamPlayerReducer = (state, action) => {
     return state
   }
   if (player.position === PLAYERS.STR && state.STR.length > 0) {
-    const prevPlayer = state.STR.find((p) => previousPlayer.id === p.id)
+    const prevPlayer = state.STR.find((p) => previousPlayer.id === p.player_id)
     const prevPlayerIndex = state.STR.findIndex(
       (p) => previousPlayer.id === p.id
     )
