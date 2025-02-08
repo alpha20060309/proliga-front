@@ -13,7 +13,7 @@ export const playerPointExtraReducer = (builder) => {
       state.isLoading = false
     })
     .addCase(fetchPlayerPoint.rejected, (state, action) => {
-      state.error = action.payload?.error?.message ?? null
+      state.error = action?.error?.message ?? null
       state.isLoading = false
     })
 }

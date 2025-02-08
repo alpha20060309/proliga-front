@@ -15,7 +15,7 @@ export const teamsExtraReducer = (builder) => {
       state.isLoading = false
     })
     .addCase(fetchUserTeams.rejected, (state, action) => {
-      state.error = action.payload.error.message ?? null
+      state.error = action?.error?.messagell
       state.isLoading = false
     })
     // top teams
@@ -30,9 +30,10 @@ export const teamsExtraReducer = (builder) => {
       state.topTeamsLoading = false
     })
     .addCase(fetchTopTeams.rejected, (state, action) => {
-      state.topTeamsError = action.payload?.error?.message ?? null
+      state.topTeamsError = action?.error?.message ?? null
       state.topTeamsLoading = false
     })
+    // fetch all teams
     .addCase(fetchAllTeams.pending, (state) => {
       state.allTeams = []
       state.teamsLoading = true
@@ -43,7 +44,7 @@ export const teamsExtraReducer = (builder) => {
       state.teamsLoading = false
     })
     .addCase(fetchAllTeams.rejected, (state, action) => {
-      state.teamsError = action.payload?.error.message ?? null
+      state.teamsError = action?.error.message ?? null
       state.teamsLoading = false
     })
     // search all teams
@@ -57,7 +58,7 @@ export const teamsExtraReducer = (builder) => {
       state.teamsLoading = false
     })
     .addCase(searchAllTeams.rejected, (state, action) => {
-      state.teamsError = action.payload?.error.message ?? null
+      state.teamsError = action?.error.message ?? null
       state.teamsLoading = false
     })
 }

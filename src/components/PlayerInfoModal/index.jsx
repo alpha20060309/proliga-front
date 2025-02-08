@@ -32,7 +32,10 @@ const PlayerInfoModal = () => {
     if (playerPoint?.length > 0) {
       setMatches([])
       playerPoint.forEach((item) => {
-        if (item.player_id === currentPlayer?.id) {
+        if (
+          item.player_id === currentPlayer?.id &&
+          item?.player_result_id?.played_min > 0
+        ) {
           setMatches((prevMatch) => [...prevMatch, item])
         }
       })

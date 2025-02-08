@@ -15,7 +15,7 @@ export const playersExtraReducer = (builder) => {
       state.isLoading = false
     })
     .addCase(fetchPlayers.rejected, (state, action) => {
-      state.error = action.payload?.error?.message ?? null
+      state.error = action?.error?.message ?? null
       state.isLoading = false
     })
     .addCase(fetchAdditionalPlayers.pending, (state) => {
@@ -30,7 +30,7 @@ export const playersExtraReducer = (builder) => {
       state.isLoading = false
     })
     .addCase(fetchAdditionalPlayers.rejected, (state, action) => {
-      state.error = action.payload?.error?.message ?? null
+      state.error = action?.error?.message ?? null
       state.isLoading = false
     })
     .addCase(fetchTopPlayers.pending, (state) => {
@@ -47,7 +47,7 @@ export const playersExtraReducer = (builder) => {
       state.topPlayersLoading = false
     })
     .addCase(fetchTopPlayers.rejected, (state, action) => {
-      state.topPlayersError = action.payload?.error?.message ?? null
+      state.topPlayersError = action?.error?.message ?? null
       state.topPlayersLoading = false
     })
 }

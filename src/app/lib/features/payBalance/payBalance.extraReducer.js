@@ -13,7 +13,7 @@ export const payBalanceExtraReducer = (builder) => {
       state.isLoading = false
     })
     .addCase(fetchPayBalance.rejected, (state, action) => {
-      state.error = action.payload?.error?.message ?? null
+      state.error = action?.error?.message ?? null
       state.isLoading = false
     })
 }

@@ -13,7 +13,7 @@ export const matchEventExtraReducer = (builder) => {
       state.isLoading = false
     })
     .addCase(fetchMatchEvents.rejected, (state, action) => {
-      state.error = action.payload.error.message ?? null
+      state.error = action?.error?.message
       state.isLoading = false
     })
 }

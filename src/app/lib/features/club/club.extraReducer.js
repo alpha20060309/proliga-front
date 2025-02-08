@@ -11,7 +11,7 @@ export const clubExtraReducer = (builder) => {
       state.isLoading = false
     })
     .addCase(fetchClubs.rejected, (state, action) => {
-      state.error = action.payload.error.message ?? null
+      state.error = action?.error?.message ?? null
       state.isLoading = false
     })
 }

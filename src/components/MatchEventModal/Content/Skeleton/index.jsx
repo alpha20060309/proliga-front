@@ -2,9 +2,9 @@ import { cn } from '@/lib/utils'
 
 export default function MatchEventSkeleton() {
   return (
-    <section className="relative flex h-full max-h-[calc(90vh-300px)] flex-col gap-4 overflow-y-auto px-4 py-4">
+    <section className="relative flex h-full max-h-[calc(90vh-320px)] flex-col gap-4 overflow-y-auto px-4 py-4">
       {/* Center line */}
-      <span className="absolute bottom-0 left-1/2 top-0 w-px -translate-x-1/2 transform bg-white/25" />
+      <span className="absolute bottom-0 left-1/2 top-0 w-px -translate-x-1/2 transform bg-neutral-600" />
 
       <SkeletonEventHeader />
       <SkeletonEvent />
@@ -16,6 +16,8 @@ export default function MatchEventSkeleton() {
       <SkeletonEvent />
       <SkeletonEvent isReversed />
       <SkeletonEvent />
+      <SkeletonEvent />
+
       <SkeletonEventHeader />
     </section>
   )

@@ -82,7 +82,6 @@ export const swapTeamPlayerReducer = (state, action) => {
       (p) => previousPlayer.id === p.player_id
     )
     state.GOA[prevPlayerIndex] = createUpdatedPlayer(prevPlayer, player)
-    console.log(createUpdatedPlayer(prevPlayer, player), prevPlayerIndex)
     evaluateTeamClubId()
     calcTeamPrice()
     state.transferModal = false

@@ -13,7 +13,7 @@ export const currentTeamExtraReducer = (builder) => {
       state.isLoading = false
     })
     .addCase(fetchCurrentTeam.rejected, (state, action) => {
-      state.error = action.payload.error.message ?? null
+      state.error = action?.error?.message ?? null
       state.isLoading = false
     })
     .addCase(fetchSelectedTeam.pending, (state) => {
@@ -27,7 +27,7 @@ export const currentTeamExtraReducer = (builder) => {
       state.isLoading = false
     })
     .addCase(fetchSelectedTeam.rejected, (state, action) => {
-      state.error = action.payload.error.message ?? null
+      state.error = action?.error?.message ?? null
       state.isLoading = false
     })
 }
