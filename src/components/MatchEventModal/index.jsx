@@ -60,9 +60,11 @@ function MatchEventModal() {
 
   const handleRefresh = () => {}
 
+  const events = []
+
   return (
     <Dialog open={isModalOpen && currentMatch?.id} onOpenChange={setModalOpen}>
-      <DialogContent className="max-h-[90vh] max-w-2xl gap-0 rounded-xl border border-neutral-800 bg-gradient-to-b from-gray-900 via-neutral-950 to-black p-0 text-white">
+      <DialogContent className="flex max-h-[90vh] min-h-[55vh] max-w-2xl flex-col gap-0 rounded-xl border border-neutral-800 bg-gradient-to-b from-gray-900 via-neutral-950 to-black p-0 text-white">
         <MatchEventHeader
           started_date={currentMatch?.started_date}
           finished_date={currentMatch?.finished_date}
@@ -87,7 +89,7 @@ function MatchEventModal() {
         <AnimatePresence>
           {isModalOpen && (
             <motion.button
-              className="absolute bottom-4 right-6 rounded-full bg-gray-800 p-2 text-white shadow-lg"
+              className="absolute bottom-4 right-6 rounded-full bg-gray-800 p-2 text-white shadow shadow-neutral-400"
               variants={refreshButtonVariants}
               initial="hidden"
               animate="visible"
@@ -243,82 +245,5 @@ const MatchEvent = ({ event, index }) => {
     </motion.div>
   )
 }
-
-const events = [
-  {
-    player_name: ' Конец матча.',
-    type: MATCH_EVENTS.FIRST_TIME_START,
-  },
-  {
-    player_name: 'Калафьори',
-    minute: 5,
-    team: 'home',
-    type: MATCH_EVENTS.HIT_PENALTY,
-  },
-  {
-    player_name: 'Стерлинг',
-    second_player_name: 'Хавертц',
-    minute: 90,
-    team: 'home',
-    type: MATCH_EVENTS.FIRST_TIME_END,
-  },
-  {
-    player_name: 'Стерлинг',
-    minute: 90,
-    team: 'home',
-    type: MATCH_EVENTS.GOAL,
-  },
-  {
-    player_name: 'Эдегор',
-    minute: 90,
-    second_player_name: 'Троссард',
-    team: 'away',
-    type: MATCH_EVENTS.GOAL,
-  },
-  {
-    player_name: 'Мерино',
-    second_player_name: 'Эдегор',
-    minute: 84,
-    team: 'home',
-    type: MATCH_EVENTS.MISSED_PENALTY,
-  },
-  {
-    player_name: 'Нванери',
-    second_player_name: 'Троссард',
-    minute: 84,
-    team: 'home',
-    type: MATCH_EVENTS.SECOND_TIME_START,
-  },
-  {
-    player_name: 'Хавертц',
-    second_player_name: 'Мартинелли',
-    minute: 76,
-    goal: true,
-    team: 'home',
-    type: MATCH_EVENTS.YELLOW_CARD,
-  },
-  {
-    player_name: 'Хавертц',
-    minute: 76,
-    team: 'home',
-    type: MATCH_EVENTS.RED_CARD,
-  },
-  {
-    player_name: 'Хавертц',
-    second_player_name: 'Мартинелли',
-    minute: 76,
-    goal: true,
-    team: 'home',
-    type: MATCH_EVENTS.TRANSFER,
-  },
-  {
-    player_name: 'Хавертц',
-    second_player_name: 'Мартинелли',
-    minute: 76,
-    goal: true,
-    team: 'home',
-    type: MATCH_EVENTS.SECOND_TIME_END,
-  },
-]
 
 export default MatchEventModal

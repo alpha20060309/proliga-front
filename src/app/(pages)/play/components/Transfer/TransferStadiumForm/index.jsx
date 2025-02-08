@@ -210,7 +210,7 @@ const TransferStadiumForm = () => {
         value={teamConcat.find((player) => player.is_captain)?.player_id ?? ''}
         onValueChange={(value) => dispatch(setCaptain(value))}
       >
-        <SelectTrigger className="h-10 w-full min-w-36 2xs:min-w-44 max-w-56 rounded border-neutral-400 bg-neutral-950 px-2 text-xs text-neutral-100 hover:border-primary xs:text-sm md:text-base">
+        <SelectTrigger className="h-10 w-full min-w-36 max-w-56 rounded border-neutral-400 bg-neutral-950 px-2 text-xs text-neutral-100 hover:border-primary 2xs:min-w-44 xs:text-sm md:text-base">
           <SelectValue placeholder={t('Kapitan tanlang')} />
         </SelectTrigger>
         <SelectContent>

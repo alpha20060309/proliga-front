@@ -11,7 +11,7 @@ const MatchEventHeader = ({ started_date }) => {
   const currentCompetition = useSelector(selectCurrentCompetition)
 
   return (
-    <section className="relative border-b border-white/10 p-4">
+    <section className="relative h-min border-b border-white/10 p-4">
       <DialogTitle className="text-center text-xl font-semibold">
         {getCorrectName({
           lang,
