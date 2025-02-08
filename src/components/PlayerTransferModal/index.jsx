@@ -11,6 +11,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { setPlayerTransferModal } from 'app/lib/features/teamPlayers/teamPlayers.slice'
 import { selectCurrentPlayer } from 'app/lib/features/players/players.selector'
+import { memo } from 'react'
 
 const PlayerTransferModal = () => {
   const dispatch = useDispatch()
@@ -41,4 +42,4 @@ const PlayerTransferModal = () => {
   )
 }
 
-export default PlayerTransferModal
+export default memo(PlayerTransferModal)

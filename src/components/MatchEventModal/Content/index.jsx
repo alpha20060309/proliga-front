@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { selectMatchEvents } from 'app/lib/features/matchEvent/matchEvent.selector'
 import MatchEvent from './Event'
 import MatchEventSkeleton from './Skeleton'
+import { memo } from 'react'
 
 const MatchEventContent = () => {
   const events = useSelector(selectMatchEvents)
@@ -27,4 +28,4 @@ const MatchEventContent = () => {
   )
 }
 
-export default MatchEventContent
+export default memo(MatchEventContent)

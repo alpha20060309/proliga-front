@@ -8,7 +8,7 @@ export const fetchMatchEvents = createAsyncThunk(
     const { data, error } = await supabase
       .from('match_event')
       .select(
-        '*, player_id(id, name, name_ru), second_player_id(id,name,name_ru)'
+        'id, match_id, event_type, minute, player_id(id, name, name_ru, club(id)), second_player_id(id, name, name_ru, club(id))'
       )
       .eq('match_id', match_id)
       .in('event_type', [

@@ -173,7 +173,7 @@ const Play = ({ params }) => {
         })
       )
     }
-  }, [teamConcat, dispatch, currentTour?.id, params?.league])
+  }, [dispatch, currentTour?.id, params?.league, teamConcat])
 
   useEffect(() => {
     if (competitions?.length > 0 && params.league) {

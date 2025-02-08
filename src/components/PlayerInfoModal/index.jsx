@@ -14,6 +14,7 @@ import { selectPlayerPoint } from 'app/lib/features/playerPoint/playerPoint.sele
 import { getCorrentPlayerPosition } from 'app/utils/getCorrectPlayerPosition.utils'
 import { setPlayerInfoModal } from 'app/lib/features/teamPlayers/teamPlayers.slice'
 import { selectCurrentPlayer } from 'app/lib/features/players/players.selector'
+import { memo } from 'react'
 
 const PlayerInfoModal = () => {
   const dispatch = useDispatch()
@@ -95,4 +96,4 @@ const PlayerInfoModal = () => {
   )
 }
 
-export default PlayerInfoModal
+export default memo(PlayerInfoModal)

@@ -2,6 +2,7 @@ import Gutter from '../../../../../components/Gutter'
 import Tabs from './TourTabs'
 import { useSelector } from 'react-redux'
 import { TABS } from '../../../../utils/tabs.util'
+import { memo } from 'react'
 
 const GameNavigation = () => {
   const { gameTab } = useSelector((state) => state.tours)
@@ -22,4 +23,4 @@ const GameNavigation = () => {
   )
 }
 
-export default GameNavigation
+export default memo(GameNavigation)

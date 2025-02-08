@@ -11,6 +11,7 @@ const GameBrief = dynamic(() => import('./GameBrief'), {
   loading: () => <GameBriefContainerSkeleton />,
 })
 import PlayerInfoModal from 'components/PlayerInfoModal'
+import { memo } from 'react'
 
 const GameProfile = () => {
   const currentTour = useSelector(selectCurrentTour)
@@ -39,4 +40,4 @@ const GameProfile = () => {
   )
 }
 
-export default GameProfile
+export default memo(GameProfile)

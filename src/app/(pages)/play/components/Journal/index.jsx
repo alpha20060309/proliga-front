@@ -7,8 +7,9 @@ import { usePathname } from 'next/navigation'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { Pagination } from 'components/Table/Pagination'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
+import { memo } from 'react'
 
-export default function Journal() {
+function Journal() {
   const path = usePathname()
   const dispatch = useDispatch()
   const userTable = useSelector(selectUserTable)
@@ -51,3 +52,5 @@ export default function Journal() {
     </>
   )
 }
+
+export default memo(Journal)

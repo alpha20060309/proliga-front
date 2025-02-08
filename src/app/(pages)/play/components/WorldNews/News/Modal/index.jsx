@@ -12,8 +12,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { formatDate } from 'app/utils/formatDate.util'
 import { selectCurrentNews } from 'app/lib/features/news/news.selector'
 import { setNewsModal } from 'app/lib/features/news/news.slice'
+import { memo } from 'react'
 
-export default function ArticleModal() {
+function ArticleModal() {
   const dispatch = useDispatch()
   const currentNews = useSelector(selectCurrentNews)
   const { isModalOpen } = useSelector((store) => store.news)
@@ -67,3 +68,4 @@ export default function ArticleModal() {
     </Dialog>
   )
 }
+export default memo(ArticleModal)

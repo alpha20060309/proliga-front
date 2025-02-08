@@ -5,58 +5,46 @@ import { motion } from 'framer-motion'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { eventVariants } from 'components/MatchEventModal/animations.styles'
 import { cn } from '@/lib/utils'
+import { selectCurrentMatch } from 'app/lib/features/matches/matches.selector'
+import MatchEventIcon from './Icon'
 
 const MatchEvent = ({ event, index }) => {
   const { t } = useTranslation()
   const { lang } = useSelector((store) => store.systemLanguage)
+  const currentMatch = useSelector(selectCurrentMatch)
+  let isHome = false
 
-  const renderIcon = (type) => {
-    switch (type) {
-      case MATCH_EVENTS.GOAL:
-        return <img src="/icons/football.svg" alt="GOAL" className="size-7" />
-      case MATCH_EVENTS.MISSED_PENALTY:
-        return (
-          <img
-            src="/icons/missed-penalty.svg"
-            alt="missed penalty"
-            className="size-6"
-          />
-        )
-      case MATCH_EVENTS.HIT_PENALTY:
-        return (
-          <img
-            src="/icons/hit-penalty.svg"
-            alt="Penalty hit"
-            className="size-6"
-          />
-        )
-      case MATCH_EVENTS.TRANSFER:
-        return (
-          <img
-            src="/icons/arrows-transfer.svg"
-            alt="transfer players"
-            className="size-7"
-          />
-        )
-      case MATCH_EVENTS.RED_CARD:
-        return (
-          <img
-            src="/icons/soccer-card.svg"
-            alt="red card"
-            className="filter-red-600 size-7"
-          />
-        )
-      case MATCH_EVENTS.YELLOW_CARD:
-        return (
-          <img
-            src="/icons/soccer-card.svg"
-            alt="Yellow Card"
-            className="filter-yellow-500 size-7"
-          />
-        )
-      default:
-        return null
-    }
+  const hasSecondName =
+    event.event_type === MATCH_EVENTS.TRANSFER ||
+    event.event_type === MATCH_EVENTS.GOAL
+
+  const hasName =
+    event.event_type === MATCH_EVENTS.GOAL ||
+    event.event_type === MATCH_EVENTS.TRANSFER ||
+    event.event_type === MATCH_EVENTS.MISSED_PENALTY ||
+    event.event_type === MATCH_EVENTS.HIT_PENALTY ||
+    event.event_type === MATCH_EVENTS.RED_CARD ||
+    event.event_type === MATCH_EVENTS.YELLOW_CARD
+
+  const isTextOnly =
+    event.event_type === MATCH_EVENTS.FIRST_TIME_START ||
+    event.event_type === MATCH_EVENTS.FIRST_TIME_END ||
+    event.event_type === MATCH_EVENTS.SECOND_TIME_START ||
+    event.event_type === MATCH_EVENTS.SECOND_TIME_END
+
+  if (isTextOnly) {
+    isHome = true
+  }
+
+  if (
+    hasSecondName &&
+    currentMatch?.home_club_id?.id === event.player_id?.club?.id &&
+    currentMatch?.home_club_id?.id === event.second_player_id?.club?.id
+  ) {
+    isHome = true
+  }
+  if (hasName && event.player_id?.club?.id === currentMatch?.home_club_id?.id) {
+    isHome = true
   }
 
   const renderHeader = (type) => {
@@ -73,26 +61,6 @@ const MatchEvent = ({ event, index }) => {
         return null
     }
   }
-
-  const isTextOnly =
-    event.event_type === MATCH_EVENTS.FIRST_TIME_START ||
-    event.event_type === MATCH_EVENTS.FIRST_TIME_END ||
-    event.event_type === MATCH_EVENTS.SECOND_TIME_START ||
-    event.event_type === MATCH_EVENTS.SECOND_TIME_END
-
-  const hasSecondName =
-    event.event_type === MATCH_EVENTS.TRANSFER ||
-    event.event_type === MATCH_EVENTS.GOAL
-
-  const hasName =
-    event.event_type === MATCH_EVENTS.GOAL ||
-    event.event_type === MATCH_EVENTS.TRANSFER ||
-    event.event_type === MATCH_EVENTS.MISSED_PENALTY ||
-    event.event_type === MATCH_EVENTS.HIT_PENALTY ||
-    event.event_type === MATCH_EVENTS.RED_CARD ||
-    event.event_type === MATCH_EVENTS.YELLOW_CARD
-
-  const isHome = true
 
   return (
     <motion.div
@@ -148,7 +116,7 @@ const MatchEvent = ({ event, index }) => {
           </div>
           <div className="flex w-2/12 items-center justify-center">
             <div className="z-10 flex size-10 items-center justify-center rounded-full bg-neutral-900 shadow shadow-neutral-700">
-              {renderIcon(event.event_type)}
+              <MatchEventIcon type={event.event_type} />
             </div>
           </div>
           <div

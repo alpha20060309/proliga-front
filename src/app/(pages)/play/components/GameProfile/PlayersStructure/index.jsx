@@ -1,6 +1,7 @@
 import Player from './Player'
 import { useSelector } from 'react-redux'
 import StadiumSpinner from '../../StadiumSpinner'
+import { memo } from 'react'
 
 const ProfilePlayersStructure = () => {
   const { GOA, DEF, MID, STR, isLoading } = useSelector(
@@ -39,4 +40,4 @@ const ProfilePlayersStructure = () => {
   )
 }
 
-export default ProfilePlayersStructure
+export default memo(ProfilePlayersStructure)

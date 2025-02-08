@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
 import StatisticsTable from './Table'
 import StatisticsTableSkeleton from './Skeleton'
+import { memo } from 'react'
 
 const Statistics = () => {
   const { isLoading } = useSelector((state) => state.players)
@@ -10,4 +11,4 @@ const Statistics = () => {
   return <StatisticsTable />
 }
 
-export default Statistics
+export default memo(Statistics)

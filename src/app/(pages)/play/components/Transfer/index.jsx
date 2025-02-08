@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux'
 import { TOUR } from 'app/utils/tour.util'
 import { selectCurrentTour } from 'app/lib/features/tours/tours.selector'
 import PlayerTransferModal from 'components/PlayerTransferModal'
+import { memo } from 'react'
 
 const Transfer = () => {
   const currentTour = useSelector(selectCurrentTour)
@@ -39,4 +40,4 @@ const Transfer = () => {
   )
 }
 
-export default Transfer
+export default memo(Transfer)

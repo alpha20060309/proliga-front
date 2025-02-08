@@ -13,11 +13,14 @@ import { refreshButtonVariants } from './animations.styles'
 import { useEffect } from 'react'
 import { fetchMatchEvents } from 'app/lib/features/matchEvent/matchEvent.thunk'
 import MatchEventContent from './Content'
+import { memo } from 'react'
 
 function MatchEventModal() {
   const dispatch = useDispatch()
   const { isModalOpen } = useSelector((store) => store.matches)
   const currentMatch = useSelector(selectCurrentMatch)
+
+  console.log(currentMatch)
 
   const setModalOpen = () => {
     dispatch(setMatchModalOpen(false))
@@ -66,4 +69,4 @@ function MatchEventModal() {
   )
 }
 
-export default MatchEventModal
+export default memo(MatchEventModal)

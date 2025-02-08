@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { memo } from 'react'
 
 const StadiumSpinner = () => {
   return (
@@ -14,4 +15,4 @@ const StadiumSpinner = () => {
   )
 }
 
-export default StadiumSpinner
+export default memo(StadiumSpinner)
