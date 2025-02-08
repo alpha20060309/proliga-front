@@ -1,6 +1,6 @@
-import Image from 'next/image'
 import { useTranslation } from 'react-i18next'
 import { Input } from '@/components/ui/input'
+import { Search } from 'lucide-react'
 
 const PlayerNameFilter = ({ column, columnFilterValue }) => {
   const { t } = useTranslation()
@@ -13,13 +13,7 @@ const PlayerNameFilter = ({ column, columnFilterValue }) => {
         type="text"
         value={columnFilterValue ?? ''}
       />
-      <Image
-        src="/icons/search.svg"
-        className="absolute right-2 top-2"
-        alt="search"
-        width={16}
-        height={16}
-      />
+      <Search className="absolute right-2 top-1/2 hidden size-5 -translate-y-1/2 text-neutral-300 xs:block" />
     </div>
   )
 }

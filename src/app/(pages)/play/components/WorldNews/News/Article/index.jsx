@@ -24,11 +24,11 @@ const Article = ({ item }) => {
         onClick={handleClick}
         className="group flex h-[100px] w-auto overflow-hidden rounded bg-white/10 hover:cursor-pointer"
       >
-        <div className="flex aspect-video h-full w-24 items-center justify-center md:w-36">
+        <div className="my-auto flex aspect-[4/3] h-[4.5rem] w-24 flex-shrink-0 items-center justify-center md:h-[100px] md:w-32">
           <img
             src={getUrl(item?.image) || ''}
             alt={item.name}
-            className="aspect-video h-full rounded"
+            className="h-full w-full rounded object-cover object-center shadow-md"
           />
         </div>
         <div className="flex h-full w-full flex-col space-y-1 px-2 py-1">

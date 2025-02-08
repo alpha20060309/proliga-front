@@ -139,7 +139,7 @@ const ProfileStadiumForm = () => {
       <Button
         type="submit"
         disabled={isLoading}
-        className="h-10 min-w-24 rounded border border-primary/80 bg-neutral-950 text-sm font-medium text-neutral-50 transition-all hover:border-black hover:bg-primary hover:bg-opacity-75 hover:text-black 2xs:min-w-28 xs:min-w-28 sm:min-w-32 md:text-base"
+        className="h-10 min-w-24 rounded border border-yellow-500 bg-neutral-950 text-sm font-medium text-neutral-100 transition-all hover:border-black hover:bg-yellow-500 hover:text-black 2xs:min-w-28 xs:min-w-28 sm:min-w-32 md:text-base"
       >
         {isLoading ? (
           <Image

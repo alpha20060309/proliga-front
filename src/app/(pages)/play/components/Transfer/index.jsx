@@ -24,7 +24,7 @@ const Transfer = () => {
               height={600}
               draggable={false}
               priority
-              className="w-full select-none rounded-sm"
+              className="w-full select-none rounded"
             />
             {currentTour?.status === TOUR.notStartedTransfer && (
               <PlayersStructure />

@@ -82,7 +82,7 @@ const GameBrief = () => {
         <>
           <Container className="border-b border-neutral-700">
             <Item>
-              <Title className="">{t('ID')}</Title>
+              <Title>{t('Team id')}</Title>
               <Content
                 className={
                   'flex cursor-pointer items-center justify-center gap-0.5 hover:underline'

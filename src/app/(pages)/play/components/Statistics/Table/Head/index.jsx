@@ -4,7 +4,7 @@ import { flexRender } from '@tanstack/react-table'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 
-const TransferTableHead = ({ table }) => {
+const Head = ({ table }) => {
   return (
     <thead>
       {table.getHeaderGroups().map((headerGroup) => (
@@ -80,4 +80,4 @@ const TransferTableHead = ({ table }) => {
   )
 }
 
-export default TransferTableHead
+export default Head

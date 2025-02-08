@@ -109,7 +109,7 @@ const Player = ({ player }) => {
                   draggable={false}
                   src="/icons/swap.svg"
                   alt="additional info"
-                  className="size-4 rounded bg-black p-px transition-all hover:bg-primary sm:size-5"
+                  className="size-4 rounded border border-neutral-900 transition-all hover:border-primary sm:size-5"
                 />
               </button>
               <div className="flex h-4 w-6 cursor-default items-center justify-center rounded border border-neutral-800 bg-neutral-50 text-center text-xs font-bold text-neutral-950 sm:h-5 sm:w-8 md:text-sm">
@@ -121,7 +121,7 @@ const Player = ({ player }) => {
                   height={16}
                   src="/icons/close-red-circle.svg"
                   alt="delete player"
-                  className="size-4 rounded bg-black p-px transition-all hover:bg-primary sm:size-5"
+                  className="size-4 rounded border border-neutral-900 transition-all hover:border-primary sm:size-5"
                 />
               </button>
             </div>

@@ -373,7 +373,7 @@
   "Transfer Amalga Oshirish": "Transfer Amalga Oshirish",
   "Sotib Olgan": "Sotib Olgan",
   "Telefon raqam tasdiqlash": "Telefon raqam tasdiqlash",
-  "Deadline": "Deadline",
+  "Deadline": "Dedlayn",
   "Tahrirlash": "Tahrirlash",
   "Xarajatlar tarixi": "Xarajatlar tarixi",
   "Balans haqida malumot topilmadi!": "Balans haqida malumot topilmadi!",
@@ -615,5 +615,6 @@
   "2nd Match Start": "Ikkinchi o‘yin boshlandi",
   "Game Ends": "O‘yin yakunlandi",
   "Ha": "Ha",
-  "Yoq": "Yoq"
+  "Yoq": "Yoq",
+  "Team id": "Jamoa identifikatori"
 }

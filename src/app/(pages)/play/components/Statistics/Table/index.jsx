@@ -14,8 +14,8 @@ import { useTranslation } from 'react-i18next'
 import { createColumnHelper } from '@tanstack/react-table'
 import { selectPlayers } from 'app/lib/features/players/players.selector'
 import { getCorrentPlayerPosition } from 'app/utils/getCorrectPlayerPosition.utils'
-import TransferTableHead from './Head'
-import TransferTableBody from './Body'
+import Head from './Head'
+import Body from './Body'
 import StatisticsTableFilters from '../Filters'
 import TanStackPagination from 'components/Table/TanStackPagination'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
@@ -133,8 +133,8 @@ function StatisticsTable() {
   })
 
   return (
-    <section className="flex flex-col gap-2">
-      <div className="relative flex gap-1 text-xs xs:text-sm">
+    <section className="flex flex-col justify-between gap-2">
+      <div className="relative flex flex-1 gap-1 text-xs xs:text-sm">
         {table
           .getHeaderGroups()
           .map((headerGroup) =>
@@ -144,12 +144,12 @@ function StatisticsTable() {
           )}
       </div>
       <table className="min-w-[22rem] text-[11px] xs:text-xs md:text-sm">
-        <TransferTableHead table={table} />
-        <TransferTableBody table={table} flexRender={flexRender} />
+        <Head table={table} />
+        <Body table={table} flexRender={flexRender} />
       </table>
       <TanStackPagination
         table={table}
-        active="bg-neutral-300 text-black"
+        active="bg-neutral-300 text-black "
         className={'mt-auto'}
       />
     </section>
