@@ -33,8 +33,6 @@ export const swapTeamPlayerReducer = (state, action) => {
       state.STR.reduce((acc, player) => acc + player.price, 0)
   }
 
-  console.log(previousPlayer)
-
   const createUpdatedPlayer = (prevPlayer, newPlayer) => ({
     ...prevPlayer,
     id: prevPlayer.id,
@@ -81,9 +79,10 @@ export const swapTeamPlayerReducer = (state, action) => {
   if (state.GOA.length > 0 && player.position === PLAYERS.GOA) {
     const prevPlayer = state.GOA.find((p) => previousPlayer.id === p.player_id)
     const prevPlayerIndex = state.GOA.findIndex(
-      (p) => previousPlayer.id === p.id
+      (p) => previousPlayer.id === p.player_id
     )
     state.GOA[prevPlayerIndex] = createUpdatedPlayer(prevPlayer, player)
+    console.log(createUpdatedPlayer(prevPlayer, player), prevPlayerIndex)
     evaluateTeamClubId()
     calcTeamPrice()
     state.transferModal = false
@@ -93,7 +92,7 @@ export const swapTeamPlayerReducer = (state, action) => {
   if (player.position === PLAYERS.DEF && state.DEF.length > 0) {
     const prevPlayer = state.DEF.find((p) => previousPlayer.id === p.player_id)
     const prevPlayerIndex = state.DEF.findIndex(
-      (p) => previousPlayer.id === p.id
+      (p) => previousPlayer.id === p.player_id
     )
     state.DEF[prevPlayerIndex] = createUpdatedPlayer(prevPlayer, player)
     evaluateTeamClubId()
@@ -105,7 +104,7 @@ export const swapTeamPlayerReducer = (state, action) => {
   if (player.position === PLAYERS.MID && state.MID.length > 0) {
     const prevPlayer = state.MID.find((p) => previousPlayer.id === p.player_id)
     const prevPlayerIndex = state.MID.findIndex(
-      (p) => previousPlayer.id === p.id
+      (p) => previousPlayer.id === p.player_id
     )
     state.MID[prevPlayerIndex] = createUpdatedPlayer(prevPlayer, player)
     evaluateTeamClubId()
@@ -117,7 +116,7 @@ export const swapTeamPlayerReducer = (state, action) => {
   if (player.position === PLAYERS.STR && state.STR.length > 0) {
     const prevPlayer = state.STR.find((p) => previousPlayer.id === p.player_id)
     const prevPlayerIndex = state.STR.findIndex(
-      (p) => previousPlayer.id === p.id
+      (p) => previousPlayer.id === p.player_id
     )
     state.STR[prevPlayerIndex] = createUpdatedPlayer(prevPlayer, player)
     evaluateTeamClubId()

@@ -11,6 +11,7 @@ import { Pagination } from 'components/Table/Pagination'
 import { selectNews } from 'app/lib/features/news/news.selector'
 import { Button } from '@/components/ui/button'
 import { RefreshCcw, Newspaper } from 'lucide-react'
+import ArticleModal from './Modal'
 
 const News = () => {
   const dispatch = useDispatch()
@@ -59,7 +60,7 @@ const News = () => {
         </Button>
       </div>
       <div className="flex h-full w-full flex-1 flex-col gap-2">
-        {news?.map((item, index) => (
+        {news?.map((item) => (
           <Article key={item.id} item={item} />
         ))}
         {news?.length === 0 && (
@@ -73,6 +74,7 @@ const News = () => {
         currentPage={page}
         totalPages={pages}
       />
+      <ArticleModal />
     </div>
   )
 }

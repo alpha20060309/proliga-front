@@ -80,7 +80,6 @@ export const addTeamPlayerReducer = (state, action) => {
   }
 
   const clubId = player?.club?.id || player.club_id.id
-  const playerId = player.id
 
   if (state.duplicatesMap[clubId] === max_same_team_players) {
     toast.warning(t('Max players count reached from the same club!'), {

@@ -3,6 +3,7 @@ import { Timer } from 'lucide-react'
 import { useSelector } from 'react-redux'
 import { staticPath, getUrl } from 'app/utils/static.util'
 import { useMemo } from 'react'
+import { MATCH_STATUS } from 'app/utils/players.util'
 
 const MatchEventScore = () => {
   const currentMatch = useSelector(selectCurrentMatch)
@@ -24,7 +25,20 @@ const MatchEventScore = () => {
     [currentMatch?.away_club_id?.slug]
   )
 
-  console.log(currentMatch)
+  const renderMatchStatus = (status) => {
+    switch (status) {
+      case MATCH_STATUS.NOT_STARTED:
+        return <p>{t('Boshlanmagan')}</p>
+      case MATCH_STATUS.INPROCESS:
+        return (
+          <p className="animate-pulse text-neutral-400">{t('Jarayonda')}</p>
+        )
+      case MATCH_STATUS.FINISHED:
+        return <p>{t('Tugagan')}</p>
+      default:
+        return null
+    }
+  }
 
   return (
     <section className="bg-gradient-to-r from-blue-800/20 via-yellow-800/20 to-red-800/20 py-4">

@@ -51,7 +51,7 @@ const Match = ({ match }) => {
   return (
     <article
       onClick={handleClick}
-      className="flex h-12 w-full items-center rounded-lg border border-neutral-800 bg-neutral-900/80 px-1 xs:px-2"
+      className="flex h-12 w-full cursor-pointer select-none items-center rounded-lg border border-neutral-800 bg-neutral-900/80 px-1 xs:px-2"
     >
       <TeamDisplay
         name={getCorrectName({
@@ -161,7 +161,7 @@ const MatchStatus = ({ status, homeScore, awayScore }) => {
       return (
         <Badge
           variant="secondary"
-          className="bg-neutral-800 py-px text-[11px] sm:text-xs"
+          className="bg-neutral-800 py-px text-[11px] font-normal sm:text-xs"
         >
           {t('Boshlanmagan')}
         </Badge>
@@ -170,14 +170,14 @@ const MatchStatus = ({ status, homeScore, awayScore }) => {
       return (
         <Badge
           variant="default"
-          className="animate-pulse py-px text-[11px] sm:text-xs"
+          className="animate-pulse py-px text-[11px] font-normal sm:text-xs"
         >
           {homeScore} - {awayScore}
         </Badge>
       )
     case MATCH_STATUS.FINISHED:
       return (
-        <Badge variant="outline text-[11px] sm:text-xs py-px">
+        <Badge variant="outline text-[11px] font-normal sm:text-xs py-px">
           {homeScore} - {awayScore}
         </Badge>
       )

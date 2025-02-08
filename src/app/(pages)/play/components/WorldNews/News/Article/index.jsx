@@ -1,20 +1,20 @@
-import ArticleModal from '../Modal'
-import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { formatDate } from 'app/utils/formatDate.util'
 import { CalendarDays, Eye } from 'lucide-react'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { useUpdateNewsView } from 'app/hooks/system/useUpdateNewsView/useUpdateNewsView'
 import { getUrl } from 'app/utils/static.util'
+import { setCurrentNews, setNewsModal } from 'app/lib/features/news/news.slice'
 
 const Article = ({ item }) => {
+  const dispatch = useDispatch()
   const { lang } = useSelector((store) => store.systemLanguage)
-  const [isModalOpen, setModalOpen] = useState(false)
   const { updateNewsView } = useUpdateNewsView()
   const date = formatDate(item?.created_at, 'news')
 
   const handleClick = () => {
-    setModalOpen(true)
+    dispatch(setCurrentNews(item))
+    dispatch(setNewsModal(true))
     setTimeout(async () => await updateNewsView(item?.id), 3000)
   }
 
@@ -24,15 +24,15 @@ const Article = ({ item }) => {
         onClick={handleClick}
         className="group flex h-[100px] w-auto overflow-hidden rounded bg-white/10 hover:cursor-pointer"
       >
-        <div className="my-auto flex aspect-[4/3] h-[4.5rem] w-24 flex-shrink-0 items-center justify-center md:h-[100px] md:w-32">
+        <section className="my-auto flex aspect-[4/3] h-full w-24 flex-shrink-0 items-center justify-center md:w-32">
           <img
             src={getUrl(item?.image) || ''}
             alt={item.name}
             className="h-full w-full rounded object-cover object-center shadow-md"
           />
-        </div>
-        <div className="flex h-full w-full flex-col space-y-1 px-2 py-1">
-          <h4 className="line-clamp-3 h-full w-auto max-w-full flex-1 break-all text-sm text-neutral-200 hover:underline">
+        </section>
+        <section className="flex h-full w-full flex-col space-y-1 px-2 py-1">
+          <h4 className="line-clamp-3 h-full w-auto max-w-full flex-1 break-all text-xs text-neutral-200 hover:underline md:text-sm">
             {getCorrectName({ lang, uz: item?.name, ru: item?.name_ru })}
           </h4>
           <div className="flex w-full flex-wrap items-center justify-between">
@@ -47,14 +47,8 @@ const Article = ({ item }) => {
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </article>
-      <ArticleModal
-        toggleModal={() => setModalOpen(!isModalOpen)}
-        item={item}
-        date={date}
-        isModalOpen={isModalOpen}
-      />
     </>
   )
 }

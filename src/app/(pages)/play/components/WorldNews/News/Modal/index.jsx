@@ -8,17 +8,32 @@ import { CalendarDays, Eye } from 'lucide-react'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { useTranslation } from 'react-i18next'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { formatDate } from 'app/utils/formatDate.util'
+import { selectCurrentNews } from 'app/lib/features/news/news.selector'
+import { setNewsModal } from 'app/lib/features/news/news.slice'
 
-export default function ArticleModal({ item, toggleModal, isModalOpen, date }) {
+export default function ArticleModal() {
+  const dispatch = useDispatch()
+  const currentNews = useSelector(selectCurrentNews)
+  const { isModalOpen } = useSelector((store) => store.news)
   const { lang } = useSelector((store) => store.systemLanguage)
   const { t } = useTranslation()
+  const date = formatDate(currentNews?.created_at, 'news')
+
+  const setModalOpen = () => {
+    dispatch(setNewsModal(false))
+  }
 
   return (
-    <Dialog open={isModalOpen} onOpenChange={toggleModal}>
+    <Dialog open={isModalOpen && currentNews?.id} onOpenChange={setModalOpen}>
       <DialogContent className="w-full max-w-4xl rounded-lg bg-black p-3 md:p-4 2xl:max-w-5xl">
-        <DialogTitle className="text-xl font-semibold leading-tight tracking-tight">
-          {getCorrectName({ lang, uz: item?.name, ru: item?.name_ru })}
+        <DialogTitle className="text-xl font-normal leading-tight tracking-wide">
+          {getCorrectName({
+            lang,
+            uz: currentNews?.name,
+            ru: currentNews?.name_ru,
+          })}
         </DialogTitle>
         <div className="text-muted-foreground flex items-center space-x-4 text-sm">
           <div className="flex items-center">
@@ -28,7 +43,7 @@ export default function ArticleModal({ item, toggleModal, isModalOpen, date }) {
           <div className="flex items-center">
             <Eye className="mr-1 size-5 text-neutral-200" />
             <span>
-              {item.view_count || 0} {t('views')}
+              {currentNews?.view_count || 0} {t('views')}
             </span>
           </div>
         </div>
@@ -38,14 +53,16 @@ export default function ArticleModal({ item, toggleModal, isModalOpen, date }) {
             dangerouslySetInnerHTML={{
               __html: getCorrectName({
                 lang,
-                uz: item?.desc,
-                ru: item?.desc_ru,
+                uz: currentNews?.desc,
+                ru: currentNews?.desc_ru,
               }),
             }}
             lang={lang}
           />
         </ScrollArea>
-        <DialogDescription className="hidden">{item.desc}</DialogDescription>
+        <DialogDescription className="hidden">
+          {currentNews?.desc}
+        </DialogDescription>
       </DialogContent>
     </Dialog>
   )

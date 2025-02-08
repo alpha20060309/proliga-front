@@ -8,7 +8,6 @@ const News = dynamic(() => import('./News'), {
 })
 import BigBanner from 'components/Banners/Big'
 import MiniBanner from 'components/Banners/Mini'
-import MatchEventModal from 'components/MatchEventModal'
 
 const WorldNews = () => {
   return (
@@ -21,7 +20,6 @@ const WorldNews = () => {
         </section>
         <News />
       </section>
-      <MatchEventModal />
     </Gutter>
   )
 }

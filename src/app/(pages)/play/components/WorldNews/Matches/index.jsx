@@ -21,6 +21,7 @@ import { selectMatches } from 'app/lib/features/matches/matches.selector'
 import { selectTours } from 'app/lib/features/tours/tours.selector'
 import { usePathname } from 'next/navigation'
 import { RefreshCcw } from 'lucide-react'
+import MatchEventModal from 'components/MatchEventModal'
 
 const Matches = () => {
   const path = usePathname()
@@ -187,6 +188,7 @@ const Matches = () => {
         currentPage={page}
         totalPages={pages}
       />
+      <MatchEventModal />
     </section>
   )
 }

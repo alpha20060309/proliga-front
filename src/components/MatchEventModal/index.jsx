@@ -1,31 +1,64 @@
 'use client'
 
 import { Dialog, DialogContent } from '@/components/ui/dialog'
-import { MATCH_EVENTS, MATCH_STATUS } from 'app/utils/players.util'
+import { MATCH_EVENTS } from 'app/utils/players.util'
 import { cn } from '@/lib/utils'
 import { useTranslation } from 'react-i18next'
 import { DialogDescription } from '@radix-ui/react-dialog'
 import { useDispatch, useSelector } from 'react-redux'
 import { setMatchModalOpen } from 'app/lib/features/matches/matches.slice'
-import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
 import { selectCurrentMatch } from 'app/lib/features/matches/matches.selector'
 import MatchEventHeader from './Header'
 import MatchEventSkeleton from './Content/Skeleton'
 import MatchEventScore from './Score'
+import { motion, AnimatePresence } from 'framer-motion'
+import { RefreshCcw } from 'lucide-react'
+
+const eventVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.1,
+      duration: 0.3,
+      type: 'spring',
+      stiffness: 75,
+    },
+  }),
+}
+
+const refreshButtonVariants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delay: 0.5,
+      type: 'spring',
+      stiffness: 200,
+      damping: 10,
+    },
+  },
+  hover: {
+    scale: 1.15,
+    transition: { duration: 0.3 },
+  },
+  tap: { scale: 0.9 },
+}
 
 function MatchEventModal() {
   const dispatch = useDispatch()
-  const { lang } = useSelector((store) => store.systemLanguage)
   const { isModalOpen } = useSelector((store) => store.matches)
   const currentMatch = useSelector(selectCurrentMatch)
-  const currentCompetition = useSelector(selectCurrentCompetition)
-  const { t } = useTranslation()
 
   const setModalOpen = () => {
     dispatch(setMatchModalOpen(false))
   }
 
-  const isLoading = true
+  const isLoading = false
+
+  const handleRefresh = () => {}
 
   return (
     <Dialog open={isModalOpen && currentMatch?.id} onOpenChange={setModalOpen}>
@@ -39,7 +72,7 @@ function MatchEventModal() {
         {isLoading ? (
           <MatchEventSkeleton />
         ) : (
-          <section className="relative flex h-full max-h-[calc(90vh-300px)] flex-col gap-4 overflow-y-auto px-4 py-4">
+          <motion.section className="relative flex h-full max-h-[calc(90vh-300px)] flex-col gap-4 overflow-y-auto px-4 py-4">
             {/* Center line */}
             <span
               style={{ height: `${events?.length * 3.65 || 0}rem` }}
@@ -47,16 +80,32 @@ function MatchEventModal() {
             />
 
             {events.map((event, index) => (
-              <MatchEvent key={index} event={event} />
+              <MatchEvent key={index} index={index} event={event} />
             ))}
-          </section>
+          </motion.section>
         )}
+        <AnimatePresence>
+          {isModalOpen && (
+            <motion.button
+              className="absolute bottom-4 right-6 rounded-full bg-gray-800 p-2 text-white shadow-lg"
+              variants={refreshButtonVariants}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              whileHover="hover"
+              whileTap="tap"
+              onClick={handleRefresh}
+            >
+              <RefreshCcw className="size-5 text-neutral-50" />
+            </motion.button>
+          )}
+        </AnimatePresence>
       </DialogContent>
     </Dialog>
   )
 }
 
-const MatchEvent = ({ event }) => {
+const MatchEvent = ({ event, index }) => {
   const { t } = useTranslation()
 
   const renderIcon = (type) => {
@@ -99,7 +148,7 @@ const MatchEvent = ({ event }) => {
         return (
           <img
             src="/icons/soccer-card.svg"
-            alt="yellow card"
+            alt="Yellow Card"
             className="filter-yellow-500 size-7"
           />
         )
@@ -134,7 +183,11 @@ const MatchEvent = ({ event }) => {
   const isTransfer = event.type === MATCH_EVENTS.TRANSFER
 
   return (
-    <div
+    <motion.div
+      variants={eventVariants}
+      initial="hidden"
+      animate="visible"
+      custom={index}
       className={cn(
         'flex items-center justify-center',
         isTextOnly
@@ -187,7 +240,7 @@ const MatchEvent = ({ event }) => {
           </div>
         </>
       )}
-    </div>
+    </motion.div>
   )
 }
 

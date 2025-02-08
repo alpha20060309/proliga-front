@@ -18,12 +18,12 @@ const TransferPlayersStructure = () => {
               <Player key={player.id} player={player} />
             ))}
           </div>
-          <div className="flex items-start justify-evenly gap-0.5 px-6 2xs:px-10 sm:gap-1 md:gap-4 md:px-4 xl:gap-0 xl:px-10">
+          <div className="flex items-start justify-evenly gap-0.5 px-6 sm:gap-1 md:gap-4 md:px-4 xl:gap-0 xl:px-10">
             {DEF.map((player) => (
               <Player key={player.id} player={player} />
             ))}
           </div>
-          <div className="flex items-start justify-evenly gap-0.5 px-6 2xs:px-10 sm:gap-1 md:gap-4 md:px-4 xl:gap-0 xl:px-10">
+          <div className="flex items-start justify-evenly gap-0.5 px-6 sm:gap-1 md:gap-4 md:px-4 xl:gap-0 xl:px-10">
             {MID.map((player) => (
               <Player key={player.id} player={player} />
             ))}

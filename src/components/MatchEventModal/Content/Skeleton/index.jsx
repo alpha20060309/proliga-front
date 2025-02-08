@@ -15,6 +15,8 @@ export default function MatchEventSkeleton() {
       <SkeletonEventHeader />
       <SkeletonEvent />
       <SkeletonEvent isReversed />
+      <SkeletonEvent />
+      <SkeletonEventHeader />
     </section>
   )
 }
