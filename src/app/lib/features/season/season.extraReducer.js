@@ -13,6 +13,6 @@ export const seasonExtraReducer = (builder) => {
     })
     .addCase(fetchSeason.rejected, (state, action) => {
       state.isLoading = false
-      state.error = action.payload.error.message ?? null
+      state.error = action?.error?.message ?? null
     })
 }

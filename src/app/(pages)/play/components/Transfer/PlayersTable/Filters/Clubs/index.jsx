@@ -8,10 +8,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { getCorrectName } from 'app/utils/getCorrectName.util'
 
 const ClubsFilter = ({ column }) => {
   const selectedClubs = useSelector(selectClubs)
   const { t } = useTranslation()
+  const { lang } = useSelector((store) => store.systemLanguage)
 
   return (
     <Select onValueChange={(value) => column.setFilterValue(value)}>
@@ -26,7 +28,7 @@ const ClubsFilter = ({ column }) => {
             value={club.name}
             className="capitalize text-neutral-200 checked:bg-neutral-800"
           >
-            {club.name}
+            {getCorrectName({ lang, uz: club?.name, ru: club?.name_ru })}
           </SelectItem>
         ))}
       </SelectContent>

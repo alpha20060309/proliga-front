@@ -4,20 +4,21 @@ import { fetchNews } from 'app/lib/features/news/news.thunk'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { useState, useEffect, useMemo } from 'react'
-import { NewsSkeleton } from './NewsSkeleton'
+import { NewsSkeleton } from './Skeleton'
 import { cn } from '@/lib/utils'
-import Article from './Article'
 import { Pagination } from 'components/Table/Pagination'
 import { selectNews } from 'app/lib/features/news/news.selector'
 import { Button } from '@/components/ui/button'
 import { RefreshCcw, Newspaper } from 'lucide-react'
+import Article from './Article'
+import NewsArticleModal from 'components/NewsArticleModal'
 
 const News = () => {
   const dispatch = useDispatch()
   const { isLoading, count } = useSelector((store) => store.news)
   const news = useSelector(selectNews)
   const [page, setPage] = useState(0)
-  const [perPage, setPerPage] = useState(5)
+  const perPage = 5
   const { t } = useTranslation()
   const pages = useMemo(() => Math.ceil(count / perPage), [count, perPage])
 
@@ -59,7 +60,7 @@ const News = () => {
         </Button>
       </div>
       <div className="flex h-full w-full flex-1 flex-col gap-2">
-        {news?.map((item, index) => (
+        {news?.map((item) => (
           <Article key={item.id} item={item} />
         ))}
         {news?.length === 0 && (
@@ -73,6 +74,7 @@ const News = () => {
         currentPage={page}
         totalPages={pages}
       />
+      <NewsArticleModal />
     </div>
   )
 }

@@ -48,16 +48,19 @@ export const swapTeamPlayerReducer = (state, action) => {
     user_id: team.user_id,
     image: newPlayer.image,
     percentage: newPlayer.percentage ?? null,
+    player: {
+      name: newPlayer.name,
+      name_ru: newPlayer.name_ru,
+    },
   })
 
-  const clubId = player?.club?.id || player.club_id.id
-  const playerId = previousPlayer.id
+  const clubId = player.club.id || player.club_id.id
 
   if (state.duplicatesMap[clubId] === max_same_team_players) {
     toast.warning(t('Max players count reached from the same club!'), {
       theme: 'dark',
     })
-    state.modals[playerId] = false
+    state.transferModal = false
     return state
   }
   if (state.duplicatesMap[clubId] > maxTeamPlayers - 1) {
@@ -68,56 +71,56 @@ export const swapTeamPlayerReducer = (state, action) => {
       ),
       { theme: 'dark' }
     )
-    state.modals[playerId] = false
+    state.transferModal = false
     state.clubModal = transfer_show_modals
     return state
   }
 
   if (state.GOA.length > 0 && player.position === PLAYERS.GOA) {
-    const prevPlayer = state.GOA.find((p) => previousPlayer.id === p.id)
+    const prevPlayer = state.GOA.find((p) => previousPlayer.id === p.player_id)
     const prevPlayerIndex = state.GOA.findIndex(
-      (p) => previousPlayer.id === p.id
+      (p) => previousPlayer.id === p.player_id
     )
     state.GOA[prevPlayerIndex] = createUpdatedPlayer(prevPlayer, player)
     evaluateTeamClubId()
     calcTeamPrice()
-    state.modals[playerId] = false
+    state.transferModal = false
     toast.success(t("Oyinchi muvaffaqiyatli o'zgartirildi!"), { theme: 'dark' })
     return state
   }
   if (player.position === PLAYERS.DEF && state.DEF.length > 0) {
-    const prevPlayer = state.DEF.find((p) => previousPlayer.id === p.id)
+    const prevPlayer = state.DEF.find((p) => previousPlayer.id === p.player_id)
     const prevPlayerIndex = state.DEF.findIndex(
-      (p) => previousPlayer.id === p.id
+      (p) => previousPlayer.id === p.player_id
     )
     state.DEF[prevPlayerIndex] = createUpdatedPlayer(prevPlayer, player)
     evaluateTeamClubId()
     calcTeamPrice()
-    state.modals[playerId] = false
+    state.transferModal = false
     toast.success(t("Oyinchi muvaffaqiyatli o'zgartirildi!"), { theme: 'dark' })
     return state
   }
   if (player.position === PLAYERS.MID && state.MID.length > 0) {
-    const prevPlayer = state.MID.find((p) => previousPlayer.id === p.id)
+    const prevPlayer = state.MID.find((p) => previousPlayer.id === p.player_id)
     const prevPlayerIndex = state.MID.findIndex(
-      (p) => previousPlayer.id === p.id
+      (p) => previousPlayer.id === p.player_id
     )
     state.MID[prevPlayerIndex] = createUpdatedPlayer(prevPlayer, player)
     evaluateTeamClubId()
     calcTeamPrice()
-    state.modals[playerId] = false
+    state.transferModal = false
     toast.success(t("Oyinchi muvaffaqiyatli o'zgartirildi!"), { theme: 'dark' })
     return state
   }
   if (player.position === PLAYERS.STR && state.STR.length > 0) {
-    const prevPlayer = state.STR.find((p) => previousPlayer.id === p.id)
+    const prevPlayer = state.STR.find((p) => previousPlayer.id === p.player_id)
     const prevPlayerIndex = state.STR.findIndex(
-      (p) => previousPlayer.id === p.id
+      (p) => previousPlayer.id === p.player_id
     )
     state.STR[prevPlayerIndex] = createUpdatedPlayer(prevPlayer, player)
     evaluateTeamClubId()
     calcTeamPrice()
-    state.modals[playerId] = false
+    state.transferModal = false
     toast.success(t("Oyinchi muvaffaqiyatli o'zgartirildi!"), { theme: 'dark' })
     return state
   }

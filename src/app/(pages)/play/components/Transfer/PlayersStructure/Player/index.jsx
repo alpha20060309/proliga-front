@@ -1,32 +1,40 @@
 'use client'
 
-import PlayerTransferModal from 'components/PlayerTransferModal'
 import ConfirmationModal from 'components/ConfirmationModal'
 import Image from 'next/image'
 import { useMemo, useState } from 'react'
-import { setCurrentPlayer } from 'app/lib/features/players/players.slice'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteTeamPlayer } from 'app/lib/features/teamPlayers/teamPlayers.slice'
-import { setModals } from 'app/lib/features/teamPlayers/teamPlayers.slice'
+import {
+  deleteTeamPlayer,
+  setPlayerTransferModal,
+} from 'app/lib/features/teamPlayers/teamPlayers.slice'
 import { staticPath } from 'app/utils/static.util'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { useTranslation } from 'react-i18next'
+import { setCurrentPlayer } from 'app/lib/features/players/players.slice'
+import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { memo } from 'react'
 
 const Player = ({ player }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { modals } = useSelector((store) => store.teamPlayers)
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
   const currentTeam = useSelector(selectCurrentTeam)
   const clubPath = useMemo(
     () => (player.name ? player?.club_id?.slug : ''),
     [player]
   )
-  const tShirt = staticPath + '/club-svg/' + clubPath + '/app.svg'
-  const firstName = player.name ? player?.name?.split(' ')[0] : ''
-  const lastName = player?.name?.split(' ')[1] ?? ''
+  const { lang } = useSelector((store) => store.systemLanguage)
 
-  const isModalOpen = useMemo(() => modals[player.id], [modals, player?.id])
+  const name = getCorrectName({
+    lang,
+    uz: player?.player?.name,
+    ru: player?.player?.name_ru,
+  })
+
+  const tShirt = staticPath + '/club-svg/' + clubPath + '/app.svg'
+  const firstName = player.name ? name?.split(' ')[0] : ''
+  const lastName = name?.split(' ')[1] ?? ''
 
   const imageErr = (e) => {
     e.target.src = '/icons/player.svg'
@@ -44,16 +52,12 @@ const Player = ({ player }) => {
   }
 
   const handleTransfer = () => {
-    setCurrentPlayer(player)
-    toggleModal()
+    dispatch(setCurrentPlayer(player?.player_id))
+    dispatch(setPlayerTransferModal(true))
   }
 
   const toggleDeleteModal = () => {
     setDeleteModalOpen(!isDeleteModalOpen)
-  }
-
-  const toggleModal = () => {
-    dispatch(setModals({ id: player.id, value: !isModalOpen }))
   }
 
   return (
@@ -79,8 +83,8 @@ const Player = ({ player }) => {
                 alt="player tshirt"
                 width={48}
                 height={48}
+                onClick={handleTransfer}
                 onError={imageErr}
-                onClick={toggleModal}
                 draggable={false}
                 className="h-full w-full"
               />
@@ -106,10 +110,10 @@ const Player = ({ player }) => {
                   draggable={false}
                   src="/icons/swap.svg"
                   alt="additional info"
-                  className="size-3.5 rounded bg-black p-[1px] transition-all hover:bg-primary xs:size-4 md:size-5 2xl:size-[18px]"
+                  className="size-4 rounded border border-neutral-900 transition-all hover:border-primary sm:size-5"
                 />
               </button>
-              <div className="flex h-3.5 w-6 cursor-default items-center justify-center rounded bg-white text-center text-[11px] font-bold shadow shadow-neutral-600 xs:h-4 xs:w-8 xs:text-xs md:h-5 md:text-sm">
+              <div className="flex h-4 w-6 cursor-default items-center justify-center rounded border border-neutral-800 bg-neutral-50 text-center text-xs font-bold text-neutral-950 sm:h-5 sm:w-8 md:text-sm">
                 {player.price ?? '00'}
               </div>
               <button onClick={toggleDeleteModal}>
@@ -118,18 +122,13 @@ const Player = ({ player }) => {
                   height={16}
                   src="/icons/close-red-circle.svg"
                   alt="delete player"
-                  className="size-3.5 rounded transition-all hover:opacity-75 xs:size-4 md:size-5 2xl:size-[18px]"
+                  className="size-4 rounded border border-neutral-900 transition-all hover:border-primary sm:size-5"
                 />
               </button>
             </div>
           </>
         )}
       </div>
-      <PlayerTransferModal
-        prevPlayer={player}
-        isModalOpen={isModalOpen}
-        setModalOpen={toggleModal}
-      />
       <ConfirmationModal
         onConfirm={handleDeletePlayer}
         onCancel={toggleDeleteModal}
@@ -140,4 +139,4 @@ const Player = ({ player }) => {
   )
 }
 
-export default Player
+export default memo(Player)

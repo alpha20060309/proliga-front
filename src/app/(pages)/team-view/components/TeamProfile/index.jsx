@@ -8,6 +8,7 @@ const GameBrief = dynamic(() => import('./GameBrief'), {
 })
 import LeftSideBanner from 'components/Banners/LeftSide'
 import RightSideBanner from 'components/Banners/RightSide'
+import PlayerInfoModal from 'components/PlayerInfoModal'
 
 const TeamProfile = () => {
   return (
@@ -28,6 +29,7 @@ const TeamProfile = () => {
       </div>
       <GameBrief />
       <RightSideBanner />
+      <PlayerInfoModal />
     </main>
   )
 }

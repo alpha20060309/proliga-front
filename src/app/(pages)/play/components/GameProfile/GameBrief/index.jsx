@@ -82,7 +82,7 @@ const GameBrief = () => {
         <>
           <Container className="border-b border-neutral-700">
             <Item>
-              <Title className="">{t('ID')}</Title>
+              <Title>{t('Team id')}</Title>
               <Content
                 className={
                   'flex cursor-pointer items-center justify-center gap-0.5 hover:underline'
@@ -109,10 +109,20 @@ const GameBrief = () => {
               <Title> {t('Keyingi Tur')}</Title>
               {currentTour.status !== TOUR.notStartedTransfer ? (
                 <Content className="text-sm uppercase text-primary md:text-base">
-                  {nextTour?.name}
+                  {getCorrectName({
+                    lang,
+                    uz: nextTour?.name,
+                    ru: nextTour?.name_ru,
+                  })}
                 </Content>
               ) : (
-                <Content>{currentTour?.name}</Content>
+                <Content>
+                  {getCorrectName({
+                    lang,
+                    uz: currentTour?.name,
+                    ru: currentTour?.name_ru,
+                  })}
+                </Content>
               )}
             </Item>
             <Item>
@@ -128,9 +138,21 @@ const GameBrief = () => {
             <Item>
               <Title>{t('Tur')}</Title>
               {currentTour.status !== TOUR.notStartedTransfer ? (
-                <Content>{currentTour?.name ?? ''}</Content>
+                <Content>
+                  {getCorrectName({
+                    lang,
+                    uz: currentTour?.name,
+                    ru: currentTour?.name_ru,
+                  }) ?? ''}
+                </Content>
               ) : (
-                <Content>{prevTour?.name}</Content>
+                <Content>
+                  {getCorrectName({
+                    lang,
+                    uz: prevTour?.name,
+                    ru: prevTour?.name_ru,
+                  })}
+                </Content>
               )}
             </Item>
             <Item>

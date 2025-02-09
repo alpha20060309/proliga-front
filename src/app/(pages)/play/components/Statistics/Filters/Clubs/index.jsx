@@ -8,19 +8,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { getCorrectName } from 'app/utils/getCorrectName.util'
 
 const ClubsFilter = ({ column }) => {
   const selectedClubs = useSelector(selectClubs)
   const { t } = useTranslation()
+  const { lang } = useSelector((store) => store.systemLanguage)
 
   return (
     <Select onValueChange={(value) => column.setFilterValue(value)}>
-      <SelectTrigger className="h-8 w-full min-w-40 truncate rounded border border-neutral-500 bg-neutral-950 px-2 text-neutral-200 shadow sm:max-w-36 md:max-w-48">
+      <SelectTrigger className="h-8 w-1/3 min-w-40 truncate rounded border border-neutral-500 bg-neutral-950 px-2 text-neutral-200 shadow sm:max-w-36 md:max-w-48">
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
         <SelectItem
-          className="rounded-sm checked:bg-neutral-800"
+          className="rounded checked:bg-neutral-800"
           defaultChecked={true}
         >
           {t('Hamma_Clublar')}
@@ -31,7 +33,7 @@ const ClubsFilter = ({ column }) => {
             value={club.name}
             className="capitalize text-neutral-200 checked:bg-neutral-800"
           >
-            {club.name}
+            {getCorrectName({ lang, uz: club?.name, ru: club?.name_ru })}
           </SelectItem>
         ))}
       </SelectContent>

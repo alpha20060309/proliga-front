@@ -1,7 +1,7 @@
 'use client'
 import { flexRender } from '@tanstack/react-table'
 
-const TransferTableHead = ({ table }) => {
+const Head = ({ table }) => {
   return (
     <thead className="">
       {table.getHeaderGroups().map((headerGroup) => (
@@ -31,4 +31,4 @@ const TransferTableHead = ({ table }) => {
   )
 }
 
-export default TransferTableHead
+export default Head

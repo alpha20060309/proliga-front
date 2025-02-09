@@ -46,6 +46,10 @@ export const updateTeamPlayerReducer = (state, action) => {
     user_id: team.user_id,
     percentage: player.percentage ?? null,
     image: player.image,
+    player: {
+      name: player.name,
+      name_ru: player.name_ru,
+    },
   })
 
   const existingPlayer = teamConcat.find((p) => p.player_id === player.id)
@@ -57,13 +61,11 @@ export const updateTeamPlayerReducer = (state, action) => {
 
   const clubId = player?.club?.id || player.club_id.id
 
-  const playerId = player.id
-
   if (state.duplicatesMap[clubId] === max_same_team_players) {
     toast.warning(t('Max players count reached from the same club!'), {
       theme: 'dark',
     })
-    state.modals[playerId] = false
+    state.transferModal = false
     return state
   }
 
@@ -75,7 +77,7 @@ export const updateTeamPlayerReducer = (state, action) => {
       ),
       { theme: 'dark' }
     )
-    state.modals[playerId] = false
+    state.transferModal = false
     state.clubModal = transfer_show_modals
     return state
   }

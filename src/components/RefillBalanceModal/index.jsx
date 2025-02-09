@@ -18,6 +18,7 @@ import { configKey } from 'app/utils/config.util'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { formatCurrency } from 'app/utils/formatCurrency'
 import PaymentOption from './PaymentOption'
+import { memo } from 'react'
 
 const RefillBalanceModal = ({ isModalOpen, setIsModalOpen }) => {
   const { t } = useTranslation()
@@ -144,4 +145,4 @@ export const BALANCEOPTIONS = {
 const ACTIVE = 'border-primary'
 const PASSIVE = 'border-neutral-600 hover:border-yellow-600'
 
-export default RefillBalanceModal
+export default memo(RefillBalanceModal)

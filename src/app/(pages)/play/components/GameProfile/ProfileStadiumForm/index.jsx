@@ -18,6 +18,7 @@ import { selectTeamConcat } from 'app/lib/features/teamPlayers/teamPlayers.selec
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
+import { getCorrectName } from 'app/utils/getCorrectName.util'
 
 const ProfileStadiumForm = () => {
   const { t } = useTranslation()
@@ -113,7 +114,7 @@ const ProfileStadiumForm = () => {
         value={teamConcat.find((player) => player.is_captain)?.player_id ?? ''}
         onValueChange={(value) => dispatch(setCaptain(value))}
       >
-        <SelectTrigger className="h-10 w-full min-w-36 max-w-56 rounded border-neutral-400 bg-neutral-950 px-2 text-xs text-neutral-100 hover:border-primary xs:text-sm md:text-base">
+        <SelectTrigger className="h-10 w-full min-w-36 max-w-56 rounded border-neutral-400 bg-neutral-950 px-2 text-xs text-neutral-100 hover:border-primary 2xs:min-w-44 xs:text-sm md:text-base">
           <SelectValue placeholder={t('Kapitan tanlang')} />
         </SelectTrigger>
         <SelectContent>
@@ -125,7 +126,11 @@ const ProfileStadiumForm = () => {
                   key={player.id}
                   selected={player.is_captain}
                 >
-                  {player.name}
+                  {getCorrectName({
+                    lang,
+                    uz: player?.player?.name,
+                    ru: player?.player?.name_ru,
+                  })}
                 </SelectItem>
               )
           )}
@@ -134,7 +139,7 @@ const ProfileStadiumForm = () => {
       <Button
         type="submit"
         disabled={isLoading}
-        className="h-10 min-w-24 rounded border border-primary/80 bg-neutral-950 text-sm font-medium text-neutral-50 transition-all hover:border-black hover:bg-primary hover:bg-opacity-75 hover:text-black 2xs:min-w-28 xs:min-w-28 sm:min-w-32 md:text-base"
+        className="h-10 min-w-24 rounded border border-yellow-500 bg-neutral-950 text-sm font-medium text-neutral-100 transition-all hover:border-black hover:bg-yellow-500 hover:text-black 2xs:min-w-28 xs:min-w-28 sm:min-w-32 md:text-base"
       >
         {isLoading ? (
           <Image

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import PlayerStatisticsTable from './Table'
 import PlayerPhoto from './PlayerPhoto'
@@ -10,22 +10,33 @@ import {
   DialogContent,
   DialogDescription,
 } from '@/components/ui/dialog'
-import { selectCurrentPlayer } from 'app/lib/features/players/players.selector'
 import { selectPlayerPoint } from 'app/lib/features/playerPoint/playerPoint.selector'
 import { getCorrentPlayerPosition } from 'app/utils/getCorrectPlayerPosition.utils'
+import { setPlayerInfoModal } from 'app/lib/features/teamPlayers/teamPlayers.slice'
+import { selectCurrentPlayer } from 'app/lib/features/players/players.selector'
+import { memo } from 'react'
 
-const PlayerInfoModal = ({ isModalOpen, setModalOpen }) => {
+const PlayerInfoModal = () => {
+  const dispatch = useDispatch()
   const currentPlayer = useSelector(selectCurrentPlayer)
+  const { infoModal } = useSelector((store) => store.teamPlayers)
   const { lang } = useSelector((store) => store.systemLanguage)
   const playerPoint = useSelector(selectPlayerPoint)
   const [matches, setMatches] = useState([])
   const { t } = useTranslation()
 
+  const setModalOpen = () => {
+    dispatch(setPlayerInfoModal(false))
+  }
+
   useEffect(() => {
     if (playerPoint?.length > 0) {
       setMatches([])
       playerPoint.forEach((item) => {
-        if (item.player_id === currentPlayer?.id) {
+        if (
+          item.player_id === currentPlayer?.id &&
+          item?.player_result_id?.played_min > 0
+        ) {
           setMatches((prevMatch) => [...prevMatch, item])
         }
       })
@@ -33,8 +44,8 @@ const PlayerInfoModal = ({ isModalOpen, setModalOpen }) => {
   }, [currentPlayer, playerPoint])
 
   return (
-    <Dialog open={isModalOpen} onOpenChange={setModalOpen}>
-      <DialogContent className="overflox-y-auto z-50 flex max-h-[90vh] min-h-[45vh] w-full max-w-[64rem] flex-col gap-4 overflow-y-auto rounded-xl border border-neutral-500 bg-neutral-950 px-2 pb-4 pt-4 text-neutral-200 xs:mx-auto xs:w-[96%] xs:px-4 sm:w-4/5 md:px-6 md:pb-4 md:pt-6 lg:w-3/4 xl:w-3/5">
+    <Dialog open={infoModal && currentPlayer?.id} onOpenChange={setModalOpen}>
+      <DialogContent className="overflox-y-auto z-50 flex max-h-[90vh] min-h-[50vh] w-full max-w-4xl flex-col gap-4 overflow-y-auto rounded-xl border border-neutral-500 bg-neutral-950 px-2 pb-4 pt-4 text-neutral-200 xs:mx-auto xs:px-4 md:px-6 md:pb-4 md:pt-6 2xl:max-w-5xl">
         <PlayerPhoto
           currentPlayer={currentPlayer}
           position={getCorrentPlayerPosition(
@@ -43,26 +54,6 @@ const PlayerInfoModal = ({ isModalOpen, setModalOpen }) => {
             'full'
           )}
         />
-        <div className="flex w-full flex-wrap gap-1">
-          <div className="flex-1 rounded-sm border border-neutral-500 bg-neutral-800 px-2 py-1 text-center text-xs md:text-sm">
-            <p className="font-semibold text-neutral-50">
-              {currentPlayer?.price ?? 0}
-            </p>
-            <p className="text-xs text-neutral-300">{t('Narx')}</p>
-          </div>
-          <div className="flex-1 rounded-sm border border-neutral-500 bg-neutral-800 px-2 py-1 text-center text-xs md:text-sm">
-            <p className="font-semibold text-neutral-50">
-              {currentPlayer?.point ?? 0}
-            </p>
-            <p className="text-xs text-neutral-300">{t('Ochko')}</p>
-          </div>
-          <div className="flex-1 rounded-sm border border-neutral-500 bg-neutral-800 px-2 py-1 text-center text-xs md:text-sm">
-            <p className="font-semibold text-neutral-50">
-              {currentPlayer?.percentage ?? 0}%
-            </p>
-            <p className="text-xs text-neutral-300">{t('Sotib Olgan')}</p>
-          </div>
-        </div>
         <PlayerStatisticsTable matches={matches} />
         <div className="mt-auto flex flex-wrap justify-center gap-x-1 gap-y-0 text-nowrap text-xs md:gap-x-2 md:text-sm">
           <div>
@@ -105,4 +96,4 @@ const PlayerInfoModal = ({ isModalOpen, setModalOpen }) => {
   )
 }
 
-export default PlayerInfoModal
+export default memo(PlayerInfoModal)

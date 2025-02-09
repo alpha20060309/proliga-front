@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils'
 
-const TransferTableBody = ({ table, flexRender }) => {
+const Body = ({ table, flexRender }) => {
   const styles = (id) => {
     if (id === 'player-name') return 'w-auto sm:min-w-20  md:min-w-32'
     if (id === 'player-position' || 'club' || 'played-min')
@@ -32,4 +32,4 @@ const TransferTableBody = ({ table, flexRender }) => {
   )
 }
 
-export default TransferTableBody
+export default Body

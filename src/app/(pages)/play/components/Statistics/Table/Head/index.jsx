@@ -4,7 +4,7 @@ import { flexRender } from '@tanstack/react-table'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 
-const TransferTableHead = ({ table }) => {
+const Head = ({ table }) => {
   return (
     <thead>
       {table.getHeaderGroups().map((headerGroup) => (
@@ -33,7 +33,7 @@ const TransferTableHead = ({ table }) => {
                       width={12}
                       height={12}
                       className={cn(
-                        'size-3.5 rotate-180 xs:size-4 md:size-5',
+                        'size-3.5 rotate-180 xs:size-4 lg:size-0 xl:size-4',
                         header.column.columnDef.header
                           ? 'hidden lg:inline-block'
                           : 'hidden'
@@ -47,7 +47,7 @@ const TransferTableHead = ({ table }) => {
                       width={12}
                       height={12}
                       className={cn(
-                        'size-3.5 xs:size-4 md:size-5',
+                        'size-3.5 xs:size-4 lg:size-0 xl:size-4',
                         header.column.columnDef.header
                           ? 'hidden lg:inline-block'
                           : 'hidden'
@@ -61,7 +61,7 @@ const TransferTableHead = ({ table }) => {
                     width={12}
                     height={12}
                     className={cn(
-                      'size-3.5 xs:size-4 md:size-5',
+                      'size-3.5 xs:size-4 lg:size-0 xl:size-4',
                       header.column.columnDef.header
                         ? 'hidden lg:inline-block'
                         : 'hidden'
@@ -80,4 +80,4 @@ const TransferTableHead = ({ table }) => {
   )
 }
 
-export default TransferTableHead
+export default Head

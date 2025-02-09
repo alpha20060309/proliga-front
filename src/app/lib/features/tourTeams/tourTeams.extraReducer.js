@@ -19,7 +19,7 @@ export const tourTeamExtraReducer = (builder) => {
       state.isLoading = false
     })
     .addCase(fetchTourTeams.rejected, (state, action) => {
-      state.error = action.payload.error.message ?? null
+      state.error = action?.error?.message ?? null
       state.isLoading = false
     })
 }

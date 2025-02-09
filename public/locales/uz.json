@@ -373,7 +373,7 @@
   "Transfer Amalga Oshirish": "Transfer Amalga Oshirish",
   "Sotib Olgan": "Sotib Olgan",
   "Telefon raqam tasdiqlash": "Telefon raqam tasdiqlash",
-  "Deadline": "Deadline",
+  "Deadline": "Dedlayn",
   "Tahrirlash": "Tahrirlash",
   "Xarajatlar tarixi": "Xarajatlar tarixi",
   "Balans haqida malumot topilmadi!": "Balans haqida malumot topilmadi!",
@@ -612,6 +612,11 @@
   "Eski parol noto'g'ri": "Eski parol noto'g'ri",
   "Match Start": "O‘yin boshlandi",
   "Halftime": "Tanaffus",
-  "2nd Match Start": "Ikkinchi o‘yin boshlandi",
-  "Game Ends": "O‘yin yakunlandi"
+  "2nd Match Start": "Ikkinchi bo'lim boshlandi",
+  "Game Ends": "O‘yin yakunlandi",
+  "Ha": "Ha",
+  "Yoq": "Yoq",
+  "Team id": "Jamoa identifikatori",
+  "No match events are currently available. Please stay tuned as they will be updated soon!": "Hozircha o‘yinga oid voqealar mavjud emas. Tez orada yangilanadi, kuzatib boring!",
+  "The match hasn't started yet. Stay tuned for updates!": "Oʻyin hali boshlanmadi. Yangilanishlarni kuzatib boring!"
 }

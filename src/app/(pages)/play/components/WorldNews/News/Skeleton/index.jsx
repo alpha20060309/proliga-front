@@ -3,7 +3,7 @@ import { CalendarDays, Eye } from 'lucide-react'
 import { PaginationSkeleton } from 'components/Table/Pagination'
 import { cn } from '@/lib/utils'
 
-export function ArticleSkeleton() {
+function ArticleSkeleton() {
   return (
     <div className="group flex h-[100px] w-auto overflow-hidden rounded bg-neutral-800">
       <Skeleton className="aspect-video h-full w-36" />

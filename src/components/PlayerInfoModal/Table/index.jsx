@@ -11,20 +11,21 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import TransferTableHead from './Head'
-import TransferTableBody from './Body'
+import Head from './Head'
+import Body from './Body'
 import TanStackPagination from 'components/Table/TanStackPagination'
 import { createColumnHelper } from '@tanstack/react-table'
-import { selectCurrentPlayer } from 'app/lib/features/players/players.selector'
 import { selectClubs } from 'app/lib/features/club/club.selector'
+import { selectCurrentPlayer } from 'app/lib/features/players/players.selector'
+import { getCorrectName } from 'app/utils/getCorrectName.util'
 
 const columnHelper = createColumnHelper()
 
 function PlayerStatisticsTable({ matches }) {
   const { t } = useTranslation()
+  const { lang } = useSelector((store) => store.systemLanguage)
   const clubs = useSelector(selectClubs)
   const currentPlayer = useSelector(selectCurrentPlayer)
-  const [styles, setStyles] = useState('border-neutral-400')
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: 10,
@@ -36,38 +37,36 @@ function PlayerStatisticsTable({ matches }) {
 
   const getCorrectCompetitor = (match) => {
     if (match.home_club_id === currentPlayer?.club?.id) {
-      return getClubInfoById(match.away_club_id)?.name
+      return getCorrectName({
+        lang,
+        ru: getClubInfoById(match.away_club_id)?.name_ru,
+        uz: getClubInfoById(match.away_club_id)?.name,
+      })
     } else if (match.away_club_id === currentPlayer?.club?.id) {
-      return getClubInfoById(match.home_club_id)?.name
+      return getCorrectName({
+        lang,
+        uz: getClubInfoById(match.home_club_id)?.name,
+        ru: getClubInfoById(match.home_club_id)?.name_ru,
+      })
     }
   }
 
   const getCorrectScore = (match) => {
     if (match.home_club_id === currentPlayer?.club?.id) {
-      if (match.home_club_result > match?.away_club_result) {
-        setStyles('border-green-500')
-      } else if (match.home_club_result < match?.away_club_result) {
-        setStyles('border-red-500')
-      } else {
-        setStyles('border-yellow-500')
-      }
-      return `${match.home_club_result ?? 0}-${match.away_club_result ?? 0}`
+      return `${match.home_club_result ?? 0} : ${match.away_club_result ?? 0}`
     } else if (match.away_club_id === currentPlayer?.club?.id) {
-      if (match?.away_club_result > match?.home_club_result) {
-        setStyles('border-green-500')
-      } else if (match?.away_club_result < match?.home_club_result) {
-        setStyles('border-red-500')
-      } else {
-        setStyles('border-yellow-500')
-
-        return `${match.away_club_result ?? 0}-${match.home_club_result ?? 0}`
-      }
+      return `${match.away_club_result ?? 0} : ${match.home_club_result ?? 0}`
     }
   }
 
   const columns = [
     columnHelper.accessor('', {
-      accessorFn: (row) => row?.tour_id?.name,
+      accessorFn: (row) =>
+        getCorrectName({
+          lang,
+          uz: row?.tour_id?.name,
+          ru: row?.tour_id?.name_ru,
+        }),
       id: 'sana',
       header: t('Tur'),
     }),
@@ -77,12 +76,13 @@ function PlayerStatisticsTable({ matches }) {
       id: 'competitor',
     }),
     columnHelper.accessor('Score', {
-      accessorFn: (row) => getCorrectScore(row.match_id) ?? '0-0',
+      accessorFn: (row) => getCorrectScore(row.match_id) ?? '0 : 0',
       header: t('Hisob'),
       id: 'score',
     }),
     columnHelper.accessor('Quriq Oyin', {
-      accessorFn: (row) => (row?.player_result_id?.is_shutout ? 'ha' : 'yoq'),
+      accessorFn: (row) =>
+        row?.player_result_id?.is_shutout ? t('Ha') : t('Yoq'),
       header: t('QO’'),
       id: 'QO’',
       meta: {
@@ -157,12 +157,8 @@ function PlayerStatisticsTable({ matches }) {
   return (
     <section className="h-auto">
       <table className="h-full w-full min-w-80 table-auto text-[10px] 2xs:text-[11px] md:text-xs xl:text-sm">
-        <TransferTableHead table={table} />
-        <TransferTableBody
-          scoreStyles={styles}
-          table={table}
-          flexRender={flexRender}
-        />
+        <Head table={table} />
+        <Body table={table} flexRender={flexRender} />
       </table>
       {matches?.length > 9 && <TanStackPagination table={table} />}
     </section>

@@ -15,6 +15,7 @@ import TournamentTable from './Table'
 import TeamSearch from './TeamSearch'
 import TournamentSelectedTour from './Filters'
 import { searchAllTeams } from 'app/lib/features/teams/teams.thunk'
+import { memo } from 'react'
 
 const Tournament = () => {
   const dispatch = useDispatch()
@@ -141,4 +142,4 @@ const Tournament = () => {
   )
 }
 
-export default Tournament
+export default memo(Tournament)

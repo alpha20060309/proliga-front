@@ -5,10 +5,12 @@ import { useTranslation } from 'react-i18next'
 import { configKey } from 'app/utils/config.util'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { cn } from '@/lib/utils'
+import { selectCurrentPlayer } from 'app/lib/features/players/players.selector'
 
-const TransferTableBody = ({ table, flexRender, prevPlayer }) => {
+const TransferTableBody = ({ table, flexRender }) => {
   const dispatch = useDispatch()
   const currentTeam = useSelector(selectCurrentTeam)
+  const currentPlayer = useSelector(selectCurrentPlayer)
   const { teamPrice } = useSelector((store) => store.teamPlayers)
   const teamBalance = +(currentTeam?.balance || 0) - +(teamPrice || 0)
   const { config } = useSelector((store) => store.systemConfig)
@@ -22,7 +24,7 @@ const TransferTableBody = ({ table, flexRender, prevPlayer }) => {
     dispatch(
       swapTeamPlayer({
         player,
-        previousPlayer: prevPlayer,
+        previousPlayer: currentPlayer,
         team: currentTeam,
         t,
         transfer_show_modals,
@@ -58,7 +60,6 @@ const TransferTableBody = ({ table, flexRender, prevPlayer }) => {
                     teamBalance={teamBalance}
                     key={cell.id}
                     cell={cell}
-                    prevPlayer={prevPlayer}
                     handleSwapPlayer={handleSwapPlayer}
                   />
                 )

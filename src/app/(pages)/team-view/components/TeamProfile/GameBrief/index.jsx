@@ -13,11 +13,11 @@ import { Coins, PercentCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
-import Image from 'next/image'
-import GameBriefSkeleton from './Skeleton'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { selectCurrentTourTeam } from 'app/lib/features/tourTeams/tourTeams.selector'
 import { formatDate } from 'app/utils/formatDate.util'
+import Image from 'next/image'
+import GameBriefSkeleton from 'app/(pages)/play/components/GameProfile/GameBrief/Skeleton'
 
 const GameBrief = () => {
   const { t } = useTranslation()
@@ -64,7 +64,7 @@ const GameBrief = () => {
         <>
           <Container className="border-b border-neutral-700">
             <Item>
-              <Title className="">{t('ID')}</Title>
+              <Title className="">{t('Team id')}</Title>
               <Content
                 className={
                   'flex cursor-pointer items-center justify-center gap-0.5 hover:underline'
@@ -90,7 +90,11 @@ const GameBrief = () => {
             <Item>
               <Title> {t('Keyingi Tur')}</Title>
               <Content className="text-sm text-primary md:text-base">
-                {nextTour?.name}
+                {getCorrectName({
+                  lang,
+                  uz: nextTour?.name,
+                  ru: nextTour?.name_ru,
+                })}
               </Content>
             </Item>
             <Item>
@@ -105,7 +109,13 @@ const GameBrief = () => {
           <Container className="border-b border-neutral-700">
             <Item>
               <Title>{t('Tur')}</Title>
-              <Content>{currentTour?.name ?? t('Hozirgi Tur')}</Content>
+              <Content>
+                {getCorrectName({
+                  lang,
+                  uz: currentTour?.name,
+                  ru: currentTour?.name_ru,
+                }) ?? t('Hozirgi Tur')}
+              </Content>
             </Item>
             <Item>
               <Title>{t('Turdagi ochkolar')}</Title>

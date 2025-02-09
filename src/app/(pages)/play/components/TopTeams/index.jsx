@@ -3,6 +3,7 @@ import RankingPlayers from './Players'
 import { useSelector } from 'react-redux'
 import TopTeamsSkeleton from './Skeleton'
 import { useMemo } from 'react'
+import { memo } from 'react'
 
 const TopTeams = () => {
   const { isLoading: teamsLoading } = useSelector((store) => store.teams)
@@ -23,4 +24,4 @@ const TopTeams = () => {
   )
 }
 
-export default TopTeams
+export default memo(TopTeams)

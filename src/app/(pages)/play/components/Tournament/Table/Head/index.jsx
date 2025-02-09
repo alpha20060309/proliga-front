@@ -30,7 +30,7 @@ const TournamentTableHead = ({ table }) => {
                       alt="triangle arrow"
                       width={12}
                       height={12}
-                      className="hidden size-4 rotate-180 xs:size-4 sm:inline-block md:size-5"
+                      className="hidden size-4 rotate-180 sm:inline-block"
                     />
                   ),
                   desc: (
@@ -39,7 +39,7 @@ const TournamentTableHead = ({ table }) => {
                       alt="triangle arrow"
                       width={12}
                       height={12}
-                      className="hidden size-4 xs:size-4 sm:inline-block md:size-5"
+                      className="hidden size-4 sm:inline-block"
                     />
                   ),
                 }[header.column.getIsSorted()] ?? (
@@ -48,7 +48,7 @@ const TournamentTableHead = ({ table }) => {
                     alt="triangle arrow"
                     width={12}
                     height={12}
-                    className="hidden size-4 rotate-180 xs:size-4 sm:inline-block md:size-5"
+                    className="hidden size-4 rotate-180 sm:inline-block"
                   />
                 )}
               </th>

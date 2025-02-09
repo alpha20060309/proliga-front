@@ -10,7 +10,10 @@ import {
 } from '@tanstack/react-table'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { selectPlayers } from 'app/lib/features/players/players.selector'
+import {
+  selectCurrentPlayer,
+  selectPlayers,
+} from 'app/lib/features/players/players.selector'
 import { createColumnHelper } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
 import TransferTableHead from './Head'
@@ -18,13 +21,15 @@ import TransferTableBody from './Body'
 import TransferTableFilters from './Filters'
 import TanStackPagination from 'components/Table/TanStackPagination'
 import { getCorrentPlayerPosition } from 'app/utils/getCorrectPlayerPosition.utils'
+import { getCorrectName } from 'app/utils/getCorrectName.util'
 
 const columnHelper = createColumnHelper()
 
-function PlayerTable({ prevPlayer }) {
+function PlayerTable() {
   const { t } = useTranslation()
   const { lang } = useSelector((state) => state.systemLanguage)
   const players = useSelector(selectPlayers)
+  const currentPlayer = useSelector(selectCurrentPlayer)
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: 10,
@@ -38,16 +43,18 @@ function PlayerTable({ prevPlayer }) {
 
   const columns = [
     columnHelper.accessor('name', {
-      accessorKey: 'name',
-      cell: (info) => info.getValue(),
+      accessorFn: (row) =>
+        getCorrectName({ lang, uz: row?.name, ru: row?.name_ru }),
       header: t('Ism'),
+      id: 'name',
       meta: {
         filterVariant: 'name',
       },
     }),
     columnHelper.accessor('club.name', {
-      accessorKey: 'club.name',
       header: t('Klub'),
+      accessorFn: (row) =>
+        getCorrectName({ lang, uz: row?.club?.name, ru: row?.club?.name_ru }),
       meta: {
         filterVariant: 'club',
       },
@@ -102,7 +109,7 @@ function PlayerTable({ prevPlayer }) {
       columnFilters: [
         {
           id: 'position',
-          value: getCorrentPlayerPosition(prevPlayer?.position || '', lang),
+          value: getCorrentPlayerPosition(currentPlayer?.position || '', lang),
         },
       ],
     },
@@ -121,11 +128,7 @@ function PlayerTable({ prevPlayer }) {
       </div>
       <table className="mt-2 w-full min-w-80 table-auto text-sm">
         <TransferTableHead table={table} />
-        <TransferTableBody
-          prevPlayer={prevPlayer}
-          table={table}
-          flexRender={flexRender}
-        />
+        <TransferTableBody table={table} flexRender={flexRender} />
       </table>
       <TanStackPagination
         table={table}

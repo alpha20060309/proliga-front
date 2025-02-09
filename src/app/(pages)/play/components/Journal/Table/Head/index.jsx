@@ -17,7 +17,7 @@ const JournalTableHead = ({ table }) => {
                 colSpan={header.colSpan}
                 {...{
                   className: header.column.getCanSort()
-                    ? 'cursor-pointer select-none px-0.5 md:p-1 text-start py-2 md:py-1 '
+                    ? 'cursor-pointer select-none px-0.5 md:p-1 text-start '
                     : ' px-0.5 md:p-1 text-start ',
                   onClick: header.column.getToggleSortingHandler(),
                 }}
@@ -34,7 +34,7 @@ const JournalTableHead = ({ table }) => {
                       width={12}
                       height={12}
                       className={cn(
-                        'size-3.5 rotate-180 xs:size-4 md:size-5',
+                        'size-3.5 rotate-180 xs:size-4',
                         header.column.columnDef.header
                           ? 'inline-block'
                           : 'hidden'
@@ -48,7 +48,7 @@ const JournalTableHead = ({ table }) => {
                       width={12}
                       height={12}
                       className={cn(
-                        'size-3.5 xs:size-4 md:size-5',
+                        'size-3.5 xs:size-4',
                         header.column.columnDef.header
                           ? 'inline-block'
                           : 'hidden'
@@ -62,7 +62,7 @@ const JournalTableHead = ({ table }) => {
                     width={12}
                     height={12}
                     className={cn(
-                      'size-3.5 xs:size-4 md:size-5',
+                      'size-3.5 xs:size-4',
                       header.column.columnDef.header ? 'inline-block' : 'hidden'
                     )}
                   />
