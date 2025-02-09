@@ -7,30 +7,23 @@ import { eventVariants } from 'components/MatchEventModal/animations.styles'
 import { cn } from '@/lib/utils'
 import { selectCurrentMatch } from 'app/lib/features/matches/matches.selector'
 import MatchEventIcon from './Icon'
+import { memo } from 'react'
 
 const MatchEvent = ({ event, index }) => {
   const { t } = useTranslation()
   const { lang } = useSelector((store) => store.systemLanguage)
   const currentMatch = useSelector(selectCurrentMatch)
-  let isHome = false
 
-  const hasSecondName =
-    event.event_type === MATCH_EVENTS.TRANSFER ||
-    event.event_type === MATCH_EVENTS.GOAL
-
-  const hasName =
-    event.event_type === MATCH_EVENTS.GOAL ||
-    event.event_type === MATCH_EVENTS.TRANSFER ||
-    event.event_type === MATCH_EVENTS.MISSED_PENALTY ||
-    event.event_type === MATCH_EVENTS.HIT_PENALTY ||
-    event.event_type === MATCH_EVENTS.RED_CARD ||
-    event.event_type === MATCH_EVENTS.YELLOW_CARD
-
-  const isTextOnly =
-    event.event_type === MATCH_EVENTS.FIRST_TIME_START ||
-    event.event_type === MATCH_EVENTS.FIRST_TIME_END ||
-    event.event_type === MATCH_EVENTS.SECOND_TIME_START ||
-    event.event_type === MATCH_EVENTS.SECOND_TIME_END
+  const hasSecondName = checkHasSecondName(event?.event_type)
+  const hasName = checkHasName(event?.event_type)
+  const isTextOnly = checkIsTextOnly(event?.event_type)
+  let isHome = checkIsHome({
+    event,
+    isTextOnly,
+    hasName,
+    hasSecondName,
+    currentMatch,
+  })
 
   if (isTextOnly) {
     isHome = true
@@ -133,4 +126,60 @@ const MatchEvent = ({ event, index }) => {
   )
 }
 
-export default MatchEvent
+const checkIsTextOnly = (event_type) => {
+  switch (event_type) {
+    case MATCH_EVENTS.FIRST_TIME_START:
+    case MATCH_EVENTS.FIRST_TIME_END:
+    case MATCH_EVENTS.SECOND_TIME_START:
+    case MATCH_EVENTS.SECOND_TIME_END:
+      return true
+    default:
+      return false
+  }
+}
+
+const checkHasName = (event_type) => {
+  switch (event_type) {
+    case MATCH_EVENTS.GOAL:
+    case MATCH_EVENTS.TRANSFER:
+    case MATCH_EVENTS.MISSED_PENALTY:
+    case MATCH_EVENTS.HIT_PENALTY:
+    case MATCH_EVENTS.RED_CARD:
+    case MATCH_EVENTS.YELLOW_CARD:
+      return true
+    default:
+      return false
+  }
+}
+const checkHasSecondName = (event_type) => {
+  switch (event_type) {
+    case MATCH_EVENTS.TRANSFER:
+    case MATCH_EVENTS.GOAL:
+      return true
+    default:
+      return false
+  }
+}
+
+const checkIsHome = ({
+  event,
+  isTextOnly,
+  hasSecondName,
+  hasName,
+  currentMatch,
+}) => {
+  if (isTextOnly) return true
+  if (
+    hasSecondName &&
+    currentMatch?.home_club_id?.id === event.player_id?.club?.id &&
+    currentMatch?.home_club_id?.id === event.second_player_id?.club?.id
+  ) {
+    return true
+  }
+  if (hasName && event.player_id?.club?.id === currentMatch?.home_club_id?.id) {
+    return true
+  }
+  return false
+}
+
+export default memo(MatchEvent)

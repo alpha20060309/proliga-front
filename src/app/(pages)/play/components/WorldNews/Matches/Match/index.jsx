@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import { Badge } from '@/components/ui/badge'
 import {
   Tooltip,
   TooltipContent,
@@ -7,18 +5,18 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 import { staticPath } from 'app/utils/static.util'
-import { cn } from '@/lib/utils'
 import { useTranslation } from 'react-i18next'
 import { formatDate } from 'app/utils/formatDate.util'
 import { useMemo } from 'react'
-import { getUrl } from 'app/utils/static.util'
-import { MATCH_STATUS } from 'app/utils/players.util'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   setCurrentMatch,
   setMatchModalOpen,
 } from 'app/lib/features/matches/matches.slice'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { memo } from 'react'
+import MatchStatus from './Status'
+import MatchTeamDisplay from './TeamDisplay'
 
 const Match = ({ match }) => {
   const dispatch = useDispatch()
@@ -53,7 +51,7 @@ const Match = ({ match }) => {
       onClick={handleClick}
       className="flex h-12 w-full cursor-pointer select-none items-center rounded-lg border border-neutral-800 bg-neutral-900/80 px-1 xs:px-2"
     >
-      <TeamDisplay
+      <MatchTeamDisplay
         name={getCorrectName({
           lang,
           uz: homeClub?.name,
@@ -81,7 +79,7 @@ const Match = ({ match }) => {
           </Tooltip>
         </TooltipProvider>
       </div>
-      <TeamDisplay
+      <MatchTeamDisplay
         name={getCorrectName({
           lang,
           uz: awayClub?.name,
@@ -97,93 +95,4 @@ const Match = ({ match }) => {
   )
 }
 
-const TeamDisplay = ({ name, logo, isWinner, isDraw, alignment, match }) => {
-  return (
-    <div
-      className={cn(
-        'flex h-full w-[35%] items-center gap-x-1 xs:gap-x-2',
-        alignment === 'right' &&
-          'w-1/3 flex-row-reverse items-center space-x-reverse',
-        isWinner && 'font-bold'
-      )}
-    >
-      <div
-        className={cn(
-          'relative',
-          isWinner &&
-            "after:absolute after:bottom-0 after:left-0 after:right-0 after:top-0 after:animate-ping after:rounded-full after:bg-primary after:opacity-75 after:content-['']",
-          isDraw &&
-            "after:absolute after:bottom-0 after:left-0 after:right-0 after:top-0 after:animate-ping after:rounded-full after:bg-neutral-500 after:opacity-50 after:content-['']"
-        )}
-      >
-        <img
-          src={getUrl(logo)}
-          alt={name}
-          width={40}
-          height={40}
-          onError={(e) => (e.currentTarget.src = '/icons/football.svg')}
-          className={cn(
-            'size-7 min-w-7 rounded-full xs:size-8',
-            isWinner && 'ring-2 ring-primary',
-            isDraw && 'ring-2 ring-neutral-500'
-          )}
-        />
-      </div>
-      <div className="flex max-w-full flex-col truncate text-wrap">
-        <span
-          className={cn(
-            'break-words text-xs md:text-sm',
-            alignment === 'left' ? 'text-left' : 'text-right'
-          )}
-        >
-          {name}
-        </span>
-        {match?.status === 'finished' && (
-          <span
-            className={cn(
-              'text-sm',
-              isWinner && 'ring-primary',
-              isDraw && 'ring-neutral-500',
-              alignment === 'left' ? 'text-left' : 'text-right'
-            )}
-          />
-        )}
-      </div>
-    </div>
-  )
-}
-
-const MatchStatus = ({ status, homeScore, awayScore }) => {
-  const { t } = useTranslation()
-
-  switch (status) {
-    case MATCH_STATUS.NOT_STARTED:
-      return (
-        <Badge
-          variant="secondary"
-          className="bg-neutral-800 py-px text-[11px] font-normal sm:text-xs"
-        >
-          {t('Boshlanmagan')}
-        </Badge>
-      )
-    case MATCH_STATUS.INPROCESS:
-      return (
-        <Badge
-          variant="default"
-          className="animate-pulse py-px text-[11px] font-normal sm:text-xs"
-        >
-          {homeScore} - {awayScore}
-        </Badge>
-      )
-    case MATCH_STATUS.FINISHED:
-      return (
-        <Badge variant="outline text-[11px] font-normal sm:text-xs py-px">
-          {homeScore} - {awayScore}
-        </Badge>
-      )
-    default:
-      return null
-  }
-}
-
-export default Match
+export default memo(Match)

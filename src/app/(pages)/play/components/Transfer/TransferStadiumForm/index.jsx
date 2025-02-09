@@ -23,7 +23,10 @@ import { Button } from '@/components/ui/button'
 import { setTransferModal } from 'app/lib/features/currentTeam/currentTeam.slice'
 import { getCorrentPlayerPosition } from 'app/utils/getCorrectPlayerPosition.utils'
 import { configKey } from 'app/utils/config.util'
-import { selectTeamConcat } from 'app/lib/features/teamPlayers/teamPlayers.selector'
+import {
+  selectPrevTeam,
+  selectTeamConcat,
+} from 'app/lib/features/teamPlayers/teamPlayers.selector'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { selectCurrentTourTeam } from 'app/lib/features/tourTeams/tourTeams.selector'
 import { selectCurrentTour } from 'app/lib/features/tours/tours.selector'
@@ -42,9 +45,8 @@ const TransferStadiumForm = () => {
   const currentTour = useSelector(selectCurrentTour)
   const players = useSelector(selectPlayers)
   const currentTourTeam = useSelector(selectCurrentTourTeam)
-  const { playersCount, prevTeam, teamPrice } = useSelector(
-    (state) => state.teamPlayers
-  )
+  const { playersCount, teamPrice } = useSelector((state) => state.teamPlayers)
+  const prevTeam = useSelector(selectPrevTeam)
   const { lang } = useSelector((state) => state.systemLanguage)
   const { config } = useSelector((store) => store.systemConfig)
 

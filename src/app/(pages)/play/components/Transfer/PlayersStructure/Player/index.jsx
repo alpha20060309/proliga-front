@@ -13,6 +13,7 @@ import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.sele
 import { useTranslation } from 'react-i18next'
 import { setCurrentPlayer } from 'app/lib/features/players/players.slice'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { memo } from 'react'
 
 const Player = ({ player }) => {
   const dispatch = useDispatch()
@@ -138,4 +139,4 @@ const Player = ({ player }) => {
   )
 }
 
-export default Player
+export default memo(Player)

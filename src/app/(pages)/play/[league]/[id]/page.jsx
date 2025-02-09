@@ -24,7 +24,7 @@ import { fetchTours } from 'app/lib/features/tours/tours.thunk'
 import { fetchClubs } from 'app/lib/features/club/club.thunk'
 import { fetchCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.thunk'
 import { fetchPlayerPoint } from 'app/lib/features/playerPoint/playerPoint.thunk'
-import { selectTeamConcat } from 'app/lib/features/teamPlayers/teamPlayers.selector'
+import { selectPrevTeam } from 'app/lib/features/teamPlayers/teamPlayers.selector'
 import { selectCompetition } from 'app/lib/features/competition/competition.selector'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { selectCurrentTour } from 'app/lib/features/tours/tours.selector'
@@ -55,7 +55,7 @@ const Play = ({ params }) => {
   const { count: playersCount, isLoading: playersLoading } = useSelector(
     (store) => store.players
   )
-  const teamConcat = useSelector(selectTeamConcat)
+  const prevTeam = useSelector(selectPrevTeam)
   const countOfPlayers = useMemo(
     () => [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000],
     []
@@ -94,7 +94,6 @@ const Play = ({ params }) => {
     if (banners?.length === 0) {
       dispatch(fetchBanners())
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch])
 
   useEffect(() => {
@@ -164,16 +163,16 @@ const Play = ({ params }) => {
   }, [dispatch, params.league, countOfPlayers, playersCount])
 
   useEffect(() => {
-    if (currentTour?.id && params?.league && teamConcat?.length > 0) {
+    if (currentTour?.id && params?.league && prevTeam?.length > 0) {
       dispatch(
         fetchPlayerPoint({
           competition_id: params.league,
           tour_id: currentTour.id,
-          teamConcat: teamConcat,
+          teamConcat: prevTeam,
         })
       )
     }
-  }, [dispatch, currentTour?.id, params?.league, teamConcat])
+  }, [dispatch, currentTour?.id, params?.league, prevTeam])
 
   useEffect(() => {
     if (competitions?.length > 0 && params.league) {

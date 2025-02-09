@@ -5,6 +5,7 @@ import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { useUpdateNewsView } from 'app/hooks/system/useUpdateNewsView/useUpdateNewsView'
 import { getUrl } from 'app/utils/static.util'
 import { setCurrentNews, setNewsModal } from 'app/lib/features/news/news.slice'
+import { memo } from 'react'
 
 const Article = ({ item }) => {
   const dispatch = useDispatch()
@@ -53,4 +54,4 @@ const Article = ({ item }) => {
   )
 }
 
-export default Article
+export default memo(Article)

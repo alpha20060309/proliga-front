@@ -6,6 +6,7 @@ import { useEffect, useState, useMemo } from 'react'
 import { staticPath } from 'app/utils/static.util'
 import Image from 'next/image'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { memo } from 'react'
 
 const Player = ({ player }) => {
   const { lang } = useSelector((store) => store.systemLanguage)
@@ -93,4 +94,4 @@ const Player = ({ player }) => {
   )
 }
 
-export default Player
+export default memo(Player)

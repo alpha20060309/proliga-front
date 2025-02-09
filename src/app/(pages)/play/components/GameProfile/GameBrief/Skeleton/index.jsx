@@ -7,7 +7,7 @@ const GameBriefSkeleton = () => {
       {/* 1 */}
       <Container className="border-b border-neutral-700">
         <Item>
-          <Skeleton className="h-6 w-12" />
+          <Skeleton className="h-6 w-36" />
           <Skeleton className="h-6 w-16 bg-primary/50" />
         </Item>
         <Item>

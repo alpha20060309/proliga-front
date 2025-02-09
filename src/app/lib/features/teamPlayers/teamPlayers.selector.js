@@ -14,3 +14,8 @@ export const selectTotalPlayersCount = createDraftSafeSelector(
     teamPlayers.playersCount?.MID +
     teamPlayers.playersCount?.STR
 )
+
+export const selectPrevTeam = createDraftSafeSelector(
+  (state) => state.teamPlayers,
+  (teamPlayers) => teamPlayers.prevTeam
+)

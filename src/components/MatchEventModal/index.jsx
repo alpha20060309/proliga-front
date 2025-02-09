@@ -20,8 +20,6 @@ function MatchEventModal() {
   const { isModalOpen } = useSelector((store) => store.matches)
   const currentMatch = useSelector(selectCurrentMatch)
 
-  console.log(currentMatch)
-
   const setModalOpen = () => {
     dispatch(setMatchModalOpen(false))
   }

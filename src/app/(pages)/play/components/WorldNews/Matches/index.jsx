@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/select'
 import { fetchMatches } from 'app/lib/features/matches/mathes.thunk'
 import Match from './Match'
-import MatchSkeleton from './MatchSkeleton'
+import MatchSkeleton from './Match/Skeleton'
 import { Pagination } from 'components/Table/Pagination'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { selectMatches } from 'app/lib/features/matches/matches.selector'
@@ -39,7 +39,7 @@ const Matches = () => {
   const [tourIndex, setTourIndex] = useState(-1)
   const [currentTour, setCurrentTour] = useState(null)
   const [page, setPage] = useState(0)
-  const [perPage, setPerPage] = useState(10)
+  const perPage = 10
   const pages = useMemo(() => Math.ceil(count / perPage), [count, perPage])
   const competition_id = +path.split('/')[2] || 0
 
