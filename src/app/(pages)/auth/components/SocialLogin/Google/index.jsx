@@ -3,21 +3,15 @@
 import { Button } from '@/components/ui/button'
 import { useTranslation } from 'react-i18next'
 import { useCallback, useEffect } from 'react'
-import { useSelector } from 'react-redux'
 import { supabase } from 'app/lib/supabaseClient'
 import { useLogOut } from 'app/hooks/auth/useLogOut/useLogOut'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { useState } from 'react'
 
-const GoogleSignIn = ({
-  type = GOOGLE_SIGN_IN_TYPES.PAGE,
-  className,
-  iconClassName,
-}) => {
+const GoogleSignIn = ({ className, iconClassName }) => {
   const { t } = useTranslation()
-  const { lang } = useSelector((store) => store.systemLanguage)
-  const { logOut } = useLogOut()
+  
 
   const handleGoogleSignIn = useCallback(() => {
     try {
@@ -65,14 +59,8 @@ const GoogleSignIn = ({
         width={24}
         height={24}
       />
-      Google
     </Button>
   )
-}
-
-export const GOOGLE_SIGN_IN_TYPES = {
-  POP_UP: 'POP_UP',
-  PAGE: 'PAGE',
 }
 
 export default GoogleSignIn

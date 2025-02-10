@@ -1,9 +1,16 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import { useEffect } from 'react'
-import { supabase } from 'app/lib/supabaseClient'
+import {
+  supabase,
+  SUPABASE_AUTH_EVENTS,
+  SUPABASE_PROVIDERS,
+} from 'app/lib/supabaseClient'
+import { useGoogleLogin } from 'app/hooks/auth/useGoogleLogin/useGoogleLogin'
 
 export default function AuthListener() {
+  const { login } = useGoogleLogin()
+
   useEffect(() => {
     const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
     const auth =
@@ -16,32 +23,30 @@ export default function AuthListener() {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN') {
+      if (event === SUPABASE_AUTH_EVENTS.SIGNED_IN) {
         console.log('User signed in:', session)
-        const isEmailIdentity =
-          session?.user?.app_metadata?.provider === 'email'
 
-        console.log(
-          isEmailIdentity,
-          session?.user?.id,
-          session?.user?.id && !isEmailIdentity
-        )
+        const rootProvider = session?.user?.app_metadata?.provider
+        const secondaryProviders = session?.user?.app_metadata?.providers
 
-        if (session?.user?.id && !isEmailIdentity) {
-          localStorage.setItem(
-            `user-auth-${sbUrl}`,
-            JSON.stringify(session?.user)
-          )
+        if (!session?.user?.id) return
+        if (rootProvider === SUPABASE_PROVIDERS.EMAIL) {
+          if (
+            secondaryProviders.includes(
+              SUPABASE_PROVIDERS.GOOGLE,
+              SUPABASE_PROVIDERS.FACEBOOK
+            )
+          ) {
+            login({ auth: session?.user })
+          }
         }
-      } else if (event === 'SIGNED_OUT') {
-        console.log('User signed out')
       }
     })
 
     return () => {
       subscription.unsubscribe()
     }
-  }, [])
+  }, [login])
 
   return null
 }
