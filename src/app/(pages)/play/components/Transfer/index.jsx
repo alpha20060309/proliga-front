@@ -5,9 +5,9 @@ import PlayersStructure from './PlayersStructure'
 import PlayersTable from './PlayersTable'
 import TransferStadiumForm from './TransferStadiumForm'
 import { useSelector } from 'react-redux'
-import { TOUR_STATUS} from 'app/utils/tour.util'
+import { TOUR_STATUS } from 'app/utils/tour.util'
 import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
-import PlayerTransferModal from 'components/PlayerTransferModal'
+import PlayerTransfer from 'components/Modals/PlayerTransfer'
 import { memo } from 'react'
 
 const Transfer = () => {
@@ -35,7 +35,7 @@ const Transfer = () => {
         </div>
         <PlayersTable />
       </main>
-      <PlayerTransferModal />
+      <PlayerTransfer />
     </>
   )
 }

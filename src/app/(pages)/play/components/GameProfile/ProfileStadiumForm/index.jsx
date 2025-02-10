@@ -31,7 +31,7 @@ const ProfileStadiumForm = () => {
   const { lang } = useSelector((store) => store.systemLanguage)
   const { isLoading: teamLoading } = useSelector((state) => state.currentTeam)
   const { currentTour, isLoading: tourLoading } = useSelector(
-    (state) => state.tours
+    (state) => state.tour
   )
   const { updateTeamCaptains, isLoading: captainsLoading } =
     useUpdateTeamCaptains()

@@ -33,7 +33,7 @@ const TeamView = ({ params }) => {
     (store) => store.season
   )
   const banners = useSelector(selectBanners)
-  const { isLoading: toursLoading } = useSelector((state) => state.tours)
+  const { isLoading: toursLoading } = useSelector((state) => state.tour
   const { isLoading: bannersLoading } = useSelector((store) => store.banner)
   const { isLoading: teamLoading } = useSelector((state) => state.currentTeam)
   const { isLoading: competitionsLoading } = useSelector(

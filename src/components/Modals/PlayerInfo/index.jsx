@@ -16,7 +16,7 @@ import { setPlayerInfoModal } from 'app/lib/features/teamPlayers/teamPlayers.sli
 import { selectCurrentPlayer } from 'app/lib/features/players/players.selector'
 import { memo } from 'react'
 
-const PlayerInfoModal = () => {
+const PlayerInfo = () => {
   const dispatch = useDispatch()
   const currentPlayer = useSelector(selectCurrentPlayer)
   const { infoModal } = useSelector((store) => store.teamPlayers)
@@ -45,7 +45,7 @@ const PlayerInfoModal = () => {
 
   return (
     <Dialog open={infoModal && currentPlayer?.id} onOpenChange={setModalOpen}>
-      <DialogContent className="overflox-y-auto z-50 flex max-h-[90vh] min-h-[50vh] w-full max-w-4xl flex-col gap-4 overflow-y-auto rounded-xl border border-neutral-500 bg-neutral-950 px-2 pb-4 pt-4 text-neutral-200 xs:mx-auto xs:px-4 md:px-6 md:pb-4 md:pt-6 2xl:max-w-5xl">
+      <DialogContent className="overflox-y-auto z-50 flex max-h-[90vh] min-h-[50vh] w-[98%] max-w-4xl flex-col gap-4 overflow-y-auto rounded-xl border border-neutral-500 bg-neutral-950 px-2 pb-4 pt-4 text-neutral-200 xs:mx-auto xs:px-4 md:px-6 md:pb-4 md:pt-6 2xl:max-w-5xl">
         <PlayerPhoto
           currentPlayer={currentPlayer}
           position={getCorrentPlayerPosition(
@@ -96,4 +96,4 @@ const PlayerInfoModal = () => {
   )
 }
 
-export default memo(PlayerInfoModal)
+export default memo(PlayerInfo)

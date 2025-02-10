@@ -1,16 +1,16 @@
 import { createDraftSafeSelector } from '@reduxjs/toolkit'
 
 export const selectTours = createDraftSafeSelector(
-  (state) => state.tours,
-  (tours) => tours.tours
+  (state) => state.tour,
+  (tour) => tour.tours
 )
 
 export const selectCurrentTour = createDraftSafeSelector(
-  (state) => state.tours,
-  (tours) => tours.currentTour
+  (state) => state.tour,
+  (tour) => tour.currentTour
 )
 
 export const selectRegisteredTour = createDraftSafeSelector(
-  (state) => state.tours,
-  (tours) => tours.registeredTour
+  (state) => state.tour,
+  (tour) => tour.registeredTour
 )

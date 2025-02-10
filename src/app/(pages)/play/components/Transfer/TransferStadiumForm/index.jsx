@@ -22,7 +22,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { setTransferModal } from 'app/lib/features/currentTeam/currentTeam.slice'
 import { getCorrentPlayerPosition } from 'app/utils/getCorrectPlayerPosition.utils'
-import { CONFIG_KEYY } from 'app/utils/config.util'
+import { CONFIG_KEY } from 'app/utils/config.util'
 import {
   selectPrevTeam,
   selectTeamConcat,

@@ -1,11 +1,11 @@
 'use client'
 import './datepicker.scss'
+import UploadFile from 'components/Modals/UploadFile'
 import Image from 'next/image'
+import DatePicker from 'react-datepicker'
 import { useUpdateUserData } from 'app/hooks/user/useUpdateUserData/useUpdateUserData'
-import UploadFileModal from 'components/UploadFileModal'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
-import DatePicker from 'react-datepicker'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
@@ -51,7 +51,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
 
   return (
     <>
-      <UploadFileModal isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
+      <UploadFile isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
       <SettingsContainer>
         <h3 className="mb-2 text-xl font-bold capitalize tracking-tight text-neutral-100">
           {t('Profil sozlamalari')}

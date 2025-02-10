@@ -7,17 +7,12 @@ import {
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 
-const Confirmation = ({
-  onConfirm,
-  onCancel,
-  isModalOpen,
-  setModalOpen,
-}) => {
+const Confirmation = ({ onConfirm, onCancel, isModalOpen, setModalOpen }) => {
   const { t } = useTranslation()
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setModalOpen}>
-      <DialogContent className="flex max-w-[96%] flex-col items-center justify-between gap-2 rounded-md bg-neutral-950 p-8 text-neutral-100 xs:max-w-96 md:max-w-max xl:max-w-[30rem]">
+      <DialogContent className="flex max-w-[96%] flex-col items-center justify-between gap-2 rounded-xl bg-neutral-950 p-6 text-neutral-100 xs:max-w-96 md:max-w-max xl:max-w-[30rem]">
         <DialogTitle className="mb-12 mt-6 cursor-default text-xl font-bold md:tracking-wide">
           {t('Ishonchingiz komilmi')}
         </DialogTitle>

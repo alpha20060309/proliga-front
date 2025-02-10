@@ -9,7 +9,7 @@ import {
 import { useGoogleLogin } from 'app/hooks/auth/useGoogleLogin/useGoogleLogin'
 import { useSelector } from 'react-redux'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
-import { CONFIG_KEYY } from 'app/utils/config.util'
+import { CONFIG_KEY } from 'app/utils/config.util'
 import {
   selectAgent,
   selectGeo,

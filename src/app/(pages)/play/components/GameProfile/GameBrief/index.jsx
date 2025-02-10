@@ -27,7 +27,7 @@ const GameBrief = () => {
   const [prevTour, setPrevTour] = useState(null)
   const [prevTourTeam, setPrevTourTeam] = useState(null)
   const { currentTourIndex, isLoading: toursLoading } = useSelector(
-    (store) => store.tours
+    (store) => store.tour
   )
   const currentTour = useSelector(selectCurrentTour)
   const tours = useSelector(selectTours)
@@ -107,7 +107,7 @@ const GameBrief = () => {
           <Container className="border-b border-neutral-700">
             <Item>
               <Title> {t('Keyingi Tur')}</Title>
-              {currentTour.status !== TOUR_STATUS.notStartedTransfer ? (
+              {currentTour?.status !== TOUR_STATUS.notStartedTransfer ? (
                 <Content className="text-sm uppercase text-primary md:text-base">
                   {getCorrectName({
                     lang,
@@ -127,7 +127,7 @@ const GameBrief = () => {
             </Item>
             <Item>
               <Title>{t('Deadline')}</Title>
-              {currentTour.status !== TOUR_STATUS.notStartedTransfer ? (
+              {currentTour?.status !== TOUR_STATUS.notStartedTransfer ? (
                 <Content>{date}</Content>
               ) : (
                 <Content>{transferDate}</Content>
@@ -137,7 +137,7 @@ const GameBrief = () => {
           <Container className="border-b border-neutral-700">
             <Item>
               <Title>{t('Tur')}</Title>
-              {currentTour.status !== TOUR_STATUS.notStartedTransfer ? (
+              {currentTour?.status !== TOUR_STATUS.notStartedTransfer ? (
                 <Content>
                   {getCorrectName({
                     lang,
@@ -157,7 +157,7 @@ const GameBrief = () => {
             </Item>
             <Item>
               <Title>{t('Turdagi ochkolar')}</Title>
-              {currentTour.status !== TOUR_STATUS.notStartedTransfer ? (
+              {currentTour?.status !== TOUR_STATUS.notStartedTransfer ? (
                 <Content>{currentTourTeam?.point ?? '0'}</Content>
               ) : (
                 <Content>{prevTourTeam?.point ?? '0'}</Content>

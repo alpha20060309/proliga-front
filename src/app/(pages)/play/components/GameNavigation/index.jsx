@@ -5,7 +5,7 @@ import { TABS } from '../../../../utils/tabs.util'
 import { memo } from 'react'
 
 const GameNavigation = () => {
-  const { gameTab } = useSelector((state) => state.tours)
+  const { gameTab } = useSelector((state) => state.tour)
 
   return (
     <>

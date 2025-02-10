@@ -24,7 +24,7 @@ import {
 export default function TourTabs() {
   const dispatch = useDispatch()
   const selectedTours = useSelector(selectTours)
-  const { currentTourIndex } = useSelector((state) => state.tours)
+  const { currentTourIndex } = useSelector((state) => state.tour)
   const currentTour = useSelector(selectCurrentTour)
   const registeredTour = useSelector(selectRegisteredTour)
   const tourTeams = useSelector(selectTourTeams)

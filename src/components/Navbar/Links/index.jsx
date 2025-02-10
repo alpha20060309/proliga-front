@@ -6,9 +6,9 @@ import { TABS } from 'app/utils/tabs.util'
 import { setTab } from 'app/lib/features/tour/tour.slice'
 import { usePathname } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
-import { TOUR_STATUS_STATUS_STATUS_STATUS_STATUS } from 'app/utils/tour.util'
+import { TOUR_STATUS } from 'app/utils/tour.util'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
-import { selectCurrentTour } from 'app/lib/features/tour/tour.selector
+import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
 import { cn } from '@/lib/utils'
 
 const PlayLinks = () => {
@@ -16,7 +16,7 @@ const PlayLinks = () => {
   const { t } = useTranslation()
   const currentTour = useSelector(selectCurrentTour)
   const currentTeam = useSelector(selectCurrentTeam)
-  const { gameTab } = useSelector((state) => state.tours)
+  const { gameTab } = useSelector((state) => state.tour)
   const { lastVisitedTeam } = useSelector((store) => store.currentTeam)
 
   const styling = (tab) => {
@@ -27,7 +27,7 @@ const PlayLinks = () => {
       return DISABLED
     }
 
-    if (currentTour?.status !== TOUR_STATUS_STATUS.notStartedTransfer) {
+    if (currentTour?.status !== TOUR_STATUS.notStartedTransfer) {
       if (tab === TABS.Transfer) {
         return DISABLED
       }
@@ -113,7 +113,7 @@ const Tab = ({ title, tab, styling }) => {
       return
     }
     if (
-      currentTour.status !== TOUR_STATUS.notStartedTransfer &&
+      currentTour?.status !== TOUR_STATUS.notStartedTransfer &&
       tab === TABS.Transfer
     ) {
       return
@@ -148,7 +148,7 @@ const TabLink = ({ title, tab, styling }) => {
       return
     }
     if (
-      currentTour.status !== TOUR_STATUS.notStartedTransfer &&
+      currentTour?.status !== TOUR_STATUS.notStartedTransfer &&
       tab === TABS.Transfer
     ) {
       return

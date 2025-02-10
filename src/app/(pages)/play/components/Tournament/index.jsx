@@ -7,7 +7,7 @@ import { Pagination } from 'components/Table/Pagination'
 import {
   selectCurrentTour,
   selectTours,
-} from 'app/lib/features/tour/tour.selector
+} from 'app/lib/features/tour/tour.selector'
 import { selectAllTeams } from 'app/lib/features/teams/teams.selector'
 import { selectCurrentTourTeam } from 'app/lib/features/tourTeams/tourTeams.selector'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
@@ -25,7 +25,7 @@ const Tournament = () => {
   )
   const tours = useSelector(selectTours)
   const allTeams = useSelector(selectAllTeams)
-  const { isLoading: tourLoading } = useSelector((state) => state.tours)
+  const { isLoading: tourLoading } = useSelector((state) => state.tour)
   const currentCompetition = useSelector(selectCurrentCompetition)
   const currentTour = useSelector(selectCurrentTour)
   const currentTourTeam = useSelector(selectCurrentTourTeam)

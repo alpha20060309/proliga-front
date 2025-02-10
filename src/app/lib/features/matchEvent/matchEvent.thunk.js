@@ -5,7 +5,9 @@ import { MATCH_EVENTS } from 'app/utils/match.util'
 export const fetchMatchEvents = createAsyncThunk(
   'matchEvent/fetchMatchEvents',
   async ({ match_id }) => {
-    const matchEvents = Object.keys(MATCH_EVENTS).map((key) => key)
+    const matchEvents = Object.keys(MATCH_EVENTS).map(
+      (key) => MATCH_EVENTS[key]
+    )
 
     const { data, error } = await supabase
       .from('match_event')

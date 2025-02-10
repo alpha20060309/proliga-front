@@ -1,7 +1,7 @@
+/* eslint-disable no-undef */
 import Link from 'next/link'
 import { useSelector } from 'react-redux'
-import { BANNER } from 'app/utils/banner.util'
-import { BANNER_SERVICE_TYPE } from 'app/utils/banner-service.util'
+import { BANNER, BANNER_SERVICE_TYPE } from 'app/utils/banner.util'
 import { useMemo, useState, useEffect, memo } from 'react'
 import { useCreateBannerView } from 'app/hooks/system/useCreateBannerView/useCreateBannerView'
 import YandexAd from '../YandexAd'

@@ -20,8 +20,9 @@ import { formatCurrency } from 'app/utils/formatCurrency'
 import PaymentOption from './PaymentOption'
 import { memo } from 'react'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
+import { BALANCE_OPTIONS } from 'app/utils/paymentOptions.util'
 
-const RefillBalanceModal = ({ isModalOpen, setIsModalOpen }) => {
+const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
   const { t } = useTranslation()
   const userTable = useSelector(selectUserTable)
   const { lang } = useSelector((store) => store.systemLanguage)
@@ -64,7 +65,7 @@ const RefillBalanceModal = ({ isModalOpen, setIsModalOpen }) => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-      <DialogContent className="max-h-[92%] max-w-[96%] overflow-auto rounded-lg bg-neutral-900 sm:max-w-[28rem] xl:max-w-[32rem] xl:p-6">
+      <DialogContent className="max-h-[92%] max-w-[96%] overflow-auto rounded-xl bg-neutral-900 sm:max-w-[28rem] xl:max-w-[32rem] xl:p-6">
         <DialogTitle className="text-lg font-bold sm:text-xl">
           {t('Balansingizni toldiring')}
         </DialogTitle>
@@ -76,9 +77,9 @@ const RefillBalanceModal = ({ isModalOpen, setIsModalOpen }) => {
             <section className="flex flex-wrap justify-start gap-1 sm:flex-nowrap">
               {cabinet_click && (
                 <PaymentOption
-                  onClick={() => setPaymentOption(BALANCEOPTIONS.CLICKUP)}
+                  onClick={() => setPaymentOption(BALANCE_OPTIONS.CLICKUP)}
                   style={
-                    paymentOption === BALANCEOPTIONS.CLICKUP ? ACTIVE : PASSIVE
+                    paymentOption === BALANCE_OPTIONS.CLICKUP ? ACTIVE : PASSIVE
                   }
                   img={'/icons/click-up.svg'}
                   alt={'click-up'}
@@ -86,9 +87,9 @@ const RefillBalanceModal = ({ isModalOpen, setIsModalOpen }) => {
               )}
               {cabinet_payme && (
                 <PaymentOption
-                  onClick={() => setPaymentOption(BALANCEOPTIONS.PAYME)}
+                  onClick={() => setPaymentOption(BALANCE_OPTIONS.PAYME)}
                   style={
-                    paymentOption === BALANCEOPTIONS.PAYME ? ACTIVE : PASSIVE
+                    paymentOption === BALANCE_OPTIONS.PAYME ? ACTIVE : PASSIVE
                   }
                   img={'/icons/payme.svg'}
                   alt={'payme'}
@@ -137,12 +138,7 @@ const RefillBalanceModal = ({ isModalOpen, setIsModalOpen }) => {
   )
 }
 
-export const BALANCEOPTIONS = {
-  CLICKUP: 'click',
-  PAYME: 'payme',
-  OKTO: 'okto',
-}
 const ACTIVE = 'border-primary'
 const PASSIVE = 'border-neutral-600 hover:border-yellow-600'
 
-export default memo(RefillBalanceModal)
+export default memo(RefillBalance)

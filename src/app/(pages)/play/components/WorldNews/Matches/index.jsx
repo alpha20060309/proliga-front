@@ -18,7 +18,7 @@ import MatchSkeleton from './Match/Skeleton'
 import { Pagination } from 'components/Table/Pagination'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { selectMatches } from 'app/lib/features/matches/matches.selector'
-import { selectTours } from 'app/lib/features/tour/tour.selector
+import { selectTours } from 'app/lib/features/tour/tour.selector'
 import { usePathname } from 'next/navigation'
 import { RefreshCcw } from 'lucide-react'
 import MatchEvent from 'components/Modals/MatchEvent'
@@ -28,7 +28,7 @@ const Matches = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const { isLoading: toursLoading, currentTourIndex } = useSelector(
-    (state) => state.tours
+    (state) => state.tour
   )
   const tours = useSelector(selectTours)
   const { isLoading: teamLoading } = useSelector((store) => store.currentTeam)

@@ -10,7 +10,7 @@ const GameBrief = dynamic(() => import('./GameBrief'), {
   ssr: false,
   loading: () => <GameBriefContainerSkeleton />,
 })
-import PlayerInfoModal from 'components/PlayerInfoModal'
+import PlayerInfo from 'components/Modals/PlayerInfo'
 import { memo } from 'react'
 
 const GameProfile = () => {
@@ -35,7 +35,7 @@ const GameProfile = () => {
         )}
       </div>
       <GameBrief />
-      <PlayerInfoModal />
+      <PlayerInfo />
     </main>
   )
 }

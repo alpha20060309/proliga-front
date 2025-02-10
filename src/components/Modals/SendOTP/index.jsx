@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
 import {
@@ -14,16 +14,23 @@ import { PhoneInput } from 'components/PhoneInput'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useGetUserPhone } from 'app/hooks/user/useGetUserPhone/useGetUserPhone'
+import { memo } from 'react'
+import { Button } from '@/components/ui/button'
 
-const SendOTPModal = ({ isModalOpen, setModalOpen }) => {
+const SendOTP = ({ isModalOpen, setModalOpen }) => {
   const router = useRouter()
   const params = useSearchParams()
   const phoneParams = params.get('phone') || ''
 
   const { t } = useTranslation()
   const [phone, setPhone] = useState('')
-  const { sendOTP, isLoading } = useSendOTP()
+  const { sendOTP, isLoading: sendLoading } = useSendOTP()
   const { getUserPhone, isLoading: tableLoading } = useGetUserPhone()
+
+  const isLoading = useMemo(
+    () => sendLoading || tableLoading,
+    [sendLoading, tableLoading]
+  )
 
   const handleConfirm = async (e) => {
     e.preventDefault()
@@ -53,7 +60,7 @@ const SendOTPModal = ({ isModalOpen, setModalOpen }) => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setModalOpen}>
-      <DialogContent className="max-w-[92%] rounded-md bg-neutral-950 px-4 py-6 text-neutral-100 xs:max-w-96 sm:max-w-[28rem] md:p-6">
+      <DialogContent className="max-w-[92%] rounded-xl bg-neutral-950 px-4 py-6 text-neutral-100 xs:max-w-96 sm:max-w-[28rem] md:p-6">
         <form
           onSubmit={handleConfirm}
           className="flex w-full flex-col items-start gap-8"
@@ -76,12 +83,12 @@ const SendOTPModal = ({ isModalOpen, setModalOpen }) => {
               onChange={setPhone}
             />
           </div>
-          <button
+          <Button
             type="submit"
-            disabled={isLoading || tableLoading}
-            className="h-10 w-full rounded border border-primary bg-neutral-900 transition-all hover:bg-black"
+            disabled={isLoading}
+            className="h-10 w-full rounded border border-primary bg-neutral-900 text-neutral-50 transition-all hover:bg-black"
           >
-            {isLoading || tableLoading ? (
+            {isLoading ? (
               <Image
                 src="/icons/loading.svg"
                 width={24}
@@ -92,11 +99,11 @@ const SendOTPModal = ({ isModalOpen, setModalOpen }) => {
             ) : (
               t('Parolni tiklash')
             )}
-          </button>
+          </Button>
         </form>
       </DialogContent>
     </Dialog>
   )
 }
 
-export default SendOTPModal
+export default memo(SendOTP)

@@ -2,9 +2,8 @@
 
 import Link from 'next/link'
 import { useSelector } from 'react-redux'
-import { BANNER } from 'app/utils/banner.util'
+import { BANNER, BANNER_SERVICE_TYPE } from 'app/utils/banner.util'
 import { useMemo, useEffect, memo } from 'react'
-import { BANNER_SERVICE_TYPE } from 'app/utils/banner-service.util'
 import { useCreateBannerView } from 'app/hooks/system/useCreateBannerView/useCreateBannerView'
 import {
   selectGeo,

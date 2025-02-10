@@ -41,7 +41,7 @@ const Play = ({ params }) => {
   const packages = useSelector(selectPackages)
   const banners = useSelector(selectBanners)
   const { gameTab, isLoading: toursLoading } = useSelector(
-    (state) => state.tours
+    (state) => state.tour
   )
   const { isLoading: packagesLoading } = useSelector((store) => store.packages)
   const { isLoading: bannersLoading } = useSelector((store) => store.banner)

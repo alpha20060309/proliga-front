@@ -38,7 +38,7 @@ function MatchEventModal() {
 
   return (
     <Dialog open={isModalOpen && currentMatch?.id} onOpenChange={setModalOpen}>
-      <DialogContent className="flex h-[75vh] max-w-2xl flex-col gap-0 rounded-xl border border-neutral-800 bg-gradient-to-b from-gray-900 via-neutral-950 to-black p-0 text-white">
+      <DialogContent className="flex h-[75vh] w-[98%] max-w-2xl flex-col gap-0 rounded-xl border border-neutral-800 bg-gradient-to-b from-gray-900 via-neutral-950 to-black p-0 text-white">
         <MatchEventHeader
           started_date={currentMatch?.started_date}
           finished_date={currentMatch?.finished_date}

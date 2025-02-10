@@ -14,7 +14,7 @@ import { selectCurrentNews } from 'app/lib/features/news/news.selector'
 import { setNewsModal } from 'app/lib/features/news/news.slice'
 import { memo } from 'react'
 
-function NewsArticleModal() {
+function NewsArticle() {
   const dispatch = useDispatch()
   const currentNews = useSelector(selectCurrentNews)
   const { isModalOpen } = useSelector((store) => store.news)
@@ -28,7 +28,7 @@ function NewsArticleModal() {
 
   return (
     <Dialog open={isModalOpen && currentNews?.id} onOpenChange={setModalOpen}>
-      <DialogContent className="w-full max-w-4xl rounded-lg bg-black px-2 py-4 md:p-4 2xl:max-w-5xl">
+      <DialogContent className="w-[98%] max-w-4xl rounded-xl bg-black px-2 py-4 md:p-4 2xl:max-w-5xl">
         <DialogTitle className="mr-7 text-xl font-normal leading-tight tracking-wide">
           {getCorrectName({
             lang,
@@ -68,4 +68,4 @@ function NewsArticleModal() {
     </Dialog>
   )
 }
-export default memo(NewsArticleModal)
+export default memo(NewsArticle)

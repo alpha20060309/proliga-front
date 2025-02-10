@@ -6,7 +6,7 @@ import {
 } from 'app/lib/features/tour/tour.selector'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
-import { TOUR_STATUSapp/utils/tour.util'
+import { TOUR_STATUS } from 'app/utils/tour.util'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { Coins, PercentCircle } from 'lucide-react'
@@ -23,7 +23,7 @@ const GameBrief = () => {
   const { t } = useTranslation()
   const [nextTour, setNextTour] = useState(null)
   const { lang } = useSelector((store) => store.systemLanguage)
-  const { currentTourIndex, isLoading } = useSelector((store) => store.tours)
+  const { currentTourIndex, isLoading } = useSelector((store) => store.tour)
   const currentTour = useSelector(selectCurrentTour)
   const tours = useSelector(selectTours)
   const currentTeam = useSelector(selectCurrentTeam)
@@ -99,7 +99,7 @@ const GameBrief = () => {
             </Item>
             <Item>
               <Title>{t('Deadline')}</Title>
-              {currentTour.status !== TOUR_STATUS_STATUS.notStartedTransfer ? (
+              {currentTour?.status !== TOUR_STATUS.notStartedTransfer ? (
                 <Content>{formatDate(date)}</Content>
               ) : (
                 <Content>{formatDate(curDate)}</Content>

@@ -1,5 +1,5 @@
-import { fetchTours, fetchTeamViewTours } from './tours.thunk'
-import { TOUR_STATUS_STATUS_STATUS_STATUS } from 'app/utils/tour.util'
+import { fetchTours, fetchTeamViewTours } from './tour.thunk'
+import { TOUR_STATUS } from 'app/utils/tour.util'
 
 export const toursExtraReducer = (builder) => {
   builder
@@ -9,7 +9,7 @@ export const toursExtraReducer = (builder) => {
     .addCase(fetchTours.fulfilled, (state, action) => {
       state.tours = action?.payload?.data ?? []
       let tour = state.tours.find(
-        (tour) => tour.status === TOUR_STATUS_STATUS.notStartedTransfer
+        (tour) => tour.status === TOUR_STATUS.notStartedTransfer
       )
       let registeredTour = state.tours.find(
         (tour) => tour.id === action.payload.registered_tour_id
@@ -69,7 +69,7 @@ export const toursExtraReducer = (builder) => {
       if (tour) {
         state.currentTour = tour
         state.registeredTour = registeredTour ?? tour
-        state.currentTourIndex = state.tours.indexOf(tour)
+        state.currentTourIndex = state.tour.indexOf(tour)
       }
       state.isLoading = false
     })

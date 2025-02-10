@@ -15,7 +15,7 @@ const SidebarTabLink = ({ title, tab, toggleModal }) => {
   const path = usePathname()
   const currentTeam = useSelector(selectCurrentTeam)
   const currentTour = useSelector(selectCurrentTour)
-  const { gameTab } = useSelector((state) => state.tours)
+  const { gameTab } = useSelector((state) => state.tour)
   const { lastVisitedTeam } = useSelector((state) => state.currentTeam)
 
   const handleClick = () => {
@@ -23,7 +23,7 @@ const SidebarTabLink = ({ title, tab, toggleModal }) => {
       return
     }
     if (
-      currentTour.status !== TOUR_STATUS.notStartedTransfer &&
+      currentTour?.status !== TOUR_STATUS.notStartedTransfer &&
       tab === TABS.Transfer
     ) {
       return

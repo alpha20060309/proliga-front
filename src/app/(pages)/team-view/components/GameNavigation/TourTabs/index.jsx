@@ -3,14 +3,14 @@ import StyledTab from './StyledTab'
 import StyledTabs from './StyledTabs'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { TOUR_STATUS_STATUS, getTourName } from 'app/utils/tour.util'
+import { TOUR_STATUS, getTourName } from 'app/utils/tour.util'
 import { setCurrentTourIndex } from 'app/lib/features/tour/tour.slice'
 import { setCurrentTourTeam } from 'app/lib/features/tourTeams/tourTeams.slice'
 import {
   selectCurrentTour,
   selectRegisteredTour,
   selectTours,
-} from 'app/lib/features/tour/tour.selector
+} from 'app/lib/features/tour/tour.selector'
 import { emptyTeamPlayers } from 'app/lib/features/teamPlayers/teamPlayers.slice'
 import { useTranslation } from 'react-i18next'
 import { tabsClasses } from '@mui/material'
@@ -24,7 +24,7 @@ export default function TourTabs() {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const { lang } = useSelector((store) => store.systemLanguage)
-  const { currentTourIndex } = useSelector((store) => store.tours)
+  const { currentTourIndex } = useSelector((store) => store.tour)
   const registeredTour = useSelector(selectRegisteredTour)
   const currentTourTeam = useSelector(selectCurrentTourTeam)
   const currentTour = useSelector(selectCurrentTour)
@@ -76,8 +76,8 @@ export default function TourTabs() {
             onClick={() => handleClick(index, item)}
             className="w-32 snap-center space-y-0 rounded hover:bg-primary hover:bg-opacity-10 disabled:cursor-default sm:w-48"
             disabled={
-              item.status === TOUR_STATUS_STATUS.notStarted ||
-              item.status === TOUR_STATUS_STATUS_STATUS.notStartedTransfer ||
+              item.status === TOUR_STATUS.notStarted ||
+              item.status === TOUR_STATUS.notStartedTransfer ||
               item.order < registeredTour?.order
             }
             label={
