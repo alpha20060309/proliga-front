@@ -1,5 +1,5 @@
 import { Separator } from '@/components/ui/separator'
-import { configKey } from 'app/utils/config.util'
+import { CONFIG_KEY } from 'app/utils/config.util'
 import { useTranslation } from 'react-i18next'
 import { usePathname } from 'next/navigation'
 import { useSelector } from 'react-redux'
@@ -13,9 +13,9 @@ const Footer = () => {
   const { t } = useTranslation()
   const config = useSelector(selectSystemConfig)
 
-  const link_email = config[configKey.link_email]?.value ?? ''
-  const link_instagram = config[configKey.link_instagram]?.value ?? ''
-  const link_telegram = config[configKey.link_telegram]?.value ?? ''
+  const link_email = config[CONFIG_KEY.link_email]?.value ?? ''
+  const link_instagram = config[CONFIG_KEY.link_instagram]?.value ?? ''
+  const link_telegram = config[CONFIG_KEY.link_telegram]?.value ?? ''
 
   const navigation = [
     { href: '/about-us', label: t('Biz haqimizda') },

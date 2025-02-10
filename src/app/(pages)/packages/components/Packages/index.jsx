@@ -7,7 +7,7 @@ const PackageContainer = dynamic(() => import('../Package'), {
   ssr: false,
   loading: () => <PackageSkeleton />,
 })
-import { PACKAGES } from 'app/utils/packages.util'
+import { PACKAGE_TYPE } from 'app/utils/packages.util'
 
 const PaymentPackages = () => {
   const { t } = useTranslation()
@@ -28,7 +28,7 @@ const PaymentPackages = () => {
             {t('O‘yiningizni mukammallikka yetkazing')}
           </h1>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {Object.values(PACKAGES).map((packageType) => (
+            {Object.values(PACKAGE_TYPE).map((packageType) => (
               <PackageContainer key={packageType} packageType={packageType} />
             ))}
           </div>

@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import SettingsAlert from '../Alert'
-import OTPConfirmationModal from 'components/ConfirmOTPModal'
+import ConfirmOTP from 'components/Modals/ConfirmOTP'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import { Input } from '@/components/ui/input'
@@ -78,7 +78,7 @@ const CabinetChangePasswordTab = () => {
 
   return (
     <>
-      <OTPConfirmationModal
+      <ConfirmOTP
         setModalOpen={setModalOpen}
         isModalOpen={isModalOpen}
         setVerificationStatus={setSMSVerified}

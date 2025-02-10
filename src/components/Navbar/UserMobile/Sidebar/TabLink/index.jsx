@@ -1,14 +1,14 @@
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux'
 import { sidebarStyles } from '../sidebarStyles.util'
-import { setTab } from 'app/lib/features/tours/tours.slice'
+import { setTab } from 'app/lib/features/tour/tour.slice'
 import { cn } from '@/lib/utils'
 import { tabStyling } from 'components/Navbar/tabStyling.util'
 import { usePathname } from 'next/navigation'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
-import { selectCurrentTour } from 'app/lib/features/tours/tours.selector'
+import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
 import { TABS } from 'app/utils/tabs.util'
-import { TOUR } from 'app/utils/tour.util'
+import { TOUR_STATUS_STATUS_STATUS_STATUS } from 'app/utils/tour.util'
 
 const SidebarTabLink = ({ title, tab, toggleModal }) => {
   const dispatch = useDispatch()
@@ -23,7 +23,7 @@ const SidebarTabLink = ({ title, tab, toggleModal }) => {
       return
     }
     if (
-      currentTour.status !== TOUR.notStartedTransfer &&
+      currentTour.status !== TOUR_STATUS.notStartedTransfer &&
       tab === TABS.Transfer
     ) {
       return

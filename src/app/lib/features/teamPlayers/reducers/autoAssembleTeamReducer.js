@@ -1,4 +1,4 @@
-import { PLAYERS } from 'app/utils/players.util'
+import { PLAYER_POSITION } from 'app/utils/player.util'
 
 export const autoAssembleTeamReducer = (state, action) => {
   const { allPlayers, playerIds, team } = action.payload
@@ -47,7 +47,7 @@ export const autoAssembleTeamReducer = (state, action) => {
     if (playerIds.includes(player.id)) {
       if (
         state.GOA.length > 0 &&
-        player.position === PLAYERS.GOA &&
+        player.position === PLAYER_POSITION.GOA &&
         state.playersCount.GOA < 1
       ) {
         const emptyGOAPlayer = state.GOA.find((p) => !p.name)
@@ -60,7 +60,7 @@ export const autoAssembleTeamReducer = (state, action) => {
         return state
       }
       if (
-        player.position === PLAYERS.DEF &&
+        player.position === PLAYER_POSITION.DEF &&
         state.playersCount.DEF < state.DEF.length
       ) {
         const emptyDEFPlayer = state.DEF.find((p) => !p.name)
@@ -73,7 +73,7 @@ export const autoAssembleTeamReducer = (state, action) => {
         return state
       }
       if (
-        player.position === PLAYERS.MID &&
+        player.position === PLAYER_POSITION.MID &&
         state.playersCount.MID < state.MID.length
       ) {
         const emptyMIDPlayer = state.MID.find((p) => !p.name)
@@ -86,7 +86,7 @@ export const autoAssembleTeamReducer = (state, action) => {
         return state
       }
       if (
-        player.position === PLAYERS.STR &&
+        player.position === PLAYER_POSITION.STR &&
         state.playersCount.STR < state.STR.length
       ) {
         const emptySTRPlayer = state.STR.find((p) => !p.name)

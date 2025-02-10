@@ -1,9 +1,10 @@
+/* eslint-disable no-undef */
 'use client'
 
 import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { PACKAGES } from 'app/utils/packages.util'
+import { PACKAGE_TYPE } from 'app/utils/packages.util'
 import {
   Dialog,
   DialogContent,
@@ -57,7 +58,7 @@ const TeamBalanceModal = () => {
         <div className="mt-4 space-y-2">
           {packages.map(
             (item) =>
-              item.type === PACKAGES.team_balance && (
+              item.type === PACKAGE_TYPE.team_balance && (
                 <Card key={item.id} className="overflow-hidden">
                   <CardContent className="bg-neutral-900 p-0">
                     <Link

@@ -18,10 +18,10 @@ import MatchSkeleton from './Match/Skeleton'
 import { Pagination } from 'components/Table/Pagination'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { selectMatches } from 'app/lib/features/matches/matches.selector'
-import { selectTours } from 'app/lib/features/tours/tours.selector'
+import { selectTours } from 'app/lib/features/tour/tour.selector
 import { usePathname } from 'next/navigation'
 import { RefreshCcw } from 'lucide-react'
-import MatchEventModal from 'components/MatchEventModal'
+import MatchEvent from 'components/Modals/MatchEvent'
 
 const Matches = () => {
   const path = usePathname()
@@ -188,7 +188,7 @@ const Matches = () => {
         currentPage={page}
         totalPages={pages}
       />
-      <MatchEventModal />
+      <MatchEvent />
     </section>
   )
 }

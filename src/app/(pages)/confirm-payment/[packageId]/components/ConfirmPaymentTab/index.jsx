@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { NumericFormat } from 'react-number-format'
-import { PAYMENTOPTIONS } from 'app/utils/paymentOptions.util'
+import { PAYMENT_OPTIONS } from 'app/utils/paymentOptions.util'
 import { useRefreshUserTable } from 'app/hooks/user/useRefreshUserTable/useRefreshUserTable'
 import { useBuyPackageWithWallet } from 'app/hooks/payment/useBuyPackageWithWallet/useBuyPackageWithWallet'
 import { useBuyPackageWithPayme } from 'app/hooks/payment/useBuyPackageWithPayme/useBuyPackageWithPayme'
@@ -36,13 +36,13 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
     if (userTable.balance < currentPackage?.price) {
       return toast.error(t('Mablag‘ yetarli emas!'), { theme: 'dark' })
     }
-    if (paymentOption === PAYMENTOPTIONS.WALLET) {
+    if (paymentOption === PAYMENT_OPTIONS.WALLET) {
       await buyPackageWithWallet({
         package_id: currentPackage?.id,
         team_id: currentTeam?.id,
       })
     }
-    if (paymentOption === PAYMENTOPTIONS.PAYME) {
+    if (paymentOption === PAYMENT_OPTIONS.PAYME) {
       buyPackageWithPayme({
         userTable,
         currentPackage,
@@ -50,7 +50,7 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
         lang,
       })
     }
-    if (paymentOption === PAYMENTOPTIONS.CLICKUP) {
+    if (paymentOption === PAYMENT_OPTIONS.CLICKUP) {
       buyPackageWithClick({ userTable, currentPackage, currentTeam })
     }
     await refreshUserTable(userTable?.guid)

@@ -1,4 +1,4 @@
-import { PLAYERS } from 'app/utils/players.util'
+import { PLAYER_POSITION} from 'app/utils/player.util'
 import { toast } from 'react-toastify'
 
 export const swapTeamPlayerReducer = (state, action) => {
@@ -76,7 +76,7 @@ export const swapTeamPlayerReducer = (state, action) => {
     return state
   }
 
-  if (state.GOA.length > 0 && player.position === PLAYERS.GOA) {
+  if (state.GOA.length > 0 && player.position === PLAYER_POSITION.GOA) {
     const prevPlayer = state.GOA.find((p) => previousPlayer.id === p.player_id)
     const prevPlayerIndex = state.GOA.findIndex(
       (p) => previousPlayer.id === p.player_id
@@ -88,7 +88,7 @@ export const swapTeamPlayerReducer = (state, action) => {
     toast.success(t("Oyinchi muvaffaqiyatli o'zgartirildi!"), { theme: 'dark' })
     return state
   }
-  if (player.position === PLAYERS.DEF && state.DEF.length > 0) {
+  if (player.position === PLAYER_POSITION.DEF && state.DEF.length > 0) {
     const prevPlayer = state.DEF.find((p) => previousPlayer.id === p.player_id)
     const prevPlayerIndex = state.DEF.findIndex(
       (p) => previousPlayer.id === p.player_id
@@ -100,7 +100,7 @@ export const swapTeamPlayerReducer = (state, action) => {
     toast.success(t("Oyinchi muvaffaqiyatli o'zgartirildi!"), { theme: 'dark' })
     return state
   }
-  if (player.position === PLAYERS.MID && state.MID.length > 0) {
+  if (player.position === PLAYER_POSITION.MID && state.MID.length > 0) {
     const prevPlayer = state.MID.find((p) => previousPlayer.id === p.player_id)
     const prevPlayerIndex = state.MID.findIndex(
       (p) => previousPlayer.id === p.player_id
@@ -112,7 +112,7 @@ export const swapTeamPlayerReducer = (state, action) => {
     toast.success(t("Oyinchi muvaffaqiyatli o'zgartirildi!"), { theme: 'dark' })
     return state
   }
-  if (player.position === PLAYERS.STR && state.STR.length > 0) {
+  if (player.position === PLAYER_POSITION.STR && state.STR.length > 0) {
     const prevPlayer = state.STR.find((p) => previousPlayer.id === p.player_id)
     const prevPlayerIndex = state.STR.findIndex(
       (p) => previousPlayer.id === p.player_id

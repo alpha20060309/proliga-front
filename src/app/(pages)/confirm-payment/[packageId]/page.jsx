@@ -20,7 +20,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchPackages } from 'app/lib/features/packages/packages.thunk'
 import { useRouter } from 'next/navigation'
-import { PAYMENTOPTIONS } from 'app/utils/paymentOptions.util'
+import { PAYMENT_OPTIONS } from 'app/utils/paymentOptions.util'
 import { setCurrentPackage } from 'app/lib/features/packages/packages.slice'
 import { useTranslation } from 'react-i18next'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
@@ -30,13 +30,13 @@ import {
   selectPackages,
 } from 'app/lib/features/packages/packages.selector'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
-import { selectCurrentTour } from 'app/lib/features/tours/tours.selector'
+import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
 
 const ConfirmPayment = ({ params }) => {
   const { t } = useTranslation()
   const router = useRouter()
   const dispatch = useDispatch()
-  const [paymentOption, setPaymentOption] = useState(PAYMENTOPTIONS.WALLET)
+  const [paymentOption, setPaymentOption] = useState(PAYMENT_OPTIONS.WALLET)
   const { isLoading } = useSelector((store) => store.packages)
   const packages = useSelector(selectPackages)
   const currentPackage = useSelector(selectCurrentPackage)

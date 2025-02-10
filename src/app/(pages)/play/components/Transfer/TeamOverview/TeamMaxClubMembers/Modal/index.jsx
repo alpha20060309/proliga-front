@@ -1,6 +1,7 @@
+/* eslint-disable no-undef */
 import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
-import { PACKAGES } from 'app/utils/packages.util'
+import { PACKAGE_TYPE } from 'app/utils/packages.util'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   Dialog,
@@ -56,7 +57,7 @@ const TeamMaxClubMembersModal = () => {
         <div className="mt-4 space-y-2">
           {packages.map(
             (item) =>
-              item.type === PACKAGES.single_club_count && (
+              item.type === PACKAGE_TYPE.single_club_count && (
                 <Card key={item.id} className="overflow-hidden">
                   <CardContent className="bg-neutral-900 p-0">
                     <Link

@@ -19,8 +19,8 @@ import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { formatDate } from 'app/utils/formatDate.util'
 import { formatCurrency } from 'app/utils/formatCurrency'
 import { Zap, Users, Coins, Wallet } from 'lucide-react'
-import { PACKAGES } from 'app/utils/packages.util'
-import { PAYMENTOPTIONS } from 'app/utils/paymentOptions.util'
+import { PACKAGE_TYPE } from 'app/utils/packages.util'
+import { PAYMENT_OPTIONS } from 'app/utils/paymentOptions.util'
 import Image from 'next/image'
 
 import {
@@ -132,11 +132,11 @@ function TransactionsPackagesTable() {
 const PackageIcon = ({ type, amount, name }) => {
   const renderIcons = () => {
     switch (type) {
-      case PACKAGES.single_club_count:
+      case PACKAGE_TYPE.single_club_count:
         return <Users className="size-4 md:size-5" />
-      case PACKAGES.team_balance:
+      case PACKAGE_TYPE.team_balance:
         return <Coins className="size-4 md:size-5" />
-      case PACKAGES.transfer_count:
+      case PACKAGE_TYPE.transfer_count:
         return <Zap className="size-4 md:size-5" />
       default:
         return
@@ -160,7 +160,7 @@ const PackageIcon = ({ type, amount, name }) => {
 export const PaymentOptionIcon = ({ system }) => {
   const { t } = useTranslation()
   switch (system) {
-    case PAYMENTOPTIONS.CLICKUP:
+    case PAYMENT_OPTIONS.CLICKUP:
       return (
         <span>
           <Image
@@ -172,7 +172,7 @@ export const PaymentOptionIcon = ({ system }) => {
           />
         </span>
       )
-    case PAYMENTOPTIONS.PAYME:
+    case PAYMENT_OPTIONS.PAYME:
       return (
         <span>
           <Image
@@ -184,7 +184,7 @@ export const PaymentOptionIcon = ({ system }) => {
           />
         </span>
       )
-    case PAYMENTOPTIONS.WALLET:
+    case PAYMENT_OPTIONS.WALLET:
       return (
         <span className="flex items-center gap-0.5 text-xs xs:text-sm md:gap-1 md:text-base">
           <Wallet className="size-4 xs:size-5" />

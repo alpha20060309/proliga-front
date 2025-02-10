@@ -2,7 +2,7 @@
 
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { SETTINGSTAB } from 'app/utils/settingsTab.util'
+import { SETTINGS_TAB } from './tabs'
 import TransactionsHistory from './components/Transactions'
 import ChangePassword from './components/ChangePassword'
 import SettingsTab from './components/Settings'
@@ -31,7 +31,7 @@ import { useTranslation } from 'react-i18next'
 function Settings() {
   const { t } = useTranslation()
   const router = useRouter()
-  const [tab, setTab] = useState(SETTINGSTAB.PROFILE)
+  const [tab, setTab] = useState(SETTINGS_TAB.PROFILE)
   const { isLoading } = useSelector((store) => store.auth)
   const userTable = useSelector(selectUserTable)
   const userAuth = useSelector(selectUserAuth)
@@ -49,15 +49,15 @@ function Settings() {
   return (
     <Gutter>
       <main className="flex h-full min-h-[44rem] flex-col gap-2 lg:min-h-[38rem] lg:flex-row">
-        <Navigation currentTab={tab} tabs={SETTINGSTAB} setTab={setTab} />
-        {tab === SETTINGSTAB.PROFILE && (
-          <Profile setSettingsTab={() => setTab(SETTINGSTAB.SETTINGS)} />
+        <Navigation currentTab={tab} tabs={SETTINGS_TAB} setTab={setTab} />
+        {tab === SETTINGS_TAB.PROFILE && (
+          <Profile setSettingsTab={() => setTab(SETTINGS_TAB.SETTINGS)} />
         )}
-        {tab === SETTINGSTAB.SETTINGS && (
-          <SettingsTab setHomeTab={() => setTab(SETTINGSTAB.PROFILE)} />
+        {tab === SETTINGS_TAB.SETTINGS && (
+          <SettingsTab setHomeTab={() => setTab(SETTINGS_TAB.PROFILE)} />
         )}
-        {tab === SETTINGSTAB.PASSWORD && <ChangePassword />}
-        {tab === SETTINGSTAB.TRANSACTIONHISTORY && <TransactionsHistory />}
+        {tab === SETTINGS_TAB.PASSWORD && <ChangePassword />}
+        {tab === SETTINGS_TAB.TRANSACTIONHISTORY && <TransactionsHistory />}
       </main>
     </Gutter>
   )

@@ -1,9 +1,4 @@
-export const configType = {
-  TextField: 'TextField',
-  Checkbox: 'Checkbox',
-}
-
-export const configKey = {
+export const CONFIG_KEY = {
   cabinet_payme: 'cabinet_payme',
   cabinet_click: 'cabinet_click',
   checkout_click: 'checkout_click',

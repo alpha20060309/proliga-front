@@ -1,4 +1,4 @@
-import { PLAYERS } from 'app/utils/players.util'
+import { PLAYER_POSITION} from 'app/utils/player.util'
 import { toast } from 'react-toastify'
 
 export const deleteTeamPlayerReducer = (state, action) => {
@@ -35,7 +35,7 @@ export const deleteTeamPlayerReducer = (state, action) => {
     image: null,
   })
 
-  if (player.position === PLAYERS.GOA) {
+  if (player.position === PLAYER_POSITION.GOA) {
     state.GOA = state.GOA.filter((p) => p.id !== player.id)
     state.GOA.push(deletedPlayerObj(player))
     state.playersCount.GOA--
@@ -43,7 +43,7 @@ export const deleteTeamPlayerReducer = (state, action) => {
     evaluateTeamClubId()
     return state
   }
-  if (player.position === PLAYERS.DEF) {
+  if (player.position === PLAYER_POSITION.DEF) {
     if (state.playersCount.DEF < 4 && is_team_created) {
       toast.warning(t('Sizda kamida 3 himoyachi bolishi shart!'))
       return state
@@ -55,7 +55,7 @@ export const deleteTeamPlayerReducer = (state, action) => {
     evaluateTeamClubId()
     return state
   }
-  if (player.position === PLAYERS.MID) {
+  if (player.position === PLAYER_POSITION.MID) {
     if (state.playersCount.MID < 4 && is_team_created) {
       toast.warning(t('Sizda kamida 3 yarim himoyachi bolishi shart!'))
       return state
@@ -67,7 +67,7 @@ export const deleteTeamPlayerReducer = (state, action) => {
     evaluateTeamClubId()
     return state
   }
-  if (player.position === PLAYERS.STR) {
+  if (player.position === PLAYER_POSITION.STR) {
     if (state.playersCount.STR < 3 && is_team_created) {
       toast.warning(t('Sizda kamida 2 hujumchi bolishi shart!'))
       return state

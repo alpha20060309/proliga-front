@@ -8,7 +8,7 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { PhoneInput } from 'components/PhoneInput'
 import { useTranslation } from 'react-i18next'
-import { configKey } from 'app/utils/config.util'
+import { CONFIG_KEY } from 'app/utils/config.util'
 import { Eye, EyeOff, Lock } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useAuthLogin } from 'app/hooks/auth/useAuthLogin/useAuthLogin'
@@ -31,8 +31,8 @@ const LoginForm = ({ setShouldRedirect }) => {
   const geo = useSelector(selectGeo)
 
   const can_send_sms =
-    config[configKey.can_send_sms]?.value.toLowerCase() === 'true' || false
-  const app_version = config[configKey.app_version]?.value || ''
+    config[CONFIG_KEY.can_send_sms]?.value.toLowerCase() === 'true' || false
+  const app_version = config[CONFIG_KEY.app_version]?.value || ''
 
   const handleSubmit = async (e) => {
     e.preventDefault()

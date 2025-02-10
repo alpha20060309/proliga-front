@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { LANGUAGE } from 'app/utils/languages.util'
-import { PLAYERS } from 'app/utils/players.util'
+import { PLAYER_POSITION } from 'app/utils/player.util'
 import { cn } from '@/lib/utils'
 
 const PositionsFilter = ({ column, columnFilterValue }) => {
@@ -33,30 +33,30 @@ const PositionsFilter = ({ column, columnFilterValue }) => {
   ]
   const getCorrentPlayerPosition = (position) => {
     if (lang === LANGUAGE.ru) {
-      if (position === PLAYERS.GOA) {
+      if (position === PLAYER_POSITION.GOA) {
         return 'ВР'
       }
-      if (position === PLAYERS.DEF) {
+      if (position === PLAYER_POSITION.DEF) {
         return 'ЗЩ'
       }
-      if (position === PLAYERS.MID) {
+      if (position === PLAYER_POSITION.MID) {
         return 'ПЗ'
       }
-      if (position === PLAYERS.STR) {
+      if (position === PLAYER_POSITION.STR) {
         return 'НП'
       }
     }
     if (lang === LANGUAGE.uz) {
-      if (position === PLAYERS.GOA) {
+      if (position === PLAYER_POSITION.GOA) {
         return 'DR'
       }
-      if (position === PLAYERS.DEF) {
+      if (position === PLAYER_POSITION.DEF) {
         return 'HM'
       }
-      if (position === PLAYERS.MID) {
+      if (position === PLAYER_POSITION.MID) {
         return 'YH'
       }
-      if (position === PLAYERS.STR) {
+      if (position === PLAYER_POSITION.STR) {
         return 'HJ'
       }
     }

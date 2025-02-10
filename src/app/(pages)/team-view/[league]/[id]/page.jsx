@@ -4,11 +4,11 @@ import TeamProfile from '../../components/TeamProfile'
 import TeamTabs from '../../components/GameNavigation'
 import Gutter from 'components/Gutter'
 import { useEffect, useMemo } from 'react'
-import { TOUR } from 'app/utils/tour.util'
+import { TOUR_STATUS_STATUS_STATUS_STATUS } from 'app/utils/tour.util'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchSeason } from 'app/lib/features/season/season.thunk'
 import { fetchBanners } from 'app/lib/features/banner/banner.thunk'
-import { fetchTeamViewTours } from 'app/lib/features/tours/tours.thunk'
+import { fetchTeamViewTours } from 'app/lib/features/tour/tour.thunk'
 import { fetchTourTeams } from 'app/lib/features/tourTeams/tourTeams.thunk'
 import { emptyTeamPlayers } from 'app/lib/features/teamPlayers/teamPlayers.slice'
 import { fetchTeamPlayers } from 'app/lib/features/teamPlayers/teamPlayers.thunk'
@@ -19,7 +19,7 @@ import { selectTeamConcat } from 'app/lib/features/teamPlayers/teamPlayers.selec
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { selectCompetition } from 'app/lib/features/competition/competition.selector'
 import { setCurrentCompetition } from 'app/lib/features/competition/competition.slice'
-import { selectCurrentTour } from 'app/lib/features/tours/tours.selector'
+import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
 import { selectBanners } from 'app/lib/features/banner/banner.selector'
 import Spinner from 'components/Spinner'
 
@@ -89,7 +89,7 @@ const TeamView = ({ params }) => {
     if (
       params &&
       currentTour?.id &&
-      currentTour?.status !== TOUR.notStartedTransfer
+      currentTour?.status !== TOUR_STATUS.notStartedTransfer
     ) {
       dispatch(
         fetchTeamPlayers({
@@ -131,7 +131,7 @@ const TeamView = ({ params }) => {
   }, [params.id, dispatch, currentTour])
 
   useEffect(() => {
-    if (currentTour?.status === TOUR.notStartedTransfer) {
+    if (currentTour?.status === TOUR_STATUS.notStartedTransfer) {
       dispatch(emptyTeamPlayers())
     }
   }, [dispatch, currentTour?.status])

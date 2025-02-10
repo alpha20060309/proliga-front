@@ -6,7 +6,7 @@ import { useUpdateTeamPlayers } from 'app/hooks/transfer/useUpdateTeamPlayers/us
 import { setCaptain } from 'app/lib/features/teamPlayers/teamPlayers.slice'
 import { useState } from 'react'
 import { useUpdateTeam } from 'app/hooks/transfer/useUpdateTeam/useUpdateTeam'
-import { setTab } from 'app/lib/features/tours/tours.slice'
+import { setTab } from 'app/lib/features/tour/tour.slice'
 import { TABS } from 'app/utils/tabs.util'
 import { revertTeamPlayers } from 'app/lib/features/teamPlayers/teamPlayers.slice'
 import { useTranslation } from 'react-i18next'
@@ -22,14 +22,14 @@ import {
 import { Button } from '@/components/ui/button'
 import { setTransferModal } from 'app/lib/features/currentTeam/currentTeam.slice'
 import { getCorrentPlayerPosition } from 'app/utils/getCorrectPlayerPosition.utils'
-import { configKey } from 'app/utils/config.util'
+import { CONFIG_KEYY } from 'app/utils/config.util'
 import {
   selectPrevTeam,
   selectTeamConcat,
 } from 'app/lib/features/teamPlayers/teamPlayers.selector'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { selectCurrentTourTeam } from 'app/lib/features/tourTeams/tourTeams.selector'
-import { selectCurrentTour } from 'app/lib/features/tours/tours.selector'
+import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { selectPlayers } from 'app/lib/features/players/players.selector'
@@ -54,7 +54,7 @@ const TransferStadiumForm = () => {
   const [teamCreateBtns, toggleTeamCreateBtns] = useState(false)
 
   const transfer_show_modals =
-    config[configKey.transfer_show_modals]?.value?.toLowerCase() === 'true'
+    config[CONFIG_KEY.transfer_show_modals]?.value?.toLowerCase() === 'true'
   const {
     updateTeamPlayers,
     isLoading: playersLoading,

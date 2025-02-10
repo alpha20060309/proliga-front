@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import { setBalanceModal } from 'app/lib/features/currentTeam/currentTeam.slice'
-import { configKey } from 'app/utils/config.util'
+import { CONFIG_KEY } from 'app/utils/config.util'
 import { useTranslation } from 'react-i18next'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { cn } from '@/lib/utils'
@@ -25,8 +25,8 @@ const AddPlayerButton = ({
   const config = useSelector(selectSystemConfig)
 
   const transfer_show_modals =
-    config[configKey.transfer_show_modals]?.value?.toLowerCase() === 'true'
-  const max_balance = +config[configKey.max_balance]?.value
+    config[CONFIG_KEY.transfer_show_modals]?.value?.toLowerCase() === 'true'
+  const max_balance = +config[CONFIG_KEY.max_balance]?.value
 
   const handleClick = () => {
     if (condition) {

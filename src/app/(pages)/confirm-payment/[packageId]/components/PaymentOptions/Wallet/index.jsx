@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { PAYMENTOPTIONS } from 'app/utils/paymentOptions.util'
+import { PAYMENT_OPTIONS } from 'app/utils/paymentOptions.util'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { NumericFormat } from 'react-number-format'
@@ -18,10 +18,10 @@ const WalletPaymentOption = ({
 
   return (
     <div
-      onClick={() => setPaymentOption(PAYMENTOPTIONS.WALLET)}
+      onClick={() => setPaymentOption(PAYMENT_OPTIONS.WALLET)}
       className={cn(
         'flex size-36 cursor-pointer flex-col justify-center gap-2 rounded-xl border bg-stone-950 transition-all sm:size-44 lg:size-56 xl:size-60',
-        paymentOption === PAYMENTOPTIONS.WALLET ? active : passive
+        paymentOption === PAYMENT_OPTIONS.WALLET ? active : passive
       )}
     >
       <Image

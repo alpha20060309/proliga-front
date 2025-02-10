@@ -1,6 +1,6 @@
 'use client'
 
-import ConfirmationModal from 'components/ConfirmationModal'
+import Confirmation from 'components/Modals/Confirmation'
 import Image from 'next/image'
 import { useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -129,7 +129,7 @@ const Player = ({ player }) => {
           </>
         )}
       </div>
-      <ConfirmationModal
+      <Confirmation
         onConfirm={handleDeletePlayer}
         onCancel={toggleDeleteModal}
         isModalOpen={isDeleteModalOpen}

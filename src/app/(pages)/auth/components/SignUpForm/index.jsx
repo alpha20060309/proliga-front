@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 import { PhoneInput } from 'components/PhoneInput'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
-import { configKey } from 'app/utils/config.util'
+import { CONFIG_KEY } from 'app/utils/config.util'
 import { Button } from '@/components/ui/button'
 import { Eye, EyeOff, Lock, Mail } from 'lucide-react'
 import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
@@ -31,7 +31,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
   const [agreement, setAgreement] = useState(false)
   const { register, isLoading } = useAuthRegister()
   const config = useSelector(selectSystemConfig)
-  const app_version = config[configKey.app_version]?.value ?? ''
+  const app_version = config[CONFIG_KEY.app_version]?.value ?? ''
 
   const handleSubmit = async (e) => {
     e.preventDefault()

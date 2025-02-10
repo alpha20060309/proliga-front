@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 import { useEffect, useMemo } from 'react'
 import { TABS } from 'app/utils/tabs.util'
 import { useSelector, useDispatch } from 'react-redux'
-import { setTab } from 'app/lib/features/tours/tours.slice'
+import { setTab } from 'app/lib/features/tour/tour.slice'
 import { setCurrentCompetition } from 'app/lib/features/competition/competition.slice'
 import { setLastVisitedTeam } from 'app/lib/features/currentTeam/currentTeam.slice'
 import { fetchCompetition } from 'app/lib/features/competition/competition.thunk'
@@ -20,14 +20,14 @@ import { fetchTopPlayers } from 'app/lib/features/players/players.thunk'
 import { fetchPlayers } from 'app/lib/features/players/players.thunk'
 import { fetchBanners } from 'app/lib/features/banner/banner.thunk'
 import { fetchSeason } from 'app/lib/features/season/season.thunk'
-import { fetchTours } from 'app/lib/features/tours/tours.thunk'
+import { fetchTours } from 'app/lib/features/tour/tour.thunk'
 import { fetchClubs } from 'app/lib/features/club/club.thunk'
 import { fetchCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.thunk'
 import { fetchPlayerPoint } from 'app/lib/features/playerPoint/playerPoint.thunk'
 import { selectPrevTeam } from 'app/lib/features/teamPlayers/teamPlayers.selector'
 import { selectCompetition } from 'app/lib/features/competition/competition.selector'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
-import { selectCurrentTour } from 'app/lib/features/tours/tours.selector'
+import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
 import { selectPackages } from 'app/lib/features/packages/packages.selector'
 import { selectBanners } from 'app/lib/features/banner/banner.selector'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
@@ -94,7 +94,7 @@ const Play = ({ params }) => {
     if (banners?.length === 0) {
       dispatch(fetchBanners())
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch])
 
   useEffect(() => {

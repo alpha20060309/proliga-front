@@ -5,7 +5,7 @@ import {
   updateTeamPlayer,
 } from 'app/lib/features/teamPlayers/teamPlayers.slice'
 import { useTranslation } from 'react-i18next'
-import { configKey } from 'app/utils/config.util'
+import { CONFIG_KEY } from 'app/utils/config.util'
 import {
   selectTeamConcat,
   selectTotalPlayersCount,
@@ -22,9 +22,9 @@ const TransferTableBody = ({ table, flexRender }) => {
   const currentTeam = useSelector(selectCurrentTeam)
   const config = useSelector(selectSystemConfig)
   const { teamPrice } = useSelector((store) => store.teamPlayers)
-  const max_same_team_players = +config[configKey.max_same_team_players]?.value
+  const max_same_team_players = +config[CONFIG_KEY.max_same_team_players]?.value
   const transfer_show_modals =
-    config[configKey.transfer_show_modals]?.value?.toLowerCase() === 'true'
+    config[CONFIG_KEY.transfer_show_modals]?.value?.toLowerCase() === 'true'
   const teamBalance = +(currentTeam?.balance || 0) - +(teamPrice || 0)
 
   const handleAddPlayer = (player) => {

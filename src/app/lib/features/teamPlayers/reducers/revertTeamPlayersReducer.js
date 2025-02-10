@@ -1,4 +1,4 @@
-import { PLAYERS } from 'app/utils/players.util'
+import { PLAYER_POSITION } from 'app/utils/player.util'
 
 export const revertTeamPlayersReducer = (state) => {
   state.GOA = []
@@ -19,7 +19,7 @@ export const revertTeamPlayersReducer = (state) => {
     team.forEach((player) => {
       const clubSlug = player?.club_id?.id ?? ''
 
-      if (player.position === PLAYERS.GOA) {
+      if (player.position === PLAYER_POSITION.GOA) {
         state.GOA.push(player)
         if (player.name) {
           state.playersCount.GOA++
@@ -27,7 +27,7 @@ export const revertTeamPlayersReducer = (state) => {
             (state.duplicatesMap[clubSlug] || 0) + 1
         }
       }
-      if (player.position === PLAYERS.DEF) {
+      if (player.position === PLAYER_POSITION.DEF) {
         state.DEF.push(player)
         if (player.name) {
           state.playersCount.DEF++
@@ -35,7 +35,7 @@ export const revertTeamPlayersReducer = (state) => {
             (state.duplicatesMap[clubSlug] || 0) + 1
         }
       }
-      if (player.position === PLAYERS.MID) {
+      if (player.position === PLAYER_POSITION.MID) {
         state.MID.push(player)
         if (player.name) {
           state.playersCount.MID++
@@ -43,7 +43,7 @@ export const revertTeamPlayersReducer = (state) => {
             (state.duplicatesMap[clubSlug] || 0) + 1
         }
       }
-      if (player.position === PLAYERS.STR) {
+      if (player.position === PLAYER_POSITION.STR) {
         state.STR.push(player)
         if (player.name) {
           state.playersCount.STR++

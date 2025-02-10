@@ -1,15 +1,15 @@
 'use client'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setTab } from 'app/lib/features/tours/tours.slice'
+import { setTab } from 'app/lib/features/tour/tour.slice'
 import { sidebarStyles } from '../sidebarStyles.util'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { cn } from '@/lib/utils'
-import { selectCurrentTour } from 'app/lib/features/tours/tours.selector'
+import { selectCurrentTour } from 'app/lib/features/tour/tour.selector
 import { TABS } from 'app/utils/tabs.util'
 import { usePathname } from 'next/navigation'
 import { tabStyling } from 'components/Navbar/tabStyling.util'
-import { TOUR } from 'app/utils/tour.util'
+import { TOUR_STATUS_STATUS_STATUS } from 'app/utils/tour.util'
 
 const SidebarTab = ({ title, tab, toggleModal }) => {
   const path = usePathname()
@@ -23,7 +23,7 @@ const SidebarTab = ({ title, tab, toggleModal }) => {
       return
     }
     if (
-      currentTour.status !== TOUR.notStartedTransfer &&
+      currentTour.status !== TOUR_STATUS_STATUS.notStartedTransfer &&
       tab === TABS.Transfer
     ) {
       return

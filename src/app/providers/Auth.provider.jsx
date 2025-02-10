@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setUserAuth, setUserTable } from '../lib/features/auth/auth.slice'
 import { usePathname, useRouter } from 'next/navigation'
 import { useCheckUserExists } from 'app/hooks/auth/useCheckUserExists/useCheckUserExists'
-import { configKey } from 'app/utils/config.util'
+import { CONFIG_KEYYY } from 'app/utils/config.util'
 import { useLogOut } from 'app/hooks/auth/useLogOut/useLogOut'
 import { toast } from 'react-toastify'
 import AuthListener from 'components/AuthListener'
@@ -25,7 +25,7 @@ const AuthProvider = ({ children }) => {
   const userAuth = useSelector(selectUserAuth)
   const { checkUserExists } = useCheckUserExists()
   const config = useSelector(selectSystemConfig)
-  const app_version = config[configKey.app_version]?.value ?? ''
+  const app_version = config[CONFIG_KEY.app_version]?.value ?? ''
   const { logOut } = useLogOut()
 
   useEffect(() => {

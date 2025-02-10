@@ -1,4 +1,4 @@
-import { PACKAGES } from 'app/utils/packages.util'
+import { PACKAGE_TYPE } from 'app/utils/packages.util'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { NumericFormat } from 'react-number-format'
@@ -9,10 +9,10 @@ const CurrentPackage = () => {
   const currentPackage = useSelector(selectCurrentPackage)
 
   const getPackageText = (currentPackage) => {
-    if (currentPackage?.type === PACKAGES.team_balance) return t('Balansni')
-    if (currentPackage?.type === PACKAGES.transfer_count)
+    if (currentPackage?.type === PACKAGE_TYPE.team_balance) return t('Balansni')
+    if (currentPackage?.type === PACKAGE_TYPE.transfer_count)
       return t('Transferla sonini')
-    if (currentPackage?.type === PACKAGES.single_club_count)
+    if (currentPackage?.type === PACKAGE_TYPE.single_club_count)
       return t("Maksimum klub oyi'nchilarini")
   }
   return (

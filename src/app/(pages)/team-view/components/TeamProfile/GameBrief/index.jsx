@@ -3,10 +3,10 @@
 import {
   selectCurrentTour,
   selectTours,
-} from 'app/lib/features/tours/tours.selector'
+} from 'app/lib/features/tour/tour.selector'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
-import { TOUR } from 'app/utils/tour.util'
+import { TOUR_STATUSapp/utils/tour.util'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { Coins, PercentCircle } from 'lucide-react'
@@ -99,7 +99,7 @@ const GameBrief = () => {
             </Item>
             <Item>
               <Title>{t('Deadline')}</Title>
-              {currentTour.status !== TOUR.notStartedTransfer ? (
+              {currentTour.status !== TOUR_STATUS_STATUS.notStartedTransfer ? (
                 <Content>{formatDate(date)}</Content>
               ) : (
                 <Content>{formatDate(curDate)}</Content>

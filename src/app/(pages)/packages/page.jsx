@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Gutter from 'components/Gutter'
 import dynamic from 'next/dynamic'
 import PackagesSkeleton from './components/PackagesSkeleton'
-import AnimatedBackground from 'components/AnimatedBackground'
+import GlowingSunBackground from 'components/AnimatedBackground/GlowingSunBackground'
 import { selectPackages } from 'app/lib/features/packages/packages.selector'
 const PaymentPackages = dynamic(() => import('./components/Packages'), {
   ssr: false,
@@ -25,7 +25,7 @@ const Packages = () => {
 
   return (
     <>
-      <AnimatedBackground />
+      <GlowingSunBackground />
       <Gutter>
         <PaymentPackages />
       </Gutter>

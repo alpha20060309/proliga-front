@@ -7,7 +7,7 @@ import TeamSlice from './features/teams/teams.slice.js'
 import CurrentTeamSlice from './features/currentTeam/currentTeam.slice.js'
 import ClubSlice from './features/club/club.slice.js'
 import TeamPlayersSlice from './features/teamPlayers/teamPlayers.slice.js'
-import ToursSlice from './features/tours/tours.slice.js'
+import TourSlice from './features/tour/tour.slice.js'
 import TourTeamsSlice from './features/tourTeams/tourTeams.slice.js'
 import SeasonSlice from './features/season/season.slice.js'
 import SystemLanguageSlice from './features/systemLanguage/systemLanguage.slice.js'
@@ -32,7 +32,7 @@ export const combinedReducer = combineReducers({
   teamPlayers: TeamPlayersSlice,
   currentTeam: CurrentTeamSlice,
   club: ClubSlice,
-  tours: ToursSlice,
+  tour: TourSlice,
   season: SeasonSlice,
   tourTeams: TourTeamsSlice,
   playerPoint: PlayerPointSlice,

@@ -9,7 +9,7 @@ import {
 import { useGoogleLogin } from 'app/hooks/auth/useGoogleLogin/useGoogleLogin'
 import { useSelector } from 'react-redux'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
-import { configKey } from 'app/utils/config.util'
+import { CONFIG_KEYY } from 'app/utils/config.util'
 import {
   selectAgent,
   selectGeo,
@@ -19,7 +19,7 @@ import {
 
 export default function AuthListener() {
   const config = useSelector(selectSystemConfig)
-  const app_version = config[configKey.app_version]?.value ?? ''
+  const app_version = config[CONFIG_KEY.app_version]?.value ?? ''
   const userTable = useSelector(selectUserTable)
   const userAuth = useSelector(selectUserAuth)
   const { fingerprint } = useSelector((store) => store.auth)
@@ -69,9 +69,9 @@ export default function AuthListener() {
             }
           }
         }
-        // if(rootProvider===SUPABASE_PROVIDERS.GOOGLE){
-
-        // }
+        if (rootProvider === SUPABASE_PROVIDERS.GOOGLE) {
+          return
+        }
       }
     })
 

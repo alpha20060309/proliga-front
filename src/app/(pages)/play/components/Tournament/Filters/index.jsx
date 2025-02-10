@@ -6,7 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { selectTours } from 'app/lib/features/tours/tours.selector'
+import { selectTours } from 'app/lib/features/tour/tour.selector
 
 const TournamentSelectedTour = ({ tour, setTour }) => {
   const tours = useSelector(selectTours)

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { supabase } from 'app/lib/supabaseClient'
-import { MATCH_EVENTS } from 'app/utils/players.util'
+import { MATCH_EVENTS } from 'app/utils/match.util'
 
 export const fetchMatchEvents = createAsyncThunk(
   'matchEvent/fetchMatchEvents',

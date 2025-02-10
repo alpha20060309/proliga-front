@@ -7,7 +7,7 @@ import { Pagination } from 'components/Table/Pagination'
 import {
   selectCurrentTour,
   selectTours,
-} from 'app/lib/features/tours/tours.selector'
+} from 'app/lib/features/tour/tour.selector
 import { selectAllTeams } from 'app/lib/features/teams/teams.selector'
 import { selectCurrentTourTeam } from 'app/lib/features/tourTeams/tourTeams.selector'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
