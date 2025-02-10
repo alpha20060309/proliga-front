@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 'use client'
 
 import { supabase } from 'app/lib/supabaseClient'
@@ -11,6 +12,7 @@ import { LANGUAGE } from 'app/utils/languages.util'
 
 export const useUpdateUserLanguage = () => {
   const dispatch = useDispatch()
+  const { t } = useTranslation()
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const { i18n } = useTranslation()
@@ -67,7 +69,7 @@ export const useUpdateUserLanguage = () => {
         setIsLoading(false)
       }
     },
-    [dispatch, i18n]
+    [dispatch, i18n, t]
   )
   return { updateUserLanguage, isLoading, error }
 }

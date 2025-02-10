@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { getUrl } from 'app/utils/static.util'
 
 const NavbarUserMobile = ({ handleToggleModal }) => {
-  const URL = process.env.NEXT_PUBLIC_STATIC_URL
   const userTable = useSelector(selectUserTable)
 
   return (

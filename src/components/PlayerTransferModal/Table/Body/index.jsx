@@ -6,6 +6,7 @@ import { configKey } from 'app/utils/config.util'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { cn } from '@/lib/utils'
 import { selectCurrentPlayer } from 'app/lib/features/players/players.selector'
+import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 
 const TransferTableBody = ({ table, flexRender }) => {
   const dispatch = useDispatch()
@@ -13,7 +14,7 @@ const TransferTableBody = ({ table, flexRender }) => {
   const currentPlayer = useSelector(selectCurrentPlayer)
   const { teamPrice } = useSelector((store) => store.teamPlayers)
   const teamBalance = +(currentTeam?.balance || 0) - +(teamPrice || 0)
-  const { config } = useSelector((store) => store.systemConfig)
+  const config = useSelector(selectSystemConfig)
   const { t } = useTranslation()
 
   const max_same_team_players = +config[configKey.max_same_team_players]?.value

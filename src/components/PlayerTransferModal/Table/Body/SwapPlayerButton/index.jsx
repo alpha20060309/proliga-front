@@ -9,6 +9,7 @@ import { selectTeamConcat } from 'app/lib/features/teamPlayers/teamPlayers.selec
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { selectCurrentPlayer } from 'app/lib/features/players/players.selector'
 import { cn } from '@/lib/utils'
+import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 
 const SwapPlayerButton = ({ cell, handleSwapPlayer, teamBalance }) => {
   const { t } = useTranslation()
@@ -16,7 +17,7 @@ const SwapPlayerButton = ({ cell, handleSwapPlayer, teamBalance }) => {
   const teamConcat = useSelector(selectTeamConcat)
   const currentTeam = useSelector(selectCurrentTeam)
   const currentPlayer = useSelector(selectCurrentPlayer)
-  const { config } = useSelector((store) => store.systemConfig)
+  const config = useSelector(selectSystemConfig)
 
   const max_balance = +config[configKey.max_balance]?.value
   const transfer_show_modals =

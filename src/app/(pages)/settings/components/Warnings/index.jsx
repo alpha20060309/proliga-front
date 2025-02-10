@@ -6,13 +6,14 @@ import { useTranslation } from 'react-i18next'
 import OTPConfirmationModal from 'components/ConfirmOTPModal'
 import { useCallback, useState } from 'react'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
+import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 
 export default function SettingsWarnings() {
   const { t } = useTranslation()
   const userTable = useSelector(selectUserTable)
-  const { config } = useSelector((store) => store.systemConfig)
+  const config = useSelector(selectSystemConfig)
   const can_send_sms =
-    config[configKey.can_send_sms]?.value.toLowerCase() === 'true' ?? false
+    config[configKey.can_send_sms]?.value.toLowerCase() === 'true' || false
   const [otpModalOpen, setOtpModalOpen] = useState(false)
   const { sendOTP } = useSendOTP()
 

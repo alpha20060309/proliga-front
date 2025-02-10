@@ -107,7 +107,7 @@ const Stat = ({ icon, value, label }) => (
   </div>
 )
 
-const SmallerStat = ({ icon, value, label }) => (
+const SmallerStat = ({ value, label }) => (
   <div className="flex items-center justify-between gap-1 rounded-md bg-neutral-800 px-2 py-1 text-xs xs:py-2">
     <p className="text-[10px] leading-tight text-neutral-400">{label}</p>
     <p className="font-semibold leading-tight text-neutral-100">{value ?? 0}</p>

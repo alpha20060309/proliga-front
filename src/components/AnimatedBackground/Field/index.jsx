@@ -1,4 +1,3 @@
-import { FieldLines } from '../FieldLines'
 import { SoccerBallAnimation } from '../SoccerBall'
 
 export const Field = () => {

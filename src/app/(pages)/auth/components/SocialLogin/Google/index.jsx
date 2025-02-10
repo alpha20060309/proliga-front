@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 import { Button } from '@/components/ui/button'
 import { useTranslation } from 'react-i18next'
 import { useCallback, useEffect } from 'react'

@@ -8,6 +8,7 @@ import { configKey } from 'app/utils/config.util'
 import { useTranslation } from 'react-i18next'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { cn } from '@/lib/utils'
+import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 
 const AddPlayerButton = ({
   cell,
@@ -21,7 +22,7 @@ const AddPlayerButton = ({
   const condition = teamBalance >= cell.row.original.price
   const isPlayerInTeam = team.find((p) => p.name === cell.getValue())
   const currentTeam = useSelector(selectCurrentTeam)
-  const { config } = useSelector((store) => store.systemConfig)
+  const config = useSelector(selectSystemConfig)
 
   const transfer_show_modals =
     config[configKey.transfer_show_modals]?.value?.toLowerCase() === 'true'

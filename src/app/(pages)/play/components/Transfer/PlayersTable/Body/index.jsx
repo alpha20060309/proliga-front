@@ -12,6 +12,7 @@ import {
 } from 'app/lib/features/teamPlayers/teamPlayers.selector'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { cn } from '@/lib/utils'
+import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 
 const TransferTableBody = ({ table, flexRender }) => {
   const { t } = useTranslation()
@@ -19,7 +20,7 @@ const TransferTableBody = ({ table, flexRender }) => {
   const totalPlayersCount = useSelector(selectTotalPlayersCount)
   const teamConcat = useSelector(selectTeamConcat)
   const currentTeam = useSelector(selectCurrentTeam)
-  const { config } = useSelector((store) => store.systemConfig)
+  const config = useSelector(selectSystemConfig)
   const { teamPrice } = useSelector((store) => store.teamPlayers)
   const max_same_team_players = +config[configKey.max_same_team_players]?.value
   const transfer_show_modals =

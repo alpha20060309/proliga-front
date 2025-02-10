@@ -3,10 +3,8 @@ import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { formatDate } from 'app/utils/formatDate.util'
 import { useSelector } from 'react-redux'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
-import { useTranslation } from 'react-i18next'
 
 const MatchEventHeader = ({ started_date }) => {
-  const { t } = useTranslation()
   const { lang } = useSelector((store) => store.systemLanguage)
   const currentCompetition = useSelector(selectCurrentCompetition)
 

@@ -13,6 +13,8 @@ import { Eye, EyeOff, Lock } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useAuthLogin } from 'app/hooks/auth/useAuthLogin/useAuthLogin'
 import { cn } from '@/lib/utils'
+import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
+import { memo } from 'react'
 
 const LoginForm = ({ setShouldRedirect }) => {
   const { t } = useTranslation()
@@ -22,10 +24,10 @@ const LoginForm = ({ setShouldRedirect }) => {
   const [phone, setPhone] = useState('')
 
   const { login, isLoading } = useAuthLogin()
-  const { config } = useSelector((store) => store.systemConfig)
+  const config = useSelector(selectSystemConfig)
   const can_send_sms =
-    config[configKey.can_send_sms]?.value.toLowerCase() === 'true' ?? false
-  const app_version = config[configKey.app_version]?.value ?? ''
+    config[configKey.can_send_sms]?.value.toLowerCase() === 'true' || false
+  const app_version = config[configKey.app_version]?.value || ''
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -131,10 +133,10 @@ const LoginForm = ({ setShouldRedirect }) => {
           )}
         </Button>
       </form>
-      {/* <SocialLogin /> */}
+      <SocialLogin />
       <SendOTPModal isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
     </section>
   )
 }
 
-export default LoginForm
+export default memo(LoginForm)

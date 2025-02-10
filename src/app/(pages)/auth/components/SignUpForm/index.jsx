@@ -14,6 +14,8 @@ import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
 import { useAuthRegister } from 'app/hooks/auth/useAuthRegister/useAuthRegister'
 import { isEmail } from 'validator'
 import { cn } from '@/lib/utils'
+import { memo } from 'react'
+import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 
 const SignUpForm = ({ setShouldRedirect }) => {
   const { t } = useTranslation()
@@ -28,7 +30,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
   const [showPassword, setShowPassword] = useState(false)
   const [agreement, setAgreement] = useState(false)
   const { register, isLoading } = useAuthRegister()
-  const { config } = useSelector((store) => store.systemConfig)
+  const config = useSelector(selectSystemConfig)
   const app_version = config[configKey.app_version]?.value ?? ''
 
   const handleSubmit = async (e) => {
@@ -227,4 +229,4 @@ const SignUpForm = ({ setShouldRedirect }) => {
   )
 }
 
-export default SignUpForm
+export default memo(SignUpForm)

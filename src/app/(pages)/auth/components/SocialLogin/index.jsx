@@ -2,8 +2,9 @@ import GoogleSignIn from './Google'
 import FacebookSignIn from './Facebook'
 import YandexSignIn from './Yandex'
 import { useTranslation } from 'react-i18next'
+import { memo } from 'react'
 
-export default function SocialLogin() {
+function SocialLogin() {
   const { t } = useTranslation()
 
   return (
@@ -21,3 +22,5 @@ export default function SocialLogin() {
     </div>
   )
 }
+
+export default memo(SocialLogin)

@@ -8,11 +8,12 @@ import { useCheckUserExists } from 'app/hooks/auth/useCheckUserExists/useCheckUs
 import { configKey } from 'app/utils/config.util'
 import { useLogOut } from 'app/hooks/auth/useLogOut/useLogOut'
 import { toast } from 'react-toastify'
-import AuthListener from 'components/AuthListener'
+// import AuthListener from 'components/AuthListener'
 import {
   selectUserAuth,
   selectUserTable,
 } from 'app/lib/features/auth/auth.selector'
+import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 
 const AuthProvider = ({ children }) => {
   const dispatch = useDispatch()
@@ -22,7 +23,7 @@ const AuthProvider = ({ children }) => {
   const userTable = useSelector(selectUserTable)
   const userAuth = useSelector(selectUserAuth)
   const { checkUserExists } = useCheckUserExists()
-  const { config } = useSelector((store) => store.systemConfig)
+  const config = useSelector(selectSystemConfig)
   const app_version = config[configKey.app_version]?.value ?? ''
   const { logOut } = useLogOut()
 

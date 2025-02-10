@@ -19,21 +19,22 @@ import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { formatCurrency } from 'app/utils/formatCurrency'
 import PaymentOption from './PaymentOption'
 import { memo } from 'react'
+import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 
 const RefillBalanceModal = ({ isModalOpen, setIsModalOpen }) => {
   const { t } = useTranslation()
 
   const userTable = useSelector(selectUserTable)
   const { lang } = useSelector((store) => store.systemLanguage)
-  const { config } = useSelector((store) => store.systemConfig)
+  const config = useSelector(selectSystemConfig)
 
   const { redirectToClick } = useRedirectToClick()
   const { redirectToPayme } = useRedirectToPayme()
 
   const cabinet_payme =
-    config[configKey.cabinet_payme]?.value.toLowerCase() === 'true' ?? false
+    config[configKey.cabinet_payme]?.value.toLowerCase() === 'true' || false
   const cabinet_click =
-    config[configKey.cabinet_click]?.value.toLowerCase() === 'true' ?? false
+    config[configKey.cabinet_click]?.value.toLowerCase() === 'true' || false
   const [paymentOption, setPaymentOption] = useState(null)
   const [amount, setAmount] = useState('')
 

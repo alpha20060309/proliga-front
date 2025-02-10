@@ -1,6 +1,6 @@
 import { PLAYERS } from 'app/utils/players.util'
 
-export const revertTeamPlayersReducer = (state, action) => {
+export const revertTeamPlayersReducer = (state) => {
   state.GOA = []
   state.DEF = []
   state.MID = []

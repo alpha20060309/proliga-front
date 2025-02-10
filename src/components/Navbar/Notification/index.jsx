@@ -139,7 +139,7 @@ const Notification = () => {
               {t('Hozicha habarlar yoq')}
             </p>
           ) : (
-            systemNotifications?.map((notification, index) => (
+            systemNotifications?.map((notification) => (
               <NotificationArticle
                 key={notification?.id + Math.random()}
                 notification={notification}

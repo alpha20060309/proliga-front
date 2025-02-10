@@ -6,11 +6,12 @@ import { useSelector } from 'react-redux'
 import Link from 'next/link'
 import SocialLink from './SocialLink'
 import GradientButton from 'components/Button/GradientButton'
+import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 
 const Footer = () => {
   const path = usePathname()
   const { t } = useTranslation()
-  const { config } = useSelector((store) => store.systemConfig)
+  const config = useSelector(selectSystemConfig)
 
   const link_email = config[configKey.link_email]?.value ?? ''
   const link_instagram = config[configKey.link_instagram]?.value ?? ''

@@ -94,6 +94,7 @@ const Play = ({ params }) => {
     if (banners?.length === 0) {
       dispatch(fetchBanners())
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch])
 
   useEffect(() => {

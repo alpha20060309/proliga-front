@@ -34,6 +34,7 @@ import { selectCurrentCompetition } from 'app/lib/features/competition/competiti
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { selectPlayers } from 'app/lib/features/players/players.selector'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 
 const TransferStadiumForm = () => {
   const { t } = useTranslation()
@@ -48,7 +49,7 @@ const TransferStadiumForm = () => {
   const { playersCount, teamPrice } = useSelector((state) => state.teamPlayers)
   const prevTeam = useSelector(selectPrevTeam)
   const { lang } = useSelector((state) => state.systemLanguage)
-  const { config } = useSelector((store) => store.systemConfig)
+  const config = useSelector(selectSystemConfig)
 
   const [teamCreateBtns, toggleTeamCreateBtns] = useState(false)
 
