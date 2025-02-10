@@ -9,7 +9,7 @@ import MotionNumber from 'components/MotionNumber'
 const TeamBalance = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { balanceModal, teamPrice } = useSelector((store) => store.teamPlayers)
+  const { balanceModal, teamPrice } = useSelector((store) => store.teamPlayer)
   const currentTeam = useSelector(selectCurrentTeam)
 
   const teamBalance = +(currentTeam?.balance || 0) - +(teamPrice || 0)

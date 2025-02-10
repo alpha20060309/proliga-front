@@ -12,12 +12,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { fetchMatches } from 'app/lib/features/matches/mathes.thunk'
+import { fetchMatches } from 'app/lib/features/match/match.thunk'
 import Match from './Match'
 import MatchSkeleton from './Match/Skeleton'
 import { Pagination } from 'components/Table/Pagination'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
-import { selectMatches } from 'app/lib/features/matches/matches.selector'
+import { selectMatches } from 'app/lib/features/match/match.selector'
 import { selectTours } from 'app/lib/features/tour/tour.selector'
 import { usePathname } from 'next/navigation'
 import { RefreshCcw } from 'lucide-react'
@@ -33,7 +33,7 @@ const Matches = () => {
   const tours = useSelector(selectTours)
   const { isLoading: teamLoading } = useSelector((store) => store.currentTeam)
   const { season } = useSelector((store) => store.season)
-  const { isLoading, count } = useSelector((state) => state.matches)
+  const { isLoading, count } = useSelector((state) => state.match)
   const matches = useSelector(selectMatches)
   const { lang } = useSelector((store) => store.systemLanguage)
   const [tourIndex, setTourIndex] = useState(-1)

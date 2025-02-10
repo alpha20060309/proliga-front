@@ -10,7 +10,7 @@ import { useBuyPackageWithWallet } from 'app/hooks/payment/useBuyPackageWithWall
 import { useBuyPackageWithPayme } from 'app/hooks/payment/useBuyPackageWithPayme/useBuyPackageWithPayme'
 import { useBuyPackageWithClick } from 'app/hooks/payment/useBuyPackageWithClick/useBuyPackageWithClick'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
-import { selectCurrentPackage } from 'app/lib/features/packages/packages.selector'
+import { selectCurrentPackage } from 'app/lib/features/package/package.selector'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 
 const ConfirmPaymentTab = ({ paymentOption }) => {

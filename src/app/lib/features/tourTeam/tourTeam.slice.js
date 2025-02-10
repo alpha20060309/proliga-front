@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { tourTeamExtraReducer } from './tourTeams.extraReducer'
+import { tourTeamExtraReducer } from './tourTeam.extraReducer'
 
 const initialState = {
   tourTeams: [],
@@ -9,7 +9,7 @@ const initialState = {
 }
 
 const tourTeamSlice = createSlice({
-  name: 'tourTeams',
+  name: 'tourTeam',
   initialState,
   reducers: {
     setCurrentTourTeam: (state, action) => {

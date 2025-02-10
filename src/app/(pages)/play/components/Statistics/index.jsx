@@ -4,7 +4,7 @@ import StatisticsTableSkeleton from './Skeleton'
 import { memo } from 'react'
 
 const Statistics = () => {
-  const { isLoading } = useSelector((state) => state.players)
+  const { isLoading } = useSelector((state) => state.player)
 
   if (isLoading) return <StatisticsTableSkeleton />
 

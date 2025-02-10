@@ -1,7 +1,7 @@
-import { fetchTeamPlayers } from './teamPlayers.thunk'
+import { fetchTeamPlayers } from './teamPlayer.thunk'
 import { PLAYER_POSITION} from 'app/utils/player.util'
 
-export const teamPlayersExtraReducer = (builder) => {
+export const teamPlayerExtraReducer = (builder) => {
   builder
     .addCase(fetchTeamPlayers.pending, (state) => {
       state.isLoading = true

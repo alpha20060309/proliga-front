@@ -5,7 +5,7 @@ import { memo } from 'react'
 
 const ProfilePlayersStructure = () => {
   const { GOA, DEF, MID, STR, isLoading } = useSelector(
-    (state) => state.teamPlayers
+    (state) => state.teamPlayer
   )
 
   return (

@@ -13,7 +13,7 @@ import {
   resetCurrentTeam,
   setLastVisitedTeam,
 } from 'app/lib/features/currentTeam/currentTeam.slice'
-import { resetTeams } from 'app/lib/features/teams/teams.slice'
+import { resetTeams } from 'app/lib/features/team/team.slice'
 import { supabase } from 'app/lib/supabaseClient'
 
 export const useLogOut = () => {

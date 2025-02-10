@@ -7,7 +7,7 @@ import { formatDate } from 'app/utils/formatDate.util'
 import { cn } from '@/lib/utils'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import CompetitionModal from '../Modal/index'
-import { selectTeams } from 'app/lib/features/teams/teams.selector'
+import { selectTeams } from 'app/lib/features/team/team.selector'
 import { getUrl } from 'app/utils/static.util'
 
 const Championship = ({ game }) => {

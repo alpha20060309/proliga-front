@@ -2,9 +2,9 @@ import {
   fetchPlayers,
   fetchTopPlayers,
   fetchAdditionalPlayers,
-} from './players.thunk'
+} from './player.thunk'
 
-export const playersExtraReducer = (builder) => {
+export const playerExtraReducer = (builder) => {
   builder
     .addCase(fetchPlayers.pending, (state) => {
       state.isLoading = true
@@ -25,7 +25,7 @@ export const playersExtraReducer = (builder) => {
       const threshold = action?.payload?.page ?? 1000
 
       if (state.players?.length > threshold - 1) {
-        state.players = [...state.players, ...action.payload?.data]
+        state.players = [...state.players, ...(action.payload?.data || [])]
       }
       state.isLoading = false
     })

@@ -14,7 +14,7 @@ import { cn } from '@/lib/utils'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
-import { selectCurrentTourTeam } from 'app/lib/features/tourTeams/tourTeams.selector'
+import { selectCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.selector'
 import { formatDate } from 'app/utils/formatDate.util'
 import Image from 'next/image'
 import GameBriefSkeleton from 'app/(pages)/play/components/GameProfile/GameBrief/Skeleton'
@@ -29,7 +29,7 @@ const GameBrief = () => {
   const currentTeam = useSelector(selectCurrentTeam)
   const currentCompetition = useSelector(selectCurrentCompetition)
   const currentTourTeam = useSelector(selectCurrentTourTeam)
-  const { teamPrice } = useSelector((store) => store.teamPlayers)
+  const { teamPrice } = useSelector((store) => store.teamPlayer)
 
   const teamBalance = +(currentTeam?.balance || 0) - +(teamPrice || 0)
 

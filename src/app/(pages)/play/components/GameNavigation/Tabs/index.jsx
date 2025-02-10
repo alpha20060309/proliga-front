@@ -5,13 +5,13 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { TOUR_STATUS, getTourName } from 'app/utils/tour.util'
 import { setCurrentTourIndex } from 'app/lib/features/tour/tour.slice'
-import { setCurrentTourTeam } from 'app/lib/features/tourTeams/tourTeams.slice'
+import { setCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.slice'
 import {
   selectCurrentTour,
   selectRegisteredTour,
   selectTours,
 } from 'app/lib/features/tour/tour.selector'
-import { emptyTeamPlayers } from 'app/lib/features/teamPlayers/teamPlayers.slice'
+import { emptyTeamPlayers } from 'app/lib/features/teamPlayer/teamPlayer.slice'
 import { useTranslation } from 'react-i18next'
 import { tabsClasses } from '@mui/material'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
@@ -19,7 +19,7 @@ import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.sele
 import {
   selectCurrentTourTeam,
   selectTourTeams,
-} from 'app/lib/features/tourTeams/tourTeams.selector'
+} from 'app/lib/features/tourTeam/tourTeam.selector'
 
 export default function TourTabs() {
   const dispatch = useDispatch()

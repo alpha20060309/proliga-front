@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge'
 import { useSelector } from 'react-redux'
 import { PACKAGE_TYPE } from 'app/utils/packages.util'
 import { useTranslation } from 'react-i18next'
-import { selectPackages } from 'app/lib/features/packages/packages.selector'
+import { selectPackages } from 'app/lib/features/package/package.selector'
 
 const PackageContainer = ({ packageType }) => {
   const packages = useSelector(selectPackages)

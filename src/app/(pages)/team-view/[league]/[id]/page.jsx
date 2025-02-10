@@ -4,18 +4,18 @@ import TeamProfile from '../../components/TeamProfile'
 import TeamTabs from '../../components/GameNavigation'
 import Gutter from 'components/Gutter'
 import { useEffect, useMemo } from 'react'
-import { TOUR_STATUS_STATUS_STATUS_STATUS } from 'app/utils/tour.util'
+import { TOUR_STATUS } from 'app/utils/tour.util'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchSeason } from 'app/lib/features/season/season.thunk'
 import { fetchBanners } from 'app/lib/features/banner/banner.thunk'
 import { fetchTeamViewTours } from 'app/lib/features/tour/tour.thunk'
-import { fetchTourTeams } from 'app/lib/features/tourTeams/tourTeams.thunk'
-import { emptyTeamPlayers } from 'app/lib/features/teamPlayers/teamPlayers.slice'
-import { fetchTeamPlayers } from 'app/lib/features/teamPlayers/teamPlayers.thunk'
+import { fetchTourTeams } from 'app/lib/features/tourTeam/tourTeam.thunk'
+import { emptyTeamPlayers } from 'app/lib/features/teamPlayer/teamPlayer.slice'
+import { fetchTeamPlayers } from 'app/lib/features/teamPlayer/teamPlayer.thunk'
 import { fetchPlayerPoint } from 'app/lib/features/playerPoint/playerPoint.thunk'
 import { fetchCompetition } from 'app/lib/features/competition/competition.thunk'
 import { fetchSelectedTeam } from 'app/lib/features/currentTeam/currentTeam.thunk'
-import { selectTeamConcat } from 'app/lib/features/teamPlayers/teamPlayers.selector'
+import { selectTeamConcat } from 'app/lib/features/teamPlayer/teamPlayer.selector'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { selectCompetition } from 'app/lib/features/competition/competition.selector'
 import { setCurrentCompetition } from 'app/lib/features/competition/competition.slice'
@@ -33,7 +33,7 @@ const TeamView = ({ params }) => {
     (store) => store.season
   )
   const banners = useSelector(selectBanners)
-  const { isLoading: toursLoading } = useSelector((state) => state.tour
+  const { isLoading: toursLoading } = useSelector((state) => state.tour)
   const { isLoading: bannersLoading } = useSelector((store) => store.banner)
   const { isLoading: teamLoading } = useSelector((state) => state.currentTeam)
   const { isLoading: competitionsLoading } = useSelector(

@@ -1,6 +1,6 @@
-import { fetchMatches } from './mathes.thunk'
+import { fetchMatches } from './match.thunk'
 
-export const matchesExtraReducer = (builder) => {
+export const matchExtraReducer = (builder) => {
   builder
     .addCase(fetchMatches.pending, (state) => {
       state.isLoading = true

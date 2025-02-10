@@ -15,16 +15,16 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from '@/components/ui/hover-card'
-import { setClubModal } from 'app/lib/features/teamPlayers/teamPlayers.slice'
+import { setClubModal } from 'app/lib/features/teamPlayer/teamPlayer.slice'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { ArrowRight, Users, InfoIcon } from 'lucide-react'
-import { selectPackages } from 'app/lib/features/packages/packages.selector'
+import { selectPackages } from 'app/lib/features/package/package.selector'
 
 const TeamMaxClubMembersModal = () => {
   const dispatch = useDispatch()
-  const { clubModal } = useSelector((store) => store.teamPlayers)
+  const { clubModal } = useSelector((store) => store.teamPlayer)
   const packages = useSelector(selectPackages)
   const { t } = useTranslation()
   const defaultSameTeamPlayers =

@@ -1,6 +1,6 @@
-import { fetchPackages } from './packages.thunk'
+import { fetchPackages } from './package.thunk'
 
-export const packagesExtraReducer = (builder) => {
+export const packageExtraReducer = (builder) => {
   builder
     .addCase(fetchPackages.pending, (state) => {
       state.isLoading = true

@@ -3,7 +3,7 @@ import {
   fetchAllTeams,
   fetchTopTeams,
   searchAllTeams,
-} from './teams.thunk'
+} from './team.thunk'
 
 export const teamsExtraReducer = (builder) => {
   builder

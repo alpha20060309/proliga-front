@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { FORMATIONS } from 'app/utils/formations.util'
 import { useRouter } from 'next/navigation'
 import { useSelector } from 'react-redux'
-import { selectTeams } from 'app/lib/features/teams/teams.selector'
+import { selectTeams } from 'app/lib/features/team/team.selector'
 import { useTranslation } from 'react-i18next'
 import {
   DialogContent,

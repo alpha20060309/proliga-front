@@ -1,4 +1,4 @@
-import { selectTopTeams } from 'app/lib/features/teams/teams.selector'
+import { selectTopTeams } from 'app/lib/features/team/team.selector'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { cn } from '@/lib/utils'

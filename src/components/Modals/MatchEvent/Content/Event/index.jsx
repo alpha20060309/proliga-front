@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { eventVariants } from '../../animations.styles'
 import { cn } from '@/lib/utils'
-import { selectCurrentMatch } from 'app/lib/features/matches/matches.selector'
+import { selectCurrentMatch } from 'app/lib/features/match/match.selector'
 import MatchEventIcon from './Icon'
 import { memo } from 'react'
 

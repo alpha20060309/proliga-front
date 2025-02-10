@@ -4,7 +4,7 @@ import MotionNumber from 'components/MotionNumber'
 
 const TeamPrice = () => {
   const { t } = useTranslation()
-  const { teamPrice } = useSelector((store) => store.teamPlayers)
+  const { teamPrice } = useSelector((store) => store.teamPlayer)
 
   return (
     <div className="w-1/2 md:w-auto">

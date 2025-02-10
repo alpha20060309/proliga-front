@@ -3,13 +3,13 @@ import AddPlayerButton from './AddPlayerButton'
 import {
   addTeamPlayer,
   updateTeamPlayer,
-} from 'app/lib/features/teamPlayers/teamPlayers.slice'
+} from 'app/lib/features/teamPlayer/teamPlayer.slice'
 import { useTranslation } from 'react-i18next'
 import { CONFIG_KEY } from 'app/utils/config.util'
 import {
   selectTeamConcat,
   selectTotalPlayersCount,
-} from 'app/lib/features/teamPlayers/teamPlayers.selector'
+} from 'app/lib/features/teamPlayer/teamPlayer.selector'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { cn } from '@/lib/utils'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
@@ -21,7 +21,7 @@ const TransferTableBody = ({ table, flexRender }) => {
   const teamConcat = useSelector(selectTeamConcat)
   const currentTeam = useSelector(selectCurrentTeam)
   const config = useSelector(selectSystemConfig)
-  const { teamPrice } = useSelector((store) => store.teamPlayers)
+  const { teamPrice } = useSelector((store) => store.teamPlayer)
   const max_same_team_players = +config[CONFIG_KEY.max_same_team_players]?.value
   const transfer_show_modals =
     config[CONFIG_KEY.transfer_show_modals]?.value?.toLowerCase() === 'true'

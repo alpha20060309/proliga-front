@@ -3,8 +3,8 @@ import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { supabase } from '../../../lib/supabaseClient'
 import { useTranslation } from 'react-i18next'
-import { autoAssembleTeam } from 'app/lib/features/teamPlayers/teamPlayers.slice'
-import { revertTeamPlayers } from 'app/lib/features/teamPlayers/teamPlayers.slice'
+import { autoAssembleTeam } from 'app/lib/features/teamPlayer/teamPlayer.slice'
+import { revertTeamPlayers } from 'app/lib/features/teamPlayer/teamPlayer.slice'
 
 export const useAutoGenerateTeamPlayers = () => {
   const dispatch = useDispatch()

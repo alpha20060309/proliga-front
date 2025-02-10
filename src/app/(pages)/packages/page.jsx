@@ -1,13 +1,13 @@
 'use client'
 
-import { fetchPackages } from 'app/lib/features/packages/packages.thunk'
+import { fetchPackages } from 'app/lib/features/package/package.thunk'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Gutter from 'components/Gutter'
 import dynamic from 'next/dynamic'
 import PackagesSkeleton from './components/PackagesSkeleton'
-import GlowingSunBackground from 'components/AnimatedBackground/GlowingSunBackground'
-import { selectPackages } from 'app/lib/features/packages/packages.selector'
+import { IconsSpray } from 'components/AnimatedBackground/Spray'
+import { selectPackages } from 'app/lib/features/package/package.selector'
 const PaymentPackages = dynamic(() => import('./components/Packages'), {
   ssr: false,
   loading: () => <PackagesSkeleton />,
@@ -25,7 +25,7 @@ const Packages = () => {
 
   return (
     <>
-      <GlowingSunBackground />
+      <IconsSpray />
       <Gutter>
         <PaymentPackages />
       </Gutter>

@@ -3,7 +3,7 @@ import TournamentTableCurrentTeamRow from './CurrentTeamRow'
 import { useSelector } from 'react-redux'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
-import { selectCurrentTourTeam } from 'app/lib/features/tourTeams/tourTeams.selector'
+import { selectCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.selector'
 import { cn } from '@/lib/utils'
 
 const TournamentTableBody = ({ table, flexRender, showUserTourTeam }) => {

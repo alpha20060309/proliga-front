@@ -1,4 +1,4 @@
-import { fetchTourTeams } from './tourTeams.thunk'
+import { fetchTourTeams } from './tourTeam.thunk'
 
 export const tourTeamExtraReducer = (builder) => {
   builder

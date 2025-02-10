@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { teamPlayersExtraReducer } from './teamPlayers.extraReducer'
+import { teamPlayerExtraReducer } from './teamPlayer.extraReducer'
 import { revertTeamPlayersReducer } from './reducers/revertTeamPlayersReducer'
 import { setCaptainReducer } from './reducers/setCaptainReducer'
 import { addTeamPlayerReducer } from './reducers/addTeamPlayerReducer'
@@ -30,7 +30,7 @@ const initialState = {
 }
 
 const teamPlayersSlice = createSlice({
-  name: 'teamPlayers',
+  name: 'teamPlayer',
   initialState,
   reducers: {
     addTeamPlayer: addTeamPlayerReducer,
@@ -51,7 +51,7 @@ const teamPlayersSlice = createSlice({
       state.infoModal = action.payload
     },
   },
-  extraReducers: teamPlayersExtraReducer,
+  extraReducers: teamPlayerExtraReducer,
 })
 
 export const {

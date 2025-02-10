@@ -2,7 +2,7 @@ import { PACKAGE_TYPE } from 'app/utils/packages.util'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { NumericFormat } from 'react-number-format'
-import { selectCurrentPackage } from 'app/lib/features/packages/packages.selector'
+import { selectCurrentPackage } from 'app/lib/features/package/package.selector'
 
 const CurrentPackage = () => {
   const { t } = useTranslation()

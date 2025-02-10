@@ -9,14 +9,14 @@ import {
   DialogDescription,
 } from '@/components/ui/dialog'
 import { useDispatch, useSelector } from 'react-redux'
-import { setPlayerTransferModal } from 'app/lib/features/teamPlayers/teamPlayers.slice'
-import { selectCurrentPlayer } from 'app/lib/features/players/players.selector'
+import { setPlayerTransferModal } from 'app/lib/features/teamPlayer/teamPlayer.slice'
+import { selectCurrentPlayer } from 'app/lib/features/player/player.selector'
 import { memo } from 'react'
 
 const PlayerTransfer = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { transferModal } = useSelector((store) => store.teamPlayers)
+  const { transferModal } = useSelector((store) => store.teamPlayer)
   const currentPlayer = useSelector(selectCurrentPlayer)
 
   const setModalOpen = () => {

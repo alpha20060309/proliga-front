@@ -18,17 +18,17 @@ import { toast } from 'react-toastify'
 import Spinner from 'components/Spinner'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchPackages } from 'app/lib/features/packages/packages.thunk'
+import { fetchPackages } from 'app/lib/features/package/package.thunk'
 import { useRouter } from 'next/navigation'
 import { PAYMENT_OPTIONS } from 'app/utils/paymentOptions.util'
-import { setCurrentPackage } from 'app/lib/features/packages/packages.slice'
+import { setCurrentPackage } from 'app/lib/features/package/package.slice'
 import { useTranslation } from 'react-i18next'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import {
   selectCurrentPackage,
   selectPackages,
-} from 'app/lib/features/packages/packages.selector'
+} from 'app/lib/features/package/package.selector'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
 
@@ -37,7 +37,7 @@ const ConfirmPayment = ({ params }) => {
   const router = useRouter()
   const dispatch = useDispatch()
   const [paymentOption, setPaymentOption] = useState(PAYMENT_OPTIONS.WALLET)
-  const { isLoading } = useSelector((store) => store.packages)
+  const { isLoading } = useSelector((store) => store.package)
   const packages = useSelector(selectPackages)
   const currentPackage = useSelector(selectCurrentPackage)
   const currentTeam = useSelector(selectCurrentTeam)

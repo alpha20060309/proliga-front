@@ -12,14 +12,14 @@ import {
 } from '@/components/ui/dialog'
 import { selectPlayerPoint } from 'app/lib/features/playerPoint/playerPoint.selector'
 import { getCorrentPlayerPosition } from 'app/utils/getCorrectPlayerPosition.utils'
-import { setPlayerInfoModal } from 'app/lib/features/teamPlayers/teamPlayers.slice'
-import { selectCurrentPlayer } from 'app/lib/features/players/players.selector'
+import { setPlayerInfoModal } from 'app/lib/features/teamPlayer/teamPlayer.slice'
+import { selectCurrentPlayer } from 'app/lib/features/player/player.selector'
 import { memo } from 'react'
 
 const PlayerInfo = () => {
   const dispatch = useDispatch()
   const currentPlayer = useSelector(selectCurrentPlayer)
-  const { infoModal } = useSelector((store) => store.teamPlayers)
+  const { infoModal } = useSelector((store) => store.teamPlayer)
   const { lang } = useSelector((store) => store.systemLanguage)
   const playerPoint = useSelector(selectPlayerPoint)
   const [matches, setMatches] = useState([])

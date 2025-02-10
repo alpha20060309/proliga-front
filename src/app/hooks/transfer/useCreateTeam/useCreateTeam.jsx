@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { supabase } from '../../../lib/supabaseClient'
 import { useRouter } from 'next/navigation'
-import { addGameToTeam } from 'app/lib/features/teams/teams.slice'
+import { addGameToTeam } from 'app/lib/features/team/team.slice'
 import { useTranslation } from 'react-i18next'
 
 export const useCreateTeam = () => {

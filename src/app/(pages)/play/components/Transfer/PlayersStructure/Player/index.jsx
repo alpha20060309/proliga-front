@@ -7,11 +7,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   deleteTeamPlayer,
   setPlayerTransferModal,
-} from 'app/lib/features/teamPlayers/teamPlayers.slice'
+} from 'app/lib/features/teamPlayer/teamPlayer.slice'
 import { staticPath } from 'app/utils/static.util'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { useTranslation } from 'react-i18next'
-import { setCurrentPlayer } from 'app/lib/features/players/players.slice'
+import { setCurrentPlayer } from 'app/lib/features/player/player.slice'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { memo } from 'react'
 

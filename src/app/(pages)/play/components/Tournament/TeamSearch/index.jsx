@@ -1,8 +1,9 @@
+/* eslint-disable no-undef */
 'use client'
 
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
-import { resetSearchResults } from 'app/lib/features/teams/teams.slice'
-import { searchAllTeams } from 'app/lib/features/teams/teams.thunk'
+import { resetSearchResults } from 'app/lib/features/team/team.slice'
+import { searchAllTeams } from 'app/lib/features/team/team.thunk'
 import { useState, useCallback, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'

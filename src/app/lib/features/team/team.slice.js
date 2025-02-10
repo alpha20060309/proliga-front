@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { teamsExtraReducer } from './teams.extraReducer'
+import { teamsExtraReducer } from './team.extraReducer'
 
 const initialState = {
   allTeams: [],
@@ -15,7 +15,7 @@ const initialState = {
 }
 
 const teamsSlice = createSlice({
-  name: 'teams',
+  name: 'team',
   initialState,
   reducers: {
     setTeams: (state, action) => {

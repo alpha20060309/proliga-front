@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { useMemo } from 'react'
 import { staticPath } from 'app/utils/static.util'
-import { selectTopPlayers } from 'app/lib/features/players/players.selector'
+import { selectTopPlayers } from 'app/lib/features/player/player.selector'
 import { getUrl } from 'app/utils/static.util'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 

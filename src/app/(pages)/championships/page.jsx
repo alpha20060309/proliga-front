@@ -12,7 +12,7 @@ import dynamic from 'next/dynamic'
 import { cn } from '@/lib/utils'
 import { useEffect, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchUserTeams } from 'app/lib/features/teams/teams.thunk'
+import { fetchUserTeams } from 'app/lib/features/team/team.thunk'
 import { fetchCompetition } from 'app/lib/features/competition/competition.thunk'
 import { selectCompetition } from 'app/lib/features/competition/competition.selector'
 import { fetchSeason } from 'app/lib/features/season/season.thunk'
@@ -30,7 +30,7 @@ const Championships = () => {
   const { season, isLoading: seasonLoading } = useSelector(
     (state) => state.season
   )
-  const { isLoading: teamsLoading } = useSelector((state) => state.teams)
+  const { isLoading: teamsLoading } = useSelector((state) => state.team)
 
   useEffect(() => {
     if (competitions?.length === 0) {

@@ -3,8 +3,8 @@
 import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { DialogDescription } from '@radix-ui/react-dialog'
 import { useDispatch, useSelector } from 'react-redux'
-import { setMatchModalOpen } from 'app/lib/features/matches/matches.slice'
-import { selectCurrentMatch } from 'app/lib/features/matches/matches.selector'
+import { setMatchModalOpen } from 'app/lib/features/match/match.slice'
+import { selectCurrentMatch } from 'app/lib/features/match/match.selector'
 import MatchEventHeader from './Header'
 import MatchEventScore from './Score'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -17,7 +17,7 @@ import { memo } from 'react'
 
 function MatchEventModal() {
   const dispatch = useDispatch()
-  const { isModalOpen } = useSelector((store) => store.matches)
+  const { isModalOpen } = useSelector((store) => store.match)
   const currentMatch = useSelector(selectCurrentMatch)
 
   const setModalOpen = () => {

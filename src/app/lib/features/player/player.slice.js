@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { playersExtraReducer } from './players.extraReducer'
+import { playerExtraReducer } from './player.extraReducer'
 
 const initialState = {
   topPlayers: [],
@@ -13,7 +13,7 @@ const initialState = {
 }
 
 export const playersSlice = createSlice({
-  name: 'players',
+  name: 'player',
   initialState,
   reducers: {
     setCurrentPlayer: (state, action) => {
@@ -21,7 +21,7 @@ export const playersSlice = createSlice({
         state.players.find((p) => p.id === action.payload) ?? {}
     },
   },
-  extraReducers: playersExtraReducer,
+  extraReducers: playerExtraReducer,
 })
 
 export const { setCurrentPlayer } = playersSlice.actions

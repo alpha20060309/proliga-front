@@ -20,7 +20,7 @@ import {
 import {
   selectCurrentTourTeam,
   selectTourTeams,
-} from 'app/lib/features/tourTeams/tourTeams.selector'
+} from 'app/lib/features/tourTeam/tourTeam.selector'
 
 const GameBrief = () => {
   const [nextTour, setNextTour] = useState(null)
@@ -34,12 +34,10 @@ const GameBrief = () => {
   const { isLoading: teamLoading } = useSelector((store) => store.currentTeam)
   const currentTeam = useSelector(selectCurrentTeam)
   const currentCompetition = useSelector(selectCurrentCompetition)
-  const { isLoading: tourTeamsLoading } = useSelector(
-    (store) => store.tourTeams
-  )
+  const { isLoading: tourTeamsLoading } = useSelector((store) => store.tourTeam)
   const tourTeams = useSelector(selectTourTeams)
   const currentTourTeam = useSelector(selectCurrentTourTeam)
-  const { teamPrice } = useSelector((store) => store.teamPlayers)
+  const { teamPrice } = useSelector((store) => store.teamPlayer)
   const { lang } = useSelector((store) => store.systemLanguage)
   const { t } = useTranslation()
   const date = formatDate(nextTour?.datetime_start)

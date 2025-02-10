@@ -1,16 +1,16 @@
 import { createDraftSafeSelector } from '@reduxjs/toolkit'
 
 export const selectPlayers = createDraftSafeSelector(
-  (store) => store.players,
-  (players) => players.players
+  (store) => store.player,
+  (player) => player.players
 )
 
 export const selectTopPlayers = createDraftSafeSelector(
-  (store) => store.players,
-  (players) => players.topPlayers
+  (store) => store.player,
+  (player) => player.topPlayers
 )
 
 export const selectCurrentPlayer = createDraftSafeSelector(
-  (store) => store.players,
-  (players) => players.currentPlayer
+  (store) => store.player,
+  (player) => player.currentPlayer
 )

@@ -1,11 +1,11 @@
 import { createDraftSafeSelector } from '@reduxjs/toolkit'
 
 export const selectMatches = createDraftSafeSelector(
-  (state) => state.matches,
-  (matches) => matches.matches
+  (state) => state.match,
+  (match) => match.matches
 )
 
 export const selectCurrentMatch = createDraftSafeSelector(
-  (state) => state.matches,
-  (matches) => matches.currentMatch
+  (state) => state.match,
+  (match) => match.currentMatch
 )

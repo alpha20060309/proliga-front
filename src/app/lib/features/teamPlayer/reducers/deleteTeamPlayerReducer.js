@@ -1,4 +1,4 @@
-import { PLAYER_POSITION} from 'app/utils/player.util'
+import { PLAYER_POSITION } from 'app/utils/player.util'
 import { toast } from 'react-toastify'
 
 export const deleteTeamPlayerReducer = (state, action) => {

@@ -1,4 +1,4 @@
-import { selectCurrentMatch } from 'app/lib/features/matches/matches.selector'
+import { selectCurrentMatch } from 'app/lib/features/match/match.selector'
 import { Timer } from 'lucide-react'
 import { useSelector } from 'react-redux'
 import { staticPath, getUrl } from 'app/utils/static.util'

@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   setCurrentMatch,
   setMatchModalOpen,
-} from 'app/lib/features/matches/matches.slice'
+} from 'app/lib/features/match/match.slice'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { memo } from 'react'
 import MatchStatus from './Status'

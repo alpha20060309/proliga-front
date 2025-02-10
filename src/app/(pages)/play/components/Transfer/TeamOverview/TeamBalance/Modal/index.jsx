@@ -22,7 +22,7 @@ import {
   HoverCard,
   HoverCardContent,
 } from '@/components/ui/hover-card'
-import { selectPackages } from 'app/lib/features/packages/packages.selector'
+import { selectPackages } from 'app/lib/features/package/package.selector'
 
 const TeamBalanceModal = () => {
   const dispatch = useDispatch()

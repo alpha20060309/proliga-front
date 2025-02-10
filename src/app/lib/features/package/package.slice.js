@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { packagesExtraReducer } from './packages.extraReducer'
+import { packageExtraReducer } from './package.extraReducer'
 
 const initialState = {
   packages: [],
@@ -8,8 +8,8 @@ const initialState = {
   error: null,
 }
 
-const packagesSlice = createSlice({
-  name: 'packages',
+const packageSlice = createSlice({
+  name: 'package',
   initialState,
   reducers: {
     setCurrentPackage: (state, action) => {
@@ -18,9 +18,9 @@ const packagesSlice = createSlice({
       )
     },
   },
-  extraReducers: packagesExtraReducer,
+  extraReducers: packageExtraReducer,
 })
 
-export const { setCurrentPackage } = packagesSlice.actions
+export const { setCurrentPackage } = packageSlice.actions
 
-export default packagesSlice.reducer
+export default packageSlice.reducer

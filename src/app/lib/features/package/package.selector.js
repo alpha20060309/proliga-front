@@ -1,11 +1,11 @@
 import { createDraftSafeSelector } from '@reduxjs/toolkit'
 
 export const selectPackages = createDraftSafeSelector(
-  (state) => state.packages,
+  (state) => state.package,
   (packages) => packages.packages
 )
 
 export const selectCurrentPackage = createDraftSafeSelector(
-  (state) => state.packages,
+  (state) => state.package,
   (packages) => packages.currentPackage
 )
