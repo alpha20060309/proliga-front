@@ -11,6 +11,8 @@ import { useSelector } from 'react-redux'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { configKey } from 'app/utils/config.util'
 import {
+  selectAgent,
+  selectGeo,
   selectUserAuth,
   selectUserTable,
 } from 'app/lib/features/auth/auth.selector'
@@ -20,6 +22,9 @@ export default function AuthListener() {
   const app_version = config[configKey.app_version]?.value ?? ''
   const userTable = useSelector(selectUserTable)
   const userAuth = useSelector(selectUserAuth)
+  const { fingerprint } = useSelector((store) => store.auth)
+  const agent = useSelector(selectAgent)
+  const geo = useSelector(selectGeo)
   const { login } = useGoogleLogin()
 
   useEffect(() => {
@@ -30,6 +35,7 @@ export default function AuthListener() {
     const table =
       localStorage.getItem(`user-table-${sbUrl}`) !== 'undefined' &&
       JSON.parse(localStorage.getItem(`user-table-${sbUrl}`))
+    const SIGN_IN_METHOD = localStorage.getItem('sign-in-method')
 
     const {
       data: { subscription },
@@ -46,6 +52,7 @@ export default function AuthListener() {
           Boolean(userTable?.id)
         )
           return
+
         if (rootProvider === SUPABASE_PROVIDERS.EMAIL) {
           if (
             secondaryProviders.includes(
@@ -53,21 +60,25 @@ export default function AuthListener() {
               SUPABASE_PROVIDERS.FACEBOOK
             ) &&
             !userAuth?.id &&
-            !userTable?.id
+            !userTable?.id &&
+            SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE
           ) {
-            login({ auth: session?.user, app_version })
+            login({ auth: session?.user, app_version, geo, agent, fingerprint })
             if (app_version) {
               localStorage.setItem('app_version', app_version)
             }
           }
         }
+        // if(rootProvider===SUPABASE_PROVIDERS.GOOGLE){
+
+        // }
       }
     })
 
     return () => {
       subscription.unsubscribe()
     }
-  }, [login, app_version, userAuth, userTable])
+  }, [login, app_version, userAuth, userTable, agent, geo, fingerprint])
 
   return null
 }

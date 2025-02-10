@@ -6,16 +6,20 @@ import { useCallback, useEffect } from 'react'
 import { supabase } from 'app/lib/supabaseClient'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
+import { SUPABASE_PROVIDERS } from 'app/lib/supabaseClient'
 
 const GoogleSignIn = ({ className, iconClassName }) => {
   const { t } = useTranslation()
+  const URL = process.env.NEXT_PUBLIC_URL
 
   const handleGoogleSignIn = useCallback(() => {
     try {
+      localStorage.setItem('sign-in-method', SUPABASE_PROVIDERS.GOOGLE)
+
       const { error } = supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: 'http://localhost:2030/auth',
+          redirectTo: URL + '/championships',
         },
       })
 
@@ -23,7 +27,7 @@ const GoogleSignIn = ({ className, iconClassName }) => {
     } catch (error) {
       console.error('Error signing in with Google:', error)
     }
-  }, [])
+  }, [URL])
 
   useEffect(() => {
     const script = document.createElement('script')

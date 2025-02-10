@@ -25,7 +25,6 @@ const authSlice = createSlice({
     setUserPhoto: (state, action) => {
       state.userTable.photo = action.payload
     },
-
     setFingerprint: (state, action) => {
       state.fingerprint = action.payload
     },
@@ -50,6 +49,7 @@ export const {
   setGeo,
   setAgent,
   setChecked,
+  setLoginMethod,
 } = authSlice.actions
 
 export default authSlice.reducer

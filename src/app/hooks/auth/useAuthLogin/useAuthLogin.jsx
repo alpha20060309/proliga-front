@@ -45,7 +45,7 @@ export const useAuthLogin = () => {
   )
 
   const login = useCallback(
-    async ({ phone, password, app_version }) => {
+    async ({ phone, password, geo, fingerprint, agent, app_version }) => {
       setIsLoading(true)
       setError(null)
       setData(null)
@@ -109,12 +109,18 @@ export const useAuthLogin = () => {
           )
         }
 
-        // Step 3: Get user table data
+        // Step 3: Get user table data & Update geo
         const { data: fullUserData, error: fullUserError } = await supabase
           .from('user')
-          .select('*')
+          .update({
+            visitor: fingerprint,
+            visited_at: new Date(),
+            geo: JSON.stringify(geo),
+            agent: JSON.stringify(agent),
+          })
           .eq('phone', phone)
           .is('deleted_at', null)
+          .select('*')
           .single()
 
         if (fullUserError) {

@@ -45,7 +45,7 @@ export const useGoogleLogin = () => {
   )
 
   const login = useCallback(
-    async ({ auth }) => {
+    async ({ auth, geo, agent, fingerprint }) => {
       setIsLoading(true)
       setError(null)
       setData(null)
@@ -58,9 +58,15 @@ export const useGoogleLogin = () => {
         // Step 1: Get user table data
         const { data: fullUserData, error: fullUserError } = await supabase
           .from('user')
-          .select('*')
+          .update({
+            visitor: fingerprint,
+            visited_at: new Date(),
+            geo: JSON.stringify(geo),
+            agent: JSON.stringify(agent),
+          })
           .eq('guid', auth?.id)
           .is('deleted_at', null)
+          .select('*')
           .single()
 
         if (fullUserError) {
@@ -70,6 +76,7 @@ export const useGoogleLogin = () => {
               : 'An unknown error occurred'
           )
         }
+
         // Step 2: If user not verified verify it!
         if (!fullUserData.phone_verified) {
           setState({ authData: auth, fullUserData })
