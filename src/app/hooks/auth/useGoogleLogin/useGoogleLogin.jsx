@@ -50,50 +50,44 @@ export const useGoogleLogin = () => {
       setError(null)
       setData(null)
 
-      // if (!phone || !password) {
-      //   handleError("Barcha maydonlar to'ldirilishi shart")
-      //   return
-      // }
-
-      // if (password.length < 6) {
-      //   handleError("Parol 6 ta belgidan kam bo'lmasligi kerak")
-      //   return
-      // }
+      if (!auth?.id) {
+        handleError('ID kirilmagan')
+      }
 
       try {
-        console.log(auth)
-        // Step 3: Get user table data
-        // const { data: fullUserData, error: fullUserError } = await supabase
-        //   .from('user')
-        //   .select('*')
-        //   .eq('phone', phone)
-        //   .is('deleted_at', null)
-        //   .single()
-        // if (fullUserError) {
-        //   return handleError(
-        //     fullUserError instanceof Error
-        //       ? fullUserError.message
-        //       : 'An unknown error occurred'
-        //   )
-        // }
-        // // Step 4: If user not verified verify it!
-        // if (!fullUserData.phone_verified) {
-        //   setState({ authData: authData?.user, fullUserData })
-        //   toast.warning(t('Sizning raqamingiz tasdiqlanmagan'), {
-        //     theme: 'dark',
-        //   })
-        //   toast.info(t('We are redirecting you to an sms confirmation page!'), {
-        //     theme: 'dark',
-        //   })
-        //   return await sendOTP({
-        //     phone,
-        //     shouldRedirect: true,
-        //     redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(phone)}`,
-        //   })
-        // }
-        // setState({ authData: authData?.user, fullUserData })
-        // localStorage.setItem('app_version', app_version)
-        // router.push('championships')
+        // Step 1: Get user table data
+        const { data: fullUserData, error: fullUserError } = await supabase
+          .from('user')
+          .select('*')
+          .eq('guid', auth?.id)
+          .is('deleted_at', null)
+          .single()
+
+        if (fullUserError) {
+          return handleError(
+            fullUserError instanceof Error
+              ? fullUserError.message
+              : 'An unknown error occurred'
+          )
+        }
+        // Step 2: If user not verified verify it!
+        if (!fullUserData.phone_verified) {
+          setState({ authData: auth, fullUserData })
+          toast.warning(t('Sizning raqamingiz tasdiqlanmagan'), {
+            theme: 'dark',
+          })
+          toast.info(t('We are redirecting you to an sms confirmation page!'), {
+            theme: 'dark',
+          })
+          return await sendOTP({
+            phone: fullUserData?.phone,
+            shouldRedirect: true,
+            redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(fullUserData?.phone)}`,
+          })
+        }
+        setState({ authData: auth, fullUserData })
+        toast.success(t('Tizimga muvaffaqiyatli kirdingiz'))
+        router.push('championships')
       } catch (error) {
         handleError(error.message || 'An unknown error occurred')
       } finally {

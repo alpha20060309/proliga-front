@@ -142,6 +142,7 @@ export const useAuthLogin = () => {
         }
 
         setState({ authData: authData?.user, fullUserData })
+        toast.success(t('Tizimga muvaffaqiyatli kirdingiz'))
         localStorage.setItem('app_version', app_version)
         router.push('championships')
       } catch (error) {

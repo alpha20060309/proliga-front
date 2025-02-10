@@ -1,17 +1,14 @@
 /* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
+
 import { Button } from '@/components/ui/button'
 import { useTranslation } from 'react-i18next'
 import { useCallback, useEffect } from 'react'
 import { supabase } from 'app/lib/supabaseClient'
-import { useLogOut } from 'app/hooks/auth/useLogOut/useLogOut'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
-import { useState } from 'react'
 
 const GoogleSignIn = ({ className, iconClassName }) => {
   const { t } = useTranslation()
-  
 
   const handleGoogleSignIn = useCallback(() => {
     try {
@@ -59,6 +56,7 @@ const GoogleSignIn = ({ className, iconClassName }) => {
         width={24}
         height={24}
       />
+      {t('Google')}
     </Button>
   )
 }

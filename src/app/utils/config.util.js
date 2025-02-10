@@ -18,4 +18,7 @@ export const configKey = {
   test_marquee: 'test_marquee',
   transfer_show_modals: 'transfer_show_modals',
   app_version: 'app_version',
+  provider_google: 'provider_google',
+  provider_facebook: 'provider_facebook',
+  provider_yandex: 'provider_yandex',
 }
