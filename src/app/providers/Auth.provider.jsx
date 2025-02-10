@@ -8,7 +8,7 @@ import { useCheckUserExists } from 'app/hooks/auth/useCheckUserExists/useCheckUs
 import { configKey } from 'app/utils/config.util'
 import { useLogOut } from 'app/hooks/auth/useLogOut/useLogOut'
 import { toast } from 'react-toastify'
-// import AuthListener from 'components/AuthListener'
+import AuthListener from 'components/AuthListener'
 import {
   selectUserAuth,
   selectUserTable,
@@ -87,7 +87,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <>
-      {/* <AuthListener /> */}
+      <AuthListener />
       {children}
     </>
   )
