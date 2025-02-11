@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
 import { TABS } from 'app/utils/tabs.util'
-import { TOUR_STATUS_STATUS_STATUS_STATUS } from 'app/utils/tour.util'
+import { TOUR_STATUS } from 'app/utils/tour.util'
 
 const SidebarTabLink = ({ title, tab, toggleModal }) => {
   const dispatch = useDispatch()

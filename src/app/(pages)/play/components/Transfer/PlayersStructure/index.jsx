@@ -1,14 +1,22 @@
 import Player from './Player'
-import { useSelector } from 'react-redux'
 import StadiumSpinner from '../../StadiumSpinner'
+import { useSelector } from 'react-redux'
+import {
+  selectDEF,
+  selectGOA,
+  selectMID,
+  selectSTR,
+} from 'app/lib/features/teamPlayer/teamPlayer.selector'
 
 const TransferPlayersStructure = () => {
-  const { GOA, DEF, MID, STR, isLoading } = useSelector(
-    (state) => state.teamPlayer
-  )
+  const { isLoading } = useSelector((state) => state.teamPlayer)
+  const GOA = useSelector(selectGOA)
+  const DEF = useSelector(selectDEF)
+  const MID = useSelector(selectMID)
+  const STR = useSelector(selectSTR)
 
   return (
-    <section className="absolute bottom-0 left-0 right-0 top-0 z-10 grid grid-rows-4 py-2 sm:py-2 sm:pb-0 sm:pt-6 md:pb-8 md:pt-8">
+    <section className="fade-in-fast absolute bottom-0 left-0 right-0 top-0 z-10 grid grid-rows-4 py-2 xs:py-3 sm:py-4">
       {isLoading ? (
         <StadiumSpinner />
       ) : (
@@ -18,12 +26,12 @@ const TransferPlayersStructure = () => {
               <Player key={player.id} player={player} />
             ))}
           </div>
-          <div className="flex items-start justify-evenly gap-0.5 px-6 sm:gap-1 md:gap-4 md:px-4 xl:gap-0 xl:px-10">
+          <div className="flex items-start justify-evenly gap-0.5 px-6 sm:gap-1 md:gap-4 md:px-8 xl:gap-0 xl:px-10">
             {DEF.map((player) => (
               <Player key={player.id} player={player} />
             ))}
           </div>
-          <div className="flex items-start justify-evenly gap-0.5 px-6 sm:gap-1 md:gap-4 md:px-4 xl:gap-0 xl:px-10">
+          <div className="flex items-start justify-evenly gap-0.5 px-6 sm:gap-1 md:gap-4 md:px-8 xl:gap-0 xl:px-10">
             {MID.map((player) => (
               <Player key={player.id} player={player} />
             ))}

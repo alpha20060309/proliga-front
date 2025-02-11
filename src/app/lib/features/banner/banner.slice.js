@@ -8,7 +8,7 @@ const initialState = {
 }
 
 const bannerSlice = createSlice({
-  name: 'prizes',
+  name: 'banner',
   initialState,
   reducers: {},
   extraReducers: bannerExtraReducer,

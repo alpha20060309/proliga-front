@@ -81,7 +81,7 @@ const TransferTableBody = ({ table, flexRender }) => {
                     teamBalance={teamBalance}
                     key={cell.id}
                     cell={cell}
-                    team={teamConcat}
+                    teamConcat={teamConcat}
                     handleAddPlayer={handleAddPlayer}
                     totalPlayersCount={totalPlayersCount}
                   />

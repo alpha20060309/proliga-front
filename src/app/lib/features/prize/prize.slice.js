@@ -9,7 +9,7 @@ const initialState = {
 }
 
 const prizesSlice = createSlice({
-  name: 'prizes',
+  name: 'prize',
   initialState,
   reducers: {},
   extraReducers: prizesExtraReducer,

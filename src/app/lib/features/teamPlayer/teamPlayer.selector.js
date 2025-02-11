@@ -19,3 +19,23 @@ export const selectPrevTeam = createDraftSafeSelector(
   (state) => state.teamPlayer,
   (teamPlayer) => teamPlayer.prevTeam
 )
+
+export const selectGOA = createDraftSafeSelector(
+  (state) => state.teamPlayer,
+  (teamPlayer) => teamPlayer.GOA
+)
+
+export const selectDEF = createDraftSafeSelector(
+  (state) => state.teamPlayer,
+  (teamPlayer) => teamPlayer.DEF
+)
+
+export const selectMID = createDraftSafeSelector(
+  (state) => state.teamPlayer,
+  (teamPlayer) => teamPlayer.MID
+)
+
+export const selectSTR = createDraftSafeSelector(
+  (state) => state.teamPlayer,
+  (teamPlayer) => teamPlayer.STR
+)
