@@ -1,10 +1,10 @@
 'use client'
 
 import SendOTP from 'components/Modals/SendOTP'
-import SocialLogin from '../SocialLogin'
+// import SocialLogin from '../SocialLogin'
 import Image from 'next/image'
 import { toast } from 'react-toastify'
-import { useState } from 'react'
+import { useState, memo } from 'react'
 import { useSelector } from 'react-redux'
 import { PhoneInput } from 'components/PhoneInput'
 import { useTranslation } from 'react-i18next'
@@ -14,7 +14,6 @@ import { Button } from '@/components/ui/button'
 import { useAuthLogin } from 'app/hooks/auth/useAuthLogin/useAuthLogin'
 import { cn } from '@/lib/utils'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
-import { memo } from 'react'
 import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
 
 const LoginForm = ({ setShouldRedirect }) => {
@@ -138,7 +137,7 @@ const LoginForm = ({ setShouldRedirect }) => {
           )}
         </Button>
       </form>
-      <SocialLogin />
+      {/* <SocialLogin /> */}
       <SendOTP isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
     </section>
   )
