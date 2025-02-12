@@ -64,8 +64,7 @@ const CabinetTransactionsHistory = () => {
           <Button
             className={cn(
               'flex h-9 flex-1 items-center justify-center font-bold',
-              'rounded-none text-sm font-medium transition-all',
-              'hover:bg-neutral-950 disabled:opacity-50',
+              'rounded-none text-sm font-medium transition-all disabled:opacity-50',
               currentTab === TRANSACTIONTABS.BALANCE ? active : passive
             )}
             onClick={() => setCurrentTab(TRANSACTIONTABS.BALANCE)}
@@ -76,8 +75,7 @@ const CabinetTransactionsHistory = () => {
           <Button
             className={cn(
               'flex h-9 flex-1 items-center justify-center font-bold',
-              'rounded-none text-sm font-medium transition-all',
-              'hover:bg-neutral-950 disabled:opacity-50',
+              'rounded-none text-sm font-medium transition-all disabled:opacity-50',
               currentTab === TRANSACTIONTABS.EXPENSES ? active : passive
             )}
             onClick={() => setCurrentTab(TRANSACTIONTABS.EXPENSES)}
@@ -134,6 +132,6 @@ const TRANSACTIONTABS = {
 }
 
 const active = 'bg-neutral-950 text-primary opacity-100'
-const passive = 'bg-transparent text-neutral-400/80'
+const passive = 'bg-transparent text-neutral-400/80 hover:bg-neutral-950/30'
 
 export default CabinetTransactionsHistory

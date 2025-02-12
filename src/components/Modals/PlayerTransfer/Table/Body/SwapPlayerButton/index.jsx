@@ -44,7 +44,11 @@ const SwapPlayerButton = ({ cell, handleSwapPlayer, teamBalance }) => {
     }
   }
 
-  if (teamConcat.find((p) => p.name === cell.getValue())) {
+  const isPlayerInTeam = teamConcat.find(
+    (p) => p.player_id == +cell?.row?.original?.id
+  )
+
+  if (isPlayerInTeam) {
     return (
       <td
         className="fade-in-fast flex h-full w-full cursor-pointer items-center justify-center p-1 md:w-auto"

@@ -17,16 +17,16 @@ import { useRedirectToPayme } from 'app/hooks/payment/useRedirectToPayme/useRedi
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { formatCurrency } from 'app/utils/formatCurrency'
-import PaymentOption from './PaymentOption'
 import { memo } from 'react'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { BALANCE_OPTIONS } from 'app/utils/paymentOptions.util'
+import PaymentOption from './PaymentOption'
 
 const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
   const { t } = useTranslation()
   const userTable = useSelector(selectUserTable)
-  const { lang } = useSelector((store) => store.systemLanguage)
   const config = useSelector(selectSystemConfig)
+  const { lang } = useSelector((store) => store.systemLanguage)
 
   const { redirectToClick } = useRedirectToClick()
   const { redirectToPayme } = useRedirectToPayme()
@@ -65,7 +65,7 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-      <DialogContent className="max-h-[92%] max-w-[96%] overflow-auto rounded-xl bg-neutral-900 sm:max-w-[28rem] xl:max-w-[32rem] xl:p-6">
+      <DialogContent className="max-h-[80%] w-[98%] max-w-xl overflow-auto rounded-xl bg-neutral-900 p-4 xl:p-6">
         <DialogTitle className="text-lg font-bold sm:text-xl">
           {t('Balansingizni toldiring')}
         </DialogTitle>

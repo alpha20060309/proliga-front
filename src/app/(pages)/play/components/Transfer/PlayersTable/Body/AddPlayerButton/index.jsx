@@ -9,28 +9,19 @@ import { useTranslation } from 'react-i18next'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { cn } from '@/lib/utils'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
-import { selectTeamConcat } from 'app/lib/features/teamPlayer/teamPlayer.selector'
 
 const AddPlayerButton = ({
   cell,
   handleAddPlayer,
   teamBalance,
+  teamConcat,
   totalPlayersCount,
 }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const teamConcat = useSelector(selectTeamConcat)
-
-  const { lang } = useSelector((store) => store.systemLanguage)
   const condition = teamBalance >= cell.row.original.price
-  const isPlayerInTeam = teamConcat.find((p) => p.name === cell.getValue())
-  console.log(
-    getCorrectName({
-      lang,
-      uz: teamConcat[1].player.name,
-      ru: teamConcat[1].player.name_ru,
-    }) === cell.getValue()
+  const isPlayerInTeam = teamConcat.find(
+    (p) => p.player_id == +cell?.row?.original?.id
   )
   const currentTeam = useSelector(selectCurrentTeam)
   const config = useSelector(selectSystemConfig)

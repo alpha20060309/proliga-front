@@ -69,7 +69,7 @@ export const toursExtraReducer = (builder) => {
       if (tour) {
         state.currentTour = tour
         state.registeredTour = registeredTour ?? tour
-        state.currentTourIndex = state.tour.indexOf(tour)
+        state.currentTourIndex = state.tours.indexOf(tour)
       }
       state.isLoading = false
     })

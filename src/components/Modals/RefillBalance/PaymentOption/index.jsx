@@ -5,7 +5,7 @@ const RefilBalanceModalPaymentOption = ({ onClick, style, img, alt }) => {
     <button
       type="button"
       onClick={onClick}
-      className={`h-16 w-36 rounded border bg-stone-950 p-3 transition-all sm:w-full sm:p-4 xl:rounded-md ${style}`}
+      className={`h-14 w-32 rounded border bg-stone-950 p-3 transition-all xs:h-16 xs:w-36 sm:w-full sm:p-4 xl:rounded-md ${style}`}
     >
       <Image
         src={img}

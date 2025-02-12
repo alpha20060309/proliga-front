@@ -24,7 +24,7 @@ const TeamSearch = ({
   const { t } = useTranslation()
   const [localSearchTerm, setLocalSearchTerm] = useState('')
   const { season } = useSelector((state) => state.season)
-  const { teamsLoading } = useSelector((state) => state.teams)
+  const { teamsLoading } = useSelector((state) => state.team)
   const currentCompetition = useSelector(selectCurrentCompetition)
   const debouncedSearchRef = useRef(null)
 
