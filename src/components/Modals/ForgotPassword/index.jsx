@@ -37,7 +37,7 @@ const ForgotPassword = ({ isModalOpen, setModalOpen }) => {
     e.preventDefault()
 
     if (!phone) {
-      toast.error(t('Email yoki Telefon kiritilmagan'), { theme: 'dark' })
+      toast.error(t('Telefon raqam kiritilmagan'), { theme: 'dark' })
       return
     }
 

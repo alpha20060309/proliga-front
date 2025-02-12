@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { useState, useCallback } from 'react'
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'

@@ -17,8 +17,8 @@ export const useGetUserPhone = () => {
       setError(null)
 
       if (!phone) {
-        setError('Telefon kirilmagan')
-        toast.error(t('Telefon kiritilmagan'), { theme: 'dark' })
+        setError('Telefon raqam kiritilmagan')
+        toast.error(t('Telefon raqam kiritilmagan'), { theme: 'dark' })
         return
       }
 

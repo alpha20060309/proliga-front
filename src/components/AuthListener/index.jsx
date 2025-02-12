@@ -75,7 +75,7 @@ export default function AuthListener() {
           rootProvider === SUPABASE_PROVIDERS.GOOGLE &&
           SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE
         ) {
-          if (userTable?.phone) {
+          if (!userTable?.phone) {
             return dispatch(setPhoneModal(true))
           }
         }

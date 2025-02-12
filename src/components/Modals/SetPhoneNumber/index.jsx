@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 'use client'
 
 import { useEffect, useState } from 'react'
@@ -16,7 +17,15 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { setPhoneModal } from 'app/lib/features/auth/auth.slice'
 import { getSession } from 'app/lib/supabaseClient'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import {
+  selectAgent,
+  selectGeo,
+  selectUserTable,
+} from 'app/lib/features/auth/auth.selector'
+import { toast } from 'react-toastify'
+import { useGoogleRegister } from 'app/hooks/auth/useGoogleRegister/useGoogleRegister'
+import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
+import { CONFIG_KEY } from 'app/utils/config.util'
 
 function SetPhoneNumber() {
   const dispatch = useDispatch()
@@ -26,14 +35,37 @@ function SetPhoneNumber() {
   const [session, setSession] = useState(null)
   const isLoading = false
   const userTable = useSelector(selectUserTable)
+  const { register } = useGoogleRegister()
+  const geo = useSelector(selectGeo)
+  const agent = useSelector(selectAgent)
+  const fingerprint = useSelector((store) => store.auth)
+  const config = useSelector(selectSystemConfig)
+  const app_version = config[CONFIG_KEY.app_version]?.value || ''
 
-  console.log(session)
   const setModalOpen = () => {
     userTable?.phone && dispatch(setPhoneModal(false))
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    if (!phone) {
+      return toast.error(t('Telefon raqam kiritilmagan'), {
+        theme: 'dark',
+      })
+    }
+    if (!session?.user?.id) {
+      return toast.warning(t('An unknown error occurred'))
+    }
+
+    await register({
+      phone,
+      auth: session?.user,
+      geo,
+      fingerprint,
+      agent,
+      app_version,
+    })
   }
 
   useEffect(() => {
