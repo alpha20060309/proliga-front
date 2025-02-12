@@ -1,7 +1,7 @@
 'use client'
 
-import SendOTP from 'components/Modals/SendOTP'
-// import SocialLogin from '../SocialLogin'
+import ForgotPassword from 'components/Modals/ForgotPassword'
+import SocialLogin from '../SocialLogin'
 import Image from 'next/image'
 import { toast } from 'react-toastify'
 import { useState, memo } from 'react'
@@ -137,8 +137,8 @@ const LoginForm = ({ setShouldRedirect }) => {
           )}
         </Button>
       </form>
-      {/* <SocialLogin /> */}
-      <SendOTP isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
+      <SocialLogin />
+      <ForgotPassword isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
     </section>
   )
 }

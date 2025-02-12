@@ -8,13 +8,15 @@ import {
   DialogDescription,
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { PhoneInput } from 'components/PhoneInput'
 import { Label } from '@/components/ui/label'
 import { Loader2 } from 'lucide-react'
 import { memo } from 'react'
+import { useTranslation } from 'react-i18next'
 
 function SetPhoneNumber({ isModalOpen, setModalOpen }) {
-  const [phoneNumber, setPhoneNumber] = useState('')
+  const { t } = useTranslation()
+  const [phone, setPhone] = useState('')
   const isLoading = false
 
   const handleSubmit = async (e) => {
@@ -23,32 +25,38 @@ function SetPhoneNumber({ isModalOpen, setModalOpen }) {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setModalOpen}>
-      <DialogContent className="max-w-xl rounded-xl">
-        <DialogTitle>Set Your Phone Number</DialogTitle>
+      <DialogContent className="w-[98%] max-w-md rounded-xl">
+        <DialogTitle>{t('Enter your phone number.')}</DialogTitle>
         <DialogDescription>
-          Enter your mobile phone number below. We&apos;ll use this for account
-          security and notifications.
+          {t(
+            'To complete your registration, please link your mobile phone to your account. This step is mandatory.'
+          )}
         </DialogDescription>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="phoneNumber">Phone Number</Label>
-            <Input
-              id="phoneNumber"
-              type="tel"
-              placeholder="+1 (555) 000-0000"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              className="w-full"
+            <Label htmlFor="phoneNumber">{t('Telefon raqam')}:</Label>
+            <PhoneInput
+              id="set-phone"
+              name="phone"
+              placeholder={t('Telefon raqam')}
+              defaultCountry="UZ"
+              className="h-10 bg-neutral-950 text-neutral-200 placeholder:text-neutral-500"
+              value={phone}
+              onChange={setPhone}
             />
           </div>
-          <Button type="submit" className="w-full" disabled={isLoading}>
+          <Button
+            type="submit"
+            className="h-10 w-full rounded border border-primary bg-neutral-900 text-neutral-50 transition-all hover:bg-black"
+            disabled={isLoading}
+          >
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 Setting...
               </>
             ) : (
-              'Set Phone Number'
+              'Tasdiqlash'
             )}
           </Button>
         </form>

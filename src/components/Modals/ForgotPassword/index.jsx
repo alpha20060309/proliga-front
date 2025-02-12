@@ -17,7 +17,7 @@ import { useGetUserPhone } from 'app/hooks/user/useGetUserPhone/useGetUserPhone'
 import { memo } from 'react'
 import { Button } from '@/components/ui/button'
 
-const SendOTP = ({ isModalOpen, setModalOpen }) => {
+const ForgotPassword = ({ isModalOpen, setModalOpen }) => {
   const router = useRouter()
   const params = useSearchParams()
   const phoneParams = params.get('phone') || ''
@@ -60,21 +60,23 @@ const SendOTP = ({ isModalOpen, setModalOpen }) => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setModalOpen}>
-      <DialogContent className="max-w-[92%] rounded-xl bg-neutral-950 px-4 py-6 text-neutral-100 xs:max-w-96 sm:max-w-[28rem] md:p-6">
+      <DialogContent className="w-[98%] max-w-md rounded-xl bg-neutral-950 px-4 py-6 text-neutral-100 md:p-6">
+        <DialogTitle>{t('Parolingizni unutingizmi?')}</DialogTitle>
+        <DialogDescription>
+          {t(
+            'To reset your password, please enter the OTP sent to your mobile phone. This step is required for security verification.'
+          )}
+        </DialogDescription>
         <form
           onSubmit={handleConfirm}
-          className="flex w-full flex-col items-start gap-8"
+          className="flex w-full flex-col items-start gap-6"
         >
-          <DialogTitle>{t('Parolingizni unutingizmi?')}</DialogTitle>
-          <DialogDescription className="hidden">
-            Send OTP Confirmation SMS
-          </DialogDescription>
           <div className="relative flex w-full flex-col gap-1">
             <label htmlFor="phone" className="text-xs md:text-base">
-              {t('Login')}:
+              {t('Telefon raqam')}:
             </label>
             <PhoneInput
-              id="phone"
+              id="enter-phone"
               name="phone"
               placeholder={t('Telefon raqam')}
               defaultCountry="UZ"
@@ -106,4 +108,4 @@ const SendOTP = ({ isModalOpen, setModalOpen }) => {
   )
 }
 
-export default memo(SendOTP)
+export default memo(ForgotPassword)

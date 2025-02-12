@@ -619,5 +619,8 @@
   "Team id": "Jamoa identifikatori",
   "No match events are currently available. Please stay tuned as they will be updated soon!": "Hozircha o‘yinga oid voqealar mavjud emas. Tez orada yangilanadi, kuzatib boring!",
   "The match hasn't started yet. Stay tuned for updates!": "Oʻyin hali boshlanmadi. Yangilanishlarni kuzatib boring!",
-  "Google": "Google"
+  "Google": "Google",
+  "To complete your registration, please link your mobile phone to your account. This step is mandatory.": "Ro‘yxatdan o‘tishni yakunlash uchun mobil telefoningizni hisobingizga bog‘lang. Ushbu qadam majburiy hisoblanadi.",
+  "To reset your password, please enter the OTP sent to your mobile phone. This step is required for security verification.": "Parolingizni tiklash uchun mobil telefoningizga yuborilgan OTP kodini kiriting. Ushbu qadam xavfsizlik tekshiruvi uchun majburiydir.",
+  "Enter your phone number.": "Raqamingizni kiriting."
 }

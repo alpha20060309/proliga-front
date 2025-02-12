@@ -15,10 +15,10 @@ const Promotions = dynamic(() => import('../components/Promotions'), {
 function Home() {
   const { generate } = useGenerateLanguage()
 
-  // useEffect(() => {
-  //   const fetch = async () => await generate()
-  //   fetch()
-  // }, [generate])
+  useEffect(() => {
+    const fetch = async () => await generate()
+    fetch()
+  }, [generate])
 
   return (
     <>
