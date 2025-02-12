@@ -1,24 +1,24 @@
 import { combineReducers } from '@reduxjs/toolkit'
 import { HYDRATE } from 'next-redux-wrapper'
+import SystemNotificationSlice from './features/systemNotification/systemNotification.slice.js'
 import AuthSlice from './features/auth/auth.slice.js'
 import CompetitionSlice from './features/competition/competition.slice.js'
-import PlayersSlice from './features/players/players.slice.js'
-import TeamSlice from './features/teams/teams.slice.js'
+import PlayerSlice from './features/player/player.slice.js'
+import TeamSlice from './features/team/team.slice.js'
 import CurrentTeamSlice from './features/currentTeam/currentTeam.slice.js'
 import ClubSlice from './features/club/club.slice.js'
-import TeamPlayersSlice from './features/teamPlayers/teamPlayers.slice.js'
-import ToursSlice from './features/tours/tours.slice.js'
-import TourTeamsSlice from './features/tourTeams/tourTeams.slice.js'
+import TeamPlayersSlice from './features/teamPlayer/teamPlayer.slice.js'
+import TourSlice from './features/tour/tour.slice.js'
+import TourTeamSlice from './features/tourTeam/tourTeam.slice.js'
 import SeasonSlice from './features/season/season.slice.js'
 import SystemLanguageSlice from './features/systemLanguage/systemLanguage.slice.js'
 import PlayerPointSlice from './features/playerPoint/playerPoint.slice.js'
-import MatchesSlice from './features/matches/matches.slice.js'
+import MatchSlice from './features/match/match.slice.js'
 import NewsSlice from './features/news/news.slice.js'
 import UserActivitySlice from './features/userActivity/userActivity.slice.js'
-import PackagesSlice from './features/packages/packages.slice.js'
+import PackageSlice from './features/package/package.slice.js'
 import PayBalanceSlice from './features/payBalance/payBalance.slice.js'
 import PayExpenseSlice from './features/payExpense/payExpense.slice.js'
-import SystemNotificationSlice from './features/systemNotification/systemNotification.slice.js'
 import PrizesSlice from './features/prize/prize.slice.js'
 import BannerSlice from './features/banner/banner.slice.js'
 import systemConfigSlice from './features/systemConfig/systemConfig.slice.js'
@@ -27,20 +27,20 @@ import MatchEventSlice from './features/matchEvent/matchEvent.slice.js'
 export const combinedReducer = combineReducers({
   auth: AuthSlice,
   competition: CompetitionSlice,
-  players: PlayersSlice,
-  teams: TeamSlice,
-  teamPlayers: TeamPlayersSlice,
+  player: PlayerSlice,
+  team: TeamSlice,
+  teamPlayer: TeamPlayersSlice,
   currentTeam: CurrentTeamSlice,
   club: ClubSlice,
-  tours: ToursSlice,
+  tour: TourSlice,
   season: SeasonSlice,
-  tourTeams: TourTeamsSlice,
+  tourTeam: TourTeamSlice,
   playerPoint: PlayerPointSlice,
-  matches: MatchesSlice,
+  match: MatchSlice,
   matchEvent: MatchEventSlice,
   news: NewsSlice,
   userActivity: UserActivitySlice,
-  packages: PackagesSlice,
+  package: PackageSlice,
   payBalance: PayBalanceSlice,
   payExpense: PayExpenseSlice,
   systemLanguage: SystemLanguageSlice,

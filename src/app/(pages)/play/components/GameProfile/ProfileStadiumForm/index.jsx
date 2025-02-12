@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { useMemo } from 'react'
-import { setCaptain } from 'app/lib/features/teamPlayers/teamPlayers.slice'
+import { setCaptain } from 'app/lib/features/teamPlayer/teamPlayer.slice'
 import { useTranslation } from 'react-i18next'
 import {
   Select,
@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/button'
 import { getCorrentPlayerPosition } from 'app/utils/getCorrectPlayerPosition.utils'
 import Image from 'next/image'
 import { useUpdateTeamCaptains } from 'app/hooks/transfer/useUpdateTeamCaptains/useUpdateTeamCaptains'
-import { selectTeamConcat } from 'app/lib/features/teamPlayers/teamPlayers.selector'
+import { selectTeamConcat } from 'app/lib/features/teamPlayer/teamPlayer.selector'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
@@ -27,11 +27,11 @@ const ProfileStadiumForm = () => {
   const userTable = useSelector(selectUserTable)
   const currentCompetition = useSelector(selectCurrentCompetition)
   const teamConcat = useSelector(selectTeamConcat)
-  const { playersCount } = useSelector((state) => state.teamPlayers)
+  const { playersCount } = useSelector((state) => state.teamPlayer)
   const { lang } = useSelector((store) => store.systemLanguage)
   const { isLoading: teamLoading } = useSelector((state) => state.currentTeam)
   const { currentTour, isLoading: tourLoading } = useSelector(
-    (state) => state.tours
+    (state) => state.tour
   )
   const { updateTeamCaptains, isLoading: captainsLoading } =
     useUpdateTeamCaptains()

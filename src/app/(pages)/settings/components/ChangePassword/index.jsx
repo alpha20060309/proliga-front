@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import SettingsAlert from '../Alert'
-import OTPConfirmationModal from 'components/ConfirmOTPModal'
+import ConfirmOTP from 'components/Modals/ConfirmOTP'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import { Input } from '@/components/ui/input'
@@ -15,7 +15,7 @@ import { useSelector } from 'react-redux'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { useAuthUpdatePassword } from 'app/hooks/auth/useAuthChangePassword/useAuthChangePassword'
 
-const CabinetChangePasswordTab = () => {
+const ChangePasswordTab = () => {
   const { t } = useTranslation()
   const userTable = useSelector(selectUserTable)
   const { sendOTP } = useSendOTP()
@@ -78,7 +78,7 @@ const CabinetChangePasswordTab = () => {
 
   return (
     <>
-      <OTPConfirmationModal
+      <ConfirmOTP
         setModalOpen={setModalOpen}
         isModalOpen={isModalOpen}
         setVerificationStatus={setSMSVerified}
@@ -210,4 +210,4 @@ const CabinetChangePasswordTab = () => {
   )
 }
 
-export default CabinetChangePasswordTab
+export default ChangePasswordTab

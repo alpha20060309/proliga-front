@@ -1,31 +1,31 @@
 import { useSelector } from 'react-redux'
 import { useState, useEffect, useMemo } from 'react'
-import { fetchAllTeams } from 'app/lib/features/teams/teams.thunk'
+import { fetchAllTeams } from 'app/lib/features/team/team.thunk'
 import { useDispatch } from 'react-redux'
 import { TournamentTableSkeleton } from './Skeleton'
 import { Pagination } from 'components/Table/Pagination'
 import {
   selectCurrentTour,
   selectTours,
-} from 'app/lib/features/tours/tours.selector'
-import { selectAllTeams } from 'app/lib/features/teams/teams.selector'
-import { selectCurrentTourTeam } from 'app/lib/features/tourTeams/tourTeams.selector'
+} from 'app/lib/features/tour/tour.selector'
+import { selectAllTeams } from 'app/lib/features/team/team.selector'
+import { selectCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.selector'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
 import TournamentTable from './Table'
 import TeamSearch from './TeamSearch'
 import TournamentSelectedTour from './Filters'
-import { searchAllTeams } from 'app/lib/features/teams/teams.thunk'
+import { searchAllTeams } from 'app/lib/features/team/team.thunk'
 import { memo } from 'react'
 
 const Tournament = () => {
   const dispatch = useDispatch()
-  const { teamsLoading, teamsCount } = useSelector((store) => store.teams)
+  const { teamsLoading, teamsCount } = useSelector((store) => store.team)
   const { season, isLoading: seasonLoading } = useSelector(
     (state) => state.season
   )
   const tours = useSelector(selectTours)
   const allTeams = useSelector(selectAllTeams)
-  const { isLoading: tourLoading } = useSelector((state) => state.tours)
+  const { isLoading: tourLoading } = useSelector((state) => state.tour)
   const currentCompetition = useSelector(selectCurrentCompetition)
   const currentTour = useSelector(selectCurrentTour)
   const currentTourTeam = useSelector(selectCurrentTourTeam)
@@ -58,7 +58,7 @@ const Tournament = () => {
   const showUserTourTeam =
     !curTourTeam && toursCondition && allTeams?.length !== 0
 
-  const [perPage, setPerPage] = useState(14)
+  const perPage = 14
   const pages = useMemo(
     () => Math.ceil(teamsCount / perPage),
     [teamsCount, perPage]

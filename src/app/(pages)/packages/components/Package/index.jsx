@@ -5,9 +5,9 @@ import Link from 'next/link'
 import { Separator } from '@/components/ui/separator'
 import { Badge } from '@/components/ui/badge'
 import { useSelector } from 'react-redux'
-import { PACKAGES } from 'app/utils/packages.util'
+import { PACKAGE_TYPE } from 'app/utils/packages.util'
 import { useTranslation } from 'react-i18next'
-import { selectPackages } from 'app/lib/features/packages/packages.selector'
+import { selectPackages } from 'app/lib/features/package/package.selector'
 
 const PackageContainer = ({ packageType }) => {
   const packages = useSelector(selectPackages)
@@ -15,11 +15,11 @@ const PackageContainer = ({ packageType }) => {
 
   const getPackageTitle = (type) => {
     switch (type) {
-      case PACKAGES.team_balance:
+      case PACKAGE_TYPE.team_balance:
         return t('Balans')
-      case PACKAGES.transfer_count:
+      case PACKAGE_TYPE.transfer_count:
         return t('Transfer')
-      case PACKAGES.single_club_count:
+      case PACKAGE_TYPE.single_club_count:
         return t('Bir jamoa oyinchilari')
       default:
         return ''
@@ -77,11 +77,11 @@ const PackageContainer = ({ packageType }) => {
 
 const PackageIcon = ({ type }) => {
   switch (type) {
-    case PACKAGES.team_balance:
+    case PACKAGE_TYPE.team_balance:
       return <Coins className="h-6 w-6 text-primary/90" />
-    case PACKAGES.transfer_count:
+    case PACKAGE_TYPE.transfer_count:
       return <Zap className="h-6 w-6 text-primary/90" />
-    case PACKAGES.single_club_count:
+    case PACKAGE_TYPE.single_club_count:
       return <Users className="h-6 w-6 text-primary/90" />
     default:
       return null

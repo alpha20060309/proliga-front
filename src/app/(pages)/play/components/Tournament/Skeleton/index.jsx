@@ -63,14 +63,4 @@ export const TournamentTableSkeleton = ({
   )
 }
 
-const TournamentSelectedTourSkeleton = () => {
-  return (
-    <div className="mb-2 flex w-full gap-1">
-      <Skeleton className="h-8 w-2/3 max-w-80" />
-
-      <Skeleton className="h-8 w-1/3 max-w-48" />
-    </div>
-  )
-}
-
 export default TournamentSkeleton

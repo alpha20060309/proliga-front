@@ -1,17 +1,17 @@
 'use client'
 
-import ConfirmationModal from 'components/ConfirmationModal'
+import Confirmation from 'components/Modals/Confirmation'
 import Image from 'next/image'
 import { useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   deleteTeamPlayer,
   setPlayerTransferModal,
-} from 'app/lib/features/teamPlayers/teamPlayers.slice'
+} from 'app/lib/features/teamPlayer/teamPlayer.slice'
 import { staticPath } from 'app/utils/static.util'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { useTranslation } from 'react-i18next'
-import { setCurrentPlayer } from 'app/lib/features/players/players.slice'
+import { setCurrentPlayer } from 'app/lib/features/player/player.slice'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { memo } from 'react'
 
@@ -103,33 +103,39 @@ const Player = ({ player }) => {
               {firstName} {lastName.slice(0, 1).toUpperCase()} {lastName && '.'}
             </p>
             <div className="flex items-center gap-0.5 sm:gap-1">
-              <button onClick={handleTransfer}>
+              <button
+                onClick={handleTransfer}
+                className="size-4 overflow-hidden rounded border border-neutral-900 transition-all hover:border-primary sm:size-5"
+              >
                 <Image
                   width={16}
                   height={16}
                   draggable={false}
                   src="/icons/swap.svg"
                   alt="additional info"
-                  className="size-4 rounded border border-neutral-900 transition-all hover:border-primary sm:size-5"
+                  className="h-full w-full"
                 />
               </button>
               <div className="flex h-4 w-6 cursor-default items-center justify-center rounded border border-neutral-800 bg-neutral-50 text-center text-xs font-bold text-neutral-950 sm:h-5 sm:w-8 md:text-sm">
                 {player.price ?? '00'}
               </div>
-              <button onClick={toggleDeleteModal}>
+              <button
+                onClick={toggleDeleteModal}
+                className="size-4 rounded border border-neutral-900 transition-all hover:border-primary sm:size-5"
+              >
                 <Image
                   width={16}
                   height={16}
                   src="/icons/close-red-circle.svg"
                   alt="delete player"
-                  className="size-4 rounded border border-neutral-900 transition-all hover:border-primary sm:size-5"
+                  className="h-full w-full"
                 />
               </button>
             </div>
           </>
         )}
       </div>
-      <ConfirmationModal
+      <Confirmation
         onConfirm={handleDeletePlayer}
         onCancel={toggleDeleteModal}
         isModalOpen={isDeleteModalOpen}

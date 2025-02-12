@@ -5,3 +5,9 @@ export const BANNER = {
   MINI_BANNER: 'mini_banner',
   BIG_BANNER: 'big_banner',
 }
+
+export const BANNER_SERVICE_TYPE = {
+  GOOGLE: 'google',
+  YANDEX: 'yandex',
+  CUSTOM: 'custom',
+}

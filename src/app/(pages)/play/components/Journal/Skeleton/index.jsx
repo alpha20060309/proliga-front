@@ -1,5 +1,4 @@
 import { Skeleton } from '@/components/ui/skeleton'
-import TopTeams from '../../TopTeams'
 import { PaginationSkeleton } from 'components/Table/Pagination'
 
 function TableSkeleton({ rows = 13 }) {

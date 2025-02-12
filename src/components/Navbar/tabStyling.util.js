@@ -1,5 +1,5 @@
 import { TABS } from 'app/utils/tabs.util'
-import { TOUR } from 'app/utils/tour.util'
+import { TOUR_STATUS} from 'app/utils/tour.util'
 
 export const tabStyling = ({
   tab,
@@ -18,7 +18,7 @@ export const tabStyling = ({
     return DISABLED
   }
 
-  if (currentTour?.status !== TOUR.notStartedTransfer) {
+  if (currentTour?.status !== TOUR_STATUS.notStartedTransfer) {
     if (tab === TABS.Transfer) {
       return DISABLED
     }

@@ -1,7 +1,8 @@
+/* eslint-disable no-undef */
 import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
-import { PACKAGES } from 'app/utils/packages.util'
+import { PACKAGE_TYPE } from 'app/utils/packages.util'
 import {
   Dialog,
   DialogContent,
@@ -19,7 +20,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { ArrowRight, Zap, InfoIcon } from 'lucide-react'
-import { selectPackages } from 'app/lib/features/packages/packages.selector'
+import { selectPackages } from 'app/lib/features/package/package.selector'
 
 const TeamMaxTransfersModal = () => {
   const dispatch = useDispatch()
@@ -53,7 +54,7 @@ const TeamMaxTransfersModal = () => {
         <div className="mt-4 space-y-2">
           {packages.map(
             (transfer) =>
-              transfer.type === PACKAGES.transfer_count && (
+              transfer.type === PACKAGE_TYPE.transfer_count && (
                 <Card key={transfer.id} className="overflow-hidden">
                   <CardContent className="bg-neutral-900 p-0">
                     <Link

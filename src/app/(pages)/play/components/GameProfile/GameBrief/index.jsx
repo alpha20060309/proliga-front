@@ -4,7 +4,7 @@ import { formatDate } from 'app/utils/formatDate.util'
 import { useEffect, useState, useMemo } from 'react'
 import { Coins, PercentCircle } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { TOUR } from 'app/utils/tour.util'
+import { TOUR_STATUS } from 'app/utils/tour.util'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { cn } from '@/lib/utils'
@@ -16,30 +16,28 @@ import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.sele
 import {
   selectCurrentTour,
   selectTours,
-} from 'app/lib/features/tours/tours.selector'
+} from 'app/lib/features/tour/tour.selector'
 import {
   selectCurrentTourTeam,
   selectTourTeams,
-} from 'app/lib/features/tourTeams/tourTeams.selector'
+} from 'app/lib/features/tourTeam/tourTeam.selector'
 
 const GameBrief = () => {
   const [nextTour, setNextTour] = useState(null)
   const [prevTour, setPrevTour] = useState(null)
   const [prevTourTeam, setPrevTourTeam] = useState(null)
   const { currentTourIndex, isLoading: toursLoading } = useSelector(
-    (store) => store.tours
+    (store) => store.tour
   )
   const currentTour = useSelector(selectCurrentTour)
   const tours = useSelector(selectTours)
   const { isLoading: teamLoading } = useSelector((store) => store.currentTeam)
   const currentTeam = useSelector(selectCurrentTeam)
   const currentCompetition = useSelector(selectCurrentCompetition)
-  const { isLoading: tourTeamsLoading } = useSelector(
-    (store) => store.tourTeams
-  )
+  const { isLoading: tourTeamsLoading } = useSelector((store) => store.tourTeam)
   const tourTeams = useSelector(selectTourTeams)
   const currentTourTeam = useSelector(selectCurrentTourTeam)
-  const { teamPrice } = useSelector((store) => store.teamPlayers)
+  const { teamPrice } = useSelector((store) => store.teamPlayer)
   const { lang } = useSelector((store) => store.systemLanguage)
   const { t } = useTranslation()
   const date = formatDate(nextTour?.datetime_start)
@@ -107,7 +105,7 @@ const GameBrief = () => {
           <Container className="border-b border-neutral-700">
             <Item>
               <Title> {t('Keyingi Tur')}</Title>
-              {currentTour.status !== TOUR.notStartedTransfer ? (
+              {currentTour?.status !== TOUR_STATUS.notStartedTransfer ? (
                 <Content className="text-sm uppercase text-primary md:text-base">
                   {getCorrectName({
                     lang,
@@ -127,7 +125,7 @@ const GameBrief = () => {
             </Item>
             <Item>
               <Title>{t('Deadline')}</Title>
-              {currentTour.status !== TOUR.notStartedTransfer ? (
+              {currentTour?.status !== TOUR_STATUS.notStartedTransfer ? (
                 <Content>{date}</Content>
               ) : (
                 <Content>{transferDate}</Content>
@@ -137,7 +135,7 @@ const GameBrief = () => {
           <Container className="border-b border-neutral-700">
             <Item>
               <Title>{t('Tur')}</Title>
-              {currentTour.status !== TOUR.notStartedTransfer ? (
+              {currentTour?.status !== TOUR_STATUS.notStartedTransfer ? (
                 <Content>
                   {getCorrectName({
                     lang,
@@ -157,7 +155,7 @@ const GameBrief = () => {
             </Item>
             <Item>
               <Title>{t('Turdagi ochkolar')}</Title>
-              {currentTour.status !== TOUR.notStartedTransfer ? (
+              {currentTour?.status !== TOUR_STATUS.notStartedTransfer ? (
                 <Content>{currentTourTeam?.point ?? '0'}</Content>
               ) : (
                 <Content>{prevTourTeam?.point ?? '0'}</Content>

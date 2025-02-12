@@ -1,7 +1,6 @@
 'use client'
 
 import { useDispatch, useSelector } from 'react-redux'
-import Gutter from 'components/Gutter'
 import { useEffect } from 'react'
 import { fetchCompetition } from 'app/lib/features/competition/competition.thunk'
 import dynamic from 'next/dynamic'
@@ -22,11 +21,7 @@ const Prizes = () => {
     }
   }, [dispatch, competitions?.length])
 
-  return (
-    <Gutter>
-      <PrizesSection />
-    </Gutter>
-  )
+  return <PrizesSection />
 }
 
 export default Prizes

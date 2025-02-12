@@ -3,14 +3,14 @@ import dynamic from 'next/dynamic'
 import ProfileStadiumForm from './ProfileStadiumForm'
 import ProfilePlayersStructure from './PlayersStructure'
 import { useSelector } from 'react-redux'
-import { TOUR } from 'app/utils/tour.util'
+import { TOUR_STATUS } from 'app/utils/tour.util'
 import { GameBriefContainerSkeleton } from './GameBrief/Skeleton'
-import { selectCurrentTour } from 'app/lib/features/tours/tours.selector'
+import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
 const GameBrief = dynamic(() => import('./GameBrief'), {
   ssr: false,
   loading: () => <GameBriefContainerSkeleton />,
 })
-import PlayerInfoModal from 'components/PlayerInfoModal'
+import PlayerInfo from 'components/Modals/PlayerInfo'
 import { memo } from 'react'
 
 const GameProfile = () => {
@@ -30,12 +30,12 @@ const GameProfile = () => {
           />
           <ProfilePlayersStructure />
         </div>
-        {currentTour?.status === TOUR.notStartedTransfer && (
+        {currentTour?.status === TOUR_STATUS.notStartedTransfer && (
           <ProfileStadiumForm />
         )}
       </div>
       <GameBrief />
-      <PlayerInfoModal />
+      <PlayerInfo />
     </main>
   )
 }

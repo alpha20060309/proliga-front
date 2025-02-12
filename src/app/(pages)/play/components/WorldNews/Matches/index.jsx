@@ -12,28 +12,28 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { fetchMatches } from 'app/lib/features/matches/mathes.thunk'
+import { fetchMatches } from 'app/lib/features/match/match.thunk'
 import Match from './Match'
 import MatchSkeleton from './Match/Skeleton'
 import { Pagination } from 'components/Table/Pagination'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
-import { selectMatches } from 'app/lib/features/matches/matches.selector'
-import { selectTours } from 'app/lib/features/tours/tours.selector'
+import { selectMatches } from 'app/lib/features/match/match.selector'
+import { selectTours } from 'app/lib/features/tour/tour.selector'
 import { usePathname } from 'next/navigation'
 import { RefreshCcw } from 'lucide-react'
-import MatchEventModal from 'components/MatchEventModal'
+import MatchEvent from 'components/Modals/MatchEvent'
 
 const Matches = () => {
   const path = usePathname()
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const { isLoading: toursLoading, currentTourIndex } = useSelector(
-    (state) => state.tours
+    (state) => state.tour
   )
   const tours = useSelector(selectTours)
   const { isLoading: teamLoading } = useSelector((store) => store.currentTeam)
   const { season } = useSelector((store) => store.season)
-  const { isLoading, count } = useSelector((state) => state.matches)
+  const { isLoading, count } = useSelector((state) => state.match)
   const matches = useSelector(selectMatches)
   const { lang } = useSelector((store) => store.systemLanguage)
   const [tourIndex, setTourIndex] = useState(-1)
@@ -188,7 +188,7 @@ const Matches = () => {
         currentPage={page}
         totalPages={pages}
       />
-      <MatchEventModal />
+      <MatchEvent />
     </section>
   )
 }

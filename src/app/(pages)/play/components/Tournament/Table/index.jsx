@@ -12,7 +12,7 @@ import Body from './Body'
 import { useSelector } from 'react-redux'
 import { createColumnHelper } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
-import { selectAllTeams } from 'app/lib/features/teams/teams.selector'
+import { selectAllTeams } from 'app/lib/features/team/team.selector'
 
 const columnHelper = createColumnHelper()
 

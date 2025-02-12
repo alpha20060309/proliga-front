@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react'
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { supabase } from '../../../lib/supabaseClient'
-import { fetchTeamPlayers } from 'app/lib/features/teamPlayers/teamPlayers.thunk'
+import { fetchTeamPlayers } from 'app/lib/features/teamPlayer/teamPlayer.thunk'
 import { useTranslation } from 'react-i18next'
 
 export const useUpdateTeamCaptains = () => {

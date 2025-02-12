@@ -1,7 +1,7 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { SETTINGSTABS } from 'app/utils/settingsTab.util'
+import { SETTINGS_TABS } from '../../tabs'
 const SettingsNavigationTab = dynamic(() => import('./Tab'), {
   ssr: false,
 })
@@ -11,8 +11,8 @@ const SettingsSidebarLogOut = dynamic(() => import('./LogOut/LogOut'), {
 
 const SettingsNavigation = ({ setTab, currentTab }) => {
   return (
-    <section className="flex w-full flex-row rounded-xl bg-neutral-900/80 bg-opacity-90 p-2 backdrop-blur fade-in lg:w-64 lg:flex-col lg:p-4 space-x-0.5 xl:gap-1">
-      {SETTINGSTABS.map((tab) => (
+    <section className="flex w-full flex-row space-x-0.5 rounded-xl bg-neutral-900/80 bg-opacity-90 p-2 backdrop-blur fade-in lg:w-64 lg:flex-col lg:p-4 xl:gap-1">
+      {SETTINGS_TABS.map((tab) => (
         <SettingsNavigationTab
           key={tab.key}
           setTab={setTab}

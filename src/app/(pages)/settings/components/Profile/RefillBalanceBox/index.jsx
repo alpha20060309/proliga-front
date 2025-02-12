@@ -5,7 +5,7 @@ import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { ArrowUpCircle } from 'lucide-react'
-import RefillBalanceModal from 'components/RefillBalanceModal'
+import RefillBalance from 'components/Modals/RefillBalance'
 import { useState } from 'react'
 
 const ProfessionalRefillBalanceBox = () => {
@@ -15,10 +15,7 @@ const ProfessionalRefillBalanceBox = () => {
 
   return (
     <>
-      <RefillBalanceModal
-        setIsModalOpen={setModalOpen}
-        isModalOpen={isModalOpen}
-      />
+      <RefillBalance setIsModalOpen={setModalOpen} isModalOpen={isModalOpen} />
       <Card className="h-28 w-full space-y-0 border border-neutral-600 bg-neutral-800/50 text-white shadow-md xs:max-w-64">
         <CardContent className="p-4">
           <div className="flex items-center justify-between">

@@ -1,18 +1,20 @@
 'use client'
 
-import SendOTPModal from 'components/SendOTPModal'
-import SocialLogin from '../SocialLogin'
+import SendOTP from 'components/Modals/SendOTP'
+// import SocialLogin from '../SocialLogin'
 import Image from 'next/image'
 import { toast } from 'react-toastify'
-import { useState } from 'react'
+import { useState, memo } from 'react'
 import { useSelector } from 'react-redux'
 import { PhoneInput } from 'components/PhoneInput'
 import { useTranslation } from 'react-i18next'
-import { configKey } from 'app/utils/config.util'
+import { CONFIG_KEY } from 'app/utils/config.util'
 import { Eye, EyeOff, Lock } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useAuthLogin } from 'app/hooks/auth/useAuthLogin/useAuthLogin'
 import { cn } from '@/lib/utils'
+import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
+import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
 
 const LoginForm = ({ setShouldRedirect }) => {
   const { t } = useTranslation()
@@ -22,10 +24,14 @@ const LoginForm = ({ setShouldRedirect }) => {
   const [phone, setPhone] = useState('')
 
   const { login, isLoading } = useAuthLogin()
-  const { config } = useSelector((store) => store.systemConfig)
+  const config = useSelector(selectSystemConfig)
+  const { fingerprint } = useSelector((store) => store.auth)
+  const agent = useSelector(selectAgent)
+  const geo = useSelector(selectGeo)
+
   const can_send_sms =
-    config[configKey.can_send_sms]?.value.toLowerCase() === 'true' ?? false
-  const app_version = config[configKey.app_version]?.value ?? ''
+    config[CONFIG_KEY.can_send_sms]?.value.toLowerCase() === 'true' || false
+  const app_version = config[CONFIG_KEY.app_version]?.value || ''
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -41,7 +47,7 @@ const LoginForm = ({ setShouldRedirect }) => {
     }
 
     setShouldRedirect(false)
-    await login({ phone, password, app_version })
+    await login({ phone, password, app_version, fingerprint, agent, geo })
   }
 
   return (
@@ -132,9 +138,9 @@ const LoginForm = ({ setShouldRedirect }) => {
         </Button>
       </form>
       {/* <SocialLogin /> */}
-      <SendOTPModal isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
+      <SendOTP isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
     </section>
   )
 }
 
-export default LoginForm
+export default memo(LoginForm)

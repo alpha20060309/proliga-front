@@ -9,7 +9,7 @@ const initialState = {
 }
 
 const userActivity = createSlice({
-  name: 'teams',
+  name: 'userActivity',
   initialState,
   extraReducers: userActivityExtraReducer,
 })

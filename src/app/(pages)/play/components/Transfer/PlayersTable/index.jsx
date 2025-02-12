@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { createColumnHelper } from '@tanstack/react-table'
-import { selectPlayers } from 'app/lib/features/players/players.selector'
+import { selectPlayers } from 'app/lib/features/player/player.selector'
 import { getCorrentPlayerPosition } from 'app/utils/getCorrectPlayerPosition.utils'
 import TransferTableHead from './Head'
 import TransferTableBody from './Body'
@@ -40,7 +40,7 @@ function PlayersTable() {
     pageIndex: 0,
     pageSize: 10,
   })
-  const { isLoading } = useSelector((state) => state.players)
+  const { isLoading } = useSelector((state) => state.player)
   const selectedPlayers = useSelector(selectPlayers)
   const [windowWidth, setWindowWidth] = useState(0)
 

@@ -12,7 +12,7 @@ import RightSideBanner from 'components/Banners/RightSide'
 import { TABS } from '../../../../utils/tabs.util'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchTopTeams } from 'app/lib/features/teams/teams.thunk'
+import { fetchTopTeams } from 'app/lib/features/team/team.thunk'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
 
 const CurrentTab = ({ currentTab }) => {

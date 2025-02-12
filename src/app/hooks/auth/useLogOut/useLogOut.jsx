@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify'
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import {
@@ -13,12 +13,12 @@ import {
   resetCurrentTeam,
   setLastVisitedTeam,
 } from 'app/lib/features/currentTeam/currentTeam.slice'
-import { resetTeams } from 'app/lib/features/teams/teams.slice'
+import { resetTeams } from 'app/lib/features/team/team.slice'
 import { supabase } from 'app/lib/supabaseClient'
 
 export const useLogOut = () => {
   const dispatch = useDispatch()
-  const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
+  const [error, setError] = useState(null)
   const router = useRouter()
   const { t } = useTranslation()
 
@@ -64,5 +64,5 @@ export const useLogOut = () => {
     [clearState, router, t]
   )
 
-  return { logOut }
+  return { logOut, error }
 }

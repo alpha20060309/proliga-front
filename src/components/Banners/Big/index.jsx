@@ -4,8 +4,7 @@ import YandexAd from '../YandexAd'
 import Link from 'next/link'
 import { useSelector } from 'react-redux'
 import { useMemo, useEffect, memo } from 'react'
-import { BANNER } from 'app/utils/banner.util'
-import { BANNER_SERVICE_TYPE } from 'app/utils/banner-service.util'
+import { BANNER, BANNER_SERVICE_TYPE } from 'app/utils/banner.util'
 import { useCreateBannerView } from 'app/hooks/system/useCreateBannerView/useCreateBannerView'
 import {
   selectAgent,

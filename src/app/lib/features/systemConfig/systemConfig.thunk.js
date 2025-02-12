@@ -1,13 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { supabase } from 'app/lib/supabaseClient'
-import { configKey } from 'app/utils/config.util'
+import { CONFIG_KEY } from 'app/utils/config.util'
 import { toast } from 'react-toastify'
 
 export const fetchSystemConfig = createAsyncThunk(
   'systemConfig/fetchSystemConfig',
   async () => {
     try {
-      const configKeys = Object.keys(configKey).map((key) => key)
+      const configKeys = Object.keys(CONFIG_KEY).map((key) => key)
 
       const { data, error } = await supabase
         .from('system_config')

@@ -11,7 +11,7 @@ import { selectNews } from 'app/lib/features/news/news.selector'
 import { Button } from '@/components/ui/button'
 import { RefreshCcw, Newspaper } from 'lucide-react'
 import Article from './Article'
-import NewsArticleModal from 'components/NewsArticleModal'
+import NewsArticle from 'components/Modals/NewsArticle'
 
 const News = () => {
   const dispatch = useDispatch()
@@ -74,7 +74,7 @@ const News = () => {
         currentPage={page}
         totalPages={pages}
       />
-      <NewsArticleModal />
+      <NewsArticle />
     </div>
   )
 }

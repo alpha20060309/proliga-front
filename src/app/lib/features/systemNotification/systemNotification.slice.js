@@ -8,7 +8,7 @@ const initialState = {
 }
 
 export const systemNotificationSlice = createSlice({
-  name: 'notifications',
+  name: 'systemNotification',
   initialState,
   reducers: {
     addNotification: (state, action) => {

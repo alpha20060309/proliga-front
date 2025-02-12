@@ -3,8 +3,8 @@ import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { supabase } from '../../../lib/supabaseClient'
 import { useTranslation } from 'react-i18next'
-import { setCurrentTourTeamTransfersCount } from 'app/lib/features/tourTeams/tourTeams.slice'
-import { fetchTourTeams } from 'app/lib/features/tourTeams/tourTeams.thunk'
+import { setCurrentTourTeamTransfersCount } from 'app/lib/features/tourTeam/tourTeam.slice'
+import { fetchTourTeams } from 'app/lib/features/tourTeam/tourTeam.thunk'
 
 export const useUpdateTourTeam = () => {
   const dispatch = useDispatch()

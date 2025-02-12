@@ -2,7 +2,7 @@ import Image from 'next/image'
 import TeamMaxClubMembersModal from './Modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { setClubModal } from 'app/lib/features/teamPlayers/teamPlayers.slice'
+import { setClubModal } from 'app/lib/features/teamPlayer/teamPlayer.slice'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import MotionNumber from 'components/MotionNumber'
 
@@ -10,7 +10,7 @@ export default function TeamMaxClubMembers() {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const currentTeam = useSelector(selectCurrentTeam)
-  const { clubModal } = useSelector((state) => state.teamPlayers)
+  const { clubModal } = useSelector((state) => state.teamPlayer)
 
   return (
     <>

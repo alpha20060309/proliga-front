@@ -12,7 +12,7 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { createColumnHelper } from '@tanstack/react-table'
-import { selectPlayers } from 'app/lib/features/players/players.selector'
+import { selectPlayers } from 'app/lib/features/player/player.selector'
 import { getCorrentPlayerPosition } from 'app/utils/getCorrectPlayerPosition.utils'
 import Head from './Head'
 import Body from './Body'
@@ -133,8 +133,8 @@ function StatisticsTable() {
   })
 
   return (
-    <section className="flex flex-col justify-between gap-2">
-      <div className="relative flex flex-1 gap-1 text-xs xs:text-sm">
+    <section className="flex h-full flex-col gap-2">
+      <div className="flex-0 relative flex gap-1 text-xs xs:text-sm">
         {table
           .getHeaderGroups()
           .map((headerGroup) =>
@@ -143,15 +143,17 @@ function StatisticsTable() {
             ))
           )}
       </div>
-      <table className="min-w-[22rem] text-[11px] xs:text-xs md:text-sm">
-        <Head table={table} />
-        <Body table={table} flexRender={flexRender} />
-      </table>
-      <TanStackPagination
-        table={table}
-        active="bg-neutral-300 text-black "
-        className={'mt-auto'}
-      />
+      <div className="flex h-full flex-1 flex-col justify-between gap-2">
+        <table className="min-w-[22rem] text-[11px] xs:text-xs md:text-sm">
+          <Head table={table} />
+          <Body table={table} flexRender={flexRender} />
+        </table>
+        <TanStackPagination
+          table={table}
+          active="bg-neutral-300 text-black "
+          className={'mt-auto'}
+        />
+      </div>
     </section>
   )
 }

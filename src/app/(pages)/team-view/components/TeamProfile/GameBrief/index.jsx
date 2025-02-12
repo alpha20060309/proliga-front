@@ -3,10 +3,10 @@
 import {
   selectCurrentTour,
   selectTours,
-} from 'app/lib/features/tours/tours.selector'
+} from 'app/lib/features/tour/tour.selector'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
-import { TOUR } from 'app/utils/tour.util'
+import { TOUR_STATUS } from 'app/utils/tour.util'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { Coins, PercentCircle } from 'lucide-react'
@@ -14,7 +14,7 @@ import { cn } from '@/lib/utils'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
-import { selectCurrentTourTeam } from 'app/lib/features/tourTeams/tourTeams.selector'
+import { selectCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.selector'
 import { formatDate } from 'app/utils/formatDate.util'
 import Image from 'next/image'
 import GameBriefSkeleton from 'app/(pages)/play/components/GameProfile/GameBrief/Skeleton'
@@ -23,13 +23,13 @@ const GameBrief = () => {
   const { t } = useTranslation()
   const [nextTour, setNextTour] = useState(null)
   const { lang } = useSelector((store) => store.systemLanguage)
-  const { currentTourIndex, isLoading } = useSelector((store) => store.tours)
+  const { currentTourIndex, isLoading } = useSelector((store) => store.tour)
   const currentTour = useSelector(selectCurrentTour)
   const tours = useSelector(selectTours)
   const currentTeam = useSelector(selectCurrentTeam)
   const currentCompetition = useSelector(selectCurrentCompetition)
   const currentTourTeam = useSelector(selectCurrentTourTeam)
-  const { teamPrice } = useSelector((store) => store.teamPlayers)
+  const { teamPrice } = useSelector((store) => store.teamPlayer)
 
   const teamBalance = +(currentTeam?.balance || 0) - +(teamPrice || 0)
 
@@ -99,7 +99,7 @@ const GameBrief = () => {
             </Item>
             <Item>
               <Title>{t('Deadline')}</Title>
-              {currentTour.status !== TOUR.notStartedTransfer ? (
+              {currentTour?.status !== TOUR_STATUS.notStartedTransfer ? (
                 <Content>{formatDate(date)}</Content>
               ) : (
                 <Content>{formatDate(curDate)}</Content>

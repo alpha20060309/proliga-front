@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import Image from 'next/image'
 import { staticPath } from 'app/utils/static.util'
 import { selectPlayerPoint } from 'app/lib/features/playerPoint/playerPoint.selector'
-import { setPlayerInfoModal } from 'app/lib/features/teamPlayers/teamPlayers.slice'
-import { setCurrentPlayer } from 'app/lib/features/players/players.slice'
+import { setPlayerInfoModal } from 'app/lib/features/teamPlayer/teamPlayer.slice'
+import { setCurrentPlayer } from 'app/lib/features/player/player.slice'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { memo } from 'react'
 
@@ -91,14 +91,17 @@ const Player = ({ player }) => {
             {firstName} {lastName.slice(0, 1).toUpperCase()} {lastName && '.'}
           </p>
           <div className="flex items-center gap-0.5">
-            <button onClick={handleInfoModal}>
+            <button
+              onClick={handleInfoModal}
+              className="size-4 rounded bg-black transition-all hover:bg-primary sm:size-5"
+            >
               <Image
                 width={16}
                 height={16}
                 draggable={false}
                 src="/icons/info.svg"
                 alt="additional info"
-                className="size-4 rounded bg-black p-px transition-all hover:bg-primary sm:size-5"
+                className="h-full w-full"
               />
             </button>
             <div className="flex h-4 w-6 cursor-default items-center justify-center rounded border border-neutral-800 bg-primary text-center text-xs font-bold text-neutral-950 sm:h-5 sm:w-8 md:text-sm">

@@ -21,7 +21,7 @@ export default class UppyServerActionUpload extends BasePlugin {
     const formData = new FormData()
     formData.append('dir', this.dir)
     formData.append('subDir', this.subDir)
-    files.forEach((file, index) => {
+    files.forEach((file) => {
       formData.append('files', file.data, file.name)
     })
     this.uppy.emit('upload-started', files)

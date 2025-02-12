@@ -1,6 +1,7 @@
+/* eslint-disable no-undef */
 import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
-import { PACKAGES } from 'app/utils/packages.util'
+import { PACKAGE_TYPE } from 'app/utils/packages.util'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   Dialog,
@@ -14,16 +15,16 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from '@/components/ui/hover-card'
-import { setClubModal } from 'app/lib/features/teamPlayers/teamPlayers.slice'
+import { setClubModal } from 'app/lib/features/teamPlayer/teamPlayer.slice'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { ArrowRight, Users, InfoIcon } from 'lucide-react'
-import { selectPackages } from 'app/lib/features/packages/packages.selector'
+import { selectPackages } from 'app/lib/features/package/package.selector'
 
 const TeamMaxClubMembersModal = () => {
   const dispatch = useDispatch()
-  const { clubModal } = useSelector((store) => store.teamPlayers)
+  const { clubModal } = useSelector((store) => store.teamPlayer)
   const packages = useSelector(selectPackages)
   const { t } = useTranslation()
   const defaultSameTeamPlayers =
@@ -56,7 +57,7 @@ const TeamMaxClubMembersModal = () => {
         <div className="mt-4 space-y-2">
           {packages.map(
             (item) =>
-              item.type === PACKAGES.single_club_count && (
+              item.type === PACKAGE_TYPE.single_club_count && (
                 <Card key={item.id} className="overflow-hidden">
                   <CardContent className="bg-neutral-900 p-0">
                     <Link

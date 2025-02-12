@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { useTranslation } from 'react-i18next'
 import { Input } from '@/components/ui/input'
 import { Search } from 'lucide-react'

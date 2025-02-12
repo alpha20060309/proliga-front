@@ -3,12 +3,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { useEffect, useMemo } from 'react'
 import { useUpdateTeamPlayers } from 'app/hooks/transfer/useUpdateTeamPlayers/useUpdateTeamPlayers'
-import { setCaptain } from 'app/lib/features/teamPlayers/teamPlayers.slice'
+import { setCaptain } from 'app/lib/features/teamPlayer/teamPlayer.slice'
 import { useState } from 'react'
 import { useUpdateTeam } from 'app/hooks/transfer/useUpdateTeam/useUpdateTeam'
-import { setTab } from 'app/lib/features/tours/tours.slice'
+import { setTab } from 'app/lib/features/tour/tour.slice'
 import { TABS } from 'app/utils/tabs.util'
-import { revertTeamPlayers } from 'app/lib/features/teamPlayers/teamPlayers.slice'
+import { revertTeamPlayers } from 'app/lib/features/teamPlayer/teamPlayer.slice'
 import { useTranslation } from 'react-i18next'
 import { useUpdateTourTeam } from 'app/hooks/transfer/useUpdateTourTeam/useUpdateTourTeam.index'
 import { useAutoGenerateTeamPlayers } from 'app/hooks/transfer/useAutoGenerateTeamPlayers/useAutoGenerateTeamPlayers'
@@ -22,18 +22,19 @@ import {
 import { Button } from '@/components/ui/button'
 import { setTransferModal } from 'app/lib/features/currentTeam/currentTeam.slice'
 import { getCorrentPlayerPosition } from 'app/utils/getCorrectPlayerPosition.utils'
-import { configKey } from 'app/utils/config.util'
+import { CONFIG_KEY } from 'app/utils/config.util'
 import {
   selectPrevTeam,
   selectTeamConcat,
-} from 'app/lib/features/teamPlayers/teamPlayers.selector'
+} from 'app/lib/features/teamPlayer/teamPlayer.selector'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
-import { selectCurrentTourTeam } from 'app/lib/features/tourTeams/tourTeams.selector'
-import { selectCurrentTour } from 'app/lib/features/tours/tours.selector'
+import { selectCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.selector'
+import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
-import { selectPlayers } from 'app/lib/features/players/players.selector'
+import { selectPlayers } from 'app/lib/features/player/player.selector'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 
 const TransferStadiumForm = () => {
   const { t } = useTranslation()
@@ -45,15 +46,15 @@ const TransferStadiumForm = () => {
   const currentTour = useSelector(selectCurrentTour)
   const players = useSelector(selectPlayers)
   const currentTourTeam = useSelector(selectCurrentTourTeam)
-  const { playersCount, teamPrice } = useSelector((state) => state.teamPlayers)
+  const { playersCount, teamPrice } = useSelector((state) => state.teamPlayer)
   const prevTeam = useSelector(selectPrevTeam)
   const { lang } = useSelector((state) => state.systemLanguage)
-  const { config } = useSelector((store) => store.systemConfig)
+  const config = useSelector(selectSystemConfig)
 
   const [teamCreateBtns, toggleTeamCreateBtns] = useState(false)
 
   const transfer_show_modals =
-    config[configKey.transfer_show_modals]?.value?.toLowerCase() === 'true'
+    config[CONFIG_KEY.transfer_show_modals]?.value?.toLowerCase() === 'true'
   const {
     updateTeamPlayers,
     isLoading: playersLoading,

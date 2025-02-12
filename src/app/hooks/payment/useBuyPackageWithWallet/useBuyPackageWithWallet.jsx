@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react'
 import { toast } from 'react-toastify'
 import { supabase } from '../../../lib/supabaseClient'
 import { useTranslation } from 'react-i18next'
-import { PAYMENTOPTIONS } from 'app/utils/paymentOptions.util'
+import { PAYMENT_OPTIONS } from 'app/utils/paymentOptions.util'
 import { useRouter } from 'next/navigation'
 
 export const useBuyPackageWithWallet = () => {
@@ -35,9 +35,9 @@ export const useBuyPackageWithWallet = () => {
           .insert({
             team_id,
             pay_package_id: package_id,
-            system: PAYMENTOPTIONS.WALLET,
+            system: PAYMENT_OPTIONS.WALLET,
             status: 1,
-            transaction_id: btoa(Date.now() + team_id + PAYMENTOPTIONS.WALLET),
+            transaction_id: btoa(Date.now() + team_id + PAYMENT_OPTIONS.WALLET),
           })
           .select()
           .is('deleted_at', null)

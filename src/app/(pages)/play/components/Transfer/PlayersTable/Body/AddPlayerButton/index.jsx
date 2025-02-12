@@ -4,28 +4,31 @@ import Image from 'next/image'
 import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import { setBalanceModal } from 'app/lib/features/currentTeam/currentTeam.slice'
-import { configKey } from 'app/utils/config.util'
+import { CONFIG_KEY } from 'app/utils/config.util'
 import { useTranslation } from 'react-i18next'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { cn } from '@/lib/utils'
+import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 
 const AddPlayerButton = ({
   cell,
   handleAddPlayer,
-  team,
   teamBalance,
+  teamConcat,
   totalPlayersCount,
 }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const condition = teamBalance >= cell.row.original.price
-  const isPlayerInTeam = team.find((p) => p.name === cell.getValue())
+  const isPlayerInTeam = teamConcat.find(
+    (p) => p.player_id == +cell?.row?.original?.id
+  )
   const currentTeam = useSelector(selectCurrentTeam)
-  const { config } = useSelector((store) => store.systemConfig)
+  const config = useSelector(selectSystemConfig)
 
   const transfer_show_modals =
-    config[configKey.transfer_show_modals]?.value?.toLowerCase() === 'true'
-  const max_balance = +config[configKey.max_balance]?.value
+    config[CONFIG_KEY.transfer_show_modals]?.value?.toLowerCase() === 'true'
+  const max_balance = +config[CONFIG_KEY.max_balance]?.value
 
   const handleClick = () => {
     if (condition) {

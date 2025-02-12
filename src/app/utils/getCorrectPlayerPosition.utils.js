@@ -1,17 +1,17 @@
 import { LANGUAGE } from './languages.util'
-import { PLAYERS } from './players.util'
+import { PLAYER_POSITION } from './player.util'
 
 export const getCorrentPlayerPosition = (position, lang, type = 'short') => {
   if (type === 'short') {
     if (lang === LANGUAGE.uz) {
       switch (position) {
-        case PLAYERS.GOA:
+        case PLAYER_POSITION.GOA:
           return 'DR'
-        case PLAYERS.DEF:
+        case PLAYER_POSITION.DEF:
           return 'HM'
-        case PLAYERS.MID:
+        case PLAYER_POSITION.MID:
           return 'YH'
-        case PLAYERS.STR:
+        case PLAYER_POSITION.STR:
           return 'HJ'
         default:
           return position
@@ -19,13 +19,13 @@ export const getCorrentPlayerPosition = (position, lang, type = 'short') => {
     }
     if (lang === LANGUAGE.ru) {
       switch (position) {
-        case PLAYERS.GOA:
+        case PLAYER_POSITION.GOA:
           return 'ВР'
-        case PLAYERS.DEF:
+        case PLAYER_POSITION.DEF:
           return 'ЗЩ'
-        case PLAYERS.MID:
+        case PLAYER_POSITION.MID:
           return 'ПЗ'
-        case PLAYERS.STR:
+        case PLAYER_POSITION.STR:
           return 'НП'
         default:
           return position
@@ -35,13 +35,13 @@ export const getCorrentPlayerPosition = (position, lang, type = 'short') => {
   if (type === 'full') {
     if (lang === LANGUAGE.uz) {
       switch (position) {
-        case PLAYERS.GOA:
+        case PLAYER_POSITION.GOA:
           return 'Darvozabon'
-        case PLAYERS.DEF:
+        case PLAYER_POSITION.DEF:
           return 'Himoyachi'
-        case PLAYERS.MID:
+        case PLAYER_POSITION.MID:
           return 'Yarim Himoyachi'
-        case PLAYERS.STR:
+        case PLAYER_POSITION.STR:
           return 'Hujumchi'
         default:
           return position
@@ -49,13 +49,13 @@ export const getCorrentPlayerPosition = (position, lang, type = 'short') => {
     }
     if (lang === LANGUAGE.ru) {
       switch (position) {
-        case PLAYERS.GOA:
+        case PLAYER_POSITION.GOA:
           return 'Вратарь'
-        case PLAYERS.DEF:
+        case PLAYER_POSITION.DEF:
           return 'Защитник'
-        case PLAYERS.MID:
+        case PLAYER_POSITION.MID:
           return 'Полузащитник'
-        case PLAYERS.STR:
+        case PLAYER_POSITION.STR:
           return 'Нападающий'
         default:
           return position

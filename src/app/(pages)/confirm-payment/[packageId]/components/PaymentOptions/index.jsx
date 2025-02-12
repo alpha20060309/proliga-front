@@ -3,21 +3,22 @@ import ClickUpPaymentOption from './ClickUp'
 import PaymePaymentOption from './Payme'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import RefillBalanceModal from 'components/RefillBalanceModal'
+import RefillBalance from 'components/Modals/RefillBalance'
 import { useSelector } from 'react-redux'
-import { configKey } from 'app/utils/config.util'
+import { CONFIG_KEY } from 'app/utils/config.util'
+import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 
 const PaymentOptions = ({ paymentOption, setPaymentOption }) => {
   const { t } = useTranslation()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const active = 'border-primary'
   const passive = 'border-neutral-600 hover:border-primary/80'
-  const { config } = useSelector((store) => store.systemConfig)
+  const config = useSelector(selectSystemConfig)
 
   const checkout_payme =
-    config[configKey.checkout_payme]?.value.toLowerCase() === 'true' ?? null
+    config[CONFIG_KEY.checkout_payme]?.value.toLowerCase() === 'true' || null
   const checkout_click =
-    config[configKey.checkout_click]?.value.toLowerCase() === 'true' ?? null
+    config[CONFIG_KEY.checkout_click]?.value.toLowerCase() === 'true' || null
 
   return (
     <div className="mb-4 mt-2">
@@ -54,7 +55,7 @@ const PaymentOptions = ({ paymentOption, setPaymentOption }) => {
           />
         )}
       </section>
-      <RefillBalanceModal
+      <RefillBalance
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
       />

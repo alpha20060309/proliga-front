@@ -1,4 +1,4 @@
-import { fetchCompetition, fetchCompetitionStats } from './competition.thunk'
+import { fetchCompetition } from './competition.thunk'
 
 export const competitionExtraReducer = (builder) => {
   builder

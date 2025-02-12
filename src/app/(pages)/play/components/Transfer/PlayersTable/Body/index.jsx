@@ -3,15 +3,16 @@ import AddPlayerButton from './AddPlayerButton'
 import {
   addTeamPlayer,
   updateTeamPlayer,
-} from 'app/lib/features/teamPlayers/teamPlayers.slice'
+} from 'app/lib/features/teamPlayer/teamPlayer.slice'
 import { useTranslation } from 'react-i18next'
-import { configKey } from 'app/utils/config.util'
+import { CONFIG_KEY } from 'app/utils/config.util'
 import {
   selectTeamConcat,
   selectTotalPlayersCount,
-} from 'app/lib/features/teamPlayers/teamPlayers.selector'
+} from 'app/lib/features/teamPlayer/teamPlayer.selector'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { cn } from '@/lib/utils'
+import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 
 const TransferTableBody = ({ table, flexRender }) => {
   const { t } = useTranslation()
@@ -19,11 +20,11 @@ const TransferTableBody = ({ table, flexRender }) => {
   const totalPlayersCount = useSelector(selectTotalPlayersCount)
   const teamConcat = useSelector(selectTeamConcat)
   const currentTeam = useSelector(selectCurrentTeam)
-  const { config } = useSelector((store) => store.systemConfig)
-  const { teamPrice } = useSelector((store) => store.teamPlayers)
-  const max_same_team_players = +config[configKey.max_same_team_players]?.value
+  const config = useSelector(selectSystemConfig)
+  const { teamPrice } = useSelector((store) => store.teamPlayer)
+  const max_same_team_players = +config[CONFIG_KEY.max_same_team_players]?.value
   const transfer_show_modals =
-    config[configKey.transfer_show_modals]?.value?.toLowerCase() === 'true'
+    config[CONFIG_KEY.transfer_show_modals]?.value?.toLowerCase() === 'true'
   const teamBalance = +(currentTeam?.balance || 0) - +(teamPrice || 0)
 
   const handleAddPlayer = (player) => {
@@ -80,7 +81,7 @@ const TransferTableBody = ({ table, flexRender }) => {
                     teamBalance={teamBalance}
                     key={cell.id}
                     cell={cell}
-                    team={teamConcat}
+                    teamConcat={teamConcat}
                     handleAddPlayer={handleAddPlayer}
                     totalPlayersCount={totalPlayersCount}
                   />

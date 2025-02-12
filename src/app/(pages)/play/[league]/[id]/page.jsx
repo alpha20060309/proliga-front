@@ -8,27 +8,27 @@ import { cn } from '@/lib/utils'
 import { useEffect, useMemo } from 'react'
 import { TABS } from 'app/utils/tabs.util'
 import { useSelector, useDispatch } from 'react-redux'
-import { setTab } from 'app/lib/features/tours/tours.slice'
+import { setTab } from 'app/lib/features/tour/tour.slice'
 import { setCurrentCompetition } from 'app/lib/features/competition/competition.slice'
 import { setLastVisitedTeam } from 'app/lib/features/currentTeam/currentTeam.slice'
 import { fetchCompetition } from 'app/lib/features/competition/competition.thunk'
-import { fetchTeamPlayers } from 'app/lib/features/teamPlayers/teamPlayers.thunk'
-import { fetchAdditionalPlayers } from 'app/lib/features/players/players.thunk'
-import { fetchTourTeams } from 'app/lib/features/tourTeams/tourTeams.thunk'
-import { fetchPackages } from 'app/lib/features/packages/packages.thunk'
-import { fetchTopPlayers } from 'app/lib/features/players/players.thunk'
-import { fetchPlayers } from 'app/lib/features/players/players.thunk'
+import { fetchTeamPlayers } from 'app/lib/features/teamPlayer/teamPlayer.thunk'
+import { fetchAdditionalPlayers } from 'app/lib/features/player/player.thunk'
+import { fetchTourTeams } from 'app/lib/features/tourTeam/tourTeam.thunk'
+import { fetchPackages } from 'app/lib/features/package/package.thunk'
+import { fetchTopPlayers } from 'app/lib/features/player/player.thunk'
+import { fetchPlayers } from 'app/lib/features/player/player.thunk'
 import { fetchBanners } from 'app/lib/features/banner/banner.thunk'
 import { fetchSeason } from 'app/lib/features/season/season.thunk'
-import { fetchTours } from 'app/lib/features/tours/tours.thunk'
+import { fetchTours } from 'app/lib/features/tour/tour.thunk'
 import { fetchClubs } from 'app/lib/features/club/club.thunk'
 import { fetchCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.thunk'
 import { fetchPlayerPoint } from 'app/lib/features/playerPoint/playerPoint.thunk'
-import { selectPrevTeam } from 'app/lib/features/teamPlayers/teamPlayers.selector'
+import { selectPrevTeam } from 'app/lib/features/teamPlayer/teamPlayer.selector'
 import { selectCompetition } from 'app/lib/features/competition/competition.selector'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
-import { selectCurrentTour } from 'app/lib/features/tours/tours.selector'
-import { selectPackages } from 'app/lib/features/packages/packages.selector'
+import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
+import { selectPackages } from 'app/lib/features/package/package.selector'
 import { selectBanners } from 'app/lib/features/banner/banner.selector'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 
@@ -41,9 +41,9 @@ const Play = ({ params }) => {
   const packages = useSelector(selectPackages)
   const banners = useSelector(selectBanners)
   const { gameTab, isLoading: toursLoading } = useSelector(
-    (state) => state.tours
+    (state) => state.tour
   )
-  const { isLoading: packagesLoading } = useSelector((store) => store.packages)
+  const { isLoading: packagesLoading } = useSelector((store) => store.package)
   const { isLoading: bannersLoading } = useSelector((store) => store.banner)
   const { isLoading: teamLoading } = useSelector((state) => state.currentTeam)
   const { isLoading: competitionsLoading } = useSelector(
@@ -53,7 +53,7 @@ const Play = ({ params }) => {
     (store) => store.season
   )
   const { count: playersCount, isLoading: playersLoading } = useSelector(
-    (store) => store.players
+    (store) => store.player
   )
   const prevTeam = useSelector(selectPrevTeam)
   const countOfPlayers = useMemo(
@@ -94,6 +94,7 @@ const Play = ({ params }) => {
     if (banners?.length === 0) {
       dispatch(fetchBanners())
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch])
 
   useEffect(() => {

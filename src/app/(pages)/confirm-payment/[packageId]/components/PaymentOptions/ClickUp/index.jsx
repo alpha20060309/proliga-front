@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { PAYMENTOPTIONS } from 'app/utils/paymentOptions.util'
+import { PAYMENT_OPTIONS } from 'app/utils/paymentOptions.util'
 import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
 
@@ -13,10 +13,10 @@ const ClickUpPaymentOption = ({
 
   return (
     <div
-      onClick={() => setPaymentOption(PAYMENTOPTIONS.CLICKUP)}
+      onClick={() => setPaymentOption(PAYMENT_OPTIONS.CLICKUP)}
       className={cn(
         'flex size-36 cursor-pointer flex-col justify-center gap-2 rounded-xl border bg-stone-950 transition-all sm:size-44 lg:size-56 xl:size-60',
-        paymentOption === PAYMENTOPTIONS.CLICKUP ? active : passive
+        paymentOption === PAYMENT_OPTIONS.CLICKUP ? active : passive
       )}
     >
       <Image
