@@ -7,7 +7,7 @@ import {
   SUPABASE_PROVIDERS,
 } from 'app/lib/supabaseClient'
 import { useGoogleLogin } from 'app/hooks/auth/useGoogleLogin/useGoogleLogin'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { CONFIG_KEY } from 'app/utils/config.util'
 import {
@@ -16,8 +16,10 @@ import {
   selectUserAuth,
   selectUserTable,
 } from 'app/lib/features/auth/auth.selector'
+import { setPhoneModal } from 'app/lib/features/auth/auth.slice'
 
 export default function AuthListener() {
+  const dispatch = useDispatch()
   const config = useSelector(selectSystemConfig)
   const app_version = config[CONFIG_KEY.app_version]?.value ?? ''
   const userTable = useSelector(selectUserTable)
@@ -69,8 +71,13 @@ export default function AuthListener() {
             }
           }
         }
-        if (rootProvider === SUPABASE_PROVIDERS.GOOGLE) {
-          return
+        if (
+          rootProvider === SUPABASE_PROVIDERS.GOOGLE &&
+          SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE
+        ) {
+          if (userTable?.phone) {
+            return dispatch(setPhoneModal(true))
+          }
         }
       }
     })
@@ -78,7 +85,16 @@ export default function AuthListener() {
     return () => {
       subscription.unsubscribe()
     }
-  }, [login, app_version, userAuth, userTable, agent, geo, fingerprint])
+  }, [
+    login,
+    app_version,
+    userAuth,
+    userTable,
+    agent,
+    geo,
+    fingerprint,
+    dispatch,
+  ])
 
   return null
 }

@@ -16,6 +16,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useGetUserPhone } from 'app/hooks/user/useGetUserPhone/useGetUserPhone'
 import { memo } from 'react'
 import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
 
 const ForgotPassword = ({ isModalOpen, setModalOpen }) => {
   const router = useRouter()
@@ -60,21 +61,16 @@ const ForgotPassword = ({ isModalOpen, setModalOpen }) => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setModalOpen}>
-      <DialogContent className="w-[98%] max-w-md rounded-xl bg-neutral-950 px-4 py-6 text-neutral-100 md:p-6">
+      <DialogContent className="w-[98%] max-w-md rounded-xl bg-neutral-950 px-4 py-6 text-neutral-100 sm:p-6">
         <DialogTitle>{t('Parolingizni unutingizmi?')}</DialogTitle>
         <DialogDescription>
           {t(
             'To reset your password, please enter the OTP sent to your mobile phone. This step is required for security verification.'
           )}
         </DialogDescription>
-        <form
-          onSubmit={handleConfirm}
-          className="flex w-full flex-col items-start gap-6"
-        >
-          <div className="relative flex w-full flex-col gap-1">
-            <label htmlFor="phone" className="text-xs md:text-base">
-              {t('Telefon raqam')}:
-            </label>
+        <form onSubmit={handleConfirm} className="space-y-4">
+          <div className="relative space-y-1">
+            <Label htmlFor="enter-phone">{t('Telefon raqam')}:</Label>
             <PhoneInput
               id="enter-phone"
               name="phone"

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Dialog,
   DialogContent,
@@ -13,19 +13,42 @@ import { Label } from '@/components/ui/label'
 import { Loader2 } from 'lucide-react'
 import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
+import { setPhoneModal } from 'app/lib/features/auth/auth.slice'
+import { getSession } from 'app/lib/supabaseClient'
+import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 
-function SetPhoneNumber({ isModalOpen, setModalOpen }) {
+function SetPhoneNumber() {
+  const dispatch = useDispatch()
+  const { phoneModal } = useSelector((store) => store.auth)
   const { t } = useTranslation()
   const [phone, setPhone] = useState('')
+  const [session, setSession] = useState(null)
   const isLoading = false
+  const userTable = useSelector(selectUserTable)
+
+  console.log(session)
+  const setModalOpen = () => {
+    userTable?.phone && dispatch(setPhoneModal(false))
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
   }
 
+  useEffect(() => {
+    const fetch = async () => {
+      const session = await getSession()
+      if (session?.user?.id) {
+        setSession(session)
+      }
+    }
+    fetch()
+  }, [])
+
   return (
-    <Dialog open={isModalOpen} onOpenChange={setModalOpen}>
-      <DialogContent className="w-[98%] max-w-md rounded-xl">
+    <Dialog open={phoneModal} onOpenChange={setModalOpen}>
+      <DialogContent className="w-[98%] max-w-md rounded-xl bg-neutral-950 px-4 py-6 text-neutral-100 sm:p-6">
         <DialogTitle>{t('Enter your phone number.')}</DialogTitle>
         <DialogDescription>
           {t(
@@ -33,8 +56,8 @@ function SetPhoneNumber({ isModalOpen, setModalOpen }) {
           )}
         </DialogDescription>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="phoneNumber">{t('Telefon raqam')}:</Label>
+          <div className="relative space-y-1">
+            <Label htmlFor="set-phone">{t('Telefon raqam')}:</Label>
             <PhoneInput
               id="set-phone"
               name="phone"

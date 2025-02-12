@@ -4,11 +4,9 @@ import YandexSignIn from './Yandex'
 import { useTranslation } from 'react-i18next'
 import { memo } from 'react'
 import SetPhoneNumber from 'components/Modals/SetPhoneNumber'
-import { useState } from 'react'
 
 function SocialLogin() {
   const { t } = useTranslation()
-  const [isModalOpen, setModalOpen] = useState(true)
 
   return (
     <>
@@ -26,7 +24,7 @@ function SocialLogin() {
           <YandexSignIn />
         </div>
       </div>
-      <SetPhoneNumber isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
+      <SetPhoneNumber />
     </>
   )
 }

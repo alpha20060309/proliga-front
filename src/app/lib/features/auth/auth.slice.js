@@ -10,6 +10,7 @@ const initialState = {
   geoError: null,
   geoLoading: false,
   is_checked: false,
+  phoneModal: false,
 }
 
 const authSlice = createSlice({
@@ -37,6 +38,9 @@ const authSlice = createSlice({
     setChecked: (state, action) => {
       state.is_checked = action.payload
     },
+    setPhoneModal: (state, action) => {
+      state.phoneModal = action.payload
+    },
   },
   extraReducers: authExtraReducer,
 })
@@ -50,6 +54,7 @@ export const {
   setAgent,
   setChecked,
   setLoginMethod,
+  setPhoneModal,
 } = authSlice.actions
 
 export default authSlice.reducer

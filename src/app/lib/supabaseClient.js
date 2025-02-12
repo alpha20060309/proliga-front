@@ -6,6 +6,17 @@ export const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ''
 )
 
+export async function getSession() {
+  try {
+    const { data, error } = await supabase.auth.getSession()
+    if (error) throw error
+    return data.session
+  } catch (error) {
+    console.error('Error getting session:', error.message)
+    return null
+  }
+}
+
 export const SUPABASE_EVENT_TYPE = {
   INSERT: 'INSERT',
   UPDATE: 'UPDATE',

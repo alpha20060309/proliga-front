@@ -19,7 +19,7 @@ const GoogleSignIn = ({ className, iconClassName }) => {
       const { error } = supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: URL + '/championships',
+          redirectTo: URL + '/auth',
         },
       })
 
