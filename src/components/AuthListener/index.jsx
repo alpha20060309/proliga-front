@@ -44,12 +44,12 @@ export default function AuthListener() {
         const rootProvider = session?.user?.app_metadata?.provider
         const secondaryProviders = session?.user?.app_metadata?.providers
 
-        if (!session?.user?.id) return
         if (
           Boolean(auth?.id) ||
           Boolean(table?.id) ||
           Boolean(userAuth?.id) ||
-          Boolean(userTable?.id)
+          Boolean(userTable?.id) ||
+          !session?.user?.id
         )
           return
 

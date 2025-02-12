@@ -619,5 +619,8 @@
   "Team id": "Идентификатор команды",
   "No match events are currently available. Please stay tuned as they will be updated soon!": "В настоящее время событий матча нет. Пожалуйста, оставайтесь с нами – они скоро будут добавлены!",
   "The match hasn't started yet. Stay tuned for updates!": "Матч еще не начался. Оставайтесь с нами для обновлений!",
-  "Google": "Google"
+  "Google": "Google",
+  "To complete your registration, please link your mobile phone to your account. This step is mandatory.": "Для завершения регистрации привяжите свой мобильный телефон к аккаунту. Этот шаг является обязательным.",
+  "To reset your password, please enter the OTP sent to your mobile phone. This step is required for security verification.": "Для сброса пароля введите OTP-код, отправленный на ваш мобильный телефон. Этот шаг необходим для проверки безопасности.",
+  "Enter your phone number.": "Введите номер."
 }
