@@ -27,6 +27,7 @@ const ForgotPassword = ({ isModalOpen, setModalOpen }) => {
   const [phone, setPhone] = useState('')
   const { sendOTP, isLoading: sendLoading } = useSendOTP()
   const { getUserPhone, isLoading: tableLoading } = useGetUserPhone()
+  const [verified, setVerified] = useState(false)
 
   const isLoading = useMemo(
     () => sendLoading || tableLoading,
@@ -37,17 +38,18 @@ const ForgotPassword = ({ isModalOpen, setModalOpen }) => {
     e.preventDefault()
 
     if (!phone) {
-      toast.error(t('Telefon raqam kiritilmagan'), { theme: 'dark' })
-      return
+      console.log('5')
+      return toast.error(t('Telefon raqam kiritilmagan'))
     }
 
     await getUserPhone({
       phone,
+      cb: () => setVerified(true),
     })
   }
 
   useEffect(() => {
-    if (phoneParams) {
+    if (phoneParams && verified) {
       const fetch = async () => {
         await sendOTP({
           phone,
@@ -56,8 +58,9 @@ const ForgotPassword = ({ isModalOpen, setModalOpen }) => {
         })
       }
       fetch()
+      setVerified(false)
     }
-  }, [router, phone, phoneParams, sendOTP])
+  }, [router, phone, phoneParams, sendOTP, verified])
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setModalOpen}>

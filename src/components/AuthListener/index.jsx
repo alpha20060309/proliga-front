@@ -18,9 +18,11 @@ import {
 } from 'app/lib/features/auth/auth.selector'
 import { setPhoneModal } from 'app/lib/features/auth/auth.slice'
 import { useCheckUserRegistered } from 'app/hooks/auth/useCheckUserRegistered/useCheckUserRegistered'
+import { useSearchParams } from 'next/navigation'
 
 export default function AuthListener() {
   const dispatch = useDispatch()
+  const params = useSearchParams()
   const config = useSelector(selectSystemConfig)
   const userTable = useSelector(selectUserTable)
   const userAuth = useSelector(selectUserAuth)
@@ -29,6 +31,8 @@ export default function AuthListener() {
   const { fingerprint } = useSelector((store) => store.auth)
   const app_version = config[CONFIG_KEY.app_version]?.value ?? ''
   const { login } = useGoogleLogin()
+  const phone = decodeURIComponent(params.get('phone')) || ''
+  const phone_verified = decodeURIComponent(params.get('pv')) || ''
   const { checkUserRegistered } = useCheckUserRegistered()
 
   useEffect(() => {
@@ -60,19 +64,21 @@ export default function AuthListener() {
 
         if (
           rootProvider === SUPABASE_PROVIDERS.EMAIL &&
-          SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE
+          SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE &&
+          phone
         ) {
-          // login({ auth: session?.user, app_version, geo, agent, fingerprint })
-          // if (app_version) {
-          //   localStorage.setItem('app_version', app_version)
-          // }
+          login({ auth: session?.user, geo, agent, fingerprint })
+          app_version && localStorage.setItem('app_version', app_version)
         }
         if (
           rootProvider === SUPABASE_PROVIDERS.GOOGLE &&
           SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE
         ) {
-          if (!userTable?.phone) {
-            // return dispatch(setPhoneModal(true))
+          if (phone) {
+            login({ auth: session?.user, geo, agent, fingerprint })
+            app_version && localStorage.setItem('app_version', app_version)
+          } else {
+            return dispatch(setPhoneModal(true))
           }
         }
       }
@@ -91,6 +97,7 @@ export default function AuthListener() {
     fingerprint,
     dispatch,
     checkUserRegistered,
+    phone,
   ])
 
   return null

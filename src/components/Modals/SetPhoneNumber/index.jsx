@@ -51,9 +51,7 @@ function SetPhoneNumber() {
     e.preventDefault()
 
     if (!phone) {
-      return toast.error(t('Telefon raqam kiritilmagan'), {
-        theme: 'dark',
-      })
+      return toast.error(t('Telefon raqam kiritilmagan'))
     }
     if (!session?.user?.id) {
       return toast.warning(t('An unknown error occurred'))

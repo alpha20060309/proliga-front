@@ -76,7 +76,7 @@ export const useCheckUserRegistered = () => {
         setIsLoading(false)
       }
     },
-    [t, setParams]
+    [t, setParams, dispatch]
   )
   return { checkUserRegistered, isLoading, error }
 }

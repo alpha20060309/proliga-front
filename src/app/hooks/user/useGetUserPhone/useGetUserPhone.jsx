@@ -9,14 +9,15 @@ export const useGetUserPhone = () => {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState(null)
-  const updateParams = useUpdateSearchParams()
+  const setParams = useUpdateSearchParams()
 
   const getUserPhone = useCallback(
-    async ({ phone }) => {
+    async ({ phone, cb = () => {} }) => {
       setIsLoading(false)
       setError(null)
 
       if (!phone) {
+        console.log('4')
         setError('Telefon raqam kiritilmagan')
         toast.error(t('Telefon raqam kiritilmagan'), { theme: 'dark' })
         return
@@ -57,7 +58,8 @@ export const useGetUserPhone = () => {
         }
         if (data?.phone) {
           setData(data?.phone)
-          updateParams('phone', data?.phone)
+          setParams({ phone: data?.phone })
+          cb()
         }
       } catch (error) {
         setError(
@@ -75,7 +77,7 @@ export const useGetUserPhone = () => {
         setIsLoading(false)
       }
     },
-    [t, updateParams]
+    [t, setParams]
   )
   return { getUserPhone, isLoading, error, data }
 }
