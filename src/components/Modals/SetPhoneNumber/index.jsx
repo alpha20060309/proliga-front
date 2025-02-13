@@ -38,9 +38,10 @@ function SetPhoneNumber() {
   const { register } = useGoogleRegister()
   const geo = useSelector(selectGeo)
   const agent = useSelector(selectAgent)
-  const fingerprint = useSelector((store) => store.auth)
+  const { fingerprint } = useSelector((store) => store.auth)
   const config = useSelector(selectSystemConfig)
   const app_version = config[CONFIG_KEY.app_version]?.value || ''
+  const SIGN_IN_METHOD = localStorage.getItem('sign-in-method')
 
   const setModalOpen = () => {
     userTable?.phone && dispatch(setPhoneModal(false))
@@ -65,6 +66,7 @@ function SetPhoneNumber() {
       fingerprint,
       agent,
       app_version,
+      closeModal: () => dispatch(setPhoneModal(true)),
     })
   }
 
@@ -79,7 +81,7 @@ function SetPhoneNumber() {
   }, [])
 
   return (
-    <Dialog open={phoneModal} onOpenChange={setModalOpen}>
+    <Dialog open={phoneModal && SIGN_IN_METHOD} onOpenChange={setModalOpen}>
       <DialogContent className="w-[98%] max-w-md rounded-xl bg-neutral-950 px-4 py-6 text-neutral-100 sm:p-6">
         <DialogTitle>{t('Enter your phone number.')}</DialogTitle>
         <DialogDescription>

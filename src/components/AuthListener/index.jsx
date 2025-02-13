@@ -17,17 +17,19 @@ import {
   selectUserTable,
 } from 'app/lib/features/auth/auth.selector'
 import { setPhoneModal } from 'app/lib/features/auth/auth.slice'
+import { useCheckUserRegistered } from 'app/hooks/auth/useCheckUserRegistered/useCheckUserRegistered'
 
 export default function AuthListener() {
   const dispatch = useDispatch()
   const config = useSelector(selectSystemConfig)
-  const app_version = config[CONFIG_KEY.app_version]?.value ?? ''
   const userTable = useSelector(selectUserTable)
   const userAuth = useSelector(selectUserAuth)
-  const { fingerprint } = useSelector((store) => store.auth)
   const agent = useSelector(selectAgent)
   const geo = useSelector(selectGeo)
+  const { fingerprint } = useSelector((store) => store.auth)
+  const app_version = config[CONFIG_KEY.app_version]?.value ?? ''
   const { login } = useGoogleLogin()
+  const { checkUserRegistered } = useCheckUserRegistered()
 
   useEffect(() => {
     const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
@@ -44,7 +46,6 @@ export default function AuthListener() {
     } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === SUPABASE_AUTH_EVENTS.SIGNED_IN) {
         const rootProvider = session?.user?.app_metadata?.provider
-        const secondaryProviders = session?.user?.app_metadata?.providers
 
         if (
           Boolean(auth?.id) ||
@@ -55,28 +56,23 @@ export default function AuthListener() {
         )
           return
 
-        if (rootProvider === SUPABASE_PROVIDERS.EMAIL) {
-          if (
-            secondaryProviders.includes(
-              SUPABASE_PROVIDERS.GOOGLE,
-              SUPABASE_PROVIDERS.FACEBOOK
-            ) &&
-            !userAuth?.id &&
-            !userTable?.id &&
-            SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE
-          ) {
-            login({ auth: session?.user, app_version, geo, agent, fingerprint })
-            if (app_version) {
-              localStorage.setItem('app_version', app_version)
-            }
-          }
+        checkUserRegistered({ guid: session?.user?.id })
+
+        if (
+          rootProvider === SUPABASE_PROVIDERS.EMAIL &&
+          SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE
+        ) {
+          // login({ auth: session?.user, app_version, geo, agent, fingerprint })
+          // if (app_version) {
+          //   localStorage.setItem('app_version', app_version)
+          // }
         }
         if (
           rootProvider === SUPABASE_PROVIDERS.GOOGLE &&
           SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE
         ) {
           if (!userTable?.phone) {
-            return dispatch(setPhoneModal(true))
+            // return dispatch(setPhoneModal(true))
           }
         }
       }
@@ -94,6 +90,7 @@ export default function AuthListener() {
     geo,
     fingerprint,
     dispatch,
+    checkUserRegistered,
   ])
 
   return null

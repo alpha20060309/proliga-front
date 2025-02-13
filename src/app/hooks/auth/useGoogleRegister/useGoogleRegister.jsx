@@ -43,7 +43,15 @@ export const useGoogleRegister = () => {
   )
 
   const register = useCallback(
-    async ({ phone, auth, geo, fingerprint, agent, app_version }) => {
+    async ({
+      phone,
+      auth,
+      geo,
+      fingerprint,
+      agent,
+      app_version,
+      closeModal,
+    }) => {
       setIsLoading(true)
       setError(null)
       setData(null)
@@ -100,6 +108,7 @@ export const useGoogleRegister = () => {
         }
 
         // Step 3: Send OTP and redirect to confirmation page
+        closeModal()
         setState({ authData: auth, fullUserData })
         localStorage.setItem('app_version', app_version)
         toast.info(t('Please confirm your phone number to complete sign up!'))

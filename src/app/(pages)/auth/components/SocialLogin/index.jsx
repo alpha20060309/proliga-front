@@ -1,6 +1,5 @@
 import GoogleSignIn from './Google'
 import FacebookSignIn from './Facebook'
-import YandexSignIn from './Yandex'
 import { useTranslation } from 'react-i18next'
 import { memo } from 'react'
 import SetPhoneNumber from 'components/Modals/SetPhoneNumber'
@@ -21,7 +20,6 @@ function SocialLogin() {
         <div className="flex gap-1">
           <GoogleSignIn />
           <FacebookSignIn />
-          <YandexSignIn />
         </div>
       </div>
       <SetPhoneNumber />
