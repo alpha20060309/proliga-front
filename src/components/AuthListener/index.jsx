@@ -65,18 +65,20 @@ export default function AuthListener() {
         if (
           rootProvider === SUPABASE_PROVIDERS.EMAIL &&
           SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE &&
-          phone
+          phone !== 'null'
         ) {
           login({ auth: session?.user, geo, agent, fingerprint })
           app_version && localStorage.setItem('app_version', app_version)
+          return
         }
         if (
           rootProvider === SUPABASE_PROVIDERS.GOOGLE &&
           SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE
         ) {
-          if (phone) {
+          if (phone !== 'null') {
             login({ auth: session?.user, geo, agent, fingerprint })
             app_version && localStorage.setItem('app_version', app_version)
+            return
           } else {
             return dispatch(setPhoneModal(true))
           }

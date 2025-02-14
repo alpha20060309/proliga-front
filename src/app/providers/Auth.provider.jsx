@@ -41,9 +41,6 @@ const AuthProvider = ({ children }) => {
       dispatch(setUserAuth(auth))
       dispatch(setUserTable(table))
     }
-    // if (auth && !auth.session?.access_token && table?.email) {
-    //   logOut({ showMessage: false })
-    // }
     if ((!auth || !table) && path.slice(1, 5) === 'play') {
       router.push('/')
     }
@@ -63,6 +60,30 @@ const AuthProvider = ({ children }) => {
       fetch()
     }
   }, [userTable, userAuth, checkUserExists, path, is_checked])
+
+  useEffect(() => {
+    const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
+    const session =
+      localStorage.getItem(`sb-${sbUrl}-auth-token`) &&
+      JSON.parse(localStorage.getItem(`sb-${sbUrl}-auth-token`))
+    const auth =
+      localStorage.getItem(`user-auth-${sbUrl}`) &&
+      JSON.parse(localStorage.getItem(`user-auth-${sbUrl}`))
+    const table =
+      localStorage.getItem(`user-table-${sbUrl}`) !== 'undefined' &&
+      JSON.parse(localStorage.getItem(`user-table-${sbUrl}`))
+
+    if (
+      !path.includes('auth') &&
+      !path.includes('confirm-otp') &&
+      session?.user?.id &&
+      !auth?.id &&
+      !table?.id
+    ) {
+      const fetch = async () => await logOut({ showMessage: false })
+      fetch()
+    }
+  }, [path, logOut])
 
   useEffect(() => {
     const existing_app_version = localStorage.getItem('app_version') || ''

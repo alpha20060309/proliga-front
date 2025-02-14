@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
 import {
@@ -12,22 +12,16 @@ import {
 import Image from 'next/image'
 import { PhoneInput } from 'components/PhoneInput'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
-import { useRouter, useSearchParams } from 'next/navigation'
 import { useGetUserPhone } from 'app/hooks/user/useGetUserPhone/useGetUserPhone'
 import { memo } from 'react'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 
 const ForgotPassword = ({ isModalOpen, setModalOpen }) => {
-  const router = useRouter()
-  const params = useSearchParams()
-  const phoneParams = params.get('phone') || ''
-
   const { t } = useTranslation()
   const [phone, setPhone] = useState('')
-  const { sendOTP, isLoading: sendLoading } = useSendOTP()
+  const { isLoading: sendLoading } = useSendOTP()
   const { getUserPhone, isLoading: tableLoading } = useGetUserPhone()
-  const [verified, setVerified] = useState(false)
 
   const isLoading = useMemo(
     () => sendLoading || tableLoading,
@@ -38,29 +32,13 @@ const ForgotPassword = ({ isModalOpen, setModalOpen }) => {
     e.preventDefault()
 
     if (!phone) {
-      console.log('5')
       return toast.error(t('Telefon raqam kiritilmagan'))
     }
 
     await getUserPhone({
       phone,
-      cb: () => setVerified(true),
     })
   }
-
-  useEffect(() => {
-    if (phoneParams && verified) {
-      const fetch = async () => {
-        await sendOTP({
-          phone,
-          shouldRedirect: true,
-          redirectTo: `/confirm-otp?redirect=/reset-password&phone=${encodeURIComponent(phoneParams)}`,
-        })
-      }
-      fetch()
-      setVerified(false)
-    }
-  }, [router, phone, phoneParams, sendOTP, verified])
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setModalOpen}>

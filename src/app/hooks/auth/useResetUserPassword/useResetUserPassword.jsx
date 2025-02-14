@@ -24,7 +24,6 @@ export const useResetUserPassword = () => {
         setError(null)
 
         if (!phone) {
-          console.log('2')
           toast.error(t('Telefon raqam kiritilmagan'), { theme: 'dark' })
           setError(t('Telefon raqam kiritilmagan'))
           return

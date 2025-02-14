@@ -22,9 +22,9 @@ export const useGoogleRegister = () => {
     (errorMessage) => {
       setError(errorMessage)
       toast.error(t(errorMessage), { theme: 'dark' })
-      localStorage.clear()
       dispatch(setUserAuth(null))
       dispatch(setUserTable(null))
+      return
     },
     [t, dispatch]
   )

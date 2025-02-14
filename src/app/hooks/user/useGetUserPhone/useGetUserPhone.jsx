@@ -3,6 +3,7 @@ import { toast } from 'react-toastify'
 import { supabase } from '../../../lib/supabaseClient'
 import { useTranslation } from 'react-i18next'
 import { useUpdateSearchParams } from 'app/hooks/system/useUpdateSearchParams/useUpdateSearchParams'
+import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
 
 export const useGetUserPhone = () => {
   const { t } = useTranslation()
@@ -10,14 +11,14 @@ export const useGetUserPhone = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState(null)
   const setParams = useUpdateSearchParams()
+  const { sendOTP } = useSendOTP()
 
   const getUserPhone = useCallback(
-    async ({ phone, cb = () => {} }) => {
+    async ({ phone }) => {
       setIsLoading(false)
       setError(null)
 
       if (!phone) {
-        console.log('4')
         setError('Telefon raqam kiritilmagan')
         toast.error(t('Telefon raqam kiritilmagan'), { theme: 'dark' })
         return
@@ -59,7 +60,11 @@ export const useGetUserPhone = () => {
         if (data?.phone) {
           setData(data?.phone)
           setParams({ phone: data?.phone })
-          cb()
+          await sendOTP({
+            phone,
+            shouldRedirect: true,
+            redirectTo: `/confirm-otp?redirect=/reset-password&phone=${encodeURIComponent(data?.phone)}`,
+          })
         }
       } catch (error) {
         setError(
@@ -77,7 +82,7 @@ export const useGetUserPhone = () => {
         setIsLoading(false)
       }
     },
-    [t, setParams]
+    [t, setParams, sendOTP]
   )
   return { getUserPhone, isLoading, error, data }
 }

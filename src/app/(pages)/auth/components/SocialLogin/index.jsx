@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { memo } from 'react'
 import SetPhoneNumber from 'components/Modals/SetPhoneNumber'
 
-function SocialLogin() {
+function SocialLogin({ setShouldRedirect }) {
   const { t } = useTranslation()
 
   return (
@@ -18,7 +18,7 @@ function SocialLogin() {
           <span className="flex-grow border-t border-gray-300" />
         </div>
         <div className="flex gap-1">
-          <GoogleSignIn />
+          <GoogleSignIn setShouldRedirect={setShouldRedirect} />
           <FacebookSignIn />
         </div>
       </div>

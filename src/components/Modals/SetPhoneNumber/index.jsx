@@ -80,7 +80,10 @@ function SetPhoneNumber() {
 
   return (
     <Dialog open={phoneModal && SIGN_IN_METHOD} onOpenChange={setModalOpen}>
-      <DialogContent className="w-[98%] max-w-md rounded-xl bg-neutral-950 px-4 py-6 text-neutral-100 sm:p-6">
+      <DialogContent
+        showCloseButton={false}
+        className="w-[98%] max-w-md rounded-xl bg-neutral-950 p-5 text-neutral-100 sm:p-6"
+      >
         <DialogTitle>{t('Enter your phone number.')}</DialogTitle>
         <DialogDescription>
           {t(
