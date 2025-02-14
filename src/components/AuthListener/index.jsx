@@ -7,7 +7,7 @@ import {
   SUPABASE_PROVIDERS,
 } from 'app/lib/supabaseClient'
 import { useGoogleLogin } from 'app/hooks/auth/useGoogleLogin/useGoogleLogin'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { CONFIG_KEY } from 'app/utils/config.util'
 import {
@@ -16,16 +16,24 @@ import {
   selectUserAuth,
   selectUserTable,
 } from 'app/lib/features/auth/auth.selector'
+import { setPhoneModal } from 'app/lib/features/auth/auth.slice'
+import { useCheckUserRegistered } from 'app/hooks/auth/useCheckUserRegistered/useCheckUserRegistered'
+import { useSearchParams } from 'next/navigation'
 
 export default function AuthListener() {
+  const dispatch = useDispatch()
+  const params = useSearchParams()
   const config = useSelector(selectSystemConfig)
-  const app_version = config[CONFIG_KEY.app_version]?.value ?? ''
   const userTable = useSelector(selectUserTable)
   const userAuth = useSelector(selectUserAuth)
-  const { fingerprint } = useSelector((store) => store.auth)
   const agent = useSelector(selectAgent)
   const geo = useSelector(selectGeo)
+  const { fingerprint } = useSelector((store) => store.auth)
+  const app_version = config[CONFIG_KEY.app_version]?.value ?? ''
   const { login } = useGoogleLogin()
+  const phone = decodeURIComponent(params.get('phone')) || ''
+  const phone_verified = decodeURIComponent(params.get('pv')) || ''
+  const { checkUserRegistered } = useCheckUserRegistered()
 
   useEffect(() => {
     const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
@@ -42,7 +50,6 @@ export default function AuthListener() {
     } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === SUPABASE_AUTH_EVENTS.SIGNED_IN) {
         const rootProvider = session?.user?.app_metadata?.provider
-        const secondaryProviders = session?.user?.app_metadata?.providers
 
         if (
           Boolean(auth?.id) ||
@@ -53,24 +60,28 @@ export default function AuthListener() {
         )
           return
 
-        if (rootProvider === SUPABASE_PROVIDERS.EMAIL) {
-          if (
-            secondaryProviders.includes(
-              SUPABASE_PROVIDERS.GOOGLE,
-              SUPABASE_PROVIDERS.FACEBOOK
-            ) &&
-            !userAuth?.id &&
-            !userTable?.id &&
-            SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE
-          ) {
-            login({ auth: session?.user, app_version, geo, agent, fingerprint })
-            if (app_version) {
-              localStorage.setItem('app_version', app_version)
-            }
-          }
-        }
-        if (rootProvider === SUPABASE_PROVIDERS.GOOGLE) {
+        checkUserRegistered({ guid: session?.user?.id })
+
+        if (
+          rootProvider === SUPABASE_PROVIDERS.EMAIL &&
+          SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE &&
+          phone !== 'null'
+        ) {
+          login({ auth: session?.user, geo, agent, fingerprint })
+          app_version && localStorage.setItem('app_version', app_version)
           return
+        }
+        if (
+          rootProvider === SUPABASE_PROVIDERS.GOOGLE &&
+          SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE
+        ) {
+          if (phone !== 'null') {
+            login({ auth: session?.user, geo, agent, fingerprint })
+            app_version && localStorage.setItem('app_version', app_version)
+            return
+          } else {
+            return dispatch(setPhoneModal(true))
+          }
         }
       }
     })
@@ -78,7 +89,18 @@ export default function AuthListener() {
     return () => {
       subscription.unsubscribe()
     }
-  }, [login, app_version, userAuth, userTable, agent, geo, fingerprint])
+  }, [
+    login,
+    app_version,
+    userAuth,
+    userTable,
+    agent,
+    geo,
+    fingerprint,
+    dispatch,
+    checkUserRegistered,
+    phone,
+  ])
 
   return null
 }

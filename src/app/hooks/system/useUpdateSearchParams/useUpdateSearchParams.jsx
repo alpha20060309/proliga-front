@@ -1,3 +1,5 @@
+'use client'
+
 import { useCallback } from 'react'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 
@@ -7,11 +9,18 @@ export function useUpdateSearchParams() {
   const searchParams = useSearchParams()
 
   const updateSearchParams = useCallback(
-    (name, value) => {
-      const params = new URLSearchParams(searchParams.toString())
-      params.set(name, encodeURIComponent(value))
+    (params) => {
+      const updatedParams = new URLSearchParams(searchParams.toString())
 
-      router.push(pathname + '?' + params.toString())
+      Object.entries(params).forEach(([name, value]) => {
+        if (value === null || value === undefined) {
+          updatedParams.delete(name)
+        } else {
+          updatedParams.set(name, encodeURIComponent(value))
+        }
+      })
+
+      router.push(pathname + '?' + updatedParams.toString())
     },
     [searchParams, pathname, router]
   )

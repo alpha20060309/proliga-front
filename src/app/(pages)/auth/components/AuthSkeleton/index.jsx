@@ -31,9 +31,8 @@ export const LoginFormSkeleton = () => {
         <Skeleton className="h-12 w-full" />
         <Skeleton className="mx-auto h-4 w-1/3" />
         <div className="flex justify-between space-x-1">
-          <Skeleton className="h-9 w-1/3" />
-          <Skeleton className="h-9 w-1/3" />
-          <Skeleton className="h-9 w-1/3" />
+          <Skeleton className="h-9 w-1/2" />
+          <Skeleton className="h-9 w-1/2" />
         </div>
       </CardContent>
     </Card>

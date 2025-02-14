@@ -1,14 +1,11 @@
 import GoogleSignIn from './Google'
 import FacebookSignIn from './Facebook'
-import YandexSignIn from './Yandex'
 import { useTranslation } from 'react-i18next'
 import { memo } from 'react'
 import SetPhoneNumber from 'components/Modals/SetPhoneNumber'
-import { useState } from 'react'
 
-function SocialLogin() {
+function SocialLogin({ setShouldRedirect }) {
   const { t } = useTranslation()
-  const [isModalOpen, setModalOpen] = useState(true)
 
   return (
     <>
@@ -21,12 +18,11 @@ function SocialLogin() {
           <span className="flex-grow border-t border-gray-300" />
         </div>
         <div className="flex gap-1">
-          <GoogleSignIn />
+          <GoogleSignIn setShouldRedirect={setShouldRedirect} />
           <FacebookSignIn />
-          <YandexSignIn />
         </div>
       </div>
-      <SetPhoneNumber isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
+      <SetPhoneNumber />
     </>
   )
 }

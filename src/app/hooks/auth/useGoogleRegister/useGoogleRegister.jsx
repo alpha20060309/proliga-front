@@ -22,9 +22,9 @@ export const useGoogleRegister = () => {
     (errorMessage) => {
       setError(errorMessage)
       toast.error(t(errorMessage), { theme: 'dark' })
-      localStorage.clear()
       dispatch(setUserAuth(null))
       dispatch(setUserTable(null))
+      return
     },
     [t, dispatch]
   )
@@ -45,24 +45,19 @@ export const useGoogleRegister = () => {
   const register = useCallback(
     async ({
       phone,
-      email,
-      password,
+      auth,
       geo,
       fingerprint,
       agent,
       app_version,
+      closeModal,
     }) => {
       setIsLoading(true)
       setError(null)
       setData(null)
 
-      if (!phone || !email || !password) {
+      if (!phone || !auth) {
         handleError("Barcha maydonlar to'ldirilishi shart")
-        return
-      }
-
-      if (password.length < 6) {
-        handleError("Parol 6 ta belgidan kam bo'lmasligi kerak")
         return
       }
 
@@ -99,7 +94,7 @@ export const useGoogleRegister = () => {
             geo: JSON.stringify(geo),
             agent: JSON.stringify(agent),
           })
-          .eq('guid', authData.user.id)
+          .eq('guid', auth?.id)
           .is('deleted_at', null)
           .select('*')
           .single()
@@ -113,11 +108,10 @@ export const useGoogleRegister = () => {
         }
 
         // Step 3: Send OTP and redirect to confirmation page
-        setState({ authData: authData?.user, fullUserData })
+        closeModal()
+        setState({ authData: auth, fullUserData })
         localStorage.setItem('app_version', app_version)
-        toast.info(t('Please confirm your phone number to complete sign up!'), {
-          theme: 'dark',
-        })
+        toast.info(t('Please confirm your phone number to complete sign up!'))
         await sendOTP({
           phone,
           shouldRedirect: true,

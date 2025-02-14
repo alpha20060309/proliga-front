@@ -1,10 +1,9 @@
 /* eslint-disable no-undef */
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { toast } from 'react-toastify'
 import { supabase } from '../../../lib/supabaseClient'
 import { useTranslation } from 'react-i18next'
 import { useLogOut } from '../useLogOut/useLogOut'
-import { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { setChecked, setUserTable } from 'app/lib/features/auth/auth.slice'
 

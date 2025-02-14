@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
 import {
@@ -12,19 +12,15 @@ import {
 import Image from 'next/image'
 import { PhoneInput } from 'components/PhoneInput'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
-import { useRouter, useSearchParams } from 'next/navigation'
 import { useGetUserPhone } from 'app/hooks/user/useGetUserPhone/useGetUserPhone'
 import { memo } from 'react'
 import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
 
 const ForgotPassword = ({ isModalOpen, setModalOpen }) => {
-  const router = useRouter()
-  const params = useSearchParams()
-  const phoneParams = params.get('phone') || ''
-
   const { t } = useTranslation()
   const [phone, setPhone] = useState('')
-  const { sendOTP, isLoading: sendLoading } = useSendOTP()
+  const { isLoading: sendLoading } = useSendOTP()
   const { getUserPhone, isLoading: tableLoading } = useGetUserPhone()
 
   const isLoading = useMemo(
@@ -36,8 +32,7 @@ const ForgotPassword = ({ isModalOpen, setModalOpen }) => {
     e.preventDefault()
 
     if (!phone) {
-      toast.error(t('Email yoki Telefon kiritilmagan'), { theme: 'dark' })
-      return
+      return toast.error(t('Telefon raqam kiritilmagan'))
     }
 
     await getUserPhone({
@@ -45,36 +40,18 @@ const ForgotPassword = ({ isModalOpen, setModalOpen }) => {
     })
   }
 
-  useEffect(() => {
-    if (phoneParams) {
-      const fetch = async () => {
-        await sendOTP({
-          phone,
-          shouldRedirect: true,
-          redirectTo: `/confirm-otp?redirect=/reset-password&phone=${encodeURIComponent(phoneParams)}`,
-        })
-      }
-      fetch()
-    }
-  }, [router, phone, phoneParams, sendOTP])
-
   return (
     <Dialog open={isModalOpen} onOpenChange={setModalOpen}>
-      <DialogContent className="w-[98%] max-w-md rounded-xl bg-neutral-950 px-4 py-6 text-neutral-100 md:p-6">
+      <DialogContent className="w-[98%] max-w-md rounded-xl bg-neutral-950 px-4 py-6 text-neutral-100 sm:p-6">
         <DialogTitle>{t('Parolingizni unutingizmi?')}</DialogTitle>
         <DialogDescription>
           {t(
             'To reset your password, please enter the OTP sent to your mobile phone. This step is required for security verification.'
           )}
         </DialogDescription>
-        <form
-          onSubmit={handleConfirm}
-          className="flex w-full flex-col items-start gap-6"
-        >
-          <div className="relative flex w-full flex-col gap-1">
-            <label htmlFor="phone" className="text-xs md:text-base">
-              {t('Telefon raqam')}:
-            </label>
+        <form onSubmit={handleConfirm} className="space-y-4">
+          <div className="relative space-y-1">
+            <Label htmlFor="enter-phone">{t('Telefon raqam')}:</Label>
             <PhoneInput
               id="enter-phone"
               name="phone"
