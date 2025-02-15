@@ -1,6 +1,6 @@
 import { createDraftSafeSelector } from '@reduxjs/toolkit'
 
 export const selectPrizes = createDraftSafeSelector(
-  (state) => state.prizes,
+  (state) => state.prize,
   (prizes) => prizes.prizes
 )

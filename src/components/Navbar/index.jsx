@@ -20,6 +20,7 @@ const Navbar = () => {
   const [isModalOpen, setModalOpen] = useState(false)
   const { t } = useTranslation()
   const NEXT_PUBLIC_TEST_NAV_SLIDER = Boolean(
+    // eslint-disable-next-line no-undef
     process.env.NEXT_PUBLIC_TEST_NAV_SLIDER ?? ''
   )
 

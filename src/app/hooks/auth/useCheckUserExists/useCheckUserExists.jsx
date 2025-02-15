@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { useState, useCallback } from 'react'
 import { toast } from 'react-toastify'
 import { supabase } from '../../../lib/supabaseClient'
@@ -16,6 +15,7 @@ export const useCheckUserExists = () => {
 
   const checkUserExists = useCallback(
     async ({ guid }) => {
+      // eslint-disable-next-line no-undef
       const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
 
       setIsLoading(false)

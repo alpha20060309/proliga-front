@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+
 import { useState, useCallback } from 'react'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation'
@@ -12,8 +12,11 @@ export const useBuyPackageWithClick = () => {
 
   const buyPackageWithClick = useCallback(
     ({ userTable, currentPackage, currentTeam }) => {
+      // eslint-disable-next-line no-undef
       const SERVICE_ID = process.env.NEXT_PUBLIC_CLICK_EXPENSE_SERVICE_ID
+      // eslint-disable-next-line no-undef
       const MERCHANT_ID = process.env.NEXT_PUBLIC_CLICK_MERCHANT_ID
+      // eslint-disable-next-line no-undef
       const RETURN_URL = process.env.NEXT_PUBLIC_URL
       setIsLoading(false)
       setError(null)

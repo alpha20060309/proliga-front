@@ -25,7 +25,7 @@ const PrizesSection = () => {
   const { isLoading: competitionLoading } = useSelector(
     (store) => store.competition
   )
-  const { isLoading: prizesLoading } = useSelector((store) => store.prizes)
+  const { isLoading: prizesLoading } = useSelector((store) => store.prize)
 
   const isLoading = useMemo(
     () => competitionLoading || prizesLoading,

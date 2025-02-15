@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { useState, useCallback } from 'react'
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
@@ -15,6 +14,7 @@ export const useUpdateUserGeo = () => {
 
   const updateUserGeo = useCallback(
     async ({ id, geo, agent }) => {
+      // eslint-disable-next-line no-undef
       const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
       setIsLoading(false)
 

@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
@@ -27,6 +26,7 @@ const TeamMaxTransfersModal = () => {
   const { transferModal } = useSelector((store) => store.currentTeam)
   const packages = useSelector(selectPackages)
   const { t } = useTranslation()
+  // eslint-disable-next-line no-undef
   const defaultTransfers = +process.env.NEXT_PUBLIC_DEFAULT_TRANSFERS
 
   return (

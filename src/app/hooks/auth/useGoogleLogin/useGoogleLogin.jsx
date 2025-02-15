@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { useState, useCallback } from 'react'
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
@@ -32,20 +31,23 @@ export const useGoogleLogin = () => {
   )
 
   const setState = useCallback(
-    ({ fullUserData, authData }) => {
+    ({ table, auth, app_version }) => {
+      // eslint-disable-next-line no-undef
       const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
 
-      setData({ table: fullUserData, auth: authData })
-      dispatch(setUserAuth(authData))
-      dispatch(setUserTable(fullUserData))
-      localStorage.setItem(`user-auth-${sbUrl}`, JSON.stringify(authData))
-      localStorage.setItem(`user-table-${sbUrl}`, JSON.stringify(fullUserData))
+      setData({ table: table, auth: auth })
+      dispatch(setUserAuth(auth))
+      dispatch(setUserTable(table))
+      localStorage.setItem(`user-auth-${sbUrl}`, JSON.stringify(auth))
+      localStorage.setItem(`user-table-${sbUrl}`, JSON.stringify(table))
+      localStorage.removeItem('sign-in-method')
+      app_version && localStorage.setItem('app_version', app_version)
     },
     [dispatch]
   )
 
   const login = useCallback(
-    async ({ auth, geo, agent, fingerprint }) => {
+    async ({ auth, geo, agent, fingerprint, app_version }) => {
       setIsLoading(true)
       setError(null)
       setData(null)
@@ -56,7 +58,7 @@ export const useGoogleLogin = () => {
 
       try {
         // Step 1: Get user table data
-        const { data: fullUserData, error: fullUserError } = await supabase
+        const { data: table, error: fullUserError } = await supabase
           .from('user')
           .update({
             visitor: fingerprint,
@@ -78,23 +80,25 @@ export const useGoogleLogin = () => {
         }
 
         // Step 2: If user not verified verify it!
-        if (!fullUserData.phone_verified) {
-          setState({ authData: auth, fullUserData })
+        if (!table.phone_verified) {
+          setState({ auth, table, app_version })
+          app_version && localStorage.setItem('app_version', app_version)
           toast.warning(t('Sizning raqamingiz tasdiqlanmagan'), {
             theme: 'dark',
           })
           toast.info(t('We are redirecting you to an sms confirmation page!'), {
             theme: 'dark',
           })
-          return await sendOTP({
-            phone: fullUserData?.phone,
+          await sendOTP({
+            phone: table?.phone,
             shouldRedirect: true,
-            redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(fullUserData?.phone)}`,
+            redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(table?.phone)}`,
           })
+          return
         }
-        setState({ authData: auth, fullUserData })
+        setState({ auth, table, app_version })
         toast.success(t('Tizimga muvaffaqiyatli kirdingiz'))
-        router.push('championships')
+        router.push('/championships')
       } catch (error) {
         handleError(error.message || 'An unknown error occurred')
       } finally {

@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 'use client'
 import {
   Dialog,
@@ -28,6 +27,7 @@ const ModalBanner = ({ isModalOpen, setModalOpen }) => {
   const userAuth = useSelector(selectUserAuth)
   const geo = useSelector(selectGeo)
   const NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH =
+    // eslint-disable-next-line no-undef
     process.env.NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH
   const [windowWidth, setWindowWidth] = useState(0)
   const { createBannerView } = useCreateBannerView()

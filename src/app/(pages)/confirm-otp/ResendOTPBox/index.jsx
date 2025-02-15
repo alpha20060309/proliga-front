@@ -10,7 +10,7 @@ import { RefreshCcw } from 'lucide-react'
 export default function ResendOTPBox({ phone, className }) {
   const { sendOTP } = useSendOTP()
   const { t } = useTranslation()
-  const [countdown, setCountdown] = useState(60)
+  const [countdown, setCountdown] = useState(45)
   const [isResendEnabled, setIsResendEnabled] = useState(false)
 
   useEffect(() => {
@@ -46,7 +46,7 @@ export default function ResendOTPBox({ phone, className }) {
       >
         <RefreshCcw
           className={cn(
-            'mr-1.5 size-5',
+            'mr-1.5 size-4',
             isResendEnabled ? 'text-primary' : 'text-neutral-300'
           )}
         />

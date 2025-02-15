@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 'use client'
 
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
@@ -19,6 +18,7 @@ const TeamSearch = ({
   setIsSearchMode,
   setSearchTerm,
 }) => {
+  // eslint-disable-next-line no-undef
   const timing = +process.env.NEXT_PUBLIC_DEBOUNCE_TIMING || 1000
   const dispatch = useDispatch()
   const { t } = useTranslation()

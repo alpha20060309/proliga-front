@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 export const staticPath = process.env.NEXT_PUBLIC_STATIC_URL
 
 export function getUrl(path) {

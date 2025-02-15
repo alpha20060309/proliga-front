@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
 import { PACKAGE_TYPE } from 'app/utils/packages.util'
@@ -28,6 +27,7 @@ const TeamMaxClubMembersModal = () => {
   const packages = useSelector(selectPackages)
   const { t } = useTranslation()
   const defaultSameTeamPlayers =
+    // eslint-disable-next-line no-undef
     +process.env.NEXT_PUBLIC_DEFAULT_SAME_TEAM_PLAYERS
 
   return (

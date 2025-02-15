@@ -1,17 +1,15 @@
-/* eslint-disable no-undef */
 import { useState, useCallback } from 'react'
 import { toast } from 'react-toastify'
 import { supabase } from '../../../lib/supabaseClient'
 import { useTranslation } from 'react-i18next'
-import { useUpdateSearchParams } from 'app/hooks/system/useUpdateSearchParams/useUpdateSearchParams'
 import { useDispatch } from 'react-redux'
 import { setPhoneModal } from 'app/lib/features/auth/auth.slice'
 
 export const useCheckUserRegistered = () => {
+  const [data, setData] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
   const { t } = useTranslation()
-  const setParams = useUpdateSearchParams()
   const dispatch = useDispatch()
 
   const checkUserRegistered = useCallback(
@@ -52,13 +50,11 @@ export const useCheckUserRegistered = () => {
           return
         }
         if (data) {
-          setParams({
-            phone: encodeURIComponent(data?.phone),
-            pv: encodeURIComponent(data?.phone_verified),
-          })
           if (!data?.phone) {
             dispatch(setPhoneModal(true))
           }
+          setData(data)
+          return data
         }
       } catch (error) {
         setError(
@@ -76,7 +72,7 @@ export const useCheckUserRegistered = () => {
         setIsLoading(false)
       }
     },
-    [t, setParams, dispatch]
+    [t, dispatch]
   )
-  return { checkUserRegistered, isLoading, error }
+  return { checkUserRegistered, isLoading, error, data }
 }

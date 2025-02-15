@@ -1,7 +1,6 @@
-/* eslint-disable no-undef */
 'use client'
 
-import { useEffect, Suspense } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUserAuth, setUserTable } from '../lib/features/auth/auth.slice'
 import { usePathname, useRouter } from 'next/navigation'
@@ -9,16 +8,18 @@ import { useCheckUserExists } from 'app/hooks/auth/useCheckUserExists/useCheckUs
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { useLogOut } from 'app/hooks/auth/useLogOut/useLogOut'
 import { toast } from 'react-toastify'
-import AuthListener from 'components/AuthListener'
 import {
   selectUserAuth,
   selectUserTable,
 } from 'app/lib/features/auth/auth.selector'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
+import { setLanguage } from 'app/lib/features/systemLanguage/systemLanguage.slice'
+import { useTranslation } from 'react-i18next'
 
 const AuthProvider = ({ children }) => {
   const dispatch = useDispatch()
   const path = usePathname()
+  const { i18n } = useTranslation()
   const router = useRouter()
   const { is_checked } = useSelector((state) => state.auth)
   const userTable = useSelector(selectUserTable)
@@ -29,6 +30,7 @@ const AuthProvider = ({ children }) => {
   const { logOut } = useLogOut()
 
   useEffect(() => {
+    // eslint-disable-next-line no-undef
     const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
     const auth =
       localStorage.getItem(`user-auth-${sbUrl}`) &&
@@ -47,6 +49,23 @@ const AuthProvider = ({ children }) => {
   }, [dispatch, userAuth, userTable, router, path, logOut])
 
   useEffect(() => {
+    // eslint-disable-next-line no-undef
+    const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
+    const auth =
+      localStorage.getItem(`user-auth-${sbUrl}`) &&
+      JSON.parse(localStorage.getItem(`user-auth-${sbUrl}`))
+    const table =
+      localStorage.getItem(`user-table-${sbUrl}`) !== 'undefined' &&
+      JSON.parse(localStorage.getItem(`user-table-${sbUrl}`))
+
+    const lang = localStorage.getItem('lang')
+
+    if (!auth?.id && !table?.id && (lang !== 'undefined' || lang !== 'null')) {
+      dispatch(setLanguage({ lang, cb: (lang) => i18n.changeLanguage(lang) }))
+    }
+  }, [dispatch, i18n])
+
+  useEffect(() => {
     if (
       userTable?.guid &&
       userAuth?.id &&
@@ -62,6 +81,7 @@ const AuthProvider = ({ children }) => {
   }, [userTable, userAuth, checkUserExists, path, is_checked])
 
   useEffect(() => {
+    // eslint-disable-next-line no-undef
     const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
     const session =
       localStorage.getItem(`sb-${sbUrl}-auth-token`) &&
@@ -107,14 +127,7 @@ const AuthProvider = ({ children }) => {
     }
   }, [app_version, userAuth?.id, userTable, logOut])
 
-  return (
-    <>
-      <Suspense>
-        <AuthListener />
-      </Suspense>
-      {children}
-    </>
-  )
+  return <>{children}</>
 }
 
 export default AuthProvider

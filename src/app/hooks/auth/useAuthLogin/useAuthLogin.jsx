@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { useState, useCallback } from 'react'
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
@@ -33,6 +32,7 @@ export const useAuthLogin = () => {
 
   const setState = useCallback(
     ({ fullUserData, authData }) => {
+      // eslint-disable-next-line no-undef
       const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
 
       setData({ table: fullUserData, auth: authData })
@@ -150,7 +150,7 @@ export const useAuthLogin = () => {
         setState({ authData: authData?.user, fullUserData })
         toast.success(t('Tizimga muvaffaqiyatli kirdingiz'))
         localStorage.setItem('app_version', app_version)
-        router.push('championships')
+        router.push('/championships')
       } catch (error) {
         handleError(error.message || 'An unknown error occurred')
       } finally {

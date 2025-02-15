@@ -106,6 +106,7 @@ const Play = ({ params }) => {
 
   useEffect(() => {
     if (params?.id && currentTour?.id) {
+      // eslint-disable-next-line no-undef
       Promise.all([
         dispatch(
           fetchTeamPlayers({
@@ -132,6 +133,7 @@ const Play = ({ params }) => {
 
   useEffect(() => {
     if (params.league) {
+      // eslint-disable-next-line no-undef
       Promise.all([
         dispatch(fetchClubs({ competition_id: params.league })),
         dispatch(

@@ -31,11 +31,12 @@ const InitialStateProvider = ({ children }) => {
   useEffect(() => {
     const fetch = async () => await getUserAgent()
 
+    // eslint-disable-next-line no-undef
     Promise.all([
       dispatch(fetchGeo()),
-      dispatch(fetchSystemConfig()),
       dispatch(fetchPrizes()),
       dispatch(fetchBroadcastNotifications()),
+      dispatch(fetchSystemConfig()),
       generateFingerprint(),
       fetch(),
     ])
@@ -49,8 +50,12 @@ const InitialStateProvider = ({ children }) => {
 
   useEffect(() => {
     if (lang !== userTable?.language && userTable?.id) {
-      dispatch(setLanguage(userTable?.language ?? LANGUAGE.uz))
-      i18n.changeLanguage(userTable?.language ?? LANGUAGE.uz)
+      dispatch(
+        setLanguage({
+          lang: userTable?.language ?? LANGUAGE.uz,
+          cb: (lang) => i18n.changeLanguage(lang),
+        })
+      )
     }
   }, [dispatch, lang, userTable?.language, i18n, userTable])
 
