@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 import { Button } from '@/components/ui/button'
 import { useTranslation } from 'react-i18next'
 import { useCallback, useEffect } from 'react'
@@ -10,6 +8,7 @@ import { SUPABASE_PROVIDERS } from 'app/lib/supabaseClient'
 
 const GoogleSignIn = ({ className, iconClassName }) => {
   const { t } = useTranslation()
+  // eslint-disable-next-line no-undef
   const URL = process.env.NEXT_PUBLIC_URL
 
   const handleGoogleSignIn = useCallback(() => {
@@ -38,6 +37,7 @@ const GoogleSignIn = ({ className, iconClassName }) => {
 
     script.onload = () => {
       window.google.accounts.id.initialize({
+        // eslint-disable-next-line no-undef
         client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
       })
     }

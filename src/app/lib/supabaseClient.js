@@ -1,8 +1,9 @@
-/* eslint-disable no-undef */
 import { createClient } from '@supabase/supabase-js'
 
 export const supabase = createClient(
+  // eslint-disable-next-line no-undef
   process.env.NEXT_PUBLIC_SUPABASE_URL ?? '',
+  // eslint-disable-next-line no-undef
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ''
 )
 

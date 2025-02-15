@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 'use client'
 
 import { supabase } from 'app/lib/supabaseClient'
@@ -19,6 +18,7 @@ export const useUpdateUserLanguage = () => {
   const updateUserLanguage = useCallback(
     async ({ lang, userTable }) => {
       try {
+        // eslint-disable-next-line no-undef
         const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
         setIsLoading(true)
         setError('')

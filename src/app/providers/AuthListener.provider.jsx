@@ -14,19 +14,16 @@ import {
 } from 'app/lib/features/auth/auth.selector'
 import { setPhoneModal } from 'app/lib/features/auth/auth.slice'
 import { useCheckUserRegistered } from 'app/hooks/auth/useCheckUserRegistered/useCheckUserRegistered'
-// import { useSearchParams } from 'next/navigation'
 
 export default function AuthListenerProvider({ children }) {
   const dispatch = useDispatch()
-  // const params = useSearchParams()
   const userTable = useSelector(selectUserTable)
   const userAuth = useSelector(selectUserAuth)
   const agent = useSelector(selectAgent)
   const geo = useSelector(selectGeo)
   const { fingerprint } = useSelector((store) => store.auth)
   const { login } = useGoogleLogin()
-  // const phone = decodeURIComponent(params.get('phone')) || ''
-  const { checkUserRegistered, data } = useCheckUserRegistered()
+  const { checkUserRegistered } = useCheckUserRegistered()
 
   useEffect(() => {
     // eslint-disable-next-line no-undef
@@ -44,7 +41,7 @@ export default function AuthListenerProvider({ children }) {
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (event === SUPABASE_AUTH_EVENTS.SIGNED_IN) {
         const rootProvider = session?.user?.app_metadata?.provider
 
@@ -57,14 +54,14 @@ export default function AuthListenerProvider({ children }) {
         )
           return
 
-        checkUserRegistered({ guid: session?.user?.id })
-        console.log(data)
+        const data = await checkUserRegistered({ guid: session?.user?.id })
         const phone = data?.phone
 
         if (
           rootProvider === SUPABASE_PROVIDERS.EMAIL &&
           SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE &&
-          phone !== 'null'
+          phone &&
+          data
         ) {
           return login({
             auth: session?.user,
@@ -76,9 +73,10 @@ export default function AuthListenerProvider({ children }) {
         }
         if (
           rootProvider === SUPABASE_PROVIDERS.GOOGLE &&
-          SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE
+          SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE &&
+          data
         ) {
-          if (phone !== 'null') {
+          if (phone) {
             return login({
               auth: session?.user,
               geo,
@@ -105,7 +103,6 @@ export default function AuthListenerProvider({ children }) {
     fingerprint,
     dispatch,
     checkUserRegistered,
-    data,
   ])
 
   return <>{children}</>

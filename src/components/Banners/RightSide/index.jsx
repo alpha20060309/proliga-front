@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import Link from 'next/link'
 import { useSelector } from 'react-redux'
 import { BANNER, BANNER_SERVICE_TYPE } from 'app/utils/banner.util'
@@ -21,6 +20,7 @@ const RightSideBanner = () => {
   const userAuth = useSelector(selectUserAuth)
   const geo = useSelector(selectGeo)
   const NEXT_PUBLIC_BANNER_TWO_RENDER_WIDTH =
+    // eslint-disable-next-line no-undef
     process.env.NEXT_PUBLIC_BANNER_TWO_RENDER_WIDTH ?? 1440
 
   const [windowWidth, setWindowWidth] = useState(0)

@@ -11,7 +11,6 @@ const initialState = {
   geoLoading: false,
   is_checked: false,
   phoneModal: false,
-  temp: null,
 }
 
 const authSlice = createSlice({

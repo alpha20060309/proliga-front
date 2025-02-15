@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import YandexAd from '../YandexAd'
 import Link from 'next/link'
 import { useSelector } from 'react-redux'
@@ -21,6 +20,7 @@ const LeftSideBanner = () => {
   const userAuth = useSelector(selectUserAuth)
   const geo = useSelector(selectGeo)
   const NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH =
+    // eslint-disable-next-line no-undef
     process.env.NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH
   const { createBannerView } = useCreateBannerView()
 

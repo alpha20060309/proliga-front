@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 'use client'
 
 import Link from 'next/link'
@@ -29,6 +28,7 @@ const TeamBalanceModal = () => {
   const packages = useSelector(selectPackages)
   const { t } = useTranslation()
   const { balanceModal } = useSelector((store) => store.currentTeam)
+  // eslint-disable-next-line no-undef
   const defaultBalance = +process.env.NEXT_PUBLIC_DEFAULT_BALANCE
 
   return (

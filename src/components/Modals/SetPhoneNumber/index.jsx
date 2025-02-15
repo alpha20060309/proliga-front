@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 'use client'
 
 import { useEffect, useState } from 'react'
@@ -41,7 +40,6 @@ function SetPhoneNumber() {
   const { fingerprint } = useSelector((store) => store.auth)
   const config = useSelector(selectSystemConfig)
   const app_version = config[CONFIG_KEY.app_version]?.value || ''
-  const SIGN_IN_METHOD = localStorage.getItem('sign-in-method')
 
   const setModalOpen = () => {
     userTable?.phone && dispatch(setPhoneModal(false))
@@ -79,7 +77,7 @@ function SetPhoneNumber() {
   }, [])
 
   return (
-    <Dialog open={phoneModal && SIGN_IN_METHOD} onOpenChange={setModalOpen}>
+    <Dialog open={phoneModal} onOpenChange={setModalOpen}>
       <DialogContent
         showCloseButton={false}
         className="w-[98%] max-w-md rounded-xl bg-neutral-950 p-5 text-neutral-100 sm:p-6"
