@@ -68,6 +68,7 @@ export default function AuthListener() {
         ) {
           login({ auth: session?.user, geo, agent, fingerprint })
           app_version && localStorage.setItem('app_version', app_version)
+          localStorage.removeItem('sign-in-method')
           return
         }
         if (

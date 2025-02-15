@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { CONFIG_KEY } from 'app/utils/config.util'
 
-function SocialLogin({ setShouldRedirect }) {
+function SocialLogin() {
   const { t } = useTranslation()
   const config = useSelector(selectSystemConfig)
 
@@ -27,7 +27,7 @@ function SocialLogin({ setShouldRedirect }) {
           <span className="flex-grow border-t border-gray-300" />
         </div>
         <div className="flex gap-1">
-          {google && <GoogleSignIn setShouldRedirect={setShouldRedirect} />}
+          {google && <GoogleSignIn />}
           {facebook && <FacebookSignIn />}
         </div>
       </div>

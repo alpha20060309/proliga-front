@@ -94,7 +94,7 @@ export const useGoogleLogin = () => {
         }
         setState({ authData: auth, fullUserData })
         toast.success(t('Tizimga muvaffaqiyatli kirdingiz'))
-        router.push('championships')
+        router.push('/championships')
       } catch (error) {
         handleError(error.message || 'An unknown error occurred')
       } finally {

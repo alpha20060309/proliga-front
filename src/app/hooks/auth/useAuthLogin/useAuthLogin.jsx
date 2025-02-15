@@ -150,7 +150,7 @@ export const useAuthLogin = () => {
         setState({ authData: authData?.user, fullUserData })
         toast.success(t('Tizimga muvaffaqiyatli kirdingiz'))
         localStorage.setItem('app_version', app_version)
-        router.push('championships')
+        router.push('/championships')
       } catch (error) {
         handleError(error.message || 'An unknown error occurred')
       } finally {

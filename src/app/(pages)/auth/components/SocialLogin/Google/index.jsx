@@ -8,13 +8,12 @@ import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { SUPABASE_PROVIDERS } from 'app/lib/supabaseClient'
 
-const GoogleSignIn = ({ className, iconClassName, setShouldRedirect }) => {
+const GoogleSignIn = ({ className, iconClassName }) => {
   const { t } = useTranslation()
   const URL = process.env.NEXT_PUBLIC_URL
 
   const handleGoogleSignIn = useCallback(() => {
     try {
-      setShouldRedirect(false)
       localStorage.setItem('sign-in-method', SUPABASE_PROVIDERS.GOOGLE)
 
       const { error } = supabase.auth.signInWithOAuth({
@@ -28,7 +27,7 @@ const GoogleSignIn = ({ className, iconClassName, setShouldRedirect }) => {
     } catch (error) {
       console.error('Error signing in with Google:', error)
     }
-  }, [URL, setShouldRedirect])
+  }, [URL])
 
   useEffect(() => {
     const script = document.createElement('script')

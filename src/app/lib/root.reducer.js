@@ -19,7 +19,7 @@ import UserActivitySlice from './features/userActivity/userActivity.slice.js'
 import PackageSlice from './features/package/package.slice.js'
 import PayBalanceSlice from './features/payBalance/payBalance.slice.js'
 import PayExpenseSlice from './features/payExpense/payExpense.slice.js'
-import PrizesSlice from './features/prize/prize.slice.js'
+import PrizeSlice from './features/prize/prize.slice.js'
 import BannerSlice from './features/banner/banner.slice.js'
 import systemConfigSlice from './features/systemConfig/systemConfig.slice.js'
 import MatchEventSlice from './features/matchEvent/matchEvent.slice.js'
@@ -46,7 +46,7 @@ export const combinedReducer = combineReducers({
   systemLanguage: SystemLanguageSlice,
   systemConfig: systemConfigSlice,
   systemNotifications: SystemNotificationSlice,
-  prizes: PrizesSlice,
+  prize: PrizeSlice,
   banner: BannerSlice,
 })
 

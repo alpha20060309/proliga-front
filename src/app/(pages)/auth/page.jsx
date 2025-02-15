@@ -32,11 +32,13 @@ const Auth = () => {
   const userTable = useSelector(selectUserTable)
   const [currentTab, setCurrentTab] = useState(tabs.login)
   const [shouldRedirect, setShouldRedirect] = useState(true)
-  const active = 'bg-black text-primary opacity-100'
-  const passive = 'bg-transparent text-neutral-400'
 
   useEffect(() => {
-    if (userTable?.id && userAuth?.id && shouldRedirect) {
+    const SIGN_IN_METHOD =
+      localStorage.getItem('sign-in-method') !== 'undefined' &&
+      localStorage.getItem('sign-in-method')
+
+    if (userTable?.id && userAuth?.id && shouldRedirect && !SIGN_IN_METHOD) {
       router.push('/championships')
     }
   }, [userTable, userAuth, router, shouldRedirect])
@@ -65,5 +67,7 @@ const tabs = {
   login: 'login',
   signup: 'signup',
 }
+const active = 'bg-black text-primary opacity-100'
+const passive = 'bg-transparent text-neutral-400'
 
 export default Auth

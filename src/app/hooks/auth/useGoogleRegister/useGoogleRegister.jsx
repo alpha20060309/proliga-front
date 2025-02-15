@@ -93,6 +93,8 @@ export const useGoogleRegister = () => {
             visited_at: new Date(),
             geo: JSON.stringify(geo),
             agent: JSON.stringify(agent),
+            photo: auth?.user_metadata?.avatar_url,
+            name: auth?.user_metadata?.name,
           })
           .eq('guid', auth?.id)
           .is('deleted_at', null)
