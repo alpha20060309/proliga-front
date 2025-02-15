@@ -6,7 +6,6 @@ import { SETTINGS_TAB } from './tabs'
 import TransactionsHistory from './components/Transactions'
 import ChangePassword from './components/ChangePassword'
 import SettingsTab from './components/Settings'
-import Gutter from 'components/Gutter'
 import dynamic from 'next/dynamic'
 import SettingsSkeleton, {
   ProfileSkeleton,
@@ -47,19 +46,17 @@ function Settings() {
     return <SettingsSkeleton />
   }
   return (
-    <Gutter>
-      <main className="flex h-full min-h-[44rem] flex-col gap-2 lg:min-h-[38rem] lg:flex-row">
-        <Navigation currentTab={tab} tabs={SETTINGS_TAB} setTab={setTab} />
-        {tab === SETTINGS_TAB.PROFILE && (
-          <Profile setSettingsTab={() => setTab(SETTINGS_TAB.SETTINGS)} />
-        )}
-        {tab === SETTINGS_TAB.SETTINGS && (
-          <SettingsTab setHomeTab={() => setTab(SETTINGS_TAB.PROFILE)} />
-        )}
-        {tab === SETTINGS_TAB.PASSWORD && <ChangePassword />}
-        {tab === SETTINGS_TAB.TRANSACTIONHISTORY && <TransactionsHistory />}
-      </main>
-    </Gutter>
+    <main className="flex h-full min-h-[44rem] flex-col gap-2 lg:min-h-[38rem] lg:flex-row">
+      <Navigation currentTab={tab} tabs={SETTINGS_TAB} setTab={setTab} />
+      {tab === SETTINGS_TAB.PROFILE && (
+        <Profile setSettingsTab={() => setTab(SETTINGS_TAB.SETTINGS)} />
+      )}
+      {tab === SETTINGS_TAB.SETTINGS && (
+        <SettingsTab setHomeTab={() => setTab(SETTINGS_TAB.PROFILE)} />
+      )}
+      {tab === SETTINGS_TAB.PASSWORD && <ChangePassword />}
+      {tab === SETTINGS_TAB.TRANSACTIONHISTORY && <TransactionsHistory />}
+    </main>
   )
 }
 

@@ -4,7 +4,7 @@ import Image from 'next/image'
 const FacebookSignIn = () => {
   return (
     <>
-      <Button variant="outline" className="flex-1 p-0">
+      <Button variant="outline" className="w-1/2 p-0">
         <Image
           src="./icons/facebook.svg"
           alt="Facebook"

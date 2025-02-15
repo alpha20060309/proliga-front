@@ -15,5 +15,4 @@ export const CONFIG_KEY = {
   app_version: 'app_version',
   provider_google: 'provider_google',
   provider_facebook: 'provider_facebook',
-  provider_yandex: 'provider_yandex',
 }

@@ -32,7 +32,6 @@ export default function AuthListener() {
   const app_version = config[CONFIG_KEY.app_version]?.value ?? ''
   const { login } = useGoogleLogin()
   const phone = decodeURIComponent(params.get('phone')) || ''
-  const phone_verified = decodeURIComponent(params.get('pv')) || ''
   const { checkUserRegistered } = useCheckUserRegistered()
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, Suspense } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUserAuth, setUserTable } from '../lib/features/auth/auth.slice'
 import { usePathname, useRouter } from 'next/navigation'
@@ -109,7 +109,9 @@ const AuthProvider = ({ children }) => {
 
   return (
     <>
-      <AuthListener />
+      <Suspense>
+        <AuthListener />
+      </Suspense>
       {children}
     </>
   )

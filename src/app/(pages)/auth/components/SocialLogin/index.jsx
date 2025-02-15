@@ -3,23 +3,32 @@ import FacebookSignIn from './Facebook'
 import { useTranslation } from 'react-i18next'
 import { memo } from 'react'
 import SetPhoneNumber from 'components/Modals/SetPhoneNumber'
+import { useSelector } from 'react-redux'
+import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
+import { CONFIG_KEY } from 'app/utils/config.util'
 
 function SocialLogin({ setShouldRedirect }) {
   const { t } = useTranslation()
+  const config = useSelector(selectSystemConfig)
+
+  const facebook =
+    config[CONFIG_KEY.provider_facebook]?.value?.toLowerCase() === 'true'
+  const google =
+    config[CONFIG_KEY.provider_google]?.value?.toLowerCase() === 'true'
 
   return (
     <>
       <div className="w-full space-y-2">
         <div className="flex items-center py-0.5">
           <span className="flex-grow border-t border-gray-300" />
-          <p className="px-3 text-sm text-neutral-400">
+          <p className="px-2 text-sm text-neutral-400">
             {t('Or continue with')}
           </p>
           <span className="flex-grow border-t border-gray-300" />
         </div>
         <div className="flex gap-1">
-          <GoogleSignIn setShouldRedirect={setShouldRedirect} />
-          <FacebookSignIn />
+          {google && <GoogleSignIn setShouldRedirect={setShouldRedirect} />}
+          {facebook && <FacebookSignIn />}
         </div>
       </div>
       <SetPhoneNumber />
