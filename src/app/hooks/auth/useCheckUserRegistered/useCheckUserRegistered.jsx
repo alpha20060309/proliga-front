@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux'
 import { setPhoneModal } from 'app/lib/features/auth/auth.slice'
 
 export const useCheckUserRegistered = () => {
+  const [data, setData] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
   const { t } = useTranslation()
@@ -59,6 +60,7 @@ export const useCheckUserRegistered = () => {
           if (!data?.phone) {
             dispatch(setPhoneModal(true))
           }
+          setData(data)
         }
       } catch (error) {
         setError(
@@ -78,5 +80,5 @@ export const useCheckUserRegistered = () => {
     },
     [t, setParams, dispatch]
   )
-  return { checkUserRegistered, isLoading, error }
+  return { checkUserRegistered, isLoading, error, data }
 }

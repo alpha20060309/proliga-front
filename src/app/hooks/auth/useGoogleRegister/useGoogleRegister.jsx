@@ -119,6 +119,7 @@ export const useGoogleRegister = () => {
           shouldRedirect: true,
           redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(phone)}`,
         })
+        localStorage.removeItem('sign-in-method')
       } catch (error) {
         handleError(
           error instanceof Error

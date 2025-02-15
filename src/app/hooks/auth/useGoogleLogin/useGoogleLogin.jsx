@@ -45,7 +45,7 @@ export const useGoogleLogin = () => {
   )
 
   const login = useCallback(
-    async ({ auth, geo, agent, fingerprint }) => {
+    async ({ auth, geo, agent, fingerprint, app_version }) => {
       setIsLoading(true)
       setError(null)
       setData(null)
@@ -80,19 +80,25 @@ export const useGoogleLogin = () => {
         // Step 2: If user not verified verify it!
         if (!fullUserData.phone_verified) {
           setState({ authData: auth, fullUserData })
+          app_version && localStorage.setItem('app_version', app_version)
+
           toast.warning(t('Sizning raqamingiz tasdiqlanmagan'), {
             theme: 'dark',
           })
           toast.info(t('We are redirecting you to an sms confirmation page!'), {
             theme: 'dark',
           })
-          return await sendOTP({
+          await sendOTP({
             phone: fullUserData?.phone,
             shouldRedirect: true,
             redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(fullUserData?.phone)}`,
           })
+          localStorage.removeItem('sign-in-method')
+          return
         }
         setState({ authData: auth, fullUserData })
+        app_version && localStorage.setItem('app_version', app_version)
+        localStorage.removeItem('sign-in-method')
         toast.success(t('Tizimga muvaffaqiyatli kirdingiz'))
         router.push('/championships')
       } catch (error) {

@@ -1,7 +1,6 @@
-/* eslint-disable no-undef */
 'use client'
 
-import { useEffect, Suspense } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUserAuth, setUserTable } from '../lib/features/auth/auth.slice'
 import { usePathname, useRouter } from 'next/navigation'
@@ -9,7 +8,6 @@ import { useCheckUserExists } from 'app/hooks/auth/useCheckUserExists/useCheckUs
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { useLogOut } from 'app/hooks/auth/useLogOut/useLogOut'
 import { toast } from 'react-toastify'
-import AuthListener from 'components/AuthListener'
 import {
   selectUserAuth,
   selectUserTable,
@@ -32,6 +30,7 @@ const AuthProvider = ({ children }) => {
   const { logOut } = useLogOut()
 
   useEffect(() => {
+    // eslint-disable-next-line no-undef
     const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
     const auth =
       localStorage.getItem(`user-auth-${sbUrl}`) &&
@@ -50,6 +49,7 @@ const AuthProvider = ({ children }) => {
   }, [dispatch, userAuth, userTable, router, path, logOut])
 
   useEffect(() => {
+    // eslint-disable-next-line no-undef
     const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
     const auth =
       localStorage.getItem(`user-auth-${sbUrl}`) &&
@@ -81,6 +81,7 @@ const AuthProvider = ({ children }) => {
   }, [userTable, userAuth, checkUserExists, path, is_checked])
 
   useEffect(() => {
+    // eslint-disable-next-line no-undef
     const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
     const session =
       localStorage.getItem(`sb-${sbUrl}-auth-token`) &&
@@ -126,14 +127,7 @@ const AuthProvider = ({ children }) => {
     }
   }, [app_version, userAuth?.id, userTable, logOut])
 
-  return (
-    <>
-      <Suspense>
-        <AuthListener />
-      </Suspense>
-      {children}
-    </>
-  )
+  return <>{children}</>
 }
 
 export default AuthProvider

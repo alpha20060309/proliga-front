@@ -25,7 +25,7 @@ const NavbarUserDesktop = () => {
               draggable={false}
               height={32}
               key={userTable?.photo}
-              className="size-8 rounded-full bg-white"
+              className="size-8 select-none rounded-full bg-neutral-100"
             />
           ) : (
             <span className="flex size-8 select-none items-center justify-center rounded-full bg-primary text-lg font-bold uppercase text-black">
@@ -39,7 +39,7 @@ const NavbarUserDesktop = () => {
             width={32}
             draggable={false}
             height={32}
-            className="size-8 rounded-full bg-white"
+            className="size-8 select-none rounded-full bg-neutral-100"
           />
         )}
       </PopoverTrigger>

@@ -35,17 +35,11 @@ const InitialStateProvider = ({ children }) => {
       dispatch(fetchGeo()),
       dispatch(fetchPrizes()),
       dispatch(fetchBroadcastNotifications()),
+      dispatch(fetchSystemConfig()),
       generateFingerprint(),
       fetch(),
     ])
   }, [dispatch, generateFingerprint, getUserAgent])
-
-  useEffect(() => {
-    const SIGN_IN_METHOD = localStorage.getItem('sign-in-method')
-    if (!SIGN_IN_METHOD) {
-      dispatch(fetchSystemConfig())
-    }
-  }, [dispatch])
 
   useEffect(() => {
     if (userAuth?.id && userTable?.id) {
