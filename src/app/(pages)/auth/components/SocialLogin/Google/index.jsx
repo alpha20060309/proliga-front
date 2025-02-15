@@ -9,16 +9,19 @@ import { SUPABASE_PROVIDERS } from 'app/lib/supabaseClient'
 const GoogleSignIn = ({ className, iconClassName }) => {
   const { t } = useTranslation()
   // eslint-disable-next-line no-undef
-  const URL = process.env.NEXT_PUBLIC_URL
+  // const URL = process.env.NEXT_PUBLIC_URL
 
   const handleGoogleSignIn = useCallback(() => {
     try {
       localStorage.setItem('sign-in-method', SUPABASE_PROVIDERS.GOOGLE)
 
+      console.log(window.location.origin)
+
       const { error } = supabase.auth.signInWithOAuth({
         provider: 'google',
+        // redirectTo: URL + '/auth',
         options: {
-          redirectTo: URL + '/auth',
+          redirectTo: `${window.location.origin}/auth`,
         },
       })
 
@@ -26,7 +29,7 @@ const GoogleSignIn = ({ className, iconClassName }) => {
     } catch (error) {
       console.error('Error signing in with Google:', error)
     }
-  }, [URL])
+  }, [])
 
   useEffect(() => {
     const script = document.createElement('script')
