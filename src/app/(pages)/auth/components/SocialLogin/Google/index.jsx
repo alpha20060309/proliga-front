@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 const GoogleSignIn = ({ className, iconClassName }) => {
   const { t } = useTranslation()
 
-  console.log(URL + '/auth')
+  console.log(process.env.NEXT_PUBLIC_URL + '/auth')
   const handleGoogleSignIn = useCallback(() => {
     try {
       localStorage.setItem('sign-in-method', SUPABASE_PROVIDERS.GOOGLE)
