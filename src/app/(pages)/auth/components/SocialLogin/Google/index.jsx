@@ -14,15 +14,13 @@ const GoogleSignIn = ({ className, iconClassName }) => {
       // eslint-disable-next-line no-undef
       const URL = process.env.NEXT_PUBLIC_URL
       localStorage.setItem('sign-in-method', SUPABASE_PROVIDERS.GOOGLE)
-      const url = URL + '/auth'
+
+      console.log(URL + '/auth')
 
       const { error } = supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: url,
-          queryParams: {
-            prompt: 'select_account',
-          },
+          redirectTo: URL + '/auth',
         },
       })
 
