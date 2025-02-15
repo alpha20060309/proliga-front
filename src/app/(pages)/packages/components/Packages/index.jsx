@@ -13,7 +13,7 @@ const PaymentPackages = () => {
   const { t } = useTranslation()
 
   const { isLoading: packagesLoading } = useSelector((store) => store.package)
-  const { isLoading: langLoading } = useSelector((store) => store.prizes)
+  const { isLoading: langLoading } = useSelector((store) => store.prize)
   const isLoading = useMemo(
     () => packagesLoading || langLoading,
     [packagesLoading, langLoading]

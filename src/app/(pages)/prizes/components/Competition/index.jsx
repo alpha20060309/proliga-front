@@ -13,7 +13,7 @@ import { getUrl } from 'app/utils/static.util'
 
 const PrizeCompetition = ({ competition }) => {
   const { lang } = useSelector((store) => store.systemLanguage)
-  const { isLoading } = useSelector((store) => store.prizes)
+  const { isLoading } = useSelector((store) => store.prize)
   const prizes = useSelector(selectPrizes)
 
   const hasPrize = prizes.some(

@@ -16,7 +16,7 @@ export const fetchSystemConfig = createAsyncThunk(
 
       return { data, error }
     } catch (error) {
-      toast.error(error.message, { theme: 'dark' })
+      toast.error(error.message)
     }
   }
 )

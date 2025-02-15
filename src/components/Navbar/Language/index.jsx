@@ -24,8 +24,12 @@ const ChangeLanguageDropdown = () => {
     if (userTable?.id) {
       return await updateUserLanguage({ lang, userTable })
     } else {
-      dispatch(setLanguage(lang))
-      i18n.changeLanguage(lang)
+      dispatch(
+        setLanguage({
+          lang,
+          cb: (lang) => i18n.changeLanguage(lang),
+        })
+      )
     }
   }
 
@@ -37,7 +41,7 @@ const ChangeLanguageDropdown = () => {
     >
       <SelectTrigger
         aria-label="Change Language"
-        className="h-8 w-16 border-none bg-transparent px-2 md:w-24 xl:w-24"
+        className="h-8 w-16 border-none bg-red-400 bg-transparent px-2 md:w-24 xl:w-24"
       >
         <SelectValue placeholder={t('Til')} />
       </SelectTrigger>

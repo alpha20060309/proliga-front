@@ -33,13 +33,19 @@ const InitialStateProvider = ({ children }) => {
 
     Promise.all([
       dispatch(fetchGeo()),
-      dispatch(fetchSystemConfig()),
       dispatch(fetchPrizes()),
       dispatch(fetchBroadcastNotifications()),
       generateFingerprint(),
       fetch(),
     ])
   }, [dispatch, generateFingerprint, getUserAgent])
+
+  useEffect(() => {
+    const SIGN_IN_METHOD = localStorage.getItem('sign-in-method')
+    if (!SIGN_IN_METHOD) {
+      dispatch(fetchSystemConfig())
+    }
+  }, [dispatch])
 
   useEffect(() => {
     if (userAuth?.id && userTable?.id) {
@@ -49,8 +55,12 @@ const InitialStateProvider = ({ children }) => {
 
   useEffect(() => {
     if (lang !== userTable?.language && userTable?.id) {
-      dispatch(setLanguage(userTable?.language ?? LANGUAGE.uz))
-      i18n.changeLanguage(userTable?.language ?? LANGUAGE.uz)
+      dispatch(
+        setLanguage({
+          lang: userTable?.language ?? LANGUAGE.uz,
+          cb: (lang) => i18n.changeLanguage(lang),
+        })
+      )
     }
   }, [dispatch, lang, userTable?.language, i18n, userTable])
 

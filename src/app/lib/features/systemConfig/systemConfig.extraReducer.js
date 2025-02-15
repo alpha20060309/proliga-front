@@ -14,6 +14,7 @@ export const systemConfigExtraReducer = (builder) => {
           }
         })
       }
+      localStorage.setItem('config', JSON.stringify(state.config))
       state.isLoading = false
     })
     .addCase(fetchSystemConfig.rejected, (state, action) => {

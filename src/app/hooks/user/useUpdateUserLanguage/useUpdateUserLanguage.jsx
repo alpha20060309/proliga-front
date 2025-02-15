@@ -8,7 +8,6 @@ import { toast } from 'react-toastify'
 import { setUserTable } from 'app/lib/features/auth/auth.slice'
 import { setLanguage } from 'app/lib/features/systemLanguage/systemLanguage.slice'
 import { useTranslation } from 'react-i18next'
-import { LANGUAGE } from 'app/utils/languages.util'
 
 export const useUpdateUserLanguage = () => {
   const dispatch = useDispatch()
@@ -49,8 +48,9 @@ export const useUpdateUserLanguage = () => {
         }
         if (data) {
           dispatch(setUserTable(data[0]))
-          dispatch(setLanguage(lang))
-          i18n.changeLanguage(data[0]?.language ?? LANGUAGE.uz)
+          dispatch(
+            setLanguage({ lang, cb: (lang) => i18n.changeLanguage(lang) })
+          )
           localStorage.setItem(`user-table-${sbUrl}`, JSON.stringify(data[0]))
         }
       } catch (error) {

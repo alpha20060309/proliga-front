@@ -15,10 +15,13 @@ import {
   selectUserTable,
 } from 'app/lib/features/auth/auth.selector'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
+import { setLanguage } from 'app/lib/features/systemLanguage/systemLanguage.slice'
+import { useTranslation } from 'react-i18next'
 
 const AuthProvider = ({ children }) => {
   const dispatch = useDispatch()
   const path = usePathname()
+  const { i18n } = useTranslation()
   const router = useRouter()
   const { is_checked } = useSelector((state) => state.auth)
   const userTable = useSelector(selectUserTable)
@@ -45,6 +48,22 @@ const AuthProvider = ({ children }) => {
       router.push('/')
     }
   }, [dispatch, userAuth, userTable, router, path, logOut])
+
+  useEffect(() => {
+    const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
+    const auth =
+      localStorage.getItem(`user-auth-${sbUrl}`) &&
+      JSON.parse(localStorage.getItem(`user-auth-${sbUrl}`))
+    const table =
+      localStorage.getItem(`user-table-${sbUrl}`) !== 'undefined' &&
+      JSON.parse(localStorage.getItem(`user-table-${sbUrl}`))
+
+    const lang = localStorage.getItem('lang')
+
+    if (!auth?.id && !table?.id && (lang !== 'undefined' || lang !== 'null')) {
+      dispatch(setLanguage({ lang, cb: (lang) => i18n.changeLanguage(lang) }))
+    }
+  }, [dispatch, i18n])
 
   useEffect(() => {
     if (

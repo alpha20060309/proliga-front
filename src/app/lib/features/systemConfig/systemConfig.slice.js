@@ -10,11 +10,6 @@ const initialState = {
 const systemConfigSlice = createSlice({
   name: 'systemConfig',
   initialState,
-  reducers: {
-    setSystemConfig: (state, action) => {
-      state.value = action.payload
-    },
-  },
   extraReducers: systemConfigExtraReducer,
 })
 
