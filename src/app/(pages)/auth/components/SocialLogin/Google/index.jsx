@@ -51,7 +51,7 @@ const GoogleSignIn = ({ className, iconClassName, setShouldRedirect }) => {
   return (
     <Button
       variant="outline"
-      className={cn('flex-1 p-0', className)}
+      className={cn('w-1/2 p-0', className)}
       onClick={handleGoogleSignIn}
     >
       <Image
