@@ -1,53 +1,34 @@
 import { Button } from '@/components/ui/button'
 import { useTranslation } from 'react-i18next'
-import { useCallback, useEffect } from 'react'
+import { useCallback } from 'react'
 import { supabase } from 'app/lib/supabaseClient'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { SUPABASE_PROVIDERS } from 'app/lib/supabaseClient'
+import { toast } from 'react-toastify'
 
 const GoogleSignIn = ({ className, iconClassName }) => {
   const { t } = useTranslation()
 
+  console.log(URL + '/auth')
   const handleGoogleSignIn = useCallback(() => {
     try {
-      // eslint-disable-next-line no-undef
-      const URL = process.env.NEXT_PUBLIC_URL
       localStorage.setItem('sign-in-method', SUPABASE_PROVIDERS.GOOGLE)
-
-      console.log(URL + '/auth')
 
       const { error } = supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: URL + '/auth',
+          // eslint-disable-next-line no-undef
+          redirectTo: `${process.env.NEXT_PUBLIC_URL}/auth`,
         },
       })
 
       if (error) throw new Error(error.message)
     } catch (error) {
       console.error('Error signing in with Google:', error)
+      toast.error(error.message, { theme: 'dark' })
     }
   }, [])
-
-  useEffect(() => {
-    const script = document.createElement('script')
-    script.src = 'https://accounts.google.com/gsi/client'
-    script.async = true
-    script.defer = true
-    document.body.appendChild(script)
-
-    script.onload = () => {
-      window.google.accounts.id.initialize({
-        // eslint-disable-next-line no-undef
-        client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
-      })
-    }
-
-    return () => {
-      document.body.removeChild(script)
-    }
-  }, [handleGoogleSignIn])
 
   return (
     <Button
