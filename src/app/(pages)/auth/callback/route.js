@@ -34,6 +34,7 @@ export async function GET(request) {
     await supabase.auth.exchangeCodeForSession(code)
   }
 
+  console.log(requestUrl.origin + "/auth")
   // URL to redirect to after sign in process completes
   return NextResponse.redirect(requestUrl.origin + "/auth")
 }
