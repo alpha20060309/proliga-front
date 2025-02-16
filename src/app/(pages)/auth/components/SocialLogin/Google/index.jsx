@@ -18,14 +18,6 @@ const GoogleSignIn = ({ className, iconClassName }) => {
 
       const { error } = supabase.auth.signInWithOAuth({
         provider: 'google',
-        options: {
-          // eslint-disable-next-line no-undef
-          redirectTo: `${process.env.NEXT_PUBLIC_URL}/auth/callback`,
-          queryParams: {
-            access_type: 'offline',
-            prompt: 'consent',
-          },
-        },
       })
 
       if (error) throw new Error(error.message)
