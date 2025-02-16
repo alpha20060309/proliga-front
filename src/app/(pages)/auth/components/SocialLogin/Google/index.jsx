@@ -10,6 +10,7 @@ import { toast } from 'react-toastify'
 const GoogleSignIn = ({ className, iconClassName }) => {
   const { t } = useTranslation()
 
+  // eslint-disable-next-line no-undef
   console.log(process.env.NEXT_PUBLIC_URL + '/auth')
   const handleGoogleSignIn = useCallback(() => {
     try {
@@ -19,7 +20,11 @@ const GoogleSignIn = ({ className, iconClassName }) => {
         provider: 'google',
         options: {
           // eslint-disable-next-line no-undef
-          redirectTo: `${process.env.NEXT_PUBLIC_URL}/auth`,
+          redirectTo: `${process.env.NEXT_PUBLIC_URL}/auth/callback`,
+          queryParams: {
+            access_type: 'offline',
+            prompt: 'consent',
+          },
         },
       })
 
