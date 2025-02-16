@@ -6,6 +6,7 @@ export function middleware() {
   res.headers.append('Access-Control-Allow-Credentials', 'true')
   res.headers.append(
     'Access-Control-Allow-Origin',
+    // eslint-disable-next-line no-undef
     process.env.NEXT_PUBLIC_ALLOWED_DOMAINS
   )
   res.headers.append(
