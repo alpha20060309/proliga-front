@@ -96,7 +96,7 @@ const ChangePasswordTab = () => {
         </h3>
         <form onSubmit={handleSubmit} className="space-y-2">
           <section className="space-y-1">
-            <div className="relative sm:max-w-96">
+            <div className="relative space-y-1 sm:max-w-96">
               <label
                 className="block text-sm font-bold text-neutral-300"
                 htmlFor="oldPassword"
@@ -126,7 +126,7 @@ const ChangePasswordTab = () => {
                 )}
               </Button>
             </div>
-            <div className="relative sm:max-w-96">
+            <div className="relative space-y-1 sm:max-w-96">
               <label
                 className="block text-sm font-bold text-neutral-300"
                 htmlFor="newPassword"
@@ -156,7 +156,7 @@ const ChangePasswordTab = () => {
                 )}
               </Button>
             </div>
-            <div className="relative sm:max-w-96">
+            <div className="relative space-y-1 sm:max-w-96">
               <label
                 className="block text-sm font-bold text-neutral-300"
                 htmlFor="confirmPassword"
