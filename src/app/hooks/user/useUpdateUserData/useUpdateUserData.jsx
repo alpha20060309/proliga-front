@@ -21,8 +21,6 @@ export const useUpdateUserData = () => {
       bio,
       gender,
       birth_date,
-      phone,
-      differentPhone,
       cb = () => {},
     }) => {
       // eslint-disable-next-line no-undef
@@ -55,37 +53,6 @@ export const useUpdateUserData = () => {
           bio,
           gender,
           birth_date,
-        }
-
-        if (differentPhone) {
-          obj = {
-            ...obj,
-            phone,
-            phone_verified: false,
-          }
-          const { data: checkData, error: checkError } = await supabase.rpc(
-            'get__check_user_not_exist',
-            {
-              phone_num: phone,
-            }
-          )
-
-          if (checkError) {
-            setError(
-              checkError instanceof Error
-                ? checkError.message
-                : 'An unknown error occurred'
-            )
-            return toast.error(checkError.message)
-          }
-          if (checkData?.status === 200) {
-            setError("Bu telefon raqam oldin ro'yxatdan o'tgan")
-            return toast.error(t("Bu telefon raqam oldin ro'yxatdan o'tgan"))
-          }
-          if (checkData?.status !== 404) {
-            setError('An unknown error occurred')
-            return toast.error(t('An unknown error occurred'))
-          }
         }
 
         const { data, error } = await supabase

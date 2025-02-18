@@ -56,12 +56,6 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
     if (!gender) {
       return toast.warning(t('Iltimos jiningizni tanlang'))
     }
-    if (phone.slice(0, 4) !== '+998') {
-      return toast.error(t("Phone number must start with '+998'."))
-    }
-    if (phone.length !== 13) {
-      return toast.error(t("Telefon raqam noto'g'ri"))
-    }
 
     await updateUserData({
       name: firstName,
@@ -70,8 +64,6 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
       bio,
       gender,
       birth_date: date,
-      phone,
-      differentPhone: phone !== userTable?.phone,
       cb: () => setHomeTab(),
     })
   }

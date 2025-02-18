@@ -14,6 +14,7 @@ import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
 import { useSelector } from 'react-redux'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { useAuthUpdatePassword } from 'app/hooks/auth/useAuthChangePassword/useAuthChangePassword'
+import UpdatePhoneNumber from 'components/Modals/UpdatePhoneNumber'
 
 const ChangePasswordTab = () => {
   const { t } = useTranslation()
@@ -29,6 +30,7 @@ const ChangePasswordTab = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [isSMSVerified, setSMSVerified] = useState(false)
   const [isModalOpen, setModalOpen] = useState(false)
+  const [updateModalOpen, setUpdateModalOpen] = useState(true)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -78,6 +80,10 @@ const ChangePasswordTab = () => {
 
   return (
     <>
+      <UpdatePhoneNumber
+        isModalOpen={updateModalOpen}
+        setModalOpen={setUpdateModalOpen}
+      />
       <ConfirmOTP
         setModalOpen={setModalOpen}
         isModalOpen={isModalOpen}
