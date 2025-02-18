@@ -14,45 +14,83 @@ export const useUpdateUserData = () => {
   const { t } = useTranslation()
 
   const updateUserData = useCallback(
-    async (firstName, lastName, middleName, bio, gender, birthdate) => {
+    async ({
+      name,
+      last_name,
+      middle_name,
+      bio,
+      gender,
+      birth_date,
+      phone,
+      differentPhone,
+      cb = () => {},
+    }) => {
+      // eslint-disable-next-line no-undef
       const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
-      if (!firstName) {
+      if (!name) {
         setError(t('Ism kiriting'))
-        toast.warning(t('Ism kiriting'), { theme: 'dark' })
-        return
+        return toast.warning(t('Ism kiriting'), { theme: 'dark' })
       }
       if (!gender) {
         setError(t('Jinsni tanlang'))
-        toast.warning(t('Jinsni tanlang'), { theme: 'dark' })
-        return
+        return toast.warning(t('Jinsni tanlang'), { theme: 'dark' })
       }
-      if (!birthdate) {
+      if (!birth_date) {
         setError(t("Tug'ilgan yilingizni kiriting"))
-        toast.warning(t("Tug'ilgan yilingizni kiriting"), { theme: 'dark' })
-        return
+        return toast.warning(t("Tug'ilgan yilingizni kiriting"))
       }
       if (!userAuth) {
         setError('User not authenticated')
-        toast.error(t('Foydalanuvchi autentifikatsiya qilinmagan'), {
-          theme: 'dark',
-        })
-        return
+        return toast.error(t('Foydalanuvchi autentifikatsiya qilinmagan'))
       }
 
       try {
         setIsLoading(true)
         setError('')
 
+        let obj = {
+          name,
+          last_name,
+          middle_name,
+          bio,
+          gender,
+          birth_date,
+        }
+
+        if (differentPhone) {
+          obj = {
+            ...obj,
+            phone,
+            phone_verified: false,
+          }
+          const { data: checkData, error: checkError } = await supabase.rpc(
+            'get__check_user_not_exist',
+            {
+              phone_num: phone,
+            }
+          )
+
+          if (checkError) {
+            setError(
+              checkError instanceof Error
+                ? checkError.message
+                : 'An unknown error occurred'
+            )
+            return toast.error(checkError.message)
+          }
+          if (checkData?.status === 200) {
+            setError("Bu telefon raqam oldin ro'yxatdan o'tgan")
+            return toast.error(t("Bu telefon raqam oldin ro'yxatdan o'tgan"))
+          }
+          if (checkData?.status !== 404) {
+            setError('An unknown error occurred')
+            return toast.error(t('An unknown error occurred'))
+          }
+        }
+
         const { data, error } = await supabase
           .from('user')
-          .update({
-            name: firstName,
-            last_name: lastName,
-            middle_name: middleName,
-            bio,
-            gender,
-            birth_date: birthdate,
-          })
+          .update(obj)
           .eq('guid', userAuth?.id)
           .is('deleted_at', null)
           .select()
@@ -67,14 +105,14 @@ export const useUpdateUserData = () => {
           toast.error(
             error instanceof Error
               ? error.message
-              : t('An unknown error occurred'),
-            { theme: 'dark' }
+              : t('An unknown error occurred')
           )
-          return
+          return { error, data }
         }
         if (data) {
           dispatch(setUserTable(data))
           localStorage.setItem(`user-table-${sbUrl}`, JSON.stringify(data))
+          cb()
         }
       } catch (error) {
         setError(

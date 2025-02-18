@@ -37,32 +37,25 @@ const SignUpForm = ({ setShouldRedirect }) => {
     e.preventDefault()
 
     if (!agreement) {
-      toast.error(t('Iltimos qoidalarga rozilik berin'))
-      return
+      return toast.error(t('Iltimos qoidalarga rozilik berin'))
     }
     if (!email || !password || !confirmPassword) {
-      toast.error(t("Barcha maydonlar to'ldirilishi shart"))
-      return
+      return toast.error(t("Barcha maydonlar to'ldirilishi shart"))
     }
     if (!isEmail(email)) {
-      toast.error(t('Your email is incorrect.'))
-      return
+      return toast.error(t('Your email is incorrect.'))
     }
     if (password !== confirmPassword) {
-      toast.error(t('Parollar mos kelmadi'), { theme: 'dark' })
-      return
-    }
-    if (phone.length !== 13) {
-      toast.error(t("Telefon raqam noto'g'ri"), { theme: 'dark' })
-      return
+      return toast.error(t('Parollar mos kelmadi'))
     }
     if (password.length < 6) {
-      toast.error(t("Parol 6 ta belgidan kam bo'lmasligi kerak"))
-      return
+      return toast.error(t("Parol 6 ta belgidan kam bo'lmasligi kerak"))
     }
     if (phone.slice(0, 4) !== '+998') {
-      toast.error(t("Phone number must start with '+998'."), { theme: 'dark' })
-      return
+      return toast.error(t("Phone number must start with '+998'."))
+    }
+    if (phone.length !== 13) {
+      return toast.error(t("Telefon raqam noto'g'ri"))
     }
 
     setShouldRedirect(false)

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import DatePicker from 'react-datepicker'
-import { Camera, Loader } from 'lucide-react'
+import { Camera, Loader, Send } from 'lucide-react'
 
 import { useUpdateUserData } from 'app/hooks/user/useUpdateUserData/useUpdateUserData'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
@@ -23,7 +23,8 @@ import {
 } from '@/components/ui/select'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { getUrl } from 'app/utils/static.util'
-
+import { Label } from '@/components/ui/label'
+import PhoneVerification from './PhoneVerification'
 import './datepicker.scss'
 
 const GENDERS = {
@@ -43,29 +44,36 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
   const [bio, setBio] = useState(userTable?.bio ?? '')
   const [gender, setGender] = useState(userTable?.gender ?? GENDERS.UNSET)
   const [isModalOpen, setModalOpen] = useState(false)
-  const { updateUserData, isLoading, error } = useUpdateUserData()
+  const { updateUserData, isLoading } = useUpdateUserData()
+  const [otp, setOtp] = useState('')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     if (!firstName) {
-      toast.warning(t('Iltimos ismni kiriting'), { theme: 'dark' })
-      return
+      return toast.warning(t('Iltimos ismni kiriting'))
     }
-
     if (!gender) {
-      toast.warning(t('Iltimos jiningizni tanlang'), { theme: 'dark' })
-      return
+      return toast.warning(t('Iltimos jiningizni tanlang'))
+    }
+    if (phone.slice(0, 4) !== '+998') {
+      return toast.error(t("Phone number must start with '+998'."))
+    }
+    if (phone.length !== 13) {
+      return toast.error(t("Telefon raqam noto'g'ri"))
     }
 
-    if (phone !== userTable?.phone) {
-      return toast.warning(t("Can't change phone yet"))
-    }
-
-    await updateUserData(firstName, lastName, middleName, bio, gender, date)
-    if (!isLoading && !error) {
-      setHomeTab()
-    }
+    await updateUserData({
+      name: firstName,
+      last_name: lastName,
+      middle_name: middleName,
+      bio,
+      gender,
+      birth_date: date,
+      phone,
+      differentPhone: phone !== userTable?.phone,
+      cb: () => setHomeTab(),
+    })
   }
 
   console.log(userTable?.phone)
@@ -78,7 +86,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
           {t('Profil sozlamalari')}
         </h3>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="flex flex-col items-start gap-4 sm:flex-row">
+          <div className="flex flex-col items-start gap-2 sm:flex-row">
             <div className="relative">
               <Avatar className="size-32 border-2 border-neutral-700 xl:size-36">
                 <AvatarImage
@@ -148,15 +156,15 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
                   />
                 </article>
                 <article className="space-y-1">
-                  <label
+                  <Label
                     className="text-sm font-medium text-neutral-300"
                     htmlFor="phone"
                   >
                     {t('Telefon raqam')}
-                  </label>
-                  <PhoneInput
+                  </Label>
+                  <Input
                     placeholder={userTable?.phone}
-                    onChange={(value) => setPhone(value)}
+                    readOnly
                     value={phone}
                     className="border-neutral-700 bg-neutral-800"
                   />
@@ -214,6 +222,13 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
               </section>
             </div>
           </div>
+          <PhoneVerification
+            otp={otp}
+            setOtp={setOtp}
+            setPhone={setPhone}
+            phone={phone}
+          />
+
           <div className="space-y-1">
             <label
               className="text-sm font-medium text-neutral-300"
@@ -226,7 +241,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
               placeholder={t('Bio')}
               value={bio}
               onChange={(e) => setBio(e.target.value)}
-              className="h-48 border-neutral-700 bg-neutral-800 text-neutral-200 placeholder:text-neutral-500 lg:h-56 xl:h-64"
+              className="h-40 border-neutral-700 bg-neutral-800 text-neutral-200 placeholder:text-neutral-500"
             />
           </div>
           <Button
