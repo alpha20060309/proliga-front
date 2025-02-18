@@ -60,7 +60,9 @@ export const useUpdateUserData = () => {
           .update(obj)
           .eq('guid', userAuth?.id)
           .is('deleted_at', null)
-          .select()
+          .select(
+            'id, guid, name, email, phone, photo, last_name, middle_name, gender, birth_date, bio, balance, deleted_at, language, phone_verified, visitor, geo, agent'
+          )
           .single()
 
         if (error) {

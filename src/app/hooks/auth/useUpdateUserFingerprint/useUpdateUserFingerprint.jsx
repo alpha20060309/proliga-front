@@ -37,7 +37,9 @@ export const useUpdateUserFingerprint = () => {
           .update({ visitor: fingerprint, visited_at: new Date() })
           .eq('guid', guid)
           .is('deleted_at', null)
-          .select('*')
+          .select(
+            'id, guid, name, email, phone, photo, last_name, middle_name, gender, birth_date, bio, balance, deleted_at, language, phone_verified, visitor, geo, agent'
+          )
           .single()
 
         if (error) {
