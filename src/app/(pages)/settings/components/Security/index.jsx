@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import { Input } from '@/components/ui/input'
 import { toast } from 'react-toastify'
-import { Eye, EyeOff } from 'lucide-react'
+import { Eye, EyeOff, EditIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { SettingsContainer } from '../Container'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
@@ -15,6 +15,7 @@ import { useSelector } from 'react-redux'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { useAuthUpdatePassword } from 'app/hooks/auth/useAuthChangePassword/useAuthChangePassword'
 import UpdatePhoneNumber from 'components/Modals/UpdatePhoneNumber'
+import { Label } from '@/components/ui/label'
 
 const ChangePasswordTab = () => {
   const { t } = useTranslation()
@@ -30,7 +31,7 @@ const ChangePasswordTab = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [isSMSVerified, setSMSVerified] = useState(false)
   const [isModalOpen, setModalOpen] = useState(false)
-  const [updateModalOpen, setUpdateModalOpen] = useState(true)
+  const [updateModalOpen, setUpdateModalOpen] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -98,17 +99,47 @@ const ChangePasswordTab = () => {
           onAction={handleSendSms}
         />
         <h3 className="mb-2 text-xl font-bold tracking-tight text-neutral-100">
-          {t('Parol Yangilash')}
+          {t('Security settings')}
         </h3>
         <form onSubmit={handleSubmit} className="space-y-2">
           <section className="space-y-1">
             <div className="relative space-y-1 sm:max-w-96">
-              <label
+              <Label
+                className="block text-sm font-bold text-neutral-300"
+                htmlFor="phone"
+              >
+                {t('Telefon raqam')}:
+              </Label>
+              <div className="group relative">
+                <Input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  className="h-10 cursor-pointer rounded border-neutral-500 bg-neutral-900 text-sm text-neutral-300 transition-colors placeholder:text-neutral-500 md:text-base"
+                  placeholder={'99-999-99-99'}
+                  value={userTable?.phone}
+                  disabled={!isSMSVerified}
+                  readOnly
+                />
+                <Button
+                  // disabled={!isSMSVerified}
+                  type="button"
+                  size="icon"
+                  variant="ghost"
+                  onClick={() => setUpdateModalOpen(true)}
+                  className="absolute bottom-0 right-0 bg-transparent transition-all group-hover:bg-neutral-950"
+                >
+                  <EditIcon className="size-5 text-neutral-200" />
+                </Button>
+              </div>
+            </div>
+            <div className="relative space-y-1 sm:max-w-96">
+              <Label
                 className="block text-sm font-bold text-neutral-300"
                 htmlFor="oldPassword"
               >
                 {t('Eski parol')}
-              </label>
+              </Label>
               <Input
                 disabled={!isSMSVerified}
                 id="oldPassword"
@@ -133,12 +164,12 @@ const ChangePasswordTab = () => {
               </Button>
             </div>
             <div className="relative space-y-1 sm:max-w-96">
-              <label
+              <Label
                 className="block text-sm font-bold text-neutral-300"
                 htmlFor="newPassword"
               >
                 {t('Yangi parol')}
-              </label>
+              </Label>
               <Input
                 id="newPassword"
                 name="newPassword"
@@ -163,12 +194,12 @@ const ChangePasswordTab = () => {
               </Button>
             </div>
             <div className="relative space-y-1 sm:max-w-96">
-              <label
+              <Label
                 className="block text-sm font-bold text-neutral-300"
                 htmlFor="confirmPassword"
               >
                 {t('Yangi parolni qayta kiriting')}
-              </label>
+              </Label>
               <Input
                 disabled={!isSMSVerified}
                 id="confirmPassword"

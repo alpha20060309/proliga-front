@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { SETTINGS_TAB } from './tabs'
 import TransactionsHistory from './components/Transactions'
-import ChangePassword from './components/ChangePassword'
+import ChangePassword from './components/Security'
 import SettingsTab from './components/Settings'
 import dynamic from 'next/dynamic'
 import SettingsSkeleton, {

@@ -37,30 +37,29 @@ function UpdatePhoneNumber({ isModalOpen, setModalOpen }) {
       <DialogContent className="w-[98%] max-w-md rounded-xl bg-neutral-950 p-5 text-neutral-100 sm:p-6">
         <DialogTitle>{t('Update Phone Number')}</DialogTitle>
         <DialogDescription>
-          {t(
-            'To update your phone number, please enter your previous and new phone numbers.'
-          )}
+          {t('Please be careful when setting your new phone number')}
         </DialogDescription>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="relative space-y-1">
-            <Label htmlFor="prev-phone">{t('Previous Phone Number')}:</Label>
+            <Label htmlFor="prev-phone">{t('Telefon raqam')}:</Label>
             <PhoneInput
               id="prev-phone"
               name="prevPhone"
-              placeholder={t('Previous Phone Number')}
               defaultCountry="UZ"
               className="h-10 bg-neutral-950 text-neutral-200 placeholder:text-neutral-500"
               value={prevPhone}
+              placeholder={'99-999-99-99'}
               onChange={setPrevPhone}
-              disabled // Disable editing for the previous phone number
+              disabled
+              readOnly // Disable editing for the previous phone number
             />
           </div>
           <div className="relative space-y-1">
-            <Label htmlFor="new-phone">{t('New Phone Number')}:</Label>
+            <Label htmlFor="new-phone">{t('New Phone Number:')}:</Label>
             <PhoneInput
               id="new-phone"
               name="newPhone"
-              placeholder={t('New Phone Number')}
+              placeholder={'99-999-99-99'}
               defaultCountry="UZ"
               className="h-10 bg-neutral-950 text-neutral-200 placeholder:text-neutral-500"
               value={newPhone}
@@ -75,7 +74,7 @@ function UpdatePhoneNumber({ isModalOpen, setModalOpen }) {
             {isLoading ? (
               <Loader2 className="h-4 w-4 animate-spin" />
             ) : (
-              t('Update')
+              t('Tasdiqlash')
             )}
           </Button>
         </form>

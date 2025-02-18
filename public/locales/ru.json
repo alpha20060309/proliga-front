@@ -200,7 +200,7 @@
   "Ism": "Имя",
   "Familiya": "Фамилия",
   "Sharif": "Отчество",
-  "Siz haqingizda": "о вас",
+  "Siz haqingizda": "О вас",
   "Jins": "пол",
   "Tanlang": "Выберите",
   "Erkak": "Мужчина",
@@ -508,7 +508,6 @@
   "Bu foydalanuvchi allaqachon ro'yxatdan o'tgan": "Пользователь с таким адресом электронной почты уже зарегистрирован.",
   "Login yoki parol xato": "Неверный логин или пароль",
   "Bunaqa raqamli foydalanuvchi yoq": "Пользователь с таким номером не существует",
-  "Telefon kiritilmagan": "Телефон не добавлен",
   "Mablag‘ yetarli emas!": "Недостаточно средств!",
   "Sizning Ismingiz": "Ваше имя",
   "Rasm muvofaqiyatli yuklandi": "Изображение загружено успешно",
@@ -622,5 +621,10 @@
   "Google": "Google",
   "To complete your registration, please link your mobile phone to your account. This step is mandatory.": "Для завершения регистрации привяжите свой мобильный телефон к аккаунту. Этот шаг является обязательным.",
   "To reset your password, please enter the OTP sent to your mobile phone. This step is required for security verification.": "Для сброса пароля введите OTP-код, отправленный на ваш мобильный телефон. Этот шаг необходим для проверки безопасности.",
-  "Enter your phone number.": "Введите номер."
+  "Enter your phone number.": "Введите номер.",
+  "Security": "Безопасность",
+  "Security settings": "Настройки безопасности",
+  "Update Phone Number": "Обновить номер телефона",
+  "Please be careful when setting your new phone number": "Пожалуйста, будьте внимательны при установке нового номера телефона, так как он будет использоваться для восстановления и проверки аккаунта. Вам потребуется подтвердить новый номер после его установки.",
+  "New Phone Number:": "Новый номер телефона"
 }

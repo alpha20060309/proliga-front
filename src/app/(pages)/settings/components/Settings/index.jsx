@@ -64,8 +64,6 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
     })
   }
 
-  console.log(userTable?.phone)
-
   return (
     <>
       <UploadFile isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
