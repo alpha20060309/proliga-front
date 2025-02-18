@@ -29,7 +29,9 @@ export const useRefreshUserTable = () => {
 
         const { data, error } = await supabase
           .from('user')
-          .select('*')
+          .select(
+            'id, guid, name, email, phone, photo, last_name, middle_name, gender, birth_date, bio, balance, deleted_at, language, phone_verified, visitor, geo, agent'
+          )
           .eq('guid', guid)
           .is('deleted_at', null)
           .single()

@@ -65,7 +65,7 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-      <DialogContent className="max-h-[80%] w-[98%] max-w-xl overflow-auto rounded-xl bg-neutral-900 p-4 xl:p-6">
+      <DialogContent className="max-h-[80%] w-[98%] max-w-lg overflow-auto rounded-xl bg-neutral-900 p-4 xl:p-6">
         <DialogTitle className="text-lg font-bold sm:text-xl">
           {t('Balansingizni toldiring')}
         </DialogTitle>

@@ -14,6 +14,7 @@ export const useUpdateUserPhoto = () => {
   const updateUserPhoto = useCallback(
     async ({ path, closeModal, userTable, userAuth }) => {
       try {
+        // eslint-disable-next-line no-undef
         const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
         setIsLoading(true)
         setError('')
@@ -39,7 +40,9 @@ export const useUpdateUserPhoto = () => {
           })
           .eq('guid', userAuth?.id)
           .is('deleted_at', null)
-          .select()
+          .select(
+            'id, guid, name, email, phone, photo, last_name, middle_name, gender, birth_date, bio, balance, deleted_at, language, phone_verified, visitor, geo, agent'
+          )
           .single()
 
         if (error) {

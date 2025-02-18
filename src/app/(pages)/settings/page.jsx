@@ -24,7 +24,6 @@ const Navigation = dynamic(() => import('./components/Navigation'), {
   ssr: false,
   loading: () => <NavigationSkeleton />,
 })
-import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
 
 function Settings() {
@@ -37,7 +36,6 @@ function Settings() {
 
   useEffect(() => {
     if (!userTable || !userAuth) {
-      toast.warning(t('Please login first'))
       router.push('/')
     }
   }, [router, t, userAuth, userTable])
