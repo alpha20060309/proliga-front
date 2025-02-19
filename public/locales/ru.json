@@ -375,7 +375,7 @@
   "Telefon raqam tasdiqlash": "Подтверждение номера телефона",
   "Deadline": "Дедлайн",
   "Tahrirlash": "Редактировать",
-  "Xarajatlar tarixi": "История расходов",
+  "Xarajatlar tarixi": "История платежей",
   "Balans haqida malumot topilmadi!": "Информация о балансе не найдена!",
   "Paketlar haqida malumoti topilmadi!": "Информация о пакетах не найдена!",
   "O’2": "П2",
@@ -626,5 +626,7 @@
   "Security settings": "Настройки безопасности",
   "Update Phone Number": "Обновить номер телефона",
   "Please be careful when setting your new phone number": "Пожалуйста, будьте внимательны при установке нового номера телефона, так как он будет использоваться для восстановления и проверки аккаунта. Вам потребуется подтвердить новый номер после его установки.",
-  "New Phone Number:": "Новый номер телефона"
+  "New Phone Number:": "Новый номер телефона",
+  "Update your password to keep your account secure": "Обновите свой пароль, чтобы обезопасить свою учетную запись.",
+  "Keep your contact information up to date": "Держите свою контактную информацию в актуальном состоянии."
 }

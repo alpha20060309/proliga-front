@@ -10,7 +10,6 @@ import { Label } from '@/components/ui/label'
 import { useAuthUpdatePassword } from 'app/hooks/auth/useAuthChangePassword/useAuthChangePassword'
 import { useSelector } from 'react-redux'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
-import Image from 'next/image'
 
 export default function ChangePasswordForm({ isSMSVerified }) {
   const { t } = useTranslation()
@@ -57,19 +56,17 @@ export default function ChangePasswordForm({ isSMSVerified }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-2">
-      <div className="relative space-y-1 sm:max-w-96">
-        <Label
-          className="block text-sm font-bold text-neutral-300"
-          htmlFor="oldPassword"
-        >
-          {t('Eski parol')}
-        </Label>
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-2 px-1 sm:max-w-96"
+    >
+      <div className="relative sm:max-w-96">
+        <Label htmlFor="oldPassword">{t('Eski parol')}</Label>
         <Input
           disabled={!isSMSVerified}
           id="oldPassword"
           name="oldPassword"
-          className="h-10 pr-10"
+          className="h-10 border-neutral-400 pr-10"
           type={showOldPassword ? 'text' : 'password'}
           value={oldPassword}
           onChange={(e) => setOldPassword(e.target.value)}
@@ -88,17 +85,12 @@ export default function ChangePasswordForm({ isSMSVerified }) {
           )}
         </Button>
       </div>
-      <div className="relative space-y-1 sm:max-w-96">
-        <Label
-          className="block text-sm font-bold text-neutral-300"
-          htmlFor="newPassword"
-        >
-          {t('Yangi parol')}
-        </Label>
+      <div className="relative sm:max-w-96">
+        <Label htmlFor="newPassword">{t('Yangi parol')}</Label>
         <Input
           id="newPassword"
           name="newPassword"
-          className="h-10 pr-10"
+          className="h-10 border-neutral-400 pr-10"
           type={showPassword ? 'text' : 'password'}
           value={password}
           disabled={!isSMSVerified}
@@ -118,18 +110,15 @@ export default function ChangePasswordForm({ isSMSVerified }) {
           )}
         </Button>
       </div>
-      <div className="relative space-y-1 sm:max-w-96">
-        <Label
-          className="block text-sm font-bold text-neutral-300"
-          htmlFor="confirmPassword"
-        >
+      <div className="relative sm:max-w-96">
+        <Label htmlFor="confirmPassword">
           {t('Yangi parolni qayta kiriting')}
         </Label>
         <Input
           disabled={!isSMSVerified}
           id="confirmPassword"
           name="confirmPassword"
-          className="h-10 pr-10"
+          className="h-10 border-neutral-400 pr-10"
           type={showConfirmPassword ? 'text' : 'password'}
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
@@ -149,16 +138,15 @@ export default function ChangePasswordForm({ isSMSVerified }) {
         </Button>
       </div>
       <Button
-        className="h-10 w-full rounded border border-black bg-primary/75 text-sm font-semibold text-neutral-900 transition-all hover:bg-primary hover:bg-opacity-100 xs:max-w-48"
+        className="h-10 w-full rounded border border-black border-primary/75 bg-neutral-900 text-sm font-semibold text-neutral-200 transition-all hover:border-primary xs:max-w-40"
         type="submit"
-        // disabled={isLoading || !isSMSVerified}
+        disabled={isLoading || !isSMSVerified}
       >
-          <Loader className="filter-black mx-auto size-5 animate-spin" />
-          {/* {true ? (
+        {isLoading ? (
           <Loader className="filter-black mx-auto size-5 animate-spin" />
         ) : (
           t('Saqlash')
-        )} */}
+        )}
       </Button>
     </form>
   )

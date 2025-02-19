@@ -2,75 +2,54 @@
 
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { EditIcon, Eye, EyeOff } from 'lucide-react'
+import { Eye, EyeOff, Loader } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { useSelector } from 'react-redux'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
-import UpdatePhoneNumber from 'components/Modals/UpdatePhoneNumber'
+import { PhoneInput } from 'components/PhoneInput'
 
 export default function ChangePhoneForm() {
   const { t } = useTranslation()
   const userTable = useSelector(selectUserTable)
 
-  const [updateModalOpen, setUpdateModalOpen] = useState(false)
+  const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+  const isLoading = false
 
   return (
-    <div className="space-y-1 sm:max-w-96">
-      <UpdatePhoneNumber
-        isModalOpen={updateModalOpen}
-        setModalOpen={setUpdateModalOpen}
-      />
-      <Label
-        className="block text-sm font-bold text-neutral-300"
-        htmlFor="phone"
-      >
-        {t('Telefon raqam')}:
-      </Label>
-      <div className="group relative">
-        <Input
-          id="phone"
-          name="phone"
-          type="tel"
-          className="h-10 cursor-pointer pr-10"
-          placeholder={'99-999-99-99'}
+    <section className="flex flex-col gap-2 px-1 sm:max-w-96">
+      <div className="relative">
+        <Label htmlFor="prev-phone">{t('Telefon raqam')}:</Label>
+        <PhoneInput
+          id="prev-phone"
+          name="prevPhone"
+          defaultCountry="UZ"
+          className="h-10 border-neutral-400 bg-neutral-950 text-neutral-200 placeholder:text-neutral-500"
           value={userTable?.phone}
-          readOnly
+          placeholder={'99-999-99-99'}
+          // onChange={setPrevPhone}
         />
-        <Button
-          type="button"
-          size="icon"
-          variant="ghost"
-          onClick={() => setUpdateModalOpen(true)}
-          className="absolute bottom-0 right-0 bg-transparent transition-all group-hover:bg-neutral-950"
-        >
-          <EditIcon className="h-5 w-5 text-neutral-200" />
-        </Button>
       </div>
-      <div className="relative space-y-1 sm:max-w-96">
-        <Label
-          className="block text-sm font-bold text-neutral-300"
-          htmlFor="confirmPassword"
-        >
-          {t('Yangi parolni qayta kiriting')}
-        </Label>
+      <div className="relative sm:max-w-96">
+        <Label htmlFor="confirmPassword">{t('Parol')}</Label>
         <Input
-          id="confirmPassword"
-          name="confirmPassword"
-          className="h-10 pr-10"
-          // type={showConfirmPassword ? 'text' : 'password'}
-          // value={confirmPassword}
-          // onChange={(e) => setConfirmPassword(e.target.value)}
+          id="password"
+          name="password"
+          className="h-10 border-neutral-400 pr-10"
+          type={showPassword ? 'text' : 'password'}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <Button
           type="button"
           variant="ghost"
           size="icon"
           className="absolute bottom-0 right-0 hover:bg-transparent"
-          // onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+          onClick={() => setShowPassword(!showPassword)}
         >
-          {true ? (
+          {showPassword ? (
             <EyeOff className="h-5 w-5 text-neutral-200" />
           ) : (
             <Eye className="h-5 w-5 text-neutral-200" />
@@ -78,21 +57,15 @@ export default function ChangePhoneForm() {
         </Button>
       </div>
       <Button
-        className="h-10 w-full rounded border border-black bg-primary/75 text-sm font-semibold text-neutral-900 transition-all hover:bg-primary hover:bg-opacity-100 xs:max-w-48"
+        className="h-10 w-full rounded border border-black border-primary/75 bg-neutral-900 text-sm font-semibold text-neutral-200 transition-all hover:border-primary xs:max-w-40"
         type="submit"
       >
-        {false ? (
-          <Image
-            src="/icons/loading.svg"
-            width={24}
-            height={24}
-            alt="loading"
-            className="filter-black mx-auto size-5 animate-spin"
-          />
+        {isLoading ? (
+          <Loader className="filter-black mx-auto size-5 animate-spin" />
         ) : (
           t('Saqlash')
         )}
       </Button>
-    </div>
+    </section>
   )
 }

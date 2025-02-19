@@ -626,5 +626,7 @@
   "Security settings": "Xavfsizlik sozlamalari",
   "Update Phone Number": "Telefon raqamini yangilash",
   "Please be careful when setting your new phone number": "Iltimos, yangi telefon raqamingizni kiritishda ehtiyot bo‘ling, chunki u hisobni tiklash va tasdiqlash uchun ishlatiladi. Yangi raqamingiz o‘rnatilgandan so‘ng uni tasdiqlashingiz kerak bo‘ladi.",
-  "New Phone Number:": "Yangi telefon raqami"
+  "New Phone Number:": "Yangi telefon raqami",
+  "Update your password to keep your account secure": "Parolingizni yangilang, hisobingizni xavfsiz saqlash uchun.",
+  "Keep your contact information up to date": "Iltimos, telefon raqamingizni yangilab turing."
 }
