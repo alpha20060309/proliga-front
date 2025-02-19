@@ -41,12 +41,12 @@ export const useSendOTP = () => {
               : t('An unknown error occurred'),
             { theme: 'dark' }
           )
-          return
+          return { error }
         }
         if (data?.status !== 200) {
           setError(data?.message)
           toast.error(data?.message, { theme: 'dark' })
-          return
+          return { error }
         }
         if (data?.status === 200) {
           setData(data)
@@ -54,6 +54,7 @@ export const useSendOTP = () => {
           if (shouldRedirect) {
             router.push(redirectTo)
           }
+          return
         }
       } catch (error) {
         setError(

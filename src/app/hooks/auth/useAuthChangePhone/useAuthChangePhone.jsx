@@ -1,15 +1,14 @@
 import { useState, useCallback } from 'react'
 import { toast } from 'react-toastify'
-import { useDispatch } from 'react-redux'
 import { supabase } from '../../../lib/supabaseClient'
 import { useTranslation } from 'react-i18next'
-import { setUserAuth } from '../../../lib/features/auth/auth.slice'
+import { useSendOTP } from '../useSendOTP/useSendOTP'
 
 export const useAuthChangePhone = () => {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState(null)
-  const dispatch = useDispatch()
+  const { sendOTP } = useSendOTP()
   const { t } = useTranslation()
 
   const handleError = useCallback(
@@ -20,26 +19,19 @@ export const useAuthChangePhone = () => {
     [t]
   )
 
-  const setState = useCallback(
-    (userData) => {
-      setData(userData)
-      dispatch(setUserAuth(userData))
-      // eslint-disable-next-line no-undef
-      const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
-      localStorage.setItem(`user-auth-${sbUrl}`, JSON.stringify(userData))
-    },
-    [dispatch]
-  )
-
-  // Step 1 Check Phone doesn't exist
-  // Step 2 Login to check Pass
-  // Step 3 Set new phone to new_phone col
-  // Step 4 Send OTP new phone
-
   // Step 5 Confirm otp for new phone
 
   const updatePhone = useCallback(
-    async ({ new_phone, email, password }) => {
+    async ({
+      new_phone,
+      email,
+      password,
+      fingerprint,
+      geo,
+      agent,
+      app_version,
+      cb,
+    }) => {
       setError(null)
       setData(null)
 
@@ -49,9 +41,78 @@ export const useAuthChangePhone = () => {
 
       try {
         setIsLoading(true)
-        // First verify the old password
 
-        return true
+        // Step 1 Check Phone doesn't exist
+        const { data: checkData, error: checkError } = await supabase.rpc(
+          'get__check_user_not_exist',
+          {
+            phone_num: new_phone,
+          }
+        )
+
+        if (checkError) {
+          return handleError(
+            checkError instanceof Error
+              ? checkError.message
+              : 'An unknown error occurred'
+          )
+        }
+        if (checkData?.status === 200) {
+          return handleError("Bu telefon raqam oldin ro'yxatdan o'tgan")
+        }
+        if (checkData?.status !== 404) {
+          return handleError('An unknown error occurred')
+        }
+
+        // Step 2 Login to check password
+        const { error: authError } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        })
+
+        if (authError?.code === 'invalid_credentials') {
+          return handleError('Login yoki parol xato')
+        }
+
+        if (authError) {
+          return handleError(
+            authError instanceof Error
+              ? authError.message
+              : 'An unknown error occurred'
+          )
+        }
+
+        // Step 3 Set new phone to new_phone col
+        const { error: fullUserError } = await supabase
+          .from('user')
+          .update({
+            visitor: fingerprint,
+            visited_at: new Date(),
+            geo: JSON.stringify(geo),
+            agent: JSON.stringify(agent),
+            new_phone,
+          })
+          .eq('email', email)
+          .is('deleted_at', null)
+          .single()
+
+        if (fullUserError) {
+          return handleError(
+            fullUserError instanceof Error
+              ? fullUserError.message
+              : 'An unknown error occurred'
+          )
+        }
+        // Step 4 Send OTP new phone
+        const status = await sendOTP({ phone: new_phone })
+
+        if (status?.error) {
+          return handleError(status.error.message)
+        }
+
+        localStorage.setItem('app_version', app_version)
+        cb()
+        return
       } catch (error) {
         handleError(
           error instanceof Error ? error.message : 'An unknown error occurred'
@@ -60,7 +121,7 @@ export const useAuthChangePhone = () => {
         setIsLoading(false)
       }
     },
-    [t, handleError, setState]
+    [handleError, sendOTP]
   )
 
   return { updatePhone, isLoading, error, data }
