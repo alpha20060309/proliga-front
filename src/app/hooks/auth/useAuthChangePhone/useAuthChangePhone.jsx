@@ -20,18 +20,8 @@ export const useAuthChangePhone = () => {
   )
 
   // Step 5 Confirm otp for new phone
-
   const updatePhone = useCallback(
-    async ({
-      new_phone,
-      email,
-      password,
-      fingerprint,
-      geo,
-      agent,
-      app_version,
-      cb,
-    }) => {
+    async ({ new_phone, email, password, fingerprint, geo, agent, cb }) => {
       setError(null)
       setData(null)
 
@@ -104,15 +94,14 @@ export const useAuthChangePhone = () => {
           )
         }
         // Step 4 Send OTP new phone
-        const status = await sendOTP({ phone: new_phone })
+        const status = await sendOTP({ phone: new_phone, is_update: true })
 
         if (status?.error) {
           return handleError(status.error.message)
         }
 
-        localStorage.setItem('app_version', app_version)
         cb()
-        return
+        return true
       } catch (error) {
         handleError(
           error instanceof Error ? error.message : 'An unknown error occurred'

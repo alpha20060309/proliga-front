@@ -9,7 +9,6 @@ import SettingsAlert from '../Alert'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
 import { useSelector } from 'react-redux'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
-import ConfirmOTP from 'components/Modals/ConfirmOTP'
 import { Lock, Phone } from 'lucide-react'
 import {
   Accordion,
@@ -20,10 +19,9 @@ import {
 
 export default function SettingsPage() {
   const { t } = useTranslation()
-  const userTable = useSelector(selectUserTable)
   const { sendOTP } = useSendOTP()
+  const userTable = useSelector(selectUserTable)
 
-  const [isSMSVerified, setSMSVerified] = useState(false)
   const [isModalOpen, setModalOpen] = useState(false)
 
   const handleSendSms = async () => {
@@ -43,11 +41,6 @@ export default function SettingsPage() {
         actionText={t('Send')}
         onAction={handleSendSms}
       />
-      <ConfirmOTP
-        setModalOpen={setModalOpen}
-        isModalOpen={isModalOpen}
-        setVerificationStatus={setSMSVerified}
-      />
       <Accordion type="single" collapsible>
         <AccordionItem value="pass">
           <AccordionTrigger className="mb-0.5 rounded-lg p-2 hover:bg-neutral-950 hover:no-underline">
@@ -64,7 +57,10 @@ export default function SettingsPage() {
             </div>
           </AccordionTrigger>
           <AccordionContent>
-            <ChangePasswordForm isSMSVerified={isSMSVerified} />
+            <ChangePasswordForm
+              isModalOpen={isModalOpen}
+              setModalOpen={setModalOpen}
+            />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="phone">
@@ -82,7 +78,7 @@ export default function SettingsPage() {
             </div>
           </AccordionTrigger>
           <AccordionContent>
-            <ChangePhoneForm isSMSVerified={isSMSVerified} />
+            <ChangePhoneForm />
           </AccordionContent>
         </AccordionItem>
       </Accordion>

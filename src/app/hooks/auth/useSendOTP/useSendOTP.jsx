@@ -12,7 +12,12 @@ export const useSendOTP = () => {
   const { t } = useTranslation()
 
   const sendOTP = useCallback(
-    async ({ phone, shouldRedirect = false, redirectTo = '' }) => {
+    async ({
+      phone,
+      shouldRedirect = false,
+      redirectTo = '',
+      is_update = false,
+    }) => {
       setIsLoading(false)
       setError(null)
 
@@ -27,6 +32,7 @@ export const useSendOTP = () => {
 
         const { data, error } = await supabase.rpc('http__send__sms__phone', {
           phone_number: phone,
+          is_update,
         })
 
         if (error) {

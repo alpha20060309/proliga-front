@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import { Eye, EyeOff, Loader } from 'lucide-react'
@@ -10,8 +10,9 @@ import { Label } from '@/components/ui/label'
 import { useAuthUpdatePassword } from 'app/hooks/auth/useAuthChangePassword/useAuthChangePassword'
 import { useSelector } from 'react-redux'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import ConfirmOTP from 'components/Modals/ConfirmOTP'
 
-export default function ChangePasswordForm({ isSMSVerified }) {
+function ChangePasswordForm({ isModalOpen, setModalOpen }) {
   const { t } = useTranslation()
   const userTable = useSelector(selectUserTable)
   const { updatePassword, isLoading } = useAuthUpdatePassword()
@@ -22,30 +23,25 @@ export default function ChangePasswordForm({ isSMSVerified }) {
   const [showOldPassword, setShowOldPassword] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [isSMSVerified, setSMSVerified] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     if (password !== confirmPassword) {
-      toast.warning(t('Parollar mos kelmadi'), { theme: 'dark' })
-      return
+      return toast.warning(t('Parollar mos kelmadi'))
     }
     if (
       oldPassword.length < 6 ||
       password.length < 6 ||
       confirmPassword.length < 6
     ) {
-      toast.warning(t("Parolar 6 ta belgidan kam bo'lmasligi kerak"))
-      return
+      return toast.warning(t("Parolar 6 ta belgidan kam bo'lmasligi kerak"))
     }
     if (oldPassword === password) {
-      toast.warning(
-        t('Yangi parol eski parol bilan birhil bolishi mumkin emas'),
-        {
-          theme: 'dark',
-        }
+      return toast.warning(
+        t('Yangi parol eski parol bilan birhil bolishi mumkin emas')
       )
-      return
     }
 
     const status = await updatePassword({
@@ -62,98 +58,108 @@ export default function ChangePasswordForm({ isSMSVerified }) {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex flex-col gap-2 px-1 sm:max-w-96"
-    >
-      <div className="relative sm:max-w-96">
-        <Label htmlFor="oldPassword">{t('Eski parol')}</Label>
-        <Input
-          disabled={!isSMSVerified}
-          id="oldPassword"
-          name="oldPassword"
-          className="h-10 border-neutral-400 pr-10"
-          type={showOldPassword ? 'text' : 'password'}
-          value={oldPassword}
-          onChange={(e) => setOldPassword(e.target.value)}
-        />
-        <Button
-          type="button"
-          variant="ghost"
-          size="icon"
-          className="absolute bottom-0 right-0 hover:bg-transparent"
-          onClick={() => setShowOldPassword(!showOldPassword)}
-        >
-          {showOldPassword ? (
-            <EyeOff className="h-5 w-5 text-neutral-200" />
-          ) : (
-            <Eye className="h-5 w-5 text-neutral-200" />
-          )}
-        </Button>
-      </div>
-      <div className="relative sm:max-w-96">
-        <Label htmlFor="newPassword">{t('Yangi parol')}</Label>
-        <Input
-          id="newPassword"
-          name="newPassword"
-          className="h-10 border-neutral-400 pr-10"
-          type={showPassword ? 'text' : 'password'}
-          value={password}
-          disabled={!isSMSVerified}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <Button
-          type="button"
-          variant="ghost"
-          size="icon"
-          className="absolute bottom-0 right-0 hover:bg-transparent"
-          onClick={() => setShowPassword(!showPassword)}
-        >
-          {showPassword ? (
-            <EyeOff className="h-5 w-5 text-neutral-200" />
-          ) : (
-            <Eye className="h-5 w-5 text-neutral-200" />
-          )}
-        </Button>
-      </div>
-      <div className="relative sm:max-w-96">
-        <Label htmlFor="confirmPassword">
-          {t('Yangi parolni qayta kiriting')}
-        </Label>
-        <Input
-          disabled={!isSMSVerified}
-          id="confirmPassword"
-          name="confirmPassword"
-          className="h-10 border-neutral-400 pr-10"
-          type={showConfirmPassword ? 'text' : 'password'}
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-        <Button
-          type="button"
-          variant="ghost"
-          size="icon"
-          className="absolute bottom-0 right-0 hover:bg-transparent"
-          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-        >
-          {showConfirmPassword ? (
-            <EyeOff className="h-5 w-5 text-neutral-200" />
-          ) : (
-            <Eye className="h-5 w-5 text-neutral-200" />
-          )}
-        </Button>
-      </div>
-      <Button
-        className="h-10 w-full rounded border border-black border-primary/75 bg-neutral-900 text-sm font-semibold text-neutral-200 transition-all hover:border-primary xs:max-w-40"
-        type="submit"
-        disabled={isLoading || !isSMSVerified}
+    <>
+      <ConfirmOTP
+        setModalOpen={setModalOpen}
+        isModalOpen={isModalOpen}
+        cb={(value) => setSMSVerified(value)}
+        phone={userTable?.phone}
+      />
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-2 px-1 sm:max-w-96"
       >
-        {isLoading ? (
-          <Loader className="mx-auto size-5 animate-spin text-neutral-100" />
-        ) : (
-          t('Saqlash')
-        )}
-      </Button>
-    </form>
+        <div className="relative sm:max-w-96">
+          <Label htmlFor="oldPassword">{t('Eski parol')}</Label>
+          <Input
+            disabled={!isSMSVerified}
+            id="oldPassword"
+            name="oldPassword"
+            className="h-10 border-neutral-400 pr-10"
+            type={showOldPassword ? 'text' : 'password'}
+            value={oldPassword}
+            onChange={(e) => setOldPassword(e.target.value)}
+          />
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="absolute bottom-0 right-0 hover:bg-transparent"
+            onClick={() => setShowOldPassword(!showOldPassword)}
+          >
+            {showOldPassword ? (
+              <EyeOff className="h-5 w-5 text-neutral-200" />
+            ) : (
+              <Eye className="h-5 w-5 text-neutral-200" />
+            )}
+          </Button>
+        </div>
+        <div className="relative sm:max-w-96">
+          <Label htmlFor="newPassword">{t('Yangi parol')}</Label>
+          <Input
+            id="newPassword"
+            name="newPassword"
+            className="h-10 border-neutral-400 pr-10"
+            type={showPassword ? 'text' : 'password'}
+            value={password}
+            disabled={!isSMSVerified}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="absolute bottom-0 right-0 hover:bg-transparent"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? (
+              <EyeOff className="h-5 w-5 text-neutral-200" />
+            ) : (
+              <Eye className="h-5 w-5 text-neutral-200" />
+            )}
+          </Button>
+        </div>
+        <div className="relative sm:max-w-96">
+          <Label htmlFor="confirmPassword">
+            {t('Yangi parolni qayta kiriting')}
+          </Label>
+          <Input
+            disabled={!isSMSVerified}
+            id="confirmPassword"
+            name="confirmPassword"
+            className="h-10 border-neutral-400 pr-10"
+            type={showConfirmPassword ? 'text' : 'password'}
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="absolute bottom-0 right-0 hover:bg-transparent"
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+          >
+            {showConfirmPassword ? (
+              <EyeOff className="h-5 w-5 text-neutral-200" />
+            ) : (
+              <Eye className="h-5 w-5 text-neutral-200" />
+            )}
+          </Button>
+        </div>
+        <Button
+          className="h-10 w-full rounded border border-black border-primary/75 bg-neutral-900 text-sm font-semibold text-neutral-200 transition-all hover:border-primary xs:max-w-40"
+          type="submit"
+          disabled={isLoading || !isSMSVerified}
+        >
+          {isLoading ? (
+            <Loader className="mx-auto size-5 animate-spin text-neutral-100" />
+          ) : (
+            t('Saqlash')
+          )}
+        </Button>
+      </form>
+    </>
   )
 }
+
+export default memo(ChangePasswordForm)

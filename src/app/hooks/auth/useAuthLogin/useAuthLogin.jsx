@@ -117,6 +117,7 @@ export const useAuthLogin = () => {
             visited_at: new Date(),
             geo: JSON.stringify(geo),
             agent: JSON.stringify(agent),
+            new_phone: null,
           })
           .eq('phone', phone)
           .is('deleted_at', null)

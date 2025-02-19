@@ -25,8 +25,9 @@ import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 const ConfirmOTP = ({
   isModalOpen,
   setModalOpen,
-  setVerificationStatus = () => {},
+  cb = () => {},
   refreshUser = true,
+  phone,
 }) => {
   const [code, setCode] = useState('')
   const { t } = useTranslation()
@@ -45,7 +46,7 @@ const ConfirmOTP = ({
       return
     }
 
-    await confirmOTP({ code, guid: userTable?.guid, phone: userTable?.phone })
+    await confirmOTP({ code, guid: userTable?.guid, phone })
   }
 
   useEffect(() => {
@@ -56,7 +57,7 @@ const ConfirmOTP = ({
 
       setCode('')
       setModalOpen(false)
-      setVerificationStatus(true)
+      cb(true)
       refreshUser && fetch()
     }
   }, [
@@ -66,7 +67,7 @@ const ConfirmOTP = ({
     refreshUserTable,
     userTable,
     setModalOpen,
-    setVerificationStatus,
+    cb,
     refreshUser,
   ])
 
