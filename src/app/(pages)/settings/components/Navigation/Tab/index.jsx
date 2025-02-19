@@ -5,11 +5,11 @@ import { Shield, User, Cog, History } from 'lucide-react'
 
 const SettingsNavigationTab = ({ tab, setTab, currentTab }) => {
   const { t } = useTranslation()
-  const isActive = tab.key === currentTab
   const active = 'text-primary'
   const passive = 'text-neutral-300'
   const containerActive = 'bg-neutral-800'
   const containerPassive = 'bg-transparent'
+  const isActive = tab.key === currentTab
 
   const renderIcon = (type) => {
     switch (type) {

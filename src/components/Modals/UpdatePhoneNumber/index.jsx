@@ -51,7 +51,7 @@ function UpdatePhoneNumber({ isModalOpen, setModalOpen }) {
               placeholder={'99-999-99-99'}
               onChange={setPrevPhone}
               disabled
-              readOnly // Disable editing for the previous phone number
+              readOnly
             />
           </div>
           <div className="relative space-y-1">
