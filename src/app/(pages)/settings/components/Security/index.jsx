@@ -33,6 +33,9 @@ export default function SettingsPage() {
 
   return (
     <SettingsContainer>
+      <h2 className="text-xl font-bold tracking-tight text-neutral-100">
+        {t('Security settings')}
+      </h2>
       <SettingsAlert
         message={t(
           'To change your password, you must confirm your identity using a one-time password sent via SMS.'
@@ -40,9 +43,6 @@ export default function SettingsPage() {
         actionText={t('Send')}
         onAction={handleSendSms}
       />
-      <h2 className="text-xl font-bold tracking-tight text-neutral-100">
-        {t('Security settings')}
-      </h2>
       <ConfirmOTP
         setModalOpen={setModalOpen}
         isModalOpen={isModalOpen}
@@ -50,7 +50,7 @@ export default function SettingsPage() {
       />
       <Accordion type="single" collapsible>
         <AccordionItem value="pass">
-          <AccordionTrigger className="rounded-lg p-2 hover:bg-neutral-950 hover:no-underline">
+          <AccordionTrigger className="mb-0.5 rounded-lg p-2 hover:bg-neutral-950 hover:no-underline">
             <div className="flex items-center">
               <Lock className="mr-2 h-5 w-5 text-neutral-50" />
               <div className="text-left">
@@ -68,7 +68,7 @@ export default function SettingsPage() {
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="phone">
-          <AccordionTrigger className="rounded-lg p-2 hover:bg-neutral-950 hover:no-underline">
+          <AccordionTrigger className="my-0.5 rounded-lg p-2 hover:bg-neutral-950 hover:no-underline">
             <div className="flex items-center">
               <Phone className="mr-2 h-5 w-5 text-neutral-50" />
               <div className="text-left">

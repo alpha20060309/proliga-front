@@ -48,11 +48,17 @@ export default function ChangePasswordForm({ isSMSVerified }) {
       return
     }
 
-    await updatePassword({
+    const status = await updatePassword({
       oldPassword,
       newPassword: password,
       email: userTable?.email,
     })
+
+    if (status) {
+      setPassword('')
+      setOldPassword('')
+      setConfirmPassword('')
+    }
   }
 
   return (
@@ -143,7 +149,7 @@ export default function ChangePasswordForm({ isSMSVerified }) {
         disabled={isLoading || !isSMSVerified}
       >
         {isLoading ? (
-          <Loader className="filter-black mx-auto size-5 animate-spin" />
+          <Loader className="mx-auto size-5 animate-spin text-neutral-100" />
         ) : (
           t('Saqlash')
         )}

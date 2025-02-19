@@ -39,7 +39,7 @@ const SettingsNavigationTab = ({ tab, setTab, currentTab }) => {
       {renderIcon(tab.icon)}
       <div
         className={cn(
-          'hidden lg:block lg:text-sm',
+          'hidden select-none lg:block lg:text-sm',
           isActive ? active : passive
         )}
       >

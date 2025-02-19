@@ -86,8 +86,9 @@ export const useAuthUpdatePassword = () => {
 
         if (userData) {
           setState(userData?.user)
-          toast.success(t('Sizning Parolingiz Almashdi'), { theme: 'dark' })
+          toast.success(t('Sizning Parolingiz Almashdi'))
         }
+        return true
       } catch (error) {
         handleError(
           error instanceof Error ? error.message : 'An unknown error occurred'

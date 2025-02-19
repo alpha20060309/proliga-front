@@ -15,21 +15,22 @@ export default function ChangePhoneForm() {
   const userTable = useSelector(selectUserTable)
 
   const [password, setPassword] = useState('')
+  const [phone, setPhone] = useState(userTable?.phone || '')
   const [showPassword, setShowPassword] = useState(false)
   const isLoading = false
 
   return (
     <section className="flex flex-col gap-2 px-1 sm:max-w-96">
       <div className="relative">
-        <Label htmlFor="prev-phone">{t('Telefon raqam')}:</Label>
+        <Label htmlFor="phone">{t('Telefon raqam')}:</Label>
         <PhoneInput
-          id="prev-phone"
-          name="prevPhone"
+          id="phone"
+          name="phone"
           defaultCountry="UZ"
           className="h-10 border-neutral-400 bg-neutral-950 text-neutral-200 placeholder:text-neutral-500"
-          value={userTable?.phone}
+          value={phone}
           placeholder={'99-999-99-99'}
-          // onChange={setPrevPhone}
+          onChange={setPhone}
         />
       </div>
       <div className="relative sm:max-w-96">
@@ -61,7 +62,7 @@ export default function ChangePhoneForm() {
         type="submit"
       >
         {isLoading ? (
-          <Loader className="filter-black mx-auto size-5 animate-spin" />
+          <Loader className="mx-auto size-5 animate-spin text-neutral-100" />
         ) : (
           t('Saqlash')
         )}

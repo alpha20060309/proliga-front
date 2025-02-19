@@ -75,7 +75,7 @@ const LoginForm = ({ setShouldRedirect }) => {
               name="phone"
               placeholder={t('99-999-99-99')}
               defaultCountry="UZ"
-              className="h-10 bg-neutral-950 text-neutral-50 placeholder:text-neutral-400"
+              className="h-10 bg-neutral-950 text-neutral-50 border-yellow-700 placeholder:text-neutral-400"
               value={phone}
               onChange={setPhone}
             />
