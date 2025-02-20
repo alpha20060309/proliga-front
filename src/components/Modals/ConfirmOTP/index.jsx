@@ -28,6 +28,7 @@ const ConfirmOTP = ({
   cb = () => {},
   refreshUser = true,
   phone,
+  is_update = false,
 }) => {
   const [code, setCode] = useState('')
   const { t } = useTranslation()
@@ -46,7 +47,7 @@ const ConfirmOTP = ({
       return
     }
 
-    await confirmOTP({ code, guid: userTable?.guid, phone })
+    await confirmOTP({ code, guid: userTable?.guid, phone, is_update })
   }
 
   useEffect(() => {

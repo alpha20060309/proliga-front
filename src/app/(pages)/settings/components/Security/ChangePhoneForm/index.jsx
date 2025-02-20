@@ -60,13 +60,14 @@ export default function ChangePhoneForm() {
         phone={phone}
         setModalOpen={setModalOpen}
         isModalOpen={isModalOpen}
+        is_update={true}
       />
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-2 px-1 sm:max-w-96"
       >
         <div className="relative">
-          <Label htmlFor="phone">{t('Telefon raqam')}:</Label>
+          <Label htmlFor="phone">{t('New Phone Number')}:</Label>
           <PhoneInput
             id="phone"
             name="phone"

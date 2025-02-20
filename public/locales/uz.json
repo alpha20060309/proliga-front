@@ -595,7 +595,7 @@
   "Profil sozlamalari": "Profil sozlamalari",
   "Iltimos, telefon raqamingizni tasdiqlang": "Iltimos, telefon raqamingizni tasdiqlang",
   "Balansni toldirish": "Balansni toldirish",
-  "To change your password, you must confirm your identity using a one-time password sent via SMS.": "Parolni o'zgartirish uchun SMS-kod bilan shaxsiyatingizni tasdiqlang.",
+  "To change your password, you must confirm your identity using a one-time password sent via SMS.": "Parolni o'zgartirish uchun SMS-kod bilan telefon raqamingizni tasdiqlang.",
   "Send": "Yuborish",
   "Sizning raqamingiz tasdiqlanmagan": "Sizning raqamingiz tasdiqlanmagan.",
   "We are redirecting you to an sms confirmation page!": "Sizni SMS tasdiqlash sahifasiga yo‘naltiramiz!",
@@ -626,7 +626,7 @@
   "Security settings": "Xavfsizlik sozlamalari",
   "Update Phone Number": "Telefon raqamini yangilash",
   "Please be careful when setting your new phone number": "Iltimos, yangi telefon raqamingizni kiritishda ehtiyot bo‘ling, chunki u hisobni tiklash va tasdiqlash uchun ishlatiladi. Yangi raqamingiz o‘rnatilgandan so‘ng uni tasdiqlashingiz kerak bo‘ladi.",
-  "New Phone Number:": "Yangi telefon raqami",
+  "New Phone Number": "Yangi telefon raqam",
   "Update your password to keep your account secure": "Parolingizni yangilang, hisobingizni xavfsiz saqlash uchun.",
   "Keep your contact information up to date": "Iltimos, telefon raqamingizni yangilab turing."
 }

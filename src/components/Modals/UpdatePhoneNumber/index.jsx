@@ -55,7 +55,7 @@ function UpdatePhoneNumber({ isModalOpen, setModalOpen }) {
             />
           </div>
           <div className="relative space-y-1">
-            <Label htmlFor="new-phone">{t('New Phone Number:')}:</Label>
+            <Label htmlFor="new-phone">{t('New Phone Number')}:</Label>
             <PhoneInput
               id="new-phone"
               name="newPhone"
