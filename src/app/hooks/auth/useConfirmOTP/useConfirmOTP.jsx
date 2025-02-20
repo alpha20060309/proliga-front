@@ -12,12 +12,18 @@ export const useConfirmOTP = () => {
   const { t } = useTranslation()
 
   const confirmOTP = useCallback(
-    async ({ code, phone, shouldRedirect = false, redirectTo = '' }) => {
+    async ({
+      code,
+      phone,
+      shouldRedirect = false,
+      redirectTo = '',
+      is_update = false,
+    }) => {
       setIsLoading(false)
       setError(null)
 
       if (!code) {
-        toast.error(t('SMS kodingizni kiriting'), { theme: 'dark' })
+        toast.error(t('SMS kodingizni kiriting'))
         setError(t('SMS kodingizni kiriting'))
         return
       }
@@ -31,7 +37,7 @@ export const useConfirmOTP = () => {
       }
 
       if (!phone) {
-        toast.error(t('Telefon raqam kiritilmagan'), { theme: 'dark' })
+        toast.error(t('Telefon raqam kiritilmagan'))
         setError(t('Telefon raqam kiritilmagan'))
         return
       }
@@ -42,6 +48,7 @@ export const useConfirmOTP = () => {
         const { data, error } = await supabase.rpc('verify__sms_code', {
           phone_number: phone,
           confirm_code: code,
+          is_update,
         })
 
         if (error) {
@@ -53,29 +60,28 @@ export const useConfirmOTP = () => {
           toast.error(
             error instanceof Error
               ? error.message
-              : t('An unknown error occurred'),
-            { theme: 'dark' }
+              : t('An unknown error occurred')
           )
           return
         }
         if (data?.status === 419) {
-          toast.warning(t('Kod eskirib qolgan!'), { theme: 'dark' })
+          toast.warning(t('Kod eskirib qolgan!'))
           setError(t('Kod eskirib qolgan!'))
           return
         }
         if (data?.status === 400 || data?.status === 404) {
-          toast.error(t('SMS kodingiz xato'), { theme: 'dark' })
+          toast.error(t('SMS kodingiz xato'))
           setError(t('SMS kodingiz xato'))
           return
         }
         if (data?.status !== 200) {
           setError(data?.message)
-          toast.error(data?.message, { theme: 'dark' })
+          toast.error(data?.message)
           return
         }
         if (data?.status === 200) {
           setData(data)
-          toast.success(t('SMS muvaffaqiyatli tasdiqlandi'), { theme: 'dark' })
+          toast.success(t('SMS muvaffaqiyatli tasdiqlandi'))
           if (shouldRedirect) {
             router.push(redirectTo)
           }

@@ -117,6 +117,7 @@ export const useAuthLogin = () => {
             visited_at: new Date(),
             geo: JSON.stringify(geo),
             agent: JSON.stringify(agent),
+            new_phone: null,
           })
           .eq('phone', phone)
           .is('deleted_at', null)
@@ -142,11 +143,16 @@ export const useAuthLogin = () => {
           toast.info(t('We are redirecting you to an sms confirmation page!'), {
             theme: 'dark',
           })
-          return await sendOTP({
+          const status = await sendOTP({
             phone,
             shouldRedirect: true,
             redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(phone)}`,
           })
+
+          if (status?.error) {
+            return handleError(status.error.message)
+          }
+          return
         }
 
         setState({ authData: authData?.user, fullUserData })

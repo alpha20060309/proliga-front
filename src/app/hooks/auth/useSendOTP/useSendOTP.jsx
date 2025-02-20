@@ -12,7 +12,12 @@ export const useSendOTP = () => {
   const { t } = useTranslation()
 
   const sendOTP = useCallback(
-    async ({ phone, shouldRedirect = false, redirectTo = '' }) => {
+    async ({
+      phone,
+      shouldRedirect = false,
+      redirectTo = '',
+      is_update = false,
+    }) => {
       setIsLoading(false)
       setError(null)
 
@@ -27,6 +32,7 @@ export const useSendOTP = () => {
 
         const { data, error } = await supabase.rpc('http__send__sms__phone', {
           phone_number: phone,
+          is_update,
         })
 
         if (error) {
@@ -41,12 +47,12 @@ export const useSendOTP = () => {
               : t('An unknown error occurred'),
             { theme: 'dark' }
           )
-          return
+          return { error }
         }
         if (data?.status !== 200) {
           setError(data?.message)
           toast.error(data?.message, { theme: 'dark' })
-          return
+          return { error }
         }
         if (data?.status === 200) {
           setData(data)
@@ -54,6 +60,7 @@ export const useSendOTP = () => {
           if (shouldRedirect) {
             router.push(redirectTo)
           }
+          return
         }
       } catch (error) {
         setError(

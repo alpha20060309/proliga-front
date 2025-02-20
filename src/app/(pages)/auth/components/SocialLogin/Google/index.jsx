@@ -11,7 +11,6 @@ const GoogleSignIn = ({ className, iconClassName }) => {
   const { t } = useTranslation()
 
   // eslint-disable-next-line no-undef
-  console.log(process.env.NEXT_PUBLIC_URL + '/auth')
   const handleGoogleSignIn = useCallback(() => {
     try {
       localStorage.setItem('sign-in-method', SUPABASE_PROVIDERS.GOOGLE)

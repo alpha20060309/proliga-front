@@ -25,7 +25,11 @@ export default function SettingsWarnings() {
   if (!userTable?.phone_verified && can_send_sms) {
     return (
       <>
-        <ConfirmOTP setModalOpen={setOtpModalOpen} isModalOpen={otpModalOpen} />
+        <ConfirmOTP
+          phone={userTable?.phone}
+          setModalOpen={setOtpModalOpen}
+          isModalOpen={otpModalOpen}
+        />
         <SettingsAlert
           message={t('Iltimos, telefon raqamingizni tasdiqlang')}
           actionText={t('Tasdiqlash')}

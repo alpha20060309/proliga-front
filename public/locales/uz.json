@@ -508,7 +508,6 @@
   "Bu foydalanuvchi allaqachon ro'yxatdan o'tgan": "Ushbu elektron pochta manzili bilan foydalanuvchi allaqachon ro'yxatdan o'tgan.",
   "Login yoki parol xato": "Login yoki parol xato",
   "Bunaqa raqamli foydalanuvchi yoq": "Bunaqa raqamli foydalanuvchi yoq",
-  "Telefon kiritilmagan": "Telefon kiritilmagan",
   "Mablag‘ yetarli emas!": "Mablag‘ yetarli emas!",
   "Sizning Ismingiz": "Sizning Ismingiz",
   "Rasm muvofaqiyatli yuklandi": "Rasm muvofaqiyatli yuklandi",
@@ -596,7 +595,7 @@
   "Profil sozlamalari": "Profil sozlamalari",
   "Iltimos, telefon raqamingizni tasdiqlang": "Iltimos, telefon raqamingizni tasdiqlang",
   "Balansni toldirish": "Balansni toldirish",
-  "To change your password, you must confirm your identity using a one-time password sent via SMS.": "Parolni o'zgartirish uchun SMS-kod bilan shaxsiyatingizni tasdiqlang.",
+  "To change your password, you must confirm your identity using a one-time password sent via SMS.": "Parolni o'zgartirish uchun SMS-kod bilan telefon raqamingizni tasdiqlang.",
   "Send": "Yuborish",
   "Sizning raqamingiz tasdiqlanmagan": "Sizning raqamingiz tasdiqlanmagan.",
   "We are redirecting you to an sms confirmation page!": "Sizni SMS tasdiqlash sahifasiga yo‘naltiramiz!",
@@ -622,5 +621,12 @@
   "Google": "Google",
   "To complete your registration, please link your mobile phone to your account. This step is mandatory.": "Ro‘yxatdan o‘tishni yakunlash uchun mobil telefoningizni hisobingizga bog‘lang. Ushbu qadam majburiy hisoblanadi.",
   "To reset your password, please enter the OTP sent to your mobile phone. This step is required for security verification.": "Parolingizni tiklash uchun mobil telefoningizga yuborilgan OTP kodini kiriting. Ushbu qadam xavfsizlik tekshiruvi uchun majburiydir.",
-  "Enter your phone number.": "Raqamingizni kiriting."
+  "Enter your phone number.": "Raqamingizni kiriting.",
+  "Security": "Xavfsizlik",
+  "Security settings": "Xavfsizlik sozlamalari",
+  "Update Phone Number": "Telefon raqamini yangilash",
+  "Please be careful when setting your new phone number": "Iltimos, yangi telefon raqamingizni kiritishda ehtiyot bo‘ling, chunki u hisobni tiklash va tasdiqlash uchun ishlatiladi. Yangi raqamingiz o‘rnatilgandan so‘ng uni tasdiqlashingiz kerak bo‘ladi.",
+  "New Phone Number": "Yangi telefon raqam",
+  "Update your password to keep your account secure": "Parolingizni yangilang, hisobingizni xavfsiz saqlash uchun.",
+  "Keep your contact information up to date": "Iltimos, telefon raqamingizni yangilab turing."
 }

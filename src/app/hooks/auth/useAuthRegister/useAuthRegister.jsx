@@ -144,11 +144,15 @@ export const useAuthRegister = () => {
         toast.info(t('Please confirm your phone number to complete sign up!'), {
           theme: 'dark',
         })
-        await sendOTP({
+        const status = await sendOTP({
           phone,
           shouldRedirect: true,
           redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(phone)}`,
         })
+
+        if (status?.error) {
+          return handleError(status.error.message)
+        }
       } catch (error) {
         handleError(
           error instanceof Error

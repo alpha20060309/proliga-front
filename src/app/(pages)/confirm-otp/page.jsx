@@ -1,13 +1,13 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { useEffect } from 'react'
+import { useEffect, memo } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 const ConfirmOTPForm = dynamic(() => import('./ConfirmOTPForm'), {
   ssr: false,
 })
 
-const ConfirmOTP = () => {
+const ConfirmOTPPage = () => {
   const router = useRouter()
   const params = useSearchParams()
   const redirect = params.get('redirect') || '/auth'
@@ -39,4 +39,4 @@ const ConfirmOTP = () => {
   )
 }
 
-export default ConfirmOTP
+export default memo(ConfirmOTPPage)
