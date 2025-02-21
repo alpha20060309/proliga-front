@@ -8,7 +8,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, memo } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { createColumnHelper } from '@tanstack/react-table'
@@ -34,8 +34,6 @@ function PlayersTable() {
   ])
   const { t } = useTranslation()
   const { lang } = useSelector((state) => state.systemLanguage)
-  const [data, setData] = useState([])
-
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: 10,
@@ -43,6 +41,7 @@ function PlayersTable() {
   const { isLoading } = useSelector((state) => state.player)
   const selectedPlayers = useSelector(selectPlayers)
   const [windowWidth, setWindowWidth] = useState(0)
+  const [data, setData] = useState(selectedPlayers || [])
 
   useEffect(() => {
     const handleResize = () => {
@@ -59,12 +58,6 @@ function PlayersTable() {
   useEffect(() => {
     setWindowWidth(window.innerWidth)
   }, [])
-
-  useEffect(() => {
-    if (selectedPlayers?.length > 0) {
-      setData(selectedPlayers)
-    }
-  }, [selectedPlayers])
 
   const columns = [
     columnHelper.accessor('name', {
@@ -112,9 +105,10 @@ function PlayersTable() {
       header: t('Ochko'),
     }),
     columnHelper.accessor('position', {
-      accessorFn: (row) => getCorrentPlayerPosition(row.position, lang),
+      accessorFn: (row) => row.position,
       id: 'position',
       header: t('Poz'),
+      cell: (info) => <>{getCorrentPlayerPosition(info.getValue(), lang)}</>,
       meta: {
         filterVariant: 'position',
       },
@@ -134,8 +128,13 @@ function PlayersTable() {
       pagination,
       sorting,
     },
-    key: lang,
   })
+
+  useEffect(() => {
+    if (lang) {
+      setData([...selectedPlayers])
+    }
+  }, [lang, selectedPlayers])
 
   useEffect(() => {
     if (windowWidth >= 1024 && windowWidth <= 1280) {
@@ -150,14 +149,13 @@ function PlayersTable() {
   }
 
   return (
-    <div
+    <section
       className={cn(
-        'px-2 py-3 xs:px-3 sm:px-4 md:text-sm lg:w-1/2 lg:max-w-[28rem] xl:max-w-[34rem] 2xl:max-w-[36rem]',
-        'mx-auto w-auto max-w-[40rem] border-collapse',
-        'overflow-x-auto rounded-xl border border-primary border-opacity-50 bg-black',
-        'text-neutral-200 shadow-md shadow-neutral-600 transition-all hover:border-opacity-100',
-        'animate-duration-200 animate-delay-500 animate-in fade-in',
-        'flex flex-col gap-1'
+        'p-2 xs:p-3 sm:px-4 md:text-sm lg:w-1/2 lg:max-w-[28rem] xl:max-w-[34rem]',
+        'mx-auto flex w-auto max-w-[40rem] border-collapse flex-col gap-1 bg-black',
+        'overflow-x-auto rounded-xl border border-primary border-opacity-50',
+        'text-neutral-200 shadow-md shadow-neutral-600 transition-all',
+        'fade-in-fast hover:border-opacity-100 2xl:max-w-[36rem]'
       )}
     >
       <TeamOverview />
@@ -179,8 +177,8 @@ function PlayersTable() {
         active="bg-primary text-black"
         className={'mt-auto p-0'}
       />
-    </div>
+    </section>
   )
 }
 
-export default PlayersTable
+export default memo(PlayersTable)
