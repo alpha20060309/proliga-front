@@ -15,6 +15,7 @@ import {
 } from 'app/lib/features/currentTeam/currentTeam.slice'
 import { resetTeams } from 'app/lib/features/team/team.slice'
 import { supabase } from 'app/lib/supabaseClient'
+import { signOut } from 'next-auth/react'
 
 export const useLogOut = () => {
   const dispatch = useDispatch()
@@ -44,6 +45,8 @@ export const useLogOut = () => {
               : t('An unknown error occurred')
           )
         }
+
+        signOut()
 
         clearState()
         localStorage.clear()

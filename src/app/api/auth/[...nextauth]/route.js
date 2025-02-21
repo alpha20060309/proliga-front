@@ -4,6 +4,7 @@ import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
 import YandexProvider from "next-auth/providers/yandex";
 import FacebookProvider from "next-auth/providers/facebook";
+import { SupabaseAdapter } from "@auth/supabase-adapter";
 
 const handler = NextAuth({
   providers: [
@@ -30,5 +31,7 @@ const handler = NextAuth({
     secret: process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE,
   }),
 });
+
+console.log(handler)
 
 export { handler as GET, handler as POST };
