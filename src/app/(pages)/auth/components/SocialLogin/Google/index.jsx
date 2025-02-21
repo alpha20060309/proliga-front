@@ -7,33 +7,34 @@ import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { SUPABASE_PROVIDERS } from 'app/lib/supabaseClient'
 import { toast } from 'react-toastify'
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 
 const GoogleSignIn = ({ className, iconClassName }) => {
   const { t } = useTranslation()
+  const { data: session } = useSession()
 
   // eslint-disable-next-line no-undef
   const handleGoogleSignIn = useCallback(() => {
     // try {
     //   localStorage.setItem('sign-in-method', SUPABASE_PROVIDERS.GOOGLE)
-
     //   const { error } = supabase.auth.signInWithOAuth({
     //     provider: 'google',
     //   })
-
     //   if (error) throw new Error(error.message)
     // } catch (error) {
     //   console.error('Error signing in with Google:', error)
     //   toast.error(error.message, { theme: 'dark' })
     // }
-    signIn('google')
-  }, [])
 
+    // eslint-disable-next-line no-undef
+    signIn('google', { redirect: process.env.URL + '/auth' })
+  }, [])
+  console.log(session)
   return (
     <Button
       variant="outline"
       className={cn('w-1/2 p-0', className)}
-      onClick={handleGoogleSignIn}
+      onClick={() => signIn('google')}
     >
       <Image
         src="./icons/google.svg"

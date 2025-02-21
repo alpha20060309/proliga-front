@@ -17,11 +17,9 @@ import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.s
 import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
 import { useGoogleLogin } from 'app/hooks/auth/useGoogleLogin/useGoogleLogin'
 import Spinner from 'components/Spinner'
-import { useSession } from 'next-auth/react'
 
 const LoginForm = ({ setShouldRedirect }) => {
   const { t } = useTranslation()
-  const { data: session } = useSession()
   const [showPassword, setShowPassword] = useState(false)
   const [isModalOpen, setModalOpen] = useState(false)
   const [password, setPassword] = useState('')
@@ -149,7 +147,6 @@ const LoginForm = ({ setShouldRedirect }) => {
         <SocialLogin setShouldRedirect={setShouldRedirect} />
       </section>
       <ForgotPassword isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
-      {JSON.stringify(session)}
     </>
   )
 }
