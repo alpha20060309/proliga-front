@@ -134,6 +134,7 @@ function PlayersTable() {
       pagination,
       sorting,
     },
+    key: lang,
   })
 
   useEffect(() => {
