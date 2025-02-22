@@ -6,6 +6,7 @@ import SetPhoneNumber from 'components/Modals/SetPhoneNumber'
 import { useSelector } from 'react-redux'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { CONFIG_KEY } from 'app/utils/config.util'
+import YandexSignIn from './Yandex'
 
 function SocialLogin() {
   const { t } = useTranslation()
@@ -29,6 +30,7 @@ function SocialLogin() {
         <div className="flex gap-1">
           {google && <GoogleSignIn />}
           {facebook && <FacebookSignIn />}
+          <YandexSignIn />
         </div>
       </div>
       <SetPhoneNumber />

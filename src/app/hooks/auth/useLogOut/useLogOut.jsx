@@ -46,7 +46,8 @@ export const useLogOut = () => {
           )
         }
 
-        signOut({ redirect: '/' })
+        // eslint-disable-next-line no-undef
+        signOut({ redirect: false })
 
         clearState()
         localStorage.clear()

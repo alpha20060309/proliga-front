@@ -27,14 +27,17 @@ const GoogleSignIn = ({ className, iconClassName }) => {
     // }
 
     // eslint-disable-next-line no-undef
-    signIn('google', { redirect: process.env.URL + '/auth' })
+    signIn('google', { redirect: process.env.NEXT_PUBLIC_URL + '/auth' })
   }, [])
   console.log(session)
   return (
     <Button
       variant="outline"
       className={cn('w-1/2 p-0', className)}
-      onClick={() => signIn('google')}
+      onClick={() =>
+        // eslint-disable-next-line no-undef
+        signIn('google', { redirect: process.env.NEXT_PUBLIC_URL + '/auth' })
+      }
     >
       <Image
         src="./icons/google.svg"
