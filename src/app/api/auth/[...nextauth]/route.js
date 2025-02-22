@@ -5,6 +5,11 @@ import GoogleProvider from "next-auth/providers/google";
 import YandexProvider from "next-auth/providers/yandex";
 import { SupabaseAdapter } from "@auth/supabase-adapter";
 
+const supabaseAdapter = SupabaseAdapter({
+  url: process.env.NEXT_PUBLIC_SUPABASE_URL,
+  secret: process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE,
+})
+
 const handler = NextAuth({
   providers: [
     GoogleProvider({
@@ -30,11 +35,10 @@ const handler = NextAuth({
       // },
     }),
   ],
-  adapter: SupabaseAdapter({
-    url: process.env.NEXT_PUBLIC_SUPABASE_URL,
-    secret: process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE,
-  }),
+  adapter: supabaseAdapter,
   pages: {
+    signIn: '/auth',
+    signOut: '/',
     error: '/auth'
   },
   secret: process.env.NEXT_PUBLIC_JWT

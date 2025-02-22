@@ -13,31 +13,20 @@ const GoogleSignIn = ({ className, iconClassName }) => {
   const { t } = useTranslation()
   const { data: session } = useSession()
 
-  // eslint-disable-next-line no-undef
-  const handleGoogleSignIn = useCallback(() => {
-    // try {
-    //   localStorage.setItem('sign-in-method', SUPABASE_PROVIDERS.GOOGLE)
-    //   const { error } = supabase.auth.signInWithOAuth({
-    //     provider: 'google',
-    //   })
-    //   if (error) throw new Error(error.message)
-    // } catch (error) {
-    //   console.error('Error signing in with Google:', error)
-    //   toast.error(error.message, { theme: 'dark' })
-    // }
+  const handleGoogleSignIn = () => {
+    if (!session?.expires) {
+      // eslint-disable-next-line no-undef
+      signIn('google', { redirect: process.env.NEXT_PUBLIC_URL + '/auth' })
+    }
+  }
 
-    // eslint-disable-next-line no-undef
-    signIn('google', { redirect: process.env.NEXT_PUBLIC_URL + '/auth' })
-  }, [])
   console.log(session)
+
   return (
     <Button
       variant="outline"
       className={cn('w-1/2 p-0', className)}
-      onClick={() =>
-        // eslint-disable-next-line no-undef
-        signIn('google', { redirect: process.env.NEXT_PUBLIC_URL + '/auth' })
-      }
+      onClick={handleGoogleSignIn}
     >
       <Image
         src="./icons/google.svg"

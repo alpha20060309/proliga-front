@@ -1,5 +1,6 @@
 'use client'
 
+import { toast } from 'react-toastify'
 import dynamic from 'next/dynamic'
 import { useState, useEffect } from 'react'
 import {
@@ -7,7 +8,7 @@ import {
   SignUpFormSkeleton,
   AuthTabsSkeleton,
 } from './components/AuthSkeleton'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useSelector } from 'react-redux'
 import {
   selectUserAuth,
@@ -30,6 +31,8 @@ const Auth = () => {
   const router = useRouter()
   const userAuth = useSelector(selectUserAuth)
   const userTable = useSelector(selectUserTable)
+  const params = useSearchParams()
+  const error = params.get('error')
   const [currentTab, setCurrentTab] = useState(tabs.login)
   const [shouldRedirect, setShouldRedirect] = useState(true)
 
@@ -42,6 +45,12 @@ const Auth = () => {
       router.push('/championships')
     }
   }, [userTable, userAuth, router, shouldRedirect])
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error)
+    }
+  }, [error])
 
   return (
     <main className="flex min-h-screen w-full justify-center">

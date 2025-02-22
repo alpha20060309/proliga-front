@@ -16,6 +16,7 @@ import { isEmail } from 'validator'
 import { cn } from '@/lib/utils'
 import { memo } from 'react'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
+import SocialLogin from '../SocialLogin'
 
 const SignUpForm = ({ setShouldRedirect }) => {
   const { t } = useTranslation()
@@ -76,149 +77,153 @@ const SignUpForm = ({ setShouldRedirect }) => {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex w-full flex-col gap-2 rounded-xl border border-neutral-700 bg-neutral-950 px-4 py-8"
-    >
-      <h2 className="mb-2 text-xl font-bold text-neutral-100 md:mb-4 md:text-2xl">
-        {t("Ro'yxatdan o'tish")}
-      </h2>
-      <div className="relative flex flex-col gap-1">
-        <label
-          htmlFor="phone"
-          className="text-xs text-neutral-300 md:text-base"
-        >
-          {t('Telefon raqam')}:
-        </label>
-        <PhoneInput
-          id="phone"
-          name="phone"
-          placeholder={'99-999-99-99'}
-          defaultCountry="UZ"
-          className="h-10 border-yellow-700 bg-neutral-950 text-white"
-          value={phone}
-          onChange={setPhone}
-        />
-      </div>
-      <div className="relative flex flex-col gap-1">
-        <label
-          htmlFor="email"
-          className="text-xs text-neutral-300 md:text-base"
-        >
-          {t('Elektron pochta')}:
-        </label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          className="auth-input pl-9"
-          placeholder="example@xyz.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <Mail className="filter-neutral-400 absolute bottom-2.5 left-2 size-5" />
-      </div>
-      <div className="relative flex flex-col gap-1">
-        <label
-          htmlFor="confirmPassword"
-          className="text-xs text-neutral-300 md:text-base"
-        >
-          {t('Parol')}:
-        </label>
-        <input
-          type={showPassword ? 'text' : 'password'}
-          name="confirmPassword"
-          id="confirmPassword"
-          placeholder="********"
-          className="auth-input pl-9"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <Button
-          type="button"
-          variant="ghost"
-          size="icon"
-          className="absolute bottom-0 right-0 hover:bg-transparent"
-          onClick={() => setShowPassword(!showPassword)}
-        >
-          {showPassword ? (
-            <EyeOff className="size-6 text-neutral-200" />
-          ) : (
-            <Eye className="size-6 text-neutral-200" />
-          )}
-        </Button>
-        <Lock className="filter-neutral-400 absolute bottom-2.5 left-2 size-5" />
-      </div>
-      <div className="relative flex flex-col gap-1">
-        <label
-          htmlFor="password"
-          className="text-xs text-neutral-300 md:text-base"
-        >
-          {t('Parol tasdiqlash')}:
-        </label>
-        <input
-          type={showConfirmPassword ? 'text' : 'password'}
-          name="password"
-          id="password"
-          placeholder="********"
-          className="auth-input pl-9"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-        <Button
-          type="button"
-          variant="ghost"
-          size="icon"
-          className="absolute bottom-0 right-0 hover:bg-transparent"
-          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-        >
-          {showConfirmPassword ? (
-            <EyeOff className="size-6 text-neutral-200" />
-          ) : (
-            <Eye className="size-6 text-neutral-200" />
-          )}
-        </Button>
-        <Lock className="filter-neutral-400 absolute bottom-2.5 left-2 size-5" />
-      </div>
-      <div className="my-3 flex items-center text-xs text-neutral-100 sm:text-sm">
-        <input
-          type="checkbox"
-          className="mr-1.5 inline size-4 cursor-pointer accent-primary"
-          id="agreement"
-          name="agreement"
-          value={agreement}
-          onChange={() => setAgreement(!agreement)}
-        />
-        <label htmlFor="agreement" className="inline select-none">
-          {t('Men')}{' '}
-          <Link href="/user-agreement" className="underline">
-            {t('qoidalar')}
-          </Link>{' '}
-          {t('bilan tanishib chiqdim va ularga roziman')}
-        </label>
-      </div>
-      <Button
-        type="submit"
-        disabled={isLoading}
-        className={cn(
-          'h-12 w-full rounded border border-yellow-400 bg-neutral-900 font-bold',
-          'text-neutral-100 transition-all duration-300 hover:bg-yellow-400 hover:text-neutral-900',
-          isLoading && 'bg-yellow-400 text-neutral-900'
-        )}
+    <section className="flex w-full flex-col gap-4 rounded-xl border border-neutral-700 bg-neutral-950 px-4 py-8">
+      <form
+        onSubmit={handleSubmit}
+        // className="flex w-full flex-col gap-2 rounded-xl border border-neutral-700 bg-neutral-950 px-4 py-8"
+        className="flex w-full flex-col gap-1"
       >
-        {isLoading ? (
-          <Image
-            src="/icons/loading.svg"
-            width={24}
-            height={24}
-            alt="loading"
-            className="filter-black mx-auto size-6 animate-spin"
+        <h2 className="mb-2 text-xl font-bold text-neutral-100 md:mb-4 md:text-2xl">
+          {t("Ro'yxatdan o'tish")}
+        </h2>
+        <div className="relative flex flex-col gap-1">
+          <label
+            htmlFor="phone"
+            className="text-xs text-neutral-300 md:text-base"
+          >
+            {t('Telefon raqam')}:
+          </label>
+          <PhoneInput
+            id="phone"
+            name="phone"
+            placeholder={'99-999-99-99'}
+            defaultCountry="UZ"
+            className="h-10 border-yellow-700 bg-neutral-900 text-white"
+            value={phone}
+            onChange={setPhone}
           />
-        ) : (
-          t('Akkaunt Ochish')
-        )}
-      </Button>
-    </form>
+        </div>
+        <div className="relative flex flex-col gap-1">
+          <label
+            htmlFor="email"
+            className="text-xs text-neutral-300 md:text-base"
+          >
+            {t('Elektron pochta')}:
+          </label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            className="auth-input pl-9"
+            placeholder="example@xyz.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Mail className="filter-neutral-400 absolute bottom-2.5 left-2 size-5" />
+        </div>
+        <div className="relative flex flex-col gap-1">
+          <label
+            htmlFor="confirmPassword"
+            className="text-xs text-neutral-300 md:text-base"
+          >
+            {t('Parol')}:
+          </label>
+          <input
+            type={showPassword ? 'text' : 'password'}
+            name="confirmPassword"
+            id="confirmPassword"
+            placeholder="********"
+            className="auth-input pl-9"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="absolute bottom-0 right-0 hover:bg-transparent"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? (
+              <EyeOff className="size-6 text-neutral-200" />
+            ) : (
+              <Eye className="size-6 text-neutral-200" />
+            )}
+          </Button>
+          <Lock className="filter-neutral-400 absolute bottom-2.5 left-2 size-5" />
+        </div>
+        <div className="relative flex flex-col gap-1">
+          <label
+            htmlFor="password"
+            className="text-xs text-neutral-300 md:text-base"
+          >
+            {t('Parol tasdiqlash')}:
+          </label>
+          <input
+            type={showConfirmPassword ? 'text' : 'password'}
+            name="password"
+            id="password"
+            placeholder="********"
+            className="auth-input pl-9"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="absolute bottom-0 right-0 hover:bg-transparent"
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+          >
+            {showConfirmPassword ? (
+              <EyeOff className="size-6 text-neutral-200" />
+            ) : (
+              <Eye className="size-6 text-neutral-200" />
+            )}
+          </Button>
+          <Lock className="filter-neutral-400 absolute bottom-2.5 left-2 size-5" />
+        </div>
+        <div className="my-3 flex items-center text-xs text-neutral-100 sm:text-sm">
+          <input
+            type="checkbox"
+            className="mr-1.5 inline size-4 cursor-pointer accent-primary"
+            id="agreement"
+            name="agreement"
+            value={agreement}
+            onChange={() => setAgreement(!agreement)}
+          />
+          <label htmlFor="agreement" className="inline select-none">
+            {t('Men')}{' '}
+            <Link href="/user-agreement" className="underline">
+              {t('qoidalar')}
+            </Link>{' '}
+            {t('bilan tanishib chiqdim va ularga roziman')}
+          </label>
+        </div>
+        <Button
+          type="submit"
+          disabled={isLoading}
+          className={cn(
+            'h-12 w-full rounded border border-yellow-400 bg-neutral-900 font-bold',
+            'text-neutral-100 transition-all duration-300 hover:bg-yellow-400 hover:text-neutral-900',
+            isLoading && 'bg-yellow-400 text-neutral-900'
+          )}
+        >
+          {isLoading ? (
+            <Image
+              src="/icons/loading.svg"
+              width={24}
+              height={24}
+              alt="loading"
+              className="filter-black mx-auto size-6 animate-spin"
+            />
+          ) : (
+            t('Akkaunt Ochish')
+          )}
+        </Button>
+      </form>
+      <SocialLogin setShouldRedirect={setShouldRedirect} />
+    </section>
   )
 }
 

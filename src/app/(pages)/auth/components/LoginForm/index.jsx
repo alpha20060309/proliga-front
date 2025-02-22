@@ -16,8 +16,8 @@ import { cn } from '@/lib/utils'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
 import { useGoogleLogin } from 'app/hooks/auth/useGoogleLogin/useGoogleLogin'
-import Spinner from 'components/Spinner'
 import { useSession } from 'next-auth/react'
+import Spinner from 'components/Spinner'
 
 const LoginForm = ({ setShouldRedirect }) => {
   const { t } = useTranslation()
@@ -61,7 +61,7 @@ const LoginForm = ({ setShouldRedirect }) => {
   return (
     <>
       <section className="flex w-full flex-col gap-4 rounded-xl border border-neutral-700 bg-neutral-950 px-4 py-8">
-        <form onSubmit={handleSubmit} className="flex w-full flex-col gap-2">
+        <form onSubmit={handleSubmit} className="flex w-full flex-col gap-1">
           <h2 className="mb-2 text-xl font-bold text-neutral-100 md:mb-4 md:text-2xl">
             {t('Tizimga kirish_1')}
           </h2>
@@ -77,7 +77,7 @@ const LoginForm = ({ setShouldRedirect }) => {
               name="phone"
               placeholder={t('99-999-99-99')}
               defaultCountry="UZ"
-              className="h-10 border-yellow-700 bg-neutral-950 text-neutral-50 placeholder:text-neutral-400"
+              className="h-10 border-yellow-700 bg-neutral-900 text-neutral-50 placeholder:text-neutral-400"
               value={phone}
               onChange={setPhone}
             />
@@ -149,7 +149,7 @@ const LoginForm = ({ setShouldRedirect }) => {
         <SocialLogin setShouldRedirect={setShouldRedirect} />
       </section>
       <ForgotPassword isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
-      <span className='max-w-96 break-words'>{JSON.stringify(session)}</span>
+      <span className="max-w-96 break-words">{JSON.stringify(session)}</span>
     </>
   )
 }
