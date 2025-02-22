@@ -41,6 +41,14 @@ const handler = NextAuth({
     signOut: '/',
     error: '/auth'
   },
+  callbacks: {
+    async session({ session, user }) {
+      console.log(user)
+      console.log(session)
+      session.user.id = user.id;
+      return session;
+    },
+  },
   secret: process.env.NEXT_PUBLIC_JWT
 });
 

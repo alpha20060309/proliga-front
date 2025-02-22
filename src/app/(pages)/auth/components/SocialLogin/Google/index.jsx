@@ -17,10 +17,9 @@ const GoogleSignIn = ({ className, iconClassName }) => {
     if (!session?.expires) {
       // eslint-disable-next-line no-undef
       signIn('google', { redirect: process.env.NEXT_PUBLIC_URL + '/auth' })
+      localStorage.setItem('sign-in-method', SUPABASE_PROVIDERS.GOOGLE)
     }
   }
-
-  console.log(session)
 
   return (
     <Button
