@@ -49,9 +49,9 @@ export default function AuthListener({ children }) {
           return
 
         // console.log(user?.id)
-        const data = await checkUserRegistered({ guid: user.id })
+        // const data = await checkUserRegistered({ guid: user.id })
         // const phone = data?.phone
-        console.log(data)
+        // console.log(data)
         // if (
         //   user.provider === SUPABASE_PROVIDERS.EMAIL &&
         //   SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE &&
