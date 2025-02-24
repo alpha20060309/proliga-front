@@ -18,6 +18,7 @@ import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
 import { useGoogleLogin } from 'app/hooks/auth/useGoogleLogin/useGoogleLogin'
 import { useSession } from 'next-auth/react'
 import Spinner from 'components/Spinner'
+import { signIn } from 'next-auth/react'
 
 const LoginForm = ({ setShouldRedirect }) => {
   const { t } = useTranslation()
@@ -56,6 +57,20 @@ const LoginForm = ({ setShouldRedirect }) => {
   }
   if (isGoogleLoading) {
     return <Spinner />
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  const handleSubmit2 = async (e) => {
+    e.preventDefault()
+    const result = await signIn('credentials', {
+      redirect: false,
+      phone,
+      password,
+    })
+
+    if (result?.error) {
+      toast.error(result.error)
+    }
   }
 
   return (
