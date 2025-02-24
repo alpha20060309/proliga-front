@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import { signIn } from 'next-auth/react'
 import Image from 'next/image'
 import { useSession } from 'next-auth/react'
+import { SUPABASE_PROVIDERS } from 'app/lib/supabaseClient'
 
 const YandexSignIn = () => {
   const { data: session } = useSession()
@@ -10,6 +11,7 @@ const YandexSignIn = () => {
     if (!session?.expires) {
       // eslint-disable-next-line no-undef
       signIn('yandex', { redirect: process.env.NEXT_PUBLIC_URL + '/auth' })
+      localStorage.setItem('sign-in-method', SUPABASE_PROVIDERS.YANDEX)
     }
   }
 

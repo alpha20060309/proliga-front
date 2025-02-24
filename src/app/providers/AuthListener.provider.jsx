@@ -53,21 +53,21 @@ export default function AuthListener({ children }) {
         const phone = data?.phone
         console.log(data)
 
-        // if (
-        //   user.provider === SUPABASE_PROVIDERS.EMAIL &&
-        //   SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE &&
-        //   phone &&
-        //   data
-        // ) {
-        //   return login({
-        //     auth: user,
-        //     geo,
-        //     agent,
-        //     fingerprint,
-        //     app_version,
-        //   })
-        // }
         if (SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE && data) {
+          if (phone) {
+            console.log('executed')
+            return login({
+              auth: user,
+              geo,
+              agent,
+              fingerprint,
+              app_version,
+            })
+          } else {
+            return dispatch(setPhoneModal(true))
+          }
+        }
+        if (SIGN_IN_METHOD === SUPABASE_PROVIDERS.YANDEX && data) {
           if (phone) {
             console.log('executed')
             return login({

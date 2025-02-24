@@ -11,11 +11,11 @@ const supabaseAdapter = SupabaseAdapter({
   secret: process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE,
 })
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-  // { db: { schema: 'next_auth' } }
-)
+// const supabase = createClient(
+//   process.env.NEXT_PUBLIC_SUPABASE_URL,
+//   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+//   // { db: { schema: 'next_auth' } }
+// )
 
 const handler = NextAuth({
   providers: [
@@ -36,13 +36,13 @@ const handler = NextAuth({
   },
   callbacks: {
     async session({ session, user }) {
-      const { data, error } = await supabase
-        .from('user')
-        .select('*')
-        .eq('guid', user.id)
-        .single()
+      // const { data, error } = await supabase
+      //   .from('user')
+      //   .select('*')
+      //   .eq('guid', user.id)
+      //   .single()
 
-      console.log(data)
+      // console.log(data)
       console.log("session", session)
       session.user.id = user.id;
       return session;
