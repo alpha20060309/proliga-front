@@ -49,10 +49,10 @@ export default function AuthListener({ children }) {
         )
           return
 
-        // console.log(user?.id)
         const data = await checkUserRegistered({ guid: user.id })
-        // const phone = data?.phone
+        const phone = data?.phone
         console.log(data)
+
         // if (
         //   user.provider === SUPABASE_PROVIDERS.EMAIL &&
         //   SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE &&
@@ -67,12 +67,9 @@ export default function AuthListener({ children }) {
         //     app_version,
         //   })
         // }
-        if (
-          user.provider === SUPABASE_PROVIDERS.GOOGLE &&
-          SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE &&
-          data
-        ) {
+        if (SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE && data) {
           if (phone) {
+            console.log('executed')
             return login({
               auth: user,
               geo,

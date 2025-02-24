@@ -58,6 +58,7 @@ function SetPhoneNumber() {
     }
 
     await register({
+      email,
       phone,
       auth: session?.user,
       geo,
@@ -67,6 +68,7 @@ function SetPhoneNumber() {
       closeModal: () => dispatch(setPhoneModal(true)),
     })
   }
+
   return (
     <Dialog open={phoneModal} onOpenChange={setModalOpen}>
       <DialogContent
@@ -99,7 +101,7 @@ function SetPhoneNumber() {
                 type="email"
                 name="email"
                 id="email"
-                className="h-10 border-neutral-500 bg-neutral-950 pl-10 text-neutral-200 placeholder:text-neutral-500"
+                className="h-10 rounded border-neutral-500 bg-neutral-950 pl-10 text-neutral-200 placeholder:text-neutral-500"
                 placeholder="example@xyz.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
