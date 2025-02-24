@@ -46,22 +46,22 @@ const handler = NextAuth({
     YandexProvider({
       clientId: process.env.NEXT_PUBLIC_YANDEX_CLIENT_ID ?? "",
       clientSecret: process.env.NEXT_PUBLIC_YANDEX_CLIENT_SECRET ?? "",
-      authorization: {
-        url: "https://oauth.yandex.ru/authorize?scope=login:info+login:email+login:avatar+login:default_phone",
-      },
+      // authorization: {
+      //   url: "https://oauth.yandex.ru/authorize?scope=login:info+login:email+login:avatar+login:default_phone",
+      // },
       // scopes: ['phone_number'],
-      profile(profile) {
-        console.log('profile', profile)
-        return {
-          id: profile.id,
-          name: profile.real_name || profile.display_name,
-          email: profile.default_email,
-          image: profile.is_avatar_empty
-            ? null
-            : `https://avatars.yandex.net/get-yapic/${profile.default_avatar_id}/islands-200`,
-          phone: profile.default_phone?.number,
-        }
-      },
+      // profile(profile) {
+      //   console.log('profile', profile)
+      //   return {
+      //     id: profile.id,
+      //     name: profile.real_name || profile.display_name,
+      //     email: profile.default_email,
+      //     image: profile.is_avatar_empty
+      //       ? null
+      //       : `https://avatars.yandex.net/get-yapic/${profile.default_avatar_id}/islands-200`,
+      //     phone: profile.default_phone?.number,
+      //   }
+      // },
     }),
   ],
   adapter: supabaseAdapter,
@@ -71,15 +71,15 @@ const handler = NextAuth({
     error: '/auth'
   },
   callbacks: {
-    async jwt({ token, user, account, profile }) {
-      if (user) {
-        token.user = user
-      }
-      if (account && profile) {
-        token.yandexProfile = profile
-      }
-      return token
-    },
+    // async jwt({ token, user, account, profile }) {
+    //   if (user) {
+    //     token.user = user
+    //   }
+    //   if (account && profile) {
+    //     token.yandexProfile = profile
+    //   }
+    //   return token
+    // },
     async session({ session, user }) {
       console.log('user-1', user)
       console.log("session", session)

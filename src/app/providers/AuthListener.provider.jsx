@@ -14,6 +14,7 @@ import {
 import { setPhoneModal } from 'app/lib/features/auth/auth.slice'
 import { useGoogleLogin } from 'app/hooks/auth/useGoogleLogin/useGoogleLogin'
 import { useCheckUserRegistered } from 'app/hooks/auth/useCheckUserRegistered/useCheckUserRegistered'
+import { SUPABASE_PROVIDERS } from 'app/lib/supabaseClient'
 
 export default function AuthListener({ children }) {
   const dispatch = useDispatch()
@@ -49,9 +50,9 @@ export default function AuthListener({ children }) {
           return
 
         // console.log(user?.id)
-        // const data = await checkUserRegistered({ guid: user.id })
+        const data = await checkUserRegistered({ guid: user.id })
         // const phone = data?.phone
-        // console.log(data)
+        console.log(data)
         // if (
         //   user.provider === SUPABASE_PROVIDERS.EMAIL &&
         //   SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE &&
@@ -66,26 +67,23 @@ export default function AuthListener({ children }) {
         //     app_version,
         //   })
         // }
-        // if (
-        //   user.provider === SUPABASE_PROVIDERS.GOOGLE &&
-        //   SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE &&
-        //   data
-        // ) {
-        //   if (phone) {
-        //     return login({
-        //       auth: user,
-        //       geo,
-        //       agent,
-        //       fingerprint,
-        //       app_version,
-        //     })
-        //   } else {
-        //     return dispatch(setPhoneModal(true))
-        //   }
-        // }
-
-        // If we reach here, it's a new Google sign-in
-        // You might want to add additional logic here if needed
+        if (
+          user.provider === SUPABASE_PROVIDERS.GOOGLE &&
+          SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE &&
+          data
+        ) {
+          if (phone) {
+            return login({
+              auth: user,
+              geo,
+              agent,
+              fingerprint,
+              app_version,
+            })
+          } else {
+            return dispatch(setPhoneModal(true))
+          }
+        }
       }
     }
 

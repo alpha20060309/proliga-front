@@ -17,6 +17,7 @@ import { cn } from '@/lib/utils'
 import { memo } from 'react'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import SocialLogin from '../SocialLogin'
+import { Input } from '@/components/ui/input'
 
 const SignUpForm = ({ setShouldRedirect }) => {
   const { t } = useTranslation()
@@ -110,7 +111,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
           >
             {t('Elektron pochta')}:
           </label>
-          <input
+          <Input
             type="email"
             name="email"
             id="email"
