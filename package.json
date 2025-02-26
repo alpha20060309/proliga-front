@@ -8,8 +8,8 @@
     "start": "dotenv -e .env.production next start",
     "lint": "next lint",
     "pull": "dotenv -e .env.development -- npx prisma db pull",
-    "generate": "npx prisma generate"
-
+    "generate": "npx prisma generate",
+    "dev:push": "dotenv -e .env.development -- npx prisma db push"
   },
   "dependencies": {
     "@auth/supabase-adapter": "1.7.4",

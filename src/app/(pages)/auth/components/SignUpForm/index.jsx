@@ -18,6 +18,7 @@ import { memo } from 'react'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import SocialLogin from '../SocialLogin'
 import { Input } from '@/components/ui/input'
+import { signIn } from 'next-auth/react'
 
 const SignUpForm = ({ setShouldRedirect }) => {
   const { t } = useTranslation()
@@ -61,20 +62,26 @@ const SignUpForm = ({ setShouldRedirect }) => {
     }
 
     setShouldRedirect(false)
-    await register({
-      email,
-      password,
+    // await register({
+    //   email,
+    //   password,
+    //   phone,
+    //   geo,
+    //   fingerprint,
+    //   agent,
+    //   app_version,
+    // })
+    // session.user.isTwoFactorEnabled = token;
+    await signIn('credentials', {
       phone,
-      geo,
-      fingerprint,
-      agent,
-      app_version,
+      password,
+      redirect: false,
     })
 
-    setPhone('')
-    setEmail('')
-    setPassword('')
-    setConfirmPassword('')
+    // setPhone('')
+    // setEmail('')
+    // setPassword('')
+    // setConfirmPassword('')
   }
 
   return (

@@ -52,8 +52,14 @@ const LoginForm = ({ setShouldRedirect }) => {
       return
     }
 
-    setShouldRedirect(false)
-    await login({ phone, password, app_version, fingerprint, agent, geo })
+    await signIn('credentials', {
+      phone,
+      password,
+      // redirect: false,
+    })
+
+    // setShouldRedirect(false)
+    // await login({ phone, password, app_version, fingerprint, agent, geo })
   }
   if (isGoogleLoading) {
     return <Spinner />
