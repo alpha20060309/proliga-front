@@ -19,6 +19,7 @@ import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
 import { useGoogleLogin } from 'app/hooks/auth/useGoogleLogin/useGoogleLogin'
 import { useSession } from 'next-auth/react'
 import { login } from 'app/actions/login'
+import { signIn } from 'next-auth/react'
 
 const LoginForm = ({ setShouldRedirect }) => {
   const { t } = useTranslation()
@@ -54,13 +55,13 @@ const LoginForm = ({ setShouldRedirect }) => {
     }
 
     // eslint-disable-next-line no-undef
-    const res = await login(
-      { phone, password },
-      // eslint-disable-next-line no-undef
-      process.env.NEXT_PUBLIC_URL + '/auth'
-    )
+    const res = await signIn('credentials', {
+      phone,
+      password,
+      redirect: false,
+    })
     console.log(res)
-    if (res.error) {
+    if (res?.error) {
       toast.error(t(res.error))
     }
     // setShouldRedirect(false)

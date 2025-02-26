@@ -8,8 +8,6 @@ import { db } from "lib/db/db";
 import { getUserById, getAccountByUserId } from "lib/utils/auth.util";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-
-
 export const handler = NextAuth({
   providers: [
     GoogleProvider({
@@ -26,30 +24,16 @@ export const handler = NextAuth({
         phone: { label: "Phone", type: "text" },
         password: { label: "Password", type: "password" }
       },
-      async authorize(credentials) {
-        if (!credentials?.phone || !credentials?.password) {
-          throw new Error("Invalid credentials");
-        }
+      async authorize(credentials, req) {
+        console.log("Authorize function called");
+        console.log("Credentials:", credentials);
 
-        const user = await db.user.findUnique({
-          where: { phone: credentials.phone }
-        });
+        const { phone, password } = credentials ?? {};
 
-        if (!user || !user.password) {
-          throw new Error("Invalid credentials");
-        }
 
-        const isCorrectPassword = await bcrypt.compare(
-          credentials.password,
-          user.password
-        );
-
-        if (!isCorrectPassword) {
-          throw new Error("Invalid credentials");
-        }
-
-        return user;
-      }
+        console.log("Authentication failed");
+        return null;
+      },
     }),
   ],
   adapter: PrismaAdapter(db),
@@ -59,33 +43,17 @@ export const handler = NextAuth({
     error: '/auth'
   },
   callbacks: {
-    async signIn({ user, account }) {
-      // Allow OAuth without email verification
-      console.log('sign in')
-      if (account?.provider !== "credentials") return true;
+    // async signIn({ user, account }) {
+    //   // Allow OAuth without email verification
+    //   console.log('sign in', user)
+    //   if (account?.provider !== "credentials") return true;
 
-      if (!user?.id) return false;
+    //   if (!user?.id) return false;
 
-      const existingUser = await getUserById(user.id);
+    //   const existingUser = await getUserById(user.id);
 
-      // Prevent sign in without email verification
-      // if (!existingUser?.emailVerified) return false;
-
-      if (existingUser.isTwoFactorEnabled) {
-        const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(
-          existingUser.id
-        );
-
-        if (!twoFactorConfirmation) return false;
-
-        // Delete two factor confirmation for next sign in
-        await db.twoFactorConfirmation.delete({
-          where: { id: twoFactorConfirmation.id },
-        });
-      }
-
-      return true;
-    },
+    //   return true;
+    // },
 
     async session({ token, session }) {
       if (token.sub && session.user) {

@@ -3,8 +3,9 @@
 import bcrypt from "bcryptjs";
 
 import { RegisterSchema } from "lib/schema";
-import { db } from "@/lib/db";
-import { getUserByPhone } from "lib/utils/auth.util";
+// import { db } from "@/lib/db";
+import { db } from "lib/db/db";
+import { getUserByPhone, getUserByEmail } from "lib/utils/auth.util";
 
 
 export const register = async (values) => {
@@ -17,15 +18,22 @@ export const register = async (values) => {
   const { email, password, phone } = validatedFields.data;
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  const existingUser = await getUserByPhone(phone);
+  const existingPhone = await getUserByPhone(phone);
 
-  if (existingUser) {
+  if (existingPhone) {
+    return { error: "User phone already exists." };
+  }
+
+  const existingEmail = await getUserByEmail(email);
+
+  if (existingEmail) {
     return { error: "User email already exists." };
   }
 
   await db.user.create({
     data: {
       email,
+      phone,
       password: hashedPassword,
     },
   });

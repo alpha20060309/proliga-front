@@ -19,6 +19,7 @@ import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.s
 import SocialLogin from '../SocialLogin'
 import { Input } from '@/components/ui/input'
 import { signIn } from 'next-auth/react'
+import { register } from 'app/actions/register'
 
 const SignUpForm = ({ setShouldRedirect }) => {
   const { t } = useTranslation()
@@ -32,9 +33,10 @@ const SignUpForm = ({ setShouldRedirect }) => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [agreement, setAgreement] = useState(false)
-  const { register, isLoading } = useAuthRegister()
+  // const { register, isLoading } = useAuthRegister()
   const config = useSelector(selectSystemConfig)
   const app_version = config[CONFIG_KEY.app_version]?.value ?? ''
+  const isLoading = false
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -61,7 +63,15 @@ const SignUpForm = ({ setShouldRedirect }) => {
       return toast.error(t("Telefon raqam noto'g'ri"))
     }
 
-    setShouldRedirect(false)
+    // setShouldRedirect(false)
+    const res = await register({
+      email,
+      phone,
+      password,
+      passwordConfirmation: confirmPassword,
+    })
+
+    console.log(res)
     // await register({
     //   email,
     //   password,
@@ -72,11 +82,11 @@ const SignUpForm = ({ setShouldRedirect }) => {
     //   app_version,
     // })
     // session.user.isTwoFactorEnabled = token;
-    await signIn('credentials', {
-      phone,
-      password,
-      redirect: false,
-    })
+    // await signIn('credentials', {
+    //   phone,
+    //   password,
+    //   redirect: false,
+    // })
 
     // setPhone('')
     // setEmail('')

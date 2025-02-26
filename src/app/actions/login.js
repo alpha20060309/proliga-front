@@ -1,14 +1,11 @@
 "use server";
 
-import { AuthError } from "next-auth";
-
 import { LoginSchema } from "lib/schema";
 import { signIn } from "next-auth/react";
 import { getUserByPhone } from "lib/utils/auth.util";
 
 export const login = async (
   values,
-  callbackUrl
 ) => {
   const validatedFields = LoginSchema.safeParse(values);
 
@@ -25,13 +22,17 @@ export const login = async (
   }
 
   try {
-    await signIn("credentials", {
+    console.log('1')
+    const res = await signIn("credentials", {
       phone,
       password,
-      redirectTo: callbackUrl,
+      redirect: false,
     });
+    console.log(res)
   } catch (error) {
-    if (error instanceof AuthError) {
+    if (error) {
+      console.log(error);
+
       switch (error.type) {
         case "CredentialsSignin":
           return { error: "Invalid credentials!" };

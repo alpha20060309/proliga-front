@@ -34,3 +34,14 @@ export const getUserByPhone = async (phone) => {
     return null;
   }
 };
+
+export const getUserByEmail = async (email) => {
+  try {
+    const user = await db.user.findUnique({
+      where: { email },
+    });
+    return user;
+  } catch {
+    return null;
+  }
+};
