@@ -7,9 +7,9 @@
     "build": "next build",
     "start": "dotenv -e .env.production next start",
     "lint": "next lint",
-    "pull": "dotenv -e .env.production -- npx prisma db pull",
-    "generate": "npx prisma generate",
-    "dev:migrate": "dotenv -e .env.production -- npx prisma migrate dev"
+    "pull": "dotenv -e .env.development -- npx prisma db pull",
+    "generate": "npx prisma generate"
+
   },
   "dependencies": {
     "@auth/supabase-adapter": "1.7.4",

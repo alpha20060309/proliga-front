@@ -1,5 +1,5 @@
 import GoogleSignIn from './Google'
-import FacebookSignIn from './Facebook'
+// import FacebookSignIn from './Facebook'
 import { useTranslation } from 'react-i18next'
 import { memo } from 'react'
 import SetPhoneNumber from 'components/Modals/SetPhoneNumber'
