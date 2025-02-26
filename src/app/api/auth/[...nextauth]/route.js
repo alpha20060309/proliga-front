@@ -4,18 +4,16 @@ import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
 import YandexProvider from "next-auth/providers/yandex";
 import { SupabaseAdapter } from "@auth/supabase-adapter";
-import { createClient } from "@supabase/supabase-js";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { db } from "lib/db/db";
+import { getUserById, getAccountByUserId } from "lib/utils/auth.util";
 
 const supabaseAdapter = SupabaseAdapter({
   url: process.env.NEXT_PUBLIC_SUPABASE_URL,
   secret: process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE,
 })
 
-// const supabase = createClient(
-//   process.env.NEXT_PUBLIC_SUPABASE_URL,
-//   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-//   // { db: { schema: 'next_auth' } }
-// )
+
 
 const handler = NextAuth({
   providers: [
@@ -28,27 +26,62 @@ const handler = NextAuth({
       clientSecret: process.env.NEXT_PUBLIC_YANDEX_CLIENT_SECRET ?? "",
     }),
   ],
-  adapter: supabaseAdapter,
+  adapter: PrismaAdapter(db),
   pages: {
     signIn: '/auth',
     signOut: '/',
     error: '/auth'
   },
   callbacks: {
-    async session({ session, user }) {
-      // const { data, error } = await supabase
-      //   .from('user')
-      //   .select('*')
-      //   .eq('guid', user.id)
-      //   .single()
+    //   async session({ token, session }) {
+    //     if (token.sub && session.user) {
+    //       session.user.id = token.sub;
+    //     }
 
-      // console.log(data)
-      console.log("session", session)
-      session.user.id = user.id;
-      return session;
-    },
-  },
-  secret: process.env.NEXT_PUBLIC_JWT
+    //     if (token.role && session.user) {
+    //       session.user.role = token.role;
+    //     }
+
+    //     if (session.user) {
+    //       session.user.isOAuth = token.isOAuth;
+    //       session.user.isTwoFactorEnabled = token.isTwoFactorEnabled;
+    //       session.user.name = token.name;
+    //       session.user.email = token.email;
+    //     }
+
+    //     return session;
+    //   },
+    // },
+    // async signIn({ user, account }) {
+    //   console.log("signIn", user, account)
+    //   return true
+    // },
+    // async jwt({ token }) {
+    //   console.log("jwt", token)
+    //   return token
+    // },
+    // async jwt({ token }) {
+    //   if (!token.sub) return token;
+
+    //   const existingUser = await getUserById(token.sub);
+
+    //   if (!existingUser) return token;
+
+    //   const existingAccount = await getAccountByUserId(existingUser.id);
+
+    //   token.isOAuth = !!existingAccount;
+    //   token.isTwoFactorEnabled = existingUser.is_two_factor_enabled;
+    //   token.name = existingUser.name;
+    //   token.email = existingUser.email;
+    //   token.role = existingUser.role;
+
+    //   return token;
+    // },
+    secret: process.env.NEXT_PUBLIC_JWT,
+    // session: {
+    //   strategy: "jwt",
+    // },
+  }
 });
 
 

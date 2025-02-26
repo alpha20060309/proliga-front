@@ -12,8 +12,10 @@ function SocialLogin() {
   const { t } = useTranslation()
   const config = useSelector(selectSystemConfig)
 
+  // eslint-disable-next-line no-unused-vars
   const facebook =
     config[CONFIG_KEY.provider_facebook]?.value?.toLowerCase() === 'true'
+  // eslint-disable-next-line no-unused-vars
   const google =
     config[CONFIG_KEY.provider_google]?.value?.toLowerCase() === 'true'
 
@@ -28,8 +30,7 @@ function SocialLogin() {
           <span className="flex-grow border-t border-gray-300" />
         </div>
         <div className="flex gap-1">
-          {google && <GoogleSignIn />}
-          {facebook && <FacebookSignIn />}
+          <GoogleSignIn />
           <YandexSignIn />
         </div>
       </div>
