@@ -3,7 +3,7 @@
 import { AuthError } from "next-auth";
 
 import { LoginSchema } from "lib/schema";
-import { signIn } from "@/auth";
+import { signIn } from "next-auth/react";
 import { getUserByPhone } from "lib/utils/auth.util";
 
 export const login = async (
@@ -21,7 +21,7 @@ export const login = async (
   const existingUser = await getUserByPhone(phone);
 
   if (!existingUser || !existingUser.email || !existingUser.password) {
-    return { error: "User not registered!" };
+    return { error: "Login yoki parol xato" };
   }
 
   try {

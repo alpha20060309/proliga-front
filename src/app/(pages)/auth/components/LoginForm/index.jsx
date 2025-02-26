@@ -18,7 +18,7 @@ import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.s
 import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
 import { useGoogleLogin } from 'app/hooks/auth/useGoogleLogin/useGoogleLogin'
 import { useSession } from 'next-auth/react'
-import { signIn } from 'next-auth/react'
+import { login } from 'app/actions/login'
 
 const LoginForm = ({ setShouldRedirect }) => {
   const { t } = useTranslation()
@@ -28,12 +28,13 @@ const LoginForm = ({ setShouldRedirect }) => {
   const [phone, setPhone] = useState('')
   const { data: session } = useSession()
 
-  const { login, isLoading } = useAuthLogin()
+  // const { login, isLoading } = useAuthLogin()
   const config = useSelector(selectSystemConfig)
   const { fingerprint } = useSelector((store) => store.auth)
   const agent = useSelector(selectAgent)
   const geo = useSelector(selectGeo)
   const { isLoading: isGoogleLoading } = useGoogleLogin()
+  const isLoading = false
 
   const can_send_sms =
     config[CONFIG_KEY.can_send_sms]?.value.toLowerCase() === 'true' || false
@@ -52,31 +53,21 @@ const LoginForm = ({ setShouldRedirect }) => {
       return
     }
 
-    await signIn('credentials', {
-      phone,
-      password,
-      // redirect: false,
-    })
-
+    // eslint-disable-next-line no-undef
+    const res = await login(
+      { phone, password },
+      // eslint-disable-next-line no-undef
+      process.env.NEXT_PUBLIC_URL + '/auth'
+    )
+    console.log(res)
+    if (res.error) {
+      toast.error(t(res.error))
+    }
     // setShouldRedirect(false)
     // await login({ phone, password, app_version, fingerprint, agent, geo })
   }
   if (isGoogleLoading) {
     return <Spinner />
-  }
-
-  // eslint-disable-next-line no-unused-vars
-  const handleSubmit2 = async (e) => {
-    e.preventDefault()
-    const result = await signIn('credentials', {
-      redirect: false,
-      phone,
-      password,
-    })
-
-    if (result?.error) {
-      toast.error(result.error)
-    }
   }
 
   return (

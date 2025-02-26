@@ -10,7 +10,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 
 
 
-const handler = NextAuth({
+export const handler = NextAuth({
   providers: [
     GoogleProvider({
       clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ?? "",
@@ -59,6 +59,34 @@ const handler = NextAuth({
     error: '/auth'
   },
   callbacks: {
+    async signIn({ user, account }) {
+      // Allow OAuth without email verification
+      console.log('sign in')
+      if (account?.provider !== "credentials") return true;
+
+      if (!user?.id) return false;
+
+      const existingUser = await getUserById(user.id);
+
+      // Prevent sign in without email verification
+      // if (!existingUser?.emailVerified) return false;
+
+      if (existingUser.isTwoFactorEnabled) {
+        const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(
+          existingUser.id
+        );
+
+        if (!twoFactorConfirmation) return false;
+
+        // Delete two factor confirmation for next sign in
+        await db.twoFactorConfirmation.delete({
+          where: { id: twoFactorConfirmation.id },
+        });
+      }
+
+      return true;
+    },
+
     async session({ token, session }) {
       if (token.sub && session.user) {
         session.user.id = token.sub;
