@@ -36,15 +36,17 @@ model Session {
 }
 
 model User {
-  id                  String    @id @default(cuid())
-  name                String?
-  email               String?   @unique
-  emailVerified       DateTime?
-  image               String?
-  is_two_factor_enabled Boolean  @default(false)
-  role                String    @default("user")
-  accounts            Account[]
-  sessions            Session[]
+  id                    String    @id @default(cuid())
+  name                  String?
+  email                 String?   @unique
+  emailVerified         DateTime?
+  image                 String?
+  is_two_factor_enabled Boolean   @default(false)
+  role                  String    @default("user")
+  phone                 String?   @unique
+  password              String?
+  accounts              Account[]
+  sessions              Session[]
 }
 
 model VerificationToken {
