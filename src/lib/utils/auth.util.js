@@ -23,3 +23,14 @@ export const getUserById = async (id) => {
     return null;
   }
 };
+
+export const getUserByPhone = async (phone) => {
+  try {
+    const user = await db.user.findUnique({
+      where: { phone },
+    });
+    return user;
+  } catch {
+    return null;
+  }
+};

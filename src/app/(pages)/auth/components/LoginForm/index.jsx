@@ -2,6 +2,7 @@
 
 import ForgotPassword from 'components/Modals/ForgotPassword'
 import SocialLogin from '../SocialLogin'
+import Spinner from 'components/Spinner'
 import Image from 'next/image'
 import { toast } from 'react-toastify'
 import { useState, memo } from 'react'
@@ -17,7 +18,6 @@ import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.s
 import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
 import { useGoogleLogin } from 'app/hooks/auth/useGoogleLogin/useGoogleLogin'
 import { useSession } from 'next-auth/react'
-import Spinner from 'components/Spinner'
 import { signIn } from 'next-auth/react'
 
 const LoginForm = ({ setShouldRedirect }) => {
