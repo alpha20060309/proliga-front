@@ -1,14 +1,22 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import NextAuth from "next-auth/next";
+import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import YandexProvider from "next-auth/providers/yandex";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { db } from "lib/db/db";
-import { getUserById, getAccountByUserId } from "lib/utils/auth.util";
+import { getUserById, getAccountByUserId, getUserByPhone } from "lib/utils/auth.util";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { LoginSchema } from "lib/schema";
+import bcrypt from "bcryptjs";
 
-export const handler = NextAuth({
+export const {
+  handlers: { GET, POST },
+  auth,
+  signIn,
+  signOut,
+  update,
+} = NextAuth({
   providers: [
     GoogleProvider({
       clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ?? "",
@@ -24,17 +32,24 @@ export const handler = NextAuth({
         phone: { label: "Phone", type: "text" },
         password: { label: "Password", type: "password" }
       },
-      async authorize(credentials, req) {
-        console.log("Authorize function called");
-        console.log("Credentials:", credentials);
+      async authorize(credentials) {
+        const validatedFields = LoginSchema.safeParse(credentials);
 
-        const { phone, password } = credentials ?? {};
+        if (validatedFields.success) {
+          const { phone, password } = validatedFields.data;
 
+          const user = await getUserByPhone(phone);
+          console.log(user)
+          if (!user || !user.password) return null;
 
-        console.log("Authentication failed");
+          const passwordsMatch = await bcrypt.compare(password, user.password);
+
+          if (passwordsMatch) return user;
+        }
+
         return null;
-      },
-    }),
+      }
+    })
   ],
   adapter: PrismaAdapter(db),
   pages: {
@@ -43,17 +58,17 @@ export const handler = NextAuth({
     error: '/auth'
   },
   callbacks: {
-    // async signIn({ user, account }) {
-    //   // Allow OAuth without email verification
-    //   console.log('sign in', user)
-    //   if (account?.provider !== "credentials") return true;
+    async signIn({ user, account }) {
+      // Allow OAuth without email verification
+      console.log('sign in', user)
+      if (account?.provider !== "credentials") return true;
 
-    //   if (!user?.id) return false;
+      if (!user?.id) return false;
 
-    //   const existingUser = await getUserById(user.id);
+      const existingUser = await getUserById(user.id);
 
-    //   return true;
-    // },
+      return true;
+    },
 
     async session({ token, session }) {
       if (token.sub && session.user) {
@@ -99,7 +114,3 @@ export const handler = NextAuth({
   secret: process.env.NEXT_PUBLIC_JWT
 });
 
-
-console.log(handler)
-
-export { handler as GET, handler as POST };

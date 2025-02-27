@@ -55,7 +55,7 @@ const LoginForm = ({ setShouldRedirect }) => {
     }
 
     // eslint-disable-next-line no-undef
-    const res = await signIn('credentials', {
+    const res = await login( {
       phone,
       password,
       redirect: false,

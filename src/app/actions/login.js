@@ -1,7 +1,8 @@
 "use server";
 
 import { LoginSchema } from "lib/schema";
-import { signIn } from "next-auth/react";
+// import { signIn } from "next-auth/react";
+import { signIn } from "app/api/auth/[...nextauth]/route";
 import { getUserByPhone } from "lib/utils/auth.util";
 
 export const login = async (
