@@ -15,8 +15,9 @@ import {
 } from 'app/lib/features/currentTeam/currentTeam.slice'
 import { resetTeams } from 'app/lib/features/team/team.slice'
 import { supabase } from 'app/lib/supabaseClient'
+import { signOut } from 'next-auth/react'
 // import { signOut } from 'app/api/auth/[...nextauth]/route'
-import { logout } from 'app/actions/logout'
+// import { logout } from 'app/actions/logout'
 
 export const useLogOut = () => {
   const dispatch = useDispatch()
@@ -47,10 +48,7 @@ export const useLogOut = () => {
           )
         }
 
-        // eslint-disable-next-line no-undef
-        // await signOut()
-
-        await logout()
+        signOut({ redirect: false })
 
         clearState()
         localStorage.clear()
@@ -68,7 +66,7 @@ export const useLogOut = () => {
         )
       }
     },
-    [clearState, router, t]
+    [clearState, t, router]
   )
 
   return { logOut, error }
