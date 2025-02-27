@@ -39,7 +39,7 @@ export const {
           const { phone, password } = validatedFields.data;
 
           const user = await getUserByPhone(phone);
-          console.log(user)
+          // console.log(user)
           if (!user || !user.password) return null;
 
           const passwordsMatch = await bcrypt.compare(password, user.password);
@@ -60,7 +60,6 @@ export const {
   callbacks: {
     async signIn({ user, account }) {
       // Allow OAuth without email verification
-      console.log('sign in', user)
       if (account?.provider !== "credentials") return true;
 
       if (!user?.id) return false;
@@ -71,23 +70,41 @@ export const {
     },
 
     async session({ token, session }) {
-      // console.log("got session", db)
       if (token.sub && session.user) {
         session.user.id = token.sub;
       }
 
       if (session.user) {
+        const existingUser = await getUserById(token.sub);
+
+
         session.user.isOAuth = token.isOAuth;
+        session.user.id = token.id;
+        session.user.guid = token.guid;
         session.user.name = token.name;
         session.user.email = token.email;
         session.user.phone = token.phone;
+        session.user.photo = token.photo;
+        session.user.last_name = token.last_name;
+        session.user.middle_name = token.middle_name;
+        session.user.gender = token.gender;
+        session.user.birth_date = token.birth_date;
+        session.user.bio = token.bio;
+        session.user.balance = token.balance;
+        session.user.deleted_at = token.deleted_at;
+        session.user.language = token.language;
+        session.user.phone_verified = token.phone_verified;
+        session.user.visitor = token.visitor;
+        session.user.geo = token.geo;
+        session.user.agent = token.agent;
         session.user.role = token.role;
       }
+      console.log("session", session)
+      console.log('token', token)
 
       return session;
     },
     async jwt({ token, user }) {
-      console.log("got jwt")
       if (user) {
         token.phone = user.phone;
       }
@@ -96,17 +113,29 @@ export const {
 
       const existingUser = await getUserById(token.sub);
 
-
-
       if (!existingUser) return token;
 
       const existingAccount = await getAccountByUserId(existingUser.id);
 
-      token.isOAuth = !!existingAccount;
+      token.id = existingUser.id;
+      token.guid = existingUser.guid;
       token.name = existingUser.name;
       token.email = existingUser.email;
       token.phone = existingUser.phone;
-      token.role = existingUser.role;
+      token.photo = existingUser.photo;
+      token.last_name = existingUser.last_name;
+      token.middle_name = existingUser.middle_name;
+      token.gender = existingUser.gender;
+      token.birth_date = existingUser.birth_date;
+      token.bio = existingUser.bio;
+      token.balance = existingUser.balance;
+      token.deleted_at = existingUser.deleted_at;
+      token.language = existingUser.language;
+      token.phone_verified = existingUser.phone_verified;
+      token.visitor = existingUser.visitor;
+      token.geo = existingUser.geo;
+      token.agent = existingUser.agent;
+      token.isOAuth = !!existingAccount
 
       return token;
     }

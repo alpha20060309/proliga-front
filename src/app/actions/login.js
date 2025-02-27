@@ -23,13 +23,11 @@ export const login = async (
   }
 
   try {
-    console.log('1')
-    const res = await signIn("credentials", {
+    await signIn("credentials", {
       phone,
       password,
       redirect: false,
     });
-    console.log(res)
   } catch (error) {
     if (error) {
       console.log(error);

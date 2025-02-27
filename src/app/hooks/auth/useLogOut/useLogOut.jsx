@@ -48,7 +48,7 @@ export const useLogOut = () => {
           )
         }
 
-        signOut({ redirect: false })
+        await signOut({ redirect: false })
 
         clearState()
         localStorage.clear()

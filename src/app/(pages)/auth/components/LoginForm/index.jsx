@@ -17,7 +17,6 @@ import { cn } from '@/lib/utils'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
 import { useGoogleLogin } from 'app/hooks/auth/useGoogleLogin/useGoogleLogin'
-import { useSession } from 'next-auth/react'
 import { login } from 'app/actions/login'
 import { signIn } from 'next-auth/react'
 
@@ -27,7 +26,6 @@ const LoginForm = ({ setShouldRedirect }) => {
   const [isModalOpen, setModalOpen] = useState(false)
   const [password, setPassword] = useState('')
   const [phone, setPhone] = useState('')
-  const { data: session } = useSession()
 
   // const { login, isLoading } = useAuthLogin()
   const config = useSelector(selectSystemConfig)
@@ -55,7 +53,7 @@ const LoginForm = ({ setShouldRedirect }) => {
     }
 
     // eslint-disable-next-line no-undef
-    const res = await login( {
+    const res = await login({
       phone,
       password,
       redirect: false,
@@ -162,7 +160,6 @@ const LoginForm = ({ setShouldRedirect }) => {
         <SocialLogin setShouldRedirect={setShouldRedirect} />
       </section>
       <ForgotPassword isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
-      <span className="max-w-96 break-words">{JSON.stringify(session)}</span>
     </>
   )
 }

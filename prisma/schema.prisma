@@ -845,12 +845,11 @@ model tour_team {
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model user {
   id                                               Int                   @id @default(autoincrement())
-  guid                                             String?               @db.Uuid
   role                                             roles?                @default(user)
   name                                             String?               @db.VarChar(64)
   email                                            String                @unique(map: "user_email_idx") @db.VarChar(32)
+  image                                            String?
   phone                                            String?               @unique(map: "uk_phone") @db.VarChar(64)
-  photo                                            String?
   sms_code                                         String?               @db.VarChar(64)
   sms_created_at                                   DateTime?             @db.Timestamptz(6)
   last_name                                        String?
@@ -875,8 +874,8 @@ model user {
   is_test                                          Boolean?              @default(false)
   new_phone                                        String?               @db.VarChar(64)
   old_phones                                       Json?
-  image                                            String?
   emailVerified                                    DateTime?
+  isOAuth                                          Boolean
   accounts                                         account[]
   sessions                                         session[]
   banner_view                                      banner_view[]
@@ -911,7 +910,6 @@ model user {
   @@index([id], map: "idx_user_id")
   @@index([name], map: "name_user_copy1")
   @@index([deleted_at])
-  @@index([guid])
   @@index([id])
   @@index([phone])
 }

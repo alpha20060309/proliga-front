@@ -18,15 +18,18 @@ import {
   fetchBroadcastNotifications,
   fetchPersonalNotifications,
 } from 'app/lib/features/systemNotification/systemNotification.thunk'
+import { useSession } from 'next-auth/react'
 
 const InitialStateProvider = ({ children }) => {
   const dispatch = useDispatch()
+  const { data: session } = useSession()
   const userTable = useSelector(selectUserTable)
   const userAuth = useSelector(selectUserAuth)
   const { lang } = useSelector((state) => state.systemLanguage)
   const { generateFingerprint } = useGenerateFingerprint()
   const { getUserAgent } = useGetUserAgent()
   const { i18n } = useTranslation()
+  console.log(session)
 
   useEffect(() => {
     const fetch = async () => await getUserAgent()
