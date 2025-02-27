@@ -875,7 +875,9 @@ model user {
   new_phone                                        String?               @db.VarChar(64)
   old_phones                                       Json?
   emailVerified                                    DateTime?
-  isOAuth                                          Boolean
+  isOAuth                                          Boolean?              @default(false)
+  guid                                             String?               @db.Uuid
+  password                                         String?
   accounts                                         account[]
   sessions                                         session[]
   banner_view                                      banner_view[]
@@ -907,6 +909,7 @@ model user {
   user_activity_user_activity_user_idTouser        user_activity[]       @relation("user_activity_user_idTouser")
   user_prize                                       user_prize[]
 
+  @@index([guid])
   @@index([id], map: "idx_user_id")
   @@index([name], map: "name_user_copy1")
   @@index([deleted_at])

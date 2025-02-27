@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 import { RegisterSchema } from "lib/schema";
 import { db } from "lib/db";
 import { getUserByPhone, getUserByEmail } from "lib/utils/auth.util";
-
+import { login } from "./login";
 
 export const register = async (values) => {
   const validatedFields = RegisterSchema.safeParse(values);
@@ -37,5 +37,9 @@ export const register = async (values) => {
     },
   });
 
-  return { success: "Successfully registered!" };
+  await login({ phone, password })
+
+  return {
+    success: "User created.",
+  }
 };
