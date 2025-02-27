@@ -4,7 +4,7 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import YandexProvider from "next-auth/providers/yandex";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { db } from "lib/db/db";
+import { db } from "lib/db";
 import { getUserById, getAccountByUserId, getUserByPhone } from "lib/utils/auth.util";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { LoginSchema } from "lib/schema";
@@ -71,6 +71,7 @@ export const {
     },
 
     async session({ token, session }) {
+      // console.log("got session", db)
       if (token.sub && session.user) {
         session.user.id = token.sub;
       }
@@ -86,6 +87,7 @@ export const {
       return session;
     },
     async jwt({ token, user }) {
+      console.log("got jwt")
       if (user) {
         token.phone = user.phone;
       }
@@ -94,12 +96,13 @@ export const {
 
       const existingUser = await getUserById(token.sub);
 
+
+
       if (!existingUser) return token;
 
       const existingAccount = await getAccountByUserId(existingUser.id);
 
       token.isOAuth = !!existingAccount;
-      token.isTwoFactorEnabled = existingUser.is_two_factor_enabled;
       token.name = existingUser.name;
       token.email = existingUser.email;
       token.phone = existingUser.phone;

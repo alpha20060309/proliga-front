@@ -3,8 +3,7 @@
 import bcrypt from "bcryptjs";
 
 import { RegisterSchema } from "lib/schema";
-// import { db } from "@/lib/db";
-import { db } from "lib/db/db";
+import { db } from "lib/db";
 import { getUserByPhone, getUserByEmail } from "lib/utils/auth.util";
 
 

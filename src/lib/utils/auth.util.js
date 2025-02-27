@@ -1,4 +1,4 @@
-import { db } from "lib/db/db";
+import { db } from "lib/db";
 
 export const getAccountByUserId = async (user_id) => {
   try {
@@ -18,6 +18,7 @@ export const getUserById = async (id) => {
     const user = await db.user.findUnique({
       where: { id },
     });
+
     return user;
   } catch {
     return null;
