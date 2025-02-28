@@ -9,6 +9,7 @@ import { getUserById, getAccountByUserId, getUserByPhone } from "lib/utils/auth.
 import CredentialsProvider from "next-auth/providers/credentials";
 import { LoginSchema } from "lib/schema";
 import bcrypt from "bcryptjs";
+import { LANGUAGE } from "app/utils/languages.util";
 
 export const {
   handlers: { GET, POST },
@@ -67,50 +68,28 @@ export const {
 
     async session({ token, session }) {
       if (token.sub && session.user) {
-        session.user.id = token.sub;
+        session.user.id = +token.sub;
       }
 
       if (session.user) {
         const user = await getUserById(session.user.id);
-        console.log('user', user)
 
-        session.user.isOAuth = user?.isOAuth || null;
-        session.user.birth_date = user?.birth_date || null
-        // session.user.name = token.name;
-        // session.user.email = token.email;
-
-
+        session.user.isOAuth = user?.isOAuth || false;
+        session.user.birth_date = user?.birth_date || null;
+        session.user.name = user?.name || null;
+        session.user.last_name = user?.last_name || null;
+        session.user.middle_name = user?.middle_name || null;
+        session.user.gender = user?.gender || null;
+        session.user.bio = user?.bio || null;
+        session.user.balance = user?.balance || null;
+        session.user.image = user?.image || null;
+        session.user.deleted_at = user?.deleted_at || null;
+        session.user.language = user?.language || LANGUAGE.uz;
+        session.user.phone_verified = user?.phone_verified || false;
       }
 
       return session;
     },
-    async jwt({ token, user, account, profile }) {
-
-      if (!token.sub) return token;
-      // const merged = {
-      //   ...token,
-      //   ...user
-      // }
-
-      // if (user) {
-      //   const existingUser = await getUserById(token.sub);
-      //   if (!existingUser) return token;
-
-      //   // console.log("user", user)
-
-
-      //   // const existingAccount = await getAccountByUserId(existingUser.id);
-      //   console.log(user)
-      //   token.phone = user.phone;
-      //   token.id = existingUser.id;
-      //   token.name = existingUser?.name;
-      //   token.email = existingUser?.email;
-      //   token.phone = existingUser?.phone;
-      //   token.birth_date = user?.birth_date;
-      // }
-      // console.log('token', token)
-      return token;
-    }
   },
   session: {
     strategy: "jwt",
@@ -119,39 +98,3 @@ export const {
   secret: process.env.NEXT_PUBLIC_JWT
 
 });
-
-
-// token.last_name = existingUser?.last_name;
-// token.middle_name = existingUser?.middle_name;
-// token.gender = existingUser?.gender;
-// token.bio = existingUser?.bio;
-// token.balance = existingUser?.balance;
-// token.deleted_at = existingUser?.deleted_at;
-// token.language = existingUser?.language;
-// token.phone_verified = existingUser?.phone_verified;
-// token.visitor = existingUser?.visitor;
-// token.geo = existingUser?.geo;
-// token.agent = existingUser?.agent;
-// token.isOAuth = !!existingAccount
-// if (session.user) {
-//   // const existingUser = await getUserById(token.sub);
-
-
-//   // session.user.isOAuth = token.isOAuth;
-//   // session.user.id = token.id;
-//   // session.user.name = token?.name;
-//   // session.user.email = token?.email;
-//   // session.user.phone = token?.phone;
-//   // session.user.last_name = token?.last_name;
-//   // session.user.middle_name = token?.middle_name;
-//   // session.user.gender = token?.gender;
-//   // session.user.birth_date = token?.birth_date;
-//   // session.user.bio = token?.bio;
-//   // session.user.balance = token?.balance;
-//   // session.user.deleted_at = token?.deleted_at;
-//   // session.user.language = token?.language;
-//   // session.user.phone_verified = token?.phone_verified;
-//   // session.user.visitor = token?.visitor;
-//   // session.user.geo = token?.geo;
-//   // session.user.agent = token?.agent;
-// }
