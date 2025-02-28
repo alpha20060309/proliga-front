@@ -10,6 +10,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { LoginSchema } from "lib/schema";
 import bcrypt from "bcryptjs";
 import { LANGUAGE } from "app/utils/languages.util";
+import { getServerSession } from 'next-auth';
 
 export const {
   handlers: { GET, POST },
@@ -63,9 +64,14 @@ export const {
 
       if (!user?.id) return false;
 
+      const existingUser = await getUserById(user.id);
+
+      if (!existingUser?.phone_verified) {
+        return '/confirm-otp'
+      }
+
       return true;
     },
-
     async session({ token, session }) {
       if (token.sub && session.user) {
         session.user.id = +token.sub;
@@ -73,7 +79,7 @@ export const {
 
       if (session.user) {
         const user = await getUserById(session.user.id);
-
+        session.user.phone = user?.phone || null;
         session.user.isOAuth = user?.isOAuth || false;
         session.user.birth_date = user?.birth_date || null;
         session.user.name = user?.name || null;

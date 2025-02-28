@@ -1,7 +1,7 @@
 'use client'
 
 import './globals.css'
-import 'react-toastify/dist/ReactToastify.css'
+// import 'react-toastify/dist/ReactToastify.css'
 import 'react-phone-number-input/style.css'
 import './lib/i18n.config'
 import Navbar from '../components/Navbar'
