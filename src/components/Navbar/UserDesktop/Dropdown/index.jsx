@@ -32,7 +32,7 @@ const Dropdown = () => {
             <p>{t('Sozlamalar')}</p>
           </NavLink>
           <div
-            onClick={logOut}
+            onClick={async () => await logOut()}
             className="flex h-full w-full cursor-pointer gap-2 rounded p-1 hover:bg-neutral-800"
           >
             <Image

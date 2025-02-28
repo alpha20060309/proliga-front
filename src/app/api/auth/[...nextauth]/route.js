@@ -39,11 +39,9 @@ export const {
           const { phone, password } = validatedFields.data;
 
           const user = await getUserByPhone(phone);
-          // console.log(user)
           if (!user || !user.password) return null;
 
           const passwordsMatch = await bcrypt.compare(password, user.password);
-          console.log(passwordsMatch, password, user.password)
           if (passwordsMatch) return user;
         }
 
@@ -64,8 +62,6 @@ export const {
 
       if (!user?.id) return false;
 
-      const existingUser = await getUserById(user.id);
-
       return true;
     },
 
@@ -73,69 +69,89 @@ export const {
       if (token.sub && session.user) {
         session.user.id = token.sub;
       }
+
       if (session.user) {
-        const existingUser = await getUserById(token.sub);
+        const user = await getUserById(session.user.id);
+        console.log('user', user)
+
+        session.user.isOAuth = user?.isOAuth || null;
+        session.user.birth_date = user?.birth_date || null
+        // session.user.name = token.name;
+        // session.user.email = token.email;
 
 
-        session.user.isOAuth = token.isOAuth;
-        session.user.id = token.id;
-        session.user.name = token?.name;
-        session.user.email = token?.email;
-        session.user.phone = token?.phone;
-        session.user.last_name = token?.last_name;
-        session.user.middle_name = token?.middle_name;
-        session.user.gender = token?.gender;
-        session.user.birth_date = token?.birth_date;
-        session.user.bio = token?.bio;
-        session.user.balance = token?.balance;
-        session.user.deleted_at = token?.deleted_at;
-        session.user.language = token?.language;
-        session.user.phone_verified = token?.phone_verified;
-        session.user.visitor = token?.visitor;
-        session.user.geo = token?.geo;
-        session.user.agent = token?.agent;
       }
 
       return session;
     },
-    async jwt({ token, user, account }) {
-      console.log("user", user)
-      console.log('account', account)
-      if (user) {
-        token.phone = user.phone;
-      }
+    async jwt({ token, user, account, profile }) {
+
       if (!token.sub) return token;
+      // const merged = {
+      //   ...token,
+      //   ...user
+      // }
 
-      const existingUser = await getUserById(token.sub);
+      // if (user) {
+      //   const existingUser = await getUserById(token.sub);
+      //   if (!existingUser) return token;
 
-      if (!existingUser) return token;
+      //   // console.log("user", user)
 
-      const existingAccount = await getAccountByUserId(existingUser.id);
 
-      token.id = existingUser.id;
-      token.name = existingUser?.name;
-      token.email = existingUser?.email;
-      token.phone = existingUser?.phone;
-      token.last_name = existingUser?.last_name;
-      token.middle_name = existingUser?.middle_name;
-      token.gender = existingUser?.gender;
-      token.birth_date = existingUser?.birth_date;
-      token.bio = existingUser?.bio;
-      token.balance = existingUser?.balance;
-      token.deleted_at = existingUser?.deleted_at;
-      token.language = existingUser?.language;
-      token.phone_verified = existingUser?.phone_verified;
-      token.visitor = existingUser?.visitor;
-      token.geo = existingUser?.geo;
-      token.agent = existingUser?.agent;
-      token.isOAuth = !!existingAccount
-
+      //   // const existingAccount = await getAccountByUserId(existingUser.id);
+      //   console.log(user)
+      //   token.phone = user.phone;
+      //   token.id = existingUser.id;
+      //   token.name = existingUser?.name;
+      //   token.email = existingUser?.email;
+      //   token.phone = existingUser?.phone;
+      //   token.birth_date = user?.birth_date;
+      // }
+      // console.log('token', token)
       return token;
     }
   },
   session: {
-    strategy: "jwt"
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60 * 12, // ~ 1 year
   },
   secret: process.env.NEXT_PUBLIC_JWT
+
 });
 
+
+// token.last_name = existingUser?.last_name;
+// token.middle_name = existingUser?.middle_name;
+// token.gender = existingUser?.gender;
+// token.bio = existingUser?.bio;
+// token.balance = existingUser?.balance;
+// token.deleted_at = existingUser?.deleted_at;
+// token.language = existingUser?.language;
+// token.phone_verified = existingUser?.phone_verified;
+// token.visitor = existingUser?.visitor;
+// token.geo = existingUser?.geo;
+// token.agent = existingUser?.agent;
+// token.isOAuth = !!existingAccount
+// if (session.user) {
+//   // const existingUser = await getUserById(token.sub);
+
+
+//   // session.user.isOAuth = token.isOAuth;
+//   // session.user.id = token.id;
+//   // session.user.name = token?.name;
+//   // session.user.email = token?.email;
+//   // session.user.phone = token?.phone;
+//   // session.user.last_name = token?.last_name;
+//   // session.user.middle_name = token?.middle_name;
+//   // session.user.gender = token?.gender;
+//   // session.user.birth_date = token?.birth_date;
+//   // session.user.bio = token?.bio;
+//   // session.user.balance = token?.balance;
+//   // session.user.deleted_at = token?.deleted_at;
+//   // session.user.language = token?.language;
+//   // session.user.phone_verified = token?.phone_verified;
+//   // session.user.visitor = token?.visitor;
+//   // session.user.geo = token?.geo;
+//   // session.user.agent = token?.agent;
+// }
