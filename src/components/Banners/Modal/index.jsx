@@ -14,7 +14,6 @@ import { useCreateBannerView } from 'app/hooks/system/useCreateBannerView/useCre
 import {
   selectAgent,
   selectGeo,
-  selectUserAuth,
   selectUserTable,
 } from 'app/lib/features/auth/auth.selector'
 import { selectBanners } from 'app/lib/features/banner/banner.selector'
@@ -24,7 +23,6 @@ const ModalBanner = ({ isModalOpen, setModalOpen }) => {
   const banners = useSelector(selectBanners)
   const agent = useSelector(selectAgent)
   const userTable = useSelector(selectUserTable)
-  const userAuth = useSelector(selectUserAuth)
   const geo = useSelector(selectGeo)
   const NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH =
     // eslint-disable-next-line no-undef
@@ -69,17 +67,16 @@ const ModalBanner = ({ isModalOpen, setModalOpen }) => {
 
   useEffect(() => {
     if (banner?.type === BANNER_SERVICE_TYPE.CUSTOM) {
-      if (banner?.id && userTable?.id && userAuth?.id && geo && agent) {
+      if (banner?.id && userTable?.id && geo && agent) {
         createBannerView({
           banner_id: banner?.id,
-          userAuth,
           userTable,
           geo,
           agent,
         })
       }
     }
-  }, [banner, windowWidth, agent, userTable, userAuth, geo, createBannerView])
+  }, [banner, windowWidth, agent, userTable, geo, createBannerView])
 
   return (
     <>

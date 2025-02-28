@@ -21,10 +21,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { validateTeamName } from 'app/utils/validateTeamName.util'
-import {
-  selectUserAuth,
-  selectUserTable,
-} from 'app/lib/features/auth/auth.selector'
+import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 
 const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
   const router = useRouter()
@@ -32,7 +29,6 @@ const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
   const teams = useSelector(selectTeams)
   const [title, setTitle] = useState('')
   const [formation, setFormation] = useState(FORMATIONS['4-3-3'])
-  const userAuth = useSelector(selectUserAuth)
   const userTable = useSelector(selectUserTable)
 
   const { createTeam, isLoading, error, data } = useCreateTeam()
@@ -47,7 +43,6 @@ const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
       title,
       formation,
       competition_id: competition.id,
-      userAuth,
       userTable,
     })
   }

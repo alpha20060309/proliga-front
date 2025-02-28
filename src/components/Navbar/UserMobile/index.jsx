@@ -12,14 +12,14 @@ const NavbarUserMobile = ({ handleToggleModal }) => {
       className="flex cursor-pointer items-center justify-center gap-2 lg:hidden"
     >
       {userTable?.email ? (
-        userTable?.photo ? (
+        userTable?.image ? (
           <img
-            src={getUrl(userTable?.photo)}
+            src={getUrl(userTable?.image)}
             alt="user"
             width={32}
             draggable={false}
             height={32}
-            key={userTable?.photo}
+            key={userTable?.image}
             className="size-8 select-none rounded-full bg-white"
           />
         ) : (

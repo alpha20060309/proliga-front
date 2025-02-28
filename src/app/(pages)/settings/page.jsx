@@ -11,10 +11,7 @@ import SettingsSkeleton, {
   ProfileSkeleton,
   NavigationSkeleton,
 } from './components/Skeleton'
-import {
-  selectUserAuth,
-  selectUserTable,
-} from 'app/lib/features/auth/auth.selector'
+import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { useRouter } from 'next/navigation'
 const Profile = dynamic(() => import('./components/Profile'), {
   ssr: false,
@@ -32,13 +29,12 @@ function Settings() {
   const [tab, setTab] = useState(SETTINGS_TAB.PROFILE)
   const { isLoading } = useSelector((store) => store.auth)
   const userTable = useSelector(selectUserTable)
-  const userAuth = useSelector(selectUserAuth)
 
   useEffect(() => {
-    if (!userTable || !userAuth) {
+    if (!userTable?.id) {
       router.push('/')
     }
-  }, [router, t, userAuth, userTable])
+  }, [router, t, userTable])
 
   if (isLoading) {
     return <SettingsSkeleton />

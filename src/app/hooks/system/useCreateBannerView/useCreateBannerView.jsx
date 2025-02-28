@@ -9,11 +9,11 @@ export const useCreateBannerView = () => {
   const { t } = useTranslation()
 
   const createBannerView = useCallback(
-    async ({ banner_id, userTable, userAuth, geo, agent }) => {
+    async ({ banner_id, userTable, geo, agent }) => {
       setIsLoading(false)
       setError(null)
 
-      if (!userTable?.id || !userAuth?.id) {
+      if (!userTable?.id) {
         setError('User not found')
         toast.error('User not found', { theme: 'dark' })
         return

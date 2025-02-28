@@ -10,10 +10,7 @@ import { useGenerateFingerprint } from 'app/hooks/system/useGenerateFingerprint/
 import { useGetUserAgent } from 'app/hooks/system/useGetUserAgent/useGetUserAgent'
 import { fetchGeo } from 'app/lib/features/auth/auth.thunk'
 import { fetchPrizes } from 'app/lib/features/prize/prize.thunk'
-import {
-  selectUserAuth,
-  selectUserTable,
-} from 'app/lib/features/auth/auth.selector'
+import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import {
   fetchBroadcastNotifications,
   fetchPersonalNotifications,
@@ -22,7 +19,6 @@ import {
 const InitialStateProvider = ({ children }) => {
   const dispatch = useDispatch()
   const userTable = useSelector(selectUserTable)
-  const userAuth = useSelector(selectUserAuth)
   const { lang } = useSelector((state) => state.systemLanguage)
   const { generateFingerprint } = useGenerateFingerprint()
   const { getUserAgent } = useGetUserAgent()
@@ -43,10 +39,10 @@ const InitialStateProvider = ({ children }) => {
   }, [dispatch, generateFingerprint, getUserAgent])
 
   useEffect(() => {
-    if (userAuth?.id && userTable?.id) {
+    if (userTable?.id) {
       dispatch(fetchPersonalNotifications({ user_id: userTable?.id }))
     }
-  }, [dispatch, userAuth?.id, userTable?.id])
+  }, [dispatch, userTable?.id])
 
   useEffect(() => {
     if (lang !== userTable?.language && userTable?.id) {

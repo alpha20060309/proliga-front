@@ -25,7 +25,6 @@ const AuthProvider = ({ children }) => {
   const router = useRouter()
   const { is_checked } = useSelector((state) => state.auth)
   const userTable = useSelector(selectUserTable)
-  const userAuth = useSelector(selectUserAuth)
   const { checkUserExists } = useCheckUserExists()
   const config = useSelector(selectSystemConfig)
   const app_version = config[CONFIG_KEY.app_version]?.value ?? ''
@@ -34,22 +33,13 @@ const AuthProvider = ({ children }) => {
 
   // useEffect(() => {
   //   // eslint-disable-next-line no-undef
-  //   const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
-  //   const auth =
-  //     localStorage.getItem(`user-auth-${sbUrl}`) &&
-  //     JSON.parse(localStorage.getItem(`user-auth-${sbUrl}`))
-  //   const table =
-  //     localStorage.getItem(`user-table-${sbUrl}`) !== 'undefined' &&
-  //     JSON.parse(localStorage.getItem(`user-table-${sbUrl}`))
-
-  //   if (auth?.id && table?.id && !userAuth && !userTable) {
-  //     dispatch(setUserAuth(auth))
+  //   if (table?.id &&  !userTable) {
   //     dispatch(setUserTable(table))
   //   }
   //   if ((!auth || !table) && path.slice(1, 5) === 'play') {
   //     router.push('/')
   //   }
-  // }, [dispatch, userAuth, userTable, router, path, logOut])
+  // }, [dispatch,  userTable, router, path, logOut])
 
   // useEffect(() => {
   //   // eslint-disable-next-line no-undef
@@ -71,7 +61,6 @@ const AuthProvider = ({ children }) => {
   // useEffect(() => {
   //   if (
   //     userTable?.guid &&
-  //     userAuth?.id &&
   //     !path.includes('auth') &&
   //     !path.includes('confirm-otp') &&
   //     !is_checked
@@ -81,7 +70,7 @@ const AuthProvider = ({ children }) => {
   //     }
   //     fetch()
   //   }
-  // }, [userTable, userAuth, checkUserExists, path, is_checked])
+  // }, [userTable, checkUserExists, path, is_checked])
 
   // useEffect(() => {
   //   // eslint-disable-next-line no-undef
@@ -113,7 +102,6 @@ const AuthProvider = ({ children }) => {
 
   //   if (
   //     userTable?.guid &&
-  //     userAuth?.id &&
   //     app_version &&
   //     existing_app_version &&
   //     app_version !== existing_app_version
@@ -128,7 +116,7 @@ const AuthProvider = ({ children }) => {
   //     )
   //     fetch()
   //   }
-  // }, [app_version, userAuth?.id, userTable, logOut])
+  // }, [app_version,  userTable, logOut])
 
   useEffect(() => {
     if (session?.user) {

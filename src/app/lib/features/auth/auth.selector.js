@@ -1,13 +1,8 @@
 import { createDraftSafeSelector } from '@reduxjs/toolkit'
 
-export const selectUserAuth = createDraftSafeSelector(
-  (state) => state.auth,
-  (auth) => auth.userAuth
-)
-
 export const selectUserTable = createDraftSafeSelector(
   (state) => state.auth,
-  (auth) => auth.userTable
+  (auth) => auth.user
 )
 
 export const selectGeo = createDraftSafeSelector(

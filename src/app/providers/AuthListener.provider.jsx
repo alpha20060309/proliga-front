@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   selectAgent,
   selectGeo,
-  selectUserAuth,
   selectUserTable,
 } from 'app/lib/features/auth/auth.selector'
 import { setPhoneModal } from 'app/lib/features/auth/auth.slice'
@@ -20,7 +19,6 @@ export default function AuthListener({ children }) {
   const dispatch = useDispatch()
   const { data: session, status } = useSession()
   const userTable = useSelector(selectUserTable)
-  const userAuth = useSelector(selectUserAuth)
   const agent = useSelector(selectAgent)
   const geo = useSelector(selectGeo)
   const { fingerprint } = useSelector((store) => store.auth)
@@ -43,7 +41,6 @@ export default function AuthListener({ children }) {
         if (
           Boolean(auth?.id) ||
           Boolean(table?.id) ||
-          Boolean(userAuth?.id) ||
           Boolean(userTable?.id) ||
           !user.id
         )
@@ -89,7 +86,6 @@ export default function AuthListener({ children }) {
     session,
     status,
     login,
-    userAuth,
     userTable,
     agent,
     geo,

@@ -77,7 +77,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
               <Avatar className="size-32 border-2 border-neutral-700 xl:size-36">
                 <AvatarImage
                   className="object-cover object-top"
-                  src={getUrl(userTable?.photo)}
+                  src={getUrl(userTable?.image)}
                   alt={userTable?.name}
                 />
                 <AvatarFallback className="bg-neutral-800 text-neutral-200">

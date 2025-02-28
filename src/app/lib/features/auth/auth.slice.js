@@ -3,8 +3,7 @@ import { authExtraReducer } from './auth.extraReducer'
 
 const initialState = {
   fingerprint: null,
-  userTable: null,
-  userAuth: null,
+  user: null,
   agent: null,
   geo: null,
   geoError: null,
@@ -17,14 +16,11 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setUserAuth: (state, action) => {
-      state.userAuth = action.payload
-    },
     setUserTable: (state, action) => {
-      state.userTable = action.payload
+      state.user = action.payload
     },
     setUserPhoto: (state, action) => {
-      state.userTable.photo = action.payload
+      state.user.image = action.payload
     },
     setFingerprint: (state, action) => {
       state.fingerprint = action.payload

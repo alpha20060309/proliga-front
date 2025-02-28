@@ -14,15 +14,11 @@ import { useState, useMemo, useEffect } from 'react'
 import { saveFile } from 'app/actions/saveFile.action'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { useUpdateUserPhoto } from 'app/hooks/user/useUpdateUserPhoto/useUpdateUserPhoto'
-import {
-  selectUserAuth,
-  selectUserTable,
-} from 'app/lib/features/auth/auth.selector'
+import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 
 export const UppyUploader = ({ closeModal }) => {
   const { lang } = useSelector((state) => state.systemLanguage)
   const userTable = useSelector(selectUserTable)
-  const userAuth = useSelector(selectUserAuth)
   const { updateUserPhoto } = useUpdateUserPhoto()
   const [fileType, setFileType] = useState('')
   const dir = 'user'

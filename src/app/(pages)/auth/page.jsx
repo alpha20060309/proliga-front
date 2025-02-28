@@ -10,10 +10,7 @@ import {
 } from './components/AuthSkeleton'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useSelector } from 'react-redux'
-import {
-  selectUserAuth,
-  selectUserTable,
-} from 'app/lib/features/auth/auth.selector'
+import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 const SignUpForm = dynamic(() => import('./components/SignUpForm'), {
   ssr: false,
   loading: () => <SignUpFormSkeleton />,
@@ -29,7 +26,6 @@ const AuthTabs = dynamic(() => import('./components/Tabs'), {
 
 const Auth = () => {
   const router = useRouter()
-  const userAuth = useSelector(selectUserAuth)
   const userTable = useSelector(selectUserTable)
   const params = useSearchParams()
   const error = params.get('error')
@@ -41,10 +37,10 @@ const Auth = () => {
       localStorage.getItem('sign-in-method') !== 'undefined' &&
       localStorage.getItem('sign-in-method')
 
-    if (userTable?.id && userAuth?.id && shouldRedirect && !SIGN_IN_METHOD) {
+    if (userTable?.id && shouldRedirect && !SIGN_IN_METHOD) {
       router.push('/championships')
     }
-  }, [userTable, userAuth, router, shouldRedirect])
+  }, [userTable, router, shouldRedirect])
 
   useEffect(() => {
     if (error) {

@@ -18,7 +18,6 @@ const MiniBanner = () => {
   const banners = useSelector(selectBanners)
   const agent = useSelector(selectAgent)
   const userTable = useSelector(selectUserTable)
-  const userAuth = useSelector(selectUserAuth)
   const geo = useSelector(selectGeo)
   const { createBannerView } = useCreateBannerView()
 
@@ -29,17 +28,16 @@ const MiniBanner = () => {
 
   useEffect(() => {
     if (banner?.type === BANNER_SERVICE_TYPE.CUSTOM) {
-      if (banner?.id && userTable?.id && userAuth?.id && geo && agent) {
+      if (banner?.id && userTable?.id && geo && agent) {
         createBannerView({
           banner_id: banner?.id,
-          userAuth,
           userTable,
           geo,
           agent,
         })
       }
     }
-  }, [banner, agent, userTable, userAuth, geo, createBannerView])
+  }, [banner, agent, userTable, geo, createBannerView])
 
   return (
     <>

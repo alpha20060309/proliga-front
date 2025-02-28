@@ -95,7 +95,7 @@ export const useGoogleRegister = () => {
             visited_at: new Date(),
             geo: JSON.stringify(geo),
             agent: JSON.stringify(agent),
-            photo: auth?.photo,
+            image: auth?.image,
             name: auth?.name,
           })
           .eq('guid', auth?.id)
