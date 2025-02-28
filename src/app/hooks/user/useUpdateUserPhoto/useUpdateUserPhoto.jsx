@@ -12,7 +12,7 @@ export const useUpdateUserPhoto = () => {
   const { t } = useTranslation()
 
   const updateUserPhoto = useCallback(
-    async ({ path, closeModal, userTable, userAuth }) => {
+    async ({ path, closeModal, userTable }) => {
       try {
         // eslint-disable-next-line no-undef
         const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
@@ -25,7 +25,7 @@ export const useUpdateUserPhoto = () => {
           return
         }
 
-        if (!userAuth || !userTable) {
+        if (!userTable) {
           setError('User not authenticated')
           toast.error(t('Foydalanuvchi autentifikatsiya qilinmagan'), {
             theme: 'dark',
@@ -38,7 +38,7 @@ export const useUpdateUserPhoto = () => {
           .update({
             photo: path,
           })
-          .eq('guid', userAuth?.id)
+          .eq('id', userTable?.id)
           .is('deleted_at', null)
           .select(
             'id, guid, name, email, phone, photo, last_name, middle_name, gender, birth_date, bio, balance, deleted_at, language, phone_verified, visitor, geo, agent'

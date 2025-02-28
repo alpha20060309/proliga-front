@@ -16,12 +16,12 @@ import { useLogOut } from 'app/hooks/auth/useLogOut/useLogOut'
 import { useTranslation } from 'react-i18next'
 import { sidebarStyles } from './sidebarStyles.util'
 import { cn } from '@/lib/utils'
-import { selectUserAuth } from 'app/lib/features/auth/auth.selector'
+import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 
 const MobileSidebar = ({ isModalOpen, setModalOpen }) => {
   const path = usePathname()
   const { t } = useTranslation()
-  const userAuth = useSelector(selectUserAuth)
+  const userTable = useSelector(selectUserTable)
   const { lastVisitedTeam } = useSelector((store) => store.currentTeam)
   const { logOut } = useLogOut()
 
@@ -162,7 +162,7 @@ const MobileSidebar = ({ isModalOpen, setModalOpen }) => {
           </div>
         </div>
         <section className="mt-auto flex w-full flex-col justify-between gap-1 rounded-md sm:flex-row">
-          {userAuth ? (
+          {userTable ? (
             <>
               <SystemLink
                 handleToggle={() => setModalOpen(false)}

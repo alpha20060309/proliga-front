@@ -877,7 +877,7 @@ model user {
   emailVerified                                    DateTime?
   isOAuth                                          Boolean?              @default(false)
   guid                                             String?               @db.Uuid
-  password                                         String?
+  password                                         String? 
   accounts                                         account[]
   sessions                                         session[]
   banner_view                                      banner_view[]

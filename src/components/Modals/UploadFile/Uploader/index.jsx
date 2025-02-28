@@ -59,10 +59,10 @@ export const UppyUploader = ({ closeModal }) => {
   useEffect(() => {
     if (fileType && path) {
       uppy.on('upload-success', async () => {
-        await updateUserPhoto({ path, closeModal, userAuth, userTable })
+        await updateUserPhoto({ path, closeModal, userTable })
       })
     }
-  }, [uppy, path, fileType, userAuth, userTable, closeModal, updateUserPhoto])
+  }, [uppy, path, fileType, userTable, closeModal, updateUserPhoto])
 
   return <Dashboard className="w-full rounded-xl" theme="dark" uppy={uppy} />
 }

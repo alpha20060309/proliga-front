@@ -8,14 +8,14 @@ import SessionProvider from './Session.provider'
 
 export default function RootProvider({ children }) {
   return (
-    <ReduxProvider>
-      <AuthProvider>
-        <SessionProvider>
+    <SessionProvider>
+      <ReduxProvider>
+        <AuthProvider>
           {/* <AuthListener> */}
-            <InitialStateProvider>{children}</InitialStateProvider>
+          <InitialStateProvider>{children}</InitialStateProvider>
           {/* </AuthListener> */}
-        </SessionProvider>
-      </AuthProvider>
-    </ReduxProvider>
+        </AuthProvider>
+      </ReduxProvider>
+    </SessionProvider>
   )
 }
