@@ -79,7 +79,12 @@ const Avatar = ({ className }) => {
   }
 
   return (
-    <User className={cn('size-8 select-none bg-neutral-800 p-px', className)} />
+    <User
+      className={cn(
+        'size-8 select-none bg-neutral-200 p-px text-neutral-950 lg:p-0.5',
+        className
+      )}
+    />
   )
 }
 

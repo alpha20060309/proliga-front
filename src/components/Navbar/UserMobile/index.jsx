@@ -6,7 +6,7 @@ const NavbarUserMobile = ({ handleToggleModal }) => {
       onClick={handleToggleModal}
       className="flex cursor-pointer items-center justify-center gap-2 lg:hidden"
     >
-      <Avatar className={'rounded-full text-xl'} />
+      <Avatar className={'rounded-full text-base'} />
     </div>
   )
 }

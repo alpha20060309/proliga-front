@@ -41,7 +41,7 @@ const SettingsProfile = () => {
       <div className="flex flex-wrap items-center gap-4">
         <Avatar
           className={
-            'size-24 rounded-xl bg-neutral-200 object-cover object-top transition-all duration-1000 ease-in-out hover:object-bottom'
+            'size-24 rounded-xl text-black bg-neutral-300 object-cover object-top transition-all duration-1000 ease-in-out hover:object-bottom'
           }
         />
         <div className="flex flex-col justify-center">
