@@ -45,10 +45,7 @@ export const register = async (values) => {
       return { error: res.error }
     }
 
-    return {
-      success: "User created.",
-    }
-
+    return res
   } catch (error) {
     return { error }
   }

@@ -19,6 +19,7 @@ import SocialLogin from '../SocialLogin'
 import { Input } from '@/components/ui/input'
 import { register } from 'app/actions/register'
 import { useSession } from 'next-auth/react'
+import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
 
 const SignUpForm = ({ setShouldRedirect }) => {
   const { t } = useTranslation()
@@ -35,6 +36,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
   const [agreement, setAgreement] = useState(false)
   const config = useSelector(selectSystemConfig)
   const app_version = config[CONFIG_KEY.app_version]?.value ?? ''
+  const { sendOTP } = useSendOTP()
 
   const [isPending, startTransition] = useTransition()
 
@@ -75,14 +77,23 @@ const SignUpForm = ({ setShouldRedirect }) => {
         if (res?.error) {
           return toast.error(t(res.error))
         }
+        const { phone_verified, success } = res
 
-        if (res?.success) {
-          toast.success(t('Registration successful'))
-          localStorage.setItem('app_version', app_version)
+        if (success) {
           await update()
+          localStorage.setItem('app_version', app_version)
+
+          if (!phone_verified && res?.phone) {
+            toast.warning(t('Sizning raqamingiz tasdiqlanmagan'))
+            toast.info(t('We are redirecting you to an sms confirmation page!'))
+            await sendOTP({
+              phone,
+              shouldRedirect: true,
+              redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(res.phone)}`,
+            })
+          }
         }
       } catch (error) {
-        console.log('exc')
         toast.error(t('Something went wrong'))
       }
     })
@@ -90,12 +101,8 @@ const SignUpForm = ({ setShouldRedirect }) => {
 
   return (
     <section className="flex w-full flex-col gap-4 rounded-xl border border-neutral-700 bg-neutral-950 px-4 py-8">
-      <form
-        onSubmit={handleSubmit}
-        // className="flex w-full flex-col gap-2 rounded-xl border border-neutral-700 bg-neutral-950 px-4 py-8"
-        className="flex w-full flex-col gap-1"
-      >
-        <h2 className="mb-2 text-xl font-bold text-neutral-100 md:mb-4 md:text-2xl">
+      <form onSubmit={handleSubmit} className="flex w-full flex-col gap-1">
+        <h2 className="mb-4 text-xl font-bold text-neutral-100 md:mb-4 md:text-2xl">
           {t("Ro'yxatdan o'tish")}
         </h2>
         <div className="relative flex flex-col gap-1">

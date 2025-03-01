@@ -71,7 +71,6 @@ const LoginForm = ({ setShouldRedirect }) => {
         if (success) {
           await update()
           localStorage.setItem('app_version', app_version)
-          toast.success(t('tizimga muvaffaqiyatli kirdingiz'))
 
           if (!phone_verified && res?.phone) {
             toast.warning(t('Sizning raqamingiz tasdiqlanmagan'), {
@@ -88,10 +87,11 @@ const LoginForm = ({ setShouldRedirect }) => {
               shouldRedirect: true,
               redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(res.phone)}`,
             })
+          } else {
+            toast.success(t('tizimga muvaffaqiyatli kirdingiz'))
           }
         }
       } catch (error) {
-        console.log(error)
         toast.error(t('Something went wrong'))
       }
     })
@@ -105,7 +105,7 @@ const LoginForm = ({ setShouldRedirect }) => {
     <>
       <section className="flex w-full flex-col gap-4 rounded-xl border border-neutral-700 bg-neutral-950 px-4 py-8">
         <form onSubmit={handleSubmit} className="flex w-full flex-col gap-1">
-          <h2 className="mb-2 text-xl font-bold text-neutral-100 md:mb-4 md:text-2xl">
+          <h2 className="mb-4 text-xl font-bold text-neutral-100 md:mb-4 md:text-2xl">
             {t('Tizimga kirish_1')}
           </h2>
           <div className="relative flex flex-col gap-1">

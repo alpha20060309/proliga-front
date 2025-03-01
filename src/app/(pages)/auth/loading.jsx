@@ -1,4 +1,4 @@
-import AuthSkeleton from './components/AuthSkeleton'
+import AuthSkeleton from './components/Skeleton'
 
 export default function Loading() {
   return (

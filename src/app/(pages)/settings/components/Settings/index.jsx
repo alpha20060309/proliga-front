@@ -76,7 +76,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
             <article className="relative">
               <Avatar
                 className={
-                  'size-32 w-full rounded-full border-2 border-neutral-700 shadow-sm shadow-neutral-500 xl:size-36'
+                  'size-32 w-full rounded-full border-2 border-neutral-200 xl:size-36'
                 }
               />
               <Button

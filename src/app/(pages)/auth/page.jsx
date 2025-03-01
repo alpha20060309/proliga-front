@@ -7,7 +7,7 @@ import {
   LoginFormSkeleton,
   SignUpFormSkeleton,
   AuthTabsSkeleton,
-} from './components/AuthSkeleton'
+} from './components/Skeleton'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useSelector } from 'react-redux'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
