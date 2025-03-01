@@ -12,13 +12,12 @@ import { useTranslation } from 'react-i18next'
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { Eye, EyeOff, Lock } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { useAuthLogin } from 'app/hooks/auth/useAuthLogin/useAuthLogin'
 import { cn } from '@/lib/utils'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
 import { useGoogleLogin } from 'app/hooks/auth/useGoogleLogin/useGoogleLogin'
 import { login } from 'app/actions/login'
-import { signIn, useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 
 const LoginForm = ({ setShouldRedirect }) => {
   const { t } = useTranslation()
@@ -34,36 +33,12 @@ const LoginForm = ({ setShouldRedirect }) => {
   const geo = useSelector(selectGeo)
   const [isPending, startTransition] = useTransition()
   const { isLoading: isGoogleLoading } = useGoogleLogin()
-  const isLoading = false
   const { update } = useSession()
 
   const can_send_sms =
     config[CONFIG_KEY.can_send_sms]?.value.toLowerCase() === 'true' || false
   const app_version = config[CONFIG_KEY.app_version]?.value || ''
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault()
-  //   if (!phone || !password) {
-  //     toast.error(t("Barcha maydonlar to'ldirilishi shart"))
-  //     return
-  //   }
-
-  //   if (password.length < 6) {
-  //     toast.error(t("Parol 6 ta belgidan kam bo'lmasligi kerak"))
-  //     return
-  //   }
-
-  //   // eslint-disable-next-line no-undef
-  //   const res = login({
-  //     phone,
-  //     password,
-  //     redirect: false,
-  //   })
-  //   console.log(res)
-  //   if (res?.error) {
-  //     toast.error(t(res.error))
-  //   }
-  // }
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!phone || !password) {
@@ -175,14 +150,14 @@ const LoginForm = ({ setShouldRedirect }) => {
           </div>
           <Button
             type="submit"
-            disabled={isLoading}
+            disabled={isPending}
             className={cn(
               'h-12 w-full rounded border border-yellow-400 bg-neutral-900 font-bold',
               'text-neutral-100 transition-all duration-300 hover:bg-yellow-400 hover:text-neutral-900',
-              isLoading && 'bg-yellow-400 text-neutral-900'
+              isPending && 'bg-yellow-400 text-neutral-900'
             )}
           >
-            {isLoading ? (
+            {isPending ? (
               <Image
                 src="/icons/loading.svg"
                 width={24}

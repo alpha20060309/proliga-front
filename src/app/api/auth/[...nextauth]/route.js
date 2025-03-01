@@ -101,6 +101,6 @@ export const {
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60 * 12, // ~ 1 year
   },
-  secret: process.env.NEXT_PUBLIC_JWT
-
+  secret: process.env.NEXT_PUBLIC_JWT,
+  trustHost: true
 });

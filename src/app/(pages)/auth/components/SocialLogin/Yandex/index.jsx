@@ -1,14 +1,15 @@
 import { Button } from '@/components/ui/button'
 import { signIn } from 'next-auth/react'
 import Image from 'next/image'
-import { useSession } from 'next-auth/react'
 import { SUPABASE_PROVIDERS } from 'app/lib/supabaseClient'
+import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { useSelector } from 'react-redux'
 
 const YandexSignIn = () => {
-  const { data: session } = useSession()
+  const userTable = useSelector(selectUserTable)
 
   const handleYandexSignIn = () => {
-    if (!session?.expires) {
+    if (!userTable?.id) {
       // eslint-disable-next-line no-undef
       signIn('yandex', { redirect: process.env.NEXT_PUBLIC_URL + '/auth' })
       localStorage.setItem('sign-in-method', SUPABASE_PROVIDERS.YANDEX)

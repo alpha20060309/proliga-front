@@ -25,17 +25,15 @@ import { useGoogleRegister } from 'app/hooks/auth/useGoogleRegister/useGoogleReg
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { Input } from '@/components/ui/input'
-import { useSession } from 'next-auth/react'
 
 function SetPhoneNumber() {
   const dispatch = useDispatch()
   const { phoneModal } = useSelector((store) => store.auth)
   const { t } = useTranslation()
-  const { data: session } = useSession()
   const [phone, setPhone] = useState('')
-  const [email, setEmail] = useState(session?.user?.email || '')
-  const isLoading = false
   const userTable = useSelector(selectUserTable)
+  const [email, setEmail] = useState(userTable?.email || '')
+  const isLoading = false
   const { register } = useGoogleRegister()
   const geo = useSelector(selectGeo)
   const agent = useSelector(selectAgent)

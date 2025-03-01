@@ -7,14 +7,16 @@ import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { SUPABASE_PROVIDERS } from 'app/lib/supabaseClient'
 import { toast } from 'react-toastify'
-import { signIn, useSession } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
+import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { useSelector } from 'react-redux'
 
 const GoogleSignIn = ({ className, iconClassName }) => {
   const { t } = useTranslation()
-  const { data: session } = useSession()
+  const user = useSelector(selectUserTable)
 
   const handleGoogleSignIn = () => {
-    if (!session?.expires) {
+    if (!user?.id) {
       // eslint-disable-next-line no-undef
       signIn('google', { redirect: process.env.NEXT_PUBLIC_URL + '/auth' })
       localStorage.setItem('sign-in-method', SUPABASE_PROVIDERS.GOOGLE)

@@ -72,26 +72,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
     })
 
     console.log(res)
-    // await register({
-    //   email,
-    //   password,
-    //   phone,
-    //   geo,
-    //   fingerprint,
-    //   agent,
-    //   app_version,
-    // })
-    // session.user.isTwoFactorEnabled = token;
-    // await signIn('credentials', {
-    //   phone,
-    //   password,
-    //   redirect: false,
-    // })
-
-    // setPhone('')
-    // setEmail('')
-    // setPassword('')
-    // setConfirmPassword('')
+ 
   }
 
   return (
