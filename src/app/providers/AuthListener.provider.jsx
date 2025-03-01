@@ -14,6 +14,7 @@ import { setPhoneModal } from 'app/lib/features/auth/auth.slice'
 import { useGoogleLogin } from 'app/hooks/auth/useGoogleLogin/useGoogleLogin'
 import { useCheckUserRegistered } from 'app/hooks/auth/useCheckUserRegistered/useCheckUserRegistered'
 import { SUPABASE_PROVIDERS } from 'app/lib/supabaseClient'
+import { toast } from 'react-toastify'
 
 export default function AuthListener({ children }) {
   const dispatch = useDispatch()
@@ -30,23 +31,13 @@ export default function AuthListener({ children }) {
       if (status === 'authenticated' && session?.user) {
         const { user } = session
         const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
-        const auth =
-          JSON.parse(localStorage.getItem(`user-auth-${sbUrl}`)) || {}
-        const table =
-          JSON.parse(localStorage.getItem(`user-table-${sbUrl}`)) || {}
+
         const app_version = JSON.parse(localStorage.getItem('config'))
           ?.app_version?.value
         const SIGN_IN_METHOD = localStorage.getItem('sign-in-method')
 
-        if (
-          Boolean(auth?.id) ||
-          Boolean(table?.id) ||
-          Boolean(userTable?.id) ||
-          !user.id
-        )
-          return
+        // if (Boolean(userTable?.id) || !user.id) return
 
-        const data = await checkUserRegistered({ guid: user.id })
         const phone = data?.phone
         console.log(data)
 
@@ -59,6 +50,20 @@ export default function AuthListener({ children }) {
               agent,
               fingerprint,
               app_version,
+            })
+            toast.warning(t('Sizning raqamingiz tasdiqlanmagan'), {
+              theme: 'dark',
+            })
+            toast.info(
+              t('We are redirecting you to an sms confirmation page!'),
+              {
+                theme: 'dark',
+              }
+            )
+            await sendOTP({
+              phone: table?.phone,
+              shouldRedirect: true,
+              redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(table?.phone)}`,
             })
           } else {
             return dispatch(setPhoneModal(true))

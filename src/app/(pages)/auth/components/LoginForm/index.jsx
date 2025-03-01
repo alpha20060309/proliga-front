@@ -18,6 +18,7 @@ import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
 import { useGoogleLogin } from 'app/hooks/auth/useGoogleLogin/useGoogleLogin'
 import { login } from 'app/actions/login'
 import { useSession } from 'next-auth/react'
+import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
 
 const LoginForm = ({ setShouldRedirect }) => {
   const { t } = useTranslation()
@@ -31,6 +32,7 @@ const LoginForm = ({ setShouldRedirect }) => {
   const { fingerprint } = useSelector((store) => store.auth)
   const agent = useSelector(selectAgent)
   const geo = useSelector(selectGeo)
+  const { sendOTP } = useSendOTP()
   const [isPending, startTransition] = useTransition()
   const { isLoading: isGoogleLoading } = useGoogleLogin()
   const { update } = useSession()
@@ -64,16 +66,32 @@ const LoginForm = ({ setShouldRedirect }) => {
           return
         }
 
-        if (res?.success) {
+        const { phone_verified, success } = res
+
+        if (success) {
           await update()
           localStorage.setItem('app_version', app_version)
           toast.success(t('tizimga muvaffaqiyatli kirdingiz'))
 
-          if (setShouldRedirect) {
-            setShouldRedirect(true)
+          if (!phone_verified && res?.phone) {
+            toast.warning(t('Sizning raqamingiz tasdiqlanmagan'), {
+              theme: 'dark',
+            })
+            toast.info(
+              t('We are redirecting you to an sms confirmation page!'),
+              {
+                theme: 'dark',
+              }
+            )
+            await sendOTP({
+              phone,
+              shouldRedirect: true,
+              redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(res.phone)}`,
+            })
           }
         }
       } catch (error) {
+        console.log(error)
         toast.error(t('Something went wrong'))
       }
     })

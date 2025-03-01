@@ -80,12 +80,9 @@ const SignUpForm = ({ setShouldRedirect }) => {
           toast.success(t('Registration successful'))
           localStorage.setItem('app_version', app_version)
           await update()
-
-          if (setShouldRedirect) {
-            setShouldRedirect(true)
-          }
         }
       } catch (error) {
+        console.log('exc')
         toast.error(t('Something went wrong'))
       }
     })

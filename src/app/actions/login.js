@@ -28,9 +28,10 @@ export const login = async (
       redirect: false,
     });
 
-    return { success: true }
+    return { success: true, phone: existingUser?.phone, phone_verified: existingUser?.phone_verified }
   } catch (error) {
     if (error) {
+      console.log(error)
       switch (error.type) {
         case "CredentialsSignin":
           return { error: "Invalid credentials!" };

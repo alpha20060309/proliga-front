@@ -3,9 +3,11 @@ import { supabase } from 'app/lib/supabaseClient'
 import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 
 export const useConfirmOTP = () => {
   const router = useRouter()
+  const { update } = useSession()
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState(null)
@@ -82,6 +84,7 @@ export const useConfirmOTP = () => {
         if (data?.status === 200) {
           setData(data)
           toast.success(t('SMS muvaffaqiyatli tasdiqlandi'))
+          await update()
           if (shouldRedirect) {
             router.push(redirectTo)
           }
@@ -102,7 +105,7 @@ export const useConfirmOTP = () => {
         setIsLoading(false)
       }
     },
-    [router, t]
+    [router, t, update]
   )
   return { confirmOTP, isLoading, error, data }
 }
