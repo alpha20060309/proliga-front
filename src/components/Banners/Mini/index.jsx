@@ -8,7 +8,6 @@ import { useCreateBannerView } from 'app/hooks/system/useCreateBannerView/useCre
 import {
   selectGeo,
   selectAgent,
-  selectUserAuth,
   selectUserTable,
 } from 'app/lib/features/auth/auth.selector'
 import { selectBanners } from 'app/lib/features/banner/banner.selector'

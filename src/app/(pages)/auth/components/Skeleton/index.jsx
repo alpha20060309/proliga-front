@@ -1,5 +1,4 @@
 import { Skeleton } from '@/components/ui/skeleton'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 const AuthSkeleton = () => {
   return (
@@ -10,69 +9,6 @@ const AuthSkeleton = () => {
   )
 }
 
-// export const LoginFormSkeleton = () => {
-//   return (
-//     <Card className="w-full max-w-[28rem] bg-neutral-950 shadow shadow-neutral-500">
-//       <CardHeader>
-//         <CardTitle>
-//           <Skeleton className="mb-6 h-9 w-3/4" />
-//         </CardTitle>
-//       </CardHeader>
-//       <CardContent className="space-y-4">
-//         <div className="space-y-2">
-//           <Skeleton className="h-4 w-1/4" />
-//           <Skeleton className="h-10 w-full" />
-//         </div>
-//         <div className="space-y-2">
-//           <Skeleton className="h-4 w-1/4" />
-//           <Skeleton className="h-10 w-full" />
-//         </div>
-//         <Skeleton className="h-4 w-1/4" />
-//         <Skeleton className="h-12 w-full" />
-//         <Skeleton className="mx-auto h-4 w-1/3" />
-//         <div className="flex justify-between space-x-1">
-//           <Skeleton className="h-9 w-1/2" />
-//           <Skeleton className="h-9 w-1/2" />
-//         </div>
-//       </CardContent>
-//     </Card>
-//   )
-// }
-
-// export const SignUpFormSkeleton = () => {
-//   return (
-//     <Card className="w-full max-w-[28rem] bg-neutral-950 shadow shadow-neutral-500">
-//       <CardHeader>
-//         <CardTitle>
-//           <Skeleton className="mb-6 h-8 w-3/4" />
-//         </CardTitle>
-//       </CardHeader>
-//       <CardContent className="space-y-4">
-//         <div className="space-y-2">
-//           <Skeleton className="h-4 w-1/4" />
-//           <Skeleton className="h-10 w-full" />
-//         </div>
-//         <div className="space-y-2">
-//           <Skeleton className="h-4 w-1/4" />
-//           <Skeleton className="h-10 w-full" />
-//         </div>
-//         <div className="space-y-2">
-//           <Skeleton className="h-4 w-1/4" />
-//           <Skeleton className="h-10 w-full" />
-//         </div>
-//         <div className="space-y-2">
-//           <Skeleton className="h-4 w-1/4" />
-//           <Skeleton className="h-10 w-full" />
-//         </div>
-//         <div className="flex justify-between">
-//           <Skeleton className="h-4 w-1/4" />
-//         </div>
-//         <Skeleton className="h-4 w-5/6" />
-//         <Skeleton className="h-12 w-full" />
-//       </CardContent>
-//     </Card>
-//   )
-// }
 export const LoginFormSkeleton = () => {
   return (
     <section className="flex w-full flex-col gap-4 rounded-xl border border-neutral-700 bg-neutral-950 px-4 py-8">
