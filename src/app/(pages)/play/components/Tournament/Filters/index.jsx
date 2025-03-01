@@ -7,10 +7,12 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { selectTours } from 'app/lib/features/tour/tour.selector'
+import { getCorrectName } from 'app/utils/getCorrectName.util'
 
 const TournamentSelectedTour = ({ tour, setTour }) => {
   const tours = useSelector(selectTours)
   const { teamsLoading } = useSelector((state) => state.team)
+  const { lang } = useSelector((store) => store.systemLanguage)
 
   const handleSelectTour = (value) => {
     setTour(value)
@@ -28,7 +30,7 @@ const TournamentSelectedTour = ({ tour, setTour }) => {
       <SelectContent>
         {tours?.map((t) => (
           <SelectItem key={t.id} defaultChecked={t.id === tour} value={t.id}>
-            {t.name}
+            {getCorrectName({ lang, uz: t.name, ru: t.name_ru })}
           </SelectItem>
         ))}
       </SelectContent>

@@ -45,6 +45,7 @@ export const useGoogleRegister = () => {
   const register = useCallback(
     async ({
       phone,
+      email,
       auth,
       geo,
       fingerprint,
@@ -56,7 +57,7 @@ export const useGoogleRegister = () => {
       setError(null)
       setData(null)
 
-      if (!phone || !auth) {
+      if (!phone || !auth?.id || !email) {
         handleError("Barcha maydonlar to'ldirilishi shart")
         return
       }
@@ -88,13 +89,14 @@ export const useGoogleRegister = () => {
         const { data: fullUserData, error: fullUserError } = await supabase
           .from('user')
           .update({
+            email,
             phone,
             visitor: fingerprint,
             visited_at: new Date(),
             geo: JSON.stringify(geo),
             agent: JSON.stringify(agent),
-            photo: auth?.user_metadata?.avatar_url,
-            name: auth?.user_metadata?.name,
+            image: auth?.image,
+            name: auth?.name,
           })
           .eq('guid', auth?.id)
           .is('deleted_at', null)

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Button } from '@/components/ui/button'
 import { useTranslation } from 'react-i18next'
 import { useCallback } from 'react'
@@ -6,25 +7,21 @@ import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { SUPABASE_PROVIDERS } from 'app/lib/supabaseClient'
 import { toast } from 'react-toastify'
+import { signIn } from 'next-auth/react'
+import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { useSelector } from 'react-redux'
 
 const GoogleSignIn = ({ className, iconClassName }) => {
   const { t } = useTranslation()
+  const user = useSelector(selectUserTable)
 
-  // eslint-disable-next-line no-undef
-  const handleGoogleSignIn = useCallback(() => {
-    try {
+  const handleGoogleSignIn = () => {
+    if (!user?.id) {
+      // eslint-disable-next-line no-undef
+      signIn('google', { redirect: process.env.NEXT_PUBLIC_URL + '/auth' })
       localStorage.setItem('sign-in-method', SUPABASE_PROVIDERS.GOOGLE)
-
-      const { error } = supabase.auth.signInWithOAuth({
-        provider: 'google',
-      })
-
-      if (error) throw new Error(error.message)
-    } catch (error) {
-      console.error('Error signing in with Google:', error)
-      toast.error(error.message, { theme: 'dark' })
     }
-  }, [])
+  }
 
   return (
     <Button

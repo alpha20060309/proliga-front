@@ -3,6 +3,7 @@
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { SETTINGS_TAB } from './tabs'
+import { useRouter } from 'next/navigation'
 import TransactionsHistory from './components/Transactions'
 import ChangePassword from './components/Security'
 import SettingsTab from './components/Settings'
@@ -11,11 +12,6 @@ import SettingsSkeleton, {
   ProfileSkeleton,
   NavigationSkeleton,
 } from './components/Skeleton'
-import {
-  selectUserAuth,
-  selectUserTable,
-} from 'app/lib/features/auth/auth.selector'
-import { useRouter } from 'next/navigation'
 const Profile = dynamic(() => import('./components/Profile'), {
   ssr: false,
   loading: () => <ProfileSkeleton />,
@@ -25,20 +21,20 @@ const Navigation = dynamic(() => import('./components/Navigation'), {
   loading: () => <NavigationSkeleton />,
 })
 import { useTranslation } from 'react-i18next'
+import { useSession } from 'next-auth/react'
 
 function Settings() {
   const { t } = useTranslation()
   const router = useRouter()
   const [tab, setTab] = useState(SETTINGS_TAB.PROFILE)
   const { isLoading } = useSelector((store) => store.auth)
-  const userTable = useSelector(selectUserTable)
-  const userAuth = useSelector(selectUserAuth)
+  const { data: session } = useSession()
 
   useEffect(() => {
-    if (!userTable || !userAuth) {
+    if (!session?.user?.id) {
       router.push('/')
     }
-  }, [router, t, userAuth, userTable])
+  }, [router, t, session?.user?.id])
 
   if (isLoading) {
     return <SettingsSkeleton />

@@ -2,11 +2,7 @@ import { toast } from 'react-toastify'
 import { useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import {
-  setChecked,
-  setUserAuth,
-  setUserTable,
-} from '../../../lib/features/auth/auth.slice'
+import { setChecked, setUserTable } from '../../../lib/features/auth/auth.slice'
 import { useRouter } from 'next/navigation'
 import { clearNotifications } from 'app/lib/features/systemNotification/systemNotification.slice'
 import {
@@ -15,6 +11,9 @@ import {
 } from 'app/lib/features/currentTeam/currentTeam.slice'
 import { resetTeams } from 'app/lib/features/team/team.slice'
 import { supabase } from 'app/lib/supabaseClient'
+import { signOut } from 'next-auth/react'
+// import { signOut } from 'app/api/auth/[...nextauth]/route'
+// import { logout } from 'app/actions/logout'
 
 export const useLogOut = () => {
   const dispatch = useDispatch()
@@ -23,7 +22,6 @@ export const useLogOut = () => {
   const { t } = useTranslation()
 
   const clearState = useCallback(() => {
-    dispatch(setUserAuth(null))
     dispatch(setUserTable(null))
     dispatch(setChecked(false))
     dispatch(clearNotifications())
@@ -45,6 +43,8 @@ export const useLogOut = () => {
           )
         }
 
+        await signOut({ redirect: false })
+
         clearState()
         localStorage.clear()
 
@@ -61,7 +61,7 @@ export const useLogOut = () => {
         )
       }
     },
-    [clearState, router, t]
+    [clearState, t, router]
   )
 
   return { logOut, error }

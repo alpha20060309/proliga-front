@@ -1,29 +1,30 @@
 import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
 
 const AuthTabs = ({ tabs, setCurrentTab, loginStyles, registerStyles }) => {
   const { t } = useTranslation()
 
   return (
-    <div className="flex rounded bg-neutral-900 p-1">
-      <button
+    <div className="flex gap-0.5 rounded bg-neutral-900 p-1">
+      <Button
         className={cn(
-          'flex-1 select-none rounded py-1.5 text-sm font-bold capitalize transition-all',
+          'h-8 flex-1 select-none rounded text-sm font-bold capitalize transition-all',
           loginStyles
         )}
         onClick={() => setCurrentTab(tabs.login)}
       >
         {t('Tizimga kirish_1')}
-      </button>
-      <button
+      </Button>
+      <Button
         className={cn(
-          'flex-1 select-none rounded py-1.5 text-sm font-bold transition-all',
+          'h-8 flex-1 select-none rounded text-sm font-bold transition-all',
           registerStyles
         )}
         onClick={() => setCurrentTab(tabs.signup)}
       >
         {t("Ro'yxatdan o'tish")}
-      </button>
+      </Button>
     </div>
   )
 }

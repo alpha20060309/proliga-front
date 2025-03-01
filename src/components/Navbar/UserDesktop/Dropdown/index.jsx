@@ -4,12 +4,12 @@ import { useLogOut } from 'app/hooks/auth/useLogOut/useLogOut'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { PopoverContent } from '@/components/ui/popover'
-import { selectUserAuth } from 'app/lib/features/auth/auth.selector'
+import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 
 const Dropdown = () => {
   const { logOut } = useLogOut()
-  const userAuth = useSelector(selectUserAuth)
   const { t } = useTranslation()
+  const userTable = useSelector(selectUserTable)
 
   return (
     <PopoverContent
@@ -20,7 +20,7 @@ const Dropdown = () => {
         <Image src="/icons/cup.svg" alt="user" width={24} height={24} />
         <p> {t('Chempionatlar')}</p>
       </NavLink>
-      {userAuth ? (
+      {userTable ? (
         <>
           <NavLink href="/settings">
             <Image
@@ -32,7 +32,7 @@ const Dropdown = () => {
             <p>{t('Sozlamalar')}</p>
           </NavLink>
           <div
-            onClick={logOut}
+            onClick={async () => await logOut()}
             className="flex h-full w-full cursor-pointer gap-2 rounded p-1 hover:bg-neutral-800"
           >
             <Image

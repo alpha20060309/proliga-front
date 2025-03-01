@@ -14,15 +14,11 @@ import { useState, useMemo, useEffect } from 'react'
 import { saveFile } from 'app/actions/saveFile.action'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { useUpdateUserPhoto } from 'app/hooks/user/useUpdateUserPhoto/useUpdateUserPhoto'
-import {
-  selectUserAuth,
-  selectUserTable,
-} from 'app/lib/features/auth/auth.selector'
+import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 
 export const UppyUploader = ({ closeModal }) => {
   const { lang } = useSelector((state) => state.systemLanguage)
   const userTable = useSelector(selectUserTable)
-  const userAuth = useSelector(selectUserAuth)
   const { updateUserPhoto } = useUpdateUserPhoto()
   const [fileType, setFileType] = useState('')
   const dir = 'user'
@@ -59,10 +55,10 @@ export const UppyUploader = ({ closeModal }) => {
   useEffect(() => {
     if (fileType && path) {
       uppy.on('upload-success', async () => {
-        await updateUserPhoto({ path, closeModal, userAuth, userTable })
+        await updateUserPhoto({ path, closeModal, userTable })
       })
     }
-  }, [uppy, path, fileType, userAuth, userTable, closeModal, updateUserPhoto])
+  }, [uppy, path, fileType, userTable, closeModal, updateUserPhoto])
 
   return <Dashboard className="w-full rounded-xl" theme="dark" uppy={uppy} />
 }

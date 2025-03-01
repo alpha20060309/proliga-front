@@ -15,11 +15,11 @@ export const useCreateTeam = () => {
   const { t } = useTranslation()
 
   const createTeam = useCallback(
-    async ({ title, formation, competition_id, userAuth, userTable }) => {
+    async ({ title, formation, competition_id, userTable }) => {
       setIsLoading(false)
       setError(null)
 
-      if (!userTable && !userAuth) {
+      if (!userTable) {
         setError('"Jamoa tuzish uchun tizimga kirishingiz kerak')
         toast.warning(t('Jamoa tuzish uchun tizimga kirishingiz kerak'), {
           theme: 'dark',

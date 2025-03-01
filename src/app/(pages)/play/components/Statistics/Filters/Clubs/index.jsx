@@ -30,7 +30,7 @@ const ClubsFilter = ({ column }) => {
         {selectedClubs?.map((club) => (
           <SelectItem
             key={club.id}
-            value={club.name}
+            value={getCorrectName({ lang, uz: club?.name, ru: club?.name_ru })}
             className="capitalize text-neutral-200 checked:bg-neutral-800"
           >
             {getCorrectName({ lang, uz: club?.name, ru: club?.name_ru })}

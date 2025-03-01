@@ -5,7 +5,6 @@ import { BANNER, BANNER_SERVICE_TYPE } from 'app/utils/banner.util'
 import { useMemo, useState, useEffect, memo } from 'react'
 import { useCreateBannerView } from 'app/hooks/system/useCreateBannerView/useCreateBannerView'
 import {
-  selectUserAuth,
   selectAgent,
   selectGeo,
   selectUserTable,
@@ -17,7 +16,6 @@ const LeftSideBanner = () => {
   const banners = useSelector(selectBanners)
   const agent = useSelector(selectAgent)
   const userTable = useSelector(selectUserTable)
-  const userAuth = useSelector(selectUserAuth)
   const geo = useSelector(selectGeo)
   const NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH =
     // eslint-disable-next-line no-undef
@@ -51,10 +49,9 @@ const LeftSideBanner = () => {
       windowWidth >= NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH &&
       banner?.type === BANNER_SERVICE_TYPE.CUSTOM
     ) {
-      if (banner?.id && userTable?.id && userAuth?.id && geo && agent) {
+      if (banner?.id && userTable?.id && geo && agent) {
         createBannerView({
           banner_id: banner?.id,
-          userAuth,
           userTable,
           geo,
           agent,
@@ -67,7 +64,6 @@ const LeftSideBanner = () => {
     windowWidth,
     agent,
     userTable,
-    userAuth,
     geo,
     createBannerView,
   ])

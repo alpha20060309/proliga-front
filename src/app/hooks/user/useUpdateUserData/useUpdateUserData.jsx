@@ -1,16 +1,14 @@
 import { supabase } from 'app/lib/supabaseClient'
 import { useState, useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { setUserTable } from 'app/lib/features/auth/auth.slice'
 import { useTranslation } from 'react-i18next'
-import { selectUserAuth } from 'app/lib/features/auth/auth.selector'
 
 export const useUpdateUserData = () => {
   const dispatch = useDispatch()
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
-  const userAuth = useSelector(selectUserAuth)
   const { t } = useTranslation()
 
   const updateUserData = useCallback(
@@ -21,6 +19,7 @@ export const useUpdateUserData = () => {
       bio,
       gender,
       birth_date,
+      userTable,
       cb = () => {},
     }) => {
       // eslint-disable-next-line no-undef
@@ -37,7 +36,7 @@ export const useUpdateUserData = () => {
         setError(t("Tug'ilgan yilingizni kiriting"))
         return toast.warning(t("Tug'ilgan yilingizni kiriting"))
       }
-      if (!userAuth) {
+      if (!userTable) {
         setError('User not authenticated')
         return toast.error(t('Foydalanuvchi autentifikatsiya qilinmagan'))
       }
@@ -58,7 +57,7 @@ export const useUpdateUserData = () => {
         const { data, error } = await supabase
           .from('user')
           .update(obj)
-          .eq('guid', userAuth?.id)
+          .eq('guid', userTable?.id)
           .is('deleted_at', null)
           .select(
             'id, guid, name, email, phone, photo, last_name, middle_name, gender, birth_date, bio, balance, deleted_at, language, phone_verified, visitor, geo, agent'
@@ -99,7 +98,7 @@ export const useUpdateUserData = () => {
         setIsLoading(false)
       }
     },
-    [dispatch, t, userAuth]
+    [dispatch, t]
   )
   return { updateUserData, isLoading, error }
 }

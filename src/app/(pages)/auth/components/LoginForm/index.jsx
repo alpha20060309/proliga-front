@@ -2,21 +2,23 @@
 
 import ForgotPassword from 'components/Modals/ForgotPassword'
 import SocialLogin from '../SocialLogin'
+import Spinner from 'components/Spinner'
 import Image from 'next/image'
 import { toast } from 'react-toastify'
-import { useState, memo } from 'react'
+import { useState, memo, useTransition } from 'react'
 import { useSelector } from 'react-redux'
 import { PhoneInput } from 'components/PhoneInput'
 import { useTranslation } from 'react-i18next'
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { Eye, EyeOff, Lock } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { useAuthLogin } from 'app/hooks/auth/useAuthLogin/useAuthLogin'
 import { cn } from '@/lib/utils'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
 import { useGoogleLogin } from 'app/hooks/auth/useGoogleLogin/useGoogleLogin'
-import Spinner from 'components/Spinner'
+import { login } from 'app/actions/login'
+import { useSession } from 'next-auth/react'
+import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
 
 const LoginForm = ({ setShouldRedirect }) => {
   const { t } = useTranslation()
@@ -25,12 +27,15 @@ const LoginForm = ({ setShouldRedirect }) => {
   const [password, setPassword] = useState('')
   const [phone, setPhone] = useState('')
 
-  const { login, isLoading } = useAuthLogin()
+  // const { login, isLoading } = useAuthLogin()
   const config = useSelector(selectSystemConfig)
   const { fingerprint } = useSelector((store) => store.auth)
   const agent = useSelector(selectAgent)
   const geo = useSelector(selectGeo)
+  const { sendOTP } = useSendOTP()
+  const [isPending, startTransition] = useTransition()
   const { isLoading: isGoogleLoading } = useGoogleLogin()
+  const { update } = useSession()
 
   const can_send_sms =
     config[CONFIG_KEY.can_send_sms]?.value.toLowerCase() === 'true' || false
@@ -49,9 +54,49 @@ const LoginForm = ({ setShouldRedirect }) => {
       return
     }
 
-    setShouldRedirect(false)
-    await login({ phone, password, app_version, fingerprint, agent, geo })
+    startTransition(async () => {
+      try {
+        const res = await login({
+          phone,
+          password,
+        })
+
+        if (res?.error) {
+          toast.error(t(res.error))
+          return
+        }
+
+        const { phone_verified, success } = res
+
+        if (success) {
+          await update()
+          localStorage.setItem('app_version', app_version)
+
+          if (!phone_verified && res?.phone) {
+            toast.warning(t('Sizning raqamingiz tasdiqlanmagan'), {
+              theme: 'dark',
+            })
+            toast.info(
+              t('We are redirecting you to an sms confirmation page!'),
+              {
+                theme: 'dark',
+              }
+            )
+            await sendOTP({
+              phone,
+              shouldRedirect: true,
+              redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(res.phone)}`,
+            })
+          } else {
+            toast.success(t('tizimga muvaffaqiyatli kirdingiz'))
+          }
+        }
+      } catch (error) {
+        toast.error(t('Something went wrong'))
+      }
+    })
   }
+
   if (isGoogleLoading) {
     return <Spinner />
   }
@@ -59,8 +104,8 @@ const LoginForm = ({ setShouldRedirect }) => {
   return (
     <>
       <section className="flex w-full flex-col gap-4 rounded-xl border border-neutral-700 bg-neutral-950 px-4 py-8">
-        <form onSubmit={handleSubmit} className="flex w-full flex-col gap-2">
-          <h2 className="mb-2 text-xl font-bold text-neutral-100 md:mb-4 md:text-2xl">
+        <form onSubmit={handleSubmit} className="flex w-full flex-col gap-1">
+          <h2 className="mb-4 text-xl font-bold text-neutral-100 md:mb-4 md:text-2xl">
             {t('Tizimga kirish_1')}
           </h2>
           <div className="relative flex flex-col gap-1">
@@ -75,7 +120,7 @@ const LoginForm = ({ setShouldRedirect }) => {
               name="phone"
               placeholder={t('99-999-99-99')}
               defaultCountry="UZ"
-              className="h-10 bg-neutral-950 text-neutral-50 border-yellow-700 placeholder:text-neutral-400"
+              className="h-10 border-yellow-700 bg-neutral-900 text-neutral-50 placeholder:text-neutral-400"
               value={phone}
               onChange={setPhone}
             />
@@ -124,14 +169,14 @@ const LoginForm = ({ setShouldRedirect }) => {
           </div>
           <Button
             type="submit"
-            disabled={isLoading}
+            disabled={isPending}
             className={cn(
               'h-12 w-full rounded border border-yellow-400 bg-neutral-900 font-bold',
               'text-neutral-100 transition-all duration-300 hover:bg-yellow-400 hover:text-neutral-900',
-              isLoading && 'bg-yellow-400 text-neutral-900'
+              isPending && 'bg-yellow-400 text-neutral-900'
             )}
           >
-            {isLoading ? (
+            {isPending ? (
               <Image
                 src="/icons/loading.svg"
                 width={24}
