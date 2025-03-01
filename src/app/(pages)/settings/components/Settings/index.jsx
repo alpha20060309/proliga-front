@@ -20,10 +20,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { getUrl } from 'app/utils/static.util'
+// import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Label } from '@/components/ui/label'
 import './datepicker.scss'
+import Avatar from 'components/Avatar'
 
 const GENDERS = {
   UNSET: 'unset',
@@ -74,16 +74,11 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
         <form onSubmit={handleSubmit} className="space-y-4">
           <main className="flex flex-col items-start gap-2 sm:flex-row">
             <article className="relative">
-              <Avatar className="size-32 border-2 border-neutral-700 xl:size-36">
-                <AvatarImage
-                  className="object-cover object-top"
-                  src={getUrl(userTable?.image)}
-                  alt={userTable?.name}
-                />
-                <AvatarFallback className="bg-neutral-800 text-neutral-200">
-                  {userTable?.name?.[0]}
-                </AvatarFallback>
-              </Avatar>
+              <Avatar
+                className={
+                  'size-32 w-full rounded-full border-2 border-neutral-700 shadow-sm shadow-neutral-500 xl:size-36'
+                }
+              />
               <Button
                 type="button"
                 variant="secondary"

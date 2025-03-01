@@ -21,7 +21,6 @@ import {
   selectUserTable,
 } from 'app/lib/features/auth/auth.selector'
 import { toast } from 'react-toastify'
-import { useGoogleRegister } from 'app/hooks/auth/useGoogleRegister/useGoogleRegister'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { Input } from '@/components/ui/input'
@@ -31,10 +30,9 @@ function SetPhoneNumber() {
   const { phoneModal } = useSelector((store) => store.auth)
   const { t } = useTranslation()
   const [phone, setPhone] = useState('')
-  const userTable = useSelector(selectUserTable)
-  const [email, setEmail] = useState(userTable?.email || '')
+  const user = useSelector(selectUserTable)
+  const [email, setEmail] = useState(user?.email || '')
   const isLoading = false
-  const { register } = useGoogleRegister()
   const geo = useSelector(selectGeo)
   const agent = useSelector(selectAgent)
   const { fingerprint } = useSelector((store) => store.auth)
@@ -42,7 +40,7 @@ function SetPhoneNumber() {
   const app_version = config[CONFIG_KEY.app_version]?.value || ''
 
   const setModalOpen = () => {
-    userTable?.phone && dispatch(setPhoneModal(false))
+    user?.phone && dispatch(setPhoneModal(false))
   }
 
   const handleSubmit = async (e) => {
@@ -51,20 +49,9 @@ function SetPhoneNumber() {
     if (!phone) {
       return toast.error(t('Telefon raqam kiritilmagan'))
     }
-    if (!session?.user?.id) {
+    if (!user?.id) {
       return toast.warning(t('An unknown error occurred'))
     }
-
-    await register({
-      email,
-      phone,
-      auth: session?.user,
-      geo,
-      fingerprint,
-      agent,
-      app_version,
-      closeModal: () => dispatch(setPhoneModal(true)),
-    })
   }
 
   return (

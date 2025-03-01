@@ -5,19 +5,17 @@ import GoogleProvider from "next-auth/providers/google";
 import YandexProvider from "next-auth/providers/yandex";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { db } from "lib/db";
-import { getUserById, getAccountByUserId, getUserByPhone } from "lib/utils/auth.util";
+import { getUserById, getUserByPhone } from "lib/utils/auth.util";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { LoginSchema } from "lib/schema";
 import bcrypt from "bcryptjs";
 import { LANGUAGE } from "app/utils/languages.util";
-import { getServerSession } from 'next-auth';
 
 export const {
   handlers: { GET, POST },
   auth,
   signIn,
   signOut,
-  update,
 } = NextAuth({
   providers: [
     GoogleProvider({
@@ -51,24 +49,11 @@ export const {
       }
     })
   ],
-  adapter: PrismaAdapter(db),
-  pages: {
-    signIn: '/auth',
-    signOut: '/',
-    error: '/auth'
-  },
   callbacks: {
     async signIn({ user, account }) {
-      // Allow OAuth without email verification
       if (account?.provider !== "credentials") return true;
 
       if (!user?.id) return false;
-
-      const existingUser = await getUserById(user.id);
-
-      // if (!existingUser?.phone_verified) {
-      //   return '/confirm-otp'
-      // }
 
       return true;
     },
@@ -96,6 +81,12 @@ export const {
 
       return session;
     },
+  },
+  adapter: PrismaAdapter(db),
+  pages: {
+    signIn: '/auth',
+    signOut: '/',
+    error: '/auth'
   },
   session: {
     strategy: "jwt",

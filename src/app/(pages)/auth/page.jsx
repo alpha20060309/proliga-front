@@ -30,7 +30,7 @@ const Auth = () => {
   const params = useSearchParams()
   const error = params.get('error')
   const [currentTab, setCurrentTab] = useState(tabs.login)
-  const [shouldRedirect, setShouldRedirect] = useState(false)
+  const [shouldRedirect, setShouldRedirect] = useState(true)
 
   useEffect(() => {
     const SIGN_IN_METHOD =

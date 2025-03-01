@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useTransition } from 'react'
 import { useSelector } from 'react-redux'
 import { PhoneInput } from 'components/PhoneInput'
 import { useTranslation } from 'react-i18next'
@@ -11,18 +11,18 @@ import { CONFIG_KEY } from 'app/utils/config.util'
 import { Button } from '@/components/ui/button'
 import { Eye, EyeOff, Lock, Mail } from 'lucide-react'
 import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
-import { useAuthRegister } from 'app/hooks/auth/useAuthRegister/useAuthRegister'
 import { isEmail } from 'validator'
 import { cn } from '@/lib/utils'
 import { memo } from 'react'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import SocialLogin from '../SocialLogin'
 import { Input } from '@/components/ui/input'
-import { signIn } from 'next-auth/react'
 import { register } from 'app/actions/register'
+import { useSession } from 'next-auth/react'
 
 const SignUpForm = ({ setShouldRedirect }) => {
   const { t } = useTranslation()
+  const { update } = useSession()
   const { fingerprint } = useSelector((store) => store.auth)
   const geo = useSelector(selectGeo)
   const agent = useSelector(selectAgent)
@@ -33,10 +33,10 @@ const SignUpForm = ({ setShouldRedirect }) => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [agreement, setAgreement] = useState(false)
-  // const { register, isLoading } = useAuthRegister()
   const config = useSelector(selectSystemConfig)
   const app_version = config[CONFIG_KEY.app_version]?.value ?? ''
-  const isLoading = false
+
+  const [isPending, startTransition] = useTransition()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -63,16 +63,32 @@ const SignUpForm = ({ setShouldRedirect }) => {
       return toast.error(t("Telefon raqam noto'g'ri"))
     }
 
-    // setShouldRedirect(false)
-    const res = await register({
-      email,
-      phone,
-      password,
-      passwordConfirmation: confirmPassword,
-    })
+    startTransition(async () => {
+      try {
+        const res = await register({
+          email,
+          phone,
+          password,
+          passwordConfirmation: confirmPassword,
+        })
 
-    console.log(res)
- 
+        if (res?.error) {
+          return toast.error(t(res.error))
+        }
+
+        if (res?.success) {
+          toast.success(t('Registration successful'))
+          localStorage.setItem('app_version', app_version)
+          await update()
+
+          if (setShouldRedirect) {
+            setShouldRedirect(true)
+          }
+        }
+      } catch (error) {
+        toast.error(t('Something went wrong'))
+      }
+    })
   }
 
   return (
@@ -201,14 +217,14 @@ const SignUpForm = ({ setShouldRedirect }) => {
         </div>
         <Button
           type="submit"
-          disabled={isLoading}
+          disabled={isPending}
           className={cn(
             'h-12 w-full rounded border border-yellow-400 bg-neutral-900 font-bold',
             'text-neutral-100 transition-all duration-300 hover:bg-yellow-400 hover:text-neutral-900',
-            isLoading && 'bg-yellow-400 text-neutral-900'
+            isPending && 'bg-yellow-400 text-neutral-900'
           )}
         >
-          {isLoading ? (
+          {isPending ? (
             <Image
               src="/icons/loading.svg"
               width={24}

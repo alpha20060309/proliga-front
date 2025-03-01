@@ -41,6 +41,7 @@ const LoginForm = ({ setShouldRedirect }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
     if (!phone || !password) {
       toast.error(t("Barcha maydonlar to'ldirilishi shart"))
       return
@@ -64,15 +65,15 @@ const LoginForm = ({ setShouldRedirect }) => {
         }
 
         if (res?.success) {
-          toast.success(t('Login successful'))
           await update()
+          localStorage.setItem('app_version', app_version)
+          toast.success(t('tizimga muvaffaqiyatli kirdingiz'))
 
           if (setShouldRedirect) {
             setShouldRedirect(true)
           }
         }
       } catch (error) {
-        console.error('Login error:', error)
         toast.error(t('Something went wrong'))
       }
     })

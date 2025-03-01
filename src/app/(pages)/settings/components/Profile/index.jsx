@@ -10,7 +10,7 @@ import { SettingsContainer } from '../Container'
 import Image from 'next/image'
 import SettingsWarnings from '../Warnings'
 import RefillBalanceBox from './RefillBalanceBox'
-import { getUrl } from 'app/utils/static.util'
+import Avatar from 'components/Avatar'
 
 const SettingsProfile = () => {
   const { t } = useTranslation()
@@ -39,34 +39,11 @@ const SettingsProfile = () => {
         {t('Profil')}
       </h3>
       <div className="flex flex-wrap items-center gap-4">
-        {userTable?.email && !userTable?.image && (
-          <span className="flex size-24 select-none items-center justify-center rounded-xl bg-primary text-3xl font-bold uppercase text-black">
-            {userTable.email.slice(0, 1)}
-          </span>
-        )}
-        {userTable?.email && userTable?.image && (
-          <img
-            src={getUrl(userTable?.image)}
-            alt="user"
-            width={96}
-            height={96}
-            key={userTable?.image}
-            onError={(e) => {
-              e.target.src = '/icons/user.svg'
-            }}
-            className="size-24 rounded-xl object-cover object-top transition-all duration-1000 ease-in-out hover:object-bottom"
-          />
-        )}
-        {!userTable?.email && !userTable?.image && (
-          <Image
-            src={'/icons/user.svg'}
-            alt="user"
-            width={80}
-            height={80}
-            key={userTable?.image}
-            className="size-24 rounded-xl bg-neutral-200"
-          />
-        )}
+        <Avatar
+          className={
+            'size-24 rounded-xl bg-neutral-200 object-cover object-top transition-all duration-1000 ease-in-out hover:object-bottom'
+          }
+        />
         <div className="flex flex-col justify-center">
           <div className="flex gap-1 text-lg font-bold capitalize text-neutral-50 xs:max-w-64 md:max-w-96">
             {userTable?.name && <p className="truncate">{userTable?.name}</p>}

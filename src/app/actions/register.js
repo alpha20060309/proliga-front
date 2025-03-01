@@ -8,38 +8,48 @@ import { getUserByPhone, getUserByEmail } from "lib/utils/auth.util";
 import { login } from "./login";
 
 export const register = async (values) => {
+
   const validatedFields = RegisterSchema.safeParse(values);
 
   if (!validatedFields.success) {
     return { error: "Invalid fields." };
   }
 
-  const { email, password, phone } = validatedFields.data;
+  const { phone, email, password } = validatedFields.data;
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const existingPhone = await getUserByPhone(phone);
 
-  if (existingPhone) {
+  if (existingPhone?.phone === phone) {
     return { error: "User phone already exists." };
   }
 
   const existingEmail = await getUserByEmail(email);
 
-  if (existingEmail) {
+  if (existingEmail?.email === email) {
     return { error: "User email already exists." };
   }
 
-  await db.user.create({
-    data: {
-      email,
-      phone,
-      password: hashedPassword,
-    },
-  });
+  try {
+    await db.user.create({
+      data: {
+        email,
+        phone,
+        password: hashedPassword,
+      },
+    });
 
-  await login({ phone, password })
+    const res = await login({ phone, password })
 
-  return {
-    success: "User created.",
+    if (res?.error) {
+      return { error: res.error }
+    }
+
+    return {
+      success: "User created.",
+    }
+
+  } catch (error) {
+    return { error }
   }
 };

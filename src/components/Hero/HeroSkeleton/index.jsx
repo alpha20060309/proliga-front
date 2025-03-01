@@ -21,13 +21,13 @@ const HeroSkeleton = () => {
             href="/auth"
             className="flex h-16 w-full max-w-64 -skew-x-[15deg] items-center justify-center rounded border-2 border-primary bg-primary font-bold uppercase text-black transition-all hover:bg-opacity-50"
           >
-            Ro&apos;yxatdan otish
+            RO&apos;YXATDAN O&apos;TISH
           </Link>
           <Link
             href="/championships"
             className="flex h-16 w-full max-w-64 -skew-x-[15deg] items-center justify-center rounded border-2 border-primary bg-transparent font-bold uppercase text-primary transition-all hover:bg-primary hover:bg-opacity-50 hover:text-black"
           >
-            o&apos;yinga kirish
+            O&apos;YINGA KIRISH
           </Link>
         </section>
       </div>
