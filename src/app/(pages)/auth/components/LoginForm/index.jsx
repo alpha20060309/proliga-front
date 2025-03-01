@@ -5,7 +5,7 @@ import SocialLogin from '../SocialLogin'
 import Spinner from 'components/Spinner'
 import Image from 'next/image'
 import { toast } from 'react-toastify'
-import { useState, memo } from 'react'
+import { useState, memo, useTransition } from 'react'
 import { useSelector } from 'react-redux'
 import { PhoneInput } from 'components/PhoneInput'
 import { useTranslation } from 'react-i18next'
@@ -32,6 +32,7 @@ const LoginForm = ({ setShouldRedirect }) => {
   const { fingerprint } = useSelector((store) => store.auth)
   const agent = useSelector(selectAgent)
   const geo = useSelector(selectGeo)
+  const [isPending, startTransition] = useTransition()
   const { isLoading: isGoogleLoading } = useGoogleLogin()
   const isLoading = false
 
@@ -39,9 +40,31 @@ const LoginForm = ({ setShouldRedirect }) => {
     config[CONFIG_KEY.can_send_sms]?.value.toLowerCase() === 'true' || false
   const app_version = config[CONFIG_KEY.app_version]?.value || ''
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault()
+  //   if (!phone || !password) {
+  //     toast.error(t("Barcha maydonlar to'ldirilishi shart"))
+  //     return
+  //   }
+
+  //   if (password.length < 6) {
+  //     toast.error(t("Parol 6 ta belgidan kam bo'lmasligi kerak"))
+  //     return
+  //   }
+
+  //   // eslint-disable-next-line no-undef
+  //   const res = login({
+  //     phone,
+  //     password,
+  //     redirect: false,
+  //   })
+  //   console.log(res)
+  //   if (res?.error) {
+  //     toast.error(t(res.error))
+  //   }
+  // }
   const handleSubmit = async (e) => {
     e.preventDefault()
-
     if (!phone || !password) {
       toast.error(t("Barcha maydonlar to'ldirilishi shart"))
       return
@@ -52,22 +75,69 @@ const LoginForm = ({ setShouldRedirect }) => {
       return
     }
 
-    // eslint-disable-next-line no-undef
-    const res = await login({
-      phone,
-      password,
-      redirect: false,
+    startTransition(async () => {
+      try {
+        const res = await login({
+          phone,
+          password,
+        })
+
+        if (res?.error) {
+          toast.error(t(res.error))
+          return
+        }
+
+        // If login was successful
+        if (res?.success) {
+          toast.success(t("Login successful"))
+
+          // If we have a redirect function, call it
+          if (setShouldRedirect) {
+            setShouldRedirect(true)
+          }
+
+          // Refresh the page to update the session state
+          window.location.reload()
+        }
+      } catch (error) {
+        console.error("Login error:", error)
+        toast.error(t("Something went wrong"))
+      }
     })
-    console.log(res)
-    if (res?.error) {
-      toast.error(t(res.error))
-    }
-    // setShouldRedirect(false)
-    // await login({ phone, password, app_version, fingerprint, agent, geo })
   }
+
+
   if (isGoogleLoading) {
     return <Spinner />
   }
+
+  // const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+  //   startTransition(() => {
+  //     try {
+  //       login(values, callbackUrl).then((data) => {
+  //         if (data?.error) {
+  //           form.reset();
+  //           setError(data.error);
+  //         }
+
+  //         if (data?.success) {
+  //           form.reset();
+  //           setSuccess(data.success);
+  //         }
+
+  //         if (data?.twoFactor) {
+  //           setShowTwoFactor(true);
+  //         }
+  //       });
+  //     } catch (err) {
+  //       setError(`Something went wrong! Error:${err}`);
+  //     } finally {
+  //       setShowTwoFactor(false);
+  //       setSuccess("");
+  //       setError("");
+  //     }
+  //   });
+  // };
 
   return (
     <>

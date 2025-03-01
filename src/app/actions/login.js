@@ -27,6 +27,8 @@ export const login = async (
       password,
       redirect: false,
     });
+
+    return { success: true }
   } catch (error) {
     if (error) {
       switch (error.type) {

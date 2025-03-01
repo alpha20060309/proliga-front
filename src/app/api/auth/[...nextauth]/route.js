@@ -66,9 +66,9 @@ export const {
 
       const existingUser = await getUserById(user.id);
 
-      if (!existingUser?.phone_verified) {
-        return '/confirm-otp'
-      }
+      // if (!existingUser?.phone_verified) {
+      //   return '/confirm-otp'
+      // }
 
       return true;
     },
