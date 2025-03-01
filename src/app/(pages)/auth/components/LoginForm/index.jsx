@@ -18,7 +18,7 @@ import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.s
 import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
 import { useGoogleLogin } from 'app/hooks/auth/useGoogleLogin/useGoogleLogin'
 import { login } from 'app/actions/login'
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 
 const LoginForm = ({ setShouldRedirect }) => {
   const { t } = useTranslation()
@@ -35,6 +35,7 @@ const LoginForm = ({ setShouldRedirect }) => {
   const [isPending, startTransition] = useTransition()
   const { isLoading: isGoogleLoading } = useGoogleLogin()
   const isLoading = false
+  const { update } = useSession()
 
   const can_send_sms =
     config[CONFIG_KEY.can_send_sms]?.value.toLowerCase() === 'true' || false
@@ -87,57 +88,24 @@ const LoginForm = ({ setShouldRedirect }) => {
           return
         }
 
-        // If login was successful
         if (res?.success) {
-          toast.success(t("Login successful"))
+          toast.success(t('Login successful'))
+          await update()
 
-          // If we have a redirect function, call it
           if (setShouldRedirect) {
             setShouldRedirect(true)
           }
-
-          // Refresh the page to update the session state
-          window.location.reload()
         }
       } catch (error) {
-        console.error("Login error:", error)
-        toast.error(t("Something went wrong"))
+        console.error('Login error:', error)
+        toast.error(t('Something went wrong'))
       }
     })
   }
 
-
   if (isGoogleLoading) {
     return <Spinner />
   }
-
-  // const onSubmit = (values: z.infer<typeof LoginSchema>) => {
-  //   startTransition(() => {
-  //     try {
-  //       login(values, callbackUrl).then((data) => {
-  //         if (data?.error) {
-  //           form.reset();
-  //           setError(data.error);
-  //         }
-
-  //         if (data?.success) {
-  //           form.reset();
-  //           setSuccess(data.success);
-  //         }
-
-  //         if (data?.twoFactor) {
-  //           setShowTwoFactor(true);
-  //         }
-  //       });
-  //     } catch (err) {
-  //       setError(`Something went wrong! Error:${err}`);
-  //     } finally {
-  //       setShowTwoFactor(false);
-  //       setSuccess("");
-  //       setError("");
-  //     }
-  //   });
-  // };
 
   return (
     <>
