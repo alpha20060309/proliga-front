@@ -48,6 +48,7 @@ const Auth = () => {
         toast.error(
           'An email with this email has been opened, please try a different account'
         )
+        // OAuthCallbackError
       } else {
         toast.error(error)
       }

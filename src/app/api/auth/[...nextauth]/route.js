@@ -25,6 +25,12 @@ export const {
     YandexProvider({
       clientId: process.env.NEXT_PUBLIC_YANDEX_CLIENT_ID ?? "",
       clientSecret: process.env.NEXT_PUBLIC_YANDEX_CLIENT_SECRET ?? "",
+      authorization:
+        "https://oauth.yandex.ru/authorize?scope=login:info+login:email+login:avatar+login:default_phone",
+      async profile(profile) {
+        console.log(profile)
+        return profile
+      }
     }),
     CredentialsProvider({
       name: "credentials",
@@ -80,6 +86,13 @@ export const {
       }
 
       return session;
+    },
+    async jwt({ token, account, profile }) {
+      if (account?.provider === "yandex") {
+        token.yandexId = profile.id
+        token.email = profile.default_email || profile.email
+      }
+      return token
     },
   },
   adapter: PrismaAdapter(db),
