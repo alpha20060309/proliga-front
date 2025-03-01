@@ -44,9 +44,17 @@ const Auth = () => {
 
   useEffect(() => {
     if (error) {
-      toast.error(error)
+      if (error === 'OAuthAccountNotLinked') {
+        toast.error(
+          'An email with this email has been opened, please try a different account'
+        )
+      } else {
+        toast.error(error)
+      }
+
+      router.push('/auth')
     }
-  }, [error])
+  }, [error, router])
 
   return (
     <main className="flex min-h-screen w-full justify-center">

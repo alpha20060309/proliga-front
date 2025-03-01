@@ -17,9 +17,12 @@ const GoogleSignIn = ({ className, iconClassName }) => {
 
   const handleGoogleSignIn = () => {
     if (!user?.id) {
-      // eslint-disable-next-line no-undef
-      signIn('google', { redirect: process.env.NEXT_PUBLIC_URL + '/auth' })
-      localStorage.setItem('sign-in-method', SUPABASE_PROVIDERS.GOOGLE)
+      const res = signIn('google', {
+        // eslint-disable-next-line no-undef
+        redirect: process.env.NEXT_PUBLIC_URL + '/auth',
+      })
+      console.log('google', res)
+      // localStorage.setItem('sign-in-method', SUPABASE_PROVIDERS.GOOGLE)
     }
   }
 
