@@ -9,7 +9,11 @@
     "lint": "next lint",
     "db:pull": "dotenv -e .env.development -- npx prisma db pull",
     "db:generate": "npx prisma generate",
-    "db:push": "dotenv -e .env.development -- npx prisma db push"
+    "db:push": "dotenv -e .env.development -- npx prisma db push",
+    "db:seed": "dotenv -e .env.development -- npx prisma db seed"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   },
   "dependencies": {
     "@auth/supabase-adapter": "1.7.4",

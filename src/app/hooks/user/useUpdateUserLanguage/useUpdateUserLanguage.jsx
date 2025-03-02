@@ -47,9 +47,9 @@ export const useUpdateUserLanguage = () => {
           return
         }
         if (data) {
-          // dispatch(
-          //   setLanguage({ lang, cb: (lang) => i18n.changeLanguage(lang) })
-          // )
+          dispatch(
+            setLanguage({ lang, cb: (lang) => i18n.changeLanguage(lang) })
+          )
           await update()
         }
       } catch (error) {
