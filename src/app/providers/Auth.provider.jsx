@@ -3,9 +3,8 @@
 
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setUserAuth, setUserTable } from '../lib/features/auth/auth.slice'
+import { setUserTable } from '../lib/features/auth/auth.slice'
 import { usePathname, useRouter } from 'next/navigation'
-import { useCheckUserExists } from 'app/hooks/auth/useCheckUserExists/useCheckUserExists'
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { useLogOut } from 'app/hooks/auth/useLogOut/useLogOut'
 import { toast } from 'react-toastify'
@@ -25,7 +24,6 @@ const AuthProvider = ({ children }) => {
   const router = useRouter()
   const { is_checked } = useSelector((state) => state.auth)
   const user = useSelector(selectUserTable)
-  const { checkUserExists } = useCheckUserExists()
   const config = useSelector(selectSystemConfig)
   const app_version = config[CONFIG_KEY.app_version]?.value ?? ''
   const { logOut } = useLogOut()
