@@ -10,10 +10,7 @@ import {
   setLastVisitedTeam,
 } from 'app/lib/features/currentTeam/currentTeam.slice'
 import { resetTeams } from 'app/lib/features/team/team.slice'
-import { supabase } from 'app/lib/supabaseClient'
 import { signOut } from 'next-auth/react'
-// import { signOut } from 'app/api/auth/[...nextauth]/route'
-// import { logout } from 'app/actions/logout'
 
 export const useLogOut = () => {
   const dispatch = useDispatch()
@@ -30,18 +27,8 @@ export const useLogOut = () => {
   }, [dispatch])
 
   const logOut = useCallback(
-    async ({ showMessage = true } = {}) => {
+    async ({ showMessage = true, cb = () => {} } = {}) => {
       try {
-        const { error } = await supabase.auth.signOut()
-
-        if (error) {
-          setError(
-            error instanceof Error
-              ? error.message
-              : t('An unknown error occurred')
-          )
-        }
-
         await signOut({ redirect: false })
 
         clearState()
@@ -51,7 +38,9 @@ export const useLogOut = () => {
         if (showMessage) {
           toast.success(t('Tizimdan chiqdingiz'), { theme: 'dark' })
         }
+        cb()
       } catch (error) {
+        setError(error)
         toast.error(
           error instanceof Error
             ? error.message

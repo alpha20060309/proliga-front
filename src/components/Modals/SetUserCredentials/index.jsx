@@ -61,12 +61,12 @@ function SetUserCredentials() {
       agent,
       fingerprint,
       app_version,
-      cb: () => dispatch(setPhoneModal(false))
+      cb: () => dispatch(setPhoneModal(false)),
     })
   }
 
   return (
-    <Dialog open={phoneModal} onOpenChange={setModalOpen}>
+    <Dialog open={user?.id && phoneModal} onOpenChange={setModalOpen}>
       <DialogContent
         showCloseButton={false}
         className="w-[98%] max-w-md rounded-xl bg-neutral-950 p-5 text-neutral-100 sm:p-6"

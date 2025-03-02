@@ -2,7 +2,7 @@
 // /* eslint-disable no-unused-vars */
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, memo } from 'react'
 import { useSession } from 'next-auth/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
@@ -12,7 +12,7 @@ import { toast } from 'react-toastify'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
 import { useTranslation } from 'react-i18next'
 
-export default function AuthListener({ children }) {
+function AuthListener({ children }) {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const { sendOTP } = useSendOTP()
@@ -65,3 +65,5 @@ export default function AuthListener({ children }) {
 
   return <>{children}</>
 }
+
+export default memo(AuthListener)

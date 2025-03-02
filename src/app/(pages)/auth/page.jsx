@@ -37,7 +37,8 @@ const Auth = () => {
       localStorage.getItem('sign-in-method') !== 'undefined' &&
       localStorage.getItem('sign-in-method')
 
-    if (userTable?.id && shouldRedirect && !SIGN_IN_METHOD) {
+    console.log(Boolean(userTable?.id) && shouldRedirect && !SIGN_IN_METHOD)
+    if (Boolean(userTable?.id) && shouldRedirect && !SIGN_IN_METHOD) {
       router.push('/championships')
     }
   }, [userTable, router, shouldRedirect])
