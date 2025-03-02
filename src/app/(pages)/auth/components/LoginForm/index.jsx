@@ -15,7 +15,6 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
-import { useGoogleLogin } from 'app/hooks/auth/useGoogleLogin/useGoogleLogin'
 import { login } from 'app/actions/login'
 import { useSession } from 'next-auth/react'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
@@ -34,7 +33,6 @@ const LoginForm = ({ setShouldRedirect }) => {
   const geo = useSelector(selectGeo)
   const { sendOTP } = useSendOTP()
   const [isPending, startTransition] = useTransition()
-  const { isLoading: isGoogleLoading } = useGoogleLogin()
   const { update } = useSession()
 
   const can_send_sms =
@@ -95,10 +93,6 @@ const LoginForm = ({ setShouldRedirect }) => {
         toast.error(t('Something went wrong'))
       }
     })
-  }
-
-  if (isGoogleLoading) {
-    return <Spinner />
   }
 
   return (

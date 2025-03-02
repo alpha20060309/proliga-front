@@ -1,12 +1,11 @@
 import { supabase } from 'app/lib/supabaseClient'
 import { useState, useCallback } from 'react'
-import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
-import { setUserTable } from 'app/lib/features/auth/auth.slice'
 import { useTranslation } from 'react-i18next'
+import { useSession } from 'next-auth/react'
 
 export const useUpdateUserPhoto = () => {
-  const dispatch = useDispatch()
+  const { update } = useSession()
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const { t } = useTranslation()
@@ -15,7 +14,6 @@ export const useUpdateUserPhoto = () => {
     async ({ path, closeModal, userTable }) => {
       try {
         // eslint-disable-next-line no-undef
-        const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
         setIsLoading(true)
         setError('')
 
@@ -25,7 +23,7 @@ export const useUpdateUserPhoto = () => {
           return
         }
 
-        if (!userTable) {
+        if (!userTable?.id) {
           setError('User not authenticated')
           toast.error(t('Foydalanuvchi autentifikatsiya qilinmagan'), {
             theme: 'dark',
@@ -40,9 +38,7 @@ export const useUpdateUserPhoto = () => {
           })
           .eq('id', userTable?.id)
           .is('deleted_at', null)
-          .select(
-            'id, guid, name, email, phone, photo, last_name, middle_name, gender, birth_date, bio, balance, deleted_at, language, phone_verified, visitor, geo, agent'
-          )
+
           .single()
 
         if (error) {
@@ -60,8 +56,7 @@ export const useUpdateUserPhoto = () => {
           return
         }
         if (data) {
-          dispatch(setUserTable(data))
-          localStorage.setItem(`user-table-${sbUrl}`, JSON.stringify(data))
+          await update()
           toast.success(t('Rasm muvofaqiyatli yuklandi'), { theme: 'dark' })
           closeModal()
         }
@@ -81,7 +76,7 @@ export const useUpdateUserPhoto = () => {
         setIsLoading(false)
       }
     },
-    [dispatch, t]
+    [t, update]
   )
   return { updateUserPhoto, isLoading, error }
 }

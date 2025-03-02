@@ -57,7 +57,7 @@ export const useUpdateUserData = () => {
         const { data, error } = await supabase
           .from('user')
           .update(obj)
-          .eq('guid', userTable?.id)
+          .eq('id', userTable?.id)
           .is('deleted_at', null)
           .select(
             'id, guid, name, email, phone, photo, last_name, middle_name, gender, birth_date, bio, balance, deleted_at, language, phone_verified, visitor, geo, agent'
@@ -79,7 +79,6 @@ export const useUpdateUserData = () => {
         }
         if (data) {
           dispatch(setUserTable(data))
-          localStorage.setItem(`user-table-${sbUrl}`, JSON.stringify(data))
           cb()
         }
       } catch (error) {

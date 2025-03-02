@@ -24,7 +24,7 @@ const AuthProvider = ({ children }) => {
   const { i18n } = useTranslation()
   const router = useRouter()
   const { is_checked } = useSelector((state) => state.auth)
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUserTable)
   const { checkUserExists } = useCheckUserExists()
   const config = useSelector(selectSystemConfig)
   const app_version = config[CONFIG_KEY.app_version]?.value ?? ''
@@ -97,26 +97,26 @@ const AuthProvider = ({ children }) => {
   //   }
   // }, [path, logOut])
 
-  // useEffect(() => {
-  //   const existing_app_version = localStorage.getItem('app_version') || ''
+  useEffect(() => {
+    const existing_app_version = localStorage.getItem('app_version') || ''
 
-  //   if (
-  //     userTable?.guid &&
-  //     app_version &&
-  //     existing_app_version &&
-  //     app_version !== existing_app_version
-  //   ) {
-  //     const fetch = async () => {
-  //       await logOut({ showMessage: false })
-  //     }
+    if (
+      user?.id &&
+      app_version &&
+      existing_app_version &&
+      app_version !== existing_app_version
+    ) {
+      const fetch = async () => {
+        await logOut({ showMessage: false })
+      }
 
-  //     toast.warning(
-  //       'Ilova yangilandi. Iltimos, tizimga qayta kiring. Noqulayliklar uchun uzr soʻraymiz.',
-  //       { theme: 'dark', autoClose: 5000 }
-  //     )
-  //     fetch()
-  //   }
-  // }, [app_version,  userTable, logOut])
+      toast.warning(
+        'Ilova yangilandi. Iltimos, tizimga qayta kiring. Noqulayliklar uchun uzr soʻraymiz.',
+        { theme: 'dark', autoClose: 5000 }
+      )
+      fetch()
+    }
+  }, [app_version, user, logOut])
 
   useEffect(() => {
     if (session?.user) {
