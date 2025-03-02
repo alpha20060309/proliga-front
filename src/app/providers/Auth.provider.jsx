@@ -8,92 +8,21 @@ import { usePathname, useRouter } from 'next/navigation'
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { useLogOut } from 'app/hooks/auth/useLogOut/useLogOut'
 import { toast } from 'react-toastify'
-import {
-  selectUserAuth,
-  selectUserTable,
-} from 'app/lib/features/auth/auth.selector'
+import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
-import { setLanguage } from 'app/lib/features/systemLanguage/systemLanguage.slice'
 import { useTranslation } from 'react-i18next'
 import { useSession } from 'next-auth/react'
 
 const AuthProvider = ({ children }) => {
+  const { i18n } = useTranslation()
   const dispatch = useDispatch()
   const path = usePathname()
-  const { i18n } = useTranslation()
   const router = useRouter()
-  const { is_checked } = useSelector((state) => state.auth)
   const user = useSelector(selectUserTable)
   const config = useSelector(selectSystemConfig)
   const app_version = config[CONFIG_KEY.app_version]?.value ?? ''
   const { logOut } = useLogOut()
   const { data: session } = useSession()
-
-  // useEffect(() => {
-  //   // eslint-disable-next-line no-undef
-  //   if (table?.id &&  !userTable) {
-  //     dispatch(setUserTable(table))
-  //   }
-  //   if ((!auth || !table) && path.slice(1, 5) === 'play') {
-  //     router.push('/')
-  //   }
-  // }, [dispatch,  userTable, router, path, logOut])
-
-  // useEffect(() => {
-  //   // eslint-disable-next-line no-undef
-  //   const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
-  //   const auth =
-  //     localStorage.getItem(`user-auth-${sbUrl}`) &&
-  //     JSON.parse(localStorage.getItem(`user-auth-${sbUrl}`))
-  //   const table =
-  //     localStorage.getItem(`user-table-${sbUrl}`) !== 'undefined' &&
-  //     JSON.parse(localStorage.getItem(`user-table-${sbUrl}`))
-
-  //   const lang = localStorage.getItem('lang')
-
-  //   if (!auth?.id && !table?.id && (lang !== 'undefined' || lang !== 'null')) {
-  //     dispatch(setLanguage({ lang, cb: (lang) => i18n.changeLanguage(lang) }))
-  //   }
-  // }, [dispatch, i18n])
-
-  // useEffect(() => {
-  //   if (
-  //     userTable?.guid &&
-  //     !path.includes('auth') &&
-  //     !path.includes('confirm-otp') &&
-  //     !is_checked
-  //   ) {
-  //     const fetch = async () => {
-  //       await checkUserExists({ guid: userTable?.guid })
-  //     }
-  //     fetch()
-  //   }
-  // }, [userTable, checkUserExists, path, is_checked])
-
-  // useEffect(() => {
-  //   // eslint-disable-next-line no-undef
-  //   const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
-  //   const session =
-  //     localStorage.getItem(`sb-${sbUrl}-auth-token`) &&
-  //     JSON.parse(localStorage.getItem(`sb-${sbUrl}-auth-token`))
-  //   const auth =
-  //     localStorage.getItem(`user-auth-${sbUrl}`) &&
-  //     JSON.parse(localStorage.getItem(`user-auth-${sbUrl}`))
-  //   const table =
-  //     localStorage.getItem(`user-table-${sbUrl}`) !== 'undefined' &&
-  //     JSON.parse(localStorage.getItem(`user-table-${sbUrl}`))
-
-  //   if (
-  //     !path.includes('auth') &&
-  //     !path.includes('confirm-otp') &&
-  //     session?.user?.id &&
-  //     !auth?.id &&
-  //     !table?.id
-  //   ) {
-  //     const fetch = async () => await logOut({ showMessage: false })
-  //     fetch()
-  //   }
-  // }, [path, logOut])
 
   useEffect(() => {
     const existing_app_version = localStorage.getItem('app_version') || ''
@@ -117,8 +46,8 @@ const AuthProvider = ({ children }) => {
   }, [app_version, user, logOut])
 
   useEffect(() => {
-    if (session?.user) {
-      dispatch(setUserTable(session.user))
+    if (session !== undefined) {
+      dispatch(setUserTable(session?.user))
     }
   }, [session, dispatch])
 

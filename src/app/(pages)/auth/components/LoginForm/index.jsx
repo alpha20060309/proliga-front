@@ -2,7 +2,6 @@
 
 import ForgotPassword from 'components/Modals/ForgotPassword'
 import SocialLogin from '../SocialLogin'
-import Spinner from 'components/Spinner'
 import Image from 'next/image'
 import { toast } from 'react-toastify'
 import { useState, memo, useTransition } from 'react'
@@ -25,8 +24,6 @@ const LoginForm = ({ setShouldRedirect }) => {
   const [isModalOpen, setModalOpen] = useState(false)
   const [password, setPassword] = useState('')
   const [phone, setPhone] = useState('')
-
-  // const { login, isLoading } = useAuthLogin()
   const config = useSelector(selectSystemConfig)
   const { fingerprint } = useSelector((store) => store.auth)
   const agent = useSelector(selectAgent)

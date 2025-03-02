@@ -2,20 +2,15 @@
 
 import { supabase } from 'app/lib/supabaseClient'
 import { useState, useCallback } from 'react'
-import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
-import { setUserTable } from 'app/lib/features/auth/auth.slice'
-import { setLanguage } from 'app/lib/features/systemLanguage/systemLanguage.slice'
 import { useTranslation } from 'react-i18next'
 import { useSession } from 'next-auth/react'
 
 export const useUpdateUserLanguage = () => {
   const { update } = useSession()
-  const dispatch = useDispatch()
   const { t } = useTranslation()
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
-  const { i18n } = useTranslation()
 
   const updateUserLanguage = useCallback(
     async ({ lang, userTable }) => {
@@ -47,9 +42,6 @@ export const useUpdateUserLanguage = () => {
           return
         }
         if (data) {
-          dispatch(
-            setLanguage({ lang, cb: (lang) => i18n.changeLanguage(lang) })
-          )
           await update()
         }
       } catch (error) {
@@ -68,7 +60,7 @@ export const useUpdateUserLanguage = () => {
         setIsLoading(false)
       }
     },
-    [dispatch, i18n, t, update]
+    [t, update]
   )
   return { updateUserLanguage, isLoading, error }
 }

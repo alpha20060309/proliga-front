@@ -3,10 +3,7 @@ import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { supabase } from '../../../lib/supabaseClient'
 import { useTranslation } from 'react-i18next'
-import {
-  setUserAuth,
-  setUserTable,
-} from '../../../lib/features/auth/auth.slice'
+import { setUserTable } from '../../../lib/features/auth/auth.slice'
 import { useSendOTP } from '../useSendOTP/useSendOTP'
 
 export const useGoogleRegister = () => {
@@ -21,7 +18,6 @@ export const useGoogleRegister = () => {
     (errorMessage) => {
       setError(errorMessage)
       toast.error(t(errorMessage), { theme: 'dark' })
-      dispatch(setUserAuth(null))
       dispatch(setUserTable(null))
       return
     },
@@ -31,13 +27,9 @@ export const useGoogleRegister = () => {
   const setState = useCallback(
     ({ fullUserData, authData }) => {
       // eslint-disable-next-line no-undef
-      const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
 
       setData({ table: fullUserData, auth: authData })
-      dispatch(setUserAuth(authData))
       dispatch(setUserTable(fullUserData))
-      localStorage.setItem(`user-auth-${sbUrl}`, JSON.stringify(authData))
-      localStorage.setItem(`user-table-${sbUrl}`, JSON.stringify(fullUserData))
     },
     [dispatch]
   )

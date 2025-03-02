@@ -2,7 +2,7 @@ import { toast } from 'react-toastify'
 import { useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { setChecked, setUserTable } from '../../../lib/features/auth/auth.slice'
+import { setUserTable } from '../../../lib/features/auth/auth.slice'
 import { useRouter } from 'next/navigation'
 import { clearNotifications } from 'app/lib/features/systemNotification/systemNotification.slice'
 import {
@@ -23,7 +23,6 @@ export const useLogOut = () => {
 
   const clearState = useCallback(() => {
     dispatch(setUserTable(null))
-    dispatch(setChecked(false))
     dispatch(clearNotifications())
     dispatch(resetCurrentTeam())
     dispatch(resetTeams())

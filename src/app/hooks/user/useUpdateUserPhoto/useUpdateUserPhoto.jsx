@@ -11,7 +11,7 @@ export const useUpdateUserPhoto = () => {
   const { t } = useTranslation()
 
   const updateUserPhoto = useCallback(
-    async ({ path, closeModal, userTable }) => {
+    async ({ path, cb = () => {}, userTable }) => {
       try {
         // eslint-disable-next-line no-undef
         setIsLoading(true)
@@ -58,7 +58,7 @@ export const useUpdateUserPhoto = () => {
         if (data) {
           await update()
           toast.success(t('Rasm muvofaqiyatli yuklandi'), { theme: 'dark' })
-          closeModal()
+          cb()
         }
       } catch (error) {
         setError(

@@ -12,7 +12,7 @@ export const LoginSchema = z.object({
   password: z.string().min(1, {
     message: "Please enter your password. Password is required.",
   }),
-  provider: z.string().optional(),
+  data: z.any()
 });
 
 export const RegisterSchema = z
@@ -36,7 +36,7 @@ export const RegisterSchema = z
     passwordConfirmation: z.string().min(6, {
       message: "Please confirm your password, required.",
     }),
-    provider: z.string().optional(),
+    data: z.any()
   })
   .refine((data) => data.password === data.passwordConfirmation, {
     message: "Passwords do not match.",
