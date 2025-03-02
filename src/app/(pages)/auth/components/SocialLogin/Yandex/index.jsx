@@ -8,11 +8,12 @@ import { useSelector } from 'react-redux'
 const YandexSignIn = () => {
   const userTable = useSelector(selectUserTable)
 
-  const handleYandexSignIn = () => {
+  const handleYandexSignIn = async () => {
     if (!userTable?.id) {
       // eslint-disable-next-line no-undef
-      signIn('yandex', { redirect: process.env.NEXT_PUBLIC_URL + '/auth' })
+      const res = await signIn('yandex')
       localStorage.setItem('sign-in-method', SUPABASE_PROVIDERS.YANDEX)
+      console.log(res)
     }
   }
 

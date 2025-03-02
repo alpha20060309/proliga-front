@@ -26,10 +26,39 @@ export const {
       clientId: process.env.NEXT_PUBLIC_YANDEX_CLIENT_ID ?? "",
       clientSecret: process.env.NEXT_PUBLIC_YANDEX_CLIENT_SECRET ?? "",
       authorization:
-        "https://oauth.yandex.ru/authorize?scope=login:info+login:email+login:avatar+login:default_phone",
+        "https://oauth.yandex.ru/authorize?scope=login:info+login:email+login:avatar+login:default_phone+login:birthday",
       async profile(profile) {
-        console.log(profile)
-        return profile
+        console.log("Yandex", profile)
+
+        if (profile?.default_phone?.number) {
+          try {
+            const existingUser = await getUserByPhone(profile.default_phone.number);
+
+            // If a user with this phone already exists and it's not the same user
+            if (existingUser && existingUser.email !== profile.default_email) {
+              throw new Error("Phone number already in use");
+            }
+          } catch (error) {
+            // If the error is our custom error, rethrow it to be handled by NextAuth
+            if (error.message === "Phone number already in use") {
+              throw error;
+            }
+            // Otherwise, log the error but continue
+            console.error("Error checking phone uniqueness:", error);
+          }
+        }
+
+        return {
+          name: profile?.first_name || "",
+          email: profile?.default_email || profile?.emails[0] || null,
+          image: profile?.is_avatar_empty === false ? profile.avatar_url : null,
+          last_name: profile?.last_name || "",
+          phone: profile?.default_phone?.number || null,
+          isOAuth: true,
+          phone_verified: profile?.default_phone?.number ? true : false,
+          gender: profile?.sex || null,
+          birth_date: profile?.birthday ? new Date(profile.birthday) : null,
+        }
       }
     }),
     CredentialsProvider({
@@ -56,7 +85,10 @@ export const {
     })
   ],
   callbacks: {
-    async signIn({ user, account }) {
+    async signIn({ user, account, profile }) {
+      console.log('profile', profile)
+      console.log('account', account)
+      console.log('user', user)
       if (account?.provider !== "credentials") return true;
 
       if (!user?.id) return false;
@@ -87,11 +119,11 @@ export const {
 
       return session;
     },
-    async jwt({ token, account, profile }) {
-      if (account?.provider === "yandex") {
-        token.yandexId = profile.id
-        token.email = profile.default_email || profile.email
-      }
+    async jwt({ token, account, profile, user }) {
+      console.log('token', token)
+      console.log('profile', profile)
+      console.log('account', account)
+      console.log('user', user)
       return token
     },
   },

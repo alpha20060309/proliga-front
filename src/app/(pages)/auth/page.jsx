@@ -37,11 +37,25 @@ const Auth = () => {
       localStorage.getItem('sign-in-method') !== 'undefined' &&
       localStorage.getItem('sign-in-method')
 
-    console.log(Boolean(userTable?.id) && shouldRedirect && !SIGN_IN_METHOD)
     if (Boolean(userTable?.id) && shouldRedirect && !SIGN_IN_METHOD) {
       router.push('/championships')
     }
   }, [userTable, router, shouldRedirect])
+
+  const errorMessages = {
+    OAuthSignin: 'Error occurred while signing in with OAuth provider.',
+    OAuthCallback: 'Error occurred during OAuth callback.',
+    OAuthCreateAccount: 'Error creating OAuth account.',
+    EmailCreateAccount: 'Error creating email account.',
+    Callback: 'Error during callback processing.',
+    OAuthAccountNotLinked:
+      'This email is already associated with another account.',
+    EmailSignin: 'Error sending sign in email.',
+    CredentialsSignin:
+      'Invalid credentials. Please check your phone number and password.',
+    SessionRequired: 'Please sign in to access this page.',
+    Default: 'An unexpected error occurred.',
+  }
 
   useEffect(() => {
     if (error) {
@@ -54,7 +68,7 @@ const Auth = () => {
         toast.error(error)
       }
 
-      router.push('/auth')
+      // router.push('/auth')
     }
   }, [error, router])
 
