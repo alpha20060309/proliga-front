@@ -33,7 +33,11 @@ const Auth = () => {
   const [shouldRedirect, setShouldRedirect] = useState(true)
 
   useEffect(() => {
-    if (userTable?.id && shouldRedirect) {
+    const SIGN_IN_METHOD =
+      localStorage.getItem('sign-in-method') !== 'undefined' &&
+      localStorage.getItem('sign-in-method')
+
+    if (userTable?.id && shouldRedirect && !SIGN_IN_METHOD) {
       router.push('/championships')
     }
   }, [userTable, router, shouldRedirect])

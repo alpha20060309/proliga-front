@@ -24,14 +24,16 @@ import { toast } from 'react-toastify'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { Input } from '@/components/ui/input'
+import { useSetUserCredentials } from 'app/hooks/auth/useSetUserCredentials/useSetUserCredentials'
 
-function SetPhoneNumber() {
+function SetUserCredentials() {
   const dispatch = useDispatch()
   const { phoneModal } = useSelector((store) => store.auth)
   const { t } = useTranslation()
   const [phone, setPhone] = useState('')
   const user = useSelector(selectUserTable)
   const [email, setEmail] = useState(user?.email || '')
+  const { setUserCredentials } = useSetUserCredentials()
   const isLoading = false
   const geo = useSelector(selectGeo)
   const agent = useSelector(selectAgent)
@@ -40,18 +42,27 @@ function SetPhoneNumber() {
   const app_version = config[CONFIG_KEY.app_version]?.value || ''
 
   const setModalOpen = () => {
-    user?.phone && dispatch(setPhoneModal(false))
+    user?.phone && user?.email && dispatch(setPhoneModal(false))
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (!phone) {
-      return toast.error(t('Telefon raqam kiritilmagan'))
+    if (!email || !phone) {
+      return toast.error(t("Barcha maydonlar to'ldirilishi shart"))
     }
     if (!user?.id) {
-      return toast.warning(t('An unknown error occurred'))
+      return toast.warning(t('Please login first'))
     }
+    await setUserCredentials({
+      email,
+      phone,
+      geo,
+      agent,
+      fingerprint,
+      app_version,
+      cb: () => dispatch(setPhoneModal(false))
+    })
   }
 
   return (
@@ -111,4 +122,4 @@ function SetPhoneNumber() {
   )
 }
 
-export default memo(SetPhoneNumber)
+export default memo(SetUserCredentials)

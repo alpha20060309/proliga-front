@@ -1,6 +1,5 @@
 import { useState, useCallback } from 'react'
 import { toast } from 'react-toastify'
-import { useDispatch } from 'react-redux'
 import { supabase } from '../../../lib/supabaseClient'
 import { useTranslation } from 'react-i18next'
 
@@ -18,12 +17,9 @@ export const useAuthUpdatePassword = () => {
     [t]
   )
 
-  const setState = useCallback(
-    (userData) => {
-      setData(userData)
-    },
-    []
-  )
+  const setState = useCallback((userData) => {
+    setData(userData)
+  }, [])
 
   const updatePassword = useCallback(
     async ({ oldPassword, newPassword, email }) => {

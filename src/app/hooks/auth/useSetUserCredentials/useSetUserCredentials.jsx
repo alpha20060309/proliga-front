@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { setUserTable } from '../../../lib/features/auth/auth.slice'
 import { useSendOTP } from '../useSendOTP/useSendOTP'
 
-export const useGoogleRegister = () => {
+export const useSetUserCredentials = () => {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState(null)
@@ -24,32 +24,22 @@ export const useGoogleRegister = () => {
     [t, dispatch]
   )
 
-  const setState = useCallback(
-    ({ fullUserData, authData }) => {
-      // eslint-disable-next-line no-undef
-
-      setData({ table: fullUserData, auth: authData })
-      dispatch(setUserTable(fullUserData))
-    },
-    [dispatch]
-  )
-
-  const register = useCallback(
+  const setUserCredentials = useCallback(
     async ({
       phone,
       email,
-      auth,
+      user,
       geo,
       fingerprint,
       agent,
       app_version,
-      closeModal,
+      cb = () => {},
     }) => {
       setIsLoading(true)
       setError(null)
       setData(null)
 
-      if (!phone || !auth?.id || !email) {
+      if (!phone || !user?.id || !email) {
         handleError("Barcha maydonlar to'ldirilishi shart")
         return
       }
@@ -78,7 +68,7 @@ export const useGoogleRegister = () => {
         }
 
         // Step 2: Update user table
-        const { data: fullUserData, error: fullUserError } = await supabase
+        const { error: fullUserError } = await supabase
           .from('user')
           .update({
             email,
@@ -87,14 +77,11 @@ export const useGoogleRegister = () => {
             visited_at: new Date(),
             geo: JSON.stringify(geo),
             agent: JSON.stringify(agent),
-            image: auth?.image,
-            name: auth?.name,
+            image: user?.image,
+            name: user?.name,
           })
-          .eq('guid', auth?.id)
+          .eq('guid', user?.id)
           .is('deleted_at', null)
-          .select(
-            'id, guid, name, email, phone, photo, last_name, middle_name, gender, birth_date, bio, balance, deleted_at, language, phone_verified, visitor, geo, agent'
-          )
           .single()
 
         if (fullUserError) {
@@ -106,8 +93,7 @@ export const useGoogleRegister = () => {
         }
 
         // Step 3: Send OTP and redirect to confirmation page
-        closeModal()
-        setState({ authData: auth, fullUserData })
+        setData(user)
         localStorage.setItem('app_version', app_version)
         toast.info(t('Please confirm your phone number to complete sign up!'))
         await sendOTP({
@@ -116,6 +102,7 @@ export const useGoogleRegister = () => {
           redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(phone)}`,
         })
         localStorage.removeItem('sign-in-method')
+        cb()
       } catch (error) {
         handleError(
           error instanceof Error
@@ -126,8 +113,8 @@ export const useGoogleRegister = () => {
         setIsLoading(false)
       }
     },
-    [sendOTP, setState, handleError, t]
+    [sendOTP, handleError, t]
   )
 
-  return { register, isLoading, error, data }
+  return { setUserCredentials, isLoading, error, data }
 }

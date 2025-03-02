@@ -2,7 +2,7 @@ import GoogleSignIn from './Google'
 // import FacebookSignIn from './Facebook'
 import { useTranslation } from 'react-i18next'
 import { memo } from 'react'
-import SetPhoneNumber from 'components/Modals/SetPhoneNumber'
+import SetUserCredentials from 'components/Modals/SetUserCredentials'
 import { useSelector } from 'react-redux'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { CONFIG_KEY } from 'app/utils/config.util'
@@ -34,7 +34,7 @@ function SocialLogin() {
           <YandexSignIn />
         </div>
       </div>
-      <SetPhoneNumber />
+      <SetUserCredentials />
     </>
   )
 }
