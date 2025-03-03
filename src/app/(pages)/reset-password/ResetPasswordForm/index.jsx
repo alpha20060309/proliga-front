@@ -3,44 +3,50 @@
 import { useTranslation } from 'react-i18next'
 import { Input } from '@/components/ui/input'
 import { useEffect, useState } from 'react'
-import { useResetUserPassword } from 'app/hooks/auth/useResetUserPassword/useResetUserPassword'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { toast } from 'react-toastify'
 import { Eye, EyeOff } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Lock, Loader2 } from 'lucide-react'
+import { resetPassword } from 'app/actions/reset-password'
+import { useTransition } from 'react'
 
 const ResetPasswordForm = () => {
   const router = useRouter()
   const params = useSearchParams()
   const phone = decodeURIComponent(params.get('phone')) || ''
   const code = params.get('code') || ''
-
+  const [isPending, startTransition] = useTransition()
   const { t } = useTranslation()
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const { resetUserPassword, isLoading } = useResetUserPassword()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     if (password.length < 6 || confirmPassword.length < 6) {
-      toast.warning(t("Parolar 6 ta belgidan kam bo'lmasligi kerak"))
-      return
+      return toast.warning(t("Parolar 6 ta belgidan kam bo'lmasligi kerak"))
     }
     if (password !== confirmPassword) {
-      toast.warning(t('Parollar mos kelmadi'), { theme: 'dark' })
-      return
+      return toast.warning(t('Parollar mos kelmadi'))
     }
 
-    await resetUserPassword({
-      password,
-      code,
-      phone,
-      shouldRedirect: true,
-      redirectTo: '/auth',
+    startTransition(async () => {
+      const res = await resetPassword({
+        phone,
+        code,
+        password,
+      })
+
+      if (res?.error) {
+        return toast.error(t(res.error))
+      }
+      if (res?.success) {
+        toast.success('The pass has changed')
+        router.push('/auth')
+      }
     })
   }
 
@@ -120,9 +126,9 @@ const ResetPasswordForm = () => {
         <Button
           type="submit"
           className="mt-4 h-12 w-full rounded border border-yellow-400 bg-neutral-900 font-bold text-neutral-100 transition-all duration-300 hover:bg-yellow-400 hover:text-neutral-900"
-          disabled={isLoading}
+          disabled={isPending}
         >
-          {isLoading ? (
+          {isPending ? (
             <Loader2 className="size-8 animate-spin text-white" />
           ) : (
             t('Parol Yangilash')
