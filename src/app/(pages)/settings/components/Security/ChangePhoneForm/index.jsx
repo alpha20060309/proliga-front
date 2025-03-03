@@ -57,10 +57,10 @@ export default function ChangePhoneForm() {
       cb: () => setModalOpen(true),
     })
 
-    if (status) {
-      setPassword('')
-      setPhone('')
-    }
+    // if (status) {
+    //   setPassword('')
+    //   setPhone('')
+    // }
   }
 
   return (
@@ -70,6 +70,7 @@ export default function ChangePhoneForm() {
         setModalOpen={setModalOpen}
         isModalOpen={isModalOpen}
         is_update={true}
+        refreshUser={false}
       />
       <form
         onSubmit={handleSubmit}
