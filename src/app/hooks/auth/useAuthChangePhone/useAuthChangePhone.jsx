@@ -80,7 +80,7 @@ export const useAuthChangePhone = () => {
             visited_at: new Date(),
             geo: JSON.stringify(geo),
             agent: JSON.stringify(agent),
-            new_phone,
+            phone_new: new_phone,
           })
           .eq('email', email)
           .is('deleted_at', null)

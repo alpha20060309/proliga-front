@@ -138,7 +138,12 @@ const AuthProvider = ({ children }) => {
   const { data: session } = useSession()
   const [logoutInProgress, setLogoutInProgress] = useState(false)
 
-  // Handle user authentication issues
+  useEffect(() => {
+    if (session !== undefined) {
+      dispatch(setUserTable(session?.user || {}))
+    }
+  }, [session, dispatch])
+
   useEffect(() => {
     // Skip checks on auth and OTP confirmation pages
     if (path.includes('auth') || path.includes('confirm-otp')) {
@@ -211,13 +216,6 @@ const AuthProvider = ({ children }) => {
       performLogout()
     }
   }, [app_version, user, logOut, t, logoutInProgress])
-
-  // Update Redux store with session data
-  useEffect(() => {
-    if (session !== undefined) {
-      dispatch(setUserTable(session?.user || {}))
-    }
-  }, [session, dispatch])
 
   return <>{children}</>
 }

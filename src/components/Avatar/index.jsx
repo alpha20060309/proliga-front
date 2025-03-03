@@ -19,7 +19,10 @@ const Avatar = ({ className }) => {
           onError={(e) => {
             e.target.src = '/icons/user.svg'
           }}
-          className={cn('aspect-square size-8 select-none', className)}
+          className={cn(
+            'aspect-square size-8 select-none bg-neutral-100',
+            className
+          )}
         />
       )
     }
