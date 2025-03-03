@@ -35,6 +35,19 @@ const Avatar = ({ className }) => {
     )
   }
 
+  if (user?.name) {
+    return (
+      <span
+        className={cn(
+          'flex aspect-square size-8 select-none items-center justify-center bg-primary text-3xl font-bold uppercase text-black',
+          className
+        )}
+      >
+        {user.name.slice(0, 1)}
+      </span>
+    )
+  }
+
   return (
     <User
       className={cn(

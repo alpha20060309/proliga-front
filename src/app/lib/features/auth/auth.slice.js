@@ -8,7 +8,6 @@ const initialState = {
   geo: null,
   geoError: null,
   geoLoading: false,
-  is_checked: false,
   phoneModal: false,
 }
 
@@ -31,9 +30,6 @@ const authSlice = createSlice({
     setAgent: (state, action) => {
       state.agent = action.payload
     },
-    setChecked: (state, action) => {
-      state.is_checked = action.payload
-    },
     setPhoneModal: (state, action) => {
       state.phoneModal = action.payload
     },
@@ -48,7 +44,6 @@ export const {
   setFingerprint,
   setGeo,
   setAgent,
-  setChecked,
   setLoginMethod,
   setPhoneModal,
 } = authSlice.actions

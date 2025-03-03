@@ -9,7 +9,11 @@
     "lint": "next lint",
     "db:pull": "dotenv -e .env.development -- npx prisma db pull",
     "db:generate": "npx prisma generate",
-    "db:push": "dotenv -e .env.development -- npx prisma db push"
+    "db:push": "dotenv -e .env.development -- npx prisma db push",
+    "db:seed": "dotenv -e .env.development -- npx prisma db seed"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   },
   "dependencies": {
     "@auth/supabase-adapter": "1.7.4",
@@ -35,6 +39,7 @@
     "@radix-ui/react-tooltip": "1.1.6",
     "@reduxjs/toolkit": "2.2.7",
     "@supabase/auth-helpers-nextjs": "0.10.0",
+    "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "2.45.1",
     "@tanstack/react-table": "8.20.5",
     "@uppy/core": "4.4.2",

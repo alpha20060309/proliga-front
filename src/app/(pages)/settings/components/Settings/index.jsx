@@ -60,6 +60,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
       bio,
       gender,
       birth_date: date,
+      userTable,
       cb: () => setHomeTab(),
     })
   }

@@ -5,13 +5,13 @@ import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { NumericFormat } from 'react-number-format'
 import { PAYMENT_OPTIONS } from 'app/utils/paymentOptions.util'
-import { useRefreshUserTable } from 'app/hooks/user/useRefreshUserTable/useRefreshUserTable'
 import { useBuyPackageWithWallet } from 'app/hooks/payment/useBuyPackageWithWallet/useBuyPackageWithWallet'
 import { useBuyPackageWithPayme } from 'app/hooks/payment/useBuyPackageWithPayme/useBuyPackageWithPayme'
 import { useBuyPackageWithClick } from 'app/hooks/payment/useBuyPackageWithClick/useBuyPackageWithClick'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { selectCurrentPackage } from 'app/lib/features/package/package.selector'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { useSession } from 'next-auth/react'
 
 const ConfirmPaymentTab = ({ paymentOption }) => {
   const { lastVisitedTeam } = useSelector((store) => store.currentTeam)
@@ -19,6 +19,7 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
   const currentPackage = useSelector(selectCurrentPackage)
   const currentTeam = useSelector(selectCurrentTeam)
   const userTable = useSelector(selectUserTable)
+  const { update } = useSession()
 
   const { t } = useTranslation()
   const { buyPackageWithWallet, isLoading } = useBuyPackageWithWallet()
@@ -26,7 +27,6 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
     useBuyPackageWithPayme()
   const { buyPackageWithClick, isLoading: isClickLoading } =
     useBuyPackageWithClick()
-  const { refreshUserTable } = useRefreshUserTable()
 
   const handleConfirmPayment = async () => {
     if (!currentPackage?.id)
@@ -53,7 +53,7 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
     if (paymentOption === PAYMENT_OPTIONS.CLICKUP) {
       buyPackageWithClick({ userTable, currentPackage, currentTeam })
     }
-    await refreshUserTable(userTable?.guid)
+    await update()
   }
 
   return (

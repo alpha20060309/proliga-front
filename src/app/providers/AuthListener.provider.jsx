@@ -1,56 +1,44 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
+// /* eslint-disable no-undef */
+// /* eslint-disable no-unused-vars */
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, memo } from 'react'
 import { useSession } from 'next-auth/react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  selectAgent,
-  selectGeo,
-  selectUserTable,
-} from 'app/lib/features/auth/auth.selector'
+import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
 import { setPhoneModal } from 'app/lib/features/auth/auth.slice'
-import { useGoogleLogin } from 'app/hooks/auth/useGoogleLogin/useGoogleLogin'
-import { useCheckUserRegistered } from 'app/hooks/auth/useCheckUserRegistered/useCheckUserRegistered'
 import { SUPABASE_PROVIDERS } from 'app/lib/supabaseClient'
 import { toast } from 'react-toastify'
+import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
+import { useTranslation } from 'react-i18next'
 
-export default function AuthListener({ children }) {
+function AuthListener({ children }) {
   const dispatch = useDispatch()
+  const { t } = useTranslation()
+  const { sendOTP } = useSendOTP()
   const { data: session, status } = useSession()
-  const userTable = useSelector(selectUserTable)
   const agent = useSelector(selectAgent)
   const geo = useSelector(selectGeo)
   const { fingerprint } = useSelector((store) => store.auth)
-  const { login } = useGoogleLogin()
-  const { checkUserRegistered } = useCheckUserRegistered()
 
   useEffect(() => {
     const handleAuthChange = async () => {
       if (status === 'authenticated' && session?.user) {
         const { user } = session
-        const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
 
         const app_version = JSON.parse(localStorage.getItem('config'))
           ?.app_version?.value
         const SIGN_IN_METHOD = localStorage.getItem('sign-in-method')
 
-        // if (Boolean(userTable?.id) || !user.id) return
-
-        const phone = data?.phone
-        console.log(data)
-
-        if (SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE && data) {
-          if (phone) {
-            console.log('executed')
-            return login({
-              auth: user,
-              geo,
-              agent,
-              fingerprint,
-              app_version,
-            })
+        if (
+          SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE ||
+          SIGN_IN_METHOD === SUPABASE_PROVIDERS.YANDEX
+        ) {
+          if (!user?.email || !user?.phone) {
+            dispatch(setPhoneModal(true))
+            return
+          }
+          if (!user?.phone_verified) {
             toast.warning(t('Sizning raqamingiz tasdiqlanmagan'), {
               theme: 'dark',
             })
@@ -60,44 +48,22 @@ export default function AuthListener({ children }) {
                 theme: 'dark',
               }
             )
+            localStorage.setItem('app_version', app_version)
             await sendOTP({
-              phone: table?.phone,
+              phone: user?.phone,
               shouldRedirect: true,
-              redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(table?.phone)}`,
+              redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(user?.phone)}`,
             })
-          } else {
-            return dispatch(setPhoneModal(true))
-          }
-        }
-        if (SIGN_IN_METHOD === SUPABASE_PROVIDERS.YANDEX && data) {
-          if (phone) {
-            console.log('executed')
-            return login({
-              auth: user,
-              geo,
-              agent,
-              fingerprint,
-              app_version,
-            })
-          } else {
-            return dispatch(setPhoneModal(true))
+            return localStorage.removeItem('sign-in-method')
           }
         }
       }
     }
 
     handleAuthChange()
-  }, [
-    session,
-    status,
-    login,
-    userTable,
-    agent,
-    geo,
-    fingerprint,
-    dispatch,
-    checkUserRegistered,
-  ])
+  }, [dispatch, sendOTP, session, status, t])
 
   return <>{children}</>
 }
+
+export default memo(AuthListener)

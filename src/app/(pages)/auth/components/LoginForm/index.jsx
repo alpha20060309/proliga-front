@@ -2,7 +2,6 @@
 
 import ForgotPassword from 'components/Modals/ForgotPassword'
 import SocialLogin from '../SocialLogin'
-import Spinner from 'components/Spinner'
 import Image from 'next/image'
 import { toast } from 'react-toastify'
 import { useState, memo, useTransition } from 'react'
@@ -15,7 +14,6 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
-import { useGoogleLogin } from 'app/hooks/auth/useGoogleLogin/useGoogleLogin'
 import { login } from 'app/actions/login'
 import { useSession } from 'next-auth/react'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
@@ -26,15 +24,12 @@ const LoginForm = ({ setShouldRedirect }) => {
   const [isModalOpen, setModalOpen] = useState(false)
   const [password, setPassword] = useState('')
   const [phone, setPhone] = useState('')
-
-  // const { login, isLoading } = useAuthLogin()
   const config = useSelector(selectSystemConfig)
   const { fingerprint } = useSelector((store) => store.auth)
   const agent = useSelector(selectAgent)
   const geo = useSelector(selectGeo)
   const { sendOTP } = useSendOTP()
   const [isPending, startTransition] = useTransition()
-  const { isLoading: isGoogleLoading } = useGoogleLogin()
   const { update } = useSession()
 
   const can_send_sms =
@@ -95,10 +90,6 @@ const LoginForm = ({ setShouldRedirect }) => {
         toast.error(t('Something went wrong'))
       }
     })
-  }
-
-  if (isGoogleLoading) {
-    return <Spinner />
   }
 
   return (

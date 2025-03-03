@@ -6,7 +6,9 @@
 
 /.next
 
-.env*
+.env
+.env.development
+.env.production
 
 /.idea
 

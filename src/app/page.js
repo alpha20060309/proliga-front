@@ -1,8 +1,7 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { useGenerateLanguage } from './hooks/system/generateLanguage/generateLanguage'
-import { useEffect } from 'react'
+import { useGenerateLanguage } from './hooks/system/useGenerateLanguage/useGenerateLanguage'
 import HeroSkeleton from 'components/Hero/HeroSkeleton'
 const Hero = dynamic(() => import('../components/Hero'), {
   loading: () => <HeroSkeleton />,

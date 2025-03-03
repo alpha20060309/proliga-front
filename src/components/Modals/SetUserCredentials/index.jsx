@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Dialog,
   DialogContent,
@@ -24,15 +24,18 @@ import { toast } from 'react-toastify'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { Input } from '@/components/ui/input'
+import { useSetUserCredentials } from 'app/hooks/auth/useSetUserCredentials/useSetUserCredentials'
+import { useSession } from 'next-auth/react'
 
-function SetPhoneNumber() {
+function SetUserCredentials() {
   const dispatch = useDispatch()
   const { phoneModal } = useSelector((store) => store.auth)
   const { t } = useTranslation()
-  const [phone, setPhone] = useState('')
+  const { data: session } = useSession()
   const user = useSelector(selectUserTable)
-  const [email, setEmail] = useState(user?.email || '')
-  const isLoading = false
+  const [phone, setPhone] = useState('')
+  const [email, setEmail] = useState('')
+  const { setUserCredentials, isLoading } = useSetUserCredentials()
   const geo = useSelector(selectGeo)
   const agent = useSelector(selectAgent)
   const { fingerprint } = useSelector((store) => store.auth)
@@ -40,22 +43,39 @@ function SetPhoneNumber() {
   const app_version = config[CONFIG_KEY.app_version]?.value || ''
 
   const setModalOpen = () => {
-    user?.phone && dispatch(setPhoneModal(false))
+    user?.phone && user?.email && dispatch(setPhoneModal(false))
   }
+
+  useEffect(() => {
+    if (session?.user) {
+      setPhone(session?.user?.phone || '')
+      setEmail(session?.user?.email || '')
+    }
+  }, [session?.user])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (!phone) {
-      return toast.error(t('Telefon raqam kiritilmagan'))
+    if (!email || !phone) {
+      return toast.error(t("Barcha maydonlar to'ldirilishi shart"))
     }
     if (!user?.id) {
-      return toast.warning(t('An unknown error occurred'))
+      return toast.warning(t('Please login first'))
     }
+    await setUserCredentials({
+      email,
+      phone,
+      user,
+      cb: () => {
+        localStorage.removeItem('sign-in-method')
+        localStorage.setItem('app_version', app_version)
+        dispatch(setPhoneModal(false))
+      },
+    })
   }
 
   return (
-    <Dialog open={phoneModal} onOpenChange={setModalOpen}>
+    <Dialog open={user?.id && phoneModal} onOpenChange={setModalOpen}>
       <DialogContent
         showCloseButton={false}
         className="w-[98%] max-w-md rounded-xl bg-neutral-950 p-5 text-neutral-100 sm:p-6"
@@ -100,7 +120,7 @@ function SetPhoneNumber() {
             disabled={isLoading}
           >
             {isLoading ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
+              <Loader2 className="size-6 animate-spin" />
             ) : (
               t('Tasdiqlash')
             )}
@@ -111,4 +131,4 @@ function SetPhoneNumber() {
   )
 }
 
-export default memo(SetPhoneNumber)
+export default memo(SetUserCredentials)

@@ -1,15 +1,12 @@
 import { useState, useCallback } from 'react'
 import { toast } from 'react-toastify'
-import { useDispatch } from 'react-redux'
 import { supabase } from '../../../lib/supabaseClient'
 import { useTranslation } from 'react-i18next'
-import { setUserAuth } from '../../../lib/features/auth/auth.slice'
 
 export const useAuthUpdatePassword = () => {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState(null)
-  const dispatch = useDispatch()
   const { t } = useTranslation()
 
   const handleError = useCallback(
@@ -20,16 +17,9 @@ export const useAuthUpdatePassword = () => {
     [t]
   )
 
-  const setState = useCallback(
-    (userData) => {
-      setData(userData)
-      dispatch(setUserAuth(userData))
-      // eslint-disable-next-line no-undef
-      const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
-      localStorage.setItem(`user-auth-${sbUrl}`, JSON.stringify(userData))
-    },
-    [dispatch]
-  )
+  const setState = useCallback((userData) => {
+    setData(userData)
+  }, [])
 
   const updatePassword = useCallback(
     async ({ oldPassword, newPassword, email }) => {

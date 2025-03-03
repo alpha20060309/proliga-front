@@ -1,130 +1,225 @@
-/* eslint-disable no-unused-vars */
+// /* eslint-disable no-unused-vars */
+// 'use client'
+
+// import { useEffect, memo } from 'react'
+// import { useDispatch, useSelector } from 'react-redux'
+// import { setUserTable } from '../lib/features/auth/auth.slice'
+// import { usePathname, useRouter } from 'next/navigation'
+// import { CONFIG_KEY } from 'app/utils/config.util'
+// import { useLogOut } from 'app/hooks/auth/useLogOut/useLogOut'
+// import { toast } from 'react-toastify'
+// import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+// import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
+// import { useTranslation } from 'react-i18next'
+// import { useSession } from 'next-auth/react'
+// import { useState } from 'react'
+
+// const AuthProvider = ({ children }) => {
+//   const { t } = useTranslation()
+//   const dispatch = useDispatch()
+//   const path = usePathname()
+//   const user = useSelector(selectUserTable)
+//   const config = useSelector(selectSystemConfig)
+//   const app_version = config[CONFIG_KEY.app_version]?.value ?? ''
+//   const { logOut } = useLogOut()
+//   const { data: session } = useSession()
+//   const [loggedOut, setLoggedOut] = useState(false)
+
+//   useEffect(() => {
+//     if (path.includes('auth') || path.includes('confirm-otp')) {
+//       return
+//     }
+//     if (!session?.user.id && !loggedOut) {
+//       return
+//     }
+//     if (!session?.user?.phone || !session?.user?.email) {
+//       const fetch = async () =>
+//         await logOut({
+//           showMessage: false,
+//           cb: () => {
+//             toast.warning(
+//               t(
+//                 'Your registration was not successfully completed, so we are logging you out for security reasons.'
+//               )
+//             )
+//             setLoggedOut(false)
+//           },
+//         })
+
+//       !loggedOut && fetch()
+//       setLoggedOut(true)
+//       return
+//     } else if (session?.user?.id && !session?.user?.phone_verified) {
+//       const fetch = async () =>
+//         await logOut({
+//           showMessage: false,
+//           cb: () => {
+//             toast.warning(toast.warning(t('Phone verified is false')))
+//             setLoggedOut(false)
+//           },
+//         })
+
+//       !loggedOut && fetch()
+//       return
+//     }
+//   }, [path, session?.user, t, logOut, loggedOut])
+
+//   // useEffect(() => {
+//   //   if (path.includes('auth') || path.includes('confirm-otp')) {
+//   //     return
+//   //   }
+//   //   if (!user?.phone_verified && user?.id) {
+//   //     const fetch = async () =>
+//   //       await logOut({
+//   //         showMessage: false,
+//   //       })
+//   //     fetch()
+//   //     toast.warning(t('Phone verified is false'))
+
+//   //     return
+//   //   }
+//   // }, [logOut, path, t, user, session?.user?.id])
+
+//   useEffect(() => {
+//     const existing_app_version = localStorage.getItem('app_version') || ''
+
+//     if (
+//       user?.id &&
+//       app_version &&
+//       existing_app_version &&
+//       app_version !== existing_app_version
+//     ) {
+//       const fetch = async () => {
+//         await logOut({ showMessage: false })
+//       }
+
+//       toast.warning(
+//         t(
+//           'Ilova yangilandi. Iltimos, tizimga qayta kiring. Noqulayliklar uchun uzr soʻraymiz.'
+//         ),
+//         { autoClose: 5000 }
+//       )
+//       fetch()
+//     }
+//   }, [app_version, user, logOut, t])
+
+//   useEffect(() => {
+//     if (session !== undefined) {
+//       dispatch(setUserTable(session?.user))
+//     }
+//   }, [session, dispatch])
+
+//   return <>{children}</>
+// }
+
+// export default memo(AuthProvider)
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, memo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setUserAuth, setUserTable } from '../lib/features/auth/auth.slice'
-import { usePathname, useRouter } from 'next/navigation'
-import { useCheckUserExists } from 'app/hooks/auth/useCheckUserExists/useCheckUserExists'
+import { setUserTable } from '../lib/features/auth/auth.slice'
+import { usePathname } from 'next/navigation'
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { useLogOut } from 'app/hooks/auth/useLogOut/useLogOut'
 import { toast } from 'react-toastify'
-import {
-  selectUserAuth,
-  selectUserTable,
-} from 'app/lib/features/auth/auth.selector'
+import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
-import { setLanguage } from 'app/lib/features/systemLanguage/systemLanguage.slice'
 import { useTranslation } from 'react-i18next'
 import { useSession } from 'next-auth/react'
 
 const AuthProvider = ({ children }) => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const path = usePathname()
-  const { i18n } = useTranslation()
-  const router = useRouter()
-  const { is_checked } = useSelector((state) => state.auth)
-  const userTable = useSelector(selectUserTable)
-  const { checkUserExists } = useCheckUserExists()
+  const user = useSelector(selectUserTable)
   const config = useSelector(selectSystemConfig)
   const app_version = config[CONFIG_KEY.app_version]?.value ?? ''
   const { logOut } = useLogOut()
   const { data: session } = useSession()
+  const [logoutInProgress, setLogoutInProgress] = useState(false)
 
-  // useEffect(() => {
-  //   // eslint-disable-next-line no-undef
-  //   if (table?.id &&  !userTable) {
-  //     dispatch(setUserTable(table))
-  //   }
-  //   if ((!auth || !table) && path.slice(1, 5) === 'play') {
-  //     router.push('/')
-  //   }
-  // }, [dispatch,  userTable, router, path, logOut])
-
-  // useEffect(() => {
-  //   // eslint-disable-next-line no-undef
-  //   const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
-  //   const auth =
-  //     localStorage.getItem(`user-auth-${sbUrl}`) &&
-  //     JSON.parse(localStorage.getItem(`user-auth-${sbUrl}`))
-  //   const table =
-  //     localStorage.getItem(`user-table-${sbUrl}`) !== 'undefined' &&
-  //     JSON.parse(localStorage.getItem(`user-table-${sbUrl}`))
-
-  //   const lang = localStorage.getItem('lang')
-
-  //   if (!auth?.id && !table?.id && (lang !== 'undefined' || lang !== 'null')) {
-  //     dispatch(setLanguage({ lang, cb: (lang) => i18n.changeLanguage(lang) }))
-  //   }
-  // }, [dispatch, i18n])
-
-  // useEffect(() => {
-  //   if (
-  //     userTable?.guid &&
-  //     !path.includes('auth') &&
-  //     !path.includes('confirm-otp') &&
-  //     !is_checked
-  //   ) {
-  //     const fetch = async () => {
-  //       await checkUserExists({ guid: userTable?.guid })
-  //     }
-  //     fetch()
-  //   }
-  // }, [userTable, checkUserExists, path, is_checked])
-
-  // useEffect(() => {
-  //   // eslint-disable-next-line no-undef
-  //   const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
-  //   const session =
-  //     localStorage.getItem(`sb-${sbUrl}-auth-token`) &&
-  //     JSON.parse(localStorage.getItem(`sb-${sbUrl}-auth-token`))
-  //   const auth =
-  //     localStorage.getItem(`user-auth-${sbUrl}`) &&
-  //     JSON.parse(localStorage.getItem(`user-auth-${sbUrl}`))
-  //   const table =
-  //     localStorage.getItem(`user-table-${sbUrl}`) !== 'undefined' &&
-  //     JSON.parse(localStorage.getItem(`user-table-${sbUrl}`))
-
-  //   if (
-  //     !path.includes('auth') &&
-  //     !path.includes('confirm-otp') &&
-  //     session?.user?.id &&
-  //     !auth?.id &&
-  //     !table?.id
-  //   ) {
-  //     const fetch = async () => await logOut({ showMessage: false })
-  //     fetch()
-  //   }
-  // }, [path, logOut])
-
-  // useEffect(() => {
-  //   const existing_app_version = localStorage.getItem('app_version') || ''
-
-  //   if (
-  //     userTable?.guid &&
-  //     app_version &&
-  //     existing_app_version &&
-  //     app_version !== existing_app_version
-  //   ) {
-  //     const fetch = async () => {
-  //       await logOut({ showMessage: false })
-  //     }
-
-  //     toast.warning(
-  //       'Ilova yangilandi. Iltimos, tizimga qayta kiring. Noqulayliklar uchun uzr soʻraymiz.',
-  //       { theme: 'dark', autoClose: 5000 }
-  //     )
-  //     fetch()
-  //   }
-  // }, [app_version,  userTable, logOut])
-
+  // Handle user authentication issues
   useEffect(() => {
-    if (session?.user) {
-      dispatch(setUserTable(session.user))
+    // Skip checks on auth and OTP confirmation pages
+    if (path.includes('auth') || path.includes('confirm-otp')) {
+      return
+    }
+
+    // Prevent executing if logout is already in progress or if session is not loaded yet
+    if (logoutInProgress || session === undefined) {
+      return
+    }
+
+    const performLogout = async (message) => {
+      if (logoutInProgress) return
+
+      setLogoutInProgress(true)
+      await logOut({
+        showMessage: false,
+        cb: () => {
+          toast.warning(message)
+          setLogoutInProgress(false)
+        },
+      })
+    }
+
+    // Case 1: User is logged in but missing required profile data
+    if (session?.user?.id && (!session.user?.phone || !session.user?.email)) {
+      performLogout(
+        t(
+          'Your registration was not successfully completed, so we are logging you out for security reasons.'
+        )
+      )
+      return
+    }
+
+    // Case 2: User is logged in but phone is not verified
+    if (session?.user?.id && !session?.user?.phone_verified) {
+      performLogout(t('Phone verified is false'))
+      return
+    }
+  }, [path, session, t, logOut, logoutInProgress])
+
+  // Handle app version changes
+  useEffect(() => {
+    const existing_app_version = localStorage.getItem('app_version') || ''
+
+    if (
+      user?.id &&
+      app_version &&
+      existing_app_version &&
+      app_version !== existing_app_version &&
+      !logoutInProgress
+    ) {
+      const performLogout = async () => {
+        setLogoutInProgress(true)
+        await logOut({
+          showMessage: false,
+          cb: () => setLogoutInProgress(false),
+        })
+      }
+
+      toast.warning(
+        t(
+          'Ilova yangilandi. Iltimos, tizimga qayta kiring. Noqulayliklar uchun uzr soʻraymiz.'
+        ),
+        {
+          autoClose: 5000,
+        }
+      )
+
+      performLogout()
+    }
+  }, [app_version, user, logOut, t, logoutInProgress])
+
+  // Update Redux store with session data
+  useEffect(() => {
+    if (session !== undefined) {
+      dispatch(setUserTable(session?.user || {}))
     }
   }, [session, dispatch])
 
   return <>{children}</>
 }
 
-export default AuthProvider
+export default memo(AuthProvider)

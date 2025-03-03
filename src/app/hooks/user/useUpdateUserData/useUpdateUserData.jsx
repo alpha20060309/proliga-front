@@ -1,15 +1,14 @@
 import { supabase } from 'app/lib/supabaseClient'
 import { useState, useCallback } from 'react'
-import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
-import { setUserTable } from 'app/lib/features/auth/auth.slice'
 import { useTranslation } from 'react-i18next'
+import { useSession } from 'next-auth/react'
 
 export const useUpdateUserData = () => {
-  const dispatch = useDispatch()
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const { t } = useTranslation()
+  const { update } = useSession()
 
   const updateUserData = useCallback(
     async ({
@@ -23,7 +22,7 @@ export const useUpdateUserData = () => {
       cb = () => {},
     }) => {
       // eslint-disable-next-line no-undef
-      const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL.slice(8, 28)
+
       if (!name) {
         setError(t('Ism kiriting'))
         return toast.warning(t('Ism kiriting'), { theme: 'dark' })
@@ -36,7 +35,8 @@ export const useUpdateUserData = () => {
         setError(t("Tug'ilgan yilingizni kiriting"))
         return toast.warning(t("Tug'ilgan yilingizni kiriting"))
       }
-      if (!userTable) {
+      console.log('user',userTable)
+      if (!userTable?.id) {
         setError('User not authenticated')
         return toast.error(t('Foydalanuvchi autentifikatsiya qilinmagan'))
       }
@@ -57,11 +57,8 @@ export const useUpdateUserData = () => {
         const { data, error } = await supabase
           .from('user')
           .update(obj)
-          .eq('guid', userTable?.id)
+          .eq('id', userTable?.id)
           .is('deleted_at', null)
-          .select(
-            'id, guid, name, email, phone, photo, last_name, middle_name, gender, birth_date, bio, balance, deleted_at, language, phone_verified, visitor, geo, agent'
-          )
           .single()
 
         if (error) {
@@ -77,11 +74,9 @@ export const useUpdateUserData = () => {
           )
           return { error, data }
         }
-        if (data) {
-          dispatch(setUserTable(data))
-          localStorage.setItem(`user-table-${sbUrl}`, JSON.stringify(data))
-          cb()
-        }
+
+        cb()
+        await update()
       } catch (error) {
         setError(
           error instanceof Error
@@ -98,7 +93,7 @@ export const useUpdateUserData = () => {
         setIsLoading(false)
       }
     },
-    [dispatch, t]
+    [t, update]
   )
   return { updateUserData, isLoading, error }
 }

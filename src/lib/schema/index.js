@@ -12,7 +12,7 @@ export const LoginSchema = z.object({
   password: z.string().min(1, {
     message: "Please enter your password. Password is required.",
   }),
-  provider: z.string().optional(),
+  data: z.any()
 });
 
 export const RegisterSchema = z
@@ -36,9 +36,37 @@ export const RegisterSchema = z
     passwordConfirmation: z.string().min(6, {
       message: "Please confirm your password, required.",
     }),
-    provider: z.string().optional(),
+    data: z.any()
   })
   .refine((data) => data.password === data.passwordConfirmation, {
     message: "Passwords do not match.",
     path: ["passwordConfirmation"],
   });
+
+export const ChangePasswordSchema = z
+  .object({
+    id: z.number(),
+    currentPassword: z.string().min(1, "Current password is required"),
+    newPassword: z.string().min(8, "Password must be at least 8 characters"),
+    confirmPassword: z.string().min(1, "Password confirmation is required"),
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  })
+
+
+export const ChangePhoneSchema = z.object({
+  id: z.number(),
+  email: z.string().email("Valid email is required"),
+  password: z.string().min(1, "Password is required"),
+  new_phone: z.string().min(1, "New phone number is required"),
+})
+
+// Schema for OTP verification
+export const VerifyPhoneOtpSchema = z.object({
+  id: z.number(),
+  new_phone: z.string().min(1, "Phone number is required"),
+  otp: z.string().min(1, "OTP is required"),
+})
+

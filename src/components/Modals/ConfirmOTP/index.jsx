@@ -16,11 +16,11 @@ import {
 import { useConfirmOTP } from 'app/hooks/auth/useConfirmOTP/useConfirmOTP'
 import { useSelector } from 'react-redux'
 import ResendOTP from './ResendOTP'
-import { useRefreshUserTable } from 'app/hooks/user/useRefreshUserTable/useRefreshUserTable'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
 import { Button } from '@/components/ui/button'
 import { toast } from 'react-toastify'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { useSession } from 'next-auth/react'
 
 const ConfirmOTP = ({
   isModalOpen,
@@ -35,9 +35,9 @@ const ConfirmOTP = ({
   const { confirmOTP, isLoading: confirmLoading, error, data } = useConfirmOTP()
   const { isLoading: sendLoading } = useSendOTP()
   const userTable = useSelector(selectUserTable)
-  const { refreshUserTable, isLoading: refreshLoading } = useRefreshUserTable()
+  const { update } = useSession()
 
-  const isLoading = confirmLoading || sendLoading || refreshLoading
+  const isLoading = confirmLoading || sendLoading
 
   const handleConfirm = async (e) => {
     e.preventDefault()
@@ -53,7 +53,7 @@ const ConfirmOTP = ({
   useEffect(() => {
     if (!confirmLoading && !error && data?.status === 200) {
       const fetch = async () => {
-        await refreshUserTable(userTable?.guid)
+        await update()
       }
 
       setCode('')
@@ -65,11 +65,11 @@ const ConfirmOTP = ({
     confirmLoading,
     error,
     data,
-    refreshUserTable,
     userTable,
     setModalOpen,
     cb,
     refreshUser,
+    update,
   ])
 
   return (
