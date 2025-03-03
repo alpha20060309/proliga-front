@@ -26,7 +26,7 @@ export default function ChangePhoneForm() {
   const geo = useSelector(selectGeo)
 
   const [password, setPassword] = useState('')
-  const [phone, setPhone] = useState(userTable?.phone || '')
+  const [phone, setPhone] = useState('')
   const [showPassword, setShowPassword] = useState(false)
 
   const handleSubmit = async (e) => {
@@ -38,19 +38,28 @@ export default function ChangePhoneForm() {
     if (phone.length !== 13) {
       return toast.error(t("Telefon raqam noto'g'ri"))
     }
+    // new_phone,
+    // password,
+    // fingerprint,
+    // geo,
+    // agent,
+    // cb,
+    // id,
+    // phone,
 
     const status = await updatePhone({
-      new_phone: phone,
+      phone_new: phone,
       password,
       agent,
       geo,
-      email: userTable?.email,
+      id: userTable?.id,
+      phone: userTable?.phone,
       cb: () => setModalOpen(true),
     })
 
     if (status) {
       setPassword('')
-      // setPhone(userTable?.phone)
+      setPhone('')
     }
   }
 
@@ -73,7 +82,7 @@ export default function ChangePhoneForm() {
             name="phone"
             defaultCountry="UZ"
             className="h-10 rounded border-neutral-400 bg-neutral-900 text-neutral-200 placeholder:text-neutral-500"
-            value={phone}
+            value={''}
             placeholder={'99-999-99-99'}
             onChange={setPhone}
           />
