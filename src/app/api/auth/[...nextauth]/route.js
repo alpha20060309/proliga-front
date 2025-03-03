@@ -95,6 +95,8 @@ export const {
         session.user.deleted_at = user?.deleted_at || null;
         session.user.language = user?.language || LANGUAGE.uz;
         session.user.phone_verified = user?.phone_verified || false;
+        session.user.phone_oauth = user?.phone_oauth || null;
+        session.user.email_oauth = user?.email_oauth || null;
       }
 
       return session;

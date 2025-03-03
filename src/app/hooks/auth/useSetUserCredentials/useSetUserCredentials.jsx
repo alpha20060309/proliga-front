@@ -5,12 +5,14 @@ import { supabase } from '../../../lib/supabaseClient'
 import { useTranslation } from 'react-i18next'
 import { setUserTable } from '../../../lib/features/auth/auth.slice'
 import { useSendOTP } from '../useSendOTP/useSendOTP'
+import { useSession } from 'next-auth/react'
 
 export const useSetUserCredentials = () => {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState(null)
   const dispatch = useDispatch()
+  const { update } = useSession()
   const { t } = useTranslation()
   const { sendOTP } = useSendOTP()
 
@@ -25,16 +27,7 @@ export const useSetUserCredentials = () => {
   )
 
   const setUserCredentials = useCallback(
-    async ({
-      phone,
-      email,
-      user,
-      geo,
-      fingerprint,
-      agent,
-      app_version,
-      cb = () => {},
-    }) => {
+    async ({ phone, email, user, geo, fingerprint, agent, cb = () => {} }) => {
       setIsLoading(true)
       setError(null)
       setData(null)
@@ -45,30 +38,56 @@ export const useSetUserCredentials = () => {
       }
 
       try {
-        // Step 1: Check that the user doesn't exist
-        const { data: checkData, error: checkError } = await supabase.rpc(
+        // Step 1: Check that the phone doesn't exist
+        const { data: phoneData, error: phoneError } = await supabase.rpc(
           'get__check_user_not_exist',
           {
             phone_num: phone,
           }
         )
 
-        if (checkError) {
+        if (phoneError) {
           return handleError(
-            checkError instanceof Error
-              ? checkError.message
+            phoneError instanceof Error
+              ? phoneError.message
               : 'An unknown error occurred'
           )
         }
-        if (checkData?.status === 200) {
+
+        if (phoneData?.status === 200) {
           return handleError("Bu telefon raqam oldin ro'yxatdan o'tgan")
         }
-        if (checkData?.status !== 404) {
+        if (phoneData?.status !== 404) {
           return handleError('An unknown error occurred')
         }
 
-        // Step 2: Update user table
+        // Step 2: Check that the email doesn't exist
+        const { data: emailData, error: emailError } = await supabase.rpc(
+          'get__check_user_not_exist',
+          {
+            i_email: email,
+          }
+        )
+
+        if (emailError) {
+          return handleError(
+            emailError instanceof Error
+              ? emailError.message
+              : 'An unknown error occurred'
+          )
+        }
+
+        if (emailData?.status === 200) {
+          return handleError("Bu telefon raqam oldin ro'yxatdan o'tgan")
+        }
+
+        if (emailData?.status !== 404) {
+          return handleError('An unknown error occurred')
+        }
+
+        // Step 3: Update user table
         const { error: fullUserError } = await supabase
+
           .from('user')
           .update({
             email,
@@ -77,10 +96,8 @@ export const useSetUserCredentials = () => {
             visited_at: new Date(),
             geo: JSON.stringify(geo),
             agent: JSON.stringify(agent),
-            image: user?.image,
-            name: user?.name,
           })
-          .eq('guid', user?.id)
+          .eq('id', user?.id)
           .is('deleted_at', null)
           .single()
 
@@ -92,16 +109,15 @@ export const useSetUserCredentials = () => {
           )
         }
 
-        // Step 3: Send OTP and redirect to confirmation page
+        // Step 4: Send OTP and redirect to confirmation page
+        await update()
         setData(user)
-        localStorage.setItem('app_version', app_version)
         toast.info(t('Please confirm your phone number to complete sign up!'))
         await sendOTP({
           phone,
           shouldRedirect: true,
           redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(phone)}`,
         })
-        localStorage.removeItem('sign-in-method')
         cb()
       } catch (error) {
         handleError(
@@ -113,7 +129,7 @@ export const useSetUserCredentials = () => {
         setIsLoading(false)
       }
     },
-    [sendOTP, handleError, t]
+    [sendOTP, handleError, t, update]
   )
 
   return { setUserCredentials, isLoading, error, data }

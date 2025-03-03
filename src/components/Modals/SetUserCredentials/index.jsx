@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Dialog,
   DialogContent,
@@ -25,16 +25,17 @@ import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.s
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { Input } from '@/components/ui/input'
 import { useSetUserCredentials } from 'app/hooks/auth/useSetUserCredentials/useSetUserCredentials'
+import { useSession } from 'next-auth/react'
 
 function SetUserCredentials() {
   const dispatch = useDispatch()
   const { phoneModal } = useSelector((store) => store.auth)
   const { t } = useTranslation()
-  const [phone, setPhone] = useState('')
+  const { data: session } = useSession()
   const user = useSelector(selectUserTable)
-  const [email, setEmail] = useState(user?.email || '')
-  const { setUserCredentials } = useSetUserCredentials()
-  const isLoading = false
+  const [phone, setPhone] = useState('')
+  const [email, setEmail] = useState('')
+  const { setUserCredentials, isLoading } = useSetUserCredentials()
   const geo = useSelector(selectGeo)
   const agent = useSelector(selectAgent)
   const { fingerprint } = useSelector((store) => store.auth)
@@ -44,6 +45,13 @@ function SetUserCredentials() {
   const setModalOpen = () => {
     user?.phone && user?.email && dispatch(setPhoneModal(false))
   }
+
+  useEffect(() => {
+    if (session?.user) {
+      setPhone(session?.user?.phone_oauth || '')
+      setEmail(session?.user?.email_oauth || '')
+    }
+  }, [session?.user])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -61,7 +69,11 @@ function SetUserCredentials() {
       agent,
       fingerprint,
       app_version,
-      cb: () => dispatch(setPhoneModal(false)),
+      cb: () => {
+        localStorage.removeItem('sign-in-method')
+        localStorage.setItem('app_version', app_version)
+        dispatch(setPhoneModal(false))
+      },
     })
   }
 
