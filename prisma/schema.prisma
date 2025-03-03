@@ -875,6 +875,8 @@ model user {
   isOAuth                                   Boolean?              @default(false)
   guid                                      String?               @db.Uuid
   password                                  String?
+  phone_oauth                               String?               @db.VarChar(255)
+  email_oauth                               String?               @db.VarChar
   accounts                                  account[]
   banner_view                               banner_view[]
   club_club_created_byTouser                club[]                @relation("club_created_byTouser")

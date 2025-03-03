@@ -30,33 +30,13 @@ export const {
       async profile(profile) {
         console.log("Yandex", profile)
 
-        if (profile?.default_phone?.number) {
-          try {
-            const existingUser = await getUserByPhone(profile.default_phone.number);
-
-            // If a user with this phone already exists and it's not the same user
-            if (existingUser && existingUser.email !== profile.default_email) {
-              throw new Error("Phone number already in use");
-            }
-          } catch (error) {
-            // If the error is our custom error, rethrow it to be handled by NextAuth
-            if (error.message === "Phone number already in use") {
-              throw error;
-            }
-            // Otherwise, log the error but continue
-            console.error("Error checking phone uniqueness:", error);
-          }
-        }
-
         return {
           name: profile?.first_name || "",
-          email: profile?.default_email || profile?.emails[0] || null,
+          email_oauth: profile?.default_email || profile?.emails[0] || null,
           image: profile?.is_avatar_empty === false ? profile.avatar_url : null,
           last_name: profile?.last_name || "",
-          phone: profile?.default_phone?.number || null,
+          phone_oauth: profile?.default_phone?.number || null,
           isOAuth: true,
-          phone_verified: profile?.default_phone?.number ? true : false,
-          gender: profile?.sex || null,
           birth_date: profile?.birthday ? new Date(profile.birthday) : null,
         }
       }
