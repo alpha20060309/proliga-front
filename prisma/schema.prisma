@@ -371,7 +371,7 @@ model pay_expense {
   deleted_by       Int?
   competition_id   Int?
   system           pay_system?
-  transaction_id   String?           @db.VarChar(32)
+  transaction_id   String?           @unique(map: "uk_transaction_id") @db.VarChar(32)
   currency_code    Int?              @default(0) @db.SmallInt
   state            Int?              @db.SmallInt
   status           Int?              @db.SmallInt
@@ -381,12 +381,12 @@ model pay_expense {
   reason           Int?              @db.SmallInt
   tour_id          Int?
   amount           Int?              @db.SmallInt
-  competition      competition?      @relation(fields: [competition_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_competition_id")
-  pay_package      pay_package?      @relation(fields: [pay_package_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_pay_package_id")
   season           season?           @relation(fields: [season_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_season_id")
-  team             team?             @relation(fields: [team_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_team_id")
   tour             tour?             @relation(fields: [tour_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tour_id")
-  user             user?             @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_id")
+  competition      competition?      @relation(fields: [competition_id], references: [id], onUpdate: SetNull, map: "fk_competition_id")
+  pay_package      pay_package?      @relation(fields: [pay_package_id], references: [id], onUpdate: SetNull, map: "fk_pay_package_id")
+  team             team?             @relation(fields: [team_id], references: [id], onUpdate: SetNull, map: "fk_team_id")
+  user             user?             @relation(fields: [user_id], references: [id], onUpdate: SetNull, map: "fk_user_id")
 
   @@index([competition_id], map: "idx_pay_expense_competition_id")
   @@index([pay_package_id], map: "idx_pay_expense_pay_package_id")
@@ -454,7 +454,7 @@ model player {
   match_event_match_event_player_idToplayer        match_event[]    @relation("match_event_player_idToplayer")
   match_event_match_event_second_player_idToplayer match_event[]    @relation("match_event_second_player_idToplayer")
   club                                             club?            @relation(fields: [club_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_club_id")
-  competition                                      competition?     @relation(fields: [competition_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_competition_id")
+  competition                                      competition?     @relation(fields: [competition_id], references: [id], onUpdate: SetNull, map: "fk_competition_id")
   player_point                                     player_point[]
   player_result                                    player_result[]
   team_player                                      team_player[]
@@ -498,12 +498,12 @@ model player_point {
   autogoal             Int?           @default(0)
   match_name           String?        @db.VarChar(128)
   club                 club?          @relation(fields: [club_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_club_id")
-  competition          competition?   @relation(fields: [competition_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_competition_id")
-  match                match?         @relation(fields: [match_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_match_id")
-  player               player?        @relation(fields: [player_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_player_id")
-  player_result        player_result? @relation(fields: [player_result_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_player_result_id")
-  season               season?        @relation(fields: [season_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_season_id")
-  tour                 tour?          @relation(fields: [tour_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "tour_team_tour_id_fkey")
+  competition          competition?   @relation(fields: [competition_id], references: [id], onUpdate: SetNull, map: "fk_competition_id")
+  match                match?         @relation(fields: [match_id], references: [id], onUpdate: SetNull, map: "fk_match_id")
+  player               player?        @relation(fields: [player_id], references: [id], onUpdate: SetNull, map: "fk_player_id")
+  player_result        player_result? @relation(fields: [player_result_id], references: [id], onUpdate: SetNull, map: "fk_player_result_id")
+  season               season?        @relation(fields: [season_id], references: [id], onUpdate: SetNull, map: "fk_season_id")
+  tour                 tour?          @relation(fields: [tour_id], references: [id], onUpdate: SetNull, map: "tour_team_tour_id_fkey")
 
   @@index([club_id], map: "idx_player_point_club_id")
   @@index([competition_id], map: "idx_player_point_competition_id")
@@ -550,11 +550,11 @@ model player_result {
   match_name           String?          @db.VarChar(128)
   player_point         player_point[]
   club                 club?            @relation(fields: [club_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_club_id")
-  competition          competition?     @relation(fields: [competition_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_competition_id")
-  match                match?           @relation(fields: [match_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_match_id")
-  player               player?          @relation(fields: [player_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_player_id")
-  season               season?          @relation(fields: [season_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_season_id")
-  tour                 tour?            @relation(fields: [tour_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "tour_team_tour_id_fkey")
+  competition          competition?     @relation(fields: [competition_id], references: [id], onUpdate: SetNull, map: "fk_competition_id")
+  match                match?           @relation(fields: [match_id], references: [id], onUpdate: SetNull, map: "fk_match_id")
+  player               player?          @relation(fields: [player_id], references: [id], onUpdate: SetNull, map: "fk_player_id")
+  season               season?          @relation(fields: [season_id], references: [id], onUpdate: SetNull, map: "fk_season_id")
+  tour                 tour?            @relation(fields: [tour_id], references: [id], onUpdate: SetNull, map: "tour_team_tour_id_fkey")
 
   @@index([club_id], map: "idx_player_result_club_id")
   @@index([competition_id], map: "idx_player_result_competition_id")
@@ -580,7 +580,7 @@ model prize {
   updated_by     Int?
   name_ru        String?      @db.VarChar(255)
   is_active      Boolean?     @default(false)
-  competition    competition? @relation(fields: [competition_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_competition_id")
+  competition    competition? @relation(fields: [competition_id], references: [id], onUpdate: SetNull, map: "fk_competition_id")
   user_prize     user_prize[]
 
   @@index([competition_id])
@@ -631,18 +631,21 @@ model system_config {
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model system_language {
-  id         Int       @id @default(autoincrement())
-  name       String?   @db.VarChar(128)
-  uz         String?
-  ru         String?
-  en         String?
-  created_at DateTime? @default(now()) @db.Timestamptz(6)
-  updated_at DateTime? @db.Timestamptz(6)
-  deleted_at DateTime? @db.Timestamptz(6)
-  created_by Int?
-  updated_by Int?
-  deleted_by Int?
-  is_exclude Boolean?
+  id                                    Int       @id @default(autoincrement())
+  name                                  String?   @unique(map: "system_language_name") @db.VarChar(128)
+  uz                                    String?
+  ru                                    String?
+  en                                    String?
+  created_at                            DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at                            DateTime? @db.Timestamptz(6)
+  deleted_at                            DateTime? @db.Timestamptz(6)
+  created_by                            Int?
+  updated_by                            Int?
+  deleted_by                            Int?
+  is_exclude                            Boolean?
+  user_system_language_created_byTouser user?     @relation("system_language_created_byTouser", fields: [created_by], references: [id], onUpdate: SetNull)
+  user_system_language_deleted_byTouser user?     @relation("system_language_deleted_byTouser", fields: [deleted_by], references: [id], onUpdate: SetNull)
+  user_system_language_updated_byTouser user?     @relation("system_language_updated_byTouser", fields: [updated_by], references: [id], onUpdate: SetNull)
 
   @@index([created_by], map: "idx_system_language_created_by")
   @@index([deleted_by], map: "idx_system_language_deleted_by")
@@ -679,7 +682,7 @@ model system_notification {
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model team {
   id                      Int             @id(map: "_copy_1_copy_1_copy_1_copy_1_copy_3") @default(autoincrement())
-  name                    String?         @db.VarChar(50)
+  name                    String?         @unique(map: "name_unique") @db.VarChar(50)
   user_id                 Int?
   competition_id          Int?
   formation               forms?          @default(f4_3_3)
@@ -703,9 +706,9 @@ model team {
   last_tour_point         Int?            @default(0)
   is_test                 Boolean?        @default(false)
   pay_expense             pay_expense[]
-  competition             competition?    @relation(fields: [competition_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_competition_id")
-  season                  season?         @relation(fields: [season_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_season_id")
-  user                    user?           @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_id")
+  competition             competition?    @relation(fields: [competition_id], references: [id], onUpdate: SetNull, map: "fk_competition_id")
+  season                  season?         @relation(fields: [season_id], references: [id], onUpdate: SetNull, map: "fk_season_id")
+  user                    user?           @relation(fields: [user_id], references: [id], onUpdate: SetNull, map: "fk_user_id")
   team_player             team_player[]
   tour_team               tour_team[]
   user_activity           user_activity[]
@@ -746,11 +749,11 @@ model team_player {
   deleted_by     Int?
   point          Int?             @db.SmallInt
   club           club?            @relation(fields: [club_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_club_id")
-  competition    competition?     @relation(fields: [competition_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_competition_id")
-  player         player?          @relation(fields: [player_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_player_id")
-  team           team?            @relation(fields: [team_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_team_id")
-  tour           tour?            @relation(fields: [tour_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "tour_team_tour_id_fkey")
-  user           user?            @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_id")
+  competition    competition?     @relation(fields: [competition_id], references: [id], onUpdate: SetNull, map: "fk_competition_id")
+  player         player?          @relation(fields: [player_id], references: [id], onUpdate: SetNull, map: "fk_player_id")
+  team           team?            @relation(fields: [team_id], references: [id], onUpdate: SetNull, map: "fk_team_id")
+  user           user?            @relation(fields: [user_id], references: [id], onUpdate: SetNull, map: "fk_user_id")
+  tour           tour?            @relation(fields: [tour_id], references: [id], onUpdate: SetNull, map: "tour_team_tour_id_fkey")
 
   @@index([id, team_id, user_id, tour_id], map: "idx_team_player")
   @@index([club_id], map: "idx_team_player_club_id")
@@ -789,8 +792,8 @@ model tour {
   player_point     player_point[]
   player_result    player_result[]
   team_player      team_player[]
-  competition      competition?    @relation(fields: [competition_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_competition_id")
-  season           season?         @relation(fields: [season_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_season_id")
+  competition      competition?    @relation(fields: [competition_id], references: [id], onUpdate: SetNull, map: "fk_competition_id")
+  season           season?         @relation(fields: [season_id], references: [id], onUpdate: SetNull, map: "fk_season_id")
   tour_team        tour_team[]
   user_activity    user_activity[]
 
@@ -821,11 +824,11 @@ model tour_team {
   deleted_by                 Int?
   name                       String?      @db.VarChar(64)
   is_last                    Boolean?     @default(false)
-  competition                competition? @relation(fields: [competition_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_competition_id")
-  season                     season?      @relation(fields: [season_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_season_id")
-  team                       team?        @relation(fields: [team_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_team_id")
-  tour                       tour?        @relation(fields: [tour_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tour_id")
-  user                       user?        @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_id")
+  competition                competition? @relation(fields: [competition_id], references: [id], onUpdate: SetNull, map: "fk_competition_id")
+  season                     season?      @relation(fields: [season_id], references: [id], onUpdate: SetNull, map: "fk_season_id")
+  team                       team?        @relation(fields: [team_id], references: [id], onUpdate: SetNull, map: "fk_team_id")
+  tour                       tour?        @relation(fields: [tour_id], references: [id], onUpdate: SetNull, map: "fk_tour_id")
+  user                       user?        @relation(fields: [user_id], references: [id], onUpdate: SetNull, map: "fk_user_id")
 
   @@index([id, team_id, user_id, tour_id], map: "idx_tour_team")
   @@index([competition_id], map: "idx_tour_team_competition_id")
@@ -841,64 +844,71 @@ model tour_team {
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model user {
-  id                                        Int                   @id @default(autoincrement())
-  role                                      roles?                @default(user)
-  name                                      String?               @db.VarChar(64)
-  email                                     String?               @unique(map: "user_email_idx") @db.VarChar(32)
-  phone                                     String?               @unique(map: "uk_phone") @db.VarChar(64)
-  sms_code                                  String?               @db.VarChar(64)
-  sms_created_at                            DateTime?             @db.Timestamptz(6)
-  last_name                                 String?
-  middle_name                               String?
-  gender                                    String?
-  birth_date                                DateTime?             @db.Date
-  bio                                       String?
-  balance                                   Float?                @default(0)
-  created_at                                DateTime?             @db.Timestamptz(6)
-  updated_at                                DateTime?             @db.Timestamptz(6)
-  deleted_at                                DateTime?             @db.Timestamptz(6)
-  created_by                                Int?
-  updated_by                                Int?
-  deleted_by                                Int?
-  language                                  language?             @default(uz)
-  enable_notification                       Boolean?              @default(true)
-  phone_verified                            Boolean?              @default(false)
-  visitor                                   String?               @db.VarChar(32)
-  visited_at                                DateTime?             @db.Timestamptz(6)
-  geo                                       String?
-  agent                                     String?
-  is_test                                   Boolean?              @default(false)
-  new_phone                                 String?               @db.VarChar(64)
-  old_phones                                Json?
-  image                                     String?
-  emailVerified                             DateTime?
-  isOAuth                                   Boolean?              @default(false)
-  guid                                      String?               @db.Uuid
-  password                                  String?
-  accounts                                  account[]
-  banner_view                               banner_view[]
-  club_club_created_byTouser                club[]                @relation("club_created_byTouser")
-  club_club_deleted_byTouser                club[]                @relation("club_deleted_byTouser")
-  club_club_updated_byTouser                club[]                @relation("club_updated_byTouser")
-  competition_competition_created_byTouser  competition[]         @relation("competition_created_byTouser")
-  competition_competition_deleted_byTouser  competition[]         @relation("competition_deleted_byTouser")
-  competition_competition_updated_byTouser  competition[]         @relation("competition_updated_byTouser")
-  country_country_created_byTouser          country[]             @relation("country_created_byTouser")
-  country_country_deleted_byTouser          country[]             @relation("country_deleted_byTouser")
-  country_country_updated_byTouser          country[]             @relation("country_updated_byTouser")
-  match_match_created_byTouser              match[]               @relation("match_created_byTouser")
-  match_match_deleted_byTouser              match[]               @relation("match_deleted_byTouser")
-  match_match_updated_byTouser              match[]               @relation("match_updated_byTouser")
-  news                                      news[]
-  pay_balance                               pay_balance[]
-  pay_expense                               pay_expense[]
-  sessions                                  session[]
-  system_notification                       system_notification[]
-  team                                      team[]
-  team_player                               team_player[]
-  tour_team                                 tour_team[]
-  user_activity_user_activity_user_idTouser user_activity[]       @relation("user_activity_user_idTouser")
-  user_prize                                user_prize[]
+  id                                               Int                   @id @default(autoincrement())
+  guid                                             String?               @db.Uuid
+  role                                             roles?                @default(user)
+  name                                             String?               @db.VarChar(64)
+  email                                            String                @unique(map: "user_email_idx") @db.VarChar(32)
+  phone                                            String?               @unique(map: "uk_phone") @db.VarChar(64)
+  photo                                            String?
+  sms_code                                         String?               @db.VarChar(64)
+  sms_created_at                                   DateTime?             @db.Timestamptz(6)
+  last_name                                        String?
+  middle_name                                      String?
+  gender                                           String?
+  birth_date                                       DateTime?             @db.Date
+  bio                                              String?
+  balance                                          Float?                @default(0)
+  created_at                                       DateTime?             @db.Timestamptz(6)
+  updated_at                                       DateTime?             @db.Timestamptz(6)
+  deleted_at                                       DateTime?             @db.Timestamptz(6)
+  created_by                                       Int?
+  updated_by                                       Int?
+  deleted_by                                       Int?
+  language                                         language?             @default(uz)
+  enable_notification                              Boolean?              @default(true)
+  phone_verified                                   Boolean?              @default(false)
+  visitor                                          String?               @db.VarChar(32)
+  visited_at                                       DateTime?             @db.Timestamptz(6)
+  geo                                              String?
+  agent                                            String?
+  is_test                                          Boolean?              @default(false)
+  phone_new                                        String?               @db.VarChar(64)
+  phones_old                                       Json?
+  image                                            String?
+  emailVerified                                    DateTime?
+  isOAuth                                          Boolean?              @default(false)
+  password                                         String?
+  accounts                                         account[]
+  banner_view                                      banner_view[]
+  club_club_created_byTouser                       club[]                @relation("club_created_byTouser")
+  club_club_deleted_byTouser                       club[]                @relation("club_deleted_byTouser")
+  club_club_updated_byTouser                       club[]                @relation("club_updated_byTouser")
+  competition_competition_created_byTouser         competition[]         @relation("competition_created_byTouser")
+  competition_competition_deleted_byTouser         competition[]         @relation("competition_deleted_byTouser")
+  competition_competition_updated_byTouser         competition[]         @relation("competition_updated_byTouser")
+  country_country_created_byTouser                 country[]             @relation("country_created_byTouser")
+  country_country_deleted_byTouser                 country[]             @relation("country_deleted_byTouser")
+  country_country_updated_byTouser                 country[]             @relation("country_updated_byTouser")
+  match_match_created_byTouser                     match[]               @relation("match_created_byTouser")
+  match_match_deleted_byTouser                     match[]               @relation("match_deleted_byTouser")
+  match_match_updated_byTouser                     match[]               @relation("match_updated_byTouser")
+  news                                             news[]
+  pay_balance                                      pay_balance[]
+  pay_expense                                      pay_expense[]
+  sessions                                         session[]
+  system_language_system_language_created_byTouser system_language[]     @relation("system_language_created_byTouser")
+  system_language_system_language_deleted_byTouser system_language[]     @relation("system_language_deleted_byTouser")
+  system_language_system_language_updated_byTouser system_language[]     @relation("system_language_updated_byTouser")
+  system_notification                              system_notification[]
+  team                                             team[]
+  team_player                                      team_player[]
+  tour_team                                        tour_team[]
+  user_activity_user_activity_created_byTouser     user_activity[]       @relation("user_activity_created_byTouser")
+  user_activity_user_activity_deleted_byTouser     user_activity[]       @relation("user_activity_deleted_byTouser")
+  user_activity_user_activity_updated_byTouser     user_activity[]       @relation("user_activity_updated_byTouser")
+  user_activity_user_activity_user_idTouser        user_activity[]       @relation("user_activity_user_idTouser")
+  user_prize                                       user_prize[]
 
   @@index([guid])
   @@index([id], map: "idx_user_id")
@@ -910,26 +920,29 @@ model user {
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model user_activity {
-  id                               Int          @id @default(autoincrement())
-  user_id                          Int?
-  activity                         user_event?
-  team_id                          Int?
-  name_uz                          String?
-  created_at                       DateTime?    @default(now()) @db.Timestamptz(6)
-  updated_at                       DateTime?    @default(now()) @db.Timestamptz(6)
-  deleted_at                       DateTime?    @db.Timestamptz(6)
-  created_by                       Int?
-  updated_by                       Int?
-  deleted_by                       Int?
-  name_ru                          String?
-  name_en                          String?
-  tour_id                          Int?
-  competition_id                   Int?
-  name                             String?      @db.VarChar(255)
-  competition                      competition? @relation(fields: [competition_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_competition_id")
-  team                             team?        @relation(fields: [team_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_team_id")
-  tour                             tour?        @relation(fields: [tour_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "tour_team_tour_id_fkey")
-  user_user_activity_user_idTouser user?        @relation("user_activity_user_idTouser", fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_id")
+  id                                  Int          @id @default(autoincrement())
+  user_id                             Int?
+  activity                            user_event?
+  team_id                             Int?
+  name_uz                             String?
+  created_at                          DateTime?    @default(now()) @db.Timestamptz(6)
+  updated_at                          DateTime?    @default(now()) @db.Timestamptz(6)
+  deleted_at                          DateTime?    @db.Timestamptz(6)
+  created_by                          Int?
+  updated_by                          Int?
+  deleted_by                          Int?
+  name_ru                             String?
+  name_en                             String?
+  tour_id                             Int?
+  competition_id                      Int?
+  name                                String?      @db.VarChar(255)
+  user_user_activity_created_byTouser user?        @relation("user_activity_created_byTouser", fields: [created_by], references: [id], onUpdate: SetNull, map: "card_created_by_fkey")
+  user_user_activity_deleted_byTouser user?        @relation("user_activity_deleted_byTouser", fields: [deleted_by], references: [id], onUpdate: SetNull, map: "card_deleted_by_fkey")
+  user_user_activity_updated_byTouser user?        @relation("user_activity_updated_byTouser", fields: [updated_by], references: [id], onUpdate: SetNull, map: "card_updated_by_fkey")
+  competition                         competition? @relation(fields: [competition_id], references: [id], onUpdate: SetNull, map: "fk_competition_id")
+  tour                                tour?        @relation(fields: [tour_id], references: [id], onUpdate: SetNull, map: "tour_team_tour_id_fkey")
+  team                                team?        @relation(fields: [team_id], references: [id], onUpdate: SetNull, map: "fk_team_id")
+  user_user_activity_user_idTouser    user?        @relation("user_activity_user_idTouser", fields: [user_id], references: [id], onUpdate: SetNull, map: "fk_user_id")
 
   @@index([competition_id], map: "idx_user_activity_competition_id")
   @@index([created_by], map: "idx_user_activity_created_by")
@@ -963,11 +976,11 @@ model user_prize {
   deleted_at      DateTime?    @db.Timestamptz(6)
   created_by      Int?
   deleted_by      Int?
-  competition     competition? @relation(fields: [competition_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_competition_id")
-  prize           prize?       @relation(fields: [prize_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_prize_id")
-  season          season?      @relation(fields: [season_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_season_id")
-  team            team?        @relation(fields: [team_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_team_id")
-  user            user?        @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_id")
+  competition     competition? @relation(fields: [competition_id], references: [id], onUpdate: SetNull, map: "fk_competition_id")
+  prize           prize?       @relation(fields: [prize_id], references: [id], onUpdate: SetNull, map: "fk_prize_id")
+  season          season?      @relation(fields: [season_id], references: [id], onUpdate: SetNull, map: "fk_season_id")
+  team            team?        @relation(fields: [team_id], references: [id], onUpdate: SetNull, map: "fk_team_id")
+  user            user?        @relation(fields: [user_id], references: [id], onUpdate: SetNull, map: "fk_user_id")
 
   @@index([competition_id], map: "idx_user_prize_competition_id")
   @@index([prize_id], map: "idx_user_prize_prize_id")

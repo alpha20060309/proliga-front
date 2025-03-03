@@ -68,9 +68,6 @@ const LoginForm = ({ setShouldRedirect }) => {
           localStorage.setItem('app_version', app_version)
 
           if (!phone_verified && res?.phone) {
-            toast.warning(t('Sizning raqamingiz tasdiqlanmagan'), {
-              theme: 'dark',
-            })
             toast.info(
               t('We are redirecting you to an sms confirmation page!'),
               {

@@ -29,7 +29,7 @@ const Navbar = () => {
       <nav
         className={cn(
           'fixed left-0 right-0 top-0 z-20 w-screen bg-black bg-opacity-80 backdrop-blur-md',
-          NEXT_PUBLIC_TEST_NAV_SLIDER ? 'pb-3' : 'py-4'
+          NEXT_PUBLIC_TEST_NAV_SLIDER ? 'pb-3' : 'py-3'
         )}
       >
         {NEXT_PUBLIC_TEST_NAV_SLIDER && (

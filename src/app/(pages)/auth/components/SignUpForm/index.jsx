@@ -84,7 +84,6 @@ const SignUpForm = ({ setShouldRedirect }) => {
           localStorage.setItem('app_version', app_version)
 
           if (!phone_verified && res?.phone) {
-            toast.warning(t('Sizning raqamingiz tasdiqlanmagan'))
             toast.info(t('We are redirecting you to an sms confirmation page!'))
             await sendOTP({
               phone,

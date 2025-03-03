@@ -68,7 +68,7 @@ const Auth = () => {
         toast.error(error)
       }
 
-      // router.push('/auth')
+      router.push('/auth')
     }
   }, [error, router])
 

@@ -29,6 +29,11 @@ function AuthListener({ children }) {
         const app_version = JSON.parse(localStorage.getItem('config'))
           ?.app_version?.value
         const SIGN_IN_METHOD = localStorage.getItem('sign-in-method')
+        const otp = `otp_sent_${user.phone}_${session.expires}`
+
+        if (localStorage.getItem(otp)) {
+          return
+        }
 
         if (
           SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE ||
@@ -39,22 +44,15 @@ function AuthListener({ children }) {
             return
           }
           if (!user?.phone_verified) {
-            toast.warning(t('Sizning raqamingiz tasdiqlanmagan'), {
-              theme: 'dark',
-            })
-            toast.info(
-              t('We are redirecting you to an sms confirmation page!'),
-              {
-                theme: 'dark',
-              }
-            )
+            localStorage.setItem(otp, 'true')
             localStorage.setItem('app_version', app_version)
             await sendOTP({
               phone: user?.phone,
               shouldRedirect: true,
               redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(user?.phone)}`,
             })
-            return localStorage.removeItem('sign-in-method')
+            toast.info(t('We are redirecting you to an sms confirmation page!'))
+            return
           }
         }
       }

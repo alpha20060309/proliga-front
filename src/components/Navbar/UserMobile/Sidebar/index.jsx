@@ -162,7 +162,7 @@ const MobileSidebar = ({ isModalOpen, setModalOpen }) => {
           </div>
         </div>
         <section className="mt-auto flex w-full flex-col justify-between gap-1 rounded-md sm:flex-row">
-          {userTable ? (
+          {userTable?.id ? (
             <>
               <SystemLink
                 handleToggle={() => setModalOpen(false)}

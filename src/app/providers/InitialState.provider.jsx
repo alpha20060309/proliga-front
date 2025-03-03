@@ -39,10 +39,10 @@ const InitialStateProvider = ({ children }) => {
   }, [dispatch, generateFingerprint, getUserAgent])
 
   useEffect(() => {
-    if (userTable?.id) {
+    if (userTable?.id && userTable?.phone && userTable?.phone_verified) {
       dispatch(fetchPersonalNotifications({ user_id: userTable?.id }))
     }
-  }, [dispatch, userTable?.id])
+  }, [dispatch, userTable])
 
   useEffect(() => {
     if (lang !== userTable?.language && userTable?.id) {
