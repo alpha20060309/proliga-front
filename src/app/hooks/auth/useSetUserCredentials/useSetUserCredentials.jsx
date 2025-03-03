@@ -1,9 +1,7 @@
 import { useState, useCallback } from 'react'
 import { toast } from 'react-toastify'
-import { useDispatch } from 'react-redux'
 import { supabase } from '../../../lib/supabaseClient'
 import { useTranslation } from 'react-i18next'
-import { setUserTable } from '../../../lib/features/auth/auth.slice'
 import { useSendOTP } from '../useSendOTP/useSendOTP'
 import { useSession } from 'next-auth/react'
 
@@ -11,23 +9,22 @@ export const useSetUserCredentials = () => {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState(null)
-  const dispatch = useDispatch()
   const { update } = useSession()
   const { t } = useTranslation()
   const { sendOTP } = useSendOTP()
 
   const handleError = useCallback(
     (errorMessage) => {
+      setIsLoading(false)
       setError(errorMessage)
       toast.error(t(errorMessage), { theme: 'dark' })
-      dispatch(setUserTable(null))
       return
     },
-    [t, dispatch]
+    [t]
   )
 
   const setUserCredentials = useCallback(
-    async ({ phone, email, user, geo, fingerprint, agent, cb = () => {} }) => {
+    async ({ phone, email, user, cb = () => {} }) => {
       setIsLoading(true)
       setError(null)
       setData(null)
@@ -63,7 +60,7 @@ export const useSetUserCredentials = () => {
 
         // Step 2: Check that the email doesn't exist
         const { data: emailData, error: emailError } = await supabase.rpc(
-          'get__check_user_not_exist',
+          'get__check_user_email_not_exist',
           {
             i_email: email,
           }
@@ -92,10 +89,6 @@ export const useSetUserCredentials = () => {
           .update({
             email,
             phone,
-            visitor: fingerprint,
-            visited_at: new Date(),
-            geo: JSON.stringify(geo),
-            agent: JSON.stringify(agent),
           })
           .eq('id', user?.id)
           .is('deleted_at', null)
@@ -129,7 +122,7 @@ export const useSetUserCredentials = () => {
         setIsLoading(false)
       }
     },
-    [sendOTP, handleError, t, update]
+    [sendOTP, handleError, t]
   )
 
   return { setUserCredentials, isLoading, error, data }
