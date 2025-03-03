@@ -48,8 +48,8 @@ function SetUserCredentials() {
 
   useEffect(() => {
     if (session?.user) {
-      setPhone(session?.user?.phone_oauth || '')
-      setEmail(session?.user?.email_oauth || '')
+      setPhone(session?.user?.phone || '')
+      setEmail(session?.user?.email || '')
     }
   }, [session?.user])
 

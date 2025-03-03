@@ -9,7 +9,7 @@ export const useSetUserCredentials = () => {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState(null)
-  const { update } = useSession()
+  const { update, data: session } = useSession()
   const { t } = useTranslation()
   const { sendOTP } = useSendOTP()
 
@@ -36,50 +36,53 @@ export const useSetUserCredentials = () => {
 
       try {
         // Step 1: Check that the phone doesn't exist
-        const { data: phoneData, error: phoneError } = await supabase.rpc(
-          'get__check_user_not_exist',
-          {
-            phone_num: phone,
-          }
-        )
-
-        if (phoneError) {
-          return handleError(
-            phoneError instanceof Error
-              ? phoneError.message
-              : 'An unknown error occurred'
+        if (!session?.user?.email) {
+          const { data: phoneData, error: phoneError } = await supabase.rpc(
+            'get__check_user_not_exist',
+            {
+              phone_num: phone,
+            }
           )
-        }
 
-        if (phoneData?.status === 200) {
-          return handleError("Bu telefon raqam oldin ro'yxatdan o'tgan")
-        }
-        if (phoneData?.status !== 404) {
-          return handleError('An unknown error occurred')
-        }
+          if (phoneError) {
+            return handleError(
+              phoneError instanceof Error
+                ? phoneError.message
+                : 'An unknown error occurred'
+            )
+          }
 
+          if (phoneData?.status === 200) {
+            return handleError("Bu telefon raqam oldin ro'yxatdan o'tgan")
+          }
+          if (phoneData?.status !== 404) {
+            return handleError('An unknown error occurred')
+          }
+        }
         // Step 2: Check that the email doesn't exist
-        const { data: emailData, error: emailError } = await supabase.rpc(
-          'get__check_user_email_not_exist',
-          {
-            i_email: email,
-          }
-        )
-
-        if (emailError) {
-          return handleError(
-            emailError instanceof Error
-              ? emailError.message
-              : 'An unknown error occurred'
+        if (!session?.user?.email) {
+          const { data: emailData, error: emailError } = await supabase.rpc(
+            'get__check_user_email_not_exist',
+            {
+              i_email: email,
+            }
           )
-        }
 
-        if (emailData?.status === 200) {
-          return handleError("Bu telefon raqam oldin ro'yxatdan o'tgan")
-        }
+          if (emailError) {
+            return handleError(
+              emailError instanceof Error
+                ? emailError.message
+                : 'An unknown error occurred'
+            )
+          }
 
-        if (emailData?.status !== 404) {
-          return handleError('An unknown error occurred')
+          if (emailData?.status === 200) {
+            return handleError("Bu email raqam oldin ro'yxatdan o'tgan")
+          }
+
+          if (emailData?.status !== 404) {
+            return handleError('An unknown error occurred')
+          }
         }
 
         // Step 3: Update user table
@@ -89,6 +92,7 @@ export const useSetUserCredentials = () => {
           .update({
             email,
             phone,
+            isOAuth: true,
           })
           .eq('id', user?.id)
           .is('deleted_at', null)
@@ -122,7 +126,7 @@ export const useSetUserCredentials = () => {
         setIsLoading(false)
       }
     },
-    [sendOTP, handleError, t]
+    [sendOTP, handleError, t, update, session?.user]
   )
 
   return { setUserCredentials, isLoading, error, data }
