@@ -1,16 +1,15 @@
-"use server"
+'use server'
 
-import bcrypt from "bcryptjs"
-import { db } from "lib/db"
-import { getUserByPhone } from "lib/utils/auth.util"
-import { ResetPasswordSchema } from "lib/schema"
+import bcrypt from 'bcryptjs'
+import { db } from 'lib/db'
+import { getUserByPhone } from 'lib/utils/auth.util'
+import { ResetPasswordSchema } from 'lib/schema'
 
 export const resetPassword = async (values) => {
-
-  const validatedFields = ResetPasswordSchema.safeParse(values);
+  const validatedFields = ResetPasswordSchema.safeParse(values)
 
   if (!validatedFields.success) {
-    return { error: "Invalid fields" };
+    return { error: 'Invalid fields' }
   }
 
   const { phone, code, password } = validatedFields.data
@@ -20,17 +19,18 @@ export const resetPassword = async (values) => {
     const existingUser = await getUserByPhone(phone)
 
     if (!existingUser) {
-      return { error: "User not found" }
+      return { error: 'User not found' }
     }
 
     // 2. Check if the provided code matches the stored code
     if (existingUser?.sms_code !== code || !existingUser?.sms_code) {
-      return { error: "Invalid SMS code" }
+      return { error: 'Invalid SMS code' }
     }
 
-    const codeAgeInMinutes = (new Date() - existingUser.sms_created_at) / (1000 * 60)
+    const codeAgeInMinutes =
+      (new Date() - existingUser.sms_created_at) / (1000 * 60)
     if (codeAgeInMinutes > 3) {
-      return { error: "SMS code has expired" }
+      return { error: 'SMS code has expired' }
     }
 
     // 4. Hash the new password
@@ -44,8 +44,7 @@ export const resetPassword = async (values) => {
 
     return { success: true }
   } catch (error) {
-    console.error("Password reset error:", error)
-    return { error: "An unknown error occurred" }
+    console.error('Password reset error:', error)
+    return { error: 'An unknown error occurred' }
   }
 }
-

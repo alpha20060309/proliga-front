@@ -11,19 +11,21 @@ import { useAuthUpdatePassword } from 'app/hooks/auth/useAuthChangePassword/useA
 import { useSelector } from 'react-redux'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import ConfirmOTP from 'components/Modals/ConfirmOTP'
+import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
+import { resetPassword } from 'app/actions/resetPassword.action'
 
-function ChangePasswordForm({ isModalOpen, setModalOpen }) {
+function ChangePasswordForm() {
+  const [isModalOpen, setModalOpen] = useState(false)
   const { t } = useTranslation()
-  const userTable = useSelector(selectUserTable)
-  const { updatePassword, isLoading } = useAuthUpdatePassword()
 
-  const [oldPassword, setOldPassword] = useState('')
+  const userTable = useSelector(selectUserTable)
+  const { sendOTP } = useSendOTP()
+  const isLoading = false
+
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [showOldPassword, setShowOldPassword] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const [isSMSVerified, setSMSVerified] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -31,30 +33,11 @@ function ChangePasswordForm({ isModalOpen, setModalOpen }) {
     if (password !== confirmPassword) {
       return toast.warning(t('Parollar mos kelmadi'))
     }
-    if (
-      oldPassword.length < 6 ||
-      password.length < 6 ||
-      confirmPassword.length < 6
-    ) {
+    if (password.length < 6 || confirmPassword.length < 6) {
       return toast.warning(t("Parolar 6 ta belgidan kam bo'lmasligi kerak"))
     }
-    if (oldPassword === password) {
-      return toast.warning(
-        t('Yangi parol eski parol bilan birhil bolishi mumkin emas')
-      )
-    }
-
-    const status = await updatePassword({
-      oldPassword,
-      newPassword: password,
-      email: userTable?.email,
-    })
-
-    if (status) {
-      setPassword('')
-      setOldPassword('')
-      setConfirmPassword('')
-    }
+    await sendOTP({ phone: userTable?.phone })
+    setModalOpen(true)
   }
 
   return (
@@ -62,14 +45,23 @@ function ChangePasswordForm({ isModalOpen, setModalOpen }) {
       <ConfirmOTP
         setModalOpen={setModalOpen}
         isModalOpen={isModalOpen}
-        cb={(value) => setSMSVerified(value)}
+        defaultHook={false}
+        cb={(code) => {
+          const res = resetPassword({ phone: userTable?.phone, code, password })
+
+          if (res?.error) {
+            return toast.error(t(res?.error))
+          }
+          toast.success(t("Parol o'zgartirildi"))
+          setModalOpen(false)
+        }}
         phone={userTable?.phone}
       />
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-2 px-1 sm:max-w-96"
       >
-        <div className="relative sm:max-w-96">
+        {/* <div className="relative sm:max-w-96">
           <Label htmlFor="oldPassword">{t('Eski parol')}</Label>
           <Input
             disabled={!isSMSVerified}
@@ -93,7 +85,7 @@ function ChangePasswordForm({ isModalOpen, setModalOpen }) {
               <Eye className="h-5 w-5 text-neutral-200" />
             )}
           </Button>
-        </div>
+        </div> */}
         <div className="relative sm:max-w-96">
           <Label htmlFor="newPassword">{t('Yangi parol')}</Label>
           <Input
@@ -102,7 +94,6 @@ function ChangePasswordForm({ isModalOpen, setModalOpen }) {
             className="h-10 border-neutral-400 pr-10"
             type={showPassword ? 'text' : 'password'}
             value={password}
-            disabled={!isSMSVerified}
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button
@@ -124,7 +115,6 @@ function ChangePasswordForm({ isModalOpen, setModalOpen }) {
             {t('Yangi parolni qayta kiriting')}
           </Label>
           <Input
-            disabled={!isSMSVerified}
             id="confirmPassword"
             name="confirmPassword"
             className="h-10 border-neutral-400 pr-10"
@@ -149,7 +139,7 @@ function ChangePasswordForm({ isModalOpen, setModalOpen }) {
         <Button
           className="h-10 w-full rounded border border-black border-primary/75 bg-neutral-900 text-sm font-semibold text-neutral-200 transition-all hover:border-primary xs:max-w-40"
           type="submit"
-          disabled={isLoading || !isSMSVerified}
+          // disabled={isLoading}
         >
           {isLoading ? (
             <Loader className="mx-auto size-5 animate-spin text-neutral-100" />

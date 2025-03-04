@@ -35,7 +35,6 @@ const SettingsProfile = () => {
 
   return (
     <SettingsContainer>
-      <SettingsWarnings />
       <h3 className="mb-2 text-xl font-bold tracking-tight text-neutral-100">
         {t('Profil')}
       </h3>

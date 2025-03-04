@@ -42,7 +42,6 @@ function AuthListener({ children }) {
           return
         } else if (!user?.phone_verified) {
           localStorage.setItem('app_version', app_version)
-          console.log('executed')
           await sendOTP({
             phone: user?.phone,
             shouldRedirect: false,
@@ -60,7 +59,8 @@ function AuthListener({ children }) {
     }
 
     handleAuthChange()
-  }, [dispatch, status, t, login_success, router, sendOTP])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, status, t, router])
 
   return <>{children}</>
 }

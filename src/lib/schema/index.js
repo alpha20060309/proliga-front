@@ -46,14 +46,11 @@ export const RegisterSchema = z
 export const ChangePasswordSchema = z
   .object({
     id: z.number(),
-    currentPassword: z.string().min(1, "Current password is required"),
-    newPassword: z.string().min(8, "Password must be at least 8 characters"),
-    confirmPassword: z.string().min(1, "Password confirmation is required"),
+    password: z.string().min(6, "Current password is required"),
+    new_password: z.string().min(6, "Password must be at least 8 characters"),
+    code: z.string().length(6),
   })
-  .refine((data) => data.newPassword === data.confirmPassword, {
-    message: "Passwords do not match",
-    path: ["confirmPassword"],
-  })
+
 
 
 export const ChangePhoneSchema = z.object({
@@ -78,8 +75,8 @@ export const ResetPasswordSchema = z.object({
 })
 
 export const VerifySmsCodeSchema = z.object({
-  phone_number: z.string().length(13),
-  confirm_code: z.string().length(6),
+  phone: z.string().length(13),
+  code: z.string().length(6),
   is_update: z.boolean().optional().default(false),
 })
 
