@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 import { Eye, EyeOff } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Lock, Loader2 } from 'lucide-react'
-import { resetPassword } from 'app/actions/reset-password'
+import { resetPassword } from 'app/actions/resetPassword.action'
 import { useTransition } from 'react'
 
 const ResetPasswordForm = () => {

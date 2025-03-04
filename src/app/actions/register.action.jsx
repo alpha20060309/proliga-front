@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 import { RegisterSchema } from "lib/schema";
 import { db } from "lib/db";
 import { getUserByPhone, getUserByEmail } from "lib/utils/auth.util";
-import { login } from "./login";
+import { login } from "./login.action";
 
 export const register = async (values) => {
 

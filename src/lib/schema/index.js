@@ -76,3 +76,10 @@ export const ResetPasswordSchema = z.object({
   code: z.string().min(1, "SMS code is required"),
   password: z.string().min(6, "Password must be at least 6 characters"),
 })
+
+export const VerifySmsCodeSchema = z.object({
+  phone_number: z.string().length(13),
+  confirm_code: z.string().length(6),
+  is_update: z.boolean().optional().default(false),
+})
+

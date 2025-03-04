@@ -17,9 +17,9 @@ import { memo } from 'react'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import SocialLogin from '../SocialLogin'
 import { Input } from '@/components/ui/input'
-import { register } from 'app/actions/register'
 import { useSession } from 'next-auth/react'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
+import { register } from 'app/actions/register.action'
 
 const SignUpForm = ({ setShouldRedirect }) => {
   const { t } = useTranslation()

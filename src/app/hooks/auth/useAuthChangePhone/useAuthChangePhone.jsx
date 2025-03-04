@@ -3,7 +3,6 @@ import { toast } from 'react-toastify'
 import { supabase } from '../../../lib/supabaseClient'
 import { useTranslation } from 'react-i18next'
 import { useSendOTP } from '../useSendOTP/useSendOTP'
-import { login } from 'app/actions/login'
 import { signIn } from 'next-auth/react'
 
 export const useAuthChangePhone = () => {

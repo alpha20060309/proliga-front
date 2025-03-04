@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
-import { login } from 'app/actions/login'
+import { login } from 'app/actions/login.action'
 import { useSession } from 'next-auth/react'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
 
