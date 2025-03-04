@@ -1,8 +1,8 @@
 export const SETTINGS_TAB = {
-  PROFILE: 'Profile',
-  SETTINGS: 'Settings',
-  HISTORY: 'History',
-  SECURITY: 'Security',
+  PROFILE: 'profile',
+  SETTINGS: 'settings',
+  HISTORY: 'history',
+  SECURITY: 'security',
 }
 
 export const SETTINGS_TABS = [
