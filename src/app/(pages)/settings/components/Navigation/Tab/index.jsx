@@ -1,9 +1,9 @@
 import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
-
+import { TabsTrigger } from '@/components/ui/tabs'
 import { Shield, User, Cog, History } from 'lucide-react'
 
-const SettingsNavigationTab = ({ tab, setTab, currentTab }) => {
+const SettingsNavigationTab = ({ tab, currentTab }) => {
   const { t } = useTranslation()
   const active = 'text-primary'
   const passive = 'text-neutral-300'
@@ -26,10 +26,15 @@ const SettingsNavigationTab = ({ tab, setTab, currentTab }) => {
     }
   }
 
+  const handleClick = (tab) => {
+    window.location.hash = tab.key.toLowerCase()
+  }
+
   return (
-    <button
+    <TabsTrigger
+      value={tab.key}
       key={tab}
-      onClick={() => setTab(tab.key)}
+      // onClick={() => handleClick(tab)}
       className={cn(
         'flex w-full cursor-pointer items-center justify-center gap-2 lg:justify-start',
         'rounded-md p-2 transition-all hover:bg-neutral-800 lg:w-auto',
@@ -45,7 +50,7 @@ const SettingsNavigationTab = ({ tab, setTab, currentTab }) => {
       >
         {t(tab.title)}
       </div>
-    </button>
+    </TabsTrigger>
   )
 }
 

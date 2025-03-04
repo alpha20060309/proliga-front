@@ -65,12 +65,10 @@ export const useAuthChangePhone = () => {
           return handleError('An unknown error occurred')
         }
 
-        // Step 2 Login to check password
-        // const res = await login({ phone, password })
+
         await signIn('credentials', {
           phone,
           password,
-          redirect: false,
         })
 
         // Step 3 Set new phone to new_phone col

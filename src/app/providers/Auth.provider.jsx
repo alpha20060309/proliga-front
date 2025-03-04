@@ -179,10 +179,14 @@ const AuthProvider = ({ children }) => {
     }
 
     // Case 2: User is logged in but phone is not verified
-    if (session?.user?.id && !session?.user?.phone_verified && !path.includes('settings')) {
-      performLogout(t('Phone verified is false'))
-      return
-    }
+    // if (
+    //   session?.user?.id &&
+    //   !session?.user?.phone_verified &&
+    //   !path.includes('settings')
+    // ) {
+    //   performLogout(t('Phone verified is false'))
+    //   return
+    // }
   }, [path, session, t, logOut, logoutInProgress])
 
   // Handle app version changes

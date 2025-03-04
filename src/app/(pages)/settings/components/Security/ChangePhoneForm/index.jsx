@@ -38,14 +38,6 @@ export default function ChangePhoneForm() {
     if (phone.length !== 13) {
       return toast.error(t("Telefon raqam noto'g'ri"))
     }
-    // new_phone,
-    // password,
-    // fingerprint,
-    // geo,
-    // agent,
-    // cb,
-    // id,
-    // phone,
 
     const status = await updatePhone({
       phone_new: phone,
@@ -57,10 +49,12 @@ export default function ChangePhoneForm() {
       cb: () => setModalOpen(true),
     })
 
-    // if (status) {
-    //   setPassword('')
-    //   setPhone('')
-    // }
+    if (status) {
+      setTimeout(() => {
+        setPassword('')
+        setPhone('')
+      }, 1000)
+    }
   }
 
   return (

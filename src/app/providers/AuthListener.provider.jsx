@@ -31,7 +31,7 @@ function AuthListener({ children }) {
         const SIGN_IN_METHOD = localStorage.getItem('sign-in-method')
         const otp = `otp_sent_${user.phone}_${session.expires}`
 
-        if(!user){
+        if (!user) {
           return
         }
 

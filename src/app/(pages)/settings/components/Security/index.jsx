@@ -21,8 +21,8 @@ export default function SettingsPage() {
   const { t } = useTranslation()
   const { sendOTP } = useSendOTP()
   const userTable = useSelector(selectUserTable)
-
   const [isModalOpen, setModalOpen] = useState(false)
+
 
   const handleSendSms = async () => {
     setModalOpen(true)

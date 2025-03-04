@@ -1,8 +1,8 @@
 export const SETTINGS_TAB = {
-  PROFILE: 'Profil',
+  PROFILE: 'Profile',
   SETTINGS: 'Settings',
-  TRANSACTIONHISTORY: 'Transactions',
-  PASSWORD: 'Change Password',
+  HISTORY: 'History',
+  SECURITY: 'Security',
 }
 
 export const SETTINGS_TABS = [
@@ -17,12 +17,12 @@ export const SETTINGS_TABS = [
     icon: "Cog",
   },
   {
-    key: SETTINGS_TAB.TRANSACTIONHISTORY,
+    key: SETTINGS_TAB.HISTORY,
     title: 'Xarajatlar',
     icon: "History",
   },
   {
-    key: SETTINGS_TAB.PASSWORD,
+    key: SETTINGS_TAB.SECURITY,
     title: 'Security',
     icon: "Shield"
   },
