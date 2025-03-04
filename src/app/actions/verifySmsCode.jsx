@@ -1,7 +1,7 @@
-"use server"
+'use server'
 
-import { db } from "lib/db"
-import { VerifySmsCodeSchema } from "lib/schema"
+import { db } from 'lib/db'
+import { VerifySmsCodeSchema } from 'lib/schema'
 
 /**
  * Verifies an SMS code sent to a user's phone number
@@ -14,7 +14,7 @@ export async function verifySmsCode(values) {
   if (!validatedFields.success) {
     return {
       status: 400,
-      message: "Invalid fields",
+      message: 'Invalid fields',
     }
   }
 
@@ -29,7 +29,7 @@ export async function verifySmsCode(values) {
     if (!user) {
       return {
         status: 404,
-        message: "User not found",
+        message: 'User not found',
       }
     }
 
@@ -37,7 +37,7 @@ export async function verifySmsCode(values) {
     if (user.sms_code !== confirm_code) {
       return {
         status: 404,
-        message: "Code not found",
+        message: 'Code not found',
       }
     }
 
@@ -49,7 +49,7 @@ export async function verifySmsCode(values) {
     if (nowDate > confirmDate) {
       return {
         status: 419,
-        message: "Code expired",
+        message: 'Code expired',
       }
     }
 
@@ -66,7 +66,7 @@ export async function verifySmsCode(values) {
 
       return {
         status: 200,
-        message: "Code verify and phone update successfully",
+        message: 'Code verify and phone update successfully',
       }
     } else {
       // Update phone verification for regular verification
@@ -77,14 +77,14 @@ export async function verifySmsCode(values) {
 
       return {
         status: 200,
-        message: "Code successfully verified",
+        message: 'Code successfully verified',
       }
     }
   } catch (error) {
-    console.error("SMS verification error:", error)
+    console.error('SMS verification error:', error)
     return {
       status: 500,
-      message: "Something went wrong",
+      message: 'An unknown error occurred',
     }
   }
 }
@@ -113,8 +113,7 @@ async function updateUserPhone(userId) {
 
     return true
   } catch (error) {
-    console.error("Error updating user phone:", error)
+    console.error('Error updating user phone:', error)
     return false
   }
 }
-

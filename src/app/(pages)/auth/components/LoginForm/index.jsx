@@ -80,11 +80,11 @@ const LoginForm = ({ setShouldRedirect }) => {
               redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(res.phone)}`,
             })
           } else {
-            toast.success(t('tizimga muvaffaqiyatli kirdingiz'))
+            toast.success(t('Tizimga muvaffaqiyatli kirdingiz'))
           }
         }
       } catch (error) {
-        toast.error(t('Something went wrong'))
+        toast.error(t('An unknown error occurred'))
       }
     })
   }

@@ -11,8 +11,10 @@ import { SUPABASE_PROVIDERS } from 'app/lib/supabaseClient'
 import { toast } from 'react-toastify'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
 import { useTranslation } from 'react-i18next'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 function AuthListener({ children }) {
+  const router = useRouter()
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const { sendOTP } = useSendOTP()
@@ -20,6 +22,7 @@ function AuthListener({ children }) {
   const agent = useSelector(selectAgent)
   const geo = useSelector(selectGeo)
   const { fingerprint } = useSelector((store) => store.auth)
+  const params = useSearchParams()
 
   useEffect(() => {
     const handleAuthChange = async () => {
@@ -29,41 +32,35 @@ function AuthListener({ children }) {
         const app_version = JSON.parse(localStorage.getItem('config'))
           ?.app_version?.value
         const SIGN_IN_METHOD = localStorage.getItem('sign-in-method')
-        const otp = `otp_sent_${user.phone}_${session.expires}`
 
         if (!user) {
           return
         }
 
-        if (localStorage.getItem(otp)) {
+        if (!user?.email || !user?.phone) {
+          dispatch(setPhoneModal(true))
           return
-        }
-
-        if (
-          SIGN_IN_METHOD === SUPABASE_PROVIDERS.GOOGLE ||
-          SIGN_IN_METHOD === SUPABASE_PROVIDERS.YANDEX
-        ) {
-          if (!user?.email || !user?.phone) {
-            dispatch(setPhoneModal(true))
-            return
-          }
-          if (!user?.phone_verified) {
-            localStorage.setItem(otp, 'true')
-            localStorage.setItem('app_version', app_version)
-            await sendOTP({
-              phone: user?.phone,
-              shouldRedirect: true,
-              redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(user?.phone)}`,
-            })
-            toast.info(t('We are redirecting you to an sms confirmation page!'))
-            return
-          }
+        } else if (!user?.phone_verified) {
+          localStorage.setItem('app_version', app_version)
+          console.log('executed')
+          await sendOTP({
+            phone: user?.phone,
+            shouldRedirect: false,
+            redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(user?.phone)}`,
+          })
+          toast.info(t('We are redirecting you to an sms confirmation page!'))
+          router.push(
+            `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(user?.phone)}`
+          )
+          return
+        } else {
+          return router.push('/championships')
         }
       }
     }
 
     handleAuthChange()
-  }, [dispatch, sendOTP, session, status, t])
+  }, [dispatch, status, t, login_success, router, sendOTP])
 
   return <>{children}</>
 }

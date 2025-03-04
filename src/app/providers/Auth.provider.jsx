@@ -191,12 +191,14 @@ const AuthProvider = ({ children }) => {
 
   // Handle app version changes
   useEffect(() => {
-    const existing_app_version = localStorage.getItem('app_version') || ''
-
+    const existing_app_version = localStorage.getItem('app_version') || null
+    console.log(existing_app_version)
     if (
       user?.id &&
       app_version &&
       existing_app_version &&
+      existing_app_version !== 'null' &&
+      existing_app_version !== 'undefined' &&
       app_version !== existing_app_version &&
       !logoutInProgress
     ) {

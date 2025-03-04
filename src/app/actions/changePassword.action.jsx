@@ -41,7 +41,7 @@ export const changePassword = async (values) => {
     return { success: "Password has been changed successfully" }
   } catch (error) {
     console.error("CHANGE_PASSWORD_ERROR", error)
-    return { error: "Something went wrong!" }
+    return { error: "An unknown error occurred" }
   }
 }
 

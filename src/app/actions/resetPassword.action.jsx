@@ -45,7 +45,7 @@ export const resetPassword = async (values) => {
     return { success: true }
   } catch (error) {
     console.error("Password reset error:", error)
-    return { error: "Something went wrong!" }
+    return { error: "An unknown error occurred" }
   }
 }
 

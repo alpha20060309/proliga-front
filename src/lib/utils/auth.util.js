@@ -2,7 +2,7 @@ import { db } from "lib/db";
 
 export const getAccountByUserId = async (user_id) => {
   try {
-    const account = await db.auth_account.findFirst({
+    const account = await db.auth_account.findUnique({
       where: { user_id },
     });
 

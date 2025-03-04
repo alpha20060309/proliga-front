@@ -11,13 +11,12 @@ const YandexSignIn = () => {
   const handleYandexSignIn = async () => {
     if (!userTable?.id) {
       // eslint-disable-next-line no-undef
-      const res = await signIn('yandex', {
+      await signIn('yandex', {
         redirect: true,
         // eslint-disable-next-line no-undef
-        redirectTo: process.env.NEXT_PUBLIC_URL + '/auth',
+        redirectTo: process.env.NEXT_PUBLIC_URL + '/auth?success=true',
       })
       localStorage.setItem('sign-in-method', SUPABASE_PROVIDERS.YANDEX)
-      console.log(res)
     }
   }
 

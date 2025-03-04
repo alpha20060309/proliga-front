@@ -93,7 +93,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
           }
         }
       } catch (error) {
-        toast.error(t('Something went wrong'))
+        toast.error(t('An unknown error occurred'))
       }
     })
   }
