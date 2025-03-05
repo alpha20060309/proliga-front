@@ -7,7 +7,6 @@ import { Eye, EyeOff, Loader } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
-import { useAuthUpdatePassword } from 'app/hooks/auth/useAuthChangePassword/useAuthChangePassword'
 import { useSelector } from 'react-redux'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import ConfirmOTP from 'components/Modals/ConfirmOTP'
@@ -59,83 +58,60 @@ function ChangePasswordForm() {
       />
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-2 px-1 sm:max-w-96"
+        className="flex flex-col gap-4 px-1 sm:max-w-96"
       >
-        {/* <div className="relative sm:max-w-96">
-          <Label htmlFor="oldPassword">{t('Eski parol')}</Label>
-          <Input
-            disabled={!isSMSVerified}
-            id="oldPassword"
-            name="oldPassword"
-            className="h-10 border-neutral-400 pr-10"
-            type={showOldPassword ? 'text' : 'password'}
-            value={oldPassword}
-            onChange={(e) => setOldPassword(e.target.value)}
-          />
-          <Button
-            type="button"
-            variant="ghost"
-            size="icon"
-            className="absolute bottom-0 right-0 hover:bg-transparent"
-            onClick={() => setShowOldPassword(!showOldPassword)}
-          >
-            {showOldPassword ? (
-              <EyeOff className="h-5 w-5 text-neutral-200" />
-            ) : (
-              <Eye className="h-5 w-5 text-neutral-200" />
-            )}
-          </Button>
-        </div> */}
-        <div className="relative sm:max-w-96">
-          <Label htmlFor="newPassword">{t('Yangi parol')}</Label>
-          <Input
-            id="newPassword"
-            name="newPassword"
-            className="h-10 border-neutral-400 pr-10"
-            type={showPassword ? 'text' : 'password'}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button
-            type="button"
-            variant="ghost"
-            size="icon"
-            className="absolute bottom-0 right-0 hover:bg-transparent"
-            onClick={() => setShowPassword(!showPassword)}
-          >
-            {showPassword ? (
-              <EyeOff className="h-5 w-5 text-neutral-200" />
-            ) : (
-              <Eye className="h-5 w-5 text-neutral-200" />
-            )}
-          </Button>
-        </div>
-        <div className="relative sm:max-w-96">
-          <Label htmlFor="confirmPassword">
-            {t('Yangi parolni qayta kiriting')}
-          </Label>
-          <Input
-            id="confirmPassword"
-            name="confirmPassword"
-            className="h-10 border-neutral-400 pr-10"
-            type={showConfirmPassword ? 'text' : 'password'}
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-          <Button
-            type="button"
-            variant="ghost"
-            size="icon"
-            className="absolute bottom-0 right-0 hover:bg-transparent"
-            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-          >
-            {showConfirmPassword ? (
-              <EyeOff className="h-5 w-5 text-neutral-200" />
-            ) : (
-              <Eye className="h-5 w-5 text-neutral-200" />
-            )}
-          </Button>
-        </div>
+        <section>
+          <div className="relative sm:max-w-96">
+            <Label htmlFor="newPassword">{t('Yangi parol')}</Label>
+            <Input
+              id="newPassword"
+              name="newPassword"
+              className="h-10 border-neutral-400 pr-10"
+              type={showPassword ? 'text' : 'password'}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className="absolute bottom-0 right-0 hover:bg-transparent"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? (
+                <EyeOff className="h-5 w-5 text-neutral-200" />
+              ) : (
+                <Eye className="h-5 w-5 text-neutral-200" />
+              )}
+            </Button>
+          </div>
+          <div className="relative sm:max-w-96">
+            <Label htmlFor="confirmPassword">
+              {t('Yangi parolni qayta kiriting')}
+            </Label>
+            <Input
+              id="confirmPassword"
+              name="confirmPassword"
+              className="h-10 border-neutral-400 pr-10"
+              type={showConfirmPassword ? 'text' : 'password'}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className="absolute bottom-0 right-0 hover:bg-transparent"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            >
+              {showConfirmPassword ? (
+                <EyeOff className="h-5 w-5 text-neutral-200" />
+              ) : (
+                <Eye className="h-5 w-5 text-neutral-200" />
+              )}
+            </Button>
+          </div>
+        </section>
         <Button
           className="h-10 w-full rounded border border-black border-primary/75 bg-neutral-900 text-sm font-semibold text-neutral-200 transition-all hover:border-primary xs:max-w-40"
           type="submit"

@@ -68,52 +68,50 @@ export default function ChangePhoneForm() {
       />
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-2 px-1 sm:max-w-96"
+        className="flex flex-col gap-4 px-1 sm:max-w-96"
       >
-        <div className="relative">
-          <Label htmlFor="phone">{t('New Phone Number')}:</Label>
-          <PhoneInput
-            id="phone"
-            name="phone"
-            defaultCountry="UZ"
-            className="h-10 rounded border-neutral-400 bg-neutral-900 text-neutral-200 placeholder:text-neutral-500"
-            value={''}
-            placeholder={'99-999-99-99'}
-            onChange={setPhone}
-          />
-        </div>
-        <div className="relative sm:max-w-96">
-          <Label htmlFor="confirmPassword">{t('Parol')}</Label>
-          <Input
-            id="password"
-            name="password"
-            className="h-10 border-neutral-400 bg-neutral-900 pr-10"
-            type={showPassword ? 'text' : 'password'}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button
-            type="button"
-            variant="ghost"
-            size="icon"
-            className="absolute bottom-0 right-0 hover:bg-transparent"
-            onClick={() => setShowPassword(!showPassword)}
-          >
-            {showPassword ? (
-              <EyeOff className="h-5 w-5 text-neutral-200" />
-            ) : (
-              <Eye className="h-5 w-5 text-neutral-200" />
-            )}
-          </Button>
-        </div>
+        <section>
+          <div className="relative">
+            <Label htmlFor="phone">{t('New Phone Number')}:</Label>
+            <PhoneInput
+              id="phone"
+              name="phone"
+              defaultCountry="UZ"
+              className="h-10 rounded border-neutral-400 bg-neutral-900 text-neutral-200 placeholder:text-neutral-500"
+              value={''}
+              placeholder={'99-999-99-99'}
+              onChange={setPhone}
+            />
+          </div>
+          <div className="relative sm:max-w-96">
+            <Label htmlFor="oldPassword">{t('Parol')}</Label>
+            <Input
+              id="oldPassword"
+              name="oldPassword"
+              className="h-10 border-neutral-400 bg-neutral-900 pr-10"
+              type={showPassword ? 'text' : 'password'}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className="absolute bottom-0 right-0 hover:bg-transparent"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? (
+                <EyeOff className="h-5 w-5 text-neutral-200" />
+              ) : (
+                <Eye className="h-5 w-5 text-neutral-200" />
+              )}
+            </Button>
+          </div>
+        </section>
         <Button
           className="h-10 w-full rounded border border-black border-primary/75 bg-neutral-900 text-sm font-semibold text-neutral-200 transition-all hover:border-primary xs:max-w-40"
           type="submit"
-          disabled={
-            phone === userTable?.phone ||
-            isLoading ||
-            phone.slice(0, 4) !== '+998'
-          }
+          disabled={isLoading}
         >
           {isLoading ? (
             <Loader className="mx-auto size-5 animate-spin text-neutral-100" />
