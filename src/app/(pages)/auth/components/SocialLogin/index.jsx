@@ -1,7 +1,6 @@
-import GoogleSignIn from './Google'
-// import FacebookSignIn from './Facebook'
-import { useTranslation } from 'react-i18next'
 import { memo } from 'react'
+import { useTranslation } from 'react-i18next'
+import GoogleSignIn from './Google'
 import SetUserCredentials from 'components/Modals/SetUserCredentials'
 import YandexSignIn from './Yandex'
 

@@ -9,8 +9,8 @@ export const LoginSchema = z.object({
     .refine((phone) => phone.length === 13, {
       message: ("Telefon raqam noto'g'ri"),
     }),
-  password: z.string().min(1, {
-    message: "Please enter your password. Password is required.",
+  password: z.string().min(6, {
+    message: "Please enter a password with at least 6 characters, required",
   }),
   data: z.object({
     geo: z.any().optional(),
@@ -58,21 +58,6 @@ export const ChangePasswordSchema = z
     new_password: z.string().min(6, "Password must be at least 8 characters"),
     code: z.string().length(6),
   })
-
-export const ChangePhoneSchema = z.object({
-  id: z.number(),
-  email: z.string().email("Valid email is required"),
-  password: z.string().min(1, "Password is required"),
-  new_phone: z.string().min(1, "New phone number is required"),
-})
-
-// Schema for OTP verification
-export const VerifyPhoneOtpSchema = z.object({
-  id: z.number(),
-  new_phone: z.string().min(1, "Phone number is required"),
-  otp: z.string().min(1, "OTP is required"),
-})
-
 
 export const ResetPasswordSchema = z.object({
   phone: z.string().min(1, "Phone number is required"),

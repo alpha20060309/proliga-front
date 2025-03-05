@@ -11,6 +11,7 @@ import {
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useSelector } from 'react-redux'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { useTranslation } from 'react-i18next'
 const SignUpForm = dynamic(() => import('./components/SignUpForm'), {
   ssr: false,
   loading: () => <SignUpFormSkeleton />,
@@ -25,6 +26,7 @@ const AuthTabs = dynamic(() => import('./components/Tabs'), {
 })
 
 const Auth = () => {
+  const { t } = useTranslation()
   const router = useRouter()
   const userTable = useSelector(selectUserTable)
   const params = useSearchParams()
@@ -53,18 +55,20 @@ const Auth = () => {
     if (error) {
       if (error === 'OAuthAccountNotLinked') {
         toast.error(
-          'An email with this email has been opened, please try a different account'
+          t(
+            'An email with this email has been opened, please try a different account'
+          )
         )
         // OAuthCallbackError
       } else if (error === 'Configuration') {
-        toast.error('')
+        toast.error(t('An unknown error occurred'))
       } else {
-        toast.error(error)
+        toast.error(t(error))
       }
 
       router.push('/auth')
     }
-  }, [error, router])
+  }, [error, router, t])
 
   return (
     <main className="flex min-h-screen w-full justify-center">

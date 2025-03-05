@@ -11,7 +11,7 @@ export const register = async (values) => {
   const validatedFields = RegisterSchema.safeParse(values)
 
   if (!validatedFields.success) {
-    return { error: 'Invalid fields.' }
+    return { error: "Barcha maydonlar to'ldirilishi shart" }
   }
 
   const { phone, email, password, data } = validatedFields.data

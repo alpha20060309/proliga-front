@@ -14,12 +14,12 @@ const GoogleSignIn = ({ className, iconClassName }) => {
 
   const handleGoogleSignIn = async () => {
     if (!user?.id) {
+      localStorage.setItem('sign-in-method', SUPABASE_PROVIDERS.GOOGLE)
       await signIn('google', {
         redirect: true,
         // eslint-disable-next-line no-undef
         redirectTo: process.env.NEXT_PUBLIC_URL + '/auth?success=true',
       })
-      localStorage.setItem('sign-in-method', SUPABASE_PROVIDERS.GOOGLE)
     }
   }
 

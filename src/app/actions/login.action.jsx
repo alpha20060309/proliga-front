@@ -9,7 +9,7 @@ export const login = async (values) => {
   const validatedFields = LoginSchema.safeParse(values)
 
   if (!validatedFields.success) {
-    return { error: 'Invalid fields' }
+    return { error: "Barcha maydonlar to'ldirilishi shart" }
   }
 
   const { phone, password, data } = validatedFields.data
@@ -43,7 +43,6 @@ export const login = async (values) => {
     }
   } catch (error) {
     if (error) {
-      console.log(error)
       switch (error.type) {
         case 'CredentialsSignin':
           return { error: 'Login yoki parol xato' }

@@ -25,21 +25,6 @@ export const {
     YandexProvider({
       clientId: process.env.NEXT_PUBLIC_YANDEX_CLIENT_ID ?? "",
       clientSecret: process.env.NEXT_PUBLIC_YANDEX_CLIENT_SECRET ?? "",
-      // authorization:
-      //   "https://oauth.yandex.ru/authorize?scope=login:info+login:email+login:avatar+login:default_phone+login:birthday",
-      // async profile(profile) {
-      //   console.log("Yandex", profile)
-
-      //   return {
-      //     name: profile?.first_name || "",
-      //     email_oauth: profile?.default_email || profile?.emails[0] || null,
-      //     image: profile?.is_avatar_empty === false ? profile.avatar_url : null,
-      //     last_name: profile?.last_name || "",
-      //     phone_oauth: profile?.default_phone?.number || null,
-      //     isOAuth: true,
-      //     birth_date: profile?.birthday ? new Date(profile.birthday) : null,
-      //   }
-      // }
     }),
     CredentialsProvider({
       name: "credentials",
@@ -78,6 +63,7 @@ export const {
       }
       if (session.user) {
         const user = await getUserById(session.user.id);
+        session.user.email = token.email || user.email;
         session.user.phone = user?.phone || null;
         session.user.isOAuth = user?.isOAuth || false;
         session.user.birth_date = user?.birth_date || null;

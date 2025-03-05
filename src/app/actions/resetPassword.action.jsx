@@ -9,34 +9,30 @@ export const resetPassword = async (values) => {
   const validatedFields = ResetPasswordSchema.safeParse(values)
 
   if (!validatedFields.success) {
-    return { error: 'Invalid fields' }
+    return { error: "Barcha maydonlar to'ldirilishi shart" }
   }
 
   const { phone, code, password } = validatedFields.data
 
   try {
-    // 1. Find the user by phone number
     const existingUser = await getUserByPhone(phone)
 
     if (!existingUser) {
-      return { error: 'User not found' }
+      return { error: 'Foydalanuvchi topilmadi' }
     }
 
-    // 2. Check if the provided code matches the stored code
     if (existingUser?.sms_code !== code || !existingUser?.sms_code) {
-      return { error: 'Invalid SMS code' }
+      return { error: 'SMS kodingiz xato' }
     }
 
     const codeAgeInMinutes =
       (new Date() - existingUser.sms_created_at) / (1000 * 60)
     if (codeAgeInMinutes > 3) {
-      return { error: 'SMS code has expired' }
+      return { error: 'Kod eskirib qolgan!' }
     }
 
-    // 4. Hash the new password
     const hashedPassword = await bcrypt.hash(password, 10)
 
-    // 5. Update the user's password and delete the verification code
     await db.user.update({
       where: { id: existingUser.id },
       data: { password: hashedPassword },
@@ -44,7 +40,6 @@ export const resetPassword = async (values) => {
 
     return { success: true }
   } catch (error) {
-    console.error('Password reset error:', error)
     return { error: 'An unknown error occurred' }
   }
 }

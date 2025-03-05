@@ -1,17 +1,13 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
 'use client'
 
-import { useEffect, memo } from 'react'
+import { useEffect, memo, useState } from 'react'
 import { useSession } from 'next-auth/react'
-import { useDispatch, useSelector } from 'react-redux'
-import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
+import { useDispatch } from 'react-redux'
 import { setPhoneModal } from 'app/lib/features/auth/auth.slice'
-import { SUPABASE_PROVIDERS } from 'app/lib/supabaseClient'
 import { toast } from 'react-toastify'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
 import { useTranslation } from 'react-i18next'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 function AuthListener({ children }) {
   const router = useRouter()
@@ -19,10 +15,7 @@ function AuthListener({ children }) {
   const { t } = useTranslation()
   const { sendOTP } = useSendOTP()
   const { data: session, status } = useSession()
-  const agent = useSelector(selectAgent)
-  const geo = useSelector(selectGeo)
-  const { fingerprint } = useSelector((store) => store.auth)
-  const params = useSearchParams()
+  const [active, setActive] = useState(true)
 
   useEffect(() => {
     const handleAuthChange = async () => {
@@ -33,14 +26,17 @@ function AuthListener({ children }) {
           ?.app_version?.value
         const SIGN_IN_METHOD = localStorage.getItem('sign-in-method')
 
-        if (!user || !SIGN_IN_METHOD) {
+        if (!user || !SIGN_IN_METHOD || !active) {
           return
         }
 
         if (!user?.email || !user?.phone) {
           dispatch(setPhoneModal(true))
+          setActive(false)
           return
-        } else if (!user?.phone_verified) {
+        }
+        if (!user?.phone_verified && user?.phone && user?.email) {
+          setActive(false)
           localStorage.setItem('app_version', app_version)
           await sendOTP({
             phone: user?.phone,
@@ -52,7 +48,9 @@ function AuthListener({ children }) {
             `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(user?.phone)}`
           )
           return
-        } else {
+        }
+        if (user?.email && user?.phone && user?.phone_verified) {
+          setActive(false)
           toast.success(t('Tizimga muvaffaqiyatli kirdingiz'))
           localStorage.removeItem('sign-in-method')
           return router.push('/championships')
@@ -61,8 +59,8 @@ function AuthListener({ children }) {
     }
 
     handleAuthChange()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, status, t, router])
+  }, [dispatch, status, t, router, active, sendOTP, session])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 
   return <>{children}</>
 }

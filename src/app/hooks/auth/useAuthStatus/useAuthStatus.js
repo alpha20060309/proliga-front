@@ -5,14 +5,13 @@ import { useState, useEffect, useCallback } from "react"
 const AUTH_KEY = "isAuthenticated"
 
 export function useAuthStatus() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(true)
 
   const getStoredAuth = useCallback(() => {
     if (typeof window !== "undefined") {
       try {
         return localStorage.getItem(AUTH_KEY) === "true"
       } catch (error) {
-        console.error("Error reading from localStorage:", error)
         return false
       }
     }
@@ -22,12 +21,8 @@ export function useAuthStatus() {
   const setStoredAuth = useCallback((value) => {
     setIsAuthenticated(value)
     if (typeof window !== "undefined") {
-      try {
-        localStorage.setItem(AUTH_KEY, value.toString())
-        window.dispatchEvent(new Event("auth_changed"))
-      } catch (error) {
-        console.error("Error writing to localStorage:", error)
-      }
+      localStorage.setItem(AUTH_KEY, value.toString())
+      window.dispatchEvent(new Event("auth_changed"))
     }
   }, [])
 
