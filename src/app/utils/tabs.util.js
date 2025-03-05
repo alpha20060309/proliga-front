@@ -1,7 +1,7 @@
 export const TABS = {
-  GameProfile: 'GameProfile',
-  Transfer: 'Transfer',
-  Statistics: 'Statistics',
-  Journal: 'Journal',
-  Tournament: 'Tournament',
+  GameProfile: 'profile',
+  Transfer: 'transfer',
+  Statistics: 'statistics',
+  Journal: 'journal',
+  Tournament: 'tournament',
 }

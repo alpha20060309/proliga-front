@@ -20,7 +20,7 @@ const Dropdown = () => {
         <Image src="/icons/cup.svg" alt="user" width={24} height={24} />
         <p> {t('Chempionatlar')}</p>
       </NavLink>
-      {userTable ? (
+      {userTable?.id ? (
         <>
           <NavLink href="/settings">
             <Image

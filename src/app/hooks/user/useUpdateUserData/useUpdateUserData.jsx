@@ -35,7 +35,6 @@ export const useUpdateUserData = () => {
         setError(t("Tug'ilgan yilingizni kiriting"))
         return toast.warning(t("Tug'ilgan yilingizni kiriting"))
       }
-      console.log('user',userTable)
       if (!userTable?.id) {
         setError('User not authenticated')
         return toast.error(t('Foydalanuvchi autentifikatsiya qilinmagan'))

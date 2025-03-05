@@ -17,9 +17,9 @@ import { memo } from 'react'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import SocialLogin from '../SocialLogin'
 import { Input } from '@/components/ui/input'
-import { register } from 'app/actions/register'
 import { useSession } from 'next-auth/react'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
+import { register } from 'app/actions/register.action'
 
 const SignUpForm = ({ setShouldRedirect }) => {
   const { t } = useTranslation()
@@ -72,6 +72,11 @@ const SignUpForm = ({ setShouldRedirect }) => {
           phone,
           password,
           passwordConfirmation: confirmPassword,
+          data: {
+            geo,
+            agent,
+            fingerprint,
+          },
         })
 
         if (res?.error) {
@@ -84,7 +89,6 @@ const SignUpForm = ({ setShouldRedirect }) => {
           localStorage.setItem('app_version', app_version)
 
           if (!phone_verified && res?.phone) {
-            toast.warning(t('Sizning raqamingiz tasdiqlanmagan'))
             toast.info(t('We are redirecting you to an sms confirmation page!'))
             await sendOTP({
               phone,
@@ -94,7 +98,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
           }
         }
       } catch (error) {
-        toast.error(t('Something went wrong'))
+        toast.error(t('An unknown error occurred'))
       }
     })
   }

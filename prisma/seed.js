@@ -59,8 +59,6 @@ async function main() {
   })
 
   console.log(regularUser, user)
-
-
 }
 
 main()

@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
-import { login } from 'app/actions/login'
+import { login } from 'app/actions/login.action'
 import { useSession } from 'next-auth/react'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
 
@@ -54,6 +54,11 @@ const LoginForm = ({ setShouldRedirect }) => {
         const res = await login({
           phone,
           password,
+          data: {
+            geo,
+            agent,
+            fingerprint,
+          },
         })
 
         if (res?.error) {
@@ -68,9 +73,6 @@ const LoginForm = ({ setShouldRedirect }) => {
           localStorage.setItem('app_version', app_version)
 
           if (!phone_verified && res?.phone) {
-            toast.warning(t('Sizning raqamingiz tasdiqlanmagan'), {
-              theme: 'dark',
-            })
             toast.info(
               t('We are redirecting you to an sms confirmation page!'),
               {
@@ -83,11 +85,11 @@ const LoginForm = ({ setShouldRedirect }) => {
               redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(res.phone)}`,
             })
           } else {
-            toast.success(t('tizimga muvaffaqiyatli kirdingiz'))
+            toast.success(t('Tizimga muvaffaqiyatli kirdingiz'))
           }
         }
       } catch (error) {
-        toast.error(t('Something went wrong'))
+        toast.error(t('An unknown error occurred'))
       }
     })
   }

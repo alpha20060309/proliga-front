@@ -3,6 +3,7 @@ import { toast } from 'react-toastify'
 import { supabase } from '../../../lib/supabaseClient'
 import { useTranslation } from 'react-i18next'
 import { useSendOTP } from '../useSendOTP/useSendOTP'
+import { signIn } from 'next-auth/react'
 
 export const useAuthChangePhone = () => {
   const [error, setError] = useState(null)
@@ -21,11 +22,20 @@ export const useAuthChangePhone = () => {
 
   // Step 5 Confirm otp for new phone
   const updatePhone = useCallback(
-    async ({ new_phone, email, password, fingerprint, geo, agent, cb }) => {
+    async ({
+      phone_new,
+      id,
+      phone,
+      password,
+      fingerprint,
+      geo,
+      agent,
+      cb = () => {},
+    }) => {
       setError(null)
       setData(null)
 
-      if (!new_phone || !email || !password) {
+      if (!phone_new || !password || !id || !phone) {
         handleError("Barcha maydonlar to'ldirilishi shart")
       }
 
@@ -36,7 +46,7 @@ export const useAuthChangePhone = () => {
         const { data: checkData, error: checkError } = await supabase.rpc(
           'get__check_user_not_exist',
           {
-            phone_num: new_phone,
+            phone_num: phone_new,
           }
         )
 
@@ -54,23 +64,11 @@ export const useAuthChangePhone = () => {
           return handleError('An unknown error occurred')
         }
 
-        // Step 2 Login to check password
-        const { error: authError } = await supabase.auth.signInWithPassword({
-          email,
+
+        await signIn('credentials', {
+          phone,
           password,
         })
-
-        if (authError?.code === 'invalid_credentials') {
-          return handleError('Login yoki parol xato')
-        }
-
-        if (authError) {
-          return handleError(
-            authError instanceof Error
-              ? authError.message
-              : 'An unknown error occurred'
-          )
-        }
 
         // Step 3 Set new phone to new_phone col
         const { error: fullUserError } = await supabase
@@ -80,9 +78,9 @@ export const useAuthChangePhone = () => {
             visited_at: new Date(),
             geo: JSON.stringify(geo),
             agent: JSON.stringify(agent),
-            new_phone,
+            phone_new,
           })
-          .eq('email', email)
+          .eq('id', id)
           .is('deleted_at', null)
           .single()
 
@@ -94,7 +92,7 @@ export const useAuthChangePhone = () => {
           )
         }
         // Step 4 Send OTP new phone
-        const status = await sendOTP({ phone: new_phone, is_update: true })
+        const status = await sendOTP({ phone: phone_new, is_update: true })
 
         if (status?.error) {
           return handleError(status.error.message)

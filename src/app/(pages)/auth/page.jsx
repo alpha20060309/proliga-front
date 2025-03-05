@@ -11,6 +11,7 @@ import {
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useSelector } from 'react-redux'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { useTranslation } from 'react-i18next'
 const SignUpForm = dynamic(() => import('./components/SignUpForm'), {
   ssr: false,
   loading: () => <SignUpFormSkeleton />,
@@ -25,6 +26,7 @@ const AuthTabs = dynamic(() => import('./components/Tabs'), {
 })
 
 const Auth = () => {
+  const { t } = useTranslation()
   const router = useRouter()
   const userTable = useSelector(selectUserTable)
   const params = useSearchParams()
@@ -42,35 +44,31 @@ const Auth = () => {
     }
   }, [userTable, router, shouldRedirect])
 
-  const errorMessages = {
-    OAuthSignin: 'Error occurred while signing in with OAuth provider.',
-    OAuthCallback: 'Error occurred during OAuth callback.',
-    OAuthCreateAccount: 'Error creating OAuth account.',
-    EmailCreateAccount: 'Error creating email account.',
-    Callback: 'Error during callback processing.',
-    OAuthAccountNotLinked:
-      'This email is already associated with another account.',
-    EmailSignin: 'Error sending sign in email.',
-    CredentialsSignin:
-      'Invalid credentials. Please check your phone number and password.',
-    SessionRequired: 'Please sign in to access this page.',
-    Default: 'An unexpected error occurred.',
-  }
+  useEffect(() => {
+    const hash = window.location.hash.slice(1)
+    if (hash && Object.values(tabs).includes(hash)) {
+      setCurrentTab(hash)
+    }
+  }, [])
 
   useEffect(() => {
     if (error) {
       if (error === 'OAuthAccountNotLinked') {
         toast.error(
-          'An email with this email has been opened, please try a different account'
+          t(
+            'An email with this email has been opened, please try a different account'
+          )
         )
         // OAuthCallbackError
+      } else if (error === 'Configuration') {
+        toast.error(t('An unknown error occurred'))
       } else {
-        toast.error(error)
+        toast.error(t(error))
       }
 
-      // router.push('/auth')
+      router.push('/auth')
     }
-  }, [error, router])
+  }, [error, router, t])
 
   return (
     <main className="flex min-h-screen w-full justify-center">
@@ -100,3 +98,18 @@ const active = 'bg-black text-primary opacity-100'
 const passive = 'bg-transparent text-neutral-400'
 
 export default Auth
+
+// const errorMessages = {
+//   OAuthSignin: 'Error occurred while signing in with OAuth provider.',
+//   OAuthCallback: 'Error occurred during OAuth callback.',
+//   OAuthCreateAccount: 'Error creating OAuth account.',
+//   EmailCreateAccount: 'Error creating email account.',
+//   Callback: 'Error during callback processing.',
+//   OAuthAccountNotLinked:
+//     'This email is already associated with another account.',
+//   EmailSignin: 'Error sending sign in email.',
+//   CredentialsSignin:
+//     'Invalid credentials. Please check your phone number and password.',
+//   SessionRequired: 'Please sign in to access this page.',
+//   Default: 'An unexpected error occurred.',
+// }

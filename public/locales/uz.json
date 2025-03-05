@@ -628,5 +628,8 @@
   "Please be careful when setting your new phone number": "Iltimos, yangi telefon raqamingizni kiritishda ehtiyot bo‘ling, chunki u hisobni tiklash va tasdiqlash uchun ishlatiladi. Yangi raqamingiz o‘rnatilgandan so‘ng uni tasdiqlashingiz kerak bo‘ladi.",
   "New Phone Number": "Yangi telefon raqam",
   "Update your password to keep your account secure": "Parolingizni yangilang, hisobingizni xavfsiz saqlash uchun.",
-  "Keep your contact information up to date": "Iltimos, telefon raqamingizni yangilab turing."
+  "Keep your contact information up to date": "Iltimos, telefon raqamingizni yangilab turing.",
+  "Your registration was not successfully completed, so we are logging you out for security reasons.": "Ro‘yxatdan o‘tish muvaffaqiyatli yakunlanmadi, shuning uchun xavfsizlik nuqtai nazaridan sizni tizimdan chiqaramiz.",
+  "Enter your credentials.": "Kirish ma'lumotlaringizni kiriting.",
+  "To complete your registration, please link your credentials with your account. This step is mandatory.": "Ro‘yxatdan o‘tishni yakunlash uchun ma’lumotlaringizni hisobingiz bilan bog‘lang. Bu qadam majburiydir."
 }

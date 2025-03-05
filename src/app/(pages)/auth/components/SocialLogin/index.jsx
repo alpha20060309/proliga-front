@@ -1,23 +1,11 @@
-import GoogleSignIn from './Google'
-// import FacebookSignIn from './Facebook'
-import { useTranslation } from 'react-i18next'
 import { memo } from 'react'
+import { useTranslation } from 'react-i18next'
+import GoogleSignIn from './Google'
 import SetUserCredentials from 'components/Modals/SetUserCredentials'
-import { useSelector } from 'react-redux'
-import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
-import { CONFIG_KEY } from 'app/utils/config.util'
 import YandexSignIn from './Yandex'
 
 function SocialLogin() {
   const { t } = useTranslation()
-  const config = useSelector(selectSystemConfig)
-
-  // eslint-disable-next-line no-unused-vars
-  const facebook =
-    config[CONFIG_KEY.provider_facebook]?.value?.toLowerCase() === 'true'
-  // eslint-disable-next-line no-unused-vars
-  const google =
-    config[CONFIG_KEY.provider_google]?.value?.toLowerCase() === 'true'
 
   return (
     <>

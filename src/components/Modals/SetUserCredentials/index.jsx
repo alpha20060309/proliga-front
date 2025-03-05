@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useTransition, useMemo } from 'react'
 import {
   Dialog,
   DialogContent,
@@ -15,11 +15,7 @@ import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { setPhoneModal } from 'app/lib/features/auth/auth.slice'
-import {
-  selectAgent,
-  selectGeo,
-  selectUserTable,
-} from 'app/lib/features/auth/auth.selector'
+import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { toast } from 'react-toastify'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { CONFIG_KEY } from 'app/utils/config.util'
@@ -35,12 +31,16 @@ function SetUserCredentials() {
   const user = useSelector(selectUserTable)
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
-  const { setUserCredentials, isLoading } = useSetUserCredentials()
-  const geo = useSelector(selectGeo)
-  const agent = useSelector(selectAgent)
-  const { fingerprint } = useSelector((store) => store.auth)
+  const { setUserCredentials, isLoading: tableLoading } =
+    useSetUserCredentials()
   const config = useSelector(selectSystemConfig)
   const app_version = config[CONFIG_KEY.app_version]?.value || ''
+  const [isPending, startTransition] = useTransition()
+
+  const isLoading = useMemo(
+    () => isPending || tableLoading,
+    [isPending, tableLoading]
+  )
 
   const setModalOpen = () => {
     user?.phone && user?.email && dispatch(setPhoneModal(false))
@@ -62,15 +62,17 @@ function SetUserCredentials() {
     if (!user?.id) {
       return toast.warning(t('Please login first'))
     }
-    await setUserCredentials({
-      email,
-      phone,
-      user,
-      cb: () => {
-        localStorage.removeItem('sign-in-method')
-        localStorage.setItem('app_version', app_version)
-        dispatch(setPhoneModal(false))
-      },
+    startTransition(async () => {
+      await setUserCredentials({
+        email,
+        phone,
+        user,
+        cb: () => {
+          localStorage.removeItem('sign-in-method')
+          localStorage.setItem('app_version', app_version)
+          dispatch(setPhoneModal(false))
+        },
+      })
     })
   }
 
@@ -93,7 +95,7 @@ function SetUserCredentials() {
               <PhoneInput
                 id="set-phone"
                 name="phone"
-                placeholder={t('Telefon raqam')}
+                placeholder={'99-999-99-99'}
                 defaultCountry="UZ"
                 className="h-10 border-neutral-500 bg-neutral-950 text-neutral-200 placeholder:text-neutral-500"
                 value={phone}

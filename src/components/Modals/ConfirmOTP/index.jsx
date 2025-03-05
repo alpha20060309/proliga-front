@@ -27,6 +27,7 @@ const ConfirmOTP = ({
   setModalOpen,
   cb = () => {},
   refreshUser = true,
+  defaultHook = true,
   phone,
   is_update = false,
 }) => {
@@ -46,12 +47,15 @@ const ConfirmOTP = ({
       toast.warning('Kod 6 ta harf bolishi shart!', { theme: 'dark' })
       return
     }
-
-    await confirmOTP({ code, guid: userTable?.guid, phone, is_update })
+    if (defaultHook) {
+      await confirmOTP({ code, guid: userTable?.guid, phone, is_update })
+    } else {
+      cb(code)
+    }
   }
 
   useEffect(() => {
-    if (!confirmLoading && !error && data?.status === 200) {
+    if (!confirmLoading && !error && data?.status === 200 && defaultHook) {
       const fetch = async () => {
         await update()
       }
@@ -70,6 +74,7 @@ const ConfirmOTP = ({
     cb,
     refreshUser,
     update,
+    defaultHook,
   ])
 
   return (

@@ -11,7 +11,7 @@ const SettingsSidebarLogOut = dynamic(() => import('./LogOut/LogOut'), {
 
 const SettingsNavigation = ({ setTab, currentTab }) => {
   return (
-    <section className="flex w-full flex-row space-x-0.5 rounded-xl bg-neutral-900/80 bg-opacity-90 p-2 backdrop-blur fade-in lg:w-64 lg:flex-col lg:p-4 xl:gap-1">
+    <aside className="flex h-auto w-full flex-row space-x-0.5 rounded-xl bg-neutral-900/80 bg-opacity-90 p-2 backdrop-blur fade-in lg:w-64 lg:flex-col lg:p-4 xl:gap-1">
       {SETTINGS_TABS.map((tab) => (
         <SettingsNavigationTab
           key={tab.key}
@@ -21,7 +21,7 @@ const SettingsNavigation = ({ setTab, currentTab }) => {
         />
       ))}
       <SettingsSidebarLogOut />
-    </section>
+    </aside>
   )
 }
 
