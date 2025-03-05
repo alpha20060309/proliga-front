@@ -36,7 +36,7 @@ const Matches = () => {
   const { isLoading, count } = useSelector((state) => state.match)
   const matches = useSelector(selectMatches)
   const { lang } = useSelector((store) => store.systemLanguage)
-  const [tourIndex, setTourIndex] = useState(-1)
+  const [tourIndex, setTourIndex] = useState(0)
   const [currentTour, setCurrentTour] = useState(null)
   const [page, setPage] = useState(0)
   const perPage = 10

@@ -8,7 +8,6 @@ import { formatDate } from 'app/utils/formatDate.util'
 import { Phone, CalendarDays, UsersRound } from 'lucide-react'
 import { SettingsContainer } from '../Container'
 import Image from 'next/image'
-import SettingsWarnings from '../Warnings'
 import RefillBalanceBox from './RefillBalanceBox'
 import Avatar from 'components/Avatar'
 import { getUrl } from 'app/utils/static.util'
@@ -42,7 +41,7 @@ const SettingsProfile = () => {
         <Avatar
           src={getUrl(user?.image)}
           className={
-            'size-24 rounded-xl bg-neutral-300 object-cover object-top text-black transition-all duration-1000 ease-in-out hover:object-bottom'
+            'size-24 rounded-xl object-cover object-top text-black transition-all duration-1000 ease-in-out hover:object-bottom'
           }
         />
         <div className="flex flex-col justify-center">

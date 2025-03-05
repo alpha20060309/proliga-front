@@ -42,20 +42,12 @@ const Auth = () => {
     }
   }, [userTable, router, shouldRedirect])
 
-  const errorMessages = {
-    OAuthSignin: 'Error occurred while signing in with OAuth provider.',
-    OAuthCallback: 'Error occurred during OAuth callback.',
-    OAuthCreateAccount: 'Error creating OAuth account.',
-    EmailCreateAccount: 'Error creating email account.',
-    Callback: 'Error during callback processing.',
-    OAuthAccountNotLinked:
-      'This email is already associated with another account.',
-    EmailSignin: 'Error sending sign in email.',
-    CredentialsSignin:
-      'Invalid credentials. Please check your phone number and password.',
-    SessionRequired: 'Please sign in to access this page.',
-    Default: 'An unexpected error occurred.',
-  }
+  useEffect(() => {
+    const hash = window.location.hash.slice(1)
+    if (hash && Object.values(tabs).includes(hash)) {
+      setCurrentTab(hash)
+    }
+  }, [])
 
   useEffect(() => {
     if (error) {
@@ -64,7 +56,7 @@ const Auth = () => {
           'An email with this email has been opened, please try a different account'
         )
         // OAuthCallbackError
-      } else if(error === 'Configuration'){
+      } else if (error === 'Configuration') {
         toast.error('')
       } else {
         toast.error(error)
@@ -102,3 +94,18 @@ const active = 'bg-black text-primary opacity-100'
 const passive = 'bg-transparent text-neutral-400'
 
 export default Auth
+
+// const errorMessages = {
+//   OAuthSignin: 'Error occurred while signing in with OAuth provider.',
+//   OAuthCallback: 'Error occurred during OAuth callback.',
+//   OAuthCreateAccount: 'Error creating OAuth account.',
+//   EmailCreateAccount: 'Error creating email account.',
+//   Callback: 'Error during callback processing.',
+//   OAuthAccountNotLinked:
+//     'This email is already associated with another account.',
+//   EmailSignin: 'Error sending sign in email.',
+//   CredentialsSignin:
+//     'Invalid credentials. Please check your phone number and password.',
+//   SessionRequired: 'Please sign in to access this page.',
+//   Default: 'An unexpected error occurred.',
+// }
