@@ -54,6 +54,11 @@ const LoginForm = ({ setShouldRedirect }) => {
         const res = await login({
           phone,
           password,
+          data: {
+            geo,
+            agent,
+            fingerprint,
+          },
         })
 
         if (res?.error) {

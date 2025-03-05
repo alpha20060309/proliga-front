@@ -3,6 +3,7 @@
 import { LoginSchema } from 'lib/schema'
 import { signIn } from 'app/api/auth/[...nextauth]/route'
 import { getUserByPhone } from 'lib/utils/auth.util'
+import { db } from 'lib/db'
 
 export const login = async (values) => {
   const validatedFields = LoginSchema.safeParse(values)
@@ -11,7 +12,7 @@ export const login = async (values) => {
     return { error: 'Invalid fields' }
   }
 
-  const { phone, password } = validatedFields.data
+  const { phone, password, data } = validatedFields.data
 
   const existingUser = await getUserByPhone(phone)
 
@@ -26,6 +27,15 @@ export const login = async (values) => {
       redirect: false,
     })
 
+    await db.user.update({
+      where: { id: existingUser.id },
+      data: {
+        geo: JSON.stringify(data?.geo),
+        agent: JSON.stringify(data?.agent),
+        fingerprint: data?.fingerprint,
+      },
+    })
+
     return {
       success: true,
       phone: existingUser?.phone,
@@ -33,6 +43,7 @@ export const login = async (values) => {
     }
   } catch (error) {
     if (error) {
+      console.log(error)
       switch (error.type) {
         case 'CredentialsSignin':
           return { error: 'Login yoki parol xato' }

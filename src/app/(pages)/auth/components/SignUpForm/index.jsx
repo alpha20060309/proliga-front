@@ -72,6 +72,11 @@ const SignUpForm = ({ setShouldRedirect }) => {
           phone,
           password,
           passwordConfirmation: confirmPassword,
+          data: {
+            geo,
+            agent,
+            fingerprint,
+          },
         })
 
         if (res?.error) {

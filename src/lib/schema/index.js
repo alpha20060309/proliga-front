@@ -12,7 +12,11 @@ export const LoginSchema = z.object({
   password: z.string().min(1, {
     message: "Please enter your password. Password is required.",
   }),
-  data: z.any()
+  data: z.object({
+    geo: z.any().optional(),
+    agent: z.any().optional(),
+    fingerprint: z.string().optional()
+  }).optional()
 });
 
 export const RegisterSchema = z
@@ -36,7 +40,11 @@ export const RegisterSchema = z
     passwordConfirmation: z.string().min(6, {
       message: "Please confirm your password, required.",
     }),
-    data: z.any()
+    data: z.object({
+      geo: z.any().optional(),
+      agent: z.any().optional(),
+      fingerprint: z.string().optional()
+    }).optional()
   })
   .refine((data) => data.password === data.passwordConfirmation, {
     message: "Passwords do not match.",
@@ -50,8 +58,6 @@ export const ChangePasswordSchema = z
     new_password: z.string().min(6, "Password must be at least 8 characters"),
     code: z.string().length(6),
   })
-
-
 
 export const ChangePhoneSchema = z.object({
   id: z.number(),

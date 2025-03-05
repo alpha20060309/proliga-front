@@ -33,7 +33,7 @@ function AuthListener({ children }) {
           ?.app_version?.value
         const SIGN_IN_METHOD = localStorage.getItem('sign-in-method')
 
-        if (!user) {
+        if (!user || !SIGN_IN_METHOD) {
           return
         }
 
@@ -53,6 +53,7 @@ function AuthListener({ children }) {
           )
           return
         } else {
+          toast.success(t('Tizimga muvaffaqiyatli kirdingiz'))
           localStorage.removeItem('sign-in-method')
           return router.push('/championships')
         }

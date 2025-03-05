@@ -14,7 +14,7 @@ export const register = async (values) => {
     return { error: 'Invalid fields.' }
   }
 
-  const { phone, email, password } = validatedFields.data
+  const { phone, email, password, data } = validatedFields.data
   const hashedPassword = await bcrypt.hash(password, 10)
 
   const existingPhone = await getUserByPhone(phone)
@@ -38,7 +38,7 @@ export const register = async (values) => {
       },
     })
 
-    const res = await login({ phone, password })
+    const res = await login({ phone, password, data })
 
     if (res?.error) {
       return { error: res.error }
