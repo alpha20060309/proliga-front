@@ -115,10 +115,10 @@
 // export default memo(AuthProvider)
 'use client'
 
-import { useEffect, memo, useState } from 'react'
+import { useEffect, memo, useState, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUserTable } from '../lib/features/auth/auth.slice'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { useLogOut } from 'app/hooks/auth/useLogOut/useLogOut'
 import { toast } from 'react-toastify'
@@ -126,9 +126,11 @@ import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { useTranslation } from 'react-i18next'
 import { useSession } from 'next-auth/react'
+import { useAuthStatus } from 'app/hooks/auth/useAuthStatus/useAuthStatus'
 
 const AuthProvider = ({ children }) => {
   const { t } = useTranslation()
+  const router = useRouter()
   const dispatch = useDispatch()
   const path = usePathname()
   const user = useSelector(selectUserTable)
@@ -137,25 +139,10 @@ const AuthProvider = ({ children }) => {
   const { logOut } = useLogOut()
   const { data: session } = useSession()
   const [logoutInProgress, setLogoutInProgress] = useState(false)
+  const { setAuth, isAuthenticated } = useAuthStatus()
 
-  useEffect(() => {
-    if (session !== undefined) {
-      dispatch(setUserTable(session?.user || {}))
-    }
-  }, [session, dispatch])
-
-  useEffect(() => {
-    // Skip checks on auth and OTP confirmation pages
-    if (path.includes('auth') || path.includes('confirm-otp')) {
-      return
-    }
-
-    // Prevent executing if logout is already in progress or if session is not loaded yet
-    if (logoutInProgress || session === undefined) {
-      return
-    }
-
-    const performLogout = async (message) => {
+  const performLogout = useCallback(
+    async (message) => {
       if (logoutInProgress) return
 
       setLogoutInProgress(true)
@@ -166,10 +153,41 @@ const AuthProvider = ({ children }) => {
           setLogoutInProgress(false)
         },
       })
+    },
+    [logOut, logoutInProgress]
+  )
+
+  useEffect(() => {
+    if (session !== undefined) {
+      dispatch(setUserTable(session?.user || {}))
+      if (session?.user?.id) {
+        setAuth(true)
+      }
+    }
+  }, [session, dispatch, setAuth])
+
+  useEffect(() => {
+    if (path.includes('/play') || path.includes('settings')) {
+      if (!isAuthenticated) {
+        router.push('/')
+        toast.info(t('Please login first'))
+      }
+    }
+  }, [isAuthenticated, path, performLogout, router, t])
+
+  useEffect(() => {
+    // Skip checks on auth and OTP confirmation pages
+    if (path.includes('auth') || path.includes('confirm-otp')) {
+      return
+    }
+
+    // Prevent executing if logout is already in progress or if session is not loaded yet
+    if (logoutInProgress || !session?.user?.id || !isAuthenticated) {
+      return
     }
 
     // Case 1: User is logged in but missing required profile data
-    if (session?.user?.id && (!session.user?.phone || !session.user?.email)) {
+    if (!session.user?.phone || !session.user?.email) {
       performLogout(
         t(
           'Your registration was not successfully completed, so we are logging you out for security reasons.'
@@ -179,15 +197,19 @@ const AuthProvider = ({ children }) => {
     }
 
     // Case 2: User is logged in but phone is not verified
-    // if (
-    //   session?.user?.id &&
-    //   !session?.user?.phone_verified &&
-    //   !path.includes('settings')
-    // ) {
-    //   performLogout(t('Phone verified is false'))
-    //   return
-    // }
-  }, [path, session, t, logOut, logoutInProgress])
+    if (session?.user?.id && !session?.user?.phone_verified) {
+      performLogout(t('Phone verified is false'))
+      return
+    }
+  }, [
+    path,
+    session,
+    t,
+    logOut,
+    logoutInProgress,
+    performLogout,
+    isAuthenticated,
+  ])
 
   // Handle app version changes
   useEffect(() => {

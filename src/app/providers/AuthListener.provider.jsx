@@ -53,6 +53,7 @@ function AuthListener({ children }) {
           )
           return
         } else {
+          localStorage.removeItem('sign-in-method')
           return router.push('/championships')
         }
       }

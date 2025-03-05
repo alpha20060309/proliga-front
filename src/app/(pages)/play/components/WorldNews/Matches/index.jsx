@@ -52,7 +52,7 @@ const Matches = () => {
   }
 
   useEffect(() => {
-    if (currentTourIndex) {
+    if (currentTourIndex > -1) {
       setCurrentTour(tours[currentTourIndex])
       setTourIndex(currentTourIndex)
     }

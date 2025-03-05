@@ -189,6 +189,11 @@ const Play = ({ params }) => {
       currentTeam?.is_team_created === null
     ) {
       dispatch(setTab(TABS.Transfer))
+    } else {
+      const hash = window.location.hash.slice(1)
+      if (hash && Object.values(TABS).includes(hash)) {
+        dispatch(setTab(hash))
+      }
     }
   }, [dispatch, currentTeam?.is_team_created])
 

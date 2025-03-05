@@ -118,7 +118,7 @@ const Tab = ({ title, tab, styling }) => {
     ) {
       return
     }
-
+    window.location.hash = tab
     return dispatch(setTab(tab))
   }
 
