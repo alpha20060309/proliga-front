@@ -29,13 +29,13 @@ function Settings() {
   const renderSection = () => {
     switch (tab) {
       case SETTINGS_TAB.PROFILE:
-        return <Profile tab={SETTINGS_TAB.PROFILE} />
+        return <Profile />
       case SETTINGS_TAB.SETTINGS:
-        return <SettingsTab tab={SETTINGS_TAB.PROFILE} />
+        return <SettingsTab setHomeTab={() => setTab(SETTINGS_TAB.PROFILE)} />
       case SETTINGS_TAB.SECURITY:
-        return <ChangePassword tab={SETTINGS_TAB.PROFILE} />
+        return <ChangePassword />
       case SETTINGS_TAB.HISTORY:
-        return <TransactionsHistory tab={SETTINGS_TAB.PROFILE} />
+        return <TransactionsHistory />
       default:
         return <Profile />
     }
