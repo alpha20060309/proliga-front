@@ -7,10 +7,14 @@
     "build": "next build",
     "start": "dotenv -e .env.production next start",
     "lint": "next lint",
-    "db:pull": "dotenv -e .env.development -- npx prisma db pull",
-    "db:generate": "npx prisma generate",
-    "db:push": "dotenv -e .env.development -- npx prisma db push",
-    "db:seed": "dotenv -e .env.development -- npx prisma db seed"
+    "dev:pull": "dotenv -e .env.development -- npx prisma db pull",
+    "dev:generate": "npx prisma generate",
+    "dev:push": "dotenv -e .env.development -- npx prisma db push",
+    "dev:seed": "npx prisma db seed",
+    "prod:pull": "dotenv -e .env.development -- npx prisma db pull",
+    "prod:generate": "npx prisma generate",
+    "prod:push": "dotenv -e .env.development -- npx prisma db push",
+    "prod:seed": "dotenv -e .env.development -- npx prisma db seed"
   },
   "prisma": {
     "seed": "node prisma/seed.js"
