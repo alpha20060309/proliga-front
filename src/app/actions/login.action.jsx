@@ -32,7 +32,7 @@ export const login = async (values) => {
       data: {
         geo: JSON.stringify(data?.geo),
         agent: JSON.stringify(data?.agent),
-        fingerprint: data?.fingerprint,
+        visitor: data?.fingerprint,
       },
     })
 
@@ -43,6 +43,7 @@ export const login = async (values) => {
     }
   } catch (error) {
     if (error) {
+      console.log(error)
       switch (error.type) {
         case 'CredentialsSignin':
           return { error: 'Login yoki parol xato' }
