@@ -35,7 +35,7 @@ export const login = async (values) => {
         visitor: data?.fingerprint,
       },
     })
-
+// https://proliga.uz/api/auth/callback/google
     return {
       success: true,
       phone: existingUser?.phone,
