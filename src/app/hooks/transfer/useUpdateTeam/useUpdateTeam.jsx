@@ -32,7 +32,7 @@ export const useUpdateTeam = () => {
           .from('team')
           .update({ is_team_created: true })
           .eq('id', team_id)
-          .select()
+          .select("*")
           .is('deleted_at', null)
           .single()
 

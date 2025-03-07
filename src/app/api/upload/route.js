@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { NextResponse } from 'next/server'
 import { join } from 'path'
 import mime from 'mime'
