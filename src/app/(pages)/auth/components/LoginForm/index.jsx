@@ -84,9 +84,9 @@ const LoginForm = ({ setShouldRedirect }) => {
               shouldRedirect: true,
               redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(res.phone)}`,
             })
-          } else {
-            toast.success(t('Tizimga muvaffaqiyatli kirdingiz'))
+            return
           }
+          toast.success(t('Tizimga muvaffaqiyatli kirdingiz'))
         }
       } catch (error) {
         toast.error(t('An unknown error occurred'))

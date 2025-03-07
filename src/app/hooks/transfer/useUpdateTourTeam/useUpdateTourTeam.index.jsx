@@ -42,7 +42,7 @@ export const useUpdateTourTeam = () => {
           .eq('team_id', team_id)
           .eq('tour_id', tour_id)
           .is('deleted_at', null)
-          .select()
+          .select("*")
 
         if (error) {
           setError(

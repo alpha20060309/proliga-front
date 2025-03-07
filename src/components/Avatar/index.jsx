@@ -15,7 +15,7 @@ const Avatar = ({ className }) => {
           alt="user-photo"
           width={96}
           height={96}
-          key={user.image}
+          key={user?.image}
           onError={(e) => {
             e.target.src = '/icons/user.svg'
           }}
@@ -32,6 +32,7 @@ const Avatar = ({ className }) => {
           'flex aspect-square size-8 select-none items-center justify-center bg-primary text-3xl font-bold uppercase text-black',
           className
         )}
+        key={user?.email}
       >
         {user.email.slice(0, 1)}
       </span>
@@ -45,6 +46,7 @@ const Avatar = ({ className }) => {
           'flex aspect-square size-8 select-none items-center justify-center bg-primary text-3xl font-bold uppercase text-black',
           className
         )}
+        key={user?.name}
       >
         {user.name.slice(0, 1)}
       </span>

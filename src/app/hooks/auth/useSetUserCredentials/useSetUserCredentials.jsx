@@ -33,7 +33,7 @@ export const useSetUserCredentials = () => {
         handleError("Barcha maydonlar to'ldirilishi shart")
         return
       }
-      console.log(email, phone)
+
       try {
         // Step 1: Check that the phone doesn't exist
         if (!session?.user?.email) {

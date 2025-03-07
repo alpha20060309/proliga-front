@@ -1,11 +1,12 @@
 import { supabase } from 'app/lib/supabaseClient'
 import { useState, useCallback } from 'react'
+import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
+import { setUserTable } from 'app/lib/features/auth/auth.slice'
 import { useTranslation } from 'react-i18next'
-import { useSession } from 'next-auth/react'
 
 export const useUpdateUserPhoto = () => {
-  const { update } = useSession()
+  const dispatch = useDispatch()
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const { t } = useTranslation()
@@ -25,20 +26,20 @@ export const useUpdateUserPhoto = () => {
 
         if (!userTable?.id) {
           setError('User not authenticated')
-          toast.error(t('Foydalanuvchi autentifikatsiya qilinmagan'), {
-            theme: 'dark',
-          })
+          toast.error(t('Foydalanuvchi autentifikatsiya qilinmagan'))
           return
         }
 
         const { data, error } = await supabase
           .from('user')
           .update({
-            photo: path,
+            image: path,
           })
           .eq('id', userTable?.id)
           .is('deleted_at', null)
-
+          .select(
+            'id, name, email, phone, image, last_name, middle_name, gender, birth_date, bio, balance, deleted_at, language, phone_verified'
+          )
           .single()
 
         if (error) {
@@ -50,14 +51,13 @@ export const useUpdateUserPhoto = () => {
           toast.error(
             error instanceof Error
               ? error.message
-              : t('An unknown error occurred'),
-            { theme: 'dark' }
+              : t('An unknown error occurred')
           )
           return
         }
         if (data) {
-          await update()
-          toast.success(t('Rasm muvofaqiyatli yuklandi'), { theme: 'dark' })
+          dispatch(setUserTable(data))
+          toast.success(t('Rasm muvofaqiyatli yuklandi'))
           cb()
         }
       } catch (error) {
@@ -76,7 +76,7 @@ export const useUpdateUserPhoto = () => {
         setIsLoading(false)
       }
     },
-    [t, update]
+    [dispatch, t]
   )
   return { updateUserPhoto, isLoading, error }
 }

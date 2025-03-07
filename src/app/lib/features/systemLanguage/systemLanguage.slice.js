@@ -12,7 +12,6 @@ export const systemLanguageSlice = createSlice({
     setLanguage: (state, action) => {
       const { lang, cb } = action.payload
       if (lang === LANGUAGE.uz || lang === LANGUAGE.ru) {
-        localStorage.setItem('lang', lang)
         state.lang = lang
         cb(lang)
       }

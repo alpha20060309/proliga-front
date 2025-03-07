@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setLanguage } from '../lib/features/systemLanguage/systemLanguage.slice'
 import { LANGUAGE } from '../utils/languages.util'
@@ -36,13 +36,14 @@ const InitialStateProvider = ({ children }) => {
       generateFingerprint(),
       fetch(),
     ])
-  }, [dispatch, generateFingerprint, getUserAgent])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     if (userTable?.id && userTable?.phone && userTable?.phone_verified) {
       dispatch(fetchPersonalNotifications({ user_id: userTable?.id }))
     }
-  }, [dispatch, userTable])
+  }, [dispatch, userTable?.id, userTable?.phone, userTable?.phone_verified])
 
   useEffect(() => {
     if (lang !== userTable?.language && userTable?.id) {
@@ -58,4 +59,4 @@ const InitialStateProvider = ({ children }) => {
   return children
 }
 
-export default InitialStateProvider
+export default memo(InitialStateProvider)
