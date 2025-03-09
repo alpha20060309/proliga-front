@@ -80,22 +80,29 @@ const Play = ({ params }) => {
       bannersLoading,
     ]
   )
-
   useEffect(() => {
     if (competitions?.length === 0) {
       dispatch(fetchCompetition())
     }
+  }, [dispatch, competitions?.length])
+
+  useEffect(() => {
     if (!season?.id) {
       dispatch(fetchSeason())
     }
+  }, [dispatch, season?.id])
+
+  useEffect(() => {
     if (packages?.length === 0) {
       dispatch(fetchPackages())
     }
+  }, [dispatch, packages?.length])
+
+  useEffect(() => {
     if (banners?.length === 0) {
       dispatch(fetchBanners())
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch])
+  }, [dispatch, banners?.length])
 
   useEffect(() => {
     if (userTable?.id && params?.id && params?.league) {
@@ -107,21 +114,25 @@ const Play = ({ params }) => {
   useEffect(() => {
     if (params?.id && currentTour?.id) {
       // eslint-disable-next-line no-undef
-      Promise.all([
-        dispatch(
-          fetchTeamPlayers({
-            team_id: params.id,
-            tour_id: currentTour.id,
-            competition_id: params.league,
-          })
-        ),
-        dispatch(fetchTourTeams({ team_id: params.id, currentTour })),
-      ])
+      dispatch(
+        fetchTeamPlayers({
+          team_id: params.id,
+          tour_id: currentTour.id,
+          competition_id: params.league,
+        })
+      )
     }
-  }, [params, currentTour, dispatch])
+  }, [params, currentTour?.id, dispatch])
 
   useEffect(() => {
-    if (params.league && currentTeam?.registered_tour_id) {
+    if (params?.id && currentTour?.id) {
+      // eslint-disable-next-line no-undef
+      dispatch(fetchTourTeams({ team_id: params.id, currentTour }))
+    }
+  }, [params?.id, currentTour, dispatch])
+
+  useEffect(() => {
+    if (params?.league && currentTeam?.registered_tour_id) {
       dispatch(
         fetchTours({
           competition_id: params.league,
@@ -129,7 +140,7 @@ const Play = ({ params }) => {
         })
       )
     }
-  }, [params.league, dispatch, currentTeam?.registered_tour_id])
+  }, [params?.league, dispatch, currentTeam?.registered_tour_id])
 
   useEffect(() => {
     if (params.league) {

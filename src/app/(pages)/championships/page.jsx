@@ -42,7 +42,7 @@ const Championships = () => {
     if (!season?.id) {
       dispatch(fetchSeason())
     }
-  }, [dispatch, season])
+  }, [dispatch, season?.id])
 
   useEffect(() => {
     if (userTable?.id && season?.id) {
@@ -53,7 +53,7 @@ const Championships = () => {
         })
       )
     }
-  }, [dispatch, userTable?.id, season.id])
+  }, [dispatch, userTable?.id, season?.id])
 
   const isLoading = useMemo(
     () => competitionLoading || seasonLoading || teamsLoading,

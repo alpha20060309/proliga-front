@@ -1,15 +1,10 @@
 'use client'
 
-import { useEffect } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 
-export default function Error({ error, reset }) {
-  useEffect(() => {
-    console.error(error)
-  }, [error])
-
+export default function Error({ reset }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-900 p-4">
       <Card className="w-full max-w-md border-4 border-red-500 bg-neutral-800">

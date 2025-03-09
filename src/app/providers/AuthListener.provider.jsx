@@ -60,7 +60,6 @@ function AuthListener({ children }) {
 
     handleAuthChange()
   }, [dispatch, status, t, router, active, sendOTP, session])
-  // eslint-disable-next-line react-hooks/exhaustive-deps
 
   return <>{children}</>
 }

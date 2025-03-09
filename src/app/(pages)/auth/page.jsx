@@ -42,7 +42,7 @@ const Auth = () => {
     if (Boolean(userTable?.id) && shouldRedirect && !SIGN_IN_METHOD) {
       router.push('/championships')
     }
-  }, [userTable, router, shouldRedirect])
+  }, [userTable?.id, router, shouldRedirect])
 
   useEffect(() => {
     const hash = window.location.hash.slice(1)
