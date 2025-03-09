@@ -55,18 +55,24 @@ const TeamView = ({ params }) => {
       bannersLoading,
     ]
   )
+
   useEffect(() => {
     if (competitions?.length === 0) {
       dispatch(fetchCompetition())
     }
+  }, [dispatch, competitions?.length])
+
+  useEffect(() => {
     if (!season?.id) {
       dispatch(fetchSeason())
     }
+  }, [dispatch, season?.id])
+
+  useEffect(() => {
     if (banners?.length === 0) {
       dispatch(fetchBanners())
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch])
+  }, [dispatch, banners?.length])
 
   useEffect(() => {
     if (params?.id) {
@@ -83,11 +89,12 @@ const TeamView = ({ params }) => {
         })
       )
     }
-  }, [currentTeam, dispatch, params, currentTeam?.registered_tour_id])
+  }, [currentTeam, dispatch, params?.league, currentTeam?.registered_tour_id])
 
   useEffect(() => {
     if (
-      params &&
+      params?.id &&
+      params?.league &&
       currentTour?.id &&
       currentTour?.status !== TOUR_STATUS.notStartedTransfer
     ) {
@@ -117,7 +124,7 @@ const TeamView = ({ params }) => {
     if (competitions?.length > 0 && params.league) {
       dispatch(setCurrentCompetition(params.league))
     }
-  }, [dispatch, params.league, competitions?.length])
+  }, [dispatch, params?.league, competitions?.length])
 
   useEffect(() => {
     if (params.id && currentTour?.id) {
@@ -128,7 +135,7 @@ const TeamView = ({ params }) => {
         })
       )
     }
-  }, [params.id, dispatch, currentTour])
+  }, [params?.id, dispatch, currentTour])
 
   useEffect(() => {
     if (currentTour?.status === TOUR_STATUS.notStartedTransfer) {

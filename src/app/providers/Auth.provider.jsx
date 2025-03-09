@@ -86,7 +86,7 @@ const AuthProvider = ({ children }) => {
     }
   }, [
     path,
-    session,
+    session?.user,
     t,
     logOut,
     logoutInProgress,
@@ -96,6 +96,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const existing_app_version = localStorage.getItem('app_version') || null
+
     if (
       user?.id &&
       app_version &&
@@ -124,7 +125,7 @@ const AuthProvider = ({ children }) => {
 
       performLogout()
     }
-  }, [app_version, user, logOut, t, logoutInProgress])
+  }, [app_version, user?.id, logOut, t, logoutInProgress])
 
   return <>{children}</>
 }

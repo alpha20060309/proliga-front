@@ -55,7 +55,14 @@ const ConfirmPayment = ({ params }) => {
       toast.info(t('Iltimos, avval jamoani tanlang!'), { theme: 'dark' })
       router.push('/championships')
     }
-  }, [currentTeam, currentTour, currentCompetition, router, userTable, t])
+  }, [
+    currentTeam?.id,
+    currentTour?.id,
+    currentCompetition?.id,
+    router,
+    userTable?.id,
+    t,
+  ])
 
   useEffect(() => {
     dispatch(setCurrentPackage(+params.packageId))

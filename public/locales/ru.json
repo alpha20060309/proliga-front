@@ -630,6 +630,9 @@
   "Update your password to keep your account secure": "Обновите свой пароль, чтобы обезопасить свою учетную запись.",
   "Keep your contact information up to date": "Держите свою контактную информацию в актуальном состоянии.",
   "Your registration was not successfully completed, so we are logging you out for security reasons.": "Ваша регистрация не была успешно завершена, поэтому мы выполняем выход из системы в целях безопасности.",
-  "Enter your credentials.": "Введите свои учетные данные.",
-  "To complete your registration, please link your credentials with your account. This step is mandatory.": "Чтобы завершить регистрацию, свяжите свои учетные данные с учетной записью. Этот шаг является обязательным."
+  "An email with this email has been opened, please try a different account": "Этот email уже использован. Попробуйте другой аккаунт.",
+  "Phone not verified. Please complete the verification process.": "Телефон не подтвержден. Пожалуйста, завершите проверку.",
+  "You're Offline": "Вы не в сети.",
+  "It seems you've lost your internet connection. Check your network and try again.": "Похоже, вы потеряли подключение к интернету. Проверьте сеть и попробуйте снова.",
+  "try again": "Попробуйте еще раз"
 }

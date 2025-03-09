@@ -27,7 +27,6 @@ const InitialStateProvider = ({ children }) => {
   useEffect(() => {
     const fetch = async () => await getUserAgent()
 
-    // eslint-disable-next-line no-undef
     Promise.all([
       dispatch(fetchGeo()),
       dispatch(fetchPrizes()),
@@ -54,7 +53,7 @@ const InitialStateProvider = ({ children }) => {
         })
       )
     }
-  }, [dispatch, lang, userTable?.language, i18n, userTable])
+  }, [dispatch, lang, i18n, userTable?.id, userTable?.language])
 
   return children
 }

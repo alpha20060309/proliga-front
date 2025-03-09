@@ -1,6 +1,6 @@
 {
   "name": "proliga.uz",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "private": true,
   "scripts": {
     "dev": "dotenv -e .env.development next dev",
