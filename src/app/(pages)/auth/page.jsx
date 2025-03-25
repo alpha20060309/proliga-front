@@ -12,6 +12,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useSelector } from 'react-redux'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { useTranslation } from 'react-i18next'
+import { useAuthStatus } from 'app/hooks/auth/useAuthStatus/useAuthStatus'
 const SignUpForm = dynamic(() => import('./components/SignUpForm'), {
   ssr: false,
   loading: () => <SignUpFormSkeleton />,
@@ -33,6 +34,7 @@ const Auth = () => {
   const error = params.get('error')
   const [currentTab, setCurrentTab] = useState(tabs.login)
   const [shouldRedirect, setShouldRedirect] = useState(true)
+  const { setAuth } = useAuthStatus()
 
   useEffect(() => {
     const SIGN_IN_METHOD =
@@ -53,22 +55,18 @@ const Auth = () => {
 
   useEffect(() => {
     if (error) {
-      if (error === 'OAuthAccountNotLinked') {
-        toast.error(
-          t(
-            'An email with this email has been opened, please try a different account'
-          )
-        )
-        // OAuthCallbackError
-      } else if (error === 'Configuration') {
-        toast.error(t('An unknown error occurred'))
-      } else {
-        toast.error(t(error))
+      const errorMessages = {
+        OAuthAccountNotLinked: t(
+          'An email with this email has been opened, please try a different account'
+        ),
+        Configuration: t('An unknown error occurred'),
       }
-
+      toast.error(errorMessages[error] || t('An unknown error occurred'))
+      setAuth(false)
+      localStorage.removeItem('sign-in-method')
       router.push('/auth')
     }
-  }, [error, router, t])
+  }, [error, router, t, setAuth])
 
   return (
     <main className="flex min-h-screen w-full justify-center">

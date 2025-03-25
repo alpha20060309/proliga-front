@@ -1,10 +1,9 @@
 import Image from 'next/image'
 import { useCreateTeam } from 'app/hooks/transfer/useCreateTeam/useCreateTeam'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { FORMATIONS } from 'app/utils/formations.util'
 import { useRouter } from 'next/navigation'
 import { useSelector } from 'react-redux'
-import { selectTeams } from 'app/lib/features/team/team.selector'
 import { useTranslation } from 'react-i18next'
 import {
   DialogContent,
@@ -26,12 +25,11 @@ import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
   const router = useRouter()
   const { t } = useTranslation()
-  const teams = useSelector(selectTeams)
   const [title, setTitle] = useState('')
   const [formation, setFormation] = useState(FORMATIONS['4-3-3'])
   const userTable = useSelector(selectUserTable)
 
-  const { createTeam, isLoading, error, data } = useCreateTeam()
+  const { createTeam, isLoading } = useCreateTeam()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -44,20 +42,12 @@ const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
       formation,
       competition_id: competition.id,
       userTable,
+      cb: (game) => {
+        toggleModal()
+        router.push(`/play/${game.competition_id}/${game.id}`)
+      },
     })
   }
-
-  useEffect(() => {
-    if (data && !isLoading && !error && competition?.id) {
-      const currentGame = teams.find(
-        (game) => game.competition_id === competition.id
-      )
-      setTitle('')
-      setFormation(FORMATIONS['4-3-3'])
-      currentGame && router.push(`/play/${competition.id}/${currentGame.id}`)
-      toggleModal()
-    }
-  }, [competition, router, teams, data, isLoading, error, toggleModal])
 
   return (
     <Dialog onOpenChange={toggleModal} open={isModalOpen}>
