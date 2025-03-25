@@ -15,7 +15,11 @@ import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { setPhoneModal } from 'app/lib/features/auth/auth.slice'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import {
+  selectAgent,
+  selectGeo,
+  selectUserTable,
+} from 'app/lib/features/auth/auth.selector'
 import { toast } from 'react-toastify'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { CONFIG_KEY } from 'app/utils/config.util'
@@ -29,6 +33,9 @@ function SetUserCredentials() {
   const { t } = useTranslation()
   const { data: session } = useSession()
   const user = useSelector(selectUserTable)
+  const agent = useSelector(selectAgent)
+  const fingerprint = useSelector((store) => store.auth)
+  const geo = useSelector(selectGeo)
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
   const { setUserCredentials, isLoading: tableLoading } =
@@ -67,6 +74,9 @@ function SetUserCredentials() {
         email,
         phone,
         user,
+        agent,
+        geo,
+        fingerprint,
         cb: () => {
           localStorage.removeItem('sign-in-method')
           localStorage.setItem('app_version', app_version)

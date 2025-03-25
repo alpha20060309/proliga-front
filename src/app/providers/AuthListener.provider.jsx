@@ -26,7 +26,7 @@ function AuthListener({ children }) {
           ?.app_version?.value
         const SIGN_IN_METHOD = localStorage.getItem('sign-in-method')
 
-        if (!user || !SIGN_IN_METHOD || !active) {
+        if (!user?.id || !SIGN_IN_METHOD || !active) {
           return
         }
 

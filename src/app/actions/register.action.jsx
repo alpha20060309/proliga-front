@@ -22,7 +22,6 @@ export const register = async (values) => {
   if (existingPhone?.phone === phone) {
     return { error: 'User phone already exists.' }
   }
-
   const existingEmail = await getUserByEmail(email)
 
   if (existingEmail?.email === email) {
@@ -37,13 +36,11 @@ export const register = async (values) => {
         password: hashedPassword,
       },
     })
-
     const res = await login({ phone, password, data })
 
     if (res?.error) {
       return { error: res.error }
     }
-
     return res
   } catch (error) {
     return { error }

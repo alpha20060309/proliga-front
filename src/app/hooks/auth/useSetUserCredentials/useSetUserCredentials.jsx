@@ -24,7 +24,7 @@ export const useSetUserCredentials = () => {
   )
 
   const setUserCredentials = useCallback(
-    async ({ phone, email, user, cb = () => {} }) => {
+    async ({ phone, email, geo, fingerprint, agent, user, cb = () => {} }) => {
       setIsLoading(true)
       setError(null)
       setData(null)
@@ -92,6 +92,9 @@ export const useSetUserCredentials = () => {
           .update({
             email,
             phone,
+            geo: geo || null,
+            agent: agent || null,
+            visitor: fingerprint || '',
             isOAuth: true,
           })
           .eq('id', user?.id)

@@ -15,11 +15,11 @@ export const useCreateTeam = () => {
   const { t } = useTranslation()
 
   const createTeam = useCallback(
-    async ({ title, formation, competition_id, userTable }) => {
+    async ({ title, formation, competition_id, userTable, cb = () => {} }) => {
       setIsLoading(false)
       setError(null)
 
-      if (!userTable) {
+      if (!userTable?.id) {
         setError('"Jamoa tuzish uchun tizimga kirishingiz kerak')
         toast.warning(t('Jamoa tuzish uchun tizimga kirishingiz kerak'), {
           theme: 'dark',
@@ -62,23 +62,20 @@ export const useCreateTeam = () => {
               : t('An unknown error occurred')
           )
           if (error?.code === '23505') {
-            toast.error(t('Ushbu jamoa allaqachon yaratilgan'), {
-              theme: 'dark',
-            })
+            return toast.error(t('Ushbu jamoa allaqachon yaratilgan'))
           } else {
-            toast.error(
+            return toast.error(
               error instanceof Error
                 ? error.message
-                : t('An unknown error occurred'),
-              { theme: 'dark' }
+                : t('An unknown error occurred')
             )
           }
-          return
         }
         if (data) {
           setData(data)
           dispatch(addGameToTeam(data))
-          toast.success(t('Jamoa muvaffaqiyatli yaratildi'), { theme: 'dark' })
+          toast.success(t('Jamoa muvaffaqiyatli yaratildi'))
+          cb(data)
         }
       } catch (error) {
         setError(
