@@ -9,6 +9,9 @@ import { TOUR_STATUS } from 'app/utils/tour.util'
 import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
 import PlayerTransfer from 'components/Modals/PlayerTransfer'
 import { memo } from 'react'
+import { Button } from '@/components/ui/button'
+import { Share2 } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 const Transfer = () => {
   const currentTour = useSelector(selectCurrentTour)
@@ -27,6 +30,26 @@ const Transfer = () => {
               priority
               className="w-full select-none rounded"
             />
+
+            <Button
+              onClick={() => {
+                if (navigator.share) {
+                  navigator.share({
+                    title: 'Fantasy Football',
+                    url: window.location.href,
+                  })
+                }
+              }}
+              variant="default"
+              size="default"
+              className={cn(
+                'absolute right-20 top-1 z-30 border bg-green-600',
+                'shadow transition-colors'
+              )}
+              aria-label="Share"
+            >
+              <Share2 className="h-4 w-4" />
+            </Button>
             {currentTour?.status === TOUR_STATUS.notStartedTransfer && (
               <PlayersStructure />
             )}
