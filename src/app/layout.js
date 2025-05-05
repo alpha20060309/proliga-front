@@ -1,16 +1,13 @@
-'use client'
 
 import './globals.css'
 import 'react-toastify/dist/ReactToastify.css'
 import 'react-phone-number-input/style.css'
-import './lib/i18n.config'
 import Navbar from '../components/Navbar'
 import dynamic from 'next/dynamic'
 const Footer = dynamic(() => import('../components/Footer'), { ssr: false })
 import RootProvider from './providers/Root.provider'
 import { DM_Sans } from 'next/font/google'
 import { ToastContainer } from 'react-toastify'
-import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
 
 const dmSans = DM_Sans({
@@ -19,10 +16,8 @@ const dmSans = DM_Sans({
 })
 
 export default function RootLayout({ children }) {
-  const { i18n } = useTranslation()
-
   return (
-    <html lang={i18n.language || 'uz'}>
+    <html lang={'uz'}>
       <head>
         <title>
           Futbol fantasy: O&apos;zbekiston, Angliya, Ispaniya, Italiya va
