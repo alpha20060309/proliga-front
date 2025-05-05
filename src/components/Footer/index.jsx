@@ -30,7 +30,8 @@ const Footer = () => {
   if (
     path.includes('auth') ||
     path.includes('reset-password') ||
-    path.includes('confirm-otp')
+    path.includes('confirm-otp') ||
+    path.includes('offline')
   ) {
     return <></>
   }
