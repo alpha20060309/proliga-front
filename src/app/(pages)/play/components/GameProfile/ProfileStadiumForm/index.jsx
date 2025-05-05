@@ -19,6 +19,7 @@ import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.sele
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { TOUR_STATUS } from 'app/utils/tour.util'
 
 const ProfileStadiumForm = () => {
   const { t } = useTranslation()
@@ -101,6 +102,10 @@ const ProfileStadiumForm = () => {
       return false
     }
     return true
+  }
+
+  if (currentTour?.status !== TOUR_STATUS.notStartedTransfer) {
+    return null
   }
 
   return (
