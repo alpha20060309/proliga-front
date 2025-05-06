@@ -46,13 +46,8 @@
       "icons": [{ "src": "/favicon.png", "sizes": "180x180" }]
     },
     {
-      "name": "Jamoalar",
-      "url": "/teams",
-      "icons": [{ "src": "/favicon.png", "sizes": "180x180" }]
-    },
-    {
-      "name": "Yangiliklar",
-      "url": "/news",
+      "name": "Sovrinlar",
+      "url": "/prizes",
       "icons": [{ "src": "/favicon.png", "sizes": "180x180" }]
     }
   ],
