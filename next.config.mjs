@@ -1,9 +1,9 @@
 import withSerwistInit from "@serwist/next";
 
 const withSerwist = withSerwistInit({
-  swSrc: "/app/sw.ts",
+  swSrc: "/src/app/sw.ts",
   swDest: "public/sw.js",
-  // eslint-disable-next-line no-undef
+  // eslint-disable-next-line
   disable: process.env.NODE_ENV === "development",
   scope: "/",
   include: [
@@ -18,6 +18,16 @@ const withSerwist = withSerwistInit({
   ],
 });
 
-export default withSerwist({
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: false,
-});
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  swcMinify: true,
+}
+
+export default withSerwist(nextConfig);

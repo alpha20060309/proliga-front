@@ -1,5 +1,5 @@
 import Gutter from 'components/Gutter'
-import { AboutUsSkeleton } from './page'
+import AboutUsSkeleton from './AboutUsSkeleton'
 
 const Loading = () => {
   return (
