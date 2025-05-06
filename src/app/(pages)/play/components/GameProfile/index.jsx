@@ -8,7 +8,7 @@ const GameBrief = dynamic(() => import('./GameBrief'), {
 })
 import PlayerInfo from 'components/Modals/PlayerInfo'
 import { memo } from 'react'
-import StadiumContainer from '../StadiumContainer'
+import StadiumContainer from 'components/StadiumContainer'
 
 const GameProfile = () => {
   return (
