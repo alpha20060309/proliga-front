@@ -29,12 +29,11 @@ import { useSession } from 'next-auth/react'
 
 function SetUserCredentials() {
   const dispatch = useDispatch()
-  const { phoneModal } = useSelector((store) => store.auth)
+  const { phoneModal, fingerprint } = useSelector((store) => store.auth)
   const { t } = useTranslation()
   const { data: session } = useSession()
   const user = useSelector(selectUserTable)
   const agent = useSelector(selectAgent)
-  const fingerprint = useSelector((store) => store.auth)
   const geo = useSelector(selectGeo)
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
