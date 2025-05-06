@@ -12,19 +12,15 @@ const StadiumContainer = ({ children, hideShareButton = false }) => {
     navigator.clipboard.writeText(value)
     toast.info(t('Buferga muvaffaqiyatli nusxalandi!'), { theme: 'dark' })
   }
+
   const handleShare = async () => {
     if (navigator.share) {
-      try {
-        await navigator.share({
-          title: 'Fantasy Football',
-          url: window.location.href,
-        })
-      } catch (error) {
-        console.error('Error sharing:', error)
-        handleCopy(window.location.href)
-      }
+      await navigator.share({
+        title: 'Fantasy Football',
+        url: window.location.href.replace('play', 'team-view'),
+      })
     } else {
-      handleCopy(window.location.href)
+      handleCopy(window.location.href.replace('play', 'team-view'))
     }
   }
 
