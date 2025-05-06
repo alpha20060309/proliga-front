@@ -634,5 +634,7 @@
   "Phone not verified. Please complete the verification process.": "Telefon tasdiqlanmagan. Iltimos, tekshirish jarayonini yakunlang.",
   "You're Offline": "Siz oflaysiz.",
   "It seems you've lost your internet connection. Check your network and try again.": "Ko‘rinishidan, internetga ulanishingiz uzildi. Tarmog‘ingizni tekshiring va qayta urinib ko‘ring.",
-  "try again": "qayta urinib ko'ring"
+  "try again": "qayta urinib ko'ring",
+  "Enter your credentials.": "Ma'lumotlaringizni kiriting.",
+  "To complete your registration, please link your credentials with your account. This step is mandatory.": "Ro‘yxatdan o‘tishni yakunlash uchun ma’lumotlaringizni akkauntingiz bilan bog‘lang. Bu qadam majburiydir."
 }

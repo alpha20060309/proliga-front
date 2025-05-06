@@ -634,5 +634,7 @@
   "Phone not verified. Please complete the verification process.": "Телефон не подтвержден. Пожалуйста, завершите проверку.",
   "You're Offline": "Вы не в сети.",
   "It seems you've lost your internet connection. Check your network and try again.": "Похоже, вы потеряли подключение к интернету. Проверьте сеть и попробуйте снова.",
-  "try again": "Попробуйте еще раз"
+  "try again": "Попробуйте еще раз",
+  "Enter your credentials.": "Введите свои учетные данные.",
+  "To complete your registration, please link your credentials with your account. This step is mandatory.": "Чтобы завершить регистрацию, свяжите свои учетные данные с аккаунтом. Этот шаг обязателен."
 }
