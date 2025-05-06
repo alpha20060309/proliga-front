@@ -14,10 +14,11 @@ export const useSetUserCredentials = () => {
   const { sendOTP } = useSendOTP()
 
   const handleError = useCallback(
-    (errorMessage) => {
+    (errorMessage, warning = false) => {
       setIsLoading(false)
       setError(errorMessage)
-      toast.error(t(errorMessage), { theme: 'dark' })
+      warning ? toast.warning(t(errorMessage)) : toast.error(t(errorMessage))
+
       return
     },
     [t]
@@ -30,34 +31,32 @@ export const useSetUserCredentials = () => {
       setData(null)
 
       if (!phone || !user?.id || !email) {
-        handleError("Barcha maydonlar to'ldirilishi shart")
+        handleError("Barcha maydonlar to'ldirilishi shart", true)
         return
       }
 
       try {
         // Step 1: Check that the phone doesn't exist
-        if (!session?.user?.email) {
-          const { data: phoneData, error: phoneError } = await supabase.rpc(
-            'get__check_user_not_exist',
-            {
-              phone_num: phone,
-            }
+        const { data: phoneData, error: phoneError } = await supabase.rpc(
+          'get__check_user_not_exist',
+          {
+            phone_num: phone,
+          }
+        )
+
+        if (phoneError) {
+          return handleError(
+            phoneError instanceof Error
+              ? phoneError.message
+              : 'An unknown error occurred'
           )
+        }
 
-          if (phoneError) {
-            return handleError(
-              phoneError instanceof Error
-                ? phoneError.message
-                : 'An unknown error occurred'
-            )
-          }
-
-          if (phoneData?.status === 200) {
-            return handleError("Bu telefon raqam oldin ro'yxatdan o'tgan")
-          }
-          if (phoneData?.status !== 404) {
-            return handleError('An unknown error occurred')
-          }
+        if (phoneData?.status === 200) {
+          return handleError("Bu telefon raqam oldin ro'yxatdan o'tgan", true)
+        }
+        if (phoneData?.status !== 404) {
+          return handleError('An unknown error occurred')
         }
         // Step 2: Check that the email doesn't exist
         if (!session?.user?.email) {
@@ -77,7 +76,7 @@ export const useSetUserCredentials = () => {
           }
 
           if (emailData?.status === 200) {
-            return handleError("Bu email raqam oldin ro'yxatdan o'tgan")
+            return handleError("Bu email oldin ro'yxatdan o'tgan", true)
           }
 
           if (emailData?.status !== 404) {
