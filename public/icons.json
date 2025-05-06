@@ -1,12 +1,4 @@
 {
-  "name": "Proliga - Fantasy Football Platform",
-  "short_name": "Proliga",
-  "description": "O'zbekiston Fantasy Futbol Ligasi - virtual futbol o'yini bo'lib, haqiqiy futbol ligalarining o'yinchilariga asoslangan",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#121212",
-  "theme_color": "#fff400",
-  "orientation": "portrait",
   "icons": [
     {
       "src": "windows11/SmallTile.scale-100.png",
@@ -455,54 +447,6 @@
     {
       "src": "ios/1024.png",
       "sizes": "1024x1024"
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "/Screenshot.png",
-      "sizes": "1912x989",
-      "type": "image/png"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "Chempionatlar",
-      "url": "/championships",
-      "icons": [
-        {
-          "src": "/favicon.png",
-          "sizes": "180x180"
-        }
-      ]
-    },
-    {
-      "name": "Sovrinlar",
-      "url": "/prizes",
-      "icons": [
-        {
-          "src": "/favicon.png",
-          "sizes": "180x180"
-        }
-      ]
-    }
-  ],
-  "id": "uz.proliga.fantasy",
-  "lang": "uz",
-  "categories": ["sports", "games"],
-  "prefer_related_applications": false,
-  "scope": "/",
-  "dir": "ltr",
-  "display_override": ["window-controls-overlay"],
-  "related_applications": [
-    {
-      "platform": "play",
-      "url": "https://play.google.com/store/apps/details?id=com.sleeperbot.lite",
-      "id": "com.sleeperbot.lite"
-    },
-    {
-      "platform": "play",
-      "url": "https://play.google.com/store/apps/details?id=com.uefa.eurofantasy",
-      "id": "com.uefa.eurofantasy"
     }
   ]
 }
