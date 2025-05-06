@@ -1,0 +1,61 @@
+export default function manifest() {
+  return {
+    name: "Proliga - Fantasy Football Platform",
+    short_name: "Proliga",
+    description: "O'zbekiston Fantasy Futbol Ligasi - virtual futbol o'yini bo'lib, haqiqiy futbol ligalarining o'yinchilariga asoslangan",
+    start_url: "/",
+    display: "standalone",
+    background_color: "#000000",
+    theme_color: "#000000",
+    orientation: "portrait",
+    icons: [
+      {
+        src: "/favicon-16x16.png",
+        sizes: "16x16",
+        type: "image/png"
+      },
+      {
+        src: "/favicon-32x32.png",
+        sizes: "32x32",
+        type: "image/png"
+      },
+      {
+        src: "/favicon.png",
+        sizes: "180x180",
+        type: "image/png",
+        purpose: "any"
+      },
+      {
+        src: "/favicon.png",
+        sizes: "180x180",
+        type: "image/png",
+        purpose: "maskable"
+      }
+    ],
+    screenshots: [
+      {
+        src: "/Screenshot.png",
+        sizes: "1280x800",
+        type: "image/png",
+        form_factor: "wide"
+      }
+    ],
+    shortcuts: [
+      {
+        name: "Chempionatlar",
+        url: "/championships",
+        icons: [{ src: "/favicon.png", sizes: "180x180" }]
+      },
+      {
+        name: "Sovrinlar",
+        url: "/prizes",
+        icons: [{ src: "/favicon.png", sizes: "180x180" }]
+      }
+    ],
+    id: "uz.proliga",
+    lang: "uz",
+    categories: ["sports", "games"],
+    prefer_related_applications: false,
+    scope: "/"
+  }
+}
