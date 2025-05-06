@@ -30,6 +30,7 @@ const Notification = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedNotification, setSelectedNotification] = useState(null)
   const [unreadCount, setUnreadCount] = useState(0)
+  const [isOnline, setIsOnline] = useState(true)
   const systemNotifications = useSelector(selectNotifications)
 
   const handleOpen = () => {
@@ -52,6 +53,20 @@ const Notification = () => {
   }
 
   useEffect(() => {
+    const handleOnline = () => setIsOnline(true)
+    const handleOffline = () => setIsOnline(false)
+
+    window.addEventListener('online', handleOnline)
+    window.addEventListener('offline', handleOffline)
+    setIsOnline(navigator.onLine)
+
+    return () => {
+      window.removeEventListener('online', handleOnline)
+      window.removeEventListener('offline', handleOffline)
+    }
+  }, [])
+
+  useEffect(() => {
     const readNotificationIds = JSON.parse(
       localStorage.getItem('readNotificationIds') || '[]'
     )
@@ -65,6 +80,8 @@ const Notification = () => {
   }, [systemNotifications])
 
   useEffect(() => {
+    if (!isOnline) return
+
     const handleNotification = (payload) => {
       const { new: New, old: Old, eventType } = payload
 
@@ -99,7 +116,7 @@ const Notification = () => {
     return () => {
       supabase.removeChannel(subscription)
     }
-  }, [dispatch])
+  }, [dispatch, isOnline])
 
   return (
     <Popover open={isNotificationsOpen} onOpenChange={handleOpen}>
