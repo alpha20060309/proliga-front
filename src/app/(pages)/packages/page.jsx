@@ -27,7 +27,7 @@ const Packages = () => {
     <>
       <IconsSpray />
       <Gutter>
-        <PaymentPackages />
+        {packages?.length === 0 ? <PackagesSkeleton /> : <PaymentPackages />}
       </Gutter>
     </>
   )

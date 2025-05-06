@@ -28,6 +28,7 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   swcMinify: true,
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
 }
 
 export default withSerwist(nextConfig);
