@@ -1,15 +1,27 @@
-/** @type {import('next').NextConfig} */
 import withSerwistInit from "@serwist/next";
 
 const withSerwist = withSerwistInit({
-  // Note: This is only an example. If you use Pages Router,
-  // use something else that works, such as "service-worker/index.ts".
-  swSrc: "app/sw.ts",
+  swSrc: "/app/sw.ts",
   swDest: "public/sw.js",
+  disable: process.env.NODE_ENV === "development",
+  scope: "/",
+  include: [
+    "/",
+    "/offline",
+    "/manifest.json",
+    "/favicon.ico",
+    "/features/**",
+    "/**/*.{js,css,html,png,jpg,jpeg,gif,svg,ico,woff,woff2,ttf,eot}",
+    "/**/*.{json,md}",
+  ],
+  additionalPrecacheEntries: [
+    {
+      url: "/offline",
+      revision: "1",
+    },
+  ],
 });
 
 export default withSerwist({
   reactStrictMode: false,
-  // eslint-disable-next-line no-undef
-  // env: { NEXTAUTH_URL: process.env.URL }
 });
