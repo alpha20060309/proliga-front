@@ -34,7 +34,7 @@ function SetUserCredentials() {
   const { data: session } = useSession()
   const user = useSelector(selectUserTable)
   const agent = useSelector(selectAgent)
-  const fingerprint = useSelector((store) => store.auth)
+  const { fingerprint } = useSelector((store) => store.auth)
   const geo = useSelector(selectGeo)
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')

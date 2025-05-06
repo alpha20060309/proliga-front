@@ -92,8 +92,8 @@ export const useSetUserCredentials = () => {
           .update({
             email,
             phone,
-            geo: geo || null,
-            agent: agent || null,
+            geo: JSON.stringify(geo) || null,
+            agent: JSON.stringify(agent) || null,
             visitor: fingerprint || '',
             isOAuth: true,
           })
