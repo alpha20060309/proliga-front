@@ -28,6 +28,7 @@ export default function RootLayout({ children }) {
           content="Futbol fantasy: O'zbekiston, Angliya, Ispaniya, Italiya va Chempionlar
         ligasi turnirlari proliga.uz saytida"
         />
+        <link rel="manifest" href="/manifest.json" />
         <meta
           name="description"
           content="O'zbekiston Fantasy Futbol Ligasi rasmiy veb-sayti. Chempionatlar, o'yinlar, natijalar va futbol yangiliklari."

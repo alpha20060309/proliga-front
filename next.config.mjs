@@ -3,16 +3,12 @@ import withSerwistInit from "@serwist/next";
 const withSerwist = withSerwistInit({
   swSrc: "/app/sw.ts",
   swDest: "public/sw.js",
+  // eslint-disable-next-line no-undef
   disable: process.env.NODE_ENV === "development",
   scope: "/",
   include: [
     "/",
     "/offline",
-    "/manifest.json",
-    "/favicon.ico",
-    "/features/**",
-    "/**/*.{js,css,html,png,jpg,jpeg,gif,svg,ico,woff,woff2,ttf,eot}",
-    "/**/*.{json,md}",
   ],
   additionalPrecacheEntries: [
     {
