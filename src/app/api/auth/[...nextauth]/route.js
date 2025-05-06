@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";

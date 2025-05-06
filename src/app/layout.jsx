@@ -1,14 +1,21 @@
+'use client'
 
 import './globals.css'
 import 'react-toastify/dist/ReactToastify.css'
 import 'react-phone-number-input/style.css'
 import Navbar from '../components/Navbar'
 import dynamic from 'next/dynamic'
-const Footer = dynamic(() => import('../components/Footer'), { ssr: false })
-import RootProvider from './providers/Root.provider'
 import { DM_Sans } from 'next/font/google'
-import { ToastContainer } from 'react-toastify'
 import { cn } from '@/lib/utils'
+
+const Footer = dynamic(() => import('../components/Footer'), { ssr: false })
+const RootProvider = dynamic(() => import('./providers/Root.provider'), {
+  ssr: false,
+})
+const ToastContainer = dynamic(
+  () => import('react-toastify').then((mod) => mod.ToastContainer),
+  { ssr: false }
+)
 
 const dmSans = DM_Sans({
   subsets: ['latin', 'latin-ext'],
@@ -17,7 +24,7 @@ const dmSans = DM_Sans({
 
 export default function RootLayout({ children }) {
   return (
-    <html lang={'uz'}>
+    <html lang="uz">
       <head>
         <title>
           Futbol fantasy: O&apos;zbekiston, Angliya, Ispaniya, Italiya va
@@ -28,6 +35,7 @@ export default function RootLayout({ children }) {
           content="Futbol fantasy: O'zbekiston, Angliya, Ispaniya, Italiya va Chempionlar
         ligasi turnirlari proliga.uz saytida"
         />
+        <link rel="manifest" href="/manifest.json" />
         <meta
           name="description"
           content="O'zbekiston Fantasy Futbol Ligasi rasmiy veb-sayti. Chempionatlar, o'yinlar, natijalar va futbol yangiliklari."
@@ -65,19 +73,19 @@ export default function RootLayout({ children }) {
           href="/favicon-16x16.png"
         />
       </head>
-      <RootProvider>
-        <body
-          className={cn(
-            'dark min-h-svh scroll-smooth bg-black text-white antialiased md:min-h-screen',
-            dmSans.className
-          )}
-        >
+      <body
+        className={cn(
+          'dark min-h-svh scroll-smooth bg-black text-white antialiased md:min-h-screen',
+          dmSans.className
+        )}
+      >
+        <RootProvider>
           <Navbar />
           {children}
           <ToastContainer theme="dark" pauseOnHover />
           <Footer />
-        </body>
-      </RootProvider>
+        </RootProvider>
+      </body>
     </html>
   )
 }

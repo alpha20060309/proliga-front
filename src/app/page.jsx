@@ -12,6 +12,12 @@ const Promotions = dynamic(() => import('../components/Promotions'), {
   ssr: false,
 })
 
+// "@types/node": "22.13.5",
+// "@types/react": "19.0.10",
+// "@types/react-dom": "19.0.4",
+// "typescript": "5.6.3",
+// "typescript-eslint": "8.30.1"
+
 function Home() {
   // const { generate } = useGenerateLanguage()
 
