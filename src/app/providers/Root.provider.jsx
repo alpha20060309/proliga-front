@@ -1,5 +1,6 @@
 'use client'
 
+import '../lib/i18n.config'
 import ReduxProvider from './Store.provider'
 import AuthProvider from './Auth.provider'
 import InitialStateProvider from './InitialState.provider'

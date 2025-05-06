@@ -1,3 +1,5 @@
+'use client'
+
 import { Separator } from '@/components/ui/separator'
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { useTranslation } from 'react-i18next'

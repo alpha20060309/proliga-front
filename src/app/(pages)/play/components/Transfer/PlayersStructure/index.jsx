@@ -7,13 +7,21 @@ import {
   selectMID,
   selectSTR,
 } from 'app/lib/features/teamPlayer/teamPlayer.selector'
+import { TOUR_STATUS } from 'app/utils/tour.util'
+import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
 
 const TransferPlayersStructure = () => {
+  const currentTour = useSelector(selectCurrentTour)
+
   const { isLoading } = useSelector((state) => state.teamPlayer)
   const GOA = useSelector(selectGOA)
   const DEF = useSelector(selectDEF)
   const MID = useSelector(selectMID)
   const STR = useSelector(selectSTR)
+
+  if (currentTour?.status !== TOUR_STATUS.notStartedTransfer) {
+    return null
+  }
 
   return (
     <section className="fade-in-fast absolute bottom-0 left-0 right-0 top-0 z-10 grid grid-rows-4 py-2 xs:py-3 sm:py-4">
