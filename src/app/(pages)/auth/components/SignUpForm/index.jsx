@@ -97,6 +97,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
             })
           }
         }
+      // eslint-disable-next-line no-unused-vars
       } catch (error) {
         toast.error(t('An unknown error occurred'))
       }

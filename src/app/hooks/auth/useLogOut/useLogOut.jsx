@@ -34,6 +34,25 @@ export const useLogOut = () => {
         clearState()
         localStorage.clear()
 
+        // Clear IndexedDB
+        const databases = await window.indexedDB.databases()
+        databases.forEach((db) => {
+          window.indexedDB.deleteDatabase(db.name)
+        })
+
+        // Clear Cache Storage
+        if ('caches' in window) {
+          const cacheKeys = await caches.keys()
+          await Promise.all(cacheKeys.map((key) => caches.delete(key)))
+        }
+
+        // Clear cookies
+        document.cookie.split(';').forEach((cookie) => {
+          document.cookie = cookie
+            .replace(/^ +/, '')
+            .replace(/=.*/, `=;expires=${new Date(0).toUTCString()};path=/`)
+        })
+
         router.push('/')
         if (showMessage) {
           toast.success(t('Tizimdan chiqdingiz'), { theme: 'dark' })
