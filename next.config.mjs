@@ -8,13 +8,10 @@ const withSerwist = withSerwistInit({
   scope: "/",
   include: [
     "/",
+    "/manifest.json",
+    "/favicon.ico",
     "/offline",
-  ],
-  additionalPrecacheEntries: [
-    {
-      url: "/offline",
-      revision: "1",
-    },
+    "/**/*.{js,css,html,png,jpg,jpeg,gif,svg,ico,woff,woff2,ttf,eot}",
   ],
 });
 
@@ -24,11 +21,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   swcMinify: true,
-  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
 }
 
 export default withSerwist(nextConfig);
