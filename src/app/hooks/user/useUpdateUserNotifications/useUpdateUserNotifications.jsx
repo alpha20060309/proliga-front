@@ -4,35 +4,17 @@ import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
 import { useSession } from 'next-auth/react'
 
-export const useUpdateUserData = () => {
+export const useUpdateUserNotifications = () => {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const { t } = useTranslation()
   const { update } = useSession()
 
-  const updateUserData = useCallback(
-    async ({
-      name,
-      last_name,
-      middle_name,
-      bio,
-      gender,
-      birth_date,
-      userTable,
-      cb = () => {},
-    }) => {
-
-      if (!name) {
-        setError(t('Ism kiriting'))
-        return toast.warning(t('Ism kiriting'), { theme: 'dark' })
-      }
-      if (!gender) {
-        setError(t('Jinsni tanlang'))
-        return toast.warning(t('Jinsni tanlang'), { theme: 'dark' })
-      }
-      if (!birth_date) {
-        setError(t("Tug'ilgan yilingizni kiriting"))
-        return toast.warning(t("Tug'ilgan yilingizni kiriting"))
+  const updateNotificationToken = useCallback(
+    async ({ notification_token, userTable, cb = () => {} }) => {
+      if (!notification_token) {
+        setError(t('Notification token is required'))
+        return toast.warning(t('Notification token is required'), { theme: 'dark' })
       }
       if (!userTable?.id) {
         setError('User not authenticated')
@@ -43,21 +25,12 @@ export const useUpdateUserData = () => {
         setIsLoading(true)
         setError('')
 
-        let obj = {
-          name,
-          last_name,
-          middle_name,
-          bio,
-          gender,
-          birth_date,
-        }
-
         const { data, error } = await supabase
           .from('user')
-          .update(obj)
+          .update({ notification_token })
           .eq('id', userTable?.id)
           .is('deleted_at', null)
-          .single()
+          .single() 
 
         if (error) {
           setError(
@@ -93,5 +66,5 @@ export const useUpdateUserData = () => {
     },
     [t, update]
   )
-  return { updateUserData, isLoading, error }
+  return { updateNotificationToken, isLoading, error }
 }

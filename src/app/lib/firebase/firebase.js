@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getMessaging, getToken, onMessage } from "firebase/messaging";
+import { getMessaging, getToken } from "firebase/messaging";
 
 /* eslint-disable no-undef */
 export const firebaseConfig = {
@@ -38,10 +38,6 @@ export async function initializeFirebase() {
     validateFirebaseConfig();
     const app = initializeApp(firebaseConfig);
     messaging = getMessaging(app);
-    onMessage(messaging, (payload) => {
-      console.log("message", payload);
-      displayNotification(payload);
-    });
 
     return app;
   } catch (error) {
@@ -89,52 +85,6 @@ export async function getFirebaseToken() {
   }
 }
 
-function displayNotification(payload) {
-  if ("Notification" in window && Notification.permission === "granted") {
-    const notificationTitle = payload.notification?.title || "New Notification";
-    const notificationOptions = {
-      body: payload.notification?.body || "You have a new notification",
-      icon: "/icon-512x512.png",
-      data: payload.data,
-    };
-
-    const notification = new Notification(
-      notificationTitle,
-      notificationOptions
-    );
-
-    notification.onclick = () => {
-      window.focus();
-      notification.close();
-
-      window.location.href = "/";
-      if (payload.data?.url) {
-        window.location.href = payload.data.url;
-      }
-    };
-  }
-}
-
-export async function sendPushNotification(token, title, body, data) {
-  try {
-    const response = await fetch("/api/push-notifications/send", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ token, title, body, data }),
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to send push notification");
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error("Error sending push notification:", error);
-    throw error;
-  }
-}
 
 export async function subscribeToTopic(token, topic) {
   try {
@@ -178,23 +128,3 @@ export async function unsubscribeFromTopic(token, topic) {
   }
 }
 
-export async function sendNotificationToTopic(topic, title, body, data) {
-  try {
-    const response = await fetch("/api/push-notifications/send-to-topic", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ topic, title, body, data }),
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to send notification to topic");
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error("Error sending notification to topic:", error);
-    throw error;
-  }
-}

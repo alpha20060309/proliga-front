@@ -33,6 +33,7 @@ const authSlice = createSlice({
     setPhoneModal: (state, action) => {
       state.phoneModal = action.payload
     },
+
   },
   extraReducers: authExtraReducer,
 })
@@ -46,6 +47,7 @@ export const {
   setAgent,
   setLoginMethod,
   setPhoneModal,
+  setFirebaseToken,
 } = authSlice.actions
 
 export default authSlice.reducer

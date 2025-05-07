@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 importScripts(
   "https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"
 );
@@ -7,13 +8,13 @@ importScripts(
 
 // Initialize the Firebase app in the service worker by passing in the messagingSenderId.
 const firebaseConfig = {
-  apiKey: "AIzaSyAGn5FGNu5vV8yTc_sMgp61wK86gtQXRTc",
-  authDomain: "smarts-next-pwa.firebaseapp.co",
-  projectId: "smarts-next-pwa",
-  storageBucket: "smarts-next-pwa.firebasestorage.app",
-  messagingSenderId: "545017091933",
-  appId: "1:545017091933:web:6ec64e6cf90f7853e7bab4",
-  measurementId: "G-NNJ214WV5M",
+  apiKey: "AIzaSyA8TSa7hv25LtomigQekCxixYXLH8k4zBk",
+  authDomain: "proligauz-a294e.firebaseapp.com",
+  projectId: "proligauz-a294e",
+  storageBucket: "proligauz-a294e.firebasestorage.app",
+  messagingSenderId: "892756456327",
+  appId: "1:892756456327:web:e3784f6a6ee90b242a9922",
+  measurementId: "G-V9T9SPRXYJ",
 };
 
 // Initialize Firebase
@@ -31,7 +32,7 @@ messaging.onBackgroundMessage((payload) => {
   const notificationOptions = {
     title: payload?.notification?.title,
     body: payload?.notification.body,
-    icon: "/firebase.png",
+    icon: "/favicon.png",
   };
 
   self.registration.showNotification(notificationTitle, notificationOptions);

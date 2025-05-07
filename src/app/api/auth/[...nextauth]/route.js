@@ -62,6 +62,7 @@ export const {
       }
       if (session.user) {
         const user = await getUserById(session.user.id);
+        console.log("user", user);
         session.user.email = token.email || user.email;
         session.user.phone = user?.phone || null;
         session.user.isOAuth = user?.isOAuth || false;
@@ -76,6 +77,10 @@ export const {
         session.user.deleted_at = user?.deleted_at || null;
         session.user.language = user?.language || LANGUAGE.uz;
         session.user.phone_verified = user?.phone_verified || false;
+        session.user.location = user?.location || null;
+        session.user.notification_token = user?.notification_token || null;
+        session.user.notification_topics = user?.notification_topics || null;
+        session.user.enable_notification = user?.enable_notification || false;
       }
 
       return session;
