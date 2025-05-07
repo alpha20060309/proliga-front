@@ -4,7 +4,7 @@
   "description": "O'zbekiston Fantasy Futbol Ligasi - virtual futbol o'yini bo'lib, haqiqiy futbol ligalarining o'yinchilariga asoslangan",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#121212",
+  "background_color": "#082A5A",
   "theme_color": "#fff400",
   "orientation": "portrait",
   "icons": [

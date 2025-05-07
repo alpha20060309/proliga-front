@@ -30,6 +30,7 @@ const serwist = new Serwist({
   offlineAnalyticsConfig: true,
   disableDevLogs: true,
   navigationPreload: true,
+  importScripts: ['/firebase-messaging-sw.js'],
   fallbacks: {
     entries: [
       {

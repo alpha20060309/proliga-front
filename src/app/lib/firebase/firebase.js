@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
+/* eslint-disable no-undef */
 export const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "",
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "",
@@ -27,7 +28,8 @@ function validateFirebaseConfig() {
     throw new Error(`Missing Firebase config values`);
   }
 }
-let messaging: any = null;
+
+let messaging;
 
 export async function initializeFirebase() {
   if (typeof window === "undefined") return;
@@ -48,7 +50,7 @@ export async function initializeFirebase() {
   }
 }
 
-export async function requestNotificationPermission(): Promise<NotificationPermission> {
+export async function requestNotificationPermission() {
   if (!("Notification" in window)) {
     throw new Error("This browser does not support notifications");
   }
@@ -61,7 +63,7 @@ export async function requestNotificationPermission(): Promise<NotificationPermi
   return permission;
 }
 
-export async function getFirebaseToken(): Promise<string | null> {
+export async function getFirebaseToken() {
   if (!messaging) {
     throw new Error("Firebase messaging is not initialized");
   }
@@ -85,7 +87,7 @@ export async function getFirebaseToken(): Promise<string | null> {
   }
 }
 
-function displayNotification(payload: any) {
+function displayNotification(payload) {
   if ("Notification" in window && Notification.permission === "granted") {
     const notificationTitle = payload.notification?.title || "New Notification";
     const notificationOptions = {
@@ -98,7 +100,7 @@ function displayNotification(payload: any) {
       notificationTitle,
       notificationOptions
     );
-  
+
     notification.onclick = () => {
       window.focus();
       notification.close();
@@ -111,12 +113,7 @@ function displayNotification(payload: any) {
   }
 }
 
-export async function sendPushNotification(
-  token: string,
-  title: string,
-  body: string,
-  data?: any
-) {
+export async function sendPushNotification(token, title, body, data) {
   try {
     const response = await fetch("/api/push-notifications/send", {
       method: "POST",
@@ -137,7 +134,7 @@ export async function sendPushNotification(
   }
 }
 
-export async function subscribeToTopic(token: string, topic: string) {
+export async function subscribeToTopic(token, topic) {
   try {
     const response = await fetch("/api/push-notifications/subscribe", {
       method: "POST",
@@ -158,7 +155,7 @@ export async function subscribeToTopic(token: string, topic: string) {
   }
 }
 
-export async function unsubscribeFromTopic(token: string, topic: string) {
+export async function unsubscribeFromTopic(token, topic) {
   try {
     const response = await fetch("/api/push-notifications/unsubscribe", {
       method: "POST",
@@ -179,12 +176,7 @@ export async function unsubscribeFromTopic(token: string, topic: string) {
   }
 }
 
-export async function sendNotificationToTopic(
-  topic: string,
-  title: string,
-  body: string,
-  data?: any
-) {
+export async function sendNotificationToTopic(topic, title, body, data) {
   try {
     const response = await fetch("/api/push-notifications/send-to-topic", {
       method: "POST",
