@@ -1,13 +1,12 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, memo } from 'react'
 import {
   initializeFirebase,
-  requestNotificationPermission,
   getFirebaseToken,
 } from 'app/lib/firebase/firebase'
 
-export default function FirebaseProvider({ children }) {
+const FirebaseProvider = ({ children }) => {
   const [permission, setPermission] = useState(null)
   const [token, setToken] = useState(null)
   const [error, setError] = useState(null)
@@ -16,7 +15,12 @@ export default function FirebaseProvider({ children }) {
     const initializeNotifications = async () => {
       try {
         await initializeFirebase()
-        const currentPermission = await requestNotificationPermission()
+        const currentPermission = await Notification.requestPermission();
+        console.log(currentPermission)
+        if (currentPermission !== "granted") {
+          console.log("permission denied", currentPermission)
+          return;
+        }
         setPermission(currentPermission)
 
         if (currentPermission === 'granted') {
@@ -33,7 +37,10 @@ export default function FirebaseProvider({ children }) {
 
     initializeNotifications()
   }, [])
+  
   console.log(permission, token, error)
   console.log('hello')
   return <>{children}</>
 }
+
+export default memo(FirebaseProvider)

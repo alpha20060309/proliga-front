@@ -1,8 +1,9 @@
-import { initializeApp, cert, type ServiceAccount, getApps } from "firebase-admin/app";
+import { initializeApp, cert, getApps } from "firebase-admin/app";
 
 const serviceAccount = JSON.parse(
+  // eslint-disable-next-line no-undef
   process.env.FIREBASE_SERVICE_ACCOUNT_KEY || "{}"
-) as ServiceAccount;
+)
 
 function initializeFirebaseAdmin() {
   if (!getApps().length) {

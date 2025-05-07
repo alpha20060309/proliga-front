@@ -52,6 +52,7 @@ export async function initializeFirebase() {
 
 export async function requestNotificationPermission() {
   if (!("Notification" in window)) {
+    console.log("This browser does not support notifications");
     throw new Error("This browser does not support notifications");
   }
 
@@ -60,6 +61,7 @@ export async function requestNotificationPermission() {
   }
 
   const permission = await Notification.requestPermission();
+  console.log("permission", permission);
   return permission;
 }
 

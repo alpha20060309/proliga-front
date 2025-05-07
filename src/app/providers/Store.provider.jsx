@@ -2,7 +2,10 @@
 
 import { Provider } from 'react-redux'
 import store from 'app/lib/store.global'
+import { memo } from 'react'
 
-export default function ReduxProvider({ children }) {
+const ReduxProvider = ({ children }) => {
   return <Provider store={store}>{children}</Provider>
 }
+
+export default memo(ReduxProvider)

@@ -1,10 +1,10 @@
-import { type NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { getMessaging } from "firebase-admin/messaging";
-import { initializeFirebaseAdmin } from "@/lib/firebase-admin";
+import { initializeFirebaseAdmin } from "@/lib/firebase/firebase-admin";
 
 initializeFirebaseAdmin();
 
-export async function POST(request: NextRequest) {
+export async function POST(request) {
   try {
     const { topic, title, body, data } = await request.json();
 
