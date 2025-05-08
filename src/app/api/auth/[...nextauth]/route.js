@@ -18,12 +18,12 @@ export const {
 } = NextAuth({
   providers: [
     GoogleProvider({
-      clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ?? "",
-      clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET ?? "",
+      clientId: process.env.GOOGLE_CLIENT_ID ?? "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
     }),
     YandexProvider({
-      clientId: process.env.NEXT_PUBLIC_YANDEX_CLIENT_ID ?? "",
-      clientSecret: process.env.NEXT_PUBLIC_YANDEX_CLIENT_SECRET ?? "",
+      clientId: process.env.YANDEX_CLIENT_ID ?? "",
+      clientSecret: process.env.YANDEX_CLIENT_SECRET ?? "",
     }),
     CredentialsProvider({
       name: "credentials",
@@ -81,7 +81,6 @@ export const {
         session.user.notification_topics = user?.notification_topics || null;
         session.user.enable_notification = user?.enable_notification || false;
       }
-
       return session;
     },
   },
@@ -95,6 +94,4 @@ export const {
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60 * 12, // ~ 1 year
   },
-  secret: process.env.NEXT_PUBLIC_JWT,
-  trustHost: true
 });
