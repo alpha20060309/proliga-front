@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
 import { useSession } from 'next-auth/react'
 
-export const useUpdateUserNotifications = () => {
+export const useUpdateUserNotificationInfo = () => {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const { t } = useTranslation()
@@ -14,7 +14,9 @@ export const useUpdateUserNotifications = () => {
     async ({ notification_token, userTable, cb = () => {} }) => {
       if (!notification_token) {
         setError(t('Notification token is required'))
-        return toast.warning(t('Notification token is required'), { theme: 'dark' })
+        return toast.warning(t('Notification token is required'), {
+          theme: 'dark',
+        })
       }
       if (!userTable?.id) {
         setError('User not authenticated')
@@ -30,7 +32,7 @@ export const useUpdateUserNotifications = () => {
           .update({ notification_token })
           .eq('id', userTable?.id)
           .is('deleted_at', null)
-          .single() 
+          .single()
 
         if (error) {
           setError(

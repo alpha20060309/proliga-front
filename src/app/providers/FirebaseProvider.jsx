@@ -3,12 +3,11 @@
 import { useEffect, memo } from 'react'
 import { initializeFirebase, getFirebaseToken } from 'app/lib/firebase/firebase'
 import { useSelector } from 'react-redux'
-import { useUpdateUserNotifications } from 'app/hooks/user/useUpdateUserNotifications/useUpdateUserNotifications'
-import { boolean } from 'zod'
+import { useUpdateUserNotificationInfo } from 'app/hooks/user/useUpdateUserNotificationInfo/useUpdateUserNotificationInfo'
 
 const FirebaseProvider = ({ children }) => {
   const { user } = useSelector((state) => state.auth)
-  const { updateNotificationToken } = useUpdateUserNotifications()
+  const { updateNotificationToken } = useUpdateUserNotificationInfo()
 
   useEffect(() => {
     const initializeNotifications = async () => {
@@ -19,12 +18,12 @@ const FirebaseProvider = ({ children }) => {
 
         if (
           currentPermission === 'granted' &&
-          boolean(isAuthenticated) &&
+          Boolean(isAuthenticated) &&
           user?.id
         ) {
-          // if (user?.notification_token) {
-          //   return
-          // }
+          if (user?.notification_token) {
+            return
+          }
 
           const fcmToken = await getFirebaseToken()
           await updateNotificationToken({
