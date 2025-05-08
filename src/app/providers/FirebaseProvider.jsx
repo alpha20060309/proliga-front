@@ -10,8 +10,8 @@ import { useUpdateUserNotifications } from 'app/hooks/user/useUpdateUserNotifica
 import { boolean } from 'zod'
 
 const FirebaseProvider = ({ children }) => {
-  const {user} = useSelector(state => state.auth)
-  const {updateNotificationToken} =  useUpdateUserNotifications()
+  const { user } = useSelector(state => state.auth)
+  const { updateNotificationToken } =  useUpdateUserNotifications()
 
   useEffect(() => {
     const initializeNotifications = async () => {

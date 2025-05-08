@@ -1,10 +1,11 @@
 'use client'
 
 import { useCallback } from 'react'
-import { useRouter, usePathname, useSearchParams } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
+import { useTransitionRouter } from 'next-view-transitions'
 
 export function useUpdateSearchParams() {
-  const router = useRouter()
+  const router = useTransitionRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
 

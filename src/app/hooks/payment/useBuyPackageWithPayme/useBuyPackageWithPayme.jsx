@@ -1,16 +1,17 @@
 import { useState, useCallback } from 'react'
 import { toast } from 'react-toastify'
-import { useRouter } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
+import { useTransitionRouter } from 'next-view-transitions'
 
 export const useBuyPackageWithPayme = () => {
   const { t } = useTranslation()
-  const router = useRouter()
+  const router = useTransitionRouter()
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
   const buyPackageWithPayme = useCallback(
     ({ userTable, currentPackage, currentTeam, lang }) => {
+      // eslint-disable-next-line no-undef
       const RETURN_URL = process.env.NEXT_PUBLIC_URL
       setIsLoading(false)
       setError(null)
@@ -34,6 +35,7 @@ export const useBuyPackageWithPayme = () => {
         setIsLoading(true)
 
         const url = new URL('https://checkout.paycom.uz')
+        // eslint-disable-next-line no-undef
         const m = process.env.NEXT_PUBLIC_PAYME_EXPENSE_ID // merchant id
         const a = currentPackage?.price // amount
         const l = lang

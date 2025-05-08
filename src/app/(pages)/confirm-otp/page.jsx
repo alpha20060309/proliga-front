@@ -2,13 +2,14 @@
 
 import dynamic from 'next/dynamic'
 import { useEffect, memo } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
+import { useTransitionRouter } from 'next-view-transitions'
 const ConfirmOTPForm = dynamic(() => import('./ConfirmOTPForm'), {
   ssr: false,
 })
 
 const ConfirmOTPPage = () => {
-  const router = useRouter()
+  const router = useTransitionRouter()
   const params = useSearchParams()
   const redirect = params.get('redirect') || '/auth'
   const phone = decodeURIComponent(params.get('phone')) || ''

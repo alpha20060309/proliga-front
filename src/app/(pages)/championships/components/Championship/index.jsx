@@ -1,4 +1,4 @@
-import { useRouter } from 'next/navigation'
+import { useTransitionRouter } from 'next-view-transitions'
 import { useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
@@ -12,7 +12,7 @@ import { getUrl } from 'app/utils/static.util'
 
 const Championship = ({ game }) => {
   const { t } = useTranslation()
-  const router = useRouter()
+  const router = useTransitionRouter()
   const teams = useSelector(selectTeams)
   const { lang } = useSelector((state) => state.systemLanguage)
   const [isModalOpen, setModalOpen] = useState(false)

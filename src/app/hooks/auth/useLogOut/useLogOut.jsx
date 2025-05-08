@@ -3,7 +3,6 @@ import { useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { setUserTable } from '../../../lib/features/auth/auth.slice'
-import { useRouter } from 'next/navigation'
 import { clearNotifications } from 'app/lib/features/systemNotification/systemNotification.slice'
 import {
   resetCurrentTeam,
@@ -11,11 +10,11 @@ import {
 } from 'app/lib/features/currentTeam/currentTeam.slice'
 import { resetTeams } from 'app/lib/features/team/team.slice'
 import { signOut } from 'next-auth/react'
-
+import { useTransitionRouter } from 'next-view-transitions'
 export const useLogOut = () => {
   const dispatch = useDispatch()
   const [error, setError] = useState(null)
-  const router = useRouter()
+  const router = useTransitionRouter()
   const { t } = useTranslation()
 
   const clearState = useCallback(() => {

@@ -19,7 +19,7 @@ import Spinner from 'components/Spinner'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchPackages } from 'app/lib/features/package/package.thunk'
-import { useRouter } from 'next/navigation'
+import { useTransitionRouter } from 'next-view-transitions'
 import { PAYMENT_OPTIONS } from 'app/utils/paymentOptions.util'
 import { setCurrentPackage } from 'app/lib/features/package/package.slice'
 import { useTranslation } from 'react-i18next'
@@ -34,7 +34,7 @@ import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
 
 const ConfirmPayment = ({ params }) => {
   const { t } = useTranslation()
-  const router = useRouter()
+  const router = useTransitionRouter()
   const dispatch = useDispatch()
   const [paymentOption, setPaymentOption] = useState(PAYMENT_OPTIONS.WALLET)
   const { isLoading } = useSelector((store) => store.package)

@@ -1,6 +1,6 @@
 'use client'
 
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import { useSelector, useDispatch } from 'react-redux'
 import { TABS } from 'app/utils/tabs.util'
 import { setTab } from 'app/lib/features/tour/tour.slice'

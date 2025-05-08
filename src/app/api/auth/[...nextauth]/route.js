@@ -62,7 +62,6 @@ export const {
       }
       if (session.user) {
         const user = await getUserById(session.user.id);
-        console.log("user", user);
         session.user.email = token.email || user.email;
         session.user.phone = user?.phone || null;
         session.user.isOAuth = user?.isOAuth || false;

@@ -1,7 +1,7 @@
 'use client'
 
 import YandexAd from '../YandexAd'
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import { useSelector } from 'react-redux'
 import { useMemo, useEffect, memo } from 'react'
 import { BANNER, BANNER_SERVICE_TYPE } from 'app/utils/banner.util'

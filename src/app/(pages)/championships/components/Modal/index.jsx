@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { useCreateTeam } from 'app/hooks/transfer/useCreateTeam/useCreateTeam'
 import { useState } from 'react'
 import { FORMATIONS } from 'app/utils/formations.util'
-import { useRouter } from 'next/navigation'
+import { useTransitionRouter } from 'next-view-transitions'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import {
@@ -23,7 +23,7 @@ import { validateTeamName } from 'app/utils/validateTeamName.util'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 
 const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
-  const router = useRouter()
+  const router = useTransitionRouter()
   const { t } = useTranslation()
   const [title, setTitle] = useState('')
   const [formation, setFormation] = useState(FORMATIONS['4-3-3'])

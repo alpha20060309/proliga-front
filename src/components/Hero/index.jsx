@@ -1,5 +1,5 @@
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 

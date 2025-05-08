@@ -1,11 +1,12 @@
+/* eslint-disable no-undef */
 import { useState, useCallback } from 'react'
 import { toast } from 'react-toastify'
-import { useRouter } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
+import { useTransitionRouter } from 'next-view-transitions'
 
 export const useRedirectToPayme = () => {
   const { t } = useTranslation()
-  const router = useRouter()
+  const router = useTransitionRouter()
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -17,13 +18,13 @@ export const useRedirectToPayme = () => {
 
       if (!userTable?.id) {
         setError('User not found')
-        toast.error('User not found', { theme: 'dark' })
+        toast.error('User not found')
         return
       }
 
       if (!amount) {
         setError('Amount is required')
-        toast.error('Amount is required', { theme: 'dark' })
+        toast.error('Amount is required')
         return
       }
 

@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import { useDispatch, useSelector } from 'react-redux'
 import { sidebarStyles } from '../sidebarStyles.util'
 import { setTab } from 'app/lib/features/tour/tour.slice'

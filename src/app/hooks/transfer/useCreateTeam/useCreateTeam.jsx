@@ -2,16 +2,16 @@ import { useState, useCallback } from 'react'
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { supabase } from '../../../lib/supabaseClient'
-import { useRouter } from 'next/navigation'
 import { addGameToTeam } from 'app/lib/features/team/team.slice'
 import { useTranslation } from 'react-i18next'
+import { useTransitionRouter } from 'next-view-transitions'
 
 export const useCreateTeam = () => {
   const dispatch = useDispatch()
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState(null)
-  const router = useRouter()
+  const router = useTransitionRouter()
   const { t } = useTranslation()
 
   const createTeam = useCallback(

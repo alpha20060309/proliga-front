@@ -3,7 +3,7 @@
 import { useEffect, memo, useState, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUserTable } from '../lib/features/auth/auth.slice'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { useLogOut } from 'app/hooks/auth/useLogOut/useLogOut'
 import { toast } from 'react-toastify'
@@ -12,10 +12,11 @@ import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.s
 import { useTranslation } from 'react-i18next'
 import { useSession } from 'next-auth/react'
 import { useAuthStatus } from 'app/hooks/auth/useAuthStatus/useAuthStatus'
+import { useTransitionRouter } from 'next-view-transitions'
 
 const AuthProvider = ({ children }) => {
   const { t } = useTranslation()
-  const router = useRouter()
+  const router = useTransitionRouter()
   const dispatch = useDispatch()
   const path = usePathname()
   const user = useSelector(selectUserTable)

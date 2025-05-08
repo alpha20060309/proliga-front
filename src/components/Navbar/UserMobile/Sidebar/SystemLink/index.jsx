@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 
 const SidebarSystemLink = ({ children, href, handleToggle }) => {
   return (

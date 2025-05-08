@@ -1,7 +1,7 @@
 import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card'
 import { Zap, Users, Coins } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import { Separator } from '@/components/ui/separator'
 import { Badge } from '@/components/ui/badge'
 import { useSelector } from 'react-redux'
