@@ -1,10 +1,41 @@
 'use client'
 
-import { Link } from 'next-view-transitions'
+import { Link, useTransitionRouter } from 'next-view-transitions'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import { useEffect } from 'react'
 
 export default function Error({ reset }) {
+  const router = useTransitionRouter()
+  
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof navigator === 'undefined' || !router) {
+      console.warn('Required objects (window, navigator, or router) are not available')
+      return
+    }
+
+    const handleOffline = () => {
+      if (typeof navigator.onLine === 'undefined') {
+        console.warn('navigator.onLine is not available')
+        return
+      }
+
+      if (!navigator.onLine) {
+        router.push('/offline')
+      }
+    }
+
+    handleOffline()
+
+    window.addEventListener('online', handleOffline)
+    window.addEventListener('offline', handleOffline)
+
+    return () => {
+      window.removeEventListener('online', handleOffline)
+      window.removeEventListener('offline', handleOffline)
+    }
+  }, [router])
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-900 p-4">
       <Card className="w-full max-w-md border-4 border-red-500 bg-neutral-800">

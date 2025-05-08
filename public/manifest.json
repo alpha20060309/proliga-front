@@ -3,6 +3,12 @@
   "short_name": "Proliga",
   "description": "O'zbekiston Fantasy Futbol Ligasi - virtual futbol o'yini bo'lib, haqiqiy futbol ligalarining o'yinchilariga asoslangan",
   "start_url": "/",
+  "launch_handler": {
+    "platform": "windows",
+    "url": "/"
+  },
+  "dir": "ltr",
+  "display_override": ["window-controls-overlay"],
   "display": "standalone",
   "background_color": "#082A5A",
   "theme_color": "#fff400",
@@ -491,8 +497,6 @@
   "categories": ["sports", "games"],
   "prefer_related_applications": false,
   "scope": "/",
-  "dir": "ltr",
-  "display_override": ["window-controls-overlay"],
   "related_applications": [
     {
       "platform": "play",

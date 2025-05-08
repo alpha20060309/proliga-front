@@ -27,9 +27,9 @@ const serwist = new Serwist({
 ],
   skipWaiting: true,
   clientsClaim: true,
+  
   offlineAnalyticsConfig: true,
-  disableDevLogs: true,
-  navigationPreload: true,
+  disableDevLogs: false,
   importScripts: ['/firebase-messaging-sw.js'],
   fallbacks: {
     entries: [
