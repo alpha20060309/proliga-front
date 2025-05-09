@@ -94,6 +94,7 @@ export const useSetUserCredentials = () => {
             geo: JSON.stringify(geo) || null,
             agent: JSON.stringify(agent) || null,
             visitor: fingerprint || '',
+            visited_at: new Date(),
             isOAuth: true,
           })
           .eq('id', user?.id)

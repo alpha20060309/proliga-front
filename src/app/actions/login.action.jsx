@@ -33,6 +33,7 @@ export const login = async (values) => {
         geo: JSON.stringify(data?.geo),
         agent: JSON.stringify(data?.agent),
         visitor: data?.fingerprint,
+        visited_at: new Date(),
       },
     })
 
