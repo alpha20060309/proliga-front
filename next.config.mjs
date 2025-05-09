@@ -4,7 +4,7 @@ const withSerwist = withSerwistInit({
   swSrc: "/src/app/sw.ts",
   swDest: "public/sw.js",
   // eslint-disable-next-line
-  disable: process.env.NODE_ENV === "development",
+  // disable: process.env.NODE_ENV === "development",
   scope: "/",
   include: [
     "/",
