@@ -1,12 +1,22 @@
-import type { PrecacheEntry, SerwistGlobalConfig } from 'serwist'
 import { Serwist, BackgroundSyncQueue, NetworkOnly } from 'serwist'
 import { defaultCache } from '@serwist/next/worker'
+
+// Define types locally to avoid import issues
+interface PrecacheEntry {
+  url: string
+  revision?: string | null
+}
+
+interface SerwistGlobalConfig {
+  __WB_MANIFEST: (PrecacheEntry | string)[] | undefined
+}
 
 declare global {
   interface WorkerGlobalScope extends SerwistGlobalConfig {
     __SW_MANIFEST: (PrecacheEntry | string)[] | undefined
   }
 }
+
 declare const self: ServiceWorkerGlobalScope
 const serwist = new Serwist({
   precacheEntries: self.__SW_MANIFEST,
@@ -29,7 +39,7 @@ const serwist = new Serwist({
   skipWaiting: true,
   clientsClaim: true,
   offlineAnalyticsConfig: true,
-  disableDevLogs: false,
+  importScripts: ['/firebase-messaging-sw.js'],
   fallbacks: {
     entries: [
       {

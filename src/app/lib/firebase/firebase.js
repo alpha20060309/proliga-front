@@ -39,6 +39,7 @@ export async function initializeFirebase() {
     const app = initializeApp(firebaseConfig);
     messaging = getMessaging(app);
 
+
     return app;
   } catch (error) {
     console.error("Error initializing Firebase:", error);
@@ -46,20 +47,6 @@ export async function initializeFirebase() {
   }
 }
 
-export async function requestNotificationPermission() {
-  if (!("Notification" in window)) {
-    console.log("This browser does not support notifications");
-    throw new Error("This browser does not support notifications");
-  }
-
-  if (Notification.permission === "granted") {
-    return "granted";
-  }
-
-  const permission = await Notification.requestPermission();
-  console.log("permission", permission);
-  return permission;
-}
 
 export async function getFirebaseToken() {
   if (!messaging) {
@@ -67,8 +54,15 @@ export async function getFirebaseToken() {
   }
 
   try {
+    // Check for service worker registration
+    if (!('serviceWorker' in navigator)) {
+      console.error('Service Workers are not supported in this browser');
+      return null;
+    }
+
     const currentToken = await getToken(messaging, {
       vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY,
+      serviceWorkerRegistration: await navigator.serviceWorker.getRegistration("/firebase-messaging-sw.js")
     });
 
     if (!currentToken) {
@@ -78,6 +72,7 @@ export async function getFirebaseToken() {
       return null;
     }
 
+    console.log("FCM Token successfully generated:", currentToken);
     return currentToken;
   } catch (error) {
     console.error("An error occurred while retrieving token:", error);
@@ -127,4 +122,3 @@ export async function unsubscribeFromTopic(token, topic) {
     throw error;
   }
 }
-

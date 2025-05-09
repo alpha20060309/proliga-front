@@ -19,21 +19,21 @@ const FirebaseProvider = ({ children }) => {
           return
         }
 
-        console.log('helo')
         await initializeFirebase()
         const currentPermission = await Notification.requestPermission()
 
         if (currentPermission === 'granted') {
-          if (user?.ntf_token) {
-            setIsInitialized(true)
-            return
-          }
+          // if (user?.ntf_token) {
+          //   setIsInitialized(true)
+          //   return
+          // }
 
           const fcmToken = await getFirebaseToken()
-          await updateNotificationToken({
-            notification_token: fcmToken,
-            userTable: user,
-          })
+          console.log('fcmToken', fcmToken)
+          // await updateNotificationToken({
+          //   notification_token: fcmToken,
+          //   userTable: user,
+          // })
           setIsInitialized(true)
         }
       } catch (error) {
@@ -42,7 +42,7 @@ const FirebaseProvider = ({ children }) => {
     }
 
     initializeNotifications()
-  }, [user, updateNotificationToken, isInitialized])
+  }, [user])
 
   return <>{children}</>
 }

@@ -18,8 +18,18 @@ const firebaseConfig = {
   measurementId: "G-V9T9SPRXYJ",
 };
 
+// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
+
+// Log when the service worker is installed and activated
+self.addEventListener('install', event => {
+  console.log('[firebase-messaging-sw.js] Service Worker installed');
+});
+
+self.addEventListener('activate', event => {
+  console.log('[firebase-messaging-sw.js] Service Worker activated');
+});
 
 // Handle background messages
 messaging.onBackgroundMessage((payload) => {
@@ -28,15 +38,37 @@ messaging.onBackgroundMessage((payload) => {
     payload
   );
 
-  const notificationTitle = payload?.notification?.title || "New Notification";
+  // Extract notification details
+  let notificationTitle = 'New Notification';
+  let notificationBody = '';
+  let notificationImage = '/favicon.png';
+  
+  // Check for the notification format (Firebase console vs custom)
+  if (payload.notification) {
+    // Standard Firebase notification format
+    notificationTitle = payload.notification.title || notificationTitle;
+    notificationBody = payload.notification.body || notificationBody;
+    notificationImage = payload.notification.image || notificationImage;
+  } else if (payload.data) {
+    // Custom data format
+    notificationTitle = payload.data.title || notificationTitle;
+    notificationBody = payload.data.body || notificationBody;
+    notificationImage = payload.data.image || notificationImage;
+  }
+
   const notificationOptions = {
-    body: payload?.notification?.body || "",
-    icon: "/favicon.png",
+    body: notificationBody,
+    icon: notificationImage,
     badge: "/favicon.png",
-    data: payload.data,
+    data: payload.data || {},
     // Adding tag to prevent duplicate notifications
     tag: payload.data?.id || Date.now().toString(),
+    // Make notification vibrate and appear more prominent
+    vibrate: [100, 50, 100],
+    requireInteraction: true
   };
+
+  console.log("[firebase-messaging-sw.js] Showing notification:", notificationTitle, notificationOptions);
 
   // Return the promise to ensure the service worker stays active until notification is shown
   return self.registration.showNotification(notificationTitle, notificationOptions);
@@ -44,6 +76,7 @@ messaging.onBackgroundMessage((payload) => {
 
 // Handle notification click
 self.addEventListener('notificationclick', (event) => {
+  console.log('[firebase-messaging-sw.js] Notification clicked', event);
   event.notification.close();
 
   // Add custom click behavior if needed
