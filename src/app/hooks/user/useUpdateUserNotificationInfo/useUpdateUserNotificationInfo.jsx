@@ -12,12 +12,6 @@ export const useUpdateUserNotificationInfo = () => {
 
   const updateNotificationToken = useCallback(
     async ({ notification_token, userTable, cb = () => {} }) => {
-      if (!notification_token) {
-        setError(t('Notification token is required'))
-        return toast.warning(t('Notification token is required'), {
-          theme: 'dark',
-        })
-      }
       if (!userTable?.id) {
         setError('User not authenticated')
         return toast.error(t('Foydalanuvchi autentifikatsiya qilinmagan'))

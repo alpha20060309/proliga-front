@@ -65,6 +65,7 @@ const GeolocationProvider = ({ children }) => {
     } catch (error) {
       console.error('Error requesting geolocation permission:', error)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.id, isUpdated, updateLocation])
 
   return <>{children}</>

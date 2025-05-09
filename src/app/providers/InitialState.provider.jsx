@@ -16,7 +16,6 @@ import {
   fetchPersonalNotifications,
 } from 'app/lib/features/systemNotification/systemNotification.thunk'
 import { Serwist } from '@serwist/window'
-import { initializeFirebase, getFirebaseToken } from 'app/lib/firebase/firebase'
 
 function registerSW() {
   if (!('serviceWorker' in navigator)) return
@@ -81,40 +80,6 @@ const InitialStateProvider = ({ children }) => {
   useEffect(() => {
     registerSW()
   }, [])
-
-  useEffect(() => {
-    const initializeNotifications = async () => {
-      console.log('initializeNotifications')
-      try {
-        const isAuthenticated = localStorage.getItem('isAuthenticated')
-
-        if (!isAuthenticated || !user?.id) {
-          return
-        }
-
-        await initializeFirebase()
-        const currentPermission = await Notification.requestPermission()
-
-        if (currentPermission === 'granted') {
-          // if (user?.ntf_token) {
-          //   setIsInitialized(true)
-          //   return
-          // }
-
-          const fcmToken = await getFirebaseToken()
-          console.log('fcmToken', fcmToken)
-          // await updateNotificationToken({
-          //   notification_token: fcmToken,
-          //   userTable: user,
-          // })
-        }
-      } catch (error) {
-        console.error('Error initializing notifications:', error)
-      }
-    }
-
-    initializeNotifications()
-  }, [user?.id])
 
   return children
 }

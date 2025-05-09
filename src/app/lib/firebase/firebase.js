@@ -38,9 +38,12 @@ export async function initializeFirebase() {
     validateFirebaseConfig();
     const app = initializeApp(firebaseConfig);
     messaging = getMessaging(app);
+
     onMessage(messaging, (payload) => {
       console.log("message", payload);
     });
+
+    // await navigator.serviceWorker.register("/firebase-messaging-sw.js");
 
     return app;
   } catch (error) {
@@ -48,7 +51,6 @@ export async function initializeFirebase() {
     throw error;
   }
 }
-
 
 export async function getFirebaseToken() {
   if (!messaging) {
@@ -61,10 +63,11 @@ export async function getFirebaseToken() {
       console.error('Service Workers are not supported in this browser');
       return null;
     }
+    const registration = await navigator.serviceWorker.ready;
 
     const currentToken = await getToken(messaging, {
       vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY,
-      serviceWorkerRegistration: await navigator.serviceWorker.getRegistration("/firebase-messaging-sw.js")
+      serviceWorkerRegistration: registration
     });
 
     if (!currentToken) {

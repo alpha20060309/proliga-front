@@ -15,7 +15,9 @@ const RootProvider = ({ children }) => {
       <ReduxProvider>
         <AuthProvider>
           <InitialStateProvider>
-            <GeolocationProvider>{children}</GeolocationProvider>
+            <GeolocationProvider>
+              <FirebaseProvider>{children}</FirebaseProvider>
+            </GeolocationProvider>
           </InitialStateProvider>
         </AuthProvider>
       </ReduxProvider>

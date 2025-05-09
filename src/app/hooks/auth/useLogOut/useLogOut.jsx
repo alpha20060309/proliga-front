@@ -11,8 +11,14 @@ import {
 import { resetTeams } from 'app/lib/features/team/team.slice'
 import { signOut } from 'next-auth/react'
 import { useTransitionRouter } from 'next-view-transitions'
+import { useUpdateUserNotificationInfo } from 'app/hooks/user/useUpdateUserNotificationInfo/useUpdateUserNotificationInfo'
+import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { useSelector } from 'react-redux'
+
 export const useLogOut = () => {
   const dispatch = useDispatch()
+  const user = useSelector(selectUserTable)
+  const { updateNotificationToken } = useUpdateUserNotificationInfo()
   const [error, setError] = useState(null)
   const router = useTransitionRouter()
   const { t } = useTranslation()
@@ -28,6 +34,11 @@ export const useLogOut = () => {
   const logOut = useCallback(
     async ({ showMessage = true, cb = () => {} } = {}) => {
       try {
+        await updateNotificationToken({
+          notification_token: null,
+          userTable: user,
+        })
+
         await signOut({ redirect: false })
 
         clearState()

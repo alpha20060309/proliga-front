@@ -8,41 +8,35 @@ import { useUpdateUserNotificationInfo } from 'app/hooks/user/useUpdateUserNotif
 const FirebaseProvider = ({ children }) => {
   const { user } = useSelector((state) => state.auth)
   const { updateNotificationToken } = useUpdateUserNotificationInfo()
-  const [isInitialized, setIsInitialized] = useState(false)
 
   useEffect(() => {
     const initializeNotifications = async () => {
-      try {
-        const isAuthenticated = localStorage.getItem('isAuthenticated')
+      const isAuthenticated = localStorage.getItem('isAuthenticated')
 
-        if (!isAuthenticated || !user?.id || isInitialized) {
-          return
-        }
-
-        await initializeFirebase()
-        const currentPermission = await Notification.requestPermission()
-
-        if (currentPermission === 'granted') {
-          // if (user?.ntf_token) {
-          //   setIsInitialized(true)
-          //   return
-          // }
-
-          const fcmToken = await getFirebaseToken()
-          console.log('fcmToken', fcmToken)
-          // await updateNotificationToken({
-          //   notification_token: fcmToken,
-          //   userTable: user,
-          // })
-          setIsInitialized(true)
-        }
-      } catch (error) {
-        console.error('Error initializing notifications:', error)
+      if (!isAuthenticated || !user?.id) {
+        return
       }
+      await initializeFirebase()
+      const token = await getFirebaseToken()
+
+      const savedToken = localStorage.getItem('fcm_token')
+
+      if (savedToken !== token) {
+        localStorage.setItem('fcm_token', token)
+      }
+
+      if (token && token !== savedToken) {
+        updateNotificationToken({
+          notification_token: token,
+          userTable: user,
+        })
+      }
+
+      console.log('token', token)
     }
 
     initializeNotifications()
-  }, [user])
+  }, [user?.id, updateNotificationToken])
 
   return <>{children}</>
 }
