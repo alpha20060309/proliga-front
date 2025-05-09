@@ -31,7 +31,7 @@ export async function POST(request) {
         deleted_at: null
       },
       select: {
-        notification_topics: true
+        ntf_topics: true
       }
     });
 
@@ -43,7 +43,7 @@ export async function POST(request) {
     }
 
 
-    let topics = JSON.parse(user.notification_topics || "[]");
+    let topics = JSON.parse(user.ntf_topics || "[]");
     topics.push(topic);
     topics = [...new Set(topics)];
 
@@ -54,7 +54,7 @@ export async function POST(request) {
         deleted_at: null
       },
       data: {
-        notification_topics: JSON.stringify(topics)
+        ntf_topics: JSON.stringify(topics)
       }
     });
 

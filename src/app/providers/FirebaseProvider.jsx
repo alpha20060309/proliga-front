@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, memo } from 'react'
+import { useEffect, memo, useState } from 'react'
 import { initializeFirebase, getFirebaseToken } from 'app/lib/firebase/firebase'
 import { useSelector } from 'react-redux'
 import { useUpdateUserNotificationInfo } from 'app/hooks/user/useUpdateUserNotificationInfo/useUpdateUserNotificationInfo'
@@ -8,6 +8,7 @@ import { useUpdateUserNotificationInfo } from 'app/hooks/user/useUpdateUserNotif
 const FirebaseProvider = ({ children }) => {
   const { user } = useSelector((state) => state.auth)
   const { updateNotificationToken } = useUpdateUserNotificationInfo()
+  const [isRun, setIsRun] = useState(false)
 
   useEffect(() => {
     const initializeNotifications = async () => {
@@ -21,7 +22,7 @@ const FirebaseProvider = ({ children }) => {
           Boolean(isAuthenticated) &&
           user?.id
         ) {
-          if (user?.notification_token) {
+          if (user?.ntf_token) {
             return
           }
 
@@ -36,8 +37,11 @@ const FirebaseProvider = ({ children }) => {
       }
     }
 
-    initializeNotifications()
-  }, [user, updateNotificationToken])
+    if (!isRun) {
+      initializeNotifications()
+      setIsRun(true)
+    }
+  }, [user, updateNotificationToken, isRun])
 
   return <>{children}</>
 }

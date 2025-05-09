@@ -77,9 +77,10 @@ export const {
         session.user.language = user?.language || LANGUAGE.uz;
         session.user.phone_verified = user?.phone_verified || false;
         session.user.location = user?.location || null;
-        session.user.notification_token = user?.notification_token || null;
-        session.user.notification_topics = user?.notification_topics || null;
-        session.user.enable_notification = user?.enable_notification || false;
+        session.user.ntf_token = user?.ntf_token || null;
+        session.user.ntf_topics = user?.ntf_topics || null;
+        session.user.ntf_enabled = user?.ntf_enabled || false;
+        session.user.ntf_token_created_at = user?.ntf_token_created_at || null;
       }
       return session;
     },
@@ -94,4 +95,5 @@ export const {
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60 * 12, // ~ 1 year
   },
+  debug: true,
 });
