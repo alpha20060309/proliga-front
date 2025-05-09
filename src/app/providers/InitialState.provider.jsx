@@ -16,6 +16,7 @@ import {
   fetchPersonalNotifications,
 } from 'app/lib/features/systemNotification/systemNotification.thunk'
 import { Serwist } from '@serwist/window'
+import { initializeFirebase, getFirebaseToken } from 'app/lib/firebase/firebase'
 
 function registerSW() {
   if (!('serviceWorker' in navigator)) return
@@ -40,7 +41,7 @@ function registerSW() {
 
 const InitialStateProvider = ({ children }) => {
   const dispatch = useDispatch()
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUserTable)
   const { lang } = useSelector((state) => state.systemLanguage)
   const { generateFingerprint } = useGenerateFingerprint()
   const { getUserAgent } = useGetUserAgent()
@@ -61,25 +62,59 @@ const InitialStateProvider = ({ children }) => {
   }, [])
 
   useEffect(() => {
-    if (userTable?.id && userTable?.phone && userTable?.phone_verified) {
-      dispatch(fetchPersonalNotifications({ user_id: userTable?.id }))
+    if (user?.id && user?.phone && user?.phone_verified) {
+      dispatch(fetchPersonalNotifications({ user_id: user?.id }))
     }
-  }, [dispatch, userTable?.id, userTable?.phone, userTable?.phone_verified])
+  }, [dispatch, user?.id, user?.phone, user?.phone_verified])
 
   useEffect(() => {
-    if (lang !== userTable?.language && userTable?.id) {
+    if (lang !== user?.language && user?.id) {
       dispatch(
         setLanguage({
-          lang: userTable?.language ?? LANGUAGE.uz,
+          lang: user?.language ?? LANGUAGE.uz,
           cb: (lang) => i18n.changeLanguage(lang),
         })
       )
     }
-  }, [dispatch, lang, i18n, userTable?.id, userTable?.language])
+  }, [dispatch, lang, i18n, user?.id, user?.language])
 
   useEffect(() => {
     registerSW()
   }, [])
+
+  useEffect(() => {
+    const initializeNotifications = async () => {
+      console.log('initializeNotifications')
+      try {
+        const isAuthenticated = localStorage.getItem('isAuthenticated')
+
+        if (!isAuthenticated || !user?.id) {
+          return
+        }
+
+        await initializeFirebase()
+        const currentPermission = await Notification.requestPermission()
+
+        if (currentPermission === 'granted') {
+          // if (user?.ntf_token) {
+          //   setIsInitialized(true)
+          //   return
+          // }
+
+          const fcmToken = await getFirebaseToken()
+          console.log('fcmToken', fcmToken)
+          // await updateNotificationToken({
+          //   notification_token: fcmToken,
+          //   userTable: user,
+          // })
+        }
+      } catch (error) {
+        console.error('Error initializing notifications:', error)
+      }
+    }
+
+    initializeNotifications()
+  }, [user?.id])
 
   return children
 }

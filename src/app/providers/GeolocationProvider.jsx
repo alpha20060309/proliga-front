@@ -65,7 +65,7 @@ const GeolocationProvider = ({ children }) => {
     } catch (error) {
       console.error('Error requesting geolocation permission:', error)
     }
-  }, [user])
+  }, [user?.id, isUpdated, updateLocation])
 
   return <>{children}</>
 }

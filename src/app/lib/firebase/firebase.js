@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getMessaging, getToken } from "firebase/messaging";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
 /* eslint-disable no-undef */
 export const firebaseConfig = {
@@ -38,7 +38,9 @@ export async function initializeFirebase() {
     validateFirebaseConfig();
     const app = initializeApp(firebaseConfig);
     messaging = getMessaging(app);
-
+    onMessage(messaging, (payload) => {
+      console.log("message", payload);
+    });
 
     return app;
   } catch (error) {
