@@ -6,7 +6,8 @@ importScripts(
   "https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging-compat.js"
 );
 
-// Initialize the Firebase app in the service worker by passing in the messagingSenderId.
+// Using environment variables is not possible in service workers
+// so we need to use hardcoded values that match the ones in firebase.js
 const firebaseConfig = {
   apiKey: "AIzaSyA8TSa7hv25LtomigQekCxixYXLH8k4zBk",
   authDomain: "proligauz-a294e.firebaseapp.com",
@@ -17,23 +18,49 @@ const firebaseConfig = {
   measurementId: "G-V9T9SPRXYJ",
 };
 
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-// Retrieve an instance of Firebase Messaging so that it can handle background messages.
 const messaging = firebase.messaging();
 
+// Handle background messages
 messaging.onBackgroundMessage((payload) => {
   console.log(
     "[firebase-messaging-sw.js] Received background message ",
     payload
   );
-  // Customize notification here
-  const notificationTitle = "Background Message Title";
+
+  const notificationTitle = payload?.notification?.title || "New Notification";
   const notificationOptions = {
-    title: payload?.notification?.title,
-    body: payload?.notification.body,
+    body: payload?.notification?.body || "",
     icon: "/favicon.png",
+    badge: "/favicon.png",
+    data: payload.data,
+    // Adding tag to prevent duplicate notifications
+    tag: payload.data?.id || Date.now().toString(),
   };
 
-  self.registration.showNotification(notificationTitle, notificationOptions);
+  // Return the promise to ensure the service worker stays active until notification is shown
+  return self.registration.showNotification(notificationTitle, notificationOptions);
+});
+
+// Handle notification click
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+
+  // Add custom click behavior if needed
+  const clickUrl = event.notification.data?.url || '/';
+
+  event.waitUntil(
+    clients.matchAll({ type: 'window' }).then(windowClients => {
+      // If a window client is already open, focus it
+      for (const client of windowClients) {
+        if (client.url === clickUrl && 'focus' in client) {
+          return client.focus();
+        }
+      }
+      // Otherwise, open a new window
+      if (clients.openWindow) {
+        return clients.openWindow(clickUrl);
+      }
+    })
+  );
 });

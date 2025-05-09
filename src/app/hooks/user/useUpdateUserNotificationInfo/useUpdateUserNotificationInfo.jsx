@@ -29,7 +29,10 @@ export const useUpdateUserNotificationInfo = () => {
 
         const { data, error } = await supabase
           .from('user')
-          .update({ ntf_token: notification_token })
+          .update({
+            ntf_token: notification_token,
+            ntf_token_created_at: new Date(),
+          })
           .eq('id', userTable?.id)
           .is('deleted_at', null)
           .single()

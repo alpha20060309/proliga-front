@@ -8,21 +8,24 @@ import { useUpdateUserNotificationInfo } from 'app/hooks/user/useUpdateUserNotif
 const FirebaseProvider = ({ children }) => {
   const { user } = useSelector((state) => state.auth)
   const { updateNotificationToken } = useUpdateUserNotificationInfo()
-  const [isRun, setIsRun] = useState(false)
+  const [isInitialized, setIsInitialized] = useState(false)
 
   useEffect(() => {
     const initializeNotifications = async () => {
       try {
         const isAuthenticated = localStorage.getItem('isAuthenticated')
+
+        if (!isAuthenticated || !user?.id || isInitialized) {
+          return
+        }
+
+        console.log('helo')
         await initializeFirebase()
         const currentPermission = await Notification.requestPermission()
 
-        if (
-          currentPermission === 'granted' &&
-          Boolean(isAuthenticated) &&
-          user?.id
-        ) {
+        if (currentPermission === 'granted') {
           if (user?.ntf_token) {
+            setIsInitialized(true)
             return
           }
 
@@ -31,17 +34,15 @@ const FirebaseProvider = ({ children }) => {
             notification_token: fcmToken,
             userTable: user,
           })
+          setIsInitialized(true)
         }
       } catch (error) {
         console.error('Error initializing notifications:', error)
       }
     }
 
-    if (!isRun) {
-      initializeNotifications()
-      setIsRun(true)
-    }
-  }, [user, updateNotificationToken, isRun])
+    initializeNotifications()
+  }, [user, updateNotificationToken, isInitialized])
 
   return <>{children}</>
 }
