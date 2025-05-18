@@ -21,7 +21,6 @@ export const useUpdateUserData = () => {
       userTable,
       cb = () => {},
     }) => {
-      // eslint-disable-next-line no-undef
 
       if (!name) {
         setError(t('Ism kiriting'))

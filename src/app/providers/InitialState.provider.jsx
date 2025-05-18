@@ -40,7 +40,7 @@ function registerSW() {
 
 const InitialStateProvider = ({ children }) => {
   const dispatch = useDispatch()
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUserTable)
   const { lang } = useSelector((state) => state.systemLanguage)
   const { generateFingerprint } = useGenerateFingerprint()
   const { getUserAgent } = useGetUserAgent()
@@ -61,21 +61,21 @@ const InitialStateProvider = ({ children }) => {
   }, [])
 
   useEffect(() => {
-    if (userTable?.id && userTable?.phone && userTable?.phone_verified) {
-      dispatch(fetchPersonalNotifications({ user_id: userTable?.id }))
+    if (user?.id && user?.phone && user?.phone_verified) {
+      dispatch(fetchPersonalNotifications({ user_id: user?.id }))
     }
-  }, [dispatch, userTable?.id, userTable?.phone, userTable?.phone_verified])
+  }, [dispatch, user?.id, user?.phone, user?.phone_verified])
 
   useEffect(() => {
-    if (lang !== userTable?.language && userTable?.id) {
+    if (lang !== user?.language && user?.id) {
       dispatch(
         setLanguage({
-          lang: userTable?.language ?? LANGUAGE.uz,
+          lang: user?.language ?? LANGUAGE.uz,
           cb: (lang) => i18n.changeLanguage(lang),
         })
       )
     }
-  }, [dispatch, lang, i18n, userTable?.id, userTable?.language])
+  }, [dispatch, lang, i18n, user?.id, user?.language])
 
   useEffect(() => {
     registerSW()

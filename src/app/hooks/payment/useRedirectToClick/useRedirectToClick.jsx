@@ -1,10 +1,10 @@
+/* eslint-disable no-undef */
 import { useState, useCallback } from 'react'
 import { toast } from 'react-toastify'
-import { useRouter } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
-
+import { useTransitionRouter } from 'next-view-transitions'
 export const useRedirectToClick = () => {
-  const router = useRouter()
+  const router = useTransitionRouter()
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const { t } = useTranslation()

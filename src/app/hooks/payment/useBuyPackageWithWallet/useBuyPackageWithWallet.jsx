@@ -3,14 +3,14 @@ import { toast } from 'react-toastify'
 import { supabase } from '../../../lib/supabaseClient'
 import { useTranslation } from 'react-i18next'
 import { PAYMENT_OPTIONS } from 'app/utils/paymentOptions.util'
-import { useRouter } from 'next/navigation'
+import { useTransitionRouter } from 'next-view-transitions'
 
 export const useBuyPackageWithWallet = () => {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState(null)
   const { t } = useTranslation()
-  const router = useRouter()
+  const router = useTransitionRouter()
 
   const buyPackageWithWallet = useCallback(
     async ({ team_id, package_id }) => {

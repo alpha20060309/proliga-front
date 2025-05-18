@@ -2,11 +2,11 @@ import { useState, useCallback } from 'react'
 import { supabase } from 'app/lib/supabaseClient'
 import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
-import { useRouter } from 'next/navigation'
+import { useTransitionRouter } from 'next-view-transitions'
 import { useSession } from 'next-auth/react'
 
 export const useConfirmOTP = () => {
-  const router = useRouter()
+  const router = useTransitionRouter()
   const { update } = useSession()
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)

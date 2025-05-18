@@ -14,7 +14,6 @@ export const useUpdateUserPhoto = () => {
   const updateUserPhoto = useCallback(
     async ({ path, cb = () => {}, userTable }) => {
       try {
-        // eslint-disable-next-line no-undef
         setIsLoading(true)
         setError('')
 

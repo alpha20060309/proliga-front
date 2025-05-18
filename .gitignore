@@ -15,8 +15,13 @@
 todo.txt
 
 next-env.d.ts
+
 # SpecStory explanation file
 .specstory/.what-is-this.md
 
 public/sw*
 public/swe-worker*
+
+prisma/generated
+
+firebase.json

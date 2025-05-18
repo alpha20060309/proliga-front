@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import { useState, useTransition } from 'react'
 import { useSelector } from 'react-redux'
 import { PhoneInput } from 'components/PhoneInput'
@@ -97,6 +97,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
             })
           }
         }
+      // eslint-disable-next-line no-unused-vars
       } catch (error) {
         toast.error(t('An unknown error occurred'))
       }

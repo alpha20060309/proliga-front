@@ -18,12 +18,12 @@ export const {
 } = NextAuth({
   providers: [
     GoogleProvider({
-      clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ?? "",
-      clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET ?? "",
+      clientId: process.env.GOOGLE_CLIENT_ID ?? "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
     }),
     YandexProvider({
-      clientId: process.env.NEXT_PUBLIC_YANDEX_CLIENT_ID ?? "",
-      clientSecret: process.env.NEXT_PUBLIC_YANDEX_CLIENT_SECRET ?? "",
+      clientId: process.env.YANDEX_CLIENT_ID ?? "",
+      clientSecret: process.env.YANDEX_CLIENT_SECRET ?? "",
     }),
     CredentialsProvider({
       name: "credentials",
@@ -76,8 +76,12 @@ export const {
         session.user.deleted_at = user?.deleted_at || null;
         session.user.language = user?.language || LANGUAGE.uz;
         session.user.phone_verified = user?.phone_verified || false;
+        session.user.location = user?.location || null;
+        session.user.ntf_token = user?.ntf_token || null;
+        session.user.ntf_topics = user?.ntf_topics || null;
+        session.user.ntf_enabled = user?.ntf_enabled || false;
+        session.user.ntf_token_created_at = user?.ntf_token_created_at || null;
       }
-
       return session;
     },
   },
@@ -91,6 +95,4 @@ export const {
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60 * 12, // ~ 1 year
   },
-  secret: process.env.NEXT_PUBLIC_JWT,
-  trustHost: true
 });

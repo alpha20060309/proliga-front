@@ -28,7 +28,7 @@ const SidebarTab = ({ title, tab, toggleModal }) => {
     ) {
       return
     }
-
+    window.location.hash = tab
     dispatch(setTab(tab))
     toggleModal()
     return

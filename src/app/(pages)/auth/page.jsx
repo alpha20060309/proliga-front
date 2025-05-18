@@ -8,7 +8,8 @@ import {
   SignUpFormSkeleton,
   AuthTabsSkeleton,
 } from './components/Skeleton'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
+import { useTransitionRouter } from 'next-view-transitions'
 import { useSelector } from 'react-redux'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { useTranslation } from 'react-i18next'
@@ -28,7 +29,7 @@ const AuthTabs = dynamic(() => import('./components/Tabs'), {
 
 const Auth = () => {
   const { t } = useTranslation()
-  const router = useRouter()
+  const router = useTransitionRouter()
   const userTable = useSelector(selectUserTable)
   const params = useSearchParams()
   const error = params.get('error')

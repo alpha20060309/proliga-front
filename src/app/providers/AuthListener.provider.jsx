@@ -7,10 +7,10 @@ import { setPhoneModal } from 'app/lib/features/auth/auth.slice'
 import { toast } from 'react-toastify'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
 import { useTranslation } from 'react-i18next'
-import { useRouter } from 'next/navigation'
+import { useTransitionRouter } from 'next-view-transitions'
 
 function AuthListener({ children }) {
-  const router = useRouter()
+  const router = useTransitionRouter()
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const { sendOTP } = useSendOTP()

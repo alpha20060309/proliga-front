@@ -1,6 +1,6 @@
 'use client'
 
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import { useSelector } from 'react-redux'
 import { BANNER, BANNER_SERVICE_TYPE } from 'app/utils/banner.util'
 import { useMemo, useEffect, memo } from 'react'

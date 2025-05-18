@@ -126,7 +126,11 @@ const Matches = () => {
           >
             <ChevronLeft className="size-5" />
           </Button>
-          <Select value={currentTour?.id} onValueChange={handleChangeTour}>
+          <Select 
+            value={currentTour?.id || ''} 
+            onValueChange={handleChangeTour}
+            defaultValue=""
+          >
             <SelectTrigger
               showIcon={false}
               className="h-9 w-20 rounded-sm border-2 border-x-0 border-t-0 border-neutral-400 text-center text-base outline-none ring-0 ring-offset-0 hover:outline-none"

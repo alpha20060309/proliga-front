@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 
 export function middleware() {
   const res = NextResponse.next()
+  console.log('middleware')
 
   res.headers.append('Access-Control-Allow-Credentials', 'true')
   res.headers.append(

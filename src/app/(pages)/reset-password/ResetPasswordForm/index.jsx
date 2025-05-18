@@ -3,7 +3,8 @@
 import { useTranslation } from 'react-i18next'
 import { Input } from '@/components/ui/input'
 import { useEffect, useState } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
+import { useTransitionRouter } from 'next-view-transitions'
 import { toast } from 'react-toastify'
 import { Eye, EyeOff } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -12,7 +13,7 @@ import { resetPassword } from 'app/actions/resetPassword.action'
 import { useTransition } from 'react'
 
 const ResetPasswordForm = () => {
-  const router = useRouter()
+  const router = useTransitionRouter()
   const params = useSearchParams()
   const phone = decodeURIComponent(params.get('phone')) || ''
   const code = params.get('code') || ''

@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import TournamentTableCurrentTeamRow from './CurrentTeamRow'
 import { useSelector } from 'react-redux'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
