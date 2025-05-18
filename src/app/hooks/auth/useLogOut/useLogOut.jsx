@@ -39,8 +39,7 @@ export const useLogOut = () => {
           userTable: user,
         })
 
-        await signOut({ redirect: false })
-
+        // First clear state and storage before sign out
         clearState()
         localStorage.clear()
 
@@ -63,7 +62,13 @@ export const useLogOut = () => {
             .replace(/=.*/, `=;expires=${new Date(0).toUTCString()};path=/`)
         })
 
-        router.push('/')
+        // Call signOut with callbackUrl to prevent CSRF issues
+        await signOut({ 
+          redirect: true,
+          callbackUrl: '/' 
+        })
+        
+        // No need for manual redirect as we're using redirect: true
         if (showMessage) {
           toast.success(t('Tizimdan chiqdingiz'), { theme: 'dark' })
         }
@@ -78,7 +83,7 @@ export const useLogOut = () => {
         )
       }
     },
-    [clearState, t, router]
+    [clearState, t, router, user, updateNotificationToken]
   )
 
   return { logOut, error }
