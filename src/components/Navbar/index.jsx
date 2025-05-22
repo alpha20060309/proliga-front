@@ -14,7 +14,7 @@ import NavbarUserMobile from './UserMobile'
 import ChangeLanguageDropdown from './Language'
 import Notification from './Notification'
 import Marquee from 'components/Marquee'
-import ThemeSwither from './Notification/ThemeSwitch'
+import ThemeSwither from './ThemeSwitch'
 
 const Navbar = () => {
   const path = usePathname()

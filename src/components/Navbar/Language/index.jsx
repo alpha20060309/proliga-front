@@ -1,10 +1,9 @@
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import Image from 'next/image'
 import { LANGUAGE } from 'app/utils/languages.util'
 import { useTranslation } from 'react-i18next'
@@ -12,12 +11,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useUpdateUserLanguage } from 'app/hooks/user/useUpdateUserLanguage/useUpdateUserLanguage'
 import { setLanguage } from 'app/lib/features/systemLanguage/systemLanguage.slice'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { Button } from '@/components/ui/button'
+import { Globe } from 'lucide-react'
 
 const ChangeLanguageDropdown = () => {
   const dispatch = useDispatch()
   const { lang } = useSelector((store) => store.systemLanguage)
   const userTable = useSelector(selectUserTable)
-  const { t, i18n } = useTranslation()
+  const { i18n } = useTranslation()
   const { updateUserLanguage } = useUpdateUserLanguage()
 
   const handleChange = async (lang) => {
@@ -34,23 +35,38 @@ const ChangeLanguageDropdown = () => {
   }
 
   return (
-    <Select
-      onValueChange={(value) => handleChange(value)}
-      defaultValue={userTable?.language ?? lang}
-      key={userTable?.language ?? lang}
-    >
-      <SelectTrigger
+    <DropdownMenu>
+      <DropdownMenuTrigger
         aria-label="Change Language"
-        className="h-8 w-16 border-none bg-red-400 bg-transparent px-2 md:w-24 xl:w-24"
+        className="border-none bg-transparent"
       >
-        <SelectValue placeholder={t('Til')} />
-      </SelectTrigger>
-      <SelectContent
+        <Button
+          variant="ghost"
+          size="icon"
+          className="hover:text-accent dark:hover:text-accent relative bg-transparent p-0 hover:bg-transparent dark:hover:bg-transparent"
+        >
+          <Globe className="size-5" />
+          <div className="absolute -top-1 -right-1 size-4">
+            <Image
+              src={
+                lang === LANGUAGE.uz
+                  ? '/icons/uzbekistan.svg'
+                  : '/icons/russia.svg'
+              }
+              alt={lang === LANGUAGE.uz ? 'uzbekistan' : 'russia'}
+              width={16}
+              height={16}
+              className="size-4"
+            />
+          </div>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent
         aria-label="Language Options: RU, UZ"
-        className="w-min rounded-lg"
+        className="w-min rounded"
         align="end"
       >
-        <SelectItem value={LANGUAGE.uz}>
+        <DropdownMenuItem onClick={() => handleChange(LANGUAGE.uz)}>
           <div className="flex items-center justify-center md:gap-1 xl:gap-2">
             <Image
               src="/icons/uzbekistan.svg"
@@ -61,21 +77,21 @@ const ChangeLanguageDropdown = () => {
             />
             <p className="hidden md:block">UZ</p>
           </div>
-        </SelectItem>
-        <SelectItem value={LANGUAGE.ru}>
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => handleChange(LANGUAGE.ru)}>
           <div className="flex items-center justify-center md:gap-1 xl:gap-2">
             <Image
               src="/icons/russia.svg"
-              alt="uzbekistan"
+              alt="russia"
               width={24}
               className="size-6"
               height={24}
             />
             <p className="hidden md:block">РУ</p>
           </div>
-        </SelectItem>
-      </SelectContent>
-    </Select>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
 

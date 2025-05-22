@@ -121,15 +121,17 @@ const Notification = () => {
 
   return (
     <Popover open={isNotificationsOpen} onOpenChange={handleOpen}>
-      <PopoverTrigger asChild>
+      <PopoverTrigger className="bg-transparent">
         <Button
           type="ghost"
           aria-label={t('Open notifications')}
-          className="relative bg-transparent p-0"
+          className="hover:text-accent dark:hover:text-accent relative bg-transparent p-0 hover:bg-transparent dark:hover:bg-transparent"
+          onClick={() => null}
+          size={'icon'}
         >
           <Bell
             className={cn(
-              `size-5 select-none hover:text-primary`,
+              `hover:text-accent-foreground size-5 select-none`,
               isNotificationsOpen ? 'text-primary' : 'text-neutral-200'
             )}
           />
@@ -137,7 +139,7 @@ const Notification = () => {
             <Badge
               variant="destructive"
               className={cn(
-                'absolute -right-0.5 -top-0.5 flex size-3.5 items-center justify-center rounded-full p-1 text-[10px]',
+                'absolute -top-0.5 -right-0.5 flex size-3.5 items-center justify-center rounded-full p-1 text-[10px]',
                 isNotificationsOpen ? 'bg-neutral-800' : 'bg-red-700'
               )}
             >
@@ -146,7 +148,7 @@ const Notification = () => {
           )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="ml-2 mt-5 w-80 p-0" align="end">
+      <PopoverContent className="mt-5 ml-2 w-80 p-0" align="end">
         <div className="flex items-center justify-between border-b px-4 py-2">
           <h3 className="text-sm font-semibold">{t('Xabarnomalar')}</h3>
         </div>
