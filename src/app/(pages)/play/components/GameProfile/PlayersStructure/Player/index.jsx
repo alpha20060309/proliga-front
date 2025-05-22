@@ -93,7 +93,7 @@ const Player = ({ player }) => {
           <div className="flex items-center gap-0.5">
             <button
               onClick={handleInfoModal}
-              className="size-4 rounded bg-black transition-all hover:bg-primary sm:size-5"
+              className="size-4 rounded-sm bg-black transition-all hover:bg-primary sm:size-5"
             >
               <Image
                 width={16}
@@ -104,7 +104,7 @@ const Player = ({ player }) => {
                 className="h-full w-full"
               />
             </button>
-            <div className="flex h-4 w-6 cursor-default items-center justify-center rounded border border-neutral-800 bg-primary text-center text-xs font-bold text-neutral-950 sm:h-5 sm:w-8 md:text-sm">
+            <div className="flex h-4 w-6 cursor-default items-center justify-center rounded-sm border border-neutral-800 bg-primary text-center text-xs font-bold text-neutral-950 sm:h-5 sm:w-8 md:text-sm">
               {player.is_captain
                 ? (currentPlayerPoint?.point ?? 0) * 2
                 : (currentPlayerPoint?.point ?? 0)}

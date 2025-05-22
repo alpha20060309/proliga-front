@@ -77,7 +77,7 @@ export default function ChangePhoneForm() {
               id="phone"
               name="phone"
               defaultCountry="UZ"
-              className="h-10 rounded border-neutral-400 bg-neutral-900 text-neutral-200 placeholder:text-neutral-500"
+              className="h-10 rounded-sm border-neutral-400 bg-neutral-900 text-neutral-200 placeholder:text-neutral-500"
               value={''}
               placeholder={'99-999-99-99'}
               onChange={setPhone}
@@ -109,7 +109,7 @@ export default function ChangePhoneForm() {
           </div>
         </section>
         <Button
-          className="h-10 w-full rounded border border-black border-primary/75 bg-neutral-900 text-sm font-semibold text-neutral-200 transition-all hover:border-primary xs:max-w-40"
+          className="h-10 w-full rounded-sm border border-black border-primary/75 bg-neutral-900 text-sm font-semibold text-neutral-200 transition-all hover:border-primary xs:max-w-40"
           type="submit"
           disabled={isLoading}
         >

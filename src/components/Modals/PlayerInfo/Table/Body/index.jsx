@@ -4,7 +4,7 @@ const Body = ({ table, flexRender }) => {
   const styles = (id) => {
     switch (id) {
       case 'ochko':
-        return 'w-min px-1 bg-primary text-center text-black rounded bg-opacity-100'
+        return 'w-min px-1 bg-primary text-center text-black rounded-sm bg-opacity-100'
       case 'competitor':
         return 'w-min px-0.5 sm:min-w-5 max-w-14 xs:max-w-20 break-all text-center font-bold'
       default:

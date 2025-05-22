@@ -30,13 +30,13 @@ const MatchEventScore = () => {
   )
 
   return (
-    <section className="h-min bg-gradient-to-r from-blue-800/20 via-yellow-800/20 to-red-800/20 py-3">
+    <section className="h-min bg-linear-to-r from-blue-800/20 via-yellow-800/20 to-red-800/20 py-3">
       <div className="flex items-center justify-center gap-4">
         <div className="flex w-1/3 flex-col items-center justify-center gap-2 text-center sm:w-[40%]">
           <img
             src={getUrl(homeImg)}
             alt="Arsenal"
-            className="size-10 rounded-full shadow shadow-neutral-400 sm:size-16"
+            className="size-10 rounded-full shadow-sm shadow-neutral-400 sm:size-16"
           />
           <h3 className="text-sm font-bold sm:text-base">
             {getCorrectName({
@@ -64,7 +64,7 @@ const MatchEventScore = () => {
           <img
             src={getUrl(awayImg)}
             alt="Manchester City"
-            className="size-10 rounded-full shadow shadow-neutral-400 sm:size-16"
+            className="size-10 rounded-full shadow-sm shadow-neutral-400 sm:size-16"
           />
           <h3 className="text-sm font-bold sm:text-base">
             {getCorrectName({

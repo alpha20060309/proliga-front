@@ -113,7 +113,7 @@ function ChangePasswordForm() {
           </div>
         </section>
         <Button
-          className="h-10 w-full rounded border border-black border-primary/75 bg-neutral-900 text-sm font-semibold text-neutral-200 transition-all hover:border-primary xs:max-w-40"
+          className="h-10 w-full rounded-sm border border-black border-primary/75 bg-neutral-900 text-sm font-semibold text-neutral-200 transition-all hover:border-primary xs:max-w-40"
           type="submit"
           // disabled={isLoading}
         >

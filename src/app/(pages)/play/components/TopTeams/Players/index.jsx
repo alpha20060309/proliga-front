@@ -40,7 +40,7 @@ const PlayerPlace = ({ player, index }) => {
   )
 
   return (
-    <div className="relative min-h-32 rounded bg-neutral-100 p-2">
+    <div className="relative min-h-32 rounded-sm bg-neutral-100 p-2">
       <div className="flex items-center justify-between">
         <img
           src={getUrl(image)}

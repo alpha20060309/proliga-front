@@ -9,7 +9,7 @@ const PromotionCreateTeam = () => {
       <Gutter>
         <div className="flex w-full flex-col items-center justify-between gap-8 md:flex-row md:gap-4 lg:gap-0">
           <div className="flex flex-1 flex-col flex-wrap">
-            <div className="mb-2 w-5/6 max-w-72 -skew-x-12 self-start rounded-sm bg-primary sm:max-w-[24rem] md:mb-4 md:max-w-[32rem] lg:mb-6">
+            <div className="mb-2 w-5/6 max-w-72 -skew-x-12 self-start rounded-xs bg-primary sm:max-w-[24rem] md:mb-4 md:max-w-lg lg:mb-6">
               <h3 className="promotion-header text-center font-bold capitalize text-black">
                 {t('Umumiy qoidalar')}
               </h3>

@@ -15,17 +15,17 @@ const HeroSkeleton = () => {
             Biz bilan yarating
           </h2>
         </div>
-        <span className="block h-3.5 w-4/5 -skew-x-[45deg] rounded bg-primary md:w-3/5 lg:w-1/2 xl:w-2/5 2xl:w-1/3" />
+        <span className="block h-3.5 w-4/5 -skew-x-45 rounded-sm bg-primary md:w-3/5 lg:w-1/2 xl:w-2/5 2xl:w-1/3" />
         <section className="flex w-full flex-col items-center justify-center gap-2 text-lg font-bold sm:flex-row">
           <Link
             href="/auth"
-            className="flex h-16 w-full max-w-64 -skew-x-[15deg] items-center justify-center rounded border-2 border-primary bg-primary font-bold uppercase text-black transition-all hover:bg-opacity-50"
+            className="flex h-16 w-full max-w-64 -skew-x-15 items-center justify-center rounded-sm border-2 border-primary bg-primary font-bold uppercase text-black transition-all hover:bg-opacity-50"
           >
             RO&apos;YXATDAN O&apos;TISH
           </Link>
           <Link
             href="/championships"
-            className="flex h-16 w-full max-w-64 -skew-x-[15deg] items-center justify-center rounded border-2 border-primary bg-transparent font-bold uppercase text-primary transition-all hover:bg-primary hover:bg-opacity-50 hover:text-black"
+            className="flex h-16 w-full max-w-64 -skew-x-15 items-center justify-center rounded-sm border-2 border-primary bg-transparent font-bold uppercase text-primary transition-all hover:bg-primary hover:bg-opacity-50 hover:text-black"
           >
             O&apos;YINGA KIRISH
           </Link>

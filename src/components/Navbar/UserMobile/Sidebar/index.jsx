@@ -32,7 +32,7 @@ const MobileSidebar = ({ isModalOpen, setModalOpen }) => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setModalOpen}>
-      <DialogContent className="left-auto right-0 flex h-full w-4/5 min-w-80 translate-x-[0%] translate-y-[-50%] flex-col rounded-e-none rounded-s-2xl p-5 data-[state=closed]:slide-out-to-right-full data-[state=open]:slide-in-from-right-full xs:w-3/4 sm:w-2/3 sm:p-6">
+      <DialogContent className="left-auto right-0 flex h-full w-4/5 min-w-80 -translate-x-[0%] translate-y-[-50%] flex-col rounded-e-none rounded-s-2xl p-5 data-[state=closed]:slide-out-to-right-full data-[state=open]:slide-in-from-right-full xs:w-3/4 sm:w-2/3 sm:p-6">
         <DialogTitle className="hidden">Title</DialogTitle>
         <div className="flex flex-col items-start justify-center gap-6 py-12 xs:gap-7 sm:py-16">
           {path.includes('play') && (
@@ -178,7 +178,7 @@ const MobileSidebar = ({ isModalOpen, setModalOpen }) => {
               </SystemLink>
               <div
                 onClick={handleLogOut}
-                className="flex h-full w-full gap-2 rounded bg-neutral-900 p-2 hover:bg-neutral-700"
+                className="flex h-full w-full gap-2 rounded-sm bg-neutral-900 p-2 hover:bg-neutral-700"
               >
                 <Image
                   src={'/icons/logout.svg'}

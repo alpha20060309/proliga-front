@@ -57,12 +57,12 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
   }
 
   return (
-    <section className="mt-auto flex flex-col items-start justify-between gap-2 rounded-md bg-gradient-to-l from-neutral-800 to-stone-900 p-4 md:h-auto md:flex-row md:items-center md:p-6">
+    <section className="mt-auto flex flex-col items-start justify-between gap-2 rounded-md bg-linear-to-l from-neutral-800 to-stone-900 p-4 md:h-auto md:flex-row md:items-center md:p-6">
       <div className="flex items-center justify-center gap-2 text-sm font-medium xs:text-base md:text-lg">
         <p>{t("To'lov miqdori")}</p>
         <NumericFormat
           value={currentPackage?.price / 100 || 0}
-          className="text w-min select-none border-none bg-transparent text-base font-bold outline-none xs:text-lg sm:text-xl"
+          className="text w-min select-none border-none bg-transparent text-base font-bold outline-hidden xs:text-lg sm:text-xl"
           defaultValue={0}
           readOnly
           thousandSeparator
@@ -75,14 +75,14 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
       <div className="flex items-center gap-1 self-end font-medium md:self-auto">
         <Link
           href={'/play/' + lastVisitedTeam}
-          className="flex h-10 w-24 items-center justify-center rounded border border-neutral-300 bg-neutral-950 text-center text-sm text-neutral-300 transition-all hover:border-neutral-100 hover:bg-opacity-75 hover:text-neutral-100 lg:w-32 lg:text-base"
+          className="flex h-10 w-24 items-center justify-center rounded-sm border border-neutral-300 bg-neutral-950 text-center text-sm text-neutral-300 transition-all hover:border-neutral-100 hover:bg-opacity-75 hover:text-neutral-100 lg:w-32 lg:text-base"
         >
           {t('Qaytish')}
         </Link>
         <button
           onClick={handleConfirmPayment}
           disabled={isLoading || isClickLoading || isPaymeLoading}
-          className="flex h-10 w-24 items-center justify-center rounded border border-primary bg-neutral-950 text-sm text-neutral-50 transition-all hover:bg-opacity-75 hover:text-primary lg:w-32 lg:text-base"
+          className="flex h-10 w-24 items-center justify-center rounded-sm border border-primary bg-neutral-950 text-sm text-neutral-50 transition-all hover:bg-opacity-75 hover:text-primary lg:w-32 lg:text-base"
         >
           {isLoading || isClickLoading || isPaymeLoading ? (
             <Image

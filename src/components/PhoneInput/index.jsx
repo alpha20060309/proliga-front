@@ -64,7 +64,7 @@ const CountrySelect = ({ disabled, value, onChange, options }) => {
   return (
     <Button
       type="button"
-      variant={'outline'}
+      variant={'outline-solid'}
       className={cn(
         'flex gap-1 rounded-e-none rounded-s border-y border-l border-r-0 border-inherit bg-inherit px-2 text-sm'
       )}
@@ -133,7 +133,7 @@ const FlagComponent = ({ country, countryName }) => {
   const Flag = flags[country]
 
   return (
-    <span className="bg-foreground/20 flex h-4 w-6 overflow-hidden rounded-sm">
+    <span className="bg-foreground/20 flex h-4 w-6 overflow-hidden rounded-xs">
       {Flag && <Flag title={countryName} />}
     </span>
   )

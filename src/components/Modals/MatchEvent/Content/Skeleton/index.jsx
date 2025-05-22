@@ -25,7 +25,7 @@ export default function MatchEventSkeleton() {
 
 const SkeletonEventHeader = () => (
   <div className="flex items-center justify-center">
-    <div className="z-10 h-6 w-24 animate-pulse rounded bg-gray-800 px-3 py-1.5 text-center text-sm" />
+    <div className="z-10 h-6 w-24 animate-pulse rounded-sm bg-gray-800 px-3 py-1.5 text-center text-sm" />
   </div>
 )
 
@@ -74,10 +74,10 @@ const SkeletonEventIcon = ({ eventType }) => (
       )}
     >
       {eventType === 'transfer' && (
-        <SkeletonBar className="h-4 w-4 rounded bg-white/30" />
+        <SkeletonBar className="h-4 w-4 rounded-sm bg-white/30" />
       )}
       {eventType === 'card' && (
-        <SkeletonBar className="h-6 w-4 rounded-sm bg-yellow-500/50" />
+        <SkeletonBar className="h-6 w-4 rounded-xs bg-yellow-500/50" />
       )}
     </div>
   </div>
@@ -92,5 +92,5 @@ const SkeletonEventTime = ({ isReversed }) => (
 )
 
 const SkeletonBar = ({ className }) => (
-  <div className={cn('animate-pulse rounded bg-gray-700', className)} />
+  <div className={cn('animate-pulse rounded-sm bg-gray-700', className)} />
 )

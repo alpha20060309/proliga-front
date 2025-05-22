@@ -42,7 +42,7 @@ function Settings() {
   }
 
   return (
-    <main className="flex h-full min-h-[44rem] flex-col gap-2 lg:min-h-[38rem] lg:flex-row">
+    <main className="flex h-full min-h-176 flex-col gap-2 lg:min-h-152 lg:flex-row">
       <Navigation setTab={setTab} currentTab={tab} tabs={SETTINGS_TAB} />
       {renderSection()}
     </main>

@@ -88,7 +88,7 @@ const ModalBanner = ({ isModalOpen, setModalOpen }) => {
           >
             <Link
               href={banner?.link ?? ''}
-              className="block rounded md:min-w-[620px] xl:min-w-[1024px] 2xl:min-w-[1280px] 2xl:max-w-[1280px]"
+              className="block rounded-sm md:min-w-[620px] xl:min-w-[1024px] 2xl:min-w-[1280px] 2xl:max-w-[1280px]"
             >
               <img
                 src={getUrl(banner?.content_url) ?? ''}
@@ -96,7 +96,7 @@ const ModalBanner = ({ isModalOpen, setModalOpen }) => {
                 width={128}
                 height={72}
                 loading="lazy"
-                className="aspect-video h-full w-full rounded"
+                className="aspect-video h-full w-full rounded-sm"
               />
             </Link>
             <DialogTitle className="hidden">Ad title</DialogTitle>

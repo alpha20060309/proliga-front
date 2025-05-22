@@ -7,7 +7,7 @@ export default function SocialLink({ href, icon, alt, target = '_blank' }) {
       href={href}
       target={target}
       rel="noopener noreferrer"
-      className="focus:ring-offset-background transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+      className="focus:ring-offset-background transition-transform hover:scale-110 focus:outline-hidden focus:ring-2 focus:ring-primary focus:ring-offset-2"
     >
       <Image
         src={`/icons/${icon}.svg`}

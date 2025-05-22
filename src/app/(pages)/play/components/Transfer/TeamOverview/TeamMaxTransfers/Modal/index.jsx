@@ -34,7 +34,7 @@ const TeamMaxTransfersModal = () => {
       onOpenChange={() => dispatch(setTransferModal(!transferModal))}
       open={transferModal}
     >
-      <DialogContent className="max-h-[92%] max-w-[96%] overflow-auto rounded-lg sm:max-w-[28rem] xl:max-w-[32rem] xl:p-6">
+      <DialogContent className="max-h-[92%] max-w-[96%] overflow-auto rounded-lg sm:max-w-md xl:max-w-lg xl:p-6">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold">
             {t('Boost Your Transfer Limit!')}

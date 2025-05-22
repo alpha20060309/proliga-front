@@ -96,7 +96,7 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
                 />
               )}
               {!cabinet_click && !cabinet_payme && (
-                <p className="flex h-10 w-full items-center justify-center rounded border border-red-400 bg-red-700/80 font-bold">
+                <p className="flex h-10 w-full items-center justify-center rounded-sm border border-red-400 bg-red-700/80 font-bold">
                   {t("Hozircha to'lovlar o'chirib qo'yilgan!")}
                 </p>
               )}
@@ -125,7 +125,7 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
           </div>
           <button
             type="submit"
-            className="h-12 rounded border border-neutral-600 bg-primary/80 font-bold text-neutral-900 transition-all hover:bg-primary hover:text-black"
+            className="h-12 rounded-sm border border-neutral-600 bg-primary/80 font-bold text-neutral-900 transition-all hover:bg-primary hover:text-black"
           >
             {t("To'lash")}
           </button>

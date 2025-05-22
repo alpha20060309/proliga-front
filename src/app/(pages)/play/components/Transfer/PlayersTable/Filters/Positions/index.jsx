@@ -34,7 +34,7 @@ const PositionsFilter = ({ column, columnFilterValue }) => {
         <button
           key={index}
           className={cn(
-            'text-nowrap break-keep rounded px-2 py-1 font-bold capitalize transition-all md:px-4 2xl:px-2',
+            'text-nowrap break-keep rounded-sm px-2 py-1 font-bold capitalize transition-all md:px-4 2xl:px-2',
             obj.key === '' && typeof columnFilterValue === 'undefined'
               ? active
               : obj.key === columnFilterValue

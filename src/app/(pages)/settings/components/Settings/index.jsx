@@ -147,7 +147,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
                   id="birthdate"
                   selected={date}
                   onChange={(date) => setDate(date)}
-                  className="h-10 min-w-full flex-1 rounded-md border border-neutral-700 bg-neutral-800 p-2 text-sm text-neutral-200 placeholder:text-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-300 focus:ring-offset-2 focus:ring-offset-neutral-900"
+                  className="h-10 min-w-full flex-1 rounded-md border border-neutral-700 bg-neutral-800 p-2 text-sm text-neutral-200 placeholder:text-neutral-500 focus:outline-hidden focus:ring-1 focus:ring-neutral-300 focus:ring-offset-2 focus:ring-offset-neutral-900"
                 />
               </article>
               <article className="space-y-1">
@@ -204,7 +204,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
             />
           </section>
           <Button
-            className="h-10 w-full rounded border border-black bg-primary/75 text-sm font-semibold text-neutral-900 transition-all hover:bg-primary hover:bg-opacity-100 xs:max-w-48"
+            className="h-10 w-full rounded-sm border border-black bg-primary/75 text-sm font-semibold text-neutral-900 transition-all hover:bg-primary hover:bg-opacity-100 xs:max-w-48"
             type="submit"
             disabled={isLoading}
           >

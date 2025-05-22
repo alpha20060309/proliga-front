@@ -155,7 +155,7 @@ function PlayersTable() {
         'overflow-x-auto rounded-xl border border-primary border-opacity-50',
         'text-neutral-200 shadow-md shadow-neutral-600 transition-all',
         'p-2 xs:p-3 md:text-sm lg:w-1/2 lg:max-w-md xl:max-w-lg xl:p-4',
-        'fade-in-fast hover:border-opacity-100 2xl:max-w-[36rem]'
+        'fade-in-fast hover:border-opacity-100 2xl:max-w-xl'
       )}
     >
       <TeamOverview />

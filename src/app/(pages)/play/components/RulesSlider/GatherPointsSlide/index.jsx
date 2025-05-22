@@ -21,7 +21,7 @@ const GatherPointsSlide = () => {
           width={360}
           height={360}
           unoptimized
-          className="h-full w-80 sm:w-96 md:w-[28rem] xl:w-[32rem]"
+          className="h-full w-80 sm:w-96 md:w-md xl:w-lg"
         />
       </div>
     </article>

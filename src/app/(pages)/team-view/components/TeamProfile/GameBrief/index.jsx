@@ -51,8 +51,8 @@ const GameBrief = () => {
   return (
     <section
       className={cn(
-        'lg:mx-0 lg:w-1/2 lg:max-w-[24rem] lg:gap-4 lg:px-6 xl:h-min xl:max-w-[34rem]',
-        'fade-in-fast mx-auto flex h-min min-h-96 w-full max-w-[32rem] flex-col',
+        'lg:mx-0 lg:w-1/2 lg:max-w-[24rem] lg:gap-4 lg:px-6 xl:h-min xl:max-w-136',
+        'fade-in-fast mx-auto flex h-min min-h-96 w-full max-w-lg flex-col',
         'gap-3 rounded-xl border border-primary border-opacity-50 bg-neutral-950',
         'p-4 transition-all hover:border-opacity-100',
         isLoading ? 'justify-center' : 'justify-between'

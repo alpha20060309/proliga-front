@@ -14,7 +14,7 @@ const PlayerPhoto = ({ currentPlayer, position }) => {
 
   return (
     <section className="flex gap-2">
-      <div className="size-24 flex-shrink-0 sm:size-32 lg:size-36">
+      <div className="size-24 shrink-0 sm:size-32 lg:size-36">
         <img
           src={getUrl(image) || ''}
           alt="player image"

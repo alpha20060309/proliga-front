@@ -213,7 +213,7 @@ const TransferStadiumForm = () => {
         value={teamConcat.find((player) => player.is_captain)?.player_id ?? ''}
         onValueChange={(value) => dispatch(setCaptain(value))}
       >
-        <SelectTrigger className="h-10 w-36 sm:w-40 md:w-48 rounded border-neutral-400 bg-neutral-950 px-1.5 xs:px-2 text-xs text-neutral-100 hover:border-primary">
+        <SelectTrigger className="h-10 w-36 sm:w-40 md:w-48 rounded-sm border-neutral-400 bg-neutral-950 px-1.5 xs:px-2 text-xs text-neutral-100 hover:border-primary">
           <SelectValue placeholder={t('Kapitan tanlang')} />
         </SelectTrigger>
         <SelectContent>
@@ -242,7 +242,7 @@ const TransferStadiumForm = () => {
             type="button"
             variant="default"
             title="Avto jamoa yigish"
-            className="flex w-full min-w-5 max-w-10 items-center justify-center gap-1 rounded border border-neutral-400 bg-neutral-950 px-2 text-neutral-100 transition-all hover:border-primary sm:w-full sm:max-w-max"
+            className="flex w-full min-w-5 max-w-10 items-center justify-center gap-1 rounded-sm border border-neutral-400 bg-neutral-950 px-2 text-neutral-100 transition-all hover:border-primary sm:w-full sm:max-w-max"
           >
             <Image
               src="/icons/auto.svg"
@@ -259,7 +259,7 @@ const TransferStadiumForm = () => {
           variant="default"
           onClick={() => dispatch(revertTeamPlayers())}
           title={t('orqaga qaytish')}
-          className="flex w-full max-w-10 items-center justify-center gap-1 rounded border border-neutral-400 bg-neutral-950 px-2 text-neutral-100 transition-all hover:border-primary sm:w-full sm:max-w-max"
+          className="flex w-full max-w-10 items-center justify-center gap-1 rounded-sm border border-neutral-400 bg-neutral-950 px-2 text-neutral-100 transition-all hover:border-primary sm:w-full sm:max-w-max"
         >
           <Image
             src="/icons/revert.svg"
@@ -274,7 +274,7 @@ const TransferStadiumForm = () => {
       <Button
         type="submit"
         disabled={isLoading}
-        className="h-10 min-w-24 rounded border border-yellow-500 bg-neutral-950 text-sm font-medium text-neutral-100 transition-all hover:border-black hover:bg-yellow-500 hover:text-black 2xs:min-w-28 xs:min-w-28 sm:min-w-32 md:text-base"
+        className="h-10 min-w-24 rounded-sm border border-yellow-500 bg-neutral-950 text-sm font-medium text-neutral-100 transition-all hover:border-black hover:bg-yellow-500 hover:text-black 2xs:min-w-28 xs:min-w-28 sm:min-w-32 md:text-base"
       >
         {isLoading ? (
           <Image

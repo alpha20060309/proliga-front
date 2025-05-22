@@ -67,7 +67,7 @@ const MatchEvent = ({ event, index }) => {
       )}
     >
       {isTextOnly ? (
-        <div className="z-10 rounded bg-black px-3 py-1.5 text-center text-sm text-neutral-100 shadow shadow-neutral-700">
+        <div className="z-10 rounded-sm bg-black px-3 py-1.5 text-center text-sm text-neutral-100 shadow-sm shadow-neutral-700">
           {renderHeader(event.event_type)}
         </div>
       ) : (
@@ -108,7 +108,7 @@ const MatchEvent = ({ event, index }) => {
             )}
           </div>
           <div className="flex w-2/12 items-center justify-center">
-            <div className="z-10 flex size-10 items-center justify-center rounded-full bg-neutral-900 shadow shadow-neutral-700">
+            <div className="z-10 flex size-10 items-center justify-center rounded-full bg-neutral-900 shadow-sm shadow-neutral-700">
               <MatchEventIcon type={event.event_type} />
             </div>
           </div>

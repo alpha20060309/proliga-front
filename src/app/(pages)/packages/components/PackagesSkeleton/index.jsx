@@ -41,7 +41,7 @@ const PackagesSkeleton = () => {
                 {[1, 2, 3].map((item, index) => (
                   <div
                     key={index}
-                    className="flex items-center justify-between rounded bg-neutral-800 p-2 transition-all hover:bg-neutral-700"
+                    className="flex items-center justify-between rounded-sm bg-neutral-800 p-2 transition-all hover:bg-neutral-700"
                   >
                     <div className="flex items-center space-x-2">
                       <Skeleton className="h-6 w-12" />
@@ -75,7 +75,7 @@ export const PackageSkeleton = () => {
           {[1, 2, 3].map((item, index) => (
             <div
               key={index}
-              className="flex items-center justify-between rounded bg-neutral-800 p-2 transition-all hover:bg-neutral-700"
+              className="flex items-center justify-between rounded-sm bg-neutral-800 p-2 transition-all hover:bg-neutral-700"
             >
               <div className="flex items-center space-x-2">
                 <Skeleton className="h-6 w-12" />

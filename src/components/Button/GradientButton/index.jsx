@@ -3,7 +3,7 @@ import { cn } from '../../../@/lib/utils'
 
 const classes = {
   gradient: {
-    background: 'bg-gradient-to-r from-blue-500 via-red-500 to-yellow-500',
+    background: 'bg-linear-to-r from-blue-500 via-red-500 to-yellow-500',
     animate: 'animate-gradient',
     glow: 'animate-glow hover:animate-gradient',
     transition: 'transition-all duration-300 ease-in-out',
@@ -61,7 +61,7 @@ export function GradientButton({
         classes.gradient.animate,
         classes.hover.glow,
         'text-black shadow-md',
-        'focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:ring-opacity-50',
+        'focus:outline-hidden focus:ring-2 focus:ring-yellow-300 focus:ring-opacity-50',
         className
       )}
     >
@@ -84,7 +84,7 @@ export function GradientBorder({ children, className }) {
           'absolute -inset-0.5 rounded-lg',
           classes.gradient.background,
           classes.gradient.animate,
-          'opacity-70 blur-sm group-hover:opacity-100',
+          'opacity-70 blur-xs group-hover:opacity-100',
           classes.gradient.transition,
           className
         )}

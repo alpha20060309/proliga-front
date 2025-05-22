@@ -38,7 +38,7 @@ const WalletPaymentOption = ({
         </h4>
         <NumericFormat
           value={userTable?.balance / 100 || 0}
-          className="mx-1 w-full max-w-32 select-none border-none bg-transparent text-center text-sm font-bold text-neutral-50 outline-none md:max-w-40 xl:text-base"
+          className="mx-1 w-full max-w-32 select-none border-none bg-transparent text-center text-sm font-bold text-neutral-50 outline-hidden md:max-w-40 xl:text-base"
           defaultValue={0}
           readOnly
           thousandSeparator
@@ -50,7 +50,7 @@ const WalletPaymentOption = ({
       </div>
       <button
         onClick={toggleModal}
-        className="mx-auto w-min select-none self-center text-nowrap rounded border px-3 py-1 text-xs transition-all hover:bg-primary hover:text-neutral-900 sm:text-sm lg:px-4 lg:text-base"
+        className="mx-auto w-min select-none self-center text-nowrap rounded-sm border px-3 py-1 text-xs transition-all hover:bg-primary hover:text-neutral-900 sm:text-sm lg:px-4 lg:text-base"
       >
         {t('Hisobni toldirish')}
       </button>

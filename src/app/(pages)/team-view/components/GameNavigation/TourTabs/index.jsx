@@ -62,7 +62,7 @@ export default function TourTabs() {
         value={currentTourIndex}
         variant="scrollable"
         scrollButtons="auto"
-        className="snap-x snap-center rounded text-neutral-50 fade-in disabled:text-neutral-500"
+        className="snap-x snap-center rounded-sm text-neutral-50 fade-in disabled:text-neutral-500"
         aria-label="tour tabs"
         sx={{
           [`& .${tabsClasses.scrollButtons}`]: {
@@ -74,14 +74,14 @@ export default function TourTabs() {
           <StyledTab
             key={item.id}
             onClick={() => handleClick(index, item)}
-            className="w-32 snap-center space-y-0 rounded hover:bg-primary hover:bg-opacity-10 disabled:cursor-default sm:w-48"
+            className="w-32 snap-center space-y-0 rounded-sm hover:bg-primary hover:bg-opacity-10 disabled:cursor-default sm:w-48"
             disabled={
               item.status === TOUR_STATUS.notStarted ||
               item.status === TOUR_STATUS.notStartedTransfer ||
               item.order < registeredTour?.order
             }
             label={
-              <div className="flex h-12 flex-col items-center justify-start gap-1 sm:h-[3.75rem]">
+              <div className="flex h-12 flex-col items-center justify-start gap-1 sm:h-15">
                 <h3 className="text-start text-xs font-medium text-neutral-50 md:text-sm xl:text-base">
                   {getCorrectName({ lang, uz: item?.name, ru: item?.name_ru })}
                 </h3>

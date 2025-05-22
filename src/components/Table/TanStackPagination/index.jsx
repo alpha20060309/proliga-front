@@ -27,20 +27,20 @@ const TanStackPagination = ({ table, active, className, buttonClassName }) => {
         onClick={() => table.setPageIndex(0)}
         disabled={!table.getCanPreviousPage()}
         icon={'double-left'}
-        className={cn('size-7 rounded md:size-8', buttonClassName)}
+        className={cn('size-7 rounded-sm md:size-8', buttonClassName)}
       />
       <PaginationButton
         onClick={() => table.previousPage()}
         disabled={!table.getCanPreviousPage()}
         icon={'left'}
-        className={cn('size-7 rounded md:size-8', buttonClassName)}
+        className={cn('size-7 rounded-sm md:size-8', buttonClassName)}
       />
       {getPageRange().map((page) => (
         <button
           key={page}
           onClick={() => table.setPageIndex(page - 1)}
           className={cn(
-            'block size-7 rounded border text-xs md:size-8 md:text-sm',
+            'block size-7 rounded-sm border text-xs md:size-8 md:text-sm',
             buttonClassName,
             currentPage === page
               ? cn('bg-neutral-300 text-black', active)
@@ -56,13 +56,13 @@ const TanStackPagination = ({ table, active, className, buttonClassName }) => {
         onClick={() => table.nextPage()}
         disabled={!table.getCanNextPage()}
         icon={'right'}
-        className={cn('size-7 rounded md:size-8', buttonClassName)}
+        className={cn('size-7 rounded-sm md:size-8', buttonClassName)}
       />
       <PaginationButton
         onClick={() => table.setPageIndex(table.getPageCount() - 1)}
         disabled={!table.getCanNextPage()}
         icon={'double-right'}
-        className={cn('size-7 rounded md:size-8', buttonClassName)}
+        className={cn('size-7 rounded-sm md:size-8', buttonClassName)}
       />
     </section>
   )
@@ -87,7 +87,7 @@ const PaginationButton = ({ onClick, disabled, icon, className }) => {
       onClick={onClick}
       disabled={disabled}
       className={cn(
-        'block rounded-sm border p-1 hover:bg-neutral-800 disabled:opacity-75 disabled:hover:bg-transparent',
+        'block rounded-xs border p-1 hover:bg-neutral-800 disabled:opacity-75 disabled:hover:bg-transparent',
         className
       )}
     >

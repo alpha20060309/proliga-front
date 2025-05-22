@@ -65,7 +65,7 @@ const ForgotPassword = ({ isModalOpen, setModalOpen }) => {
           <Button
             type="submit"
             disabled={isLoading}
-            className="h-10 w-full rounded border border-primary bg-neutral-900 text-neutral-50 transition-all hover:bg-black"
+            className="h-10 w-full rounded-sm border border-primary bg-neutral-900 text-neutral-50 transition-all hover:bg-black"
           >
             {isLoading ? (
               <Image

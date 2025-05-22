@@ -25,7 +25,7 @@ const ProfessionalRefillBalanceBox = () => {
             <div className="text-right">
               <NumericFormat
                 value={userTable?.balance / 100 || 0}
-                className="w-full select-none border-none bg-transparent text-right text-lg font-bold text-yellow-400 outline-none"
+                className="w-full select-none border-none bg-transparent text-right text-lg font-bold text-yellow-400 outline-hidden"
                 defaultValue={0}
                 readOnly
                 thousandSeparator

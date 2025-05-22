@@ -35,7 +35,7 @@ export function Pagination({
       pageNumbers.push(
         <Button
           key={i}
-          variant={i === currentPage + 1 ? 'secondary' : 'outline'}
+          variant={i === currentPage + 1 ? 'secondary' : 'outline-solid'}
           size="sm"
           aria-label={`Page ${i}`}
           onClick={() => onPageChange(i - 1)}

@@ -26,7 +26,7 @@ const CurrentPackage = () => {
         </div>
         <NumericFormat
           value={currentPackage?.price / 100 || 0}
-          className="w-min select-none border-none bg-transparent text-center text-sm font-bold text-neutral-100 outline-none xs:text-base md:text-2xl"
+          className="w-min select-none border-none bg-transparent text-center text-sm font-bold text-neutral-100 outline-hidden xs:text-base md:text-2xl"
           defaultValue={0}
           readOnly
           thousandSeparator

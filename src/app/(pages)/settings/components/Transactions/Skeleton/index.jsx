@@ -55,7 +55,7 @@ const CabinetTransactionsSkeletonPagination = () => {
   return (
     <section className="mt-1 flex items-center justify-center gap-2 overflow-x-auto">
       {[...Array(7)].map((_, index) => (
-        <Skeleton key={index} className="size-6 rounded md:size-8" />
+        <Skeleton key={index} className="size-6 rounded-sm md:size-8" />
       ))}
     </section>
   )

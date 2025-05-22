@@ -48,7 +48,7 @@ function NewsArticle() {
             </span>
           </div>
         </div>
-        <ScrollArea className="h-[75vh] rounded bg-neutral-900">
+        <ScrollArea className="h-[75vh] rounded-sm bg-neutral-900">
           <div
             className="modal-news bg-transparent px-1 py-2 xs:px-2 xs:py-3 2xl:p-4"
             dangerouslySetInnerHTML={{

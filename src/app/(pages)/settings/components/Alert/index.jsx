@@ -58,7 +58,7 @@ const SettingsAlert = ({
   return (
     <div
       className={cn(
-        'w-full rounded-lg border p-4 shadow-sm transition-all duration-300 ease-in-out',
+        'w-full rounded-lg border p-4 shadow-xs transition-all duration-300 ease-in-out',
         defaultBorderColor,
         defaultBgColor,
         bgClassName,
@@ -67,7 +67,7 @@ const SettingsAlert = ({
       )}
     >
       <div className="flex items-center">
-        <div className="flex-shrink-0">
+        <div className="shrink-0">
           <Icon
             className={cn(
               'h-5 w-5 transform transition-transform duration-300 ease-in-out group-hover:scale-110',
@@ -110,7 +110,7 @@ const SettingsAlert = ({
               onClick={() => setIsVisible(false)}
               className={cn(
                 'inline-flex rounded-md p-1.5 transition-all duration-300 ease-in-out',
-                'hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2',
+                'hover:bg-opacity-20 focus:outline-hidden focus:ring-2 focus:ring-white focus:ring-offset-2',
                 'transform',
                 defaultTextColor,
                 `focus:ring-offset-${defaultBgColor} hover:bg-neutral-50 hover:bg-opacity-20`,

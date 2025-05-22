@@ -228,7 +228,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
           type="submit"
           disabled={isPending}
           className={cn(
-            'h-12 w-full rounded border border-yellow-400 bg-neutral-900 font-bold',
+            'h-12 w-full rounded-sm border border-yellow-400 bg-neutral-900 font-bold',
             'text-neutral-100 transition-all duration-300 hover:bg-yellow-400 hover:text-neutral-900',
             isPending && 'bg-yellow-400 text-neutral-900'
           )}

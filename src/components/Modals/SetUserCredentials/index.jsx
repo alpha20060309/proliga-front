@@ -117,7 +117,7 @@ function SetUserCredentials() {
                 type="email"
                 name="email"
                 id="email"
-                className="h-10 rounded border-neutral-500 bg-neutral-950 pl-10 text-neutral-200 placeholder:text-neutral-500"
+                className="h-10 rounded-sm border-neutral-500 bg-neutral-950 pl-10 text-neutral-200 placeholder:text-neutral-500"
                 placeholder="example@xyz.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -127,7 +127,7 @@ function SetUserCredentials() {
           </section>
           <Button
             type="submit"
-            className="h-10 w-full rounded border border-primary bg-neutral-900 text-neutral-50 transition-all hover:bg-black"
+            className="h-10 w-full rounded-sm border border-primary bg-neutral-900 text-neutral-50 transition-all hover:bg-black"
             disabled={isLoading}
           >
             {isLoading ? (

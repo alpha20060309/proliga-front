@@ -25,7 +25,7 @@ const NotificationModal = ({ isOpen, onOpenChange, notification }) => {
             })}
           </DialogTitle>
         </DialogHeader>
-        <ScrollArea className="modal-news max-h-[70vh] min-w-full rounded bg-neutral-900">
+        <ScrollArea className="modal-news max-h-[70vh] min-w-full rounded-sm bg-neutral-900">
           <div
             className="w-full max-w-none bg-transparent px-2 py-3"
             dangerouslySetInnerHTML={{

@@ -2,7 +2,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 const PlayersTableSkeleton = () => {
   return (
-    <div className="fade-in-fast min-h-auto mx-auto h-min w-full max-w-[40rem] border-collapse overflow-x-auto rounded-xl border border-primary border-opacity-50 bg-black px-2 py-4 text-neutral-200 shadow-md shadow-neutral-600 transition-all hover:border-opacity-100 xs:px-3 sm:px-4 md:text-sm lg:w-1/2 lg:max-w-[28rem] xl:max-w-[34rem] 2xl:max-w-[36rem]">
+    <div className="fade-in-fast min-h-auto mx-auto h-min w-full max-w-160 border-collapse overflow-x-auto rounded-xl border border-primary border-opacity-50 bg-black px-2 py-4 text-neutral-200 shadow-md shadow-neutral-600 transition-all hover:border-opacity-100 xs:px-3 sm:px-4 md:text-sm lg:w-1/2 lg:max-w-md xl:max-w-136 2xl:max-w-xl">
       <TeamOverviewSkeleton />
       <TransferTableFiltersSkeleton />
       <table className="w-full min-w-80 table-auto text-xs xl:text-sm">
@@ -76,7 +76,7 @@ const TransferTablePaginationSkeleton = () => {
   return (
     <section className="mt-2 flex items-center justify-center gap-2 overflow-x-auto">
       {[...Array(7)].map((_, index) => (
-        <Skeleton key={index} className="h-8 w-8 rounded" />
+        <Skeleton key={index} className="h-8 w-8 rounded-sm" />
       ))}
     </section>
   )

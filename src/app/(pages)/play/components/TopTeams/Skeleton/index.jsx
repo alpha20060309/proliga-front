@@ -25,7 +25,7 @@ const TopTeams = () => {
 
 const TeamPlaceSkeleton = () => {
   return (
-    <div className="relative min-h-32 w-full rounded bg-neutral-50/80 p-2">
+    <div className="relative min-h-32 w-full rounded-sm bg-neutral-50/80 p-2">
       <div className="flex items-center justify-between">
         <Skeleton className="size-8" />
         <Skeleton className="h-5 w-3/5 rounded-full bg-yellow-500" />
@@ -54,7 +54,7 @@ const TopPlayers = () => {
 
 const PlayerPlaceSkeleton = () => {
   return (
-    <div className="relative min-h-32 rounded bg-neutral-50/80 p-2">
+    <div className="relative min-h-32 rounded-sm bg-neutral-50/80 p-2">
       <div className="flex items-center justify-between">
         <Skeleton className="size-8 rounded-full" />
         <Skeleton className="h-5 w-3/5 rounded-full bg-yellow-500" />

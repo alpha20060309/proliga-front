@@ -43,13 +43,13 @@ const MiniBanner = () => {
       {banner?.type === BANNER_SERVICE_TYPE.CUSTOM && (
         <Link
           href={banner?.link ?? ''}
-          className="mb-2 block h-[120px] w-[360px] overflow-hidden rounded"
+          className="mb-2 block h-[120px] w-[360px] overflow-hidden rounded-sm"
         >
           <img
             src={getUrl(banner?.content_url) ?? ''}
             alt={banner?.name}
             loading="lazy"
-            className="h-full w-full rounded"
+            className="h-full w-full rounded-sm"
           />
         </Link>
       )}

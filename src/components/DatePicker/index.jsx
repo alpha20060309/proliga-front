@@ -31,7 +31,7 @@ export function DatePickerWithPresets() {
     <Popover>
       <PopoverTrigger asChild>
         <Button
-          variant={'outline'}
+          variant={'outline-solid'}
           className={cn(
             'w-72 justify-start text-left font-normal',
             !date && 'text-muted-foreground'

@@ -215,7 +215,7 @@ const Play = ({ params }) => {
   return (
     <main
       className={cn(
-        'flex flex-col gap-4 overflow-hidden bg-gradient-to-tr',
+        'flex flex-col gap-4 overflow-hidden bg-linear-to-tr',
         'from-red-800 to-blue-900 text-neutral-700',
         gameTab === TABS.GameProfile || gameTab === TABS.Transfer
           ? 'pb-4 pt-20'

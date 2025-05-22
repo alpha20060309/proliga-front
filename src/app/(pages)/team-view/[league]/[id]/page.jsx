@@ -147,7 +147,7 @@ const TeamView = ({ params }) => {
     return <Spinner />
   }
   return (
-    <div className="flex flex-col gap-4 overflow-hidden bg-gradient-to-tr from-red-800 to-blue-900 pt-20 text-neutral-700">
+    <div className="flex flex-col gap-4 overflow-hidden bg-linear-to-tr from-red-800 to-blue-900 pt-20 text-neutral-700">
       <Gutter>
         <section className="flex flex-col gap-4 overflow-hidden">
           <TeamTabs />

@@ -11,10 +11,10 @@ const AuthTabs = ({ tabs, setCurrentTab, loginStyles, registerStyles }) => {
   }
 
   return (
-    <div className="flex gap-0.5 rounded bg-neutral-900 p-1">
+    <div className="flex gap-0.5 rounded-sm bg-neutral-900 p-1">
       <Button
         className={cn(
-          'h-8 flex-1 select-none rounded text-sm font-bold capitalize transition-all',
+          'h-8 flex-1 select-none rounded-sm text-sm font-bold capitalize transition-all',
           loginStyles
         )}
         onClick={() => handleClick(tabs.login)}
@@ -23,7 +23,7 @@ const AuthTabs = ({ tabs, setCurrentTab, loginStyles, registerStyles }) => {
       </Button>
       <Button
         className={cn(
-          'h-8 flex-1 select-none rounded text-sm font-bold transition-all',
+          'h-8 flex-1 select-none rounded-sm text-sm font-bold transition-all',
           registerStyles
         )}
         onClick={() => handleClick(tabs.signup)}

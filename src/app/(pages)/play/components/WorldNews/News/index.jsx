@@ -39,7 +39,7 @@ const News = () => {
   return (
     <div
       className={cn(
-        'relative mx-auto flex h-min min-h-[42rem] w-full max-w-lg flex-col',
+        'relative mx-auto flex h-min min-h-168 w-full max-w-lg flex-col',
         'items-stretch justify-between rounded-xl bg-neutral-950 p-4 md:p-6 lg:mx-0 lg:w-auto',
         'gap-2 border border-neutral-600 lg:min-w-72 lg:flex-1'
       )}

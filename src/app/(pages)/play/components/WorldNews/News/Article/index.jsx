@@ -23,13 +23,13 @@ const Article = ({ item }) => {
     <>
       <article
         onClick={handleClick}
-        className="group flex h-[100px] w-auto overflow-hidden rounded bg-white/10 hover:cursor-pointer"
+        className="group flex h-[100px] w-auto overflow-hidden rounded-sm bg-white/10 hover:cursor-pointer"
       >
-        <section className="my-auto flex aspect-[4/3] h-full w-24 flex-shrink-0 items-center justify-center md:w-32">
+        <section className="my-auto flex aspect-4/3 h-full w-24 shrink-0 items-center justify-center md:w-32">
           <img
             src={getUrl(item?.image) || ''}
             alt={item.name}
-            className="h-full w-full rounded object-cover object-center shadow-md"
+            className="h-full w-full rounded-sm object-cover object-center shadow-md"
           />
         </section>
         <section className="flex h-full w-full flex-col space-y-1 px-2 py-1">

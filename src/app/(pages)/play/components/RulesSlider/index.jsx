@@ -24,19 +24,19 @@ function RulesSlider() {
       <Carousel opts={{ loop: true }} className="mx-7 xl:mx-8">
         <RulesSliderTitle />
         <CarouselContent className="mb-6">
-          <CarouselItem className="min-h-[24rem] md:min-h-[26rem] xl:min-h-[34rem]">
+          <CarouselItem className="min-h-96 md:min-h-104 xl:min-h-136">
             <CreateTeamSlide />
           </CarouselItem>
-          <CarouselItem className="min-h-[24rem] md:min-h-[26rem] xl:min-h-[34rem]">
+          <CarouselItem className="min-h-96 md:min-h-104 xl:min-h-136">
             <GatherPointsSlide />
           </CarouselItem>
-          <CarouselItem className="min-h-[24rem] md:min-h-[26rem] xl:min-h-[34rem]">
+          <CarouselItem className="min-h-96 md:min-h-104 xl:min-h-136">
             <MakeTransfersSlide />
           </CarouselItem>
-          <CarouselItem className="min-h-[24rem] md:min-h-[26rem] xl:min-h-[34rem]">
+          <CarouselItem className="min-h-96 md:min-h-104 xl:min-h-136">
             <CompeteSlide />
           </CarouselItem>
-          <CarouselItem className="min-h-[24rem] md:min-h-[26rem] xl:min-h-[34rem]">
+          <CarouselItem className="min-h-96 md:min-h-104 xl:min-h-136">
             <WinPrizesSlide />
           </CarouselItem>
         </CarouselContent>

@@ -9,7 +9,7 @@ const MatchSkeleton = () => {
           <Skeleton className="size-7 rounded-full xs:size-8" />
           <Skeleton className="h-4 w-16 xs:h-5 md:w-24" />
         </div>
-        <div className="flex h-full flex-col items-center justify-center gap-0 rounded-sm md:w-40">
+        <div className="flex h-full flex-col items-center justify-center gap-0 rounded-xs md:w-40">
           <Skeleton className="h-7 w-16 md:w-20" />
         </div>
         <div className="flex w-full items-center justify-end gap-1 xs:gap-2">
