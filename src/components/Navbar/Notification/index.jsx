@@ -13,7 +13,6 @@ import { Badge } from '@/components/ui/badge'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import NotificationModal from './Modal'
 import NotificationArticle from './NotificationArticle'
-import Image from 'next/image'
 import { selectNotifications } from 'app/lib/features/systemNotification/systemNotification.selector'
 import { supabase } from 'app/lib/supabaseClient'
 import {
@@ -22,6 +21,8 @@ import {
   deleteNotification,
 } from 'app/lib/features/systemNotification/systemNotification.slice'
 import { SUPABASE_EVENT_TYPE } from 'app/lib/supabaseClient'
+import { Bell } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 const Notification = () => {
   const dispatch = useDispatch()
@@ -121,16 +122,15 @@ const Notification = () => {
   return (
     <Popover open={isNotificationsOpen} onOpenChange={handleOpen}>
       <PopoverTrigger asChild>
-        <button aria-label={t('Open notifications')} className="relative">
-          <Image
-            src={'/icons/bell.svg'}
-            alt="bell"
-            draggable={false}
-            width={24}
-            height={24}
+        <Button
+          type="ghost"
+          aria-label={t('Open notifications')}
+          className="relative bg-transparent p-0"
+        >
+          <Bell
             className={cn(
-              `hover:filter-neutral-50 size-6 select-none`,
-              isNotificationsOpen ? 'filter-primary' : 'filter-neutral-200'
+              `size-5 select-none hover:text-primary`,
+              isNotificationsOpen ? 'text-primary' : 'text-neutral-200'
             )}
           />
           {unreadCount > 0 && (
@@ -144,7 +144,7 @@ const Notification = () => {
               {unreadCount}
             </Badge>
           )}
-        </button>
+        </Button>
       </PopoverTrigger>
       <PopoverContent className="ml-2 mt-5 w-80 p-0" align="end">
         <div className="flex items-center justify-between border-b px-4 py-2">

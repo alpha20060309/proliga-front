@@ -1,13 +1,11 @@
-'use client'
-
 import './globals.css'
 import 'react-toastify/dist/ReactToastify.css'
 import 'react-phone-number-input/style.css'
 import Navbar from '../components/Navbar'
-import dynamic from 'next/dynamic'
 import { DM_Sans } from 'next/font/google'
 import { cn } from '@/lib/utils'
 import { ViewTransitions } from 'next-view-transitions'
+import dynamic from 'next/dynamic'
 
 const Footer = dynamic(() => import('../components/Footer'), { ssr: false })
 const RootProvider = dynamic(() => import('./providers/Root.provider'), {
@@ -23,68 +21,69 @@ const dmSans = DM_Sans({
   weight: ['400', '700'],
 })
 
+export const metadata = {
+  title:
+    "Futbol fantasy: O'zbekiston, Angliya, Ispaniya, Italiya va Chempionlar ligasi turnirlari proliga.uz saytida",
+  description:
+    "O'zbekiston Fantasy Futbol Ligasi rasmiy veb-sayti. Chempionatlar, o'yinlar, natijalar va futbol yangiliklari.",
+  keywords:
+    "proliga, o'zbekiston futboli, professional liga, futbol, superliga, pro liga, proliga.uz, Proliga.uz, fantasy futbol, fantasy futbol uz",
+  authors: [{ name: 'Proliga' }],
+  creator: 'Proliga',
+  publisher: 'Proliga',
+  robots: 'index, follow',
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon.svg' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: [{ url: '/favicon.png', sizes: '180x180', type: 'image/png' }],
+  },
+  manifest: '/manifest.json',
+  openGraph: {
+    type: 'website',
+    locale: 'uz_UZ',
+    url: 'https://proliga.uz',
+    title:
+      "Futbol fantasy: O'zbekiston, Angliya, Ispaniya, Italiya va Chempionlar ligasi turnirlari proliga.uz saytida",
+    description:
+      "O'zbekiston Fantasy Futbol Ligasi rasmiy veb-sayti. Chempionatlar, o'yinlar, natijalar va futbol yangiliklari.",
+    siteName: 'Proliga',
+    images: [
+      {
+        url: '/Screenshot.png',
+        width: 1912,
+        height: 989,
+        alt: 'Proliga Screenshot',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title:
+      "Futbol fantasy: O'zbekiston, Angliya, Ispaniya, Italiya va Chempionlar ligasi turnirlari proliga.uz saytida",
+    description:
+      "O'zbekiston Fantasy Futbol Ligasi rasmiy veb-sayti. Chempionatlar, o'yinlar, natijalar va futbol yangiliklari.",
+    images: ['/Screenshot.png'],
+  },
+}
+
 export default function RootLayout({ children }) {
   return (
     <ViewTransitions>
-      <html lang="uz">
-        <head>
-          <title>
-            Futbol fantasy: O&apos;zbekiston, Angliya, Ispaniya, Italiya va
-            Chempionlar ligasi turnirlari proliga.uz saytida
-          </title>
-          <meta
-            name="title"
-            content="Futbol fantasy: O'zbekiston, Angliya, Ispaniya, Italiya va Chempionlar
-        ligasi turnirlari proliga.uz saytida"
-          />
-          <link rel="manifest" href="/manifest.json" />
-          <meta
-            name="description"
-            content="O'zbekiston Fantasy Futbol Ligasi rasmiy veb-sayti. Chempionatlar, o'yinlar, natijalar va futbol yangiliklari."
-          />
-          <meta
-            name="description"
-            content="Proliga Fantasy Futbol - bu vertual futbol o'yini bo'lib, unda ishtirokchilar haqiqiy futbol ligalarining haqiqiy o'yinchilariga asoslangan vertual jamoalarning murabbiylari bo'lishadi. Ushbu o'yinda ishtirokchilar futbolchilarnii tanlash orqali o'z jamoalarini yaratadilar va haqiqiy o'yinlariga qarab ochko oladilar. "
-          />
-
-          {/* Additional Meta Tags */}
-          <meta
-            name="keywords"
-            content="proliga, o'zbekiston futboli, professional liga, futbol, superliga, pro liga, proliga.uz, Proliga.uz, fantasy futbol, fantasy futbol uz"
-          />
-          <meta name="robots" content="index, follow" />
-          <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-          <meta name="language" content="Uzbek" />
-          <meta name="language" content="Russian" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-          {/* Favicon */}
-          <link rel="icon" href="/favicon.ico" />
-          <link rel="icon" href="/favicon.svg" />
-          <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="/favicon-32x32.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="/favicon-16x16.png"
-          />
-        </head>
+      <html lang="uz" suppressHydrationWarning>
         <body
           className={cn(
-            'dark min-h-svh scroll-smooth bg-black text-white antialiased md:min-h-screen',
+            'min-h-svh scroll-smooth bg-black text-white antialiased md:min-h-screen',
             dmSans.className
           )}
         >
           <RootProvider>
             <Navbar />
             {children}
-            <ToastContainer theme="dark" pauseOnHover />
+            <ToastContainer theme="auto" pauseOnHover />
             <Footer />
           </RootProvider>
         </body>
