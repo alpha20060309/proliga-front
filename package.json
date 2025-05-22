@@ -85,7 +85,7 @@
     "sass": "^1.79.3",
     "sharp": "^0.34.1",
     "tailwind-merge": "^2.5.2",
-    "tailwindcss-animate": "^1.0.7",
+    "tw-animate-css": "^1.3.0",
     "validator": "^13.12.0",
     "zod": "^3.24.2"
   },

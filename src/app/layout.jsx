@@ -60,6 +60,8 @@ export const metadata = {
       },
     ],
   },
+  // eslint-disable-next-line no-undef
+  metadataBase: new URL(process.env.NEXT_PUBLIC_URL ),
   twitter: {
     card: 'summary_large_image',
     title:
