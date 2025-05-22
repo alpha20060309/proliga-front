@@ -39,7 +39,7 @@ const Footer = () => {
   }
 
   return (
-    <footer className="w-full border-t border-neutral-700 bg-black text-foregroundround">
+    <footer className="w-full border-t border-border bg-background text-foreground">
       <div className="container mx-auto px-6 py-10">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-4">
@@ -103,7 +103,7 @@ const Footer = () => {
           </div>
         </div>
         <Separator className="my-8" />
-        <div className="text-muted-foreground b text-center text-sm">
+        <div className="text-muted-foreground text-center text-sm">
           © {new Date().getFullYear()} {t('Barcha huquqlar himoyalangan')}
         </div>
       </div>

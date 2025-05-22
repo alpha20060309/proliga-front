@@ -35,7 +35,7 @@ export function GradientButton({
   if (variant === 'gradient') {
     return (
       <GradientBorder className={'w-full'}>
-        <div className={cn(baseButtonStyles, 'bg-black')}>
+        <div className={cn(baseButtonStyles, 'bg-background')}>
           <Link
             href={href}
             tabIndex={-1}
