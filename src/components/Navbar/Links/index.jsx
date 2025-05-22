@@ -70,7 +70,7 @@ const PlayLinks = () => {
       )}
       <Link
         className={cn(
-          'relative transition-all before:absolute before:-bottom-4 hover:text-white',
+          'relative transition-all before:absolute before:-bottom-4 hover:text-foreground',
           'before:hidden before:h-1 before:w-full before:rounded-md before:bg-neutral-100',
           path.includes('championships') ? ACTIVE : PASSIVE
         )}
@@ -80,7 +80,7 @@ const PlayLinks = () => {
       </Link>
       <Link
         className={cn(
-          'relative transition-all before:absolute before:-bottom-4 hover:text-white',
+          'relative transition-all before:absolute before:-bottom-4 hover:text-foreground',
           'before:hidden before:h-1 before:w-full before:rounded-md before:bg-neutral-100',
           path.includes('prizes') ? ACTIVE : PASSIVE
         )}
@@ -90,7 +90,7 @@ const PlayLinks = () => {
       </Link>
       <Link
         className={cn(
-          'relative transition-all before:absolute before:-bottom-4 hover:text-white',
+          'relative transition-all before:absolute before:-bottom-4 hover:text-foreground',
           'before:hidden before:h-1 before:w-full before:rounded-md before:bg-neutral-100',
           path.includes('regulation') ? ACTIVE : PASSIVE
         )}
@@ -126,7 +126,7 @@ const Tab = ({ title, tab, styling }) => {
     <button
       className={cn(
         'relative transition-all before:absolute before:-bottom-4 before:hidden before:h-1',
-        'before:w-full before:rounded-md before:bg-neutral-100 hover:text-white',
+        'before:w-full before:rounded-md before:bg-neutral-100 hover:text-foreground',
         styling(tab)
       )}
       onClick={handleClick}
@@ -161,7 +161,7 @@ const TabLink = ({ title, tab, styling }) => {
     <Link
       className={cn(
         'relative transition-all before:absolute before:-bottom-4 before:hidden before:h-1',
-        'before:w-full before:rounded-md before:bg-neutral-100 hover:text-white',
+        'before:w-full before:rounded-md before:bg-neutral-100 hover:text-foreground',
         styling(tab)
       )}
       onClick={handleClick}
@@ -172,7 +172,7 @@ const TabLink = ({ title, tab, styling }) => {
   )
 }
 
-const ACTIVE = 'before:block before:bg-primary text-white'
+const ACTIVE = 'before:block before:bg-primary text-foreground'
 const PASSIVE = ' hover:before:block'
 const DISABLED = 'text-neutral-600 cursor-default hover:text-neutral-500'
 

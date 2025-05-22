@@ -51,7 +51,7 @@ const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
 
   return (
     <Dialog onOpenChange={toggleModal} open={isModalOpen}>
-      <DialogContent className="flex max-w-[96%] flex-col items-center justify-between gap-4 rounded-lg border border-neutral-50/25 bg-linear-to-br from-blue-950 to-red-950 px-4 py-6 text-white shadow-xl transition-all duration-300 ease-in-out sm:max-w-md md:gap-6 md:px-6 md:py-8 lg:max-w-lg 2xl:max-w-xl">
+      <DialogContent className="flex max-w-[96%] flex-col items-center justify-between gap-4 rounded-lg border border-neutral-50/25 bg-linear-to-br from-blue-950 to-red-950 px-4 py-6 text-foreground shadow-xl transition-all duration-300 ease-in-out sm:max-w-md md:gap-6 md:px-6 md:py-8 lg:max-w-lg 2xl:max-w-xl">
         <div className="w-full text-center">
           <Image
             src="/favicon.svg"
@@ -101,10 +101,10 @@ const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
               defaultValue={FORMATIONS['4-3-3']}
               onValueChange={(value) => setFormation(value)}
             >
-              <SelectTrigger className="h-10 w-full rounded-md border-2 border-yellow-700 bg-transparent bg-opacity-50 p-2 text-sm text-white outline-hidden focus:border-yellow-500/50 focus:ring-2 focus:ring-yellow-500 sm:h-12 sm:p-3 sm:text-base">
+              <SelectTrigger className="h-10 w-full rounded-md border-2 border-yellow-700 bg-transparent bg-opacity-50 p-2 text-sm text-foreground outline-hidden focus:border-yellow-500/50 focus:ring-2 focus:ring-yellow-500 sm:h-12 sm:p-3 sm:text-base">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="bg-neutral-800 text-white">
+              <SelectContent className="bg-neutral-800 text-foreground">
                 {Object.keys(FORMATIONS).map((key, index) => (
                   <SelectItem
                     value={FORMATIONS[key]}
@@ -120,7 +120,7 @@ const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
           <button
             type="submit"
             disabled={isLoading}
-            className="mt-2 h-12 rounded-md bg-yellow-600 text-base font-bold text-white transition-all hover:bg-yellow-700 focus:outline-hidden focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 sm:text-lg"
+            className="mt-2 h-12 rounded-md bg-yellow-600 text-base font-bold text-foreground transition-all hover:bg-yellow-700 focus:outline-hidden focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 sm:text-lg"
           >
             {isLoading ? (
               <Image

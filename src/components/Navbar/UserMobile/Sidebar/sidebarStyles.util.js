@@ -1,5 +1,5 @@
 export const sidebarStyles = {
-  active: 'text-white',
+  active: 'text-foreground',
   passive: '',
   disabled: 'text-neutral-600 cursor-default hover:text-neutral-500',
   activeIndicator: 'bg-primary',

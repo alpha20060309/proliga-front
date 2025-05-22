@@ -105,7 +105,7 @@ const MobileSidebar = ({ isModalOpen, setModalOpen }) => {
             />
             <Link
               className={cn(
-                'transition-all group-hover:text-white',
+                'transition-all group-hover:text-foreground',
                 path.includes('championships')
                   ? sidebarStyles.active
                   : sidebarStyles.passive
@@ -127,7 +127,7 @@ const MobileSidebar = ({ isModalOpen, setModalOpen }) => {
             />
             <Link
               className={cn(
-                'transition-all hover:text-white',
+                'transition-all hover:text-foreground',
                 path.includes('prizes')
                   ? sidebarStyles.active
                   : sidebarStyles.passive
@@ -149,7 +149,7 @@ const MobileSidebar = ({ isModalOpen, setModalOpen }) => {
             />
             <Link
               className={cn(
-                'transition-all hover:text-white',
+                'transition-all hover:text-foreground',
                 path.includes('regulation')
                   ? sidebarStyles.active
                   : sidebarStyles.passive

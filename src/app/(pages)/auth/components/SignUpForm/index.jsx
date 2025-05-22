@@ -122,7 +122,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
             name="phone"
             placeholder={'99-999-99-99'}
             defaultCountry="UZ"
-            className="h-10 border-yellow-700 bg-neutral-900 text-white"
+            className="h-10 border-yellow-700 bg-neutral-900 text-foreground"
             value={phone}
             onChange={setPhone}
           />

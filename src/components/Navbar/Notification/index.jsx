@@ -126,14 +126,10 @@ const Notification = () => {
           type="ghost"
           aria-label={t('Open notifications')}
           className="hover:text-accent dark:hover:text-accent relative bg-transparent p-0 hover:bg-transparent dark:hover:bg-transparent"
-          onClick={() => null}
           size={'icon'}
         >
           <Bell
-            className={cn(
-              `hover:text-accent-foreground size-5 select-none`,
-              isNotificationsOpen ? 'text-primary' : 'text-neutral-200'
-            )}
+            className={`hover:text-accent-foreground text-secondary-foreground size-5 select-none`}
           />
           {unreadCount > 0 && (
             <Badge

@@ -86,7 +86,7 @@ const ConfirmOTPForm = ({ redirect, phone }) => {
           disabled={isLoading}
         >
           {isLoading ? (
-            <Loader2 className="size-8 animate-spin text-white" />
+            <Loader2 className="size-8 animate-spin text-foreground" />
           ) : (
             t('Tasdiqlash')
           )}

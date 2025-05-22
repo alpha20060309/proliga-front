@@ -90,7 +90,7 @@ const CountrySelect = ({ disabled, value, onChange, options }) => {
     //         <ScrollArea className="h-72 bg-neutral-950">
     //           <CommandInput
     //             placeholder="Search country..."
-    //             className="text-white"
+    //             className="text-foreground"
     //           />
     //           <CommandEmpty>No country found.</CommandEmpty>
     //           <CommandGroup>

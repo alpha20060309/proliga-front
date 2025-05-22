@@ -14,7 +14,7 @@ const ThemeSwither = () => {
     <Button
       variant="ghost"
       className={cn(
-        'relative bg-transparent p-0 hover:bg-transparent dark:hover:bg-transparent',
+        'text-secondary-foreground relative bg-transparent p-0 hover:bg-transparent dark:hover:bg-transparent',
         theme === 'dark'
           ? 'hover:text-blue-500 dark:hover:text-blue-400'
           : 'hover:text-yellow-500 dark:hover:text-yellow-400'

@@ -35,7 +35,7 @@ export default function PhoneVerification({ phone, otp, setPhone, setOtp }) {
           placeholder={t('Kodni kiriting')}
           value={otp}
           onChange={(e) => setOtp(e.target.value)}
-          className="h-10 w-40 border border-neutral-600 bg-neutral-800 text-white focus:border-primary focus:ring-primary"
+          className="h-10 w-40 border border-neutral-600 bg-neutral-800 text-foreground focus:border-primary focus:ring-primary"
         />
         <Button
           type="button"

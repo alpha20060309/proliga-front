@@ -45,7 +45,7 @@ const ChangeLanguageDropdown = () => {
           size="icon"
           className="hover:text-accent dark:hover:text-accent relative bg-transparent p-0 hover:bg-transparent dark:hover:bg-transparent"
         >
-          <Globe className="size-5" />
+          <Globe className="size-5 text-secondary-foreground" />
           <div className="absolute -top-1 -right-1 size-4">
             <Image
               src={

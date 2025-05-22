@@ -130,7 +130,7 @@ const ResetPasswordForm = () => {
           disabled={isPending}
         >
           {isPending ? (
-            <Loader2 className="size-8 animate-spin text-white" />
+            <Loader2 className="size-8 animate-spin text-foreground" />
           ) : (
             t('Parol Yangilash')
           )}

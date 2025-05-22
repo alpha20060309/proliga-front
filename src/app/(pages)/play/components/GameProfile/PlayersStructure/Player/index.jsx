@@ -87,7 +87,7 @@ const Player = ({ player }) => {
               />
             )}
           </div>
-          <p className="text-shadow line-clamp-1 text-[10px] text-white xs:text-[11px] xs:text-xs md:text-sm">
+          <p className="text-shadow line-clamp-1 text-[10px] text-foreground xs:text-[11px] xs:text-xs md:text-sm">
             {firstName} {lastName.slice(0, 1).toUpperCase()} {lastName && '.'}
           </p>
           <div className="flex items-center gap-0.5">

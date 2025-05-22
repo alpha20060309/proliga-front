@@ -118,7 +118,7 @@ const MatchEvent = ({ event, index }) => {
               isHome ? 'pl-4 text-left' : 'pr-4 text-right'
             )}
           >
-            <div className="text-sm text-white/70">{event.minute}`</div>
+            <div className="text-sm text-foreground/70">{event.minute}`</div>
           </div>
         </>
       )}
