@@ -45,7 +45,7 @@ const PlayerPhoto = ({ currentPlayer, position }) => {
               onError={(e) => (e.currentTarget.src = '/icons/football.svg')}
               className="size-5 rounded-full bg-neutral-700 md:size-6 lg:size-7"
             />
-            <p className="text-sm font-medium text-neutral-200 md:text-base">
+            <p className="text-sm font-medium text-secondary-foreground md:text-base">
               {getCorrectName({
                 lang,
                 uz: currentPlayer?.club?.name,
@@ -101,7 +101,7 @@ const Stat = ({ icon, value, label }) => (
       {icon}
     </div>
     <div>
-      <p className="font-semibold text-neutral-100">{value ?? 0}</p>
+      <p className="font-semibold text-foreground">{value ?? 0}</p>
       <p className="text-xs text-neutral-400">{label}</p>
     </div>
   </div>
@@ -110,7 +110,7 @@ const Stat = ({ icon, value, label }) => (
 const SmallerStat = ({ value, label }) => (
   <div className="flex items-center justify-between gap-1 rounded-md bg-neutral-800 px-2 py-1 text-xs xs:py-2">
     <p className="text-[10px] leading-tight text-neutral-400">{label}</p>
-    <p className="font-semibold leading-tight text-neutral-100">{value ?? 0}</p>
+    <p className="font-semibold leading-tight text-foreground">{value ?? 0}</p>
   </div>
 )
 

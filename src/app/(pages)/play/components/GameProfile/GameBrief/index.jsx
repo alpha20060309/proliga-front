@@ -69,7 +69,7 @@ const GameBrief = () => {
       className={cn(
         'lg:mx-0 lg:w-1/2 lg:max-w-[24rem] lg:gap-4 lg:px-6 xl:h-min xl:max-w-136',
         'fade-in-fast mx-auto flex h-min min-h-96 w-full max-w-lg flex-col',
-        'gap-3 rounded-xl border border-primary border-opacity-50 bg-neutral-950',
+        'gap-3 rounded-xl border border-primary border-opacity-50 bg-background',
         'px-4 py-4 transition-all hover:border-opacity-100',
         isLoading ? 'justify-center' : 'justify-between'
       )}
@@ -184,7 +184,7 @@ const GameBrief = () => {
               </Content>
             </Item>
             <Item>
-              <Title className="text-neutral-100">{t("Ligadagi o'rin")}</Title>
+              <Title className="text-foreground">{t("Ligadagi o'rin")}</Title>
               <Content className="space-x-1">
                 {currentTeam?.order ?? '0'} /{' '}
                 {currentCompetition?.team_count ?? '0'}
@@ -228,7 +228,7 @@ const Item = ({ children, className }) => {
 
 const Title = ({ children, className }) => {
   return (
-    <h3 className={cn('text-base text-neutral-100', className)}>{children}</h3>
+    <h3 className={cn('text-base text-foreground', className)}>{children}</h3>
   )
 }
 

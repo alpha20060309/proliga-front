@@ -11,7 +11,7 @@ const RankingPlayers = () => {
   const topPlayers = useSelector(selectTopPlayers)
 
   return (
-    <div className="w-full rounded-xl bg-black p-5 text-neutral-100">
+    <div className="w-full rounded-xl bg-background p-5 text-foreground">
       <h3 className="text-xl font-bold">
         {t('Eng kuchli top 3 - futbolchilar')}
       </h3>

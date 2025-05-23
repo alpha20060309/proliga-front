@@ -18,7 +18,7 @@ const CabinetTransactionsSkeletonBody = ({ cols = 5, rows = 9 }) => {
       {[...Array(rows)].map((_, rowIndex) => (
         <tr
           key={rowIndex}
-          className="mx-auto w-full border-b border-neutral-700 hover:bg-neutral-950"
+          className="mx-auto w-full border-b border-neutral-700 hover:bg-background"
         >
           {[...Array(cols)].map((_, cellIndex) => (
             <td

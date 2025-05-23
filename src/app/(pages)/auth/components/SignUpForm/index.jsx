@@ -105,9 +105,9 @@ const SignUpForm = ({ setShouldRedirect }) => {
   }
 
   return (
-    <section className="flex w-full flex-col gap-4 rounded-xl border border-neutral-700 bg-neutral-950 px-4 py-8">
+    <section className="flex w-full flex-col gap-4 rounded-xl border border-neutral-700 bg-background px-4 py-8">
       <form onSubmit={handleSubmit} className="flex w-full flex-col gap-1">
-        <h2 className="mb-4 text-xl font-bold text-neutral-100 md:mb-4 md:text-2xl">
+        <h2 className="mb-4 text-xl font-bold text-foreground md:mb-4 md:text-2xl">
           {t("Ro'yxatdan o'tish")}
         </h2>
         <div className="relative flex flex-col gap-1">
@@ -169,9 +169,9 @@ const SignUpForm = ({ setShouldRedirect }) => {
             onClick={() => setShowPassword(!showPassword)}
           >
             {showPassword ? (
-              <EyeOff className="size-6 text-neutral-200" />
+              <EyeOff className="size-6 text-secondary-foreground" />
             ) : (
-              <Eye className="size-6 text-neutral-200" />
+              <Eye className="size-6 text-secondary-foreground" />
             )}
           </Button>
           <Lock className="filter-neutral-400 absolute bottom-2.5 left-2 size-5" />
@@ -200,14 +200,14 @@ const SignUpForm = ({ setShouldRedirect }) => {
             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
           >
             {showConfirmPassword ? (
-              <EyeOff className="size-6 text-neutral-200" />
+              <EyeOff className="size-6 text-secondary-foreground" />
             ) : (
-              <Eye className="size-6 text-neutral-200" />
+              <Eye className="size-6 text-secondary-foreground" />
             )}
           </Button>
           <Lock className="filter-neutral-400 absolute bottom-2.5 left-2 size-5" />
         </div>
-        <div className="my-3 flex items-center text-xs text-neutral-100 sm:text-sm">
+        <div className="my-3 flex items-center text-xs text-foreground sm:text-sm">
           <input
             type="checkbox"
             className="mr-1.5 inline size-4 cursor-pointer accent-primary"
@@ -229,7 +229,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
           disabled={isPending}
           className={cn(
             'h-12 w-full rounded-sm border border-yellow-400 bg-neutral-900 font-bold',
-            'text-neutral-100 transition-all duration-300 hover:bg-yellow-400 hover:text-neutral-900',
+            'text-foreground transition-all duration-300 hover:bg-yellow-400 hover:text-neutral-900',
             isPending && 'bg-yellow-400 text-neutral-900'
           )}
         >

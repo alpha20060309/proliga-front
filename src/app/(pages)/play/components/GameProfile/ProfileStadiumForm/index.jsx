@@ -119,7 +119,7 @@ const ProfileStadiumForm = () => {
         value={teamConcat.find((player) => player.is_captain)?.player_id ?? ''}
         onValueChange={(value) => dispatch(setCaptain(value))}
       >
-        <SelectTrigger className="h-10 w-36 sm:w-40 md:w-48 rounded-sm border-neutral-400 bg-neutral-950 px-1.5 xs:px-2 text-xs text-neutral-100 hover:border-primary">
+        <SelectTrigger className="h-10 w-36 sm:w-40 md:w-48 rounded-sm border-neutral-400 bg-background px-1.5 xs:px-2 text-xs text-foreground hover:border-primary">
           <SelectValue placeholder={t('Kapitan tanlang')} />
         </SelectTrigger>
         <SelectContent>
@@ -144,7 +144,7 @@ const ProfileStadiumForm = () => {
       <Button
         type="submit"
         disabled={isLoading}
-        className="h-10 min-w-24 rounded-sm border border-yellow-500 bg-neutral-950 text-sm font-medium text-neutral-100 transition-all hover:border-black hover:bg-yellow-500 hover:text-black 2xs:min-w-28 xs:min-w-28 sm:min-w-32 md:text-base"
+        className="h-10 min-w-24 rounded-sm border border-yellow-500 bg-background text-sm font-medium text-foreground transition-all hover:border-black hover:bg-yellow-500 hover:text-black 2xs:min-w-28 xs:min-w-28 sm:min-w-32 md:text-base"
       >
         {isLoading ? (
           <Image

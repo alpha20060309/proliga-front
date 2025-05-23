@@ -114,7 +114,7 @@ const Matches = () => {
   }
 
   return (
-    <section className="relative mx-auto flex h-min min-h-168 w-full max-w-lg flex-1 flex-col justify-between space-y-4 rounded-xl border border-neutral-600 bg-black px-4 py-6 lg:mx-0 lg:w-auto lg:min-w-72 xl:grow 2xl:max-w-lg">
+    <section className="relative mx-auto flex h-min min-h-168 w-full max-w-lg flex-1 flex-col justify-between space-y-4 rounded-xl border border-neutral-600 bg-background px-4 py-6 lg:mx-0 lg:w-auto lg:min-w-72 xl:grow 2xl:max-w-lg">
       <div className="flex w-full items-center justify-center">
         <div className="mx-auto ml-9 flex flex-1 items-center justify-center gap-2">
           <Button

@@ -20,7 +20,7 @@ const StatisticsTableBodySkeleton = () => {
       {[...Array(14)].map((_, rowIndex) => (
         <tr
           key={rowIndex}
-          className="mx-auto w-full border-b border-neutral-700 hover:bg-neutral-950"
+          className="mx-auto w-full border-b border-neutral-700 hover:bg-background"
         >
           {[...Array(10)].map((_, cellIndex) => (
             <td
@@ -65,7 +65,7 @@ const StatisticsTableFiltersSkeleton = () => {
 const StatisticsSkeleton = () => {
   return (
     <section className="flex w-full flex-col gap-2 lg:flex-row">
-      <div className="flex h-full min-h-160 w-full flex-1 table-auto flex-col gap-4 overflow-x-auto rounded-xl bg-black px-2 py-3 text-neutral-200 xs:px-3 md:p-5 lg:w-2/3">
+      <div className="flex h-full min-h-160 w-full flex-1 table-auto flex-col gap-4 overflow-x-auto rounded-xl bg-background px-2 py-3 text-secondary-foreground xs:px-3 md:p-5 lg:w-2/3">
         <StatisticsTableSkeleton />
       </div>
       <TopTeams />

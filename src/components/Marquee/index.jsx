@@ -48,7 +48,7 @@ const Marquee = ({ text, className, textClassName }) => {
     <div
       ref={containerRef}
       className={cn(
-        'overflow-hidden border-y border-primary/50 text-xs text-neutral-200',
+        'overflow-hidden border-y border-primary/50 text-xs text-secondary-foreground',
         className
       )}
     >

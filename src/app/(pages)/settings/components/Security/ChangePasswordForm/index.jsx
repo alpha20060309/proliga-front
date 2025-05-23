@@ -79,9 +79,9 @@ function ChangePasswordForm() {
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? (
-                <EyeOff className="h-5 w-5 text-neutral-200" />
+                <EyeOff className="h-5 w-5 text-secondary-foreground" />
               ) : (
-                <Eye className="h-5 w-5 text-neutral-200" />
+                <Eye className="h-5 w-5 text-secondary-foreground" />
               )}
             </Button>
           </div>
@@ -105,20 +105,20 @@ function ChangePasswordForm() {
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
             >
               {showConfirmPassword ? (
-                <EyeOff className="h-5 w-5 text-neutral-200" />
+                <EyeOff className="h-5 w-5 text-secondary-foreground" />
               ) : (
-                <Eye className="h-5 w-5 text-neutral-200" />
+                <Eye className="h-5 w-5 text-secondary-foreground" />
               )}
             </Button>
           </div>
         </section>
         <Button
-          className="h-10 w-full rounded-sm border border-black border-primary/75 bg-neutral-900 text-sm font-semibold text-neutral-200 transition-all hover:border-primary xs:max-w-40"
+          className="h-10 w-full rounded-sm border border-black border-primary/75 bg-neutral-900 text-sm font-semibold text-secondary-foreground transition-all hover:border-primary xs:max-w-40"
           type="submit"
           // disabled={isLoading}
         >
           {isLoading ? (
-            <Loader className="mx-auto size-5 animate-spin text-neutral-100" />
+            <Loader className="mx-auto size-5 animate-spin text-foreground" />
           ) : (
             t('Saqlash')
           )}

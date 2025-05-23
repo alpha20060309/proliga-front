@@ -53,7 +53,7 @@ export default function ResendOTPBox({ phone, className }) {
         {t('Qayta jo‘natish')}
       </Button>
       {!isResendEnabled && (
-        <div className="text-sm text-neutral-200">{countdown}s</div>
+        <div className="text-sm text-secondary-foreground">{countdown}s</div>
       )}
     </div>
   )

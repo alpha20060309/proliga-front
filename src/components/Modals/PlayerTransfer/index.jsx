@@ -30,7 +30,7 @@ const PlayerTransfer = () => {
     >
       <DialogContent
         onOpenAutoFocus={(e) => e.preventDefault()}
-        className="mx-auto flex max-h-[75vh] min-h-134 w-[98%] max-w-3xl flex-col gap-4 overflow-y-auto rounded-xl bg-black px-4 py-6 text-neutral-200 md:p-6 xl:max-h-180"
+        className="mx-auto flex max-h-[75vh] min-h-134 w-[98%] max-w-3xl flex-col gap-4 overflow-y-auto rounded-xl bg-background px-4 py-6 text-secondary-foreground md:p-6 xl:max-h-180"
       >
         <DialogTitle>{t('Transfer Amalga Oshirish')}</DialogTitle>
         <PlayerTable />

@@ -67,7 +67,7 @@ const MatchEvent = ({ event, index }) => {
       )}
     >
       {isTextOnly ? (
-        <div className="z-10 rounded-sm bg-black px-3 py-1.5 text-center text-sm text-neutral-100 shadow-sm shadow-neutral-700">
+        <div className="z-10 rounded-sm bg-background px-3 py-1.5 text-center text-sm text-foreground shadow-sm shadow-neutral-700">
           {renderHeader(event.event_type)}
         </div>
       ) : (

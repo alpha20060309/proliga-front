@@ -69,7 +69,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
     <>
       <UploadFile isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
       <SettingsContainer>
-        <h3 className="mb-2 text-xl font-bold tracking-tight text-neutral-100">
+        <h3 className="mb-2 text-xl font-bold tracking-tight text-foreground">
           {t('Profil sozlamalari')}
         </h3>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -87,7 +87,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
                 className="absolute bottom-0 right-0 border border-neutral-500 bg-neutral-800 hover:bg-neutral-700"
                 onClick={() => setModalOpen(true)}
               >
-                <Camera className="h-4 w-4 text-neutral-200" />
+                <Camera className="h-4 w-4 text-secondary-foreground" />
               </Button>
             </article>
             <section className="grid w-full flex-1 grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
@@ -103,7 +103,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
                   placeholder={t('Ism')}
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  className="border-neutral-700 bg-neutral-800 text-neutral-200 placeholder:text-neutral-500"
+                  className="border-neutral-700 bg-neutral-800 text-secondary-foreground placeholder:text-neutral-500"
                 />
               </article>
               <article className="space-y-1">
@@ -118,7 +118,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
                   placeholder={t('Familiya')}
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
-                  className="border-neutral-700 bg-neutral-800 text-neutral-200 placeholder:text-neutral-500"
+                  className="border-neutral-700 bg-neutral-800 text-secondary-foreground placeholder:text-neutral-500"
                 />
               </article>
               <article className="space-y-1">
@@ -133,7 +133,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
                   placeholder={t('Sharif')}
                   value={middleName}
                   onChange={(e) => setMiddleName(e.target.value)}
-                  className="border-neutral-700 bg-neutral-800 text-neutral-200 placeholder:text-neutral-500"
+                  className="border-neutral-700 bg-neutral-800 text-secondary-foreground placeholder:text-neutral-500"
                 />
               </article>
               <article className="flex flex-col flex-wrap justify-between">
@@ -147,7 +147,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
                   id="birthdate"
                   selected={date}
                   onChange={(date) => setDate(date)}
-                  className="h-10 min-w-full flex-1 rounded-md border border-neutral-700 bg-neutral-800 p-2 text-sm text-neutral-200 placeholder:text-neutral-500 focus:outline-hidden focus:ring-1 focus:ring-neutral-300 focus:ring-offset-2 focus:ring-offset-neutral-900"
+                  className="h-10 min-w-full flex-1 rounded-md border border-neutral-700 bg-neutral-800 p-2 text-sm text-secondary-foreground placeholder:text-neutral-500 focus:outline-hidden focus:ring-1 focus:ring-neutral-300 focus:ring-offset-2 focus:ring-offset-neutral-900"
                 />
               </article>
               <article className="space-y-1">
@@ -160,26 +160,26 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
                 <Select value={gender} onValueChange={setGender}>
                   <SelectTrigger
                     id="gender"
-                    className="h-10 border-neutral-700 bg-neutral-800 text-neutral-200"
+                    className="h-10 border-neutral-700 bg-neutral-800 text-secondary-foreground"
                   >
                     <SelectValue placeholder={t('Jins tanlang')} />
                   </SelectTrigger>
                   <SelectContent className="border-neutral-700 bg-neutral-900">
                     <SelectItem
                       value={GENDERS.UNSET}
-                      className="text-neutral-200"
+                      className="text-secondary-foreground"
                     >
                       {t('Belgilanmagan')}
                     </SelectItem>
                     <SelectItem
                       value={GENDERS.MALE}
-                      className="text-neutral-200"
+                      className="text-secondary-foreground"
                     >
                       {t('Erkak')}
                     </SelectItem>
                     <SelectItem
                       value={GENDERS.FEMALE}
-                      className="text-neutral-200"
+                      className="text-secondary-foreground"
                     >
                       {t('Ayol')}
                     </SelectItem>
@@ -200,7 +200,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
               placeholder={t('Bio')}
               value={bio}
               onChange={(e) => setBio(e.target.value)}
-              className="h-40 border-neutral-700 bg-neutral-800 text-neutral-200 placeholder:text-neutral-500 lg:h-48 xl:h-56"
+              className="h-40 border-neutral-700 bg-neutral-800 text-secondary-foreground placeholder:text-neutral-500 lg:h-48 xl:h-56"
             />
           </section>
           <Button

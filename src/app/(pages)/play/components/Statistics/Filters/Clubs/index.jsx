@@ -17,7 +17,7 @@ const ClubsFilter = ({ column }) => {
 
   return (
     <Select onValueChange={(value) => column.setFilterValue(value)}>
-      <SelectTrigger className="h-8 w-1/3 min-w-40 truncate rounded-sm border border-neutral-500 bg-neutral-950 px-2 text-neutral-200 shadow-sm sm:max-w-36 md:max-w-48">
+      <SelectTrigger className="h-8 w-1/3 min-w-40 truncate rounded-sm border border-neutral-500 bg-background px-2 text-secondary-foreground shadow-sm sm:max-w-36 md:max-w-48">
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
@@ -31,7 +31,7 @@ const ClubsFilter = ({ column }) => {
           <SelectItem
             key={club.id}
             value={getCorrectName({ lang, uz: club?.name, ru: club?.name_ru })}
-            className="capitalize text-neutral-200 checked:bg-neutral-800"
+            className="capitalize text-secondary-foreground checked:bg-neutral-800"
           >
             {getCorrectName({ lang, uz: club?.name, ru: club?.name_ru })}
           </SelectItem>

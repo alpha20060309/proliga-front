@@ -30,7 +30,7 @@ const PackageContainer = ({ packageType }) => {
     <Card className="border-yellow-500 bg-neutral-900 transition-all hover:border-yellow-400">
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-lg font-bold text-neutral-100 xs:text-xl">
+          <CardTitle className="text-lg font-bold text-foreground xs:text-xl">
             {getPackageTitle(packageType)}
           </CardTitle>
           <PackageIcon type={packageType} />

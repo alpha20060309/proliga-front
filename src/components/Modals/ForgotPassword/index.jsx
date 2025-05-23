@@ -42,7 +42,7 @@ const ForgotPassword = ({ isModalOpen, setModalOpen }) => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setModalOpen}>
-      <DialogContent className="w-[98%] max-w-md rounded-xl bg-neutral-950 px-4 py-6 text-neutral-100 sm:p-6">
+      <DialogContent className="w-[98%] max-w-md rounded-xl bg-background px-4 py-6 text-foreground sm:p-6">
         <DialogTitle>{t('Parolingizni unutingizmi?')}</DialogTitle>
         <DialogDescription>
           {t(
@@ -57,7 +57,7 @@ const ForgotPassword = ({ isModalOpen, setModalOpen }) => {
               name="phone"
               placeholder={t('Telefon raqam')}
               defaultCountry="UZ"
-              className="h-10 bg-neutral-950 text-neutral-200 placeholder:text-neutral-500"
+              className="h-10 bg-background text-secondary-foreground placeholder:text-neutral-500"
               value={phone}
               onChange={setPhone}
             />
@@ -65,7 +65,7 @@ const ForgotPassword = ({ isModalOpen, setModalOpen }) => {
           <Button
             type="submit"
             disabled={isLoading}
-            className="h-10 w-full rounded-sm border border-primary bg-neutral-900 text-neutral-50 transition-all hover:bg-black"
+            className="h-10 w-full rounded-sm border border-primary bg-neutral-900 text-neutral-50 transition-all hover:bg-background"
           >
             {isLoading ? (
               <Image

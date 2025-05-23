@@ -14,7 +14,7 @@ const NotificationArticle = ({ notification, handleNotificationClick }) => {
       tabIndex={0}
     >
       <div className="flex-1 space-y-1">
-        <p className="text-sm font-medium leading-none text-neutral-100">
+        <p className="text-sm font-medium leading-none text-foreground">
           {getCorrectName({
             lang,
             uz: notification?.name,

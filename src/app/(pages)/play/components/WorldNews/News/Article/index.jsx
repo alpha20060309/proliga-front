@@ -33,7 +33,7 @@ const Article = ({ item }) => {
           />
         </section>
         <section className="flex h-full w-full flex-col space-y-1 px-2 py-1">
-          <h4 className="line-clamp-3 h-full w-auto max-w-full flex-1 break-all text-xs text-neutral-200 hover:underline md:text-sm">
+          <h4 className="line-clamp-3 h-full w-auto max-w-full flex-1 break-all text-xs text-secondary-foreground hover:underline md:text-sm">
             {getCorrectName({ lang, uz: item?.name, ru: item?.name_ru })}
           </h4>
           <div className="flex w-full flex-wrap items-center justify-between">
@@ -43,7 +43,7 @@ const Article = ({ item }) => {
                 <time dateTime={date}>{date}</time>
               </div>
               <div className="flex items-center gap-1">
-                <Eye className="size-4 text-neutral-200" />
+                <Eye className="size-4 text-secondary-foreground" />
                 <span>{item.view_count || 0}</span>
               </div>
             </div>

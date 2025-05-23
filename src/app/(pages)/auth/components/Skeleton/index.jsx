@@ -2,7 +2,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 const AuthSkeleton = () => {
   return (
-    <section className="mx-4 mb-8 mt-24 flex w-full max-w-md flex-col gap-4 bg-black sm:mx-0 2xl:mt-32">
+    <section className="mx-4 mb-8 mt-24 flex w-full max-w-md flex-col gap-4 bg-background sm:mx-0 2xl:mt-32">
       <AuthTabsSkeleton />
       <LoginFormSkeleton />
     </section>
@@ -11,7 +11,7 @@ const AuthSkeleton = () => {
 
 export const LoginFormSkeleton = () => {
   return (
-    <section className="flex w-full flex-col gap-4 rounded-xl border border-neutral-700 bg-neutral-950 px-4 py-8">
+    <section className="flex w-full flex-col gap-4 rounded-xl border border-neutral-700 bg-background px-4 py-8">
       <div className="flex w-full flex-col gap-1">
         <Skeleton className="mb-4 h-8 w-3/4" />
         <div className="relative flex flex-col gap-1">
@@ -40,7 +40,7 @@ export const LoginFormSkeleton = () => {
 
 export const SignUpFormSkeleton = () => {
   return (
-    <section className="flex w-full flex-col gap-4 rounded-xl border border-neutral-700 bg-neutral-950 px-4 py-8">
+    <section className="flex w-full flex-col gap-4 rounded-xl border border-neutral-700 bg-background px-4 py-8">
       <div className="flex w-full flex-col gap-1">
         <Skeleton className="mb-4 h-8 w-3/4" />
         <div className="relative flex flex-col gap-1">
@@ -78,7 +78,7 @@ export const SignUpFormSkeleton = () => {
 export const AuthTabsSkeleton = () => {
   return (
     <div className="flex space-x-1 rounded-sm bg-neutral-900 p-1">
-      <Skeleton className="h-8 flex-1 rounded-sm bg-black" />
+      <Skeleton className="h-8 flex-1 rounded-sm bg-background" />
       <Skeleton className="h-8 flex-1 rounded-sm bg-neutral-800" />
     </div>
   )

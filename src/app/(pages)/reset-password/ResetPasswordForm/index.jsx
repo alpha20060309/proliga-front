@@ -87,9 +87,9 @@ const ResetPasswordForm = () => {
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? (
-                <EyeOff className="size-6 text-neutral-200" />
+                <EyeOff className="size-6 text-secondary-foreground" />
               ) : (
-                <Eye className="size-6 text-neutral-200" />
+                <Eye className="size-6 text-secondary-foreground" />
               )}
             </Button>
           </div>
@@ -117,16 +117,16 @@ const ResetPasswordForm = () => {
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
             >
               {showConfirmPassword ? (
-                <EyeOff className="size-6 text-neutral-200" />
+                <EyeOff className="size-6 text-secondary-foreground" />
               ) : (
-                <Eye className="size-6 text-neutral-200" />
+                <Eye className="size-6 text-secondary-foreground" />
               )}
             </Button>
           </div>
         </div>
         <Button
           type="submit"
-          className="mt-4 h-12 w-full rounded-sm border border-yellow-400 bg-neutral-900 font-bold text-neutral-100 transition-all duration-300 hover:bg-yellow-400 hover:text-neutral-900"
+          className="mt-4 h-12 w-full rounded-sm border border-yellow-400 bg-neutral-900 font-bold text-foreground transition-all duration-300 hover:bg-yellow-400 hover:text-neutral-900"
           disabled={isPending}
         >
           {isPending ? (

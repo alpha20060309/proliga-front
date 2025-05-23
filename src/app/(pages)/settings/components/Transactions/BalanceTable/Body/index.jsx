@@ -20,7 +20,7 @@ const TransactionsTableBody = ({ table, flexRender }) => {
         <tr
           key={row.id}
           className={cn(
-            'mx-auto w-full border-b border-l-2 border-neutral-700 bg-neutral-950 even:bg-neutral-900',
+            'mx-auto w-full border-b border-l-2 border-neutral-700 bg-background even:bg-neutral-900',
             condition(row?.original?.status)
           )}
         >

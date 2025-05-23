@@ -23,7 +23,7 @@ const PrizeCompetition = ({ competition }) => {
   if (!hasPrize) return <></>
 
   return (
-    <article className="transitiona-all flex-1 group flex flex-col rounded-xl border border-neutral-100/50 bg-black/25 p-2 backdrop-blur-xs hover:border-neutral-100 hover:bg-black/40 md:p-4">
+    <article className="transitiona-all flex-1 group flex flex-col rounded-xl border border-neutral-100/50 bg-background/25 p-2 backdrop-blur-xs hover:border-neutral-100 hover:bg-background/40 md:p-4">
       <div className="mb-2 flex items-center gap-2 border-b border-neutral-500/80 pb-2 transition-all group-hover:border-primary">
         <img
           src={getUrl(competition.flag)}

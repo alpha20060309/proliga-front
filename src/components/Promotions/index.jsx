@@ -15,7 +15,7 @@ const Promotions = () => {
 
   return (
     <>
-      <Wrapper className="bg-background">
+      <Wrapper className="bg-card">
         <PromotionCreateTeam />
       </Wrapper>
       <Wrapper className={'bg-card/80'}>

@@ -93,7 +93,7 @@ const Player = ({ player }) => {
           <div className="flex items-center gap-0.5">
             <button
               onClick={handleInfoModal}
-              className="size-4 rounded-sm bg-black transition-all hover:bg-primary sm:size-5"
+              className="size-4 rounded-sm bg-background transition-all hover:bg-primary sm:size-5"
             >
               <Image
                 width={16}

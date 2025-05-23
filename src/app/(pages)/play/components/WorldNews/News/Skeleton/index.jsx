@@ -36,7 +36,7 @@ export function NewsSkeleton({ count = 5, paginationCount = 5 }) {
     <div
       className={cn(
         'relative mx-auto flex h-min min-h-168 w-full max-w-lg flex-col',
-        'items-stretch justify-between rounded-xl bg-neutral-950 p-4 md:p-6 lg:mx-0',
+        'items-stretch justify-between rounded-xl bg-background p-4 md:p-6 lg:mx-0',
         'gap-2 border border-neutral-600 lg:w-auto lg:min-w-72 lg:flex-1'
       )}
     >

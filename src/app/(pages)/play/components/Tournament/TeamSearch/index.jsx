@@ -100,7 +100,7 @@ const TeamSearch = ({
         placeholder={t('Enter team name...')}
         value={localSearchTerm}
         onChange={handleSearchChange}
-        className="h-8 w-full rounded-sm border-neutral-500 bg-black pl-2 pr-7 text-sm"
+        className="h-8 w-full rounded-sm border-neutral-500 bg-backgroundround pl-2 pr-7 text-sm"
         disabled={teamsLoading}
       />
       <Search className="absolute right-2 top-1/2 hidden size-5 -translate-y-1/2 text-neutral-400 xs:block" />

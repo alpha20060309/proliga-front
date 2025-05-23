@@ -85,7 +85,7 @@ export default function TourTabs() {
                 <h3 className="text-start text-xs font-medium text-neutral-50 md:text-sm xl:text-base">
                   {getCorrectName({ lang, uz: item?.name, ru: item?.name_ru })}
                 </h3>
-                <p className="max-w-28 text-[10px] capitalize text-neutral-200 sm:text-xs">
+                <p className="max-w-28 text-[10px] capitalize text-secondary-foreground sm:text-xs">
                   {getTourName(item.status, t)}
                 </p>
               </div>

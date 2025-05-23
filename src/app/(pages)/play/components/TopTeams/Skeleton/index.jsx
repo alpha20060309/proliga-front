@@ -12,7 +12,7 @@ const TopTeamsSkeleton = () => {
 
 const TopTeams = () => {
   return (
-    <Card className="w-full rounded-xl bg-black p-5 text-neutral-100">
+    <Card className="w-full rounded-xl bg-background p-5 text-foreground">
       <Skeleton className="h-7 w-3/4 bg-neutral-500" />
       <div className="mt-4 grid h-auto min-h-32 grid-cols-2 gap-2 xs:grid-cols-3">
         {[1, 2, 3].map((index) => (
@@ -41,7 +41,7 @@ const TeamPlaceSkeleton = () => {
 
 const TopPlayers = () => {
   return (
-    <Card className="w-full rounded-xl bg-black p-5 text-neutral-100">
+    <Card className="w-full rounded-xl bg-background p-5 text-foreground">
       <Skeleton className="h-7 w-3/4 bg-neutral-500" />
       <div className="mt-4 grid grid-cols-2 gap-2 xs:grid-cols-3">
         {[1, 2, 3].map((index) => (

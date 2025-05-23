@@ -41,7 +41,7 @@ const PlayLinks = () => {
   }
 
   return (
-    <section className="hidden items-center gap-2 text-neutral-400 sm:text-sm lg:flex xl:gap-4 xl:text-base 2xl:gap-6">
+    <section className="text-secondary-foreground hidden items-center gap-2 sm:text-sm lg:flex xl:gap-4 xl:text-base 2xl:gap-6">
       {path.includes('play') && (
         <>
           <Tab title={'Profil'} styling={styling} tab={TABS.GameProfile} />
@@ -70,8 +70,8 @@ const PlayLinks = () => {
       )}
       <Link
         className={cn(
-          'relative transition-all before:absolute before:-bottom-4 hover:text-foreground',
-          'before:hidden before:h-1 before:w-full before:rounded-md before:bg-neutral-100',
+          'hover:text-foreground relative transition-all before:absolute before:-bottom-4',
+          'before:bg-accent before:hidden before:h-1 before:w-full before:rounded-md',
           path.includes('championships') ? ACTIVE : PASSIVE
         )}
         href="/championships"
@@ -80,8 +80,8 @@ const PlayLinks = () => {
       </Link>
       <Link
         className={cn(
-          'relative transition-all before:absolute before:-bottom-4 hover:text-foreground',
-          'before:hidden before:h-1 before:w-full before:rounded-md before:bg-neutral-100',
+          'hover:text-foreground relative transition-all before:absolute before:-bottom-4',
+          'before:bg-accent before:hidden before:h-1 before:w-full before:rounded-md',
           path.includes('prizes') ? ACTIVE : PASSIVE
         )}
         href="/prizes"
@@ -90,8 +90,8 @@ const PlayLinks = () => {
       </Link>
       <Link
         className={cn(
-          'relative transition-all before:absolute before:-bottom-4 hover:text-foreground',
-          'before:hidden before:h-1 before:w-full before:rounded-md before:bg-neutral-100',
+          'hover:text-foreground relative transition-all before:absolute before:-bottom-4',
+          'before:bg-accent before:hidden before:h-1 before:w-full before:rounded-md',
           path.includes('regulation') ? ACTIVE : PASSIVE
         )}
         href="/regulation"
@@ -126,7 +126,7 @@ const Tab = ({ title, tab, styling }) => {
     <button
       className={cn(
         'relative transition-all before:absolute before:-bottom-4 before:hidden before:h-1',
-        'before:w-full before:rounded-md before:bg-neutral-100 hover:text-foreground',
+        'before:bg-accent hover:text-foreground before:w-full before:rounded-md',
         styling(tab)
       )}
       onClick={handleClick}
@@ -161,7 +161,7 @@ const TabLink = ({ title, tab, styling }) => {
     <Link
       className={cn(
         'relative transition-all before:absolute before:-bottom-4 before:hidden before:h-1',
-        'before:w-full before:rounded-md before:bg-neutral-100 hover:text-foreground',
+        'before:bg-accent hover:text-foreground before:w-full before:rounded-md',
         styling(tab)
       )}
       onClick={handleClick}
@@ -172,8 +172,9 @@ const TabLink = ({ title, tab, styling }) => {
   )
 }
 
-const ACTIVE = 'before:block before:bg-primary text-foreground'
+const ACTIVE = 'before:block before:bg-primary text-accent'
 const PASSIVE = ' hover:before:block'
-const DISABLED = 'text-neutral-600 cursor-default hover:text-neutral-500'
+const DISABLED =
+  'text-muted-foreground cursor-default hover:text-muted-foreground'
 
 export default PlayLinks

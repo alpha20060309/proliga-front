@@ -22,6 +22,9 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   swcMinify: true,
+  images: {
+    domains: ['proliga.uz'],
+  },
 }
 
 export default withSerwist(nextConfig);

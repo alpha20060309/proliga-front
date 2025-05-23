@@ -29,7 +29,7 @@ const PackagesSkeleton = () => {
           >
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-xl font-bold text-neutral-100">
+                <CardTitle className="text-xl font-bold text-foreground">
                   <Skeleton className="h-6 w-24" />
                 </CardTitle>
                 <PackageIcon type={packageType} />
@@ -64,7 +64,7 @@ export const PackageSkeleton = () => {
     <Card className="border-yellow-500 bg-neutral-900 transition-all hover:border-yellow-400">
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-xl font-bold text-neutral-100">
+          <CardTitle className="text-xl font-bold text-foreground">
             <Skeleton className="h-6 w-24" />
           </CardTitle>
         </div>

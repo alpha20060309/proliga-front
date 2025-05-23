@@ -11,7 +11,7 @@ export default function SettingsPage() {
 
   return (
     <SettingsContainer>
-      <h2 className="text-xl font-bold tracking-tight text-neutral-100">
+      <h2 className="text-xl font-bold tracking-tight text-foreground">
         {t('Security settings')}
       </h2>
       <section className="flex flex-col gap-4 lg:flex-row">

@@ -75,14 +75,14 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
       <div className="flex items-center gap-1 self-end font-medium md:self-auto">
         <Link
           href={'/play/' + lastVisitedTeam}
-          className="flex h-10 w-24 items-center justify-center rounded-sm border border-neutral-300 bg-neutral-950 text-center text-sm text-neutral-300 transition-all hover:border-neutral-100 hover:bg-opacity-75 hover:text-neutral-100 lg:w-32 lg:text-base"
+          className="flex h-10 w-24 items-center justify-center rounded-sm border border-neutral-300 bg-background text-center text-sm text-neutral-300 transition-all hover:border-neutral-100 hover:bg-opacity-75 hover:text-foreground lg:w-32 lg:text-base"
         >
           {t('Qaytish')}
         </Link>
         <button
           onClick={handleConfirmPayment}
           disabled={isLoading || isClickLoading || isPaymeLoading}
-          className="flex h-10 w-24 items-center justify-center rounded-sm border border-primary bg-neutral-950 text-sm text-neutral-50 transition-all hover:bg-opacity-75 hover:text-primary lg:w-32 lg:text-base"
+          className="flex h-10 w-24 items-center justify-center rounded-sm border border-primary bg-background text-sm text-neutral-50 transition-all hover:bg-opacity-75 hover:text-primary lg:w-32 lg:text-base"
         >
           {isLoading || isClickLoading || isPaymeLoading ? (
             <Image

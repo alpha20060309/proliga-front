@@ -78,7 +78,7 @@ export default function RootLayout({ children }) {
       <html lang="uz" suppressHydrationWarning>
         <body
           className={cn(
-            'min-h-svh scroll-smooth bg-black text-foreground antialiased md:min-h-screen',
+            'min-h-svh scroll-smooth bg-background text-foreground antialiased md:min-h-screen',
             dmSans.className
           )}
         >

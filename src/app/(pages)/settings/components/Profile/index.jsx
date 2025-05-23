@@ -34,7 +34,7 @@ const SettingsProfile = () => {
 
   return (
     <SettingsContainer>
-      <h3 className="mb-2 text-xl font-bold tracking-tight text-neutral-100">
+      <h3 className="mb-2 text-xl font-bold tracking-tight text-foreground">
         {t('Profil')}
       </h3>
       <div className="flex flex-wrap items-center gap-4">
@@ -94,7 +94,7 @@ const SettingsProfile = () => {
               {t('Telefon raqam')}:
             </p>
           </div>
-          <p className="text-sm text-neutral-100">{user?.phone}</p>
+          <p className="text-sm text-foreground">{user?.phone}</p>
         </ProfileItem>
         <ProfileItem>
           <div className="flex items-center gap-2 capitalize">
@@ -103,7 +103,7 @@ const SettingsProfile = () => {
               {t("Tug'ilgan kuni")}:
             </p>
           </div>
-          <p className="text-sm text-neutral-100">
+          <p className="text-sm text-foreground">
             {formatDate(user?.birth_date, 'news')}
           </p>
         </ProfileItem>
@@ -112,7 +112,7 @@ const SettingsProfile = () => {
             <UsersRound className="size-5 text-neutral-50" />
             <p className="text-sm font-medium text-neutral-300">{t('Jins')}:</p>
           </div>
-          <p className="text-sm text-neutral-100">
+          <p className="text-sm text-foreground">
             {getCorrectGenderText(user?.gender)}
           </p>
         </ProfileItem>

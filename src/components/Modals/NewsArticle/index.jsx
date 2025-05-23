@@ -28,7 +28,7 @@ function NewsArticle() {
 
   return (
     <Dialog open={isModalOpen && currentNews?.id} onOpenChange={setModalOpen}>
-      <DialogContent className="w-[98%] max-w-4xl rounded-xl bg-black px-2 py-4 md:p-4 2xl:max-w-5xl">
+      <DialogContent className="w-[98%] max-w-4xl rounded-xl bg-background px-2 py-4 md:p-4 2xl:max-w-5xl">
         <DialogTitle className="mr-7 text-xl font-normal leading-tight tracking-wide">
           {getCorrectName({
             lang,
@@ -42,7 +42,7 @@ function NewsArticle() {
             <time dateTime={date}>{date}</time>
           </div>
           <div className="flex items-center">
-            <Eye className="mr-1 size-5 text-neutral-200" />
+            <Eye className="mr-1 size-5 text-secondary-foreground" />
             <span>
               {currentNews?.view_count || 0} {t('views')}
             </span>

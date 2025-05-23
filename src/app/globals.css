@@ -129,13 +129,13 @@
   --popover-foreground: hsl(52, 100%, 50%);
   --primary: #fff400;
   --primary-foreground: hsl(0, 0%, 10%);
-  --secondary: hsl(240, 100%, 60%);
-  --secondary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(0, 0%, 90%);
+  --secondary-foreground: hsl(0, 0%, 95%);
   --muted: hsl(0, 0%, 94%);
   --muted-foreground: hsl(0, 0%, 40%);
   --accent: hsl(52, 100%, 50%);
   --accent-foreground: hsl(0, 0%, 10%);
-  --destructive: hsl(0, 100%, 60%);
+  --destructive: hsl(0, 0%, 40%);
   --border: hsl(0, 0%, 88%);
   --input: hsl(0, 0%, 93%);
   --ring: hsl(52, 100%, 50%);
@@ -162,12 +162,12 @@
   --scrollbar-radius: 20px;
   --scrollbar-radius-sm: 5px;
   --scrollbar-border-width: 5px;
-  --scrollbar-thumb-bg: #d6dee1;
-  --scrollbar-thumb-hover-bg: #a8bbbf;
+  --scrollbar-thumb-bg: hsl(0, 0%, 80%);
+  --scrollbar-thumb-hover-bg: hsl(0, 0%, 60%);
 
   --autofill-shadow-size: 30px;
-  --autofill-shadow-color: rgb(35, 35, 25);
-  --autofill-text-color: rgb(240, 200, 50);
+  --autofill-shadow-color: rgb(35, 35, 35);
+  --autofill-text-color: rgb(240, 240, 240);
 
   --select-shadow-spread: 10px;
   --select-shadow-size: 100px;
@@ -183,13 +183,13 @@
   --popover-foreground: hsl(52, 100%, 50%);
   --primary: #fffd00;
   --primary-foreground: hsl(0, 0%, 10%);
-  --secondary: hsl(240, 100%, 60%);
-  --secondary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(0, 0%, 20%);
+  --secondary-foreground: hsl(0, 0%, 95%);
   --muted: hsl(0, 0%, 20%);
   --muted-foreground: hsl(0, 0%, 70%);
   --accent: hsl(52, 80%, 60%);
   --accent-foreground: hsl(0, 0%, 0%);
-  --destructive: hsl(0, 100%, 60%);
+  --destructive: hsl(0, 0%, 60%);
   --border: hsl(0, 0%, 25%);
   --input: hsl(0, 0%, 20%);
   --ring: hsl(52, 100%, 60%);

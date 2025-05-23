@@ -96,9 +96,9 @@ const LoginForm = ({ setShouldRedirect }) => {
 
   return (
     <>
-      <section className="flex w-full flex-col gap-4 rounded-xl border border-neutral-700 bg-neutral-950 px-4 py-8">
+      <section className="flex w-full flex-col gap-4 rounded-xl border border-neutral-700 bg-background px-4 py-8">
         <form onSubmit={handleSubmit} className="flex w-full flex-col gap-1">
-          <h2 className="mb-4 text-xl font-bold text-neutral-100 md:mb-4 md:text-2xl">
+          <h2 className="mb-4 text-xl font-bold text-foreground md:mb-4 md:text-2xl">
             {t('Tizimga kirish_1')}
           </h2>
           <div className="relative flex flex-col gap-1">
@@ -143,9 +143,9 @@ const LoginForm = ({ setShouldRedirect }) => {
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? (
-                <EyeOff className="size-6 text-neutral-200" />
+                <EyeOff className="size-6 text-secondary-foreground" />
               ) : (
-                <Eye className="size-6 text-neutral-200" />
+                <Eye className="size-6 text-secondary-foreground" />
               )}
             </Button>
           </div>
@@ -153,7 +153,7 @@ const LoginForm = ({ setShouldRedirect }) => {
             {can_send_sms && (
               <button
                 type="button"
-                className="cursor-pointer self-start text-sm text-neutral-400 transition-colors hover:text-neutral-100 hover:underline"
+                className="cursor-pointer self-start text-sm text-neutral-400 transition-colors hover:text-foreground hover:underline"
                 onClick={() => setModalOpen(true)}
               >
                 {t('Parolingizni unutingizmi?')}
@@ -165,7 +165,7 @@ const LoginForm = ({ setShouldRedirect }) => {
             disabled={isPending}
             className={cn(
               'h-12 w-full rounded-sm border border-yellow-400 bg-neutral-900 font-bold',
-              'text-neutral-100 transition-all duration-300 hover:bg-yellow-400 hover:text-neutral-900',
+              'text-foreground transition-all duration-300 hover:bg-yellow-400 hover:text-neutral-900',
               isPending && 'bg-yellow-400 text-neutral-900'
             )}
           >

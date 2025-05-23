@@ -44,7 +44,7 @@ PhoneInput.displayName = 'PhoneInput'
 const InputComponent = React.forwardRef(({ className, ...props }, ref) => (
   <Input
     className={cn(
-      'rounded-e rounded-s-none border-inherit bg-inherit text-neutral-200 placeholder:text-neutral-500 md:text-base',
+      'rounded-e rounded-s-none border-inherit bg-inherit text-secondary-foreground placeholder:text-neutral-500 md:text-base',
       className
     )}
     {...props}
@@ -84,10 +84,10 @@ const CountrySelect = ({ disabled, value, onChange, options }) => {
     // <Popover>
     //   <PopoverTrigger asChild>
     //   </PopoverTrigger>
-    //   <PopoverContent className="w-80 bg-neutral-950 p-0">
+    //   <PopoverContent className="w-80 bg-background p-0">
     //     <Command>
     //       <CommandList>
-    //         <ScrollArea className="h-72 bg-neutral-950">
+    //         <ScrollArea className="h-72 bg-background">
     //           <CommandInput
     //             placeholder="Search country..."
     //             className="text-foreground"
@@ -98,7 +98,7 @@ const CountrySelect = ({ disabled, value, onChange, options }) => {
     //               .filter((x) => x.value)
     //               .map((option) => (
     //                 <CommandItem
-    //                   className="gap-2 bg-neutral-950 text-neutral-200 hover:bg-neutral-700 active:bg-neutral-700"
+    //                   className="gap-2 bg-background text-secondary-foreground hover:bg-neutral-700 active:bg-neutral-700"
     //                   key={option.value}
     //                   // onSelect={() => handleSelect(option.value)}
     //                 >

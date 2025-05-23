@@ -44,7 +44,7 @@ const TeamMaxTransfers = () => {
         <p className="text-2xl font-bold xl:text-3xl">
           <span
             className={
-              currentTransferCount === 0 ? 'text-red-500' : 'text-neutral-100'
+              currentTransferCount === 0 ? 'text-red-500' : 'text-foreground'
             }
           >
             <MotionNumber value={currentTransferCount} />

@@ -2,7 +2,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 const PlayersTableSkeleton = () => {
   return (
-    <div className="fade-in-fast min-h-auto mx-auto h-min w-full max-w-160 border-collapse overflow-x-auto rounded-xl border border-primary border-opacity-50 bg-black px-2 py-4 text-neutral-200 shadow-md shadow-neutral-600 transition-all hover:border-opacity-100 xs:px-3 sm:px-4 md:text-sm lg:w-1/2 lg:max-w-md xl:max-w-136 2xl:max-w-xl">
+    <div className="fade-in-fast min-h-auto mx-auto h-min w-full max-w-160 border-collapse overflow-x-auto rounded-xl border border-primary border-opacity-50 bg-background px-2 py-4 text-secondary-foreground shadow-md shadow-neutral-600 transition-all hover:border-opacity-100 xs:px-3 sm:px-4 md:text-sm lg:w-1/2 lg:max-w-md xl:max-w-136 2xl:max-w-xl">
       <TeamOverviewSkeleton />
       <TransferTableFiltersSkeleton />
       <table className="w-full min-w-80 table-auto text-xs xl:text-sm">

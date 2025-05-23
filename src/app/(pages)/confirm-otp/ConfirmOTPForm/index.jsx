@@ -82,7 +82,7 @@ const ConfirmOTPForm = ({ redirect, phone }) => {
         <ResendOTPBox phone={phone} className={'my-2'} />
         <Button
           type="submit"
-          className="h-12 w-full rounded-sm border border-yellow-400 bg-neutral-900 font-bold text-neutral-100 transition-all duration-300 hover:bg-yellow-400 hover:text-neutral-900"
+          className="h-12 w-full rounded-sm border border-yellow-400 bg-neutral-900 font-bold text-foreground transition-all duration-300 hover:bg-yellow-400 hover:text-neutral-900"
           disabled={isLoading}
         >
           {isLoading ? (
