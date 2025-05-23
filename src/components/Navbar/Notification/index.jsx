@@ -146,7 +146,9 @@ const Notification = () => {
       </PopoverTrigger>
       <PopoverContent className="mt-5 ml-2 w-80 p-0" align="end">
         <div className="flex items-center justify-between border-b px-4 py-2">
-          <h3 className="text-sm font-semibold">{t('Xabarnomalar')}</h3>
+          <h3 className="text-foreground text-sm font-semibold">
+            {t('Xabarnomalar')}
+          </h3>
         </div>
         <ScrollArea className="dark h-80">
           {systemNotifications?.length === 0 ? (

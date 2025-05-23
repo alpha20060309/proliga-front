@@ -75,13 +75,13 @@ function ChangePasswordForm() {
               type="button"
               variant="ghost"
               size="icon"
-              className="absolute bottom-0 right-0 hover:bg-transparent"
+              className="absolute right-0 bottom-0 hover:bg-transparent"
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? (
-                <EyeOff className="h-5 w-5 text-secondary-foreground" />
+                <EyeOff className="text-secondary-foreground h-5 w-5" />
               ) : (
-                <Eye className="h-5 w-5 text-secondary-foreground" />
+                <Eye className="text-secondary-foreground h-5 w-5" />
               )}
             </Button>
           </div>
@@ -101,24 +101,24 @@ function ChangePasswordForm() {
               type="button"
               variant="ghost"
               size="icon"
-              className="absolute bottom-0 right-0 hover:bg-transparent"
+              className="absolute right-0 bottom-0 hover:bg-transparent"
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
             >
               {showConfirmPassword ? (
-                <EyeOff className="h-5 w-5 text-secondary-foreground" />
+                <EyeOff className="text-secondary-foreground h-5 w-5" />
               ) : (
-                <Eye className="h-5 w-5 text-secondary-foreground" />
+                <Eye className="text-secondary-foreground h-5 w-5" />
               )}
             </Button>
           </div>
         </section>
         <Button
-          className="h-10 w-full rounded-sm border border-black border-primary/75 bg-neutral-900 text-sm font-semibold text-secondary-foreground transition-all hover:border-primary xs:max-w-40"
+          className="border-primary/75 text-secondary-foreground hover:border-primary xs:max-w-40 h-10 w-full rounded-sm border bg-neutral-900 text-sm font-semibold transition-all"
           type="submit"
-          // disabled={isLoading}
+          disabled={isLoading}
         >
           {isLoading ? (
-            <Loader className="mx-auto size-5 animate-spin text-foreground" />
+            <Loader className="text-foreground mx-auto size-5 animate-spin" />
           ) : (
             t('Saqlash')
           )}

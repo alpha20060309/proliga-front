@@ -110,7 +110,7 @@ const renderGameStatus = (game, currentGame, t) => {
       <span className="bg-destructive/50 text-destructive-foreground rounded-full px-2 py-0.5 capitalize">
         {t('closed')}
       </span>
-      <p className="text-accent">{t('Registration Ended')}</p>
+      <p className="text-info">{t('Registration Ended')}</p>
     </div>
   )
 }

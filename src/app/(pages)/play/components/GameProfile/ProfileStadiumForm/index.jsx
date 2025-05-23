@@ -12,7 +12,6 @@ import {
 } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
 import { getCorrentPlayerPosition } from 'app/utils/getCorrectPlayerPosition.utils'
-import Image from 'next/image'
 import { useUpdateTeamCaptains } from 'app/hooks/transfer/useUpdateTeamCaptains/useUpdateTeamCaptains'
 import { selectTeamConcat } from 'app/lib/features/teamPlayer/teamPlayer.selector'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
@@ -20,6 +19,7 @@ import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { TOUR_STATUS } from 'app/utils/tour.util'
+import { Loader2 } from 'lucide-react'
 
 const ProfileStadiumForm = () => {
   const { t } = useTranslation()
@@ -119,7 +119,7 @@ const ProfileStadiumForm = () => {
         value={teamConcat.find((player) => player.is_captain)?.player_id ?? ''}
         onValueChange={(value) => dispatch(setCaptain(value))}
       >
-        <SelectTrigger className="h-10 w-36 sm:w-40 md:w-48 rounded-sm border-neutral-400 bg-background px-1.5 xs:px-2 text-xs text-foreground hover:border-primary">
+        <SelectTrigger className="bg-background xs:px-2 text-foreground hover:border-primary h-10 w-36 rounded-sm border-neutral-400 px-1.5 text-xs sm:w-40 md:w-48">
           <SelectValue placeholder={t('Kapitan tanlang')} />
         </SelectTrigger>
         <SelectContent>
@@ -144,16 +144,10 @@ const ProfileStadiumForm = () => {
       <Button
         type="submit"
         disabled={isLoading}
-        className="h-10 min-w-24 rounded-sm border border-yellow-500 bg-background text-sm font-medium text-foreground transition-all hover:border-black hover:bg-yellow-500 hover:text-black 2xs:min-w-28 xs:min-w-28 sm:min-w-32 md:text-base"
+        className="bg-background text-foreground 2xs:min-w-28 xs:min-w-28 h-10 min-w-24 rounded-sm border border-yellow-500 text-sm font-medium transition-all hover:border-black hover:bg-yellow-500 hover:text-black sm:min-w-32 md:text-base"
       >
         {isLoading ? (
-          <Image
-            src="/icons/loading.svg"
-            width={24}
-            height={24}
-            alt="loading"
-            className="mx-auto size-6 animate-spin"
-          />
+          <Loader2 className="mx-auto size-6 animate-spin" />
         ) : (
           t('Saqlash')
         )}

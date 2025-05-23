@@ -3,7 +3,6 @@
 @import './utils/animations.global.css';
 @import './utils/filters.global.css';
 @import './utils/defaults.global.css';
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -45,6 +44,15 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-error: var(--error);
+  --color-error-foreground: var(--error-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
 
   --breakpoint-xs: 420px;
   --breakpoint-2xs: 375px;
@@ -121,29 +129,48 @@
 :root {
   --radius: 0.5rem;
 
+  /* Base colors */
   --background: hsl(0, 0%, 98%);
   --foreground: hsl(0, 0%, 10%);
   --card: hsl(0, 0%, 96%);
   --card-foreground: hsl(0, 0%, 10%);
   --popover: hsl(0, 0%, 96%);
   --popover-foreground: hsl(52, 100%, 50%);
+
+  /* Brand colors */
   --primary: #fff400;
   --primary-foreground: hsl(0, 0%, 10%);
   --secondary: hsl(0, 0%, 90%);
   --secondary-foreground: hsl(0, 0%, 95%);
+
+  /* Status colors */
+  --success: hsl(142, 76%, 36%);
+  --success-foreground: hsl(0, 0%, 100%);
+  --warning: hsl(48, 96%, 53%);
+  --warning-foreground: hsl(0, 0%, 10%);
+  --error: hsl(0, 84%, 60%);
+  --error-foreground: hsl(0, 0%, 100%);
+  --info: hsl(200, 98%, 39%);
+  --info-foreground: hsl(0, 0%, 100%);
+
+  /* UI colors */
   --muted: hsl(0, 0%, 94%);
   --muted-foreground: hsl(0, 0%, 40%);
   --accent: hsl(52, 100%, 50%);
   --accent-foreground: hsl(0, 0%, 10%);
-  --destructive: hsl(0, 0%, 40%);
+  --destructive: hsl(0, 84%, 60%);
   --border: hsl(0, 0%, 88%);
   --input: hsl(0, 0%, 93%);
   --ring: hsl(52, 100%, 50%);
-  --chart-1: hsl(0, 100%, 40%); /* red-700 */
-  --chart-2: hsl(240, 100%, 40%); /* blue-700 */
-  --chart-3: hsl(52, 100%, 40%); /* yellow-700 */
+
+  /* Chart colors */
+  --chart-1: hsl(0, 100%, 40%);
+  --chart-2: hsl(240, 100%, 40%);
+  --chart-3: hsl(52, 100%, 40%);
   --chart-4: hsl(270, 70%, 50%);
   --chart-5: hsl(360, 100%, 60%);
+
+  /* Sidebar colors */
   --sidebar: hsl(0, 0%, 96%);
   --sidebar-foreground: hsl(0, 0%, 10%);
   --sidebar-primary: hsl(0, 0%, 10%);
@@ -154,9 +181,11 @@
   --sidebar-ring: hsl(0, 0%, 60%);
   --destructive-foreground: hsl(0, 0%, 100%);
 
+  /* Typography */
   --letter-spacing: 0em;
   --spacing: 0.25rem;
 
+  /* Scrollbar */
   --scrollbar-width: 20px;
   --scrollbar-width-sm: 5px;
   --scrollbar-radius: 20px;
@@ -165,46 +194,65 @@
   --scrollbar-thumb-bg: hsl(0, 0%, 80%);
   --scrollbar-thumb-hover-bg: hsl(0, 0%, 60%);
 
+  /* Form elements */
   --autofill-shadow-size: 30px;
   --autofill-shadow-color: rgb(35, 35, 35);
   --autofill-text-color: rgb(240, 240, 240);
-
   --select-shadow-spread: 10px;
   --select-shadow-size: 100px;
   --select-shadow-color: #000;
 }
 
 :root.dark {
+  /* Base colors */
   --background: hsl(0, 0%, 5%);
   --foreground: hsl(0, 0%, 95%);
   --card: hsl(0, 0%, 15%);
   --card-foreground: hsl(0, 0%, 95%);
   --popover: hsl(0, 0%, 12%);
   --popover-foreground: hsl(52, 100%, 50%);
+
+  /* Brand colors */
   --primary: #fffd00;
   --primary-foreground: hsl(0, 0%, 10%);
   --secondary: hsl(0, 0%, 20%);
   --secondary-foreground: hsl(0, 0%, 95%);
+
+  /* Status colors */
+  --success: hsl(142, 76%, 46%);
+  --success-foreground: hsl(0, 0%, 100%);
+  --warning: hsl(48, 96%, 63%);
+  --warning-foreground: hsl(0, 0%, 10%);
+  --error: hsl(0, 84%, 70%);
+  --error-foreground: hsl(0, 0%, 100%);
+  --info: hsl(200, 98%, 49%);
+  --info-foreground: hsl(0, 0%, 100%);
+
+  /* UI colors */
   --muted: hsl(0, 0%, 20%);
   --muted-foreground: hsl(0, 0%, 70%);
   --accent: hsl(52, 80%, 60%);
   --accent-foreground: hsl(0, 0%, 0%);
-  --destructive: hsl(0, 0%, 60%);
+  --destructive: hsl(0, 84%, 70%);
   --border: hsl(0, 0%, 25%);
   --input: hsl(0, 0%, 20%);
   --ring: hsl(52, 100%, 60%);
+
+  /* Chart colors */
   --chart-1: hsl(0, 100%, 30%);
   --chart-2: hsl(240, 100%, 30%);
   --chart-3: hsl(52, 100%, 30%);
   --chart-4: hsl(270, 70%, 50%);
   --chart-5: hsl(360, 100%, 60%);
+
+  /* Sidebar colors */
   --sidebar: hsl(0, 0%, 15%);
   --sidebar-foreground: hsl(0, 0%, 95%);
   --sidebar-primary: hsl(0, 0%, 20%);
   --sidebar-primary-foreground: hsl(0, 0%, 95%);
   --sidebar-accent: hsl(0, 0%, 12%);
   --sidebar-accent-foreground: hsl(0, 0%, 95%);
-  --sidebar-border: hsl(0, 0%, 25%);
+  --sidebar-border: hsl(0, 63%, 37%);
   --sidebar-ring: hsl(0, 0%, 40%);
   --destructive-foreground: hsl(0, 0%, 100%);
 }
