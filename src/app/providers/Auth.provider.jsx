@@ -12,11 +12,9 @@ import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.s
 import { useTranslation } from 'react-i18next'
 import { useSession } from 'next-auth/react'
 import { useAuthStatus } from 'app/hooks/auth/useAuthStatus/useAuthStatus'
-import { useTransitionRouter } from 'next-view-transitions'
 
 const AuthProvider = ({ children }) => {
   const { t } = useTranslation()
-  const router = useTransitionRouter()
   const dispatch = useDispatch()
   const path = usePathname()
   const user = useSelector(selectUserTable)
@@ -51,15 +49,6 @@ const AuthProvider = ({ children }) => {
       }
     }
   }, [session, dispatch, setAuth])
-
-  useEffect(() => {
-    if (path.includes('/play') || path.includes('settings')) {
-      if (!isAuthenticated) {
-        router.push('/')
-        toast.info(t('Please login first'))
-      }
-    }
-  }, [isAuthenticated, path, performLogout, router, t])
 
   useEffect(() => {
     if (path.includes('auth') || path.includes('confirm-otp')) {

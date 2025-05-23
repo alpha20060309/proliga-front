@@ -15,6 +15,7 @@ const ToastContainer = dynamic(
   () => import('react-toastify').then((mod) => mod.ToastContainer),
   { ssr: false }
 )
+import { fontVariables } from './fonts'
 
 const dmSans = DM_Sans({
   subsets: ['latin', 'latin-ext'],
@@ -74,15 +75,16 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const cookieStore = cookies()
-  const currentTheme = cookieStore.get('currentTheme')?.value || ''
+  const currentTheme = cookieStore.get('currentTheme')?.value || 'light'
 
   return (
     <ViewTransitions>
       <html lang="uz" suppressHydrationWarning>
         <body
           className={cn(
-            'bg-background text-foreground min-h-svh scroll-smooth antialiased md:min-h-screen',
-            dmSans.className
+            'bg-background text-foreground min-h-svh scroll-smooth antialiased lg:min-h-screen',
+            dmSans.className,
+            fontVariables
           )}
         >
           <RootProvider>

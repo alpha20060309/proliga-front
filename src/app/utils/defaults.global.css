@@ -13,28 +13,24 @@
     line-height: 2.6rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
-    color: var(--card-foreground);
   }
   h2 {
     font-size: 1.8rem;
     line-height: 2.2rem;
     font-weight: 600;
     margin-bottom: 1.2rem;
-    color: var(--foreground);
   }
   h3 {
     font-size: 1.5rem;
     line-height: 1.9rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    color: var(--foreground);
   }
   h4 {
     font-size: 1.3rem;
     line-height: 1.7rem;
     font-weight: 500;
     margin-bottom: 0.8rem;
-    color: var(--muted-foreground);
   }
   p {
     font-size: 1.1rem;

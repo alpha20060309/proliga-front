@@ -1,4 +1,5 @@
 'use client'
+
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
@@ -20,7 +21,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-// import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Label } from '@/components/ui/label'
 import './datepicker.scss'
 import Avatar from 'components/Avatar'
