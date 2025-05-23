@@ -111,7 +111,7 @@ const LoginForm = ({ setShouldRedirect }) => {
   return (
     <Card className={'dark:bg-card/70 border-foreground/50'}>
       <CardHeader>
-        <CardTitle className="text-foreground mb-4 text-xl font-bold md:mb-4 md:text-2xl">
+        <CardTitle className="text-foreground text-xl font-bold md:text-2xl">
           {t('Tizimga kirish_1')}
         </CardTitle>
       </CardHeader>
