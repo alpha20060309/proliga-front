@@ -5,7 +5,7 @@ import Gutter from 'components/Gutter'
 
 const ChampionshipsLayout = ({ children }) => {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-linear-to-br from-red-950 to-blue-950 pt-16">
+    <main className="from-chart-1 to-chart-2 relative min-h-screen overflow-hidden bg-linear-to-br pt-16">
       <IconsSpray />
       <Gutter>{children}</Gutter>
     </main>

@@ -12,13 +12,13 @@ const Confirmation = ({ onConfirm, onCancel, isModalOpen, setModalOpen }) => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setModalOpen}>
-      <DialogContent className="flex max-w-[96%] flex-col items-center justify-between gap-2 rounded-xl bg-background p-6 text-foreground xs:max-w-96 md:max-w-max xl:max-w-120">
-        <DialogTitle className="mb-12 mt-6 cursor-default text-xl font-bold md:tracking-wide">
+      <DialogContent className="bg-background text-foreground xs:max-w-96 flex max-w-[96%] flex-col items-center justify-between gap-2 rounded-xl p-6 md:max-w-max xl:max-w-120">
+        <DialogTitle className="mt-6 mb-12 cursor-default text-xl font-bold md:tracking-wide">
           {t('Ishonchingiz komilmi')}
         </DialogTitle>
         <div className="flex items-center gap-1">
           <Button
-            className="h-auto w-36 select-none rounded-md border-2 border-red-600 bg-red-600 py-2 font-medium text-neutral-50 transition-all hover:bg-red-800 focus:outline-white md:w-44"
+            className="border-destructive bg-destructive text-destructive-foreground hover:bg-destructive/80 h-auto w-36 rounded-md border-2 py-2 font-medium transition-all select-none focus:outline-white md:w-44"
             onClick={onConfirm}
             tabIndex={0}
             autoFocus={true}
@@ -26,7 +26,7 @@ const Confirmation = ({ onConfirm, onCancel, isModalOpen, setModalOpen }) => {
             {t('Tasdiqlash')}
           </Button>
           <Button
-            className="h-auto w-36 select-none rounded-md border-2 border-neutral-600 bg-neutral-900 py-2 font-medium text-secondary-foreground transition-all hover:border-neutral-700 hover:bg-card hover:text-neutral-50 md:w-44"
+            className="border-secondary bg-secondary text-secondary-foreground hover:border-secondary/80 hover:bg-secondary/80 hover:text-secondary-foreground h-auto w-36 rounded-md border-2 py-2 font-medium transition-all select-none md:w-44"
             onClick={onCancel}
           >
             {t('Qaytish')}

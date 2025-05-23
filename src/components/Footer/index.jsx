@@ -6,9 +6,10 @@ import { useTranslation } from 'react-i18next'
 import { usePathname } from 'next/navigation'
 import { useSelector } from 'react-redux'
 import { Link } from 'next-view-transitions'
-import SocialLink from './SocialLink'
 import GradientButton from 'components/Button/GradientButton'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
+import { FaTelegram, FaInstagram } from 'react-icons/fa'
+import { Mail } from 'lucide-react'
 
 const Footer = () => {
   const path = usePathname()
@@ -39,7 +40,7 @@ const Footer = () => {
   }
 
   return (
-    <footer className="w-full border-t border-border bg-background text-foreground">
+    <footer className="border-border bg-background text-foreground w-full border-t">
       <div className="container mx-auto px-6 py-10">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-4">
@@ -49,7 +50,7 @@ const Footer = () => {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="transition-colors duration-200 hover:text-primary"
+                  className="hover:text-primary transition-colors duration-200"
                 >
                   {link.label}
                 </Link>
@@ -63,7 +64,7 @@ const Footer = () => {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="transition-colors duration-200 hover:text-primary"
+                  className="hover:text-primary transition-colors duration-200"
                 >
                   {link.label}
                 </Link>
@@ -75,13 +76,30 @@ const Footer = () => {
               {t('Bizning ijtimoiy tarmoqlarimiz')}
             </h3>
             <div className="flex space-x-4">
-              <SocialLink
+              <Link
+                href={link_email}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus:ring-offset-background focus:ring-primary transition-transform hover:scale-110 focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
+              >
+                <Mail size={24} />
+              </Link>
+              <Link
                 href={link_instagram}
-                icon="instagram"
-                alt="Instagram"
-              />
-              <SocialLink href={link_email} icon="mail" alt="Email" />
-              <SocialLink href={link_telegram} icon="telegram" alt="Telegram" />
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus:ring-offset-background focus:ring-primary transition-transform hover:scale-110 focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
+              >
+                <FaInstagram size={24} />
+              </Link>
+              <Link
+                href={link_telegram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus:ring-offset-background focus:ring-primary transition-transform hover:scale-110 focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
+              >
+                <FaTelegram size={24} />
+              </Link>
             </div>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-2">

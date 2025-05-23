@@ -125,7 +125,7 @@ const Notification = () => {
         <Button
           type="ghost"
           aria-label={t('Open notifications')}
-          className="hover:text-accent dark:hover:text-accent relative bg-transparent p-0 hover:bg-transparent dark:hover:bg-transparent"
+          className="hover:text-accent dark:hover:text-accent relative bg-transparent p-0 shadow-none hover:bg-transparent dark:hover:bg-transparent"
           size={'icon'}
         >
           <Bell

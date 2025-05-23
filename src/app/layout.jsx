@@ -6,7 +6,7 @@ import { DM_Sans } from 'next/font/google'
 import { cn } from '@/lib/utils'
 import { ViewTransitions } from 'next-view-transitions'
 import dynamic from 'next/dynamic'
-
+import { cookies } from 'next/headers'
 const Footer = dynamic(() => import('../components/Footer'), { ssr: false })
 const RootProvider = dynamic(() => import('./providers/Root.provider'), {
   ssr: false,
@@ -61,7 +61,7 @@ export const metadata = {
     ],
   },
   // eslint-disable-next-line no-undef
-  metadataBase: new URL(process.env.NEXT_PUBLIC_URL ),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_URL),
   twitter: {
     card: 'summary_large_image',
     title:
@@ -72,20 +72,23 @@ export const metadata = {
   },
 }
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const cookieStore = cookies()
+  const currentTheme = cookieStore.get('currentTheme')?.value || ''
+
   return (
     <ViewTransitions>
       <html lang="uz" suppressHydrationWarning>
         <body
           className={cn(
-            'min-h-svh scroll-smooth bg-background text-foreground antialiased md:min-h-screen',
+            'bg-background text-foreground min-h-svh scroll-smooth antialiased md:min-h-screen',
             dmSans.className
           )}
         >
           <RootProvider>
             <Navbar />
             {children}
-            <ToastContainer theme="auto" pauseOnHover />
+            <ToastContainer theme={currentTheme} pauseOnHover />
             <Footer />
           </RootProvider>
         </body>

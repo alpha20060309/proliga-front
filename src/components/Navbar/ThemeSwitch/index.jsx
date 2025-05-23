@@ -2,12 +2,21 @@ import { Button } from '@/components/ui/button'
 import { Sun, Moon } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { cn } from '@/lib/utils'
+import Cookies from 'js-cookie'
 
-const ThemeSwither = () => {
+const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme()
 
-  const handleThemeToggle = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light')
+  const handleThemeToggle = async () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light'
+    setTheme(newTheme)
+
+    Cookies.set('currentTheme', newTheme, {
+      expires: 365,
+      path: '/',
+      domain: window.location.hostname,
+      sameSite: 'strict',
+    })
   }
 
   return (
@@ -21,6 +30,7 @@ const ThemeSwither = () => {
       )}
       onClick={handleThemeToggle}
       size={'icon'}
+      aria-label="Toggle theme"
     >
       <Sun className="block size-5 transition-all dark:hidden" />
       <Moon className="hidden size-5 transition-all dark:block" />
@@ -29,4 +39,4 @@ const ThemeSwither = () => {
   )
 }
 
-export default ThemeSwither
+export default ThemeSwitcher

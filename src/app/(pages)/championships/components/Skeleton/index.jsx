@@ -2,7 +2,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 export function ChampionshipSkeleton() {
   return (
-    <div className="flex h-28 items-center space-x-4 rounded-lg border border-neutral-700 bg-background/25 px-3">
+    <div className="border-border bg-card/10 flex h-28 items-center space-x-4 rounded-lg border px-3">
       <Skeleton className="h-14 min-w-14 rounded-full" />
       <div className="w-full space-y-2">
         <Skeleton className="h-5 w-full md:h-7" />

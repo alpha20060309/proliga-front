@@ -41,12 +41,12 @@ const Championship = ({ game }) => {
 
   const condition = useMemo(() => {
     if (!game?.is_active)
-      return 'border-neutral-600 hover:shadow-neutral-600 shadow-md cursor-default'
+      return 'border-destructive hover:shadow-destructive shadow-md cursor-default'
     if (currentGame)
       return 'border-primary/80 hover:shadow-primary shadow-lg cursor-pointer hover:border-primary'
     return game.can_register
-      ? 'border-white/60 hover:shadow-primary hover:border-primary cursor-pointer shadow-lg'
-      : 'border-neutral-700 hover:shadow-neutral-700 cursor-default shadow-md'
+      ? 'border-accent/60 hover:shadow-primary hover:border-primary cursor-pointer shadow-lg'
+      : 'border-destructive/70 hover:shadow-destructive/70 cursor-default shadow-md'
   }, [currentGame, game?.can_register, game?.is_active])
 
   return (
@@ -62,12 +62,12 @@ const Championship = ({ game }) => {
         <img
           src={getUrl(game.flag)}
           alt={game.title}
-          className="z-10 size-14 select-none rounded-xl bg-neutral-100 p-1"
+          className="z-10 size-14 rounded-xl bg-white p-1 select-none"
           draggable={false}
           loading="lazy"
         />
         <div>
-          <h3 className="select-none text-base font-bold capitalize md:text-lg xl:text-xl">
+          <h3 className="text-foreground text-base font-bold capitalize select-none md:text-lg xl:text-xl">
             {getCorrectName({ lang, uz: game?.name, ru: game?.name_ru })}
           </h3>
           {renderGameStatus(game, currentGame, t)}
@@ -87,8 +87,8 @@ const Championship = ({ game }) => {
 const renderGameStatus = (game, currentGame, t) => {
   if (!game?.is_active) {
     return (
-      <div className="mt-1 flex select-none items-center gap-2 text-xs text-neutral-400 sm:text-sm">
-        <span className="rounded-full bg-red-500/20 px-2 py-0.5 text-red-300">
+      <div className="text-muted-foreground mt-1 flex items-center gap-2 text-xs select-none sm:text-sm">
+        <span className="bg-destructive/50 text-destructive-foreground rounded-full px-2 py-0.5">
           {t('Inactive')}
         </span>
         <p>{t('Tez Kunda')}</p>
@@ -98,19 +98,19 @@ const renderGameStatus = (game, currentGame, t) => {
 
   if (currentGame || game?.can_register) {
     return (
-      <div className="flex select-none gap-1 text-xs text-neutral-400 sm:text-sm">
-        <p>{t('Deadline')}:</p>
+      <div className="text-foreground flex gap-1 text-xs select-none sm:text-sm">
+        <p>{t('Deadline')}: </p>
         <span className="text-primary">{formatDate(game?.deadline)}</span>
       </div>
     )
   }
 
   return (
-    <div className="mt-1 flex select-none items-center gap-2 text-xs text-neutral-400 sm:text-sm">
-      <span className="rounded-full bg-yellow-500/20 px-2 py-0.5 capitalize text-yellow-300">
+    <div className="mt-1 flex items-center gap-2 text-xs select-none sm:text-sm">
+      <span className="bg-destructive/50 text-destructive-foreground rounded-full px-2 py-0.5 capitalize">
         {t('closed')}
       </span>
-      <p>{t('Registration Ended')}</p>
+      <p className="text-accent">{t('Registration Ended')}</p>
     </div>
   )
 }

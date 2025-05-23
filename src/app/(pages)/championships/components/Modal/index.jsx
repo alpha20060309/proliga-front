@@ -19,8 +19,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
 import { validateTeamName } from 'app/utils/validateTeamName.util'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { Loader2 } from 'lucide-react'
 
 const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
   const router = useTransitionRouter()
@@ -51,7 +54,7 @@ const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
 
   return (
     <Dialog onOpenChange={toggleModal} open={isModalOpen}>
-      <DialogContent className="flex max-w-[96%] flex-col items-center justify-between gap-4 rounded-lg border border-neutral-50/25 bg-linear-to-br from-blue-950 to-red-950 px-4 py-6 text-foreground shadow-xl transition-all duration-300 ease-in-out sm:max-w-md md:gap-6 md:px-6 md:py-8 lg:max-w-lg 2xl:max-w-xl">
+      <DialogContent className="border-border from-background to-card/80 text-card-foreground flex max-w-[96%] flex-col items-center justify-between gap-4 rounded-lg border bg-transparent bg-gradient-to-t px-4 py-6 shadow-xl transition-all duration-300 ease-in-out sm:max-w-md md:gap-6 md:px-6 md:py-8 lg:max-w-lg 2xl:max-w-xl">
         <div className="w-full text-center">
           <Image
             src="/favicon.svg"
@@ -61,10 +64,10 @@ const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
             draggable={false}
             className="mx-auto mb-2 size-16"
           />
-          <DialogTitle className="text-xl font-bold text-yellow-400 xs:text-2xl sm:text-3xl lg:text-4xl">
+          <DialogTitle className="text-foreground xs:text-2xl text-xl font-bold sm:text-3xl lg:text-4xl">
             {t('Jamoa yarating')}
           </DialogTitle>
-          <DialogDescription className="mt-1 text-sm text-yellow-100 sm:mt-2 sm:text-base">
+          <DialogDescription className="text-muted-foreground mt-1 text-sm sm:mt-2 sm:text-base">
             {t('Join the league and lead your team to victory!')}
           </DialogDescription>
         </div>
@@ -75,36 +78,36 @@ const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
           name="team-create"
         >
           <div className="flex flex-col gap-1">
-            <label
-              className="text-sm font-semibold text-yellow-200/80 sm:text-base"
+            <Label
+              className="text-sm font-semibold sm:text-base"
               htmlFor="team-title"
             >
               {t('Jamoa Ismi')}
-            </label>
+            </Label>
             <Input
               type="text"
               id="team-title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder={t('Enter your team name')}
-              className="h-12 w-full rounded-md border-2 border-yellow-700 bg-transparent bg-opacity-50 p-2 text-sm text-neutral-50 placeholder-yellow-300 focus:border-yellow-500 focus:outline-hidden focus:ring-2 focus:ring-yellow-500 sm:h-12 sm:p-3 sm:text-base"
+              className="border-input bg-background text-foreground placeholder:text-muted-foreground focus:border-ring focus:ring-ring h-12 w-full rounded-md border-2 p-2 text-sm focus:ring-2 focus:outline-hidden sm:h-12 sm:p-3 sm:text-base"
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label
-              className="text-sm font-semibold text-yellow-200/80 sm:text-base"
+            <Label
+              className="text-sm font-semibold sm:text-base"
               htmlFor="formation"
             >
               {t('Taktika')}
-            </label>
+            </Label>
             <Select
               defaultValue={FORMATIONS['4-3-3']}
               onValueChange={(value) => setFormation(value)}
             >
-              <SelectTrigger className="h-10 w-full rounded-md border-2 border-yellow-700 bg-transparent bg-opacity-50 p-2 text-sm text-foreground outline-hidden focus:border-yellow-500/50 focus:ring-2 focus:ring-yellow-500 sm:h-12 sm:p-3 sm:text-base">
+              <SelectTrigger className="border-input bg-background text-foreground focus:border-ring/50 focus:ring-ring h-10 w-full rounded-md border-2 p-2 text-sm outline-hidden focus:ring-2 sm:h-12 sm:p-3 sm:text-base">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="bg-card text-foreground">
+              <SelectContent className="bg-card text-card-foreground">
                 {Object.keys(FORMATIONS).map((key, index) => (
                   <SelectItem
                     value={FORMATIONS[key]}
@@ -117,23 +120,17 @@ const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
               </SelectContent>
             </Select>
           </div>
-          <button
+          <Button
             type="submit"
             disabled={isLoading}
-            className="mt-2 h-12 rounded-md bg-yellow-600 text-base font-bold text-foreground transition-all hover:bg-yellow-700 focus:outline-hidden focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 sm:text-lg"
+            className="bg-primary/60 text-primary-foreground hover:bg-primary/90 focus:ring-ring focus:ring-offset-background mt-2 h-12 rounded-md text-base font-bold transition-all focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:opacity-50 sm:text-lg"
           >
             {isLoading ? (
-              <Image
-                src="/icons/loading.svg"
-                width={24}
-                height={24}
-                alt="loading"
-                className="mx-auto size-5 animate-spin invert sm:size-6"
-              />
+              <Loader2 className="mx-auto size-5 animate-spin sm:size-6" />
             ) : (
               <>{t('Tasdiqlash')}</>
             )}
-          </button>
+          </Button>
         </form>
       </DialogContent>
     </Dialog>
