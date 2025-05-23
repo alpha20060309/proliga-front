@@ -17,7 +17,7 @@ const Body = ({ table, flexRender }) => {
       {table.getRowModel().rows.map((row) => (
         <tr
           key={row.id}
-          className="mx-auto max-h-20 w-full border-b border-neutral-700 bg-neutral-800 even:bg-neutral-800 hover:bg-neutral-800"
+          className="mx-auto max-h-20 w-full border-b border-neutral-700 bg-card even:bg-cardbg-neutbg-card
         >
           {row.getVisibleCells().map((cell) => (
             <td

@@ -38,7 +38,7 @@ export default function Error({ reset }) {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-900 p-4">
-      <Card className="w-full max-w-md border-4 border-red-500 bg-neutral-800">
+      <Card className="w-full max-w-md border-4 border-red-500 bg-card">
         <div className="p-6 text-center">
           <h1 className="mb-4 text-6xl font-bold text-red-500">500</h1>
           <div className="relative mx-auto mb-6 h-24 w-24">

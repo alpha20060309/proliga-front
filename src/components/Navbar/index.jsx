@@ -29,7 +29,7 @@ const Navbar = () => {
     <>
       <nav
         className={cn(
-          'bg-background/20 border-border fixed top-0 right-0 left-0 z-50 w-screen border-b backdrop-blur',
+          'bg-background/50 border-border fixed top-0 right-0 left-0 z-50 w-screen border-b backdrop-blur',
           NEXT_PUBLIC_TEST_NAV_SLIDER ? 'pb-3' : 'py-3'
         )}
       >

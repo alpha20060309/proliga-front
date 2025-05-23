@@ -5,7 +5,7 @@ const NavLink = ({ children, href }) => {
   return (
     <Link
       href={href}
-      className="flex h-full w-full gap-2 rounded-sm px-1 py-1.5 hover:bg-neutral-800"
+      className="flex h-full w-full gap-2 rounded-sm px-1 py-1.5 hover:bg-card"
     >
       {children}
     </Link>

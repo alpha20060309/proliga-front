@@ -98,7 +98,7 @@ const CountrySelect = ({ disabled, value, onChange, options }) => {
     //               .filter((x) => x.value)
     //               .map((option) => (
     //                 <CommandItem
-    //                   className="gap-2 bg-background text-secondary-foreground hover:bg-neutral-700 active:bg-neutral-700"
+    //                   className="gap-2 bg-background text-secondary-foreground hover:bg-secondary active:bg-secondary"
     //                   key={option.value}
     //                   // onSelect={() => handleSelect(option.value)}
     //                 >

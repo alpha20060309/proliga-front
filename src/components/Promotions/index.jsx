@@ -15,20 +15,20 @@ const Promotions = () => {
 
   return (
     <>
-      <Wrapper className="bg-card">
+      <Wrapper className="bg-card-foreground/10">
         <PromotionCreateTeam />
       </Wrapper>
-      <Wrapper className={'bg-card/80'}>
+      <Wrapper className={'bg-card-foreground/30'}>
         <PromotionGatherPoints />
       </Wrapper>
-      <Wrapper className={'bg-card'}>
+      <Wrapper className={'bg-card-foreground/10'}>
         <PromotionMakeTransfers />
       </Wrapper>
-      <Wrapper className={'bg-card/80'}>
+      <Wrapper className={'bg-card-foreground/30'}>
         <PromotionCompete />
       </Wrapper>
       {prizes?.length > 0 && (
-        <Wrapper className={'bg-card'}>
+        <Wrapper className={'bg-card-foreground/10'}>
           <PromotionWinPrizes />
         </Wrapper>
       )}

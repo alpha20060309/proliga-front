@@ -24,7 +24,7 @@ const PriceFilter = ({ column, columnFilterValue }) => {
         <SelectContent>
           {MIN.map((item, index) => (
             <SelectItem
-              className="bg-background checked:bg-neutral-700"
+              className="bg-background checked:bg-secondary"
               key={index}
               value={item}
             >
@@ -48,7 +48,7 @@ const PriceFilter = ({ column, columnFilterValue }) => {
         <SelectContent>
           {MAX.map((item, index) => (
             <SelectItem
-              className="bg-background checked:bg-neutral-800"
+              className="bg-background checked:bg-card"
               key={index}
               value={item}
             >

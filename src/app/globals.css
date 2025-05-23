@@ -1,8 +1,8 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
-@import url('./utils/animations.global.css') layer(utilities);
-@import url('./utils/filters.global.css') layer(utilities);
-@import url('./utils/defaults.global.css') layer(utilities);
+@import './utils/animations.global.css';
+@import './utils/filters.global.css';
+@import './utils/defaults.global.css';
 
 @custom-variant dark (&:is(.dark *));
 

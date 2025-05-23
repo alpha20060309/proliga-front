@@ -79,7 +79,7 @@ export const AuthTabsSkeleton = () => {
   return (
     <div className="flex space-x-1 rounded-sm bg-neutral-900 p-1">
       <Skeleton className="h-8 flex-1 rounded-sm bg-background" />
-      <Skeleton className="h-8 flex-1 rounded-sm bg-neutral-800" />
+      <Skeleton className="h-8 flex-1 rounded-sm bg-card" />
     </div>
   )
 }

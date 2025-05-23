@@ -104,12 +104,12 @@ const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
               <SelectTrigger className="h-10 w-full rounded-md border-2 border-yellow-700 bg-transparent bg-opacity-50 p-2 text-sm text-foreground outline-hidden focus:border-yellow-500/50 focus:ring-2 focus:ring-yellow-500 sm:h-12 sm:p-3 sm:text-base">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="bg-neutral-800 text-foreground">
+              <SelectContent className="bg-card text-foreground">
                 {Object.keys(FORMATIONS).map((key, index) => (
                   <SelectItem
                     value={FORMATIONS[key]}
                     key={index}
-                    className="hover:bg-neutral-700"
+                    className="hover:bg-secondary"
                   >
                     {key}
                   </SelectItem>

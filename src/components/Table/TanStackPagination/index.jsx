@@ -44,7 +44,7 @@ const TanStackPagination = ({ table, active, className, buttonClassName }) => {
             buttonClassName,
             currentPage === page
               ? cn('bg-neutral-300 text-black', active)
-              : 'bg-transparent hover:bg-neutral-800'
+              : 'bg-transparent hover:bg-card'
           )}
           aria-label={`Page ${page}`}
           aria-current={currentPage === page ? 'page' : undefined}
@@ -87,7 +87,7 @@ const PaginationButton = ({ onClick, disabled, icon, className }) => {
       onClick={onClick}
       disabled={disabled}
       className={cn(
-        'block rounded-xs border p-1 hover:bg-neutral-800 disabled:opacity-75 disabled:hover:bg-transparent',
+        'block rounded-xs border p-1 hover:bg-card disabled:opacity-75 disabled:hover:bg-transparent',
         className
       )}
     >

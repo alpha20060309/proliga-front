@@ -22,7 +22,7 @@ const ClubsFilter = ({ column }) => {
       </SelectTrigger>
       <SelectContent>
         <SelectItem
-          className="rounded checked:bg-neutral-800"
+          className="rounded checked:bg-card"
           defaultChecked={true}
         >
           {t('Hamma_Clublar')}
@@ -31,7 +31,7 @@ const ClubsFilter = ({ column }) => {
           <SelectItem
             key={club.id}
             value={getCorrectName({ lang, uz: club?.name, ru: club?.name_ru })}
-            className="capitalize text-secondary-foreground checked:bg-neutral-800"
+            className="capitalize text-secondary-foreground checked:bg-card"
           >
             {getCorrectName({ lang, uz: club?.name, ru: club?.name_ru })}
           </SelectItem>

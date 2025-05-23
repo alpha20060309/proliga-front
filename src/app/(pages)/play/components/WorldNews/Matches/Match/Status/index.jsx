@@ -10,7 +10,7 @@ const MatchStatus = ({ status, homeScore, awayScore }) => {
       return (
         <Badge
           variant="secondary"
-          className="bg-neutral-800 py-px text-[11px] font-normal sm:text-xs"
+          className="bg-card py-px text-[11px] font-normal sm:text-xs"
         >
           {t('Boshlanmagan')}
         </Badge>

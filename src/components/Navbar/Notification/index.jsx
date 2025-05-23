@@ -129,14 +129,14 @@ const Notification = () => {
           size={'icon'}
         >
           <Bell
-            className={`hover:text-accent-foreground text-secondary-foreground size-5 select-none`}
+            className={`hover:text-accent-foreground text-foreground size-5 select-none`}
           />
           {unreadCount > 0 && (
             <Badge
               variant="destructive"
               className={cn(
                 'absolute -top-0.5 -right-0.5 flex size-3.5 items-center justify-center rounded-full p-1 text-[10px]',
-                isNotificationsOpen ? 'bg-neutral-800' : 'bg-red-700'
+                isNotificationsOpen ? 'bg-card' : 'bg-red-700'
               )}
             >
               {unreadCount}

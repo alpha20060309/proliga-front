@@ -41,7 +41,7 @@ const PlayLinks = () => {
   }
 
   return (
-    <section className="text-secondary-foreground hidden items-center gap-2 sm:text-sm lg:flex xl:gap-4 xl:text-base 2xl:gap-6">
+    <section className="text-foreground bold hidden items-center gap-2 sm:text-sm lg:flex xl:gap-4 xl:text-base 2xl:gap-6">
       {path.includes('play') && (
         <>
           <Tab title={'Profil'} styling={styling} tab={TABS.GameProfile} />
@@ -172,7 +172,7 @@ const TabLink = ({ title, tab, styling }) => {
   )
 }
 
-const ACTIVE = 'before:block before:bg-primary text-accent'
+const ACTIVE = 'before:block before:bg-primary'
 const PASSIVE = ' hover:before:block'
 const DISABLED =
   'text-muted-foreground cursor-default hover:text-muted-foreground'

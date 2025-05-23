@@ -26,7 +26,7 @@ const Confirmation = ({ onConfirm, onCancel, isModalOpen, setModalOpen }) => {
             {t('Tasdiqlash')}
           </Button>
           <Button
-            className="h-auto w-36 select-none rounded-md border-2 border-neutral-600 bg-neutral-900 py-2 font-medium text-secondary-foreground transition-all hover:border-neutral-700 hover:bg-neutral-800 hover:text-neutral-50 md:w-44"
+            className="h-auto w-36 select-none rounded-md border-2 border-neutral-600 bg-neutral-900 py-2 font-medium text-secondary-foreground transition-all hover:border-neutral-700 hover:bg-card hover:text-neutral-50 md:w-44"
             onClick={onCancel}
           >
             {t('Qaytish')}

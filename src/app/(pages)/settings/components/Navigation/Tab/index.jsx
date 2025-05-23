@@ -6,7 +6,7 @@ const SettingsNavigationTab = ({ tab, currentTab,setTab }) => {
   const { t } = useTranslation()
   const active = 'text-primary'
   const passive = 'text-neutral-300'
-  const containerActive = 'bg-neutral-800'
+  const containerActive = 'bg-card'
   const containerPassive = 'bg-transparent'
   const isActive = tab.key === currentTab
 
@@ -36,7 +36,7 @@ const SettingsNavigationTab = ({ tab, currentTab,setTab }) => {
       onClick={() => handleClick(tab)}
       className={cn(
         'flex w-full cursor-pointer items-center justify-center gap-2 lg:justify-start',
-        'rounded-md p-2 transition-all hover:bg-neutral-800 lg:w-auto',
+        'rounded-md p-2 transition-all hover:bg-card lg:w-auto',
         isActive ? containerActive : containerPassive
       )}
     >

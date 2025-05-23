@@ -5,12 +5,12 @@ import { Card } from '@/components/ui/card'
 export default function NotFound() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-900 p-4">
-      <Card className="w-full max-w-md border-4 border-yellow-500 bg-neutral-800">
+      <Card className="w-full max-w-md border-4 border-yellow-500 bg-card">
         <div className="p-6 text-center">
           <h1 className="mb-4 text-6xl font-bold text-yellow-500">404</h1>
           <div className="relative mx-auto mb-6 h-24 w-24">
             <div className="absolute inset-0 rounded-full bg-yellow-500"></div>
-            <div className="absolute inset-2 rounded-full bg-neutral-800"></div>
+            <div className="absolute inset-2 rounded-full bg-card"></div>
             <div className="absolute inset-0 flex items-center justify-center">
               <span className="text-2xl font-bold text-yellow-500">XATO</span>
             </div>

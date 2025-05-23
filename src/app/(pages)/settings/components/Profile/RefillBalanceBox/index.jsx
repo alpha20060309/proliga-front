@@ -16,7 +16,7 @@ const ProfessionalRefillBalanceBox = () => {
   return (
     <>
       <RefillBalance setIsModalOpen={setModalOpen} isModalOpen={isModalOpen} />
-      <Card className="h-28 w-full space-y-0 border border-neutral-600 bg-neutral-800/50 text-foreground shadow-md xs:max-w-64">
+      <Card className="h-28 w-full space-y-0 border border-neutral-600 bg-card/50 text-foreground shadow-md xs:max-w-64">
         <CardContent className="p-4">
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium text-neutral-300">

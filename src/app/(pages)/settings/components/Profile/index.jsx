@@ -117,7 +117,7 @@ const SettingsProfile = () => {
           </p>
         </ProfileItem>
       </section>
-      <div className="line-clamp-5 h-28 max-w-full overflow-y-scroll text-wrap break-words rounded-lg border border-neutral-700 bg-neutral-800/50 p-2 text-sm text-neutral-300 md:p-4">
+      <div className="line-clamp-5 h-28 max-w-full overflow-y-scroll text-wrap break-words rounded-lg border border-neutral-700 bg-card/50 p-2 text-sm text-neutral-300 md:p-4">
         {user?.bio ? user?.bio : t("Ma'lumot yo'q")}
       </div>
       <RefillBalanceBox />
@@ -127,7 +127,7 @@ const SettingsProfile = () => {
 
 const ProfileItem = ({ children }) => {
   return (
-    <div className="flex items-center gap-2 rounded-lg border border-neutral-700 bg-neutral-800/50 p-2 xl:p-4">
+    <div className="flex items-center gap-2 rounded-lg border border-neutral-700 bg-card/50 p-2 xl:p-4">
       {children}
     </div>
   )

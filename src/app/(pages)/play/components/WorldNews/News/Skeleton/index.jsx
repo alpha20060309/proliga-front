@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils'
 
 function ArticleSkeleton() {
   return (
-    <div className="group flex h-[100px] w-auto overflow-hidden rounded-sm bg-neutral-800">
+    <div className="group flex h-[100px] w-auto overflow-hidden rounded-sm bg-card">
       <Skeleton className="aspect-video h-full w-36" />
       <div className="flex h-full w-full flex-col justify-between space-y-1 px-2 py-1">
         <div className="space-y-1">

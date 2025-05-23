@@ -16,7 +16,7 @@ const CurrentPackage = () => {
       return t("Maksimum klub oyi'nchilarini")
   }
   return (
-    <div className="flex flex-row items-center gap-4 rounded-md bg-neutral-800 p-4 md:h-24 md:p-6">
+    <div className="flex flex-row items-center gap-4 rounded-md bg-card p-4 md:h-24 md:p-6">
       <span className="hidden size-12 items-center justify-center rounded-full bg-background font-bold text-neutral-300 sm:flex">
         1
       </span>

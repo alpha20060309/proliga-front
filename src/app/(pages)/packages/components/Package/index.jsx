@@ -44,7 +44,7 @@ const PackageContainer = ({ packageType }) => {
             .map((item, index) => (
               <div
                 key={index}
-                className="flex items-center justify-between rounded-sm bg-neutral-800 p-2 transition-all hover:bg-neutral-700"
+                className="flex items-center justify-between rounded-sm bg-card p-2 transition-all hover:bg-secondary"
               >
                 <div className="flex cursor-default items-center space-x-2">
                   <Badge

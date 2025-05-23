@@ -23,7 +23,7 @@ const PaymentOptions = ({ paymentOption, setPaymentOption }) => {
   return (
     <div className="mb-4 mt-2">
       <div className="flex w-full items-center gap-4 p-4 lg:p-6">
-        <span className="hidden size-12 items-center justify-center rounded-full bg-neutral-700 font-bold text-neutral-300 sm:flex">
+        <span className="hidden size-12 items-center justify-center rounded-full bg-secondary font-bold text-neutral-300 sm:flex">
           2
         </span>
         <h3 className="text-sm font-medium sm:text-base md:text-lg lg:text-xl">

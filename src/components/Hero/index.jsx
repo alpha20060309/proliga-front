@@ -66,7 +66,7 @@ const Hero = () => {
             className="object-cover"
             quality={100}
           />
-          <div className="absolute inset-0 bg-background/25 dark:bg-background/60" />
+          <div className="absolute inset-0 bg-black/25 dark:bg-black/60" />
         </motion.div>
       </AnimatePresence>
       {/* Content */}

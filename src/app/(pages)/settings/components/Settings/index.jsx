@@ -84,7 +84,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
                 type="button"
                 variant="secondary"
                 size="icon"
-                className="absolute bottom-0 right-0 border border-neutral-500 bg-neutral-800 hover:bg-neutral-700"
+                className="absolute bottom-0 right-0 border border-neutral-500 bg-card hover:bg-secondary"
                 onClick={() => setModalOpen(true)}
               >
                 <Camera className="h-4 w-4 text-secondary-foreground" />
@@ -103,7 +103,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
                   placeholder={t('Ism')}
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  className="border-neutral-700 bg-neutral-800 text-secondary-foreground placeholder:text-neutral-500"
+                  className="border-neutral-700 bg-card text-secondary-foreground placeholder:text-neutral-500"
                 />
               </article>
               <article className="space-y-1">
@@ -118,7 +118,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
                   placeholder={t('Familiya')}
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
-                  className="border-neutral-700 bg-neutral-800 text-secondary-foreground placeholder:text-neutral-500"
+                  className="border-neutral-700 bg-card text-secondary-foreground placeholder:text-neutral-500"
                 />
               </article>
               <article className="space-y-1">
@@ -133,7 +133,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
                   placeholder={t('Sharif')}
                   value={middleName}
                   onChange={(e) => setMiddleName(e.target.value)}
-                  className="border-neutral-700 bg-neutral-800 text-secondary-foreground placeholder:text-neutral-500"
+                  className="border-neutral-700 bg-card text-secondary-foreground placeholder:text-neutral-500"
                 />
               </article>
               <article className="flex flex-col flex-wrap justify-between">
@@ -147,7 +147,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
                   id="birthdate"
                   selected={date}
                   onChange={(date) => setDate(date)}
-                  className="h-10 min-w-full flex-1 rounded-md border border-neutral-700 bg-neutral-800 p-2 text-sm text-secondary-foreground placeholder:text-neutral-500 focus:outline-hidden focus:ring-1 focus:ring-neutral-300 focus:ring-offset-2 focus:ring-offset-neutral-900"
+                  className="h-10 min-w-full flex-1 rounded-md border border-neutral-700 bg-card p-2 text-sm text-secondary-foreground placeholder:text-neutral-500 focus:outline-hidden focus:ring-1 focus:ring-neutral-300 focus:ring-offset-2 focus:ring-offset-neutral-900"
                 />
               </article>
               <article className="space-y-1">
@@ -160,7 +160,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
                 <Select value={gender} onValueChange={setGender}>
                   <SelectTrigger
                     id="gender"
-                    className="h-10 border-neutral-700 bg-neutral-800 text-secondary-foreground"
+                    className="h-10 border-neutral-700 bg-card text-secondary-foreground"
                   >
                     <SelectValue placeholder={t('Jins tanlang')} />
                   </SelectTrigger>
@@ -200,7 +200,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
               placeholder={t('Bio')}
               value={bio}
               onChange={(e) => setBio(e.target.value)}
-              className="h-40 border-neutral-700 bg-neutral-800 text-secondary-foreground placeholder:text-neutral-500 lg:h-48 xl:h-56"
+              className="h-40 border-neutral-700 bg-card text-secondary-foreground placeholder:text-neutral-500 lg:h-48 xl:h-56"
             />
           </section>
           <Button

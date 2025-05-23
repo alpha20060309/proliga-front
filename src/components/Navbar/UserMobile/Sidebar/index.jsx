@@ -178,7 +178,7 @@ const MobileSidebar = ({ isModalOpen, setModalOpen }) => {
               </SystemLink>
               <div
                 onClick={handleLogOut}
-                className="flex h-full w-full gap-2 rounded-sm bg-neutral-900 p-2 hover:bg-neutral-700"
+                className="flex h-full w-full gap-2 rounded-sm bg-neutral-900 p-2 hover:bg-secondary"
               >
                 <Image
                   src={'/icons/logout.svg'}

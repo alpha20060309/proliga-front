@@ -33,7 +33,7 @@ const Dropdown = () => {
           </NavLink>
           <div
             onClick={async () => await logOut()}
-            className="flex h-full w-full cursor-pointer gap-2 rounded-sm p-1 hover:bg-neutral-800"
+            className="flex h-full w-full cursor-pointer gap-2 rounded-sm p-1 hover:bg-card"
           >
             <Image
               src={'/icons/logout.svg'}
