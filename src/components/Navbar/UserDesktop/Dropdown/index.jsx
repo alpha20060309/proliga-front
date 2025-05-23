@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import { Trophy, Settings, LogOut, LogIn } from 'lucide-react'
 import NavLink from './NavLink'
 import { useLogOut } from 'app/hooks/auth/useLogOut/useLogOut'
 import { useSelector } from 'react-redux'
@@ -13,41 +13,31 @@ const Dropdown = () => {
 
   return (
     <PopoverContent
-      className="mt-4 flex w-56 flex-col gap-1 rounded-lg p-3"
+      className="bg-background border-border mt-4 flex w-56 flex-col gap-1 rounded-lg p-3"
       align="end"
     >
       <NavLink href="/championships">
-        <Image src="/icons/cup.svg" alt="user" width={24} height={24} />
-        <p> {t('Chempionatlar')}</p>
+        <Trophy className="text-foreground h-6 w-6" />
+        <p className="text-foreground">{t('Chempionatlar')}</p>
       </NavLink>
       {userTable?.id ? (
         <>
           <NavLink href="/settings">
-            <Image
-              width={24}
-              height={24}
-              alt="settings"
-              src="/icons/gear.svg"
-            />
-            <p>{t('Sozlamalar')}</p>
+            <Settings className="text-foreground h-6 w-6" />
+            <p className="text-foreground">{t('Sozlamalar')}</p>
           </NavLink>
           <div
             onClick={async () => await logOut()}
-            className="flex h-full w-full cursor-pointer gap-2 rounded-sm p-1 hover:bg-card"
+            className="hover:bg-card text-foreground flex h-full w-full cursor-pointer gap-2 rounded-sm p-1"
           >
-            <Image
-              src={'/icons/logout.svg'}
-              alt="user"
-              width={24}
-              height={24}
-            />
+            <LogOut className="h-6 w-6" />
             <p>{t('Tizimdan chiqish')}</p>
           </div>
         </>
       ) : (
         <NavLink href="/auth">
-          <Image src={'/icons/login.svg'} alt="user" width={24} height={24} />
-          <p>{t('Tizimga kirish_2')}</p>
+          <LogIn className="text-foreground h-6 w-6" />
+          <p className="text-foreground">{t('Tizimga kirish_2')}</p>
         </NavLink>
       )}
     </PopoverContent>

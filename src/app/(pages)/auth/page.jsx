@@ -3,28 +3,23 @@
 import { toast } from 'react-toastify'
 import dynamic from 'next/dynamic'
 import { useState, useEffect } from 'react'
-import {
-  LoginFormSkeleton,
-  SignUpFormSkeleton,
-  AuthTabsSkeleton,
-} from './components/Skeleton'
+import { LoginFormSkeleton, SignUpFormSkeleton } from './components/Skeleton'
 import { useSearchParams } from 'next/navigation'
 import { useTransitionRouter } from 'next-view-transitions'
 import { useSelector } from 'react-redux'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { useTranslation } from 'react-i18next'
 import { useAuthStatus } from 'app/hooks/auth/useAuthStatus/useAuthStatus'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 const SignUpForm = dynamic(() => import('./components/SignUpForm'), {
   ssr: false,
   loading: () => <SignUpFormSkeleton />,
 })
+import SetUserCredentials from 'components/Modals/SetUserCredentials'
+
 const LoginForm = dynamic(() => import('./components/LoginForm'), {
   ssr: false,
   loading: () => <LoginFormSkeleton />,
-})
-const AuthTabs = dynamic(() => import('./components/Tabs'), {
-  ssr: false,
-  loading: () => <AuthTabsSkeleton />,
 })
 
 const Auth = () => {
@@ -33,9 +28,9 @@ const Auth = () => {
   const userTable = useSelector(selectUserTable)
   const params = useSearchParams()
   const error = params.get('error')
-  const [currentTab, setCurrentTab] = useState(tabs.login)
   const [shouldRedirect, setShouldRedirect] = useState(true)
   const { setAuth } = useAuthStatus()
+  const [tabValue, setTabValue] = useState('login')
 
   useEffect(() => {
     const SIGN_IN_METHOD =
@@ -46,13 +41,6 @@ const Auth = () => {
       router.push('/championships')
     }
   }, [userTable?.id, router, shouldRedirect])
-
-  useEffect(() => {
-    const hash = window.location.hash.slice(1)
-    if (hash && Object.values(tabs).includes(hash)) {
-      setCurrentTab(hash)
-    }
-  }, [])
 
   useEffect(() => {
     if (error) {
@@ -69,32 +57,48 @@ const Auth = () => {
     }
   }, [error, router, t, setAuth])
 
+  // Sync tab with URL hash
+  useEffect(() => {
+    const hash = window.location.hash.slice(1)
+    if (hash === 'login' || hash === 'signup') {
+      setTabValue(hash)
+    }
+  }, [])
+
+  // Update hash when tab changes
+  useEffect(() => {
+    if (tabValue === 'login' || tabValue === 'signup') {
+      window.location.hash = tabValue
+    }
+  }, [tabValue])
+
   return (
     <main className="flex min-h-screen w-full justify-center">
-      <section className="mx-4 mb-8 mt-24 flex w-full max-w-md flex-col gap-4 bg-background sm:mx-0 2xl:mt-32">
-        <AuthTabs
-          tabs={tabs}
-          setCurrentTab={setCurrentTab}
-          loginStyles={currentTab === tabs.login ? active : passive}
-          registerStyles={currentTab === tabs.signup ? active : passive}
-        />
-        {currentTab === 'login' && (
-          <LoginForm setShouldRedirect={setShouldRedirect} />
-        )}
-        {currentTab === 'signup' && (
-          <SignUpForm setShouldRedirect={setShouldRedirect} />
-        )}
+      <section className="bg-background mx-4 mt-24 mb-8 flex w-full max-w-md flex-col gap-4 sm:mx-0 2xl:mt-32">
+        <Tabs value={tabValue} onValueChange={setTabValue} className="w-full">
+          <TabsList className="mb-4 grid w-full grid-cols-2">
+            <TabsTrigger value="login" className="text-sm font-bold capitalize">
+              {t('Tizimga kirish_1')}
+            </TabsTrigger>
+            <TabsTrigger
+              value="signup"
+              className="text-sm font-bold capitalize"
+            >
+              {t("Ro'yxatdan o'tish")}
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="login">
+            <LoginForm setShouldRedirect={setShouldRedirect} />
+          </TabsContent>
+          <TabsContent value="signup">
+            <SignUpForm setShouldRedirect={setShouldRedirect} />
+          </TabsContent>
+        </Tabs>
+        <SetUserCredentials />
       </section>
     </main>
   )
 }
-
-const tabs = {
-  login: 'login',
-  signup: 'signup',
-}
-const active = 'bg-background text-primary opacity-100'
-const passive = 'bg-transparent text-neutral-400'
 
 export default Auth
 

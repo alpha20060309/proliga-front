@@ -53,7 +53,7 @@ const SidebarTab = ({ title, tab, toggleModal }) => {
       />
       <button
         className={cn(
-          'select-none transition-all hover:text-foreground',
+          'hover:text-foreground transition-all select-none',
           tabStyling({
             tab,
             ACTIVE: sidebarStyles.active,

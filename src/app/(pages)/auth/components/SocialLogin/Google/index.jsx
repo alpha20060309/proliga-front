@@ -25,7 +25,10 @@ const GoogleSignIn = ({ className, iconClassName }) => {
   return (
     <Button
       variant="outline"
-      className={cn('w-1/2 p-0', className)}
+      className={cn(
+        'text-foreground dark:hover:text-accent w-1/2 p-0',
+        className
+      )}
       onClick={handleGoogleSignIn}
     >
       <Image

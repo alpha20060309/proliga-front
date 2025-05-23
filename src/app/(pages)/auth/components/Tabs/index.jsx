@@ -1,36 +1,35 @@
 import { useTranslation } from 'react-i18next'
-import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
-const AuthTabs = ({ tabs, setCurrentTab, loginStyles, registerStyles }) => {
+const AuthTabs = ({ tabs, setCurrentTab }) => {
   const { t } = useTranslation()
 
-  const handleClick = (tab) => {
-    setCurrentTab(tab)
-    window.location.hash = tab
+  const handleValueChange = (value) => {
+    setCurrentTab(value)
+    window.location.hash = value
   }
 
   return (
-    <div className="flex gap-0.5 rounded-sm bg-neutral-900 p-1">
-      <Button
-        className={cn(
-          'h-8 flex-1 select-none rounded-sm text-sm font-bold capitalize transition-all',
-          loginStyles
-        )}
-        onClick={() => handleClick(tabs.login)}
-      >
-        {t('Tizimga kirish_1')}
-      </Button>
-      <Button
-        className={cn(
-          'h-8 flex-1 select-none rounded-sm text-sm font-bold transition-all',
-          registerStyles
-        )}
-        onClick={() => handleClick(tabs.signup)}
-      >
-        {t("Ro'yxatdan o'tish")}
-      </Button>
-    </div>
+    <Tabs
+      defaultValue={tabs.login}
+      onValueChange={handleValueChange}
+      className="w-full"
+    >
+      <TabsList className="grid w-full grid-cols-2">
+        <TabsTrigger
+          value={tabs.login}
+          className="text-sm font-bold capitalize"
+        >
+          {t('Tizimga kirish_1')}
+        </TabsTrigger>
+        <TabsTrigger
+          value={tabs.signup}
+          className="text-sm font-bold capitalize"
+        >
+          {t("Ro'yxatdan o'tish")}
+        </TabsTrigger>
+      </TabsList>
+    </Tabs>
   )
 }
 

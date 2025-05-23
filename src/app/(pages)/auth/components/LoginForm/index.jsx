@@ -2,7 +2,6 @@
 
 import ForgotPassword from 'components/Modals/ForgotPassword'
 import SocialLogin from '../SocialLogin'
-import Image from 'next/image'
 import { toast } from 'react-toastify'
 import { useState, memo, useTransition } from 'react'
 import { useSelector } from 'react-redux'
@@ -11,12 +10,16 @@ import { useTranslation } from 'react-i18next'
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { Eye, EyeOff, Lock } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import { cn } from '@/lib/utils'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
 import { login } from 'app/actions/login.action'
 import { useSession } from 'next-auth/react'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
+import { Loader2 } from 'lucide-react'
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 
 const LoginForm = ({ setShouldRedirect }) => {
   const { t } = useTranslation()
@@ -88,102 +91,113 @@ const LoginForm = ({ setShouldRedirect }) => {
           }
           toast.success(t('Tizimga muvaffaqiyatli kirdingiz'))
         }
+        // eslint-disable-next-line no-unused-vars
       } catch (error) {
         toast.error(t('An unknown error occurred'))
       }
     })
   }
 
+  const handleForgotPasword = () => {
+    if (can_send_sms) {
+      setModalOpen(true)
+    } else {
+      toast.warning(
+        'SMS Services have been turned off! Sorry for inconvenience'
+      )
+    }
+  }
+
   return (
     <>
-      <section className="flex w-full flex-col gap-4 rounded-xl border border-neutral-700 bg-background px-4 py-8">
-        <form onSubmit={handleSubmit} className="flex w-full flex-col gap-1">
-          <h2 className="mb-4 text-xl font-bold text-foreground md:mb-4 md:text-2xl">
+      <Card className={'dark:bg-card/80'}>
+        <CardHeader>
+          <CardTitle className="text-foreground mb-4 text-xl font-bold md:mb-4 md:text-2xl">
             {t('Tizimga kirish_1')}
-          </h2>
-          <div className="relative flex flex-col gap-1">
-            <label
-              htmlFor="phone"
-              className="text-xs text-neutral-300 md:text-base"
-            >
-              {t('Telefon raqam')}:
-            </label>
-            <PhoneInput
-              id="phone"
-              name="phone"
-              placeholder={t('99-999-99-99')}
-              defaultCountry="UZ"
-              className="h-10 border-yellow-700 bg-neutral-900 text-neutral-50 placeholder:text-neutral-400"
-              value={phone}
-              onChange={setPhone}
-            />
-          </div>
-          <div className="relative flex flex-col gap-1">
-            <label
-              htmlFor="password"
-              className="text-xs text-neutral-300 md:text-base"
-            >
-              {t('Parol')}:
-            </label>
-            <input
-              type={showPassword ? 'text' : 'password'}
-              name="password"
-              id="password"
-              placeholder="********"
-              className="auth-input pl-9"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <Lock className="filter-neutral-400 absolute bottom-2.5 left-2 size-5" />
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <form onSubmit={handleSubmit} className="flex w-full flex-col gap-2">
+            <div className="relative flex flex-col gap-1">
+              <Label htmlFor="phone" className="text-xs md:text-base">
+                {t('Telefon raqam')}:
+              </Label>
+              <PhoneInput
+                id="phone"
+                name="phone"
+                placeholder={t('99-999-99-99')}
+                defaultCountry="UZ"
+                className="text-foreground border-foreground/20 placeholder:text-muted h-10 rounded border"
+                value={phone}
+                onChange={setPhone}
+              />
+            </div>
+            <div className="relative flex flex-col gap-1">
+              <Label htmlFor="password" className="text-xs md:text-base">
+                {t('Parol')}:
+              </Label>
+              <div className="relative">
+                <Input
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  id="password"
+                  placeholder="********"
+                  className="bg-input/80 text-foreground border-foreground/20 rounded pl-9"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <Lock className="absolute top-1/2 left-2 size-5 -translate-y-1/2 text-neutral-400" />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  className="absolute top-0 right-0 hover:bg-transparent dark:hover:bg-transparent"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? (
+                    <EyeOff className="text-foreground size-6" />
+                  ) : (
+                    <Eye className="text-foreground size-6" />
+                  )}
+                </Button>
+              </div>
+            </div>
             <Button
               type="button"
-              variant="ghost"
-              size="icon"
-              className="absolute bottom-0 right-0 hover:bg-transparent"
-              onClick={() => setShowPassword(!showPassword)}
+              variant="link"
+              className="hover:text-foreground text-muted-foreground self-start p-0"
+              onClick={handleForgotPasword}
             >
-              {showPassword ? (
-                <EyeOff className="size-6 text-secondary-foreground" />
+              {t('Parolingizni unutingizmi?')}
+            </Button>
+            <Button
+              type="submit"
+              disabled={isPending}
+              variant="outline"
+              className={cn(
+                'text-foreground dark:border-accent/80 dark:hover:border-accent border-accent hover:bg-accent dark:hover:text-accent',
+                'h-12 w-full font-bold transition-all duration-300',
+                isPending && 'bg-accent text-accent-foreground'
+              )}
+            >
+              {isPending ? (
+                <Loader2 className="mx-auto size-6 animate-spin" />
               ) : (
-                <Eye className="size-6 text-secondary-foreground" />
+                t('Tizimga kirish_2')
               )}
             </Button>
+          </form>
+          <div className="flex items-center py-0.5">
+            <span className="grow border-t border-gray-300" />
+            <p className="px-2 text-sm text-neutral-400">
+              {t('Or continue with')}
+            </p>
+            <span className="grow border-t border-gray-300" />
           </div>
-          <div className="my-3 flex justify-between">
-            {can_send_sms && (
-              <button
-                type="button"
-                className="cursor-pointer self-start text-sm text-neutral-400 transition-colors hover:text-foreground hover:underline"
-                onClick={() => setModalOpen(true)}
-              >
-                {t('Parolingizni unutingizmi?')}
-              </button>
-            )}
-          </div>
-          <Button
-            type="submit"
-            disabled={isPending}
-            className={cn(
-              'h-12 w-full rounded-sm border border-yellow-400 bg-neutral-900 font-bold',
-              'text-foreground transition-all duration-300 hover:bg-yellow-400 hover:text-neutral-900',
-              isPending && 'bg-yellow-400 text-neutral-900'
-            )}
-          >
-            {isPending ? (
-              <Image
-                src="/icons/loading.svg"
-                width={24}
-                height={24}
-                alt="loading"
-                className="filter-black mx-auto size-6 animate-spin"
-              />
-            ) : (
-              t('Tizimga kirish_2')
-            )}
-          </Button>
-        </form>
-        <SocialLogin setShouldRedirect={setShouldRedirect} />
-      </section>
+
+          <SocialLogin setShouldRedirect={setShouldRedirect} />
+        </CardContent>
+      </Card>
       <ForgotPassword isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
     </>
   )

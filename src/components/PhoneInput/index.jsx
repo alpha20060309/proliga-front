@@ -6,24 +6,10 @@ import * as RPNInput from 'react-phone-number-input'
 import flags from 'react-phone-number-input/flags'
 
 import { Button } from '@/components/ui/button'
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from '@/components/ui/command'
 import { Input } from '@/components/ui/input'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
 
 import { cn } from '@/lib/utils'
 import { forwardRef } from 'react'
-import { ScrollArea } from '@/components/ui/scroll-area'
 
 const PhoneInput = forwardRef(({ className, onChange, ...props }, ref) => {
   return (
@@ -44,7 +30,7 @@ PhoneInput.displayName = 'PhoneInput'
 const InputComponent = React.forwardRef(({ className, ...props }, ref) => (
   <Input
     className={cn(
-      'rounded-e rounded-s-none border-inherit bg-inherit text-secondary-foreground placeholder:text-neutral-500 md:text-base',
+      'text-secondary-foreground bg-input/80 rounded-s-none rounded-e md:text-base',
       className
     )}
     {...props}
@@ -54,78 +40,22 @@ const InputComponent = React.forwardRef(({ className, ...props }, ref) => (
 InputComponent.displayName = 'InputComponent'
 
 const CountrySelect = ({ disabled, value, onChange, options }) => {
-  // const handleSelect = React.useCallback(
-  //   (country) => {
-  //     onChange(country)
-  //   },
-  //   [onChange]
-  // )
-
   return (
     <Button
       type="button"
       variant={'outline-solid'}
       className={cn(
-        'flex gap-1 rounded-e-none rounded-s border-y border-l border-r-0 border-inherit bg-inherit px-2 text-sm'
+        'text-color-foreground border-input bg-background/80 flex items-center justify-center gap-1 rounded rounded-s rounded-e-none border-y border-r-0 border-l px-2 text-sm'
       )}
       disabled={disabled}
     >
       <FlagComponent country={value} countryName={value} />
       {value && (
-        <p className="ml-1">+{RPNInput?.getCountryCallingCode(value)}</p>
+        <p className="text-foreground ml-1">
+          +{RPNInput?.getCountryCallingCode(value)}
+        </p>
       )}
-      {/* <ChevronsUpDown
-        className={cn(
-          '-mr-1 h-4 w-4 opacity-50',
-          disabled ? 'hidden' : 'opacity-100'
-        )}
-      /> */}
     </Button>
-    // <Popover>
-    //   <PopoverTrigger asChild>
-    //   </PopoverTrigger>
-    //   <PopoverContent className="w-80 bg-background p-0">
-    //     <Command>
-    //       <CommandList>
-    //         <ScrollArea className="h-72 bg-background">
-    //           <CommandInput
-    //             placeholder="Search country..."
-    //             className="text-foreground"
-    //           />
-    //           <CommandEmpty>No country found.</CommandEmpty>
-    //           <CommandGroup>
-    //             {options
-    //               .filter((x) => x.value)
-    //               .map((option) => (
-    //                 <CommandItem
-    //                   className="gap-2 bg-background text-secondary-foreground hover:bg-secondary active:bg-secondary"
-    //                   key={option.value}
-    //                   // onSelect={() => handleSelect(option.value)}
-    //                 >
-    //                   <FlagComponent
-    //                     country={option.value}
-    //                     countryName={option.label}
-    //                   />
-    //                   <span className="flex-1 text-sm">{option.label}</span>
-    //                   {option.value && (
-    //                     <span className="text-foreground/50 text-sm">
-    //                       {`+${RPNInput.getCountryCallingCode(option.value)}`}
-    //                     </span>
-    //                   )}
-    //                   <CheckIcon
-    //                     className={cn(
-    //                       'ml-auto h-4 w-4',
-    //                       option.value === value ? 'opacity-100' : 'opacity-0'
-    //                     )}
-    //                   />
-    //                 </CommandItem>
-    //               ))}
-    //           </CommandGroup>
-    //         </ScrollArea>
-    //       </CommandList>
-    //     </Command>
-    //   </PopoverContent>
-    // </Popover>
   )
 }
 
@@ -133,7 +63,7 @@ const FlagComponent = ({ country, countryName }) => {
   const Flag = flags[country]
 
   return (
-    <span className="bg-foreground/20 flex h-4 w-6 overflow-hidden rounded-xs">
+    <span className="flex h-full overflow-hidden">
       {Flag && <Flag title={countryName} />}
     </span>
   )

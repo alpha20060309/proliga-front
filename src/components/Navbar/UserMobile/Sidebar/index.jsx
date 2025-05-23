@@ -1,14 +1,14 @@
 import { Link } from 'next-view-transitions'
-import Image from 'next/image'
+import { Settings, LogOut, LogIn } from 'lucide-react'
 import SystemLink from './SystemLink'
 import SidebarTab from './Tab'
 import SidebarTabLink from './TabLink'
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-} from '@/components/ui/dialog'
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetTitle,
+} from '@/components/ui/sheet'
 import { useSelector } from 'react-redux'
 import { usePathname } from 'next/navigation'
 import { TABS } from 'app/utils/tabs.util'
@@ -31,10 +31,13 @@ const MobileSidebar = ({ isModalOpen, setModalOpen }) => {
   }
 
   return (
-    <Dialog open={isModalOpen} onOpenChange={setModalOpen}>
-      <DialogContent className="left-auto right-0 flex h-full w-4/5 min-w-80 -translate-x-[0%] translate-y-[-50%] flex-col rounded-e-none rounded-s-2xl p-5 data-[state=closed]:slide-out-to-right-full data-[state=open]:slide-in-from-right-full xs:w-3/4 sm:w-2/3 sm:p-6">
-        <DialogTitle className="hidden">Title</DialogTitle>
-        <div className="flex flex-col items-start justify-center gap-6 py-12 xs:gap-7 sm:py-16">
+    <Sheet open={isModalOpen} onOpenChange={setModalOpen}>
+      <SheetContent
+        side="right"
+        className="xs:w-3/4 border-muted flex h-full w-4/5 min-w-80 flex-col rounded-s-xl rounded-e-none p-5 sm:w-2/3 sm:p-6"
+      >
+        <SheetTitle className="hidden">Title</SheetTitle>
+        <div className="xs:gap-7 flex flex-col items-start justify-center gap-6 py-12 sm:py-16">
           {path.includes('play') && (
             <>
               <SidebarTab
@@ -105,7 +108,7 @@ const MobileSidebar = ({ isModalOpen, setModalOpen }) => {
             />
             <Link
               className={cn(
-                'transition-all group-hover:text-foreground',
+                'group-hover:text-foreground transition-all',
                 path.includes('championships')
                   ? sidebarStyles.active
                   : sidebarStyles.passive
@@ -127,7 +130,7 @@ const MobileSidebar = ({ isModalOpen, setModalOpen }) => {
             />
             <Link
               className={cn(
-                'transition-all hover:text-foreground',
+                'hover:text-foreground transition-all',
                 path.includes('prizes')
                   ? sidebarStyles.active
                   : sidebarStyles.passive
@@ -149,7 +152,7 @@ const MobileSidebar = ({ isModalOpen, setModalOpen }) => {
             />
             <Link
               className={cn(
-                'transition-all hover:text-foreground',
+                'hover:text-foreground transition-all',
                 path.includes('regulation')
                   ? sidebarStyles.active
                   : sidebarStyles.passive
@@ -168,44 +171,29 @@ const MobileSidebar = ({ isModalOpen, setModalOpen }) => {
                 handleToggle={() => setModalOpen(false)}
                 href="/settings"
               >
-                <Image
-                  width={24}
-                  height={24}
-                  alt="settings"
-                  src="/icons/gear.svg"
-                />
+                <Settings className="text-foreground h-6 w-6" />
                 <p>{t('Sozlamalar')}</p>
               </SystemLink>
               <div
                 onClick={handleLogOut}
-                className="flex h-full w-full gap-2 rounded-sm bg-neutral-900 p-2 hover:bg-secondary"
+                className="hover:bg-secondary bg-background flex h-full w-full gap-2 rounded-sm p-2"
               >
-                <Image
-                  src={'/icons/logout.svg'}
-                  alt="user"
-                  width={24}
-                  height={24}
-                />
+                <LogOut className="text-foreground h-6 w-6" />
                 <p>{t('Tizimdan chiqish')}</p>
               </div>
             </>
           ) : (
             <SystemLink handleToggle={() => setModalOpen(false)} href="/auth">
-              <Image
-                src={'/icons/login.svg'}
-                alt="user"
-                width={24}
-                height={24}
-              />
+              <LogIn className="text-foreground h-6 w-6" />
               <p>{t('Tizimga kirish_1')}</p>
             </SystemLink>
           )}
         </section>
-        <DialogDescription className="hidden">
+        <SheetDescription className="sr-only">
           This is a navigation sidebar for mobile devices
-        </DialogDescription>
-      </DialogContent>
-    </Dialog>
+        </SheetDescription>
+      </SheetContent>
+    </Sheet>
   )
 }
 

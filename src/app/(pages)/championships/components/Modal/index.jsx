@@ -90,7 +90,7 @@ const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder={t('Enter your team name')}
-              className="border-input bg-background text-foreground placeholder:text-muted-foreground focus:border-ring focus:ring-ring h-12 w-full rounded-md border-2 p-2 text-sm focus:ring-2 focus:outline-hidden sm:h-12 sm:p-3 sm:text-base"
+              className="border-input bg-background text-foreground placeholder:text-muted-foreground focus:border-ring focus:ring-ring h-10 w-full rounded-md border-2 p-2 text-sm focus:ring-2 focus:outline-hidden sm:h-12 sm:p-3 sm:text-base"
             />
           </div>
           <div className="flex flex-col gap-1">

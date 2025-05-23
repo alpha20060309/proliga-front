@@ -23,7 +23,7 @@ const YandexSignIn = () => {
     <Button
       onClick={handleYandexSignIn}
       variant="outline"
-      className="w-1/2 p-0"
+      className="text-foreground dark:hover:text-accent w-1/2 p-0"
     >
       <Image
         src="./icons/yandex.svg"
