@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-import { CheckIcon, ChevronsUpDown } from 'lucide-react'
 
 import * as React from 'react'
 import * as RPNInput from 'react-phone-number-input'
@@ -45,7 +44,7 @@ const CountrySelect = ({ disabled, value, onChange, options }) => {
       type="button"
       variant={'outline-solid'}
       className={cn(
-        'text-color-foreground border-input bg-background/80 flex items-center justify-center gap-1 rounded rounded-s rounded-e-none border-y border-r-0 border-l px-2 text-sm'
+        'text-foreground border-input flex items-center justify-center gap-1 rounded rounded-s rounded-e-none border-y border-r-0 border-l px-2 text-sm'
       )}
       disabled={disabled}
     >

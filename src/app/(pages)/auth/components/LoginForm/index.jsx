@@ -109,97 +109,87 @@ const LoginForm = ({ setShouldRedirect }) => {
   }
 
   return (
-    <>
-      <Card className={'dark:bg-card/80'}>
-        <CardHeader>
-          <CardTitle className="text-foreground mb-4 text-xl font-bold md:mb-4 md:text-2xl">
-            {t('Tizimga kirish_1')}
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <form onSubmit={handleSubmit} className="flex w-full flex-col gap-2">
-            <div className="relative flex flex-col gap-1">
-              <Label htmlFor="phone" className="text-xs md:text-base">
-                {t('Telefon raqam')}:
-              </Label>
-              <PhoneInput
-                id="phone"
-                name="phone"
-                placeholder={t('99-999-99-99')}
-                defaultCountry="UZ"
-                className="text-foreground border-foreground/20 placeholder:text-muted h-10 rounded border"
-                value={phone}
-                onChange={setPhone}
-              />
-            </div>
-            <div className="relative flex flex-col gap-1">
-              <Label htmlFor="password" className="text-xs md:text-base">
-                {t('Parol')}:
-              </Label>
-              <div className="relative">
-                <Input
-                  type={showPassword ? 'text' : 'password'}
-                  name="password"
-                  id="password"
-                  placeholder="********"
-                  className="bg-input/80 text-foreground border-foreground/20 rounded pl-9"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <Lock className="absolute top-1/2 left-2 size-5 -translate-y-1/2 text-neutral-400" />
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="icon"
-                  className="absolute top-0 right-0 hover:bg-transparent dark:hover:bg-transparent"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? (
-                    <EyeOff className="text-foreground size-6" />
-                  ) : (
-                    <Eye className="text-foreground size-6" />
-                  )}
-                </Button>
-              </div>
-            </div>
-            <Button
-              type="button"
-              variant="link"
-              className="hover:text-foreground text-muted-foreground self-start p-0"
-              onClick={handleForgotPasword}
-            >
-              {t('Parolingizni unutingizmi?')}
-            </Button>
-            <Button
-              type="submit"
-              disabled={isPending}
-              variant="outline"
-              className={cn(
-                'text-foreground dark:border-accent/80 dark:hover:border-accent border-accent hover:bg-accent dark:hover:text-accent',
-                'h-12 w-full font-bold transition-all duration-300',
-                isPending && 'bg-accent text-accent-foreground'
-              )}
-            >
-              {isPending ? (
-                <Loader2 className="mx-auto size-6 animate-spin" />
-              ) : (
-                t('Tizimga kirish_2')
-              )}
-            </Button>
-          </form>
-          <div className="flex items-center py-0.5">
-            <span className="grow border-t border-gray-300" />
-            <p className="px-2 text-sm text-neutral-400">
-              {t('Or continue with')}
-            </p>
-            <span className="grow border-t border-gray-300" />
+    <Card className={'dark:bg-card/70 border-foreground/50'}>
+      <CardHeader>
+        <CardTitle className="text-foreground mb-4 text-xl font-bold md:mb-4 md:text-2xl">
+          {t('Tizimga kirish_1')}
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <form onSubmit={handleSubmit} className="flex w-full flex-col gap-2">
+          <div className="relative flex flex-col gap-1">
+            <Label htmlFor="phone" className="text-xs md:text-base">
+              {t('Telefon raqam')}:
+            </Label>
+            <PhoneInput
+              id="phone"
+              name="phone"
+              placeholder={t('99-999-99-99')}
+              defaultCountry="UZ"
+              className="text-foreground border-foreground/20 placeholder:text-muted h-10 rounded border"
+              value={phone}
+              onChange={setPhone}
+            />
           </div>
-
-          <SocialLogin setShouldRedirect={setShouldRedirect} />
-        </CardContent>
-      </Card>
-      <ForgotPassword isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
-    </>
+          <div className="relative flex flex-col gap-1">
+            <Label htmlFor="password" className="text-xs md:text-base">
+              {t('Parol')}:
+            </Label>
+            <div className="relative">
+              <Input
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                id="password"
+                placeholder="********"
+                className="bg-input/80 text-foreground border-foreground/20 rounded pl-9"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Lock className="text-muted-foreground absolute top-1/2 left-2 size-5 -translate-y-1/2" />
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="hover:bg-foreground/10 dark:hover:bg-foreground/10 absolute top-0 right-0"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <EyeOff className="text-muted-foreground hover:text-foreground size-6" />
+                ) : (
+                  <Eye className="text-muted-foreground hover:text-foreground size-6" />
+                )}
+              </Button>
+            </div>
+          </div>
+          <Button
+            type="button"
+            variant="link"
+            className="hover:text-foreground text-muted-foreground self-start p-0"
+            onClick={handleForgotPasword}
+          >
+            {t('Parolingizni unutingizmi?')}
+          </Button>
+          <Button
+            type="submit"
+            disabled={isPending}
+            variant="outline"
+            className={cn(
+              'text-foreground dark:border-accent/80 dark:hover:border-accent border-accent hover:bg-accent dark:hover:text-accent',
+              'h-12 w-full font-bold transition-all duration-300',
+              isPending && 'bg-accent text-accent-foreground'
+            )}
+          >
+            {isPending ? (
+              <Loader2 className="mx-auto size-6 animate-spin" />
+            ) : (
+              t('Tizimga kirish_2')
+            )}
+          </Button>
+        </form>
+        <SocialLogin setShouldRedirect={setShouldRedirect} />
+        <ForgotPassword isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
+      </CardContent>
+    </Card>
   )
 }
 

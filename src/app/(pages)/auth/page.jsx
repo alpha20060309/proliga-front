@@ -76,13 +76,16 @@ const Auth = () => {
     <main className="flex min-h-screen w-full justify-center">
       <section className="bg-background mx-4 mt-24 mb-8 flex w-full max-w-md flex-col gap-4 sm:mx-0 2xl:mt-32">
         <Tabs value={tabValue} onValueChange={setTabValue} className="w-full">
-          <TabsList className="mb-4 grid w-full grid-cols-2">
-            <TabsTrigger value="login" className="text-sm font-bold capitalize">
+          <TabsList className="bg-muted/50 mb-4 grid w-full grid-cols-2">
+            <TabsTrigger
+              value="login"
+              className="data-[state=active]:bg-background data-[state=active]:text-foreground text-sm font-bold capitalize data-[state=active]:shadow-sm"
+            >
               {t('Tizimga kirish_1')}
             </TabsTrigger>
             <TabsTrigger
               value="signup"
-              className="text-sm font-bold capitalize"
+              className="data-[state=active]:bg-background data-[state=active]:text-foreground text-sm font-bold capitalize data-[state=active]:shadow-sm"
             >
               {t("Ro'yxatdan o'tish")}
             </TabsTrigger>

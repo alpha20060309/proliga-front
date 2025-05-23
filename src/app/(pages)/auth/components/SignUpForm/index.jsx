@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { Link } from 'next-view-transitions'
 import { useState, useTransition } from 'react'
 import { useSelector } from 'react-redux'
@@ -9,7 +8,7 @@ import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { Button } from '@/components/ui/button'
-import { Eye, EyeOff, Lock, Mail } from 'lucide-react'
+import { Eye, EyeOff, Lock, Mail, Loader2 } from 'lucide-react'
 import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
 import { isEmail } from 'validator'
 import { cn } from '@/lib/utils'
@@ -20,6 +19,9 @@ import { Input } from '@/components/ui/input'
 import { useSession } from 'next-auth/react'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
 import { register } from 'app/actions/register.action'
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { Label } from '@/components/ui/label'
+import { Checkbox } from '@/components/ui/checkbox'
 
 const SignUpForm = ({ setShouldRedirect }) => {
   const { t } = useTranslation()
@@ -97,7 +99,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
             })
           }
         }
-      // eslint-disable-next-line no-unused-vars
+        // eslint-disable-next-line no-unused-vars
       } catch (error) {
         toast.error(t('An unknown error occurred'))
       }
@@ -105,149 +107,142 @@ const SignUpForm = ({ setShouldRedirect }) => {
   }
 
   return (
-    <section className="flex w-full flex-col gap-4 rounded-xl border border-neutral-700 bg-background px-4 py-8">
-      <form onSubmit={handleSubmit} className="flex w-full flex-col gap-1">
-        <h2 className="mb-4 text-xl font-bold text-foreground md:mb-4 md:text-2xl">
+    <Card className="dark:bg-card/70 border-foreground/50">
+      <CardHeader>
+        <CardTitle className="text-foreground mb-4 text-xl font-bold md:mb-4 md:text-2xl">
           {t("Ro'yxatdan o'tish")}
-        </h2>
-        <div className="relative flex flex-col gap-1">
-          <label
-            htmlFor="phone"
-            className="text-xs text-neutral-300 md:text-base"
-          >
-            {t('Telefon raqam')}:
-          </label>
-          <PhoneInput
-            id="phone"
-            name="phone"
-            placeholder={'99-999-99-99'}
-            defaultCountry="UZ"
-            className="h-10 border-yellow-700 bg-neutral-900 text-foreground"
-            value={phone}
-            onChange={setPhone}
-          />
-        </div>
-        <div className="relative flex flex-col gap-1">
-          <label
-            htmlFor="email"
-            className="text-xs text-neutral-300 md:text-base"
-          >
-            {t('Elektron pochta')}:
-          </label>
-          <Input
-            type="email"
-            name="email"
-            id="email"
-            className="auth-input pl-9"
-            placeholder="example@xyz.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Mail className="filter-neutral-400 absolute bottom-2.5 left-2 size-5" />
-        </div>
-        <div className="relative flex flex-col gap-1">
-          <label
-            htmlFor="confirmPassword"
-            className="text-xs text-neutral-300 md:text-base"
-          >
-            {t('Parol')}:
-          </label>
-          <input
-            type={showPassword ? 'text' : 'password'}
-            name="confirmPassword"
-            id="confirmPassword"
-            placeholder="********"
-            className="auth-input pl-9"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button
-            type="button"
-            variant="ghost"
-            size="icon"
-            className="absolute bottom-0 right-0 hover:bg-transparent"
-            onClick={() => setShowPassword(!showPassword)}
-          >
-            {showPassword ? (
-              <EyeOff className="size-6 text-secondary-foreground" />
-            ) : (
-              <Eye className="size-6 text-secondary-foreground" />
-            )}
-          </Button>
-          <Lock className="filter-neutral-400 absolute bottom-2.5 left-2 size-5" />
-        </div>
-        <div className="relative flex flex-col gap-1">
-          <label
-            htmlFor="password"
-            className="text-xs text-neutral-300 md:text-base"
-          >
-            {t('Parol tasdiqlash')}:
-          </label>
-          <input
-            type={showConfirmPassword ? 'text' : 'password'}
-            name="password"
-            id="password"
-            placeholder="********"
-            className="auth-input pl-9"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-          <Button
-            type="button"
-            variant="ghost"
-            size="icon"
-            className="absolute bottom-0 right-0 hover:bg-transparent"
-            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-          >
-            {showConfirmPassword ? (
-              <EyeOff className="size-6 text-secondary-foreground" />
-            ) : (
-              <Eye className="size-6 text-secondary-foreground" />
-            )}
-          </Button>
-          <Lock className="filter-neutral-400 absolute bottom-2.5 left-2 size-5" />
-        </div>
-        <div className="my-3 flex items-center text-xs text-foreground sm:text-sm">
-          <input
-            type="checkbox"
-            className="mr-1.5 inline size-4 cursor-pointer accent-primary"
-            id="agreement"
-            name="agreement"
-            value={agreement}
-            onChange={() => setAgreement(!agreement)}
-          />
-          <label htmlFor="agreement" className="inline select-none">
-            {t('Men')}{' '}
-            <Link href="/user-agreement" className="underline">
-              {t('qoidalar')}
-            </Link>{' '}
-            {t('bilan tanishib chiqdim va ularga roziman')}
-          </label>
-        </div>
-        <Button
-          type="submit"
-          disabled={isPending}
-          className={cn(
-            'h-12 w-full rounded-sm border border-yellow-400 bg-neutral-900 font-bold',
-            'text-foreground transition-all duration-300 hover:bg-yellow-400 hover:text-neutral-900',
-            isPending && 'bg-yellow-400 text-neutral-900'
-          )}
-        >
-          {isPending ? (
-            <Image
-              src="/icons/loading.svg"
-              width={24}
-              height={24}
-              alt="loading"
-              className="filter-black mx-auto size-6 animate-spin"
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <form onSubmit={handleSubmit} className="flex w-full flex-col gap-2">
+          <div className="relative flex flex-col gap-1">
+            <Label htmlFor="phone" className="text-xs md:text-base">
+              {t('Telefon raqam')}:
+            </Label>
+            <PhoneInput
+              id="phone"
+              name="phone"
+              placeholder={t('99-999-99-99')}
+              defaultCountry="UZ"
+              className="text-foreground border-foreground/20 placeholder:text-muted h-10 rounded border"
+              value={phone}
+              onChange={setPhone}
             />
-          ) : (
-            t('Akkaunt Ochish')
-          )}
-        </Button>
-      </form>
-      <SocialLogin setShouldRedirect={setShouldRedirect} />
-    </section>
+          </div>
+          <div className="relative flex flex-col gap-1">
+            <Label htmlFor="email" className="text-xs md:text-base">
+              {t('Elektron pochta')}:
+            </Label>
+            <div className="relative">
+              <Input
+                type="email"
+                name="email"
+                id="email"
+                className="bg-input/80 text-foreground border-foreground/20 rounded pl-9"
+                placeholder="example@xyz.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <Mail className="text-muted-foreground absolute top-1/2 left-2 size-5 -translate-y-1/2" />
+            </div>
+          </div>
+          <div className="relative flex flex-col gap-1">
+            <Label htmlFor="confirmPassword" className="text-xs md:text-base">
+              {t('Parol')}:
+            </Label>
+            <div className="relative">
+              <Input
+                type={showPassword ? 'text' : 'password'}
+                name="confirmPassword"
+                id="confirmPassword"
+                placeholder="********"
+                className="bg-input/80 text-foreground border-foreground/20 rounded pl-9"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Lock className="text-muted-foreground absolute top-1/2 left-2 size-5 -translate-y-1/2" />
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="hover:bg-foreground/10 dark:hover:bg-foreground/10 absolute top-0 right-0"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <EyeOff className="text-muted-foreground hover:text-foreground size-6" />
+                ) : (
+                  <Eye className="text-muted-foreground hover:text-foreground size-6" />
+                )}
+              </Button>
+            </div>
+          </div>
+          <div className="relative flex flex-col gap-1">
+            <Label htmlFor="password" className="text-xs md:text-base">
+              {t('Parol tasdiqlash')}:
+            </Label>
+            <div className="relative">
+              <Input
+                type={showConfirmPassword ? 'text' : 'password'}
+                name="password"
+                id="password"
+                placeholder="********"
+                className="bg-input/80 text-foreground border-foreground/20 rounded pl-9"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              <Lock className="text-muted-foreground absolute top-1/2 left-2 size-5 -translate-y-1/2" />
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="hover:bg-foreground/10 dark:hover:bg-foreground/10 absolute top-0 right-0"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              >
+                {showConfirmPassword ? (
+                  <EyeOff className="text-muted-foreground hover:text-foreground size-6" />
+                ) : (
+                  <Eye className="text-muted-foreground hover:text-foreground size-6" />
+                )}
+              </Button>
+            </div>
+          </div>
+          <div className="text-foreground my-2 flex items-center gap-2 text-xs sm:text-sm">
+            <Checkbox
+              id="agreement"
+              checked={agreement}
+              onCheckedChange={(checked) => setAgreement(checked)}
+            />
+            <Label
+              htmlFor="agreement"
+              className="text-muted-foreground cursor-pointer select-none"
+            >
+              {t('Men')}{' '}
+              <Link href="/user-agreement" className="underline">
+                {t('qoidalar')}
+              </Link>{' '}
+              {t('bilan tanishib chiqdim va ularga roziman')}
+            </Label>
+          </div>
+          <Button
+            type="submit"
+            disabled={isPending}
+            variant="outline"
+            className={cn(
+              'text-foreground dark:border-accent/80 dark:hover:border-accent border-accent hover:bg-accent dark:hover:text-accent',
+              'h-12 w-full font-bold transition-all duration-300',
+              isPending && 'bg-accent text-accent-foreground'
+            )}
+          >
+            {isPending ? (
+              <Loader2 className="mx-auto size-6 animate-spin" />
+            ) : (
+              t('Akkaunt Ochish')
+            )}
+          </Button>
+        </form>
+        <SocialLogin setShouldRedirect={setShouldRedirect} />
+      </CardContent>
+    </Card>
   )
 }
 
