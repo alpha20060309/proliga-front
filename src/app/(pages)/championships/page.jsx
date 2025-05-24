@@ -63,7 +63,7 @@ const Championships = () => {
   return (
     <section
       className={cn(
-        'mb-4 mt-8 min-h-120 w-full rounded-lg border border-border',
+        'border-border mt-8 mb-4 min-h-120 w-full rounded-lg border',
         'bg-card/10 p-4 backdrop-blur-sm sm:p-5 md:mt-6 md:min-h-48'
       )}
     >

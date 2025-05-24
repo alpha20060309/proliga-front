@@ -9,6 +9,8 @@ import { getCorrectName } from 'app/utils/getCorrectName.util'
 import CompetitionModal from '../Modal/index'
 import { selectTeams } from 'app/lib/features/team/team.selector'
 import { getUrl } from 'app/utils/static.util'
+import { Card, CardContent, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
 
 const Championship = ({ game }) => {
   const { t } = useTranslation()
@@ -39,40 +41,49 @@ const Championship = ({ game }) => {
     return router.push(`/play/${game.id}/${currentGame.id}`)
   }
 
-  const condition = useMemo(() => {
-    if (!game?.is_active)
-      return 'border-destructive hover:shadow-destructive shadow-md cursor-default'
+  const cardVariants = useMemo(() => {
+    if (!game?.is_active) return 'border-muted-foreground/40 cursor-default'
     if (currentGame)
-      return 'border-primary/80 hover:shadow-primary shadow-lg cursor-pointer hover:border-primary'
+      return 'border-primary/70 hover:border-primary cursor-pointer hover:bg-card/10'
     return game.can_register
-      ? 'border-accent/60 hover:shadow-primary hover:border-primary cursor-pointer shadow-lg'
-      : 'border-destructive/70 hover:shadow-destructive/70 cursor-default shadow-md'
+      ? 'border-accent/50 hover:border-primary cursor-pointer hover:bg-card/10'
+      : 'border-muted-foreground/40 cursor-default'
   }, [currentGame, game?.can_register, game?.is_active])
 
   return (
     <>
-      <article
+      <Card
         className={cn(
-          'relative flex h-28 items-center gap-4 overflow-hidden rounded-lg border',
-          'px-3 transition-all active:shadow-lg',
-          condition
+          'bg-card/10 relative flex h-32 items-start overflow-hidden rounded-lg border',
+          'justify-center px-3 transition-all active:scale-[0.98]',
+          cardVariants
         )}
         onClick={handleClick}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            handleClick()
+          }
+        }}
+        aria-label={`View details for ${getCorrectName({ lang, uz: game?.name, ru: game?.name_ru })}`}
       >
-        <img
-          src={getUrl(game.flag)}
-          alt={game.title}
-          className="z-10 size-14 rounded-xl bg-white p-1 select-none"
-          draggable={false}
-          loading="lazy"
-        />
-        <div>
-          <h3 className="text-foreground text-base font-bold capitalize select-none md:text-lg xl:text-xl">
-            {getCorrectName({ lang, uz: game?.name, ru: game?.name_ru })}
-          </h3>
-          {renderGameStatus(game, currentGame, t)}
-        </div>
-      </article>
+        <CardContent className="flex items-start justify-center gap-4 p-0">
+          <img
+            src={getUrl(game.flag)}
+            alt={game.title}
+            className="z-10 size-14 rounded-xl bg-white p-1 select-none"
+            draggable={false}
+            loading="lazy"
+          />
+          <div>
+            <CardTitle className="text-base font-bold text-white capitalize select-none md:text-lg xl:text-xl">
+              {getCorrectName({ lang, uz: game?.name, ru: game?.name_ru })}
+            </CardTitle>
+            <div className="p-0">{renderGameStatus(game, currentGame, t)}</div>
+          </div>
+        </CardContent>
+      </Card>
       {game.can_register && (
         <CompetitionModal
           toggleModal={setModalOpen}
@@ -87,30 +98,32 @@ const Championship = ({ game }) => {
 const renderGameStatus = (game, currentGame, t) => {
   if (!game?.is_active) {
     return (
-      <div className="text-muted-foreground mt-1 flex items-center gap-2 text-xs select-none sm:text-sm">
-        <span className="bg-destructive/50 text-destructive-foreground rounded-full px-2 py-0.5">
+      <div className="mt-1 flex items-center gap-2 text-xs select-none sm:text-sm">
+        <Badge variant="destructive" className="text-destructive-foreground">
           {t('Inactive')}
-        </span>
-        <p>{t('Tez Kunda')}</p>
+        </Badge>
+        <p className="text-secondary-foreground">{t('Tez Kunda')}</p>
       </div>
     )
   }
 
   if (currentGame || game?.can_register) {
     return (
-      <div className="text-foreground flex gap-1 text-xs select-none sm:text-sm">
+      <div className="text-secondary-foreground flex gap-1 text-xs select-none sm:text-sm">
         <p>{t('Deadline')}: </p>
-        <span className="text-primary">{formatDate(game?.deadline)}</span>
+        <span className="font-semibold text-yellow-400">
+          {formatDate(game?.deadline)}
+        </span>
       </div>
     )
   }
 
   return (
     <div className="mt-1 flex items-center gap-2 text-xs select-none sm:text-sm">
-      <span className="bg-destructive/50 text-destructive-foreground rounded-full px-2 py-0.5 capitalize">
+      <Badge className="bg-amber-400 font-medium text-amber-900 capitalize hover:bg-amber-400/90 dark:bg-amber-500 dark:text-amber-950 dark:hover:bg-amber-500/90">
         {t('closed')}
-      </span>
-      <p className="text-info">{t('Registration Ended')}</p>
+      </Badge>
+      <p className="text-secondary-foreground/80">{t('Registration Ended')}</p>
     </div>
   )
 }

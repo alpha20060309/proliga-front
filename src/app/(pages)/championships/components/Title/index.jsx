@@ -4,7 +4,7 @@ const ChampionshipsTitle = () => {
   const { t } = useTranslation()
 
   return (
-    <h2 className="mb-6 text-2xl font-bold text-foreground">
+    <h2 className="mb-6 text-2xl font-bold text-white">
       <span className="mr-2 text-accent">{t('Available')}</span>
       {t('Ligalar')}
     </h2>

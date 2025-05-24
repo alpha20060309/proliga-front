@@ -144,13 +144,13 @@
   --secondary-foreground: hsl(0, 0%, 95%);
 
   /* Status colors */
-  --success: hsl(142, 76%, 36%);
+  --success: hsl(142, 100%, 30%);
   --success-foreground: hsl(0, 0%, 100%);
-  --warning: hsl(48, 96%, 53%);
+  --warning: hsl(48, 100%, 45%);
   --warning-foreground: hsl(0, 0%, 10%);
-  --error: hsl(0, 84%, 60%);
+  --error: hsl(0, 100%, 45%);
   --error-foreground: hsl(0, 0%, 100%);
-  --info: hsl(200, 98%, 39%);
+  --info: hsl(200, 100%, 35%);
   --info-foreground: hsl(0, 0%, 100%);
 
   /* UI colors */
@@ -164,9 +164,9 @@
   --ring: hsl(52, 100%, 50%);
 
   /* Chart colors */
-  --chart-1: hsl(0, 100%, 40%);
-  --chart-2: hsl(240, 100%, 40%);
-  --chart-3: hsl(52, 100%, 40%);
+  --chart-1: hsl(0, 100%, 35%);
+  --chart-2: hsl(240, 100%, 35%);
+  --chart-3: hsl(52, 100%, 35%);
   --chart-4: hsl(270, 70%, 50%);
   --chart-5: hsl(360, 100%, 60%);
 
