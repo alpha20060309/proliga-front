@@ -51,9 +51,9 @@ export default function TourTabs() {
     <Box
       sx={{
         width: '100%',
-        bgcolor: '#000',
-        color: '#fff',
-        borderRadius: '4px',
+        bgcolor: 'var(--background)',
+        color: 'var(--foreground)',
+        borderRadius: 'var(--radius)',
         minHeight: '64px',
       }}
       width={'100%'}
@@ -62,7 +62,7 @@ export default function TourTabs() {
         value={currentTourIndex}
         variant="scrollable"
         scrollButtons="auto"
-        className="snap-x snap-center rounded-sm text-neutral-50 fade-in disabled:text-neutral-500"
+        className="text-foreground disabled:text-muted roundeds snap-x snap-center"
         aria-label="tour tabs"
         sx={{
           [`& .${tabsClasses.scrollButtons}`]: {
@@ -74,18 +74,18 @@ export default function TourTabs() {
           <StyledTab
             key={item.id}
             onClick={() => handleClick(index, item)}
-            className="w-32 snap-center space-y-0 rounded-sm hover:bg-primary hover:bg-opacity-10 disabled:cursor-default sm:w-48"
+            className="hover:bg-primary hover:bg-opacity-10 w-32 snap-center space-y-0 rounded-sm disabled:cursor-default sm:w-48"
             disabled={
               item.status === TOUR_STATUS.notStarted ||
               item.status === TOUR_STATUS.notStartedTransfer ||
               item.order < registeredTour?.order
             }
             label={
-              <div className="flex h-12 flex-col items-center justify-start gap-1 sm:h-15">
-                <h3 className="text-start text-xs font-medium text-neutral-50 md:text-sm xl:text-base">
+              <div className="flex h-12 flex-col items-center justify-start gap-1 sm:h-16">
+                <h3 className="text-foreground text-start text-xs font-medium md:text-sm xl:text-base">
                   {getCorrectName({ lang, uz: item?.name, ru: item?.name_ru })}
                 </h3>
-                <p className="max-w-28 text-[10px] capitalize text-secondary-foreground sm:text-xs">
+                <p className="text-secondary-foreground text-3xs max-w-28 capitalize sm:text-xs">
                   {getTourName(item.status, t)}
                 </p>
               </div>

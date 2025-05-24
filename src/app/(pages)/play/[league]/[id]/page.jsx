@@ -113,7 +113,6 @@ const Play = ({ params }) => {
 
   useEffect(() => {
     if (params?.id && currentTour?.id) {
-      // eslint-disable-next-line no-undef
       dispatch(
         fetchTeamPlayers({
           team_id: params.id,
@@ -126,7 +125,6 @@ const Play = ({ params }) => {
 
   useEffect(() => {
     if (params?.id && currentTour?.id) {
-      // eslint-disable-next-line no-undef
       dispatch(fetchTourTeams({ team_id: params.id, currentTour }))
     }
   }, [params?.id, currentTour, dispatch])
@@ -144,7 +142,6 @@ const Play = ({ params }) => {
 
   useEffect(() => {
     if (params.league) {
-      // eslint-disable-next-line no-undef
       Promise.all([
         dispatch(fetchClubs({ competition_id: params.league })),
         dispatch(
@@ -216,10 +213,10 @@ const Play = ({ params }) => {
     <main
       className={cn(
         'flex flex-col gap-4 overflow-hidden bg-linear-to-tr',
-        'from-red-800 to-blue-900 text-neutral-700',
+        'from-chart-1 to-chart-2 text-foreground',
         gameTab === TABS.GameProfile || gameTab === TABS.Transfer
-          ? 'pb-4 pt-20'
-          : 'pb-7 pt-16'
+          ? 'pt-20 pb-4'
+          : 'pt-16 pb-7'
       )}
     >
       <GameNavigation currentTab={gameTab} />

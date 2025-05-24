@@ -156,7 +156,7 @@ function PlayerStatisticsTable({ matches }) {
 
   return (
     <section className="h-auto">
-      <table className="h-full w-full min-w-80 table-auto text-[10px] 2xs:text-[11px] md:text-xs xl:text-sm">
+      <table className="h-full w-full min-w-80 table-auto text-3xs 2xs:text-2xs md:text-xs xl:text-sm">
         <Head table={table} />
         <Body table={table} flexRender={flexRender} />
       </table>

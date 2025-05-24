@@ -5,7 +5,7 @@ const StatisticsTableSkeleton = () => {
   return (
     <>
       <StatisticsTableFiltersSkeleton />
-      <table className="h-auto w-full min-w-[310px] text-[10px] xs:text-xs md:text-sm">
+      <table className="text-3xs xs:text-xs h-auto w-full min-w-80 md:text-sm">
         <StatisticsTableHeadSkeleton />
         <StatisticsTableBodySkeleton />
       </table>
@@ -20,7 +20,7 @@ const StatisticsTableBodySkeleton = () => {
       {[...Array(14)].map((_, rowIndex) => (
         <tr
           key={rowIndex}
-          className="mx-auto w-full border-b border-neutral-700 hover:bg-background"
+          className="hover:bg-background mx-auto w-full border-b border-neutral-700"
         >
           {[...Array(10)].map((_, cellIndex) => (
             <td
@@ -55,7 +55,7 @@ const StatisticsTableHeadSkeleton = () => {
 
 const StatisticsTableFiltersSkeleton = () => {
   return (
-    <div className="relative flex flex-col gap-2 text-xs xs:text-sm sm:flex-row">
+    <div className="xs:text-sm relative flex flex-col gap-2 text-xs sm:flex-row">
       <Skeleton className="h-8 w-full sm:w-80" />
       <Skeleton className="h-8 w-full sm:w-40" />
     </div>
@@ -65,7 +65,7 @@ const StatisticsTableFiltersSkeleton = () => {
 const StatisticsSkeleton = () => {
   return (
     <section className="flex w-full flex-col gap-2 lg:flex-row">
-      <div className="flex h-full min-h-160 w-full flex-1 table-auto flex-col gap-4 overflow-x-auto rounded-xl bg-background px-2 py-3 text-secondary-foreground xs:px-3 md:p-5 lg:w-2/3">
+      <div className="bg-background text-secondary-foreground xs:px-3 flex h-full min-h-160 w-full flex-1 table-auto flex-col gap-4 overflow-x-auto rounded-xl px-2 py-3 md:p-5 lg:w-2/3">
         <StatisticsTableSkeleton />
       </div>
       <TopTeams />

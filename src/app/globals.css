@@ -63,6 +63,15 @@
   --animate-gradient: gradient 3s ease infinite;
   --animate-rainbow: rainbow var(--speed, 2s) infinite linear;
 
+  /*text size  */
+  --text-2xs: 0.6875rem;
+  --text-2xs--line-height: 0.775rem;
+  --text-2xs--font-weight: 400;
+
+  --text-3xs: 0.625rem;
+  --text-3xs--line-height: 0.7rem;
+  --text-3xs--font-weight: 400;
+
   @keyframes accordion-down {
     from {
       height: 0;
@@ -114,17 +123,6 @@
     }
   }
 }
-/* 
-@utility container {
-  margin-inline: auto;
-  padding-inline: 2rem;
-  @media (width >= --theme(--breakpoint-2xs)) {
-    max-width: none;
-  }
-  @media (width >= 1400px) {
-    max-width: 1400px;
-  }
-} */
 
 :root {
   --radius: 0.5rem;

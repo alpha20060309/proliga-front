@@ -117,7 +117,7 @@ function TransactionsPackagesTable() {
 
   return (
     <section className="flex h-full w-full flex-1 flex-col justify-between gap-1 overflow-x-auto">
-      <table className="w-full min-w-96 table-fixed rounded-sm text-[11px] sm:text-xs lg:text-sm">
+      <table className="w-full min-w-96 table-fixed rounded-sm text-2xs sm:text-xs lg:text-sm">
         <TransactionsTableHead table={table} />
         <TransactionsTableBody table={table} flexRender={flexRender} />
       </table>

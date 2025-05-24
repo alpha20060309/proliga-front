@@ -4,7 +4,6 @@ import { NextResponse } from 'next/server';
 
 const protectedRoutes = ["/settings", "/play"];
 const apiAuthPrefix = "/api/auth";
-const authRoute = "/auth";
 
 export const DEFAULT_LOGIN_REDIRECT = "/auth";
 
@@ -17,15 +16,9 @@ export default auth((req) => {
   const user = session?.user;
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isListedProtectedRoute = protectedRoutes.some(route => nextUrl.pathname.startsWith(route));
-  const isAuthRoute = nextUrl.pathname === authRoute;
 
   if (isApiAuthRoute) {
     return null;
-  }
-
-  // Redirect authorized users away from auth page
-  if (isAuthorized && isAuthRoute) {
-    return NextResponse.redirect(new URL("/", nextUrl));
   }
 
   if (!isAuthorized && isListedProtectedRoute) {

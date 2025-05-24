@@ -135,7 +135,7 @@ const Notification = () => {
             <Badge
               variant="destructive"
               className={cn(
-                'absolute -top-0.5 -right-0.5 flex size-3.5 items-center justify-center rounded-full p-1 text-[10px]',
+                'absolute -top-0.5 -right-0.5 flex size-3.5 items-center justify-center rounded-full p-1 text-3xs',
                 isNotificationsOpen ? 'bg-card' : 'bg-red-700'
               )}
             >

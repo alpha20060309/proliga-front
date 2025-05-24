@@ -10,7 +10,7 @@ const MatchStatus = ({ status, homeScore, awayScore }) => {
       return (
         <Badge
           variant="secondary"
-          className="bg-card py-px text-[11px] font-normal sm:text-xs"
+          className="bg-card py-px text-2xs font-normal sm:text-xs"
         >
           {t('Boshlanmagan')}
         </Badge>
@@ -19,14 +19,14 @@ const MatchStatus = ({ status, homeScore, awayScore }) => {
       return (
         <Badge
           variant="default"
-          className="animate-pulse py-px text-[11px] font-normal sm:text-xs"
+          className="animate-pulse py-px text-2xs font-normal sm:text-xs"
         >
           {homeScore} - {awayScore}
         </Badge>
       )
     case MATCH_STATUS.FINISHED:
       return (
-        <Badge variant="outline text-[11px] font-normal sm:text-xs py-px">
+        <Badge variant="outline text-2xs font-normal sm:text-xs py-px">
           {homeScore} - {awayScore}
         </Badge>
       )

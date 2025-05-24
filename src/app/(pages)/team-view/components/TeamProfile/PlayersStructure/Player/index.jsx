@@ -42,7 +42,7 @@ const Player = ({ player }) => {
   const tShirt = staticPath + '/club-svg/' + clubPath + '/app.svg'
 
   return (
-    <div className="flex h-min select-none flex-col items-center justify-center text-sm text-neutral-700 sm:text-base">
+    <div className="flex h-min flex-col items-center justify-center text-sm text-neutral-700 select-none sm:text-base">
       {!player.name && (
         <>
           <Image
@@ -51,13 +51,13 @@ const Player = ({ player }) => {
             width={48}
             height={48}
             draggable={false}
-            className="size-6 xs:size-8 md:size-10 lg:size-8 xl:size-10"
+            className="xs:size-8 size-6 md:size-10 lg:size-8 xl:size-10"
           />
         </>
       )}
       {player.name && (
         <>
-          <div className="relative size-6 xs:size-8 md:size-10 lg:size-8 xl:size-10">
+          <div className="xs:size-8 relative size-6 md:size-10 lg:size-8 xl:size-10">
             <Image
               src={tShirt || ''}
               alt="player tshirt"
@@ -78,11 +78,11 @@ const Player = ({ player }) => {
               />
             )}
           </div>
-          <p className="text-shadow line-clamp-1 text-[10px] text-foreground xs:text-[11px] xs:text-xs md:text-sm">
+          <p className="text-foreground xs:text-2xs xs:text-xs line-clamp-1 text-3xs text-shadow-2xs text-shadow-black md:text-sm">
             {firstName} {lastName.slice(0, 1).toUpperCase()} {lastName && '.'}
           </p>
           <div className="flex items-center gap-0.5">
-            <div className="flex h-4 w-6 cursor-default items-center justify-center rounded-sm border border-neutral-800 bg-primary text-center text-xs font-bold text-neutral-950 sm:h-5 sm:w-8 md:text-sm">
+            <div className="bg-primary flex h-4 w-6 cursor-default items-center justify-center rounded-sm border border-neutral-800 text-center text-xs font-bold text-neutral-950 sm:h-5 sm:w-8 md:text-sm">
               {player.is_captain
                 ? (currentPlayerPoint?.point ?? 0) * 2
                 : (currentPlayerPoint?.point ?? 0)}

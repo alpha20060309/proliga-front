@@ -109,7 +109,7 @@ const Stat = ({ icon, value, label }) => (
 
 const SmallerStat = ({ value, label }) => (
   <div className="flex items-center justify-between gap-1 rounded-md bg-cardy-1 text-xs xs:py-2">
-    <p className="text-[10px] leading-tight text-neutral-400">{label}</p>
+    <p className="text-3xs leading-tight text-neutral-400">{label}</p>
     <p className="font-semibold leading-tight text-foreground">{value ?? 0}</p>
   </div>
 )
