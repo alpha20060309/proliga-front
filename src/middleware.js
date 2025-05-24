@@ -49,7 +49,7 @@ export default auth((req) => {
 
 export const config = {
   matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:jpg|jpeg|gif|png|svg|ico|webp)).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|sw.js|firebase-messaging-sw.js|manifest.json|.*\\.(?:jpg|jpeg|gif|png|svg|ico|webp)).*)",
   ],
 };
 

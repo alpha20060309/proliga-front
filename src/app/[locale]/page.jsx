@@ -4,7 +4,7 @@
 import Hero from 'components/Hero'
 import Promotions from 'components/Promotions'
 
-async function Home() {
+async function Home({ params }) {
   // const { generate } = useGenerateLanguage()
 
   // useEffect(() => {
@@ -14,7 +14,7 @@ async function Home() {
 
   return (
     <>
-      <Hero />
+      <Hero params={params} />
       <Promotions />
     </>
   )
