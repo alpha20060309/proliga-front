@@ -3,7 +3,7 @@ import RulesSlider from './components/RulesSlider'
 
 const PlayLayout = ({ children }) => {
   return (
-    <main className="min-h-screen bg-linear-to-tr from-background to-card">
+    <main className="from-secondary to-background min-h-screen bg-linear-to-tr">
       {children}
       <WorldNews />
       <RulesSlider />

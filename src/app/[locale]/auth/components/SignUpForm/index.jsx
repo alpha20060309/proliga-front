@@ -192,11 +192,10 @@ const SignUpForm = ({ setShouldRedirect }) => {
               />
               <Lock className="text-muted-foreground absolute top-1/2 left-2 size-5 -translate-y-1/2" />
               <Button
-                asChild
                 type="button"
                 variant="ghost"
                 size="icon"
-                className="hover:bg-foreground/10 dark:hover:bg-foreground/10 absolute top-0 right-0"
+                className="hover:bg-foreground/10 dark:hover:bg-foreground/10 absolute  top-0 right-0"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               >
                 {showConfirmPassword ? (

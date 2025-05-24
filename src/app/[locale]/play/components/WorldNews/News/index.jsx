@@ -41,7 +41,7 @@ const News = () => {
       className={cn(
         'relative mx-auto flex h-min min-h-168 w-full max-w-lg flex-col',
         'items-stretch justify-between rounded-xl bg-background p-4 md:p-6 lg:mx-0 lg:w-auto',
-        'gap-2 border border-neutral-600 lg:min-w-72 lg:flex-1'
+        'gap-2 border border-border lg:min-w-72 lg:flex-1'
       )}
     >
       <div className="flex items-center justify-between">
@@ -53,7 +53,7 @@ const News = () => {
           onClick={refreshData}
           variant="outline"
           size="sm"
-          className="h-8 py-0 text-sm text-secondary-foreground hover:text-foreground"
+          className="h-8 py-0 text-sm text-foreground hover:text-foreground"
         >
           <RefreshCcw className="mr-2 size-4" />
           {t('Refresh')}
@@ -64,7 +64,7 @@ const News = () => {
           <Article key={item.id} item={item} />
         ))}
         {news?.length === 0 && (
-          <p className="mt-2 text-center text-neutral-300">
+          <p className="mt-2 text-center text-muted-foreground">
             {t('Yangiliklar mavjud emas!')}
           </p>
         )}

@@ -69,9 +69,7 @@ export default function Error({ reset }) {
             >
               Qayta urinish
             </Button>
-            <Button asChild variant="outline" className="w-full">
-              <Link href="/">Asosiy maydonga qaytish</Link>
-            </Button>
+            <Link href="/">Asosiy maydonga qaytish</Link>
           </div>
         </div>
       </Card>

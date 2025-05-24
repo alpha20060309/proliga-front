@@ -31,8 +31,10 @@ import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
 import { selectPackages } from 'app/lib/features/package/package.selector'
 import { selectBanners } from 'app/lib/features/banner/banner.selector'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { use } from 'react'
 
-const Play = ({ params }) => {
+const Play = (props) => {
+  const { league, id } = use(props.params)
   const dispatch = useDispatch()
   const userTable = useSelector(selectUserTable)
   const currentTeam = useSelector(selectCurrentTeam)
@@ -105,91 +107,92 @@ const Play = ({ params }) => {
   }, [dispatch, banners?.length])
 
   useEffect(() => {
-    if (userTable?.id && params?.id && params?.league) {
-      dispatch(fetchCurrentTeam({ id: params.id, user_id: userTable?.id }))
-      dispatch(setLastVisitedTeam(`${params.league}/${params.id}`))
+    if (userTable?.id && id && league) {
+      dispatch(fetchCurrentTeam({ id, user_id: userTable?.id }))
+      dispatch(setLastVisitedTeam(`${league}/${id}`))
     }
-  }, [params, dispatch, userTable?.id])
+  }, [id, league, dispatch, userTable?.id])
 
   useEffect(() => {
-    if (params?.id && currentTour?.id) {
+    if (id && currentTour?.id) {
       dispatch(
         fetchTeamPlayers({
-          team_id: params.id,
+          team_id: id,
           tour_id: currentTour.id,
-          competition_id: params.league,
+          competition_id: league,
         })
       )
     }
-  }, [params, currentTour?.id, dispatch])
+  }, [id, league, currentTour?.id, dispatch])
 
   useEffect(() => {
-    if (params?.id && currentTour?.id) {
-      dispatch(fetchTourTeams({ team_id: params.id, currentTour }))
+    if (id && currentTour?.id) {
+      dispatch(fetchTourTeams({ team_id: id, currentTour }))
     }
-  }, [params?.id, currentTour, dispatch])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, currentTour?.id, dispatch])
 
   useEffect(() => {
-    if (params?.league && currentTeam?.registered_tour_id) {
+    if (league && currentTeam?.registered_tour_id) {
       dispatch(
         fetchTours({
-          competition_id: params.league,
+          competition_id: league,
           registered_tour_id: currentTeam?.registered_tour_id,
         })
       )
     }
-  }, [params?.league, dispatch, currentTeam?.registered_tour_id])
+  }, [league, dispatch, currentTeam?.registered_tour_id])
 
   useEffect(() => {
-    if (params.league) {
+    if (league) {
       Promise.all([
-        dispatch(fetchClubs({ competition_id: params.league })),
+        dispatch(fetchClubs({ competition_id: league })),
         dispatch(
           fetchPlayers({
-            competition_id: params.league,
+            competition_id: league,
           })
         ),
       ])
     }
-  }, [dispatch, params.league])
+  }, [dispatch, league])
 
   useEffect(() => {
-    if (params.league && playersCount > 0) {
+    if (league && playersCount > 0) {
       dispatch(
         fetchTopPlayers({
-          competition_id: params.league,
+          competition_id: league,
         })
       )
       countOfPlayers.map((pCount) => {
         if (playersCount > pCount) {
           dispatch(
             fetchAdditionalPlayers({
-              competition_id: params.league,
+              competition_id: league,
               page: Math.ceil(pCount / 1000),
             })
           )
         }
       })
     }
-  }, [dispatch, params.league, countOfPlayers, playersCount])
+  }, [dispatch, league, countOfPlayers, playersCount])
 
   useEffect(() => {
-    if (currentTour?.id && params?.league && prevTeam?.length > 0) {
+    if (currentTour?.id && league && prevTeam?.length > 0) {
       dispatch(
         fetchPlayerPoint({
-          competition_id: params.league,
+          competition_id: league,
           tour_id: currentTour.id,
           teamConcat: prevTeam,
         })
       )
     }
-  }, [dispatch, currentTour?.id, params?.league, prevTeam])
+  }, [dispatch, currentTour?.id, league, prevTeam])
 
   useEffect(() => {
-    if (competitions?.length > 0 && params.league) {
-      dispatch(setCurrentCompetition(params.league))
+    if (competitions?.length > 0 && league) {
+      dispatch(setCurrentCompetition(league))
     }
-  }, [dispatch, params.league, competitions?.length])
+  }, [dispatch, league, competitions?.length])
 
   useEffect(() => {
     if (

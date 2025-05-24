@@ -11,7 +11,7 @@ const CompeteSlide = () => {
           src="/images/promotion-stats.png"
           alt="competition"
           width={400}
-          className="mx-auto size-72 xs:size-80 md:mx-0 md:size-88 xl:size-112"
+          className="xs:size-80 bg-foreground p-2 rounded mx-auto size-72 md:mx-0 md:size-88 xl:size-112"
           height={400}
           unoptimized
         />
@@ -20,7 +20,7 @@ const CompeteSlide = () => {
         <h2 className="carousel-header font-bold uppercase">
           {t('Raqobatlashing')}
         </h2>
-        <p className="carousel-text max-w-lg text-neutral-400">
+        <p className="carousel-text text-muted max-w-lg">
           {t('Boshqa foydalanuvchilar')}
         </p>
       </div>

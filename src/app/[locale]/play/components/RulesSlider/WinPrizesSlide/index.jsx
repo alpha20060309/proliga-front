@@ -1,3 +1,4 @@
+'use client'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
@@ -18,7 +19,7 @@ const WinPrizesSlide = () => {
         <h2 className="carousel-header font-bold uppercase">
           {t('Sovrinlarni yutib oling')}
         </h2>
-        <p className="carousel-text text-neutral-300">{t('Eng ko‘p ball')}</p>
+        <p className="carousel-text text-muted">{t('Eng ko‘p ball')}</p>
       </div>
       <div className="z grid grid-cols-2 grid-rows-2 justify-center gap-2 sm:flex sm:grid-rows-1 md:gap-4 xl:gap-8">
         {prizes.map(

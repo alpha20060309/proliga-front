@@ -114,7 +114,7 @@ const Matches = () => {
   }
 
   return (
-    <section className="relative mx-auto flex h-min min-h-168 w-full max-w-lg flex-1 flex-col justify-between space-y-4 rounded-xl border border-neutral-600 bg-background px-4 py-6 lg:mx-0 lg:w-auto lg:min-w-72 xl:grow 2xl:max-w-lg">
+    <section className="bg-background border-border relative mx-auto flex h-min min-h-168 w-full max-w-lg flex-1 flex-col justify-between space-y-4 rounded-xl border px-4 py-6 lg:mx-0 lg:w-auto lg:min-w-72 xl:grow 2xl:max-w-lg">
       <div className="flex w-full items-center justify-center">
         <div className="mx-auto ml-9 flex flex-1 items-center justify-center gap-2">
           <Button
@@ -126,15 +126,12 @@ const Matches = () => {
           >
             <ChevronLeft className="size-5" />
           </Button>
-          <Select 
-            value={currentTour?.id || ''} 
+          <Select
+            value={currentTour?.id || ''}
             onValueChange={handleChangeTour}
             defaultValue=""
           >
-            <SelectTrigger
-              showIcon={false}
-              className="h-9 w-20 rounded-xs border-2 border-x-0 border-t-0 border-neutral-400 text-center text-base outline-hidden ring-0 ring-offset-0 hover:outline-hidden"
-            >
+            <SelectTrigger className="border-muted h-9 w-20 rounded-xs border-2 border-x-0 border-t-0 text-center text-base ring-0 ring-offset-0 outline-hidden hover:outline-hidden">
               <SelectValue placeholder={t('Tur')} />
             </SelectTrigger>
             <SelectContent>

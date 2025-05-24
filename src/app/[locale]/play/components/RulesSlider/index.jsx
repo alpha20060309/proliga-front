@@ -1,5 +1,4 @@
 'use client'
-
 import {
   Carousel,
   CarouselContent,
@@ -12,10 +11,7 @@ import CreateTeamSlide from './CreateTeamSlide'
 import GatherPointsSlide from './GatherPointsSlide'
 import MakeTransfersSlide from './MakeTransfersSlide'
 import CompeteSlide from './CompeteSlide'
-import dynamic from 'next/dynamic'
-const RulesSliderTitle = dynamic(() => import('./RulesSliderTitle'), {
-  ssr: false,
-})
+import RulesSliderTitle from './RulesSliderTitle'
 import WinPrizesSlide from './WinPrizesSlide'
 
 function RulesSlider() {
@@ -24,19 +20,19 @@ function RulesSlider() {
       <Carousel opts={{ loop: true }} className="mx-7 xl:mx-8">
         <RulesSliderTitle />
         <CarouselContent className="mb-6">
-          <CarouselItem className="min-h-96 md:min-h-104 xl:min-h-136">
+          <CarouselItem className="min-h-96 rounded md:min-h-104 xl:min-h-136">
             <CreateTeamSlide />
           </CarouselItem>
           <CarouselItem className="min-h-96 md:min-h-104 xl:min-h-136">
             <GatherPointsSlide />
           </CarouselItem>
-          <CarouselItem className="min-h-96 md:min-h-104 xl:min-h-136">
+          <CarouselItem className="min-h-96 rounded md:min-h-104 xl:min-h-136">
             <MakeTransfersSlide />
           </CarouselItem>
           <CarouselItem className="min-h-96 md:min-h-104 xl:min-h-136">
             <CompeteSlide />
           </CarouselItem>
-          <CarouselItem className="min-h-96 md:min-h-104 xl:min-h-136">
+          <CarouselItem className="min-h-96 rounded md:min-h-104 xl:min-h-136">
             <WinPrizesSlide />
           </CarouselItem>
         </CarouselContent>

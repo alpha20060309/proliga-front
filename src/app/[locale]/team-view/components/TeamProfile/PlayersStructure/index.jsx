@@ -1,5 +1,5 @@
 import Player from './Player'
-import StadiumSpinner from 'app/(pages)/play/components/StadiumSpinner'
+import StadiumSpinner from 'app/[locale]/play/components/StadiumSpinner'
 import { useSelector } from 'react-redux'
 import {
   selectDEF,

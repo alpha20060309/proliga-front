@@ -156,7 +156,6 @@ function CarouselPrevious({
 
   return (
     <Button
-      asChild
       data-slot="carousel-previous"
       variant={variant}
       size={size}
@@ -187,7 +186,6 @@ function CarouselNext({
 
   return (
     <Button
-      asChild
       data-slot="carousel-next"
       variant={variant}
       size={size}

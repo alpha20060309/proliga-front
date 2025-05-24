@@ -17,7 +17,7 @@ import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.sele
 import { selectCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.selector'
 import { formatDate } from 'app/utils/formatDate.util'
 import Image from 'next/image'
-import GameBriefSkeleton from 'app/(pages)/play/components/GameProfile/GameBrief/Skeleton'
+import GameBriefSkeleton from 'app/[locale]/play/components/GameProfile/GameBrief/Skeleton'
 
 const GameBrief = () => {
   const { t } = useTranslation()

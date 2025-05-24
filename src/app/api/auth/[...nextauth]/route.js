@@ -23,7 +23,7 @@ export const {
         token.sub = user.id.toString();
         const dbUser = await getUserById(+user.id);
         if (dbUser) {
-          token.id = dbUser.id;
+          token.id = +dbUser.id;
           token.email = dbUser.email;
           token.phone = dbUser?.phone;
           token.isOAuth = dbUser?.isOAuth;
@@ -48,7 +48,7 @@ export const {
       if (trigger === "update" && newSessionData) {
         const dbUser = await getUserById(+token.sub);
         if (dbUser) {
-          token.id = dbUser.id;
+          token.id = +dbUser.id;
           token.email = dbUser.email;
           token.phone = dbUser.phone;
           token.name = dbUser.name;
