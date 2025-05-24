@@ -1,3 +1,4 @@
+'use client'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,25 +13,44 @@ import { useUpdateUserLanguage } from 'app/hooks/user/useUpdateUserLanguage/useU
 import { setLanguage } from 'app/lib/features/systemLanguage/systemLanguage.slice'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { Globe } from 'lucide-react'
+import { useRouter, usePathname } from 'next/navigation'
+import i18nConfig from 'app/lib/i18n.config'
 
 const ChangeLanguageDropdown = () => {
   const dispatch = useDispatch()
   const { lang } = useSelector((store) => store.systemLanguage)
   const userTable = useSelector(selectUserTable)
-  const { i18n } = useTranslation()
   const { updateUserLanguage } = useUpdateUserLanguage()
 
-  const handleChange = async (lang) => {
-    if (userTable?.id) {
-      return await updateUserLanguage({ lang, userTable })
+  const { i18n } = useTranslation()
+  const currentLocale = i18n.language
+  const router = useRouter()
+  const currentPathname = usePathname()
+
+  const handleChange = async (newLocale) => {
+    console.log(newLocale)
+    // set cookie for next-i18n-router
+    const days = 30
+    const date = new Date()
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000)
+    const expires = date.toUTCString()
+    document.cookie = `NEXT_LOCALE=${newLocale};expires=${expires};path=/`
+
+    // redirect to the new locale path
+    if (
+      currentLocale === i18nConfig.defaultLocale &&
+      !i18nConfig.prefixDefault
+    ) {
+      router.push('/' + newLocale + currentPathname)
+      dispatch(setLanguage({ lang: newLocale }))
+      if (userTable?.id) {
+        return await updateUserLanguage({ lang: newLocale, userTable })
+      }
     } else {
-      dispatch(
-        setLanguage({
-          lang,
-          cb: (lang) => i18n.changeLanguage(lang),
-        })
-      )
+      router.push(currentPathname.replace(`/${currentLocale}`, `/${newLocale}`))
     }
+
+    router.refresh()
   }
 
   return (

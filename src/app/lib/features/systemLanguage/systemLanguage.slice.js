@@ -10,10 +10,9 @@ export const systemLanguageSlice = createSlice({
   initialState,
   reducers: {
     setLanguage: (state, action) => {
-      const { lang, cb } = action.payload
+      const { lang } = action.payload
       if (lang === LANGUAGE.uz || lang === LANGUAGE.ru) {
         state.lang = lang
-        cb(lang)
       }
     },
   },

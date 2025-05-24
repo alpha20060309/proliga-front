@@ -1,3 +1,5 @@
+'use client'
+
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { useTheme } from 'next-themes'
 import { Link } from 'next-view-transitions'

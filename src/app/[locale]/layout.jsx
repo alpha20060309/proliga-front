@@ -1,19 +1,17 @@
-import './globals.css'
+import '../globals.css'
 import 'react-phone-number-input/style.css'
-import Navbar from '../components/Navbar'
+import Navbar from 'components/Navbar'
 import { DM_Sans } from 'next/font/google'
 import { cn } from '@/lib/utils'
 import { ViewTransitions } from 'next-view-transitions'
 import { Toaster } from '@/components/ui/sonner'
 import Footer from 'components/Footer'
-import RootProvider from './providers/Root.provider'
-import { fontVariables } from './fonts'
+import { fontVariables } from '../fonts'
+import RootProvider from 'app/providers/Root.provider'
 const dmSans = DM_Sans({
   subsets: ['latin', 'latin-ext'],
   weight: ['400', '700'],
 })
-import initTranslations from 'app/lib/i18n'
-import TranslationsProvider from './providers/Translations.provider'
 
 export const metadata = {
   title:
@@ -68,7 +66,6 @@ export const metadata = {
 
 export default async function RootLayout({ children, params }) {
   const { locale } = await params
-  const { resources } = await initTranslations(locale)
   return (
     <ViewTransitions>
       <html lang={locale} dir={'ltr'} suppressHydrationWarning>
@@ -79,14 +76,12 @@ export default async function RootLayout({ children, params }) {
             fontVariables
           )}
         >
-          <TranslationsProvider locale={locale} resources={resources}>
-            <Toaster />
-            <RootProvider>
-              <Navbar />
-              {children}
-              <Footer />
-            </RootProvider>
-          </TranslationsProvider>
+          <Toaster />
+          <RootProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </RootProvider>
         </body>
       </html>
     </ViewTransitions>
