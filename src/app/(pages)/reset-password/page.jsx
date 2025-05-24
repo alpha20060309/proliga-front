@@ -1,7 +1,4 @@
-import dynamic from 'next/dynamic'
-const ResetPasswordForm = dynamic(() => import('./ResetPasswordForm'), {
-  ssr: false,
-})
+import ResetPasswordForm from './ResetPasswordForm'
 
 const ResetPassword = () => {
   return (

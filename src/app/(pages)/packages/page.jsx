@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import Gutter from 'components/Gutter'
 import dynamic from 'next/dynamic'
 import PackagesSkeleton from './components/PackagesSkeleton'
-import { IconsSpray } from 'components/AnimatedBackground/Spray'
 import { selectPackages } from 'app/lib/features/package/package.selector'
 const PaymentPackages = dynamic(() => import('./components/Packages'), {
   ssr: false,
@@ -24,12 +23,9 @@ const Packages = () => {
   }, [dispatch, packages?.length])
 
   return (
-    <>
-      <IconsSpray />
-      <Gutter>
-        {packages?.length === 0 ? <PackagesSkeleton /> : <PaymentPackages />}
-      </Gutter>
-    </>
+    <Gutter>
+      {packages?.length === 0 ? <PackagesSkeleton /> : <PaymentPackages />}
+    </Gutter>
   )
 }
 

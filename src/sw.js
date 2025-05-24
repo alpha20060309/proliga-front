@@ -1,23 +1,6 @@
 import { Serwist, BackgroundSyncQueue, NetworkOnly } from 'serwist'
 import { defaultCache } from '@serwist/next/worker'
 
-// Define types locally to avoid import issues
-interface PrecacheEntry {
-  url: string
-  revision?: string | null
-}
-
-interface SerwistGlobalConfig {
-  __WB_MANIFEST: (PrecacheEntry | string)[] | undefined
-}
-
-declare global {
-  interface WorkerGlobalScope extends SerwistGlobalConfig {
-    __SW_MANIFEST: (PrecacheEntry | string)[] | undefined
-  }
-}
-
-declare const self: ServiceWorkerGlobalScope
 const serwist = new Serwist({
   precacheEntries: self.__SW_MANIFEST,
   precacheOptions: {
@@ -55,11 +38,12 @@ const serwist = new Serwist({
 
 const queue = new BackgroundSyncQueue('sync-queue')
 
-const backgroundSync = async (event: FetchEvent) => {
+const backgroundSync = async (event) => {
   try {
     const response = await fetch(event.request.clone())
     console.log(response)
     return response
+  // eslint-disable-next-line no-unused-vars
   } catch (error) {
     await queue.pushRequest({ request: event.request })
     return Response.error()

@@ -18,7 +18,6 @@ export const useUpdateUserLanguage = () => {
   const updateUserLanguage = useCallback(
     async ({ lang, userTable }) => {
       try {
-        // eslint-disable-next-line no-undef
         setIsLoading(true)
         setError('')
 

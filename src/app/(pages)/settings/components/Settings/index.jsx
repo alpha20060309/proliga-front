@@ -5,8 +5,6 @@ import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 import { Camera, Loader } from 'lucide-react'
-import DatePicker from 'react-datepicker'
-
 import { useUpdateUserData } from 'app/hooks/user/useUpdateUserData/useUpdateUserData'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import UploadFile from 'components/Modals/UploadFile'
@@ -22,7 +20,6 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Label } from '@/components/ui/label'
-import './datepicker.scss'
 import Avatar from 'components/Avatar'
 
 const GENDERS = {
@@ -143,12 +140,12 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
                 >
                   {t("Tug'ilgan kuni")}
                 </label>
-                <DatePicker
+                {/* <DatePicker
                   id="birthdate"
                   selected={date}
                   onChange={(date) => setDate(date)}
                   className="h-10 min-w-full flex-1 rounded-md border border-neutral-700 bg-card p-2 text-sm text-secondary-foreground placeholder:text-neutral-500 focus:outline-hidden focus:ring-1 focus:ring-neutral-300 focus:ring-offset-2 focus:ring-offset-neutral-900"
-                />
+                /> */}
               </article>
               <article className="space-y-1">
                 <label

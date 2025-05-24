@@ -88,7 +88,7 @@ const ModalBanner = ({ isModalOpen, setModalOpen }) => {
           >
             <Link
               href={banner?.link ?? ''}
-              className="block rounded-sm md:min-w-[620px] xl:min-w-[1024px] 2xl:min-w-[1280px] 2xl:max-w-[1280px]"
+              className="block rounded-sm md:min-w-[620px] xl:min-w-[1024px] 2xl:max-w-[1280px] 2xl:min-w-[1280px]"
             >
               <img
                 src={getUrl(banner?.content_url) ?? ''}

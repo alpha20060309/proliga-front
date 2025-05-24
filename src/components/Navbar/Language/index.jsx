@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useUpdateUserLanguage } from 'app/hooks/user/useUpdateUserLanguage/useUpdateUserLanguage'
 import { setLanguage } from 'app/lib/features/systemLanguage/systemLanguage.slice'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
-import { Button } from '@/components/ui/button'
 import { Globe } from 'lucide-react'
 
 const ChangeLanguageDropdown = () => {

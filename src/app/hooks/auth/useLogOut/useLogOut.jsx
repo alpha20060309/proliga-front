@@ -63,11 +63,11 @@ export const useLogOut = () => {
         })
 
         // Call signOut with callbackUrl to prevent CSRF issues
-        await signOut({ 
+        await signOut({
           redirect: true,
-          callbackUrl: '/' 
+          callbackUrl: '/',
         })
-        
+
         // No need for manual redirect as we're using redirect: true
         if (showMessage) {
           toast.success(t('Tizimdan chiqdingiz'), { theme: 'dark' })
@@ -83,7 +83,7 @@ export const useLogOut = () => {
         )
       }
     },
-    [clearState, t, router, user, updateNotificationToken]
+    [clearState, t, user, updateNotificationToken]
   )
 
   return { logOut, error }

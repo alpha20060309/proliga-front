@@ -1,11 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext",
-      "webworker"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext", "webworker"],
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
@@ -19,9 +14,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": "./src",
-    "types": [
-      "@serwist/next/typings"
-    ],
+    "types": ["@serwist/next/typings"],
     "plugins": [
       {
         "name": "next"
@@ -37,7 +30,5 @@
     "**/*.tsx",
     "src/**/*"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils'
 const Body = ({ table, flexRender }) => {
   const styles = (id) => {
     if (id === 'player-name') return 'w-auto sm:min-w-20  md:min-w-32'
-    if (id === 'player-position' || 'club' || 'played-min')
+    if (id === 'player-position' || id === 'club' || id === 'played-min')
       return 'w-min px-0.5 sm:min-w-12 sm:px-1'
     return 'w-min px-0.5 sm:min-w-10 sm:px-1'
   }

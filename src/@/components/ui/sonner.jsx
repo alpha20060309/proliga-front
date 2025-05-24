@@ -12,6 +12,8 @@ const Toaster = ({
     (<Sonner
       theme={theme}
       className="toaster group"
+      position="top-right"
+      swipeDirections={['right', 'left']}
       style={
         {
           "--normal-bg": "var(--popover)",

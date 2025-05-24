@@ -1,7 +1,7 @@
 import withSerwistInit from "@serwist/next";
 
 const withSerwist = withSerwistInit({
-  swSrc: "/src/app/sw.ts",
+  swSrc: "/src/sw.js",
   swDest: "public/sw.js",
   scope: "/",
   include: [
@@ -20,7 +20,13 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ['proliga.uz'],
+    // domains: ['proliga.uz'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'proliga.uz',
+      },
+    ],
   },
 }
 

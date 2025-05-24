@@ -34,7 +34,6 @@ function JournalTable() {
       cell: (info) => info.getValue(),
       header: t('Oyinchi ismi'),
       id: 'name',
-      header: t('Xabar'),
       accessorFn: (row) =>
         getCorrectName({ lang, uz: row?.name_uz, ru: row?.name_ru }),
     }),

@@ -28,7 +28,6 @@ const CabinetTransactionsHistory = () => {
 
   useEffect(() => {
     if (userTable?.id && expenses?.length === 0 && balances?.length === 0) {
-      // eslint-disable-next-line no-undef
       Promise.all([
         dispatch(fetchPayBalance({ user_id: userTable?.id })),
         dispatch(fetchPayExpenses({ user_id: userTable?.id })),
