@@ -2,9 +2,9 @@ import Gutter from 'components/Gutter'
 import { getHTMLPage } from 'app/actions/get-html-page.action'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 
-const AboutUs = async () => {
+const AboutUs = async ({ params }) => {
+  const { locale } = await params
   const { data, error } = await getHTMLPage('about-us')
-  console.log('data', data)
 
   if (error) {
     return <Gutter>{error?.message}</Gutter>
@@ -15,7 +15,7 @@ const AboutUs = async () => {
       <div
         className="html-page bg-card shadow-muted my-6 min-h-[40vh] w-full rounded-xl px-2 py-4 text-sm shadow-md sm:p-4 md:p-6 xl:text-base"
         dangerouslySetInnerHTML={{
-          __html: getCorrectName({ lang: 'uz', ru: data?.ru, uz: data?.uz }),
+          __html: getCorrectName({ lang: locale, ru: data?.ru, uz: data?.uz }),
         }}
       />
     </Gutter>

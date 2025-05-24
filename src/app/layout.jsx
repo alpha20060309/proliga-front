@@ -8,11 +8,12 @@ import { Toaster } from '@/components/ui/sonner'
 import Footer from 'components/Footer'
 import RootProvider from './providers/Root.provider'
 import { fontVariables } from './fonts'
-
 const dmSans = DM_Sans({
   subsets: ['latin', 'latin-ext'],
   weight: ['400', '700'],
 })
+import initTranslations from 'app/lib/i18n'
+import TranslationsProvider from './providers/Translations.provider'
 
 export const metadata = {
   title:
@@ -65,10 +66,12 @@ export const metadata = {
   },
 }
 
-export default async function RootLayout({ children }) {
+export default async function RootLayout({ children, params }) {
+  const { locale } = await params
+  const { resources } = await initTranslations(locale)
   return (
     <ViewTransitions>
-      <html lang="uz" suppressHydrationWarning>
+      <html lang={locale} dir={'ltr'} suppressHydrationWarning>
         <body
           className={cn(
             'bg-background text-foreground min-h-svh scroll-smooth antialiased lg:min-h-screen',
@@ -76,12 +79,14 @@ export default async function RootLayout({ children }) {
             fontVariables
           )}
         >
-          <Toaster />
-          <RootProvider>
-            <Navbar />
-            {children}
-            <Footer />
-          </RootProvider>
+          <TranslationsProvider locale={locale} resources={resources}>
+            <Toaster />
+            <RootProvider>
+              <Navbar />
+              {children}
+              <Footer />
+            </RootProvider>
+          </TranslationsProvider>
         </body>
       </html>
     </ViewTransitions>

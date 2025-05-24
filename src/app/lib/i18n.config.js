@@ -1,20 +1,18 @@
-import i18n from 'i18next'
 import UZ from '../../../public/locales/uz.json'
 import RU from '../../../public/locales/ru.json'
-import { initReactI18next } from 'react-i18next'
 
-export default i18n.use(initReactI18next).init({
+const i18nConfig = {
+  locales: ['uz', 'ru'],
+  defaultLocale: 'uz',
   resources: {
-    ru: {
-      translation: RU,
-    },
     uz: {
       translation: UZ,
     },
+    ru: {
+      translation: RU,
+    },
   },
-  lng: 'uz',
-  fallbackLng: 'uz',
-  interpolation: {
-    escapeValue: false,
-  },
-})
+  
+};
+
+export default i18nConfig;

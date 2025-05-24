@@ -1,7 +1,6 @@
 'use client'
 
 import { memo } from 'react'
-import '../lib/i18n.config'
 import ReduxProvider from './Store.provider'
 import AuthProvider from './Auth.provider'
 import InitialStateProvider from './InitialState.provider'

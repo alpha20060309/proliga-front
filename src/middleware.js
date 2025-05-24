@@ -2,6 +2,14 @@ import NextAuth from "next-auth";
 import { authConfig } from "./auth.config";
 import { NextResponse } from 'next/server';
 
+import { i18nRouter } from 'next-i18n-router';
+import i18nConfig from "./app/lib/i18n.config";
+
+export function middleware(request) {
+  return i18nRouter(request, i18nConfig);
+}
+
+
 const protectedRoutes = ["/settings", "/play"];
 const apiAuthPrefix = "/api/auth";
 
