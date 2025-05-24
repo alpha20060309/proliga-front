@@ -22,7 +22,6 @@ import {
 } from 'app/lib/features/systemNotification/systemNotification.slice'
 import { SUPABASE_EVENT_TYPE } from 'app/lib/supabaseClient'
 import { Bell } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 
 const Notification = () => {
   const dispatch = useDispatch()
@@ -121,28 +120,24 @@ const Notification = () => {
 
   return (
     <Popover open={isNotificationsOpen} onOpenChange={handleOpen}>
-      <PopoverTrigger className="bg-transparent">
-        <Button
-          type="ghost"
-          aria-label={t('Open notifications')}
-          className="hover:text-accent dark:hover:text-accent relative bg-transparent p-0 shadow-none hover:bg-transparent dark:hover:bg-transparent"
-          size={'icon'}
-        >
-          <Bell
-            className={`hover:text-accent-foreground text-foreground size-5 select-none`}
-          />
-          {unreadCount > 0 && (
-            <Badge
-              variant="destructive"
-              className={cn(
-                'absolute -top-0.5 -right-0.5 flex size-3.5 items-center justify-center rounded-full p-1 text-3xs',
-                isNotificationsOpen ? 'bg-card' : 'bg-red-700'
-              )}
-            >
-              {unreadCount}
-            </Badge>
-          )}
-        </Button>
+      <PopoverTrigger
+        aria-label={t('Open notifications')}
+        className="hover:text-accent dark:hover:text-accent relative bg-transparent p-0 shadow-none hover:bg-transparent dark:hover:bg-transparent"
+      >
+        <Bell
+          className={`hover:text-accent-foreground text-foreground size-5 select-none`}
+        />
+        {unreadCount > 0 && (
+          <Badge
+            variant="destructive"
+            className={cn(
+              'text-3xs absolute -top-0.5 -right-0.5 flex size-3.5 items-center justify-center rounded-full p-1',
+              isNotificationsOpen ? 'bg-card' : 'bg-red-700'
+            )}
+          >
+            {unreadCount}
+          </Badge>
+        )}
       </PopoverTrigger>
       <PopoverContent className="mt-5 ml-2 w-80 p-0" align="end">
         <div className="flex items-center justify-between border-b px-4 py-2">
