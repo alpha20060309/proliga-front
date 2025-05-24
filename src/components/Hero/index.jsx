@@ -92,7 +92,7 @@ const Hero = () => {
             {userTable?.id ? (
               <Link
                 href="/settings"
-                className="border-primary bg-primary hover:bg-primary-foreground text-accent-foreground flex h-16 w-full max-w-64 -skew-x-15 items-center justify-center rounded-sm border-2 font-bold uppercase transition-all"
+                className="border-primary bg-primary hover:bg-primary/50 text-accent-foreground flex h-16 w-full max-w-64 -skew-x-15 items-center justify-center rounded-sm border-2 font-bold uppercase transition-all"
               >
                 {t('Sozlamalar')}
               </Link>

@@ -13,7 +13,11 @@
     "db:pull:prod": "dotenv -e .env.production -- npx prisma db pull",
     "db:push:prod": "dotenv -e .env.production -- npx prisma db push",
     "db:seed:prod": "dotenv -e .env.production -- npx prisma db seed",
-    "db:generate": "npx prisma generate"
+    "db:generate": "npx prisma generate",
+    "pm2:start": "pm2 start npm --name \"proliga\" -- start",
+    "pm2:restart": "pm2 restart proliga",
+    "pm2:stop": "pm2 stop proliga",
+    "pm2:delete": "pm2 delete proliga"
   },
   "prisma": {
     "seed": "node prisma/seed.js"
@@ -67,8 +71,6 @@
     "framer-motion": "^12.12.2",
     "i18next": "^25.2.0",
     "input-otp": "^1.4.2",
-    "js-cookie": "^3.0.5",
-    "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "lucide-react": "^0.511.0",
     "mime": "^4.0.7",
@@ -78,7 +80,6 @@
     "next-themes": "^0.4.6",
     "next-view-transitions": "^0.3.4",
     "react": "^19.1.0",
-    "react-datepicker": "^8.3.0",
     "react-day-picker": "^9.7.0",
     "react-dom": "^19.1.0",
     "react-i18next": "^15.5.2",

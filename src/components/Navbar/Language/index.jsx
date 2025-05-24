@@ -35,36 +35,11 @@ const ChangeLanguageDropdown = () => {
 
   return (
     <DropdownMenu>
-      {/* <DropdownMenuTrigger
-        aria-label="Change Language"
-        className="border-none bg-transparent"
-      >
-        <Button
-          variant="ghost"
-          size="icon"
-          className="hover:text-accent dark:hover:text-accent relative bg-transparent p-0 hover:bg-transparent dark:hover:bg-transparent"
-        >
-          <Globe className="text-foreground size-5" />
-          <div className="absolute -top-1 -right-1 size-4">
-            <Image
-              src={
-                lang === LANGUAGE.uz
-                  ? '/icons/uzbekistan.svg'
-                  : '/icons/russia.svg'
-              }
-              alt={lang === LANGUAGE.uz ? 'uzbekistan' : 'russia'}
-              width={16}
-              height={16}
-              className="size-4"
-            />
-          </div>
-        </Button>
-      </DropdownMenuTrigger> */}
       <DropdownMenuTrigger
         aria-label="Change Language"
-        className="hover:text-accent dark:hover:text-accent relative bg-transparent p-0 hover:bg-transparent dark:hover:bg-transparent"
+        className="hover:text-accent-foreground dark:hover:text-accent relative flex size-8 items-center justify-center bg-transparent p-0 hover:bg-transparent dark:hover:bg-transparent"
       >
-        <Globe className="text-foreground size-5" />
+        <Globe className="text-foreground hover:text-accent size-5" />
         <div className="absolute -top-1 -right-1 size-4">
           <Image
             src={

@@ -122,10 +122,10 @@ const Notification = () => {
     <Popover open={isNotificationsOpen} onOpenChange={handleOpen}>
       <PopoverTrigger
         aria-label={t('Open notifications')}
-        className="hover:text-accent dark:hover:text-accent relative bg-transparent p-0 shadow-none hover:bg-transparent dark:hover:bg-transparent"
+        className="hover:text-accent-foreground dark:hover:text-accent relative flex size-8 items-center justify-center bg-transparent p-0 hover:bg-transparent dark:hover:bg-transparent"
       >
         <Bell
-          className={`hover:text-accent-foreground text-foreground size-5 select-none`}
+          className={`hover:text-accent text-foreground size-5 select-none`}
         />
         {unreadCount > 0 && (
           <Badge
