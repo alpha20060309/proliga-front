@@ -55,7 +55,7 @@ const Championship = ({ game }) => {
       <Card
         className={cn(
           'bg-card/10 relative flex h-32 items-start overflow-hidden rounded-lg border',
-          'justify-center px-3 transition-all active:scale-[0.98]',
+          'justify-center px-3 transition-all ',
           cardVariants
         )}
         onClick={handleClick}
