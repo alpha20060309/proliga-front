@@ -104,7 +104,7 @@ const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
               defaultValue={FORMATIONS['4-3-3']}
               onValueChange={(value) => setFormation(value)}
             >
-              <SelectTrigger className="border-input bg-background text-foreground focus:border-ring/50 focus:ring-ring h-10 w-full rounded-md border-2 p-2 text-sm outline-hidden focus:ring-2 sm:h-12 sm:p-3 sm:text-base">
+              <SelectTrigger className="border-input bg-background text-foreground focus:border-ring/50 focus:ring-ring w-full rounded-md border-2 p-2 text-sm outline-hidden focus:ring-2 data-[size=default]:h-10 sm:p-3 sm:text-base sm:data-[size=default]:h-12">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-card text-card-foreground">

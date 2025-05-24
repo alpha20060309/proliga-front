@@ -1,7 +1,7 @@
 'use client'
 
-import { memo } from 'react'
 import '../../auth.config'
+import { memo } from 'react'
 import ReduxProvider from './Store.provider'
 import AuthProvider from './Auth.provider'
 import InitialStateProvider from './InitialState.provider'

@@ -1,5 +1,6 @@
 'use client'
 
+import './globals.css'
 import { Link, useTransitionRouter } from 'next-view-transitions'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -7,10 +8,16 @@ import { useEffect } from 'react'
 
 export default function Error({ reset }) {
   const router = useTransitionRouter()
-  
+
   useEffect(() => {
-    if (typeof window === 'undefined' || typeof navigator === 'undefined' || !router) {
-      console.warn('Required objects (window, navigator, or router) are not available')
+    if (
+      typeof window === 'undefined' ||
+      typeof navigator === 'undefined' ||
+      !router
+    ) {
+      console.warn(
+        'Required objects (window, navigator, or router) are not available'
+      )
       return
     }
 
@@ -38,7 +45,7 @@ export default function Error({ reset }) {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-900 p-4">
-      <Card className="w-full max-w-md border-4 border-red-500 bg-card">
+      <Card className="bg-card w-full max-w-md border-4 border-red-500">
         <div className="p-6 text-center">
           <h1 className="mb-4 text-6xl font-bold text-red-500">500</h1>
           <div className="relative mx-auto mb-6 h-24 w-24">

@@ -1,9 +1,9 @@
 import { Button } from '@/components/ui/button'
 import { signIn } from 'next-auth/react'
-import Image from 'next/image'
 import { SUPABASE_PROVIDERS } from 'app/lib/supabaseClient'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { useSelector } from 'react-redux'
+import { FaYandex } from 'react-icons/fa'
 
 const YandexSignIn = () => {
   const userTable = useSelector(selectUserTable)
@@ -25,13 +25,7 @@ const YandexSignIn = () => {
       variant="outline"
       className="text-foreground dark:hover:text-accent w-1/2 p-0"
     >
-      <Image
-        src="./icons/yandex.svg"
-        alt="Facebook"
-        className="mr-2 size-4"
-        width={24}
-        height={24}
-      />
+      <FaYandex className="mr-2 size-4 text-[#FC3F1D]" />
       Yandex
     </Button>
   )
