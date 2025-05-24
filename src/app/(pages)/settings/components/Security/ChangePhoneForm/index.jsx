@@ -15,7 +15,7 @@ import {
 import { PhoneInput } from 'components/PhoneInput'
 import { useAuthChangePhone } from 'app/hooks/auth/useAuthChangePhone/useAuthChangePhone'
 import ConfirmOTP from 'components/Modals/ConfirmOTP'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 
 export default function ChangePhoneForm() {
   const [isModalOpen, setModalOpen] = useState(false)

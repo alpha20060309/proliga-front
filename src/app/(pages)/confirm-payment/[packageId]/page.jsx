@@ -14,7 +14,7 @@ const ConfirmPaymentTab = dynamic(
     ssr: false,
   }
 )
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import Spinner from 'components/Spinner'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'

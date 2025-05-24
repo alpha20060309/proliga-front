@@ -3,8 +3,6 @@ import withSerwistInit from "@serwist/next";
 const withSerwist = withSerwistInit({
   swSrc: "/src/app/sw.ts",
   swDest: "public/sw.js",
-  // eslint-disable-next-line
-  // disable: process.env.NODE_ENV === "development",
   scope: "/",
   include: [
     "/",
@@ -21,7 +19,6 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  swcMinify: true,
   images: {
     domains: ['proliga.uz'],
   },

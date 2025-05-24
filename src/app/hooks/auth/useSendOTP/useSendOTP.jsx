@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 import { supabase } from 'app/lib/supabaseClient'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { useTranslation } from 'react-i18next'
 import { useTransitionRouter } from 'next-view-transitions'
 

@@ -1,7 +1,7 @@
 import { useTransitionRouter } from 'next-view-transitions'
 import { useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { useTranslation } from 'react-i18next'
 import { formatDate } from 'app/utils/formatDate.util'
 import { cn } from '@/lib/utils'

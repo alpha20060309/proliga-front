@@ -1,7 +1,7 @@
 import { supabase } from 'app/lib/supabaseClient'
 import { useState, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { setUserTable } from 'app/lib/features/auth/auth.slice'
 import { useTranslation } from 'react-i18next'
 

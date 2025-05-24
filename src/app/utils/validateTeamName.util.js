@@ -1,4 +1,4 @@
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 
 export function validateTeamName(input, t) {
   if (input.length === 0) {

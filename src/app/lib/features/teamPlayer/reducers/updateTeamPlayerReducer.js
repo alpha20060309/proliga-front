@@ -1,5 +1,5 @@
 import { PLAYER_POSITION} from 'app/utils/player.util'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 
 export const updateTeamPlayerReducer = (state, action) => {
   const {

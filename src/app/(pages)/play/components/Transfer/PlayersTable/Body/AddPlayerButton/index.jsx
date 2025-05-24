@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { useDispatch, useSelector } from 'react-redux'
 import { setBalanceModal } from 'app/lib/features/currentTeam/currentTeam.slice'
 import { CONFIG_KEY } from 'app/utils/config.util'

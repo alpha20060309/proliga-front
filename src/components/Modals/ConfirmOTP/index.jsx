@@ -18,7 +18,7 @@ import { useSelector } from 'react-redux'
 import ResendOTP from './ResendOTP'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
 import { Button } from '@/components/ui/button'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { useSession } from 'next-auth/react'
 

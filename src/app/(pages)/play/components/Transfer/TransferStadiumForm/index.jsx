@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { useSelector, useDispatch } from 'react-redux'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { useEffect, useMemo } from 'react'
 import { useUpdateTeamPlayers } from 'app/hooks/transfer/useUpdateTeamPlayers/useUpdateTeamPlayers'
 import { setCaptain } from 'app/lib/features/teamPlayer/teamPlayer.slice'

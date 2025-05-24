@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { useMemo } from 'react'
 import { setCaptain } from 'app/lib/features/teamPlayer/teamPlayer.slice'
 import { useTranslation } from 'react-i18next'

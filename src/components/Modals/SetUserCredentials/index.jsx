@@ -20,7 +20,7 @@ import {
   selectGeo,
   selectUserTable,
 } from 'app/lib/features/auth/auth.selector'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { Input } from '@/components/ui/input'

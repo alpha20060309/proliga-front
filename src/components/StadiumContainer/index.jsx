@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Share2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { useTranslation } from 'react-i18next'
 
 const StadiumContainer = ({ children, hideShareButton = false }) => {

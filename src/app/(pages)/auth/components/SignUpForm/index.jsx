@@ -5,7 +5,7 @@ import { useState, useTransition } from 'react'
 import { useSelector } from 'react-redux'
 import { PhoneInput } from 'components/PhoneInput'
 import { useTranslation } from 'react-i18next'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { Button } from '@/components/ui/button'
 import { Eye, EyeOff, Lock, Mail, Loader2 } from 'lucide-react'
@@ -192,6 +192,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
               />
               <Lock className="text-muted-foreground absolute top-1/2 left-2 size-5 -translate-y-1/2" />
               <Button
+                asChild
                 type="button"
                 variant="ghost"
                 size="icon"

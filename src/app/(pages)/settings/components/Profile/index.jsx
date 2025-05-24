@@ -1,6 +1,6 @@
 'use client'
 
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'

@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next'
 import { useConfirmOTP } from 'app/hooks/auth/useConfirmOTP/useConfirmOTP'
 import { Button } from '@/components/ui/button'
 import { Loader2, ShieldCheck } from 'lucide-react'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 
 const ConfirmOTPForm = ({ redirect, phone }) => {
   const { t } = useTranslation()

@@ -1,6 +1,6 @@
 'use client'
 
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import dynamic from 'next/dynamic'
 import { useState, useEffect } from 'react'
 import { LoginFormSkeleton, SignUpFormSkeleton } from './components/Skeleton'

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { Camera, Loader } from 'lucide-react'
 import DatePicker from 'react-datepicker'
 

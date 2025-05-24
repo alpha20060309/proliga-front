@@ -1,20 +1,12 @@
 import './globals.css'
-import 'react-toastify/dist/ReactToastify.css'
 import 'react-phone-number-input/style.css'
 import Navbar from '../components/Navbar'
 import { DM_Sans } from 'next/font/google'
 import { cn } from '@/lib/utils'
 import { ViewTransitions } from 'next-view-transitions'
-import dynamic from 'next/dynamic'
-import { cookies } from 'next/headers'
-const Footer = dynamic(() => import('../components/Footer'), { ssr: false })
-const RootProvider = dynamic(() => import('./providers/Root.provider'), {
-  ssr: false,
-})
-const ToastContainer = dynamic(
-  () => import('react-toastify').then((mod) => mod.ToastContainer),
-  { ssr: false }
-)
+import { Toaster } from '@/components/ui/sonner'
+import Footer from 'components/Footer'
+import RootProvider from './providers/Root.provider'
 import { fontVariables } from './fonts'
 
 const dmSans = DM_Sans({
@@ -74,9 +66,6 @@ export const metadata = {
 }
 
 export default async function RootLayout({ children }) {
-  const cookieStore = cookies()
-  const currentTheme = cookieStore.get('currentTheme')?.value || 'light'
-
   return (
     <ViewTransitions>
       <html lang="uz" suppressHydrationWarning>
@@ -87,10 +76,10 @@ export default async function RootLayout({ children }) {
             fontVariables
           )}
         >
+          <Toaster />
           <RootProvider>
             <Navbar />
             {children}
-            <ToastContainer theme={currentTheme} pauseOnHover />
             <Footer />
           </RootProvider>
         </body>

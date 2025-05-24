@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { supabase } from '../../../lib/supabaseClient'
 import { incrementNewsView } from 'app/lib/features/news/news.slice'
 import { useDispatch } from 'react-redux'

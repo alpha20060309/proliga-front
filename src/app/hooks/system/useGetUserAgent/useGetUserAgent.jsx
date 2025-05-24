@@ -1,4 +1,4 @@
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { useState, useCallback } from 'react'
 import { setAgent } from 'app/lib/features/auth/auth.slice'
 import { useDispatch } from 'react-redux'

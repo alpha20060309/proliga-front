@@ -2,7 +2,7 @@
 
 import { useState, memo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { Eye, EyeOff, Loader } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'

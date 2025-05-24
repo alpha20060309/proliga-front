@@ -9,7 +9,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { PAYMENT_OPTIONS } from 'app/utils/paymentOptions.util'
 import { useSelector } from 'react-redux'
 import { useRedirectToClick } from 'app/hooks/payment/useRedirectToClick/useRedirectToClick'

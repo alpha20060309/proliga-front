@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { supabase } from 'app/lib/supabaseClient'
 import { CONFIG_KEY } from 'app/utils/config.util'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 
 export const fetchSystemConfig = createAsyncThunk(
   'systemConfig/fetchSystemConfig',

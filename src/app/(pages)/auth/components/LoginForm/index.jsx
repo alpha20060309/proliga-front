@@ -2,7 +2,7 @@
 
 import ForgotPassword from 'components/Modals/ForgotPassword'
 import SocialLogin from '../SocialLogin'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { useState, memo, useTransition } from 'react'
 import { useSelector } from 'react-redux'
 import { PhoneInput } from 'components/PhoneInput'
