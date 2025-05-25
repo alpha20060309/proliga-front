@@ -151,7 +151,7 @@ function StatisticsTable() {
           )}
       </div>
       <div className="flex h-full flex-1 flex-col justify-between gap-2">
-        <table className="text-2xs xs:text-xs min-w-88 md:text-sm">
+        <table className="text-2xs text-foreground xs:text-xs min-w-88 md:text-sm">
           <Head table={table} />
           <Body table={table} flexRender={flexRender} />
         </table>

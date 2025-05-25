@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'

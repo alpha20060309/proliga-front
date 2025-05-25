@@ -118,7 +118,7 @@ const ProfileStadiumForm = () => {
         value={teamConcat.find((player) => player.is_captain)?.player_id ?? ''}
         onValueChange={(value) => dispatch(setCaptain(value))}
       >
-        <SelectTrigger className="xs:px-2 text-foreground bg-background dark:bg-background hover:border-primary border-muted h-10 w-36 rounded px-1.5 text-xs sm:w-40 md:w-48">
+        <SelectTrigger className="xs:px-2 text-foreground bg-background dark:bg-background hover:border-primary border-muted w-36 rounded px-1.5 text-xs data-[size=default]:h-10 sm:w-40 md:w-48">
           <SelectValue placeholder={t('Kapitan tanlang')} />
         </SelectTrigger>
         <SelectContent>

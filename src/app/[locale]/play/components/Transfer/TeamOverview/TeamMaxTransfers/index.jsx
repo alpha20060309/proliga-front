@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import TeamMaxTransfersModal from './Modal'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'

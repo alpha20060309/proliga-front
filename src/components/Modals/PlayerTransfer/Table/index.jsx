@@ -116,7 +116,7 @@ function PlayerTable() {
   })
 
   return (
-    <main className="text-secondary-foreground flex flex-1 flex-col md:text-sm">
+    <main className="text-foreground flex flex-1 flex-col md:text-sm">
       <div className="xs:text-xs grid grid-cols-2 grid-rows-2 gap-x-1 gap-y-2 text-sm sm:grid-cols-4 sm:grid-rows-1 md:gap-1 md:text-sm lg:text-base">
         {table
           .getHeaderGroups()
@@ -126,7 +126,7 @@ function PlayerTable() {
             ))
           )}
       </div>
-      <table className="mt-2 w-full min-w-80 table-auto text-sm">
+      <table className="text-foreground mt-2 w-full min-w-80 table-auto text-sm">
         <TransferTableHead table={table} />
         <TransferTableBody table={table} flexRender={flexRender} />
       </table>

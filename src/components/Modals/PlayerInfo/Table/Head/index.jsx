@@ -3,9 +3,9 @@ import { flexRender } from '@tanstack/react-table'
 
 const Head = ({ table }) => {
   return (
-    <thead className="">
+    <thead>
       {table.getHeaderGroups().map((headerGroup) => (
-        <tr key={headerGroup.id} className="relative rounded-md">
+        <tr key={headerGroup.id} className="relative rounded">
           {headerGroup.headers.map((header) => {
             return (
               <th

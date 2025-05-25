@@ -27,7 +27,7 @@ const PlayerPhoto = ({ currentPlayer, position }) => {
       </div>
       <section className="flex flex-1 flex-col justify-between gap-2">
         <div>
-          <DialogTitle className="text-primary mb-1 truncate text-lg font-bold sm:text-xl md:text-2xl">
+          <DialogTitle className="text-foreground dark:text-accent mb-1 truncate text-lg font-bold sm:text-xl md:text-2xl">
             {getCorrectName({
               lang,
               uz: currentPlayer?.name,
@@ -45,15 +45,17 @@ const PlayerPhoto = ({ currentPlayer, position }) => {
               onError={(e) => (e.currentTarget.src = '/icons/football.svg')}
               className="bg-secondary size-5 rounded-full md:size-6 lg:size-7"
             />
-            <p className="text-secondary-foreground text-sm font-medium md:text-base">
+            <p className="text-foreground text-sm font-medium md:text-base">
               {getCorrectName({
                 lang,
                 uz: currentPlayer?.club?.name,
                 ru: currentPlayer?.club?.name_ru,
               })}
             </p>
-            <span className="text-neutral-500">|</span>
-            <p className="text-sm text-neutral-300 md:text-base">{position}</p>
+            <span className="text-muted-foreground/80">|</span>
+            <p className="text-muted-foreground text-sm md:text-base">
+              {position}
+            </p>
           </div>
         </div>
         <div className="grid grid-cols-3 gap-1 sm:hidden">

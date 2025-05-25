@@ -17,7 +17,7 @@ const ClubsFilter = ({ column }) => {
 
   return (
     <Select onValueChange={(value) => column.setFilterValue(value)}>
-      <SelectTrigger className="bg-background text-secondary-foreground col-span-2 w-full max-w-64 truncate rounded-sm border border-neutral-500 px-2 shadow-sm data-[size=default]:h-8 sm:col-span-1 sm:max-w-40 md:max-w-48 lg:col-span-2 lg:max-w-full xl:col-span-1 xl:max-w-64">
+      <SelectTrigger className="bg-background text-secondary-foreground col-span-2 w-full max-w-64 truncate rounded-sm border border-border px-2 shadow-sm data-[size=default]:h-8 sm:col-span-1 sm:max-w-40 md:max-w-48 lg:col-span-2 lg:max-w-full xl:col-span-1 xl:max-w-64">
         <SelectValue />
       </SelectTrigger>
       <SelectContent>

@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'sonner'
 import { useEffect, useMemo } from 'react'
@@ -214,7 +213,7 @@ const TransferStadiumForm = () => {
         value={teamConcat.find((player) => player.is_captain)?.player_id ?? ''}
         onValueChange={(value) => dispatch(setCaptain(value))}
       >
-        <SelectTrigger className="border-muted bg-background dark:bg-background xs:px-2 text-foreground hover:border-primary h-10 w-36 rounded-sm px-1.5 text-xs sm:w-40 md:w-48">
+        <SelectTrigger className="border-muted bg-background dark:bg-background xs:px-2 text-foreground hover:border-primary w-36 rounded-sm px-1.5 text-xs data-[size=default]:h-10 sm:w-40 md:w-48">
           <SelectValue placeholder={t('Kapitan tanlang')} />
         </SelectTrigger>
         <SelectContent>

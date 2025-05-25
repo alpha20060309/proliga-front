@@ -79,6 +79,7 @@
   --text-3xs: 0.625rem;
   --text-3xs--line-height: 0.7rem;
   --text-3xs--font-weight: 400;
+  --radix-context-menu-content-available-height: 60vh;
 
   @keyframes accordion-down {
     from {
@@ -207,6 +208,12 @@
   --select-shadow-spread: 10px;
   --select-shadow-size: 100px;
   --select-shadow-color: #000;
+  --radix-context-menu-content-available-height: 60vh;
+
+}
+
+.SelectContent {
+	max-height: var(--radix-select-content-available-height);
 }
 
 :root.dark {

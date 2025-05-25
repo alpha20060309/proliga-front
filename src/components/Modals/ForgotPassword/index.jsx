@@ -9,7 +9,6 @@ import {
   Dialog,
   DialogDescription,
 } from '@/components/ui/dialog'
-import Image from 'next/image'
 import { PhoneInput } from 'components/PhoneInput'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
 import { useGetUserPhone } from 'app/hooks/user/useGetUserPhone/useGetUserPhone'
