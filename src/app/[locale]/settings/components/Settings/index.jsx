@@ -66,7 +66,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
     <>
       <UploadFile isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
       <SettingsContainer>
-        <h3 className="mb-2 text-xl font-bold tracking-tight text-foreground">
+        <h3 className="text-foreground mb-2 text-xl font-bold tracking-tight">
           {t('Profil sozlamalari')}
         </h3>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -74,109 +74,99 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
             <article className="relative">
               <Avatar
                 className={
-                  'size-32 w-full rounded-full border-2 border-neutral-200 xl:size-36'
+                  'border-foreground/80 size-32 w-full rounded-full border-2 xl:size-36'
                 }
               />
               <Button
                 type="button"
                 variant="secondary"
                 size="icon"
-                className="absolute bottom-0 right-0 border border-neutral-500 bg-card hover:bg-secondary"
+                className="bg-card hover:bg-secondary border-border absolute right-0 bottom-0 border"
                 onClick={() => setModalOpen(true)}
               >
-                <Camera className="h-4 w-4 text-secondary-foreground" />
+                <Camera className="text-foreground h-4 w-4" />
               </Button>
             </article>
             <section className="grid w-full flex-1 grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
               <article className="space-y-1">
-                <label
-                  className="text-sm font-medium text-neutral-300"
-                  htmlFor="firstName"
-                >
+                <Label className="text-sm font-medium" htmlFor="firstName">
                   {t('Ism')}
-                </label>
+                </Label>
                 <Input
                   id="firstName"
                   placeholder={t('Ism')}
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  className="border-neutral-700 bg-card text-secondary-foreground placeholder:text-neutral-500"
+                  className="bg-card text-foreground border-input placeholder:text-muted-foreground"
                 />
               </article>
               <article className="space-y-1">
-                <label
-                  className="text-sm font-medium text-neutral-300"
-                  htmlFor="lastName"
-                >
+                <Label className="text-sm font-medium" htmlFor="lastName">
                   {t('Familiya')}
-                </label>
+                </Label>
                 <Input
                   id="lastName"
                   placeholder={t('Familiya')}
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
-                  className="border-neutral-700 bg-card text-secondary-foreground placeholder:text-neutral-500"
+                  className="bg-card text-foreground border-input placeholder:text-muted-foreground"
                 />
               </article>
               <article className="space-y-1">
-                <label
-                  className="text-sm font-medium text-neutral-300"
-                  htmlFor="middleName"
-                >
+                <Label className="text-sm font-medium" htmlFor="middleName">
                   {t('Sharif')}
-                </label>
+                </Label>
                 <Input
                   id="middleName"
                   placeholder={t('Sharif')}
                   value={middleName}
                   onChange={(e) => setMiddleName(e.target.value)}
-                  className="border-neutral-700 bg-card text-secondary-foreground placeholder:text-neutral-500"
+                  className="bg-card text-foreground border-input placeholder:text-muted-foreground"
                 />
               </article>
               <article className="flex flex-col flex-wrap justify-between">
-                <label
-                  className="block text-sm font-medium text-neutral-300"
-                  htmlFor="birthdate"
-                >
+                <Label className="text-sm font-medium" htmlFor="birthdate">
                   {t("Tug'ilgan kuni")}
-                </label>
-                {/* <DatePicker
+                </Label>
+                <Input
                   id="birthdate"
-                  selected={date}
-                  onChange={(date) => setDate(date)}
-                  className="h-10 min-w-full flex-1 rounded-md border border-neutral-700 bg-card p-2 text-sm text-secondary-foreground placeholder:text-neutral-500 focus:outline-hidden focus:ring-1 focus:ring-neutral-300 focus:ring-offset-2 focus:ring-offset-neutral-900"
-                /> */}
+                  type="date"
+                  value={
+                    date instanceof Date
+                      ? date.toISOString().split('T')[0]
+                      : date
+                  }
+                  onChange={(e) => setDate(new Date(e.target.value))}
+                  className="bg-card text-foreground border-input placeholder:text-muted-foreground h-10 w-full"
+                />
               </article>
               <article className="space-y-1">
-                <label
-                  className="text-sm font-medium text-neutral-300"
-                  htmlFor="gender"
-                >
+                <Label className="text-sm font-medium" htmlFor="gender">
                   {t('Jins')}
-                </label>
+                </Label>
                 <Select value={gender} onValueChange={setGender}>
                   <SelectTrigger
                     id="gender"
-                    className="h-10 border-neutral-700 bg-card text-secondary-foreground"
+                    className="bg-card text-foreground border-input w-full data-[size=default]:h-10"
                   >
                     <SelectValue placeholder={t('Jins tanlang')} />
                   </SelectTrigger>
-                  <SelectContent className="border-neutral-700 bg-neutral-900">
+                  <SelectContent className="border-input bg-secondary text-foreground capitalize">
                     <SelectItem
                       value={GENDERS.UNSET}
-                      className="text-secondary-foreground"
+                      className="text-foreground"
                     >
                       {t('Belgilanmagan')}
                     </SelectItem>
                     <SelectItem
                       value={GENDERS.MALE}
-                      className="text-secondary-foreground"
+                      className="text-foreground capitalize"
                     >
                       {t('Erkak')}
                     </SelectItem>
                     <SelectItem
                       value={GENDERS.FEMALE}
-                      className="text-secondary-foreground"
+                      className="text-foreground"
                     >
                       {t('Ayol')}
                     </SelectItem>
@@ -186,10 +176,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
             </section>
           </main>
           <section className="space-y-1">
-            <Label
-              className="text-sm font-medium text-neutral-300"
-              htmlFor="bio"
-            >
+            <Label className="text-sm font-medium" htmlFor="bio">
               {t('Siz haqingizda')}
             </Label>
             <Textarea
@@ -197,11 +184,11 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
               placeholder={t('Bio')}
               value={bio}
               onChange={(e) => setBio(e.target.value)}
-              className="h-40 border-neutral-700 bg-card text-secondary-foreground placeholder:text-neutral-500 lg:h-48 xl:h-56"
+              className="bg-card text-foreground border-input placeholder:text-muted-foreground h-40"
             />
           </section>
           <Button
-            className="h-10 w-full rounded-sm border border-black bg-primary/75 text-sm font-semibold text-neutral-900 transition-all hover:bg-primary hover:bg-opacity-100 xs:max-w-48"
+            className="bg-accent hover:bg-primary hover:bg-opacity-100 xs:max-w-48 border-accent-foreground text-accent-foreground h-10 w-full rounded-sm border text-sm font-semibold transition-all"
             type="submit"
             disabled={isLoading}
           >

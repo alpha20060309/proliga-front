@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { NumericFormat } from 'react-number-format'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
-import { Card, CardContent, CardFooter } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { ArrowUpCircle } from 'lucide-react'
 import RefillBalance from 'components/Modals/RefillBalance'
@@ -14,40 +14,39 @@ const ProfessionalRefillBalanceBox = () => {
   const [isModalOpen, setModalOpen] = useState(false)
 
   return (
-    <>
-      <RefillBalance setIsModalOpen={setModalOpen} isModalOpen={isModalOpen} />
-      <Card className="h-28 w-full space-y-0 border border-neutral-600 bg-card/50 text-foreground shadow-md xs:max-w-64">
-        <CardContent className="p-4">
-          <div className="flex items-center justify-between">
-            <span className="text-sm font-medium text-neutral-300">
-              {t('Balans')}:
-            </span>
-            <div className="text-right">
-              <NumericFormat
-                value={userTable?.balance / 100 || 0}
-                className="w-full select-none border-none bg-transparent text-right text-lg font-bold text-yellow-400 outline-hidden"
-                defaultValue={0}
-                readOnly
-                thousandSeparator
-                fixedDecimalScale
-                decimalScale={2}
-                tabIndex={-1}
-                suffix={' ' + t("so'm")}
-              />
-            </div>
+    <Card className="border-border bg-card/50 text-foreground xs:max-w-64 w-full space-y-0 border p-0 shadow-md">
+      <CardContent className="space-y-2 p-4">
+        <RefillBalance
+          setIsModalOpen={setModalOpen}
+          isModalOpen={isModalOpen}
+        />
+        <div className="flex items-center justify-between">
+          <span className="text-muted-foreground text-sm font-medium">
+            {t('Balans')}:
+          </span>
+          <div className="text-right">
+            <NumericFormat
+              value={userTable?.balance / 100 || 0}
+              className="text-foreground w-full border-none bg-transparent text-right text-lg font-bold outline-hidden select-none"
+              defaultValue={0}
+              readOnly
+              thousandSeparator
+              fixedDecimalScale
+              decimalScale={2}
+              tabIndex={-1}
+              suffix={' ' + t("so'm")}
+            />
           </div>
-        </CardContent>
-        <CardFooter className="p-4 pt-0">
-          <Button
-            onClick={() => setModalOpen(true)}
-            className="w-full bg-primary/75 text-neutral-900 transition-all hover:bg-primary"
-          >
-            <ArrowUpCircle className="mr-2 h-4 w-4" />
-            {t('Balansni toldirish')}
-          </Button>
-        </CardFooter>
-      </Card>
-    </>
+        </div>
+        <Button
+          onClick={() => setModalOpen(true)}
+          className="bg-accent text-accent-foreground hover:bg-accent w-full shadow transition-all"
+        >
+          <ArrowUpCircle className="mr-2 h-4 w-4" />
+          {t('Balansni toldirish')}
+        </Button>
+      </CardContent>
+    </Card>
   )
 }
 

@@ -2,9 +2,11 @@ import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
 
 const PositionsFilter = ({ column, columnFilterValue }) => {
-  const active = 'bg-primary text-black font-bold'
-  const passive = 'bg-transparent text-neutral-500 font-base'
+  const active = 'bg-primary text-accent-foreground font-bold'
+  const passive = 'bg-transparent text-muted font-base'
+
   const { t } = useTranslation()
+
   const DATA = [
     {
       title: 'Barchasi',
@@ -29,12 +31,12 @@ const PositionsFilter = ({ column, columnFilterValue }) => {
   ]
 
   return (
-    <section className="col-span-4 flex w-full overflow-x-auto text-xs xs:text-sm lg:text-xs 2xl:gap-x-0.5 2xl:text-sm">
+    <section className="xs:text-sm col-span-4 flex w-full overflow-x-auto text-xs lg:text-xs 2xl:gap-x-0.5 2xl:text-sm">
       {DATA.map((obj, index) => (
         <button
           key={index}
           className={cn(
-            'text-nowrap break-keep rounded-sm px-2 py-1 font-bold capitalize transition-all md:px-4 2xl:px-2',
+            'rounded-sm px-2 py-1 font-bold text-nowrap break-keep capitalize transition-all md:px-4 2xl:px-2',
             obj.key === '' && typeof columnFilterValue === 'undefined'
               ? active
               : obj.key === columnFilterValue

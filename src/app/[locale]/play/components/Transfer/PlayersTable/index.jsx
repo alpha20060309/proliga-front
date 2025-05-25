@@ -151,15 +151,15 @@ function PlayersTable() {
   return (
     <section
       className={cn(
-        'mx-auto flex w-full max-w-lg border-collapse flex-col gap-0 bg-background',
-        'overflow-x-auto rounded-xl border border-primary border-opacity-50',
+        'bg-background mx-auto flex w-full max-w-lg border-collapse flex-col gap-0',
+        'border-primary border-opacity-50 overflow-x-auto rounded-xl border',
         'text-secondary-foreground shadow-md shadow-neutral-600 transition-all',
-        'p-2 xs:p-3 md:text-sm lg:w-1/2 lg:max-w-md xl:max-w-lg xl:p-4',
+        'xs:p-3 p-2 md:text-sm lg:w-1/2 lg:max-w-md xl:max-w-lg xl:p-4',
         'fade-in-fast hover:border-opacity-100 2xl:max-w-xl'
       )}
     >
       <TeamOverview />
-      <div className="grid w-full grid-cols-4 grid-rows-2 gap-x-1 gap-y-2 text-sm xs:text-xs sm:grid-rows-1 lg:grid-rows-2 lg:gap-y-1 xl:grid-rows-1 xl:gap-y-2 2xl:text-sm">
+      <div className="xs:text-xs grid w-full grid-cols-4 grid-rows-2 gap-x-1 gap-y-2 text-sm sm:grid-rows-1 lg:grid-rows-2 lg:gap-y-1 xl:grid-rows-1 xl:gap-y-2 2xl:text-sm">
         {table
           .getHeaderGroups()
           .map((headerGroup) =>
@@ -174,8 +174,8 @@ function PlayersTable() {
       </table>
       <TanStackPagination
         table={table}
-        active="bg-primary text-black"
-        className={'mt-auto px-0 pb-0 pt-1'}
+        active="bg-primary text-accent-foreground"
+        className={'mt-auto px-0 pt-1 pb-0'}
       />
     </section>
   )

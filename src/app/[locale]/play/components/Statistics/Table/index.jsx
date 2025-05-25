@@ -141,7 +141,7 @@ function StatisticsTable() {
 
   return (
     <section className="flex h-full flex-col gap-2">
-      <div className="flex-0 relative flex gap-1 text-xs xs:text-sm">
+      <div className="xs:text-sm relative flex flex-0 gap-1 text-xs">
         {table
           .getHeaderGroups()
           .map((headerGroup) =>
@@ -151,13 +151,13 @@ function StatisticsTable() {
           )}
       </div>
       <div className="flex h-full flex-1 flex-col justify-between gap-2">
-        <table className="min-w-88 text-2xs xs:text-xs md:text-sm">
+        <table className="text-2xs xs:text-xs min-w-88 md:text-sm">
           <Head table={table} />
           <Body table={table} flexRender={flexRender} />
         </table>
         <TanStackPagination
           table={table}
-          active="bg-neutral-300 text-black "
+          active="bg-muted text-accent-foreground"
           className={'mt-auto'}
         />
       </div>

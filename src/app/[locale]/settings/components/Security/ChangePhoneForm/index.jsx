@@ -77,7 +77,7 @@ export default function ChangePhoneForm() {
               id="phone"
               name="phone"
               defaultCountry="UZ"
-              className="text-secondary-foreground h-10 rounded-sm border-neutral-400 bg-neutral-900 placeholder:text-neutral-500"
+              className="text-secondary-foreground border-input bg-secondary placeholder:text-muted h-10 rounded-sm"
               value={''}
               placeholder={'99-999-99-99'}
               onChange={setPhone}
@@ -88,7 +88,7 @@ export default function ChangePhoneForm() {
             <Input
               id="oldPassword"
               name="oldPassword"
-              className="h-10 border-neutral-400 bg-neutral-900 pr-10"
+              className="border-input bg-secondary h-10 pr-10"
               type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -109,7 +109,7 @@ export default function ChangePhoneForm() {
           </div>
         </section>
         <Button
-          className="border-primary/75 text-secondary-foreground hover:border-primary xs:max-w-40 h-10 w-full rounded-sm border bg-neutral-900 text-sm font-semibold transition-all"
+          className="border-accent/75 text-secondary-foreground hover:border-primary xs:max-w-40 bg-secondary h-10 w-full rounded-sm border text-sm font-semibold transition-all"
           type="submit"
           disabled={isLoading}
         >

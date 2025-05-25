@@ -111,7 +111,7 @@ const ProfileStadiumForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mt-2 flex justify-between gap-x-1 text-black"
+      className="mt-2 flex justify-between gap-x-1 text-accent-foreground"
     >
       <Select
         name="formation"
@@ -144,7 +144,7 @@ const ProfileStadiumForm = () => {
       <Button
         type="submit"
         disabled={isLoading}
-        className="bg-background text-foreground 2xs:min-w-28 xs:min-w-28 h-10 min-w-24 rounded-sm border border-yellow-500 text-sm font-medium transition-all hover:border-black hover:bg-yellow-500 hover:text-black sm:min-w-32 md:text-base"
+        className="bg-background text-foreground 2xs:min-w-28 xs:min-w-28 h-10 min-w-24 rounded-sm border border-accent text-sm font-medium transition-all hover:border-border hover:bg-accent hover:text-accent-foreground sm:min-w-32 md:text-base"
       >
         {isLoading ? (
           <Loader2 className="mx-auto size-6 animate-spin" />

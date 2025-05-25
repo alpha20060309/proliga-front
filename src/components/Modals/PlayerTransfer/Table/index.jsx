@@ -132,7 +132,7 @@ function PlayerTable() {
       </table>
       <TanStackPagination
         table={table}
-        active="bg-primary text-black"
+        active="bg-primary text-accent-foreground"
         className={'mt-auto pt-2'}
       />
     </main>

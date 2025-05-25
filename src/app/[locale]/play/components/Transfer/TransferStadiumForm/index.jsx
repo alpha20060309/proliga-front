@@ -35,6 +35,7 @@ import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { selectPlayers } from 'app/lib/features/player/player.selector'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
+import { Loader2 } from 'lucide-react'
 
 const TransferStadiumForm = () => {
   const { t } = useTranslation()
@@ -205,7 +206,7 @@ const TransferStadiumForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mt-2 flex justify-between gap-x-0 text-black xs:gap-x-0.5 sm:gap-x-1"
+      className="text-accent-foreground xs:gap-x-0.5 mt-2 flex justify-between gap-x-0 sm:gap-x-1"
     >
       <Select
         name="formation"
@@ -213,7 +214,7 @@ const TransferStadiumForm = () => {
         value={teamConcat.find((player) => player.is_captain)?.player_id ?? ''}
         onValueChange={(value) => dispatch(setCaptain(value))}
       >
-        <SelectTrigger className="h-10 w-36 sm:w-40 md:w-48 rounded-sm border-neutral-400 bg-background px-1.5 xs:px-2 text-xs text-foreground hover:border-primary">
+        <SelectTrigger className="border-muted bg-background xs:px-2 text-foreground hover:border-primary h-10 w-36 rounded-sm px-1.5 text-xs sm:w-40 md:w-48">
           <SelectValue placeholder={t('Kapitan tanlang')} />
         </SelectTrigger>
         <SelectContent>
@@ -235,14 +236,14 @@ const TransferStadiumForm = () => {
           )}
         </SelectContent>
       </Select>
-      <div className="flex justify-center gap-0.5 xs:gap-1">
+      <div className="xs:gap-1 flex justify-center gap-0.5">
         {teamCreateBtns && (
           <Button
             onClick={handleAutoGenerateTeamPlayers}
             type="button"
             variant="default"
             title="Avto jamoa yigish"
-            className="flex w-full min-w-5 max-w-10 items-center justify-center gap-1 rounded-sm border border-neutral-400 bg-background px-2 text-foregroundtransition-all hover:border-primary sm:w-full sm:max-w-max"
+            className="bg-background text-foregroundtransition-all hover:border-primary border-muted flex w-full max-w-10 min-w-5 items-center justify-center gap-1 rounded-sm border px-2 sm:w-full sm:max-w-max"
           >
             <Image
               src="/icons/auto.svg"
@@ -259,7 +260,7 @@ const TransferStadiumForm = () => {
           variant="default"
           onClick={() => dispatch(revertTeamPlayers())}
           title={t('orqaga qaytish')}
-          className="flex w-full max-w-10 items-center justify-center gap-1 rounded-sm border border-neutral-400 bg-background px-2 text-foreground transition-all hover:border-primary sm:w-full sm:max-w-max"
+          className="bg-background text-foreground hover:border-primary border-muted flex w-full max-w-10 items-center justify-center gap-1 rounded-sm border px-2 transition-all sm:w-full sm:max-w-max"
         >
           <Image
             src="/icons/revert.svg"
@@ -274,16 +275,10 @@ const TransferStadiumForm = () => {
       <Button
         type="submit"
         disabled={isLoading}
-        className="h-10 min-w-24 rounded-sm border border-yellow-500 bg-background text-sm font-medium text-foreground transition-all hover:border-black hover:bg-yellow-500 hover:text-black 2xs:min-w-28 xs:min-w-28 sm:min-w-32 md:text-base"
+        className="bg-background text-foreground 2xs:min-w-28 xs:min-w-28 border-accent hover:border-accent-foreground hover:bg-accent hover:text-accent-foreground h-10 min-w-24 rounded-sm border text-sm font-medium transition-all sm:min-w-32 md:text-base"
       >
         {isLoading ? (
-          <Image
-            src="/icons/loading.svg"
-            width={24}
-            height={24}
-            alt="loading"
-            className="mx-auto size-6 animate-spin"
-          />
+          <Loader2 className="text-foreground mx-auto size-6 animate-spin" />
         ) : (
           t('Saqlash')
         )}

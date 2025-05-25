@@ -21,6 +21,8 @@ import { memo } from 'react'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { BALANCE_OPTIONS } from 'app/utils/paymentOptions.util'
 import PaymentOption from './PaymentOption'
+import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
 
 const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
   const { t } = useTranslation()
@@ -103,12 +105,12 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
             </section>
           </div>
           <div className="w-full space-y-1">
-            <label
+            <Label
               className="text-sm font-medium text-neutral-300 sm:text-base"
               htmlFor="money"
             >
               {t("To'lash summasini tering")}
-            </label>
+            </Label>
             <Input
               type="number"
               id="money"
@@ -120,15 +122,15 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               name="money"
-              className="flex h-10 w-full rounded-md border border-neutral-600 bg-neutral-900 px-3 py-2 text-sm text-secondary-foreground file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus:border-none disabled:cursor-not-allowed disabled:opacity-50"
+              className="border-border bg-foreground text-secondary-foreground placeholder:text-muted-foreground flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus:border-none disabled:cursor-not-allowed disabled:opacity-50"
             />
           </div>
-          <button
+          <Button
             type="submit"
-            className="h-12 rounded-sm border border-neutral-600 bg-primary/80 font-bold text-neutral-900 transition-all hover:bg-primary hover:text-black"
+            className="border-border bg-primary/80 text-foreground hover:bg-primary hover:text-accent-foreground h-12 rounded-sm border font-bold transition-all"
           >
             {t("To'lash")}
-          </button>
+          </Button>
         </form>
       </DialogContent>
       <DialogDescription className="hidden">

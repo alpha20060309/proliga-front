@@ -9,11 +9,11 @@ const RankingTeams = () => {
   const topTeams = useSelector(selectTopTeams)
 
   return (
-    <div className="w-full rounded-xl bg-background p-5 text-foreground">
+    <div className="bg-background text-foreground w-full rounded-xl p-5">
       <h3 className="text-xl font-bold">{t('Eng kuchli top 3 jamoalar')}</h3>
       <div
         className={cn(
-          'mt-4 h-auto min-h-32 grid-cols-2 gap-2 xs:grid-cols-3',
+          'xs:grid-cols-3 mt-4 h-auto min-h-32 grid-cols-2 gap-2',
           topTeams?.length > 0 && 'grid'
         )}
       >
@@ -40,17 +40,17 @@ const TeamPlace = ({ team, index }) => {
           height={24}
           className="size-6 md:size-8"
         />
-        <span className="flex h-6 w-12 items-center justify-center rounded-full bg-primary text-xs font-bold text-black sm:text-sm">
+        <span className="bg-primary text-accent-foreground flex h-6 w-12 items-center justify-center rounded-full text-xs font-bold sm:text-sm">
           {team?.team_point ?? '00'}
         </span>
       </div>
-      <h4 className="line-clamp-2 max-w-28 break-words text-sm font-bold text-black">
+      <h4 className="text-accent-foreground line-clamp-2 max-w-28 text-sm font-bold break-words">
         {team?.team_name ?? 'team'}
       </h4>
-      <p className="line-clamp-2 max-w-28 break-words text-sm font-medium text-black">
+      <p className="text-accent-foreground line-clamp-2 max-w-28 text-sm font-medium break-words">
         {team?.user_name}
       </p>
-      <span className="absolute bottom-0 right-0 flex size-6 items-center justify-center rounded-br-lg rounded-tl-lg bg-primary text-sm font-extrabold text-black">
+      <span className="bg-primary text-accent-foreground absolute right-0 bottom-0 flex size-6 items-center justify-center rounded-tl-lg rounded-br-lg text-sm font-extrabold">
         {index + 1}
       </span>
     </div>

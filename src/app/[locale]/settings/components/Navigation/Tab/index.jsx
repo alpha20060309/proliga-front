@@ -2,11 +2,11 @@ import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
 import { Shield, User, Cog, History } from 'lucide-react'
 
-const SettingsNavigationTab = ({ tab, currentTab,setTab }) => {
+const SettingsNavigationTab = ({ tab, currentTab, setTab }) => {
   const { t } = useTranslation()
-  const active = 'text-primary'
-  const passive = 'text-neutral-300'
-  const containerActive = 'bg-card'
+  const active = 'text-foreground dark:text-primary'
+  const passive = 'text-muted-foreground'
+  const containerActive = 'bg-accent/80 dark:bg-secondary'
   const containerPassive = 'bg-transparent'
   const isActive = tab.key === currentTab
 
@@ -36,7 +36,7 @@ const SettingsNavigationTab = ({ tab, currentTab,setTab }) => {
       onClick={() => handleClick(tab)}
       className={cn(
         'flex w-full cursor-pointer items-center justify-center gap-2 lg:justify-start',
-        'rounded-md p-2 transition-all hover:bg-card lg:w-auto',
+        'hover:bg-card rounded-md p-2 transition-all lg:w-auto',
         isActive ? containerActive : containerPassive
       )}
     >

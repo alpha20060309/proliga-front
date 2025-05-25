@@ -7,10 +7,10 @@ import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { formatDate } from 'app/utils/formatDate.util'
 import { Phone, CalendarDays, UsersRound } from 'lucide-react'
 import { SettingsContainer } from '../Container'
-import Image from 'next/image'
 import RefillBalanceBox from './RefillBalanceBox'
 import Avatar from 'components/Avatar'
 import { getUrl } from 'app/utils/static.util'
+import { Copy } from 'lucide-react'
 
 const SettingsProfile = () => {
   const { t } = useTranslation()
@@ -34,18 +34,18 @@ const SettingsProfile = () => {
 
   return (
     <SettingsContainer>
-      <h3 className="mb-2 text-xl font-bold tracking-tight text-foreground">
+      <h3 className="text-foreground mb-2 text-xl font-bold tracking-tight">
         {t('Profil')}
       </h3>
       <div className="flex flex-wrap items-center gap-4">
         <Avatar
           src={getUrl(user?.image)}
           className={
-            'size-24 rounded-xl object-cover object-top text-black transition-all duration-1000 ease-in-out hover:object-bottom'
+            'text-foreground size-24 rounded-xl object-cover object-top transition-all duration-1000 ease-in-out hover:object-bottom'
           }
         />
         <div className="flex flex-col justify-center">
-          <div className="flex gap-1 text-lg font-bold capitalize text-neutral-50 xs:max-w-64 md:max-w-96">
+          <div className="text-foreground xs:max-w-64 flex gap-1 text-lg font-bold capitalize md:max-w-96">
             {user?.name && <p className="truncate">{user?.name}</p>}
             {user?.last_name && (
               <>
@@ -67,21 +67,17 @@ const SettingsProfile = () => {
               <p className="truncate">{t('Sizning Ismingiz')}</p>
             )}
           </div>
-          <span className="text-sm text-neutral-300">{user?.email}</span>
+          <span className="text-muted-foreground text-sm">{user?.email}</span>
         </div>
         <div className="ml-auto flex items-center justify-center gap-2 px-0 py-0 text-sm">
-          <p className="block text-neutral-400">{t('Foydalanuvchi ID-si')}</p>
+          <p className="text-muted-foreground block">
+            {t('Foydalanuvchi ID-si')}
+          </p>
           <div
-            className="flex cursor-pointer items-center justify-center gap-1 rounded-md bg-primary/90 px-3 py-1.5 text-base font-medium text-black transition-all hover:bg-primary"
+            className="bg-accent hover:bg-accent text-accent-foreground flex cursor-pointer items-center justify-center gap-1 rounded-md px-3 py-1.5 text-base font-medium transition-all"
             onClick={() => handleClick(user?.id)}
           >
-            <Image
-              width="16"
-              height="16"
-              className="filter-black size-4"
-              src="/icons/copy.svg"
-              alt="copy"
-            />
+            <Copy className="text-foreground size-4" />
             {user?.id}
           </div>
         </div>
@@ -89,35 +85,37 @@ const SettingsProfile = () => {
       <section className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
         <ProfileItem>
           <div className="flex items-center gap-2 capitalize">
-            <Phone className="size-5 text-neutral-50" />
-            <p className="text-sm font-medium text-neutral-300">
+            <Phone className="text-foreground size-5" />
+            <p className="text-muted-foreground text-sm font-medium">
               {t('Telefon raqam')}:
             </p>
           </div>
-          <p className="text-sm text-foreground">{user?.phone}</p>
+          <p className="text-foreground text-sm">{user?.phone}</p>
         </ProfileItem>
         <ProfileItem>
           <div className="flex items-center gap-2 capitalize">
-            <CalendarDays className="size-5 text-neutral-50" />
-            <p className="text-sm font-medium text-neutral-300">
+            <CalendarDays className="text-foreground size-5" />
+            <p className="text-muted-foreground text-sm font-medium">
               {t("Tug'ilgan kuni")}:
             </p>
           </div>
-          <p className="text-sm text-foreground">
+          <p className="text-foreground text-sm">
             {formatDate(user?.birth_date, 'news')}
           </p>
         </ProfileItem>
         <ProfileItem>
           <div className="flex items-center gap-2 capitalize">
-            <UsersRound className="size-5 text-neutral-50" />
-            <p className="text-sm font-medium text-neutral-300">{t('Jins')}:</p>
+            <UsersRound className="text-foreground size-5" />
+            <p className="text-muted-foreground text-sm font-medium">
+              {t('Jins')}:
+            </p>
           </div>
-          <p className="text-sm text-foreground">
+          <p className="text-foreground text-sm">
             {getCorrectGenderText(user?.gender)}
           </p>
         </ProfileItem>
       </section>
-      <div className="line-clamp-5 h-28 max-w-full overflow-y-scroll text-wrap break-words rounded-lg border border-neutral-700 bg-card/50 p-2 text-sm text-neutral-300 md:p-4">
+      <div className="bg-card/50 border-border text-muted-foreground line-clamp-5 h-28 max-w-full overflow-y-scroll rounded-lg border p-2 text-sm text-wrap break-words md:p-4">
         {user?.bio ? user?.bio : t("Ma'lumot yo'q")}
       </div>
       <RefillBalanceBox />
@@ -127,7 +125,7 @@ const SettingsProfile = () => {
 
 const ProfileItem = ({ children }) => {
   return (
-    <div className="flex items-center gap-2 rounded-lg border border-neutral-700 bg-card/50 p-2 xl:p-4">
+    <div className="bg-card/50 border-border flex items-center gap-2 rounded-lg border p-2 xl:p-4">
       {children}
     </div>
   )

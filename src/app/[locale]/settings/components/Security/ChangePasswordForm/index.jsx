@@ -66,7 +66,7 @@ function ChangePasswordForm() {
             <Input
               id="newPassword"
               name="newPassword"
-              className="h-10 border-neutral-400 pr-10"
+              className="border-input h-10 pr-10"
               type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -92,7 +92,7 @@ function ChangePasswordForm() {
             <Input
               id="confirmPassword"
               name="confirmPassword"
-              className="h-10 border-neutral-400 pr-10"
+              className="border-input h-10 pr-10"
               type={showConfirmPassword ? 'text' : 'password'}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
@@ -113,7 +113,7 @@ function ChangePasswordForm() {
           </div>
         </section>
         <Button
-          className="border-primary/75 text-secondary-foreground hover:border-primary xs:max-w-40 h-10 w-full rounded-sm border bg-neutral-900 text-sm font-semibold transition-all"
+          className="border-accent/75 text-secondary-foreground hover:border-accent xs:max-w-40 h-10 w-full rounded-sm border bg-secondary text-sm font-semibold transition-all"
           type="submit"
           disabled={isLoading}
         >

@@ -42,7 +42,7 @@ export function GradientButton({
             className={cn(
               classes.gradient.background,
               'bg-clip-text text-transparent',
-              'w-full whitespace-nowrap px-5',
+              'w-full px-5 whitespace-nowrap',
               classes.gradient.animate
             )}
           >
@@ -60,15 +60,15 @@ export function GradientButton({
         classes.gradient.background,
         classes.gradient.animate,
         classes.hover.glow,
-        'text-black shadow-md',
-        'focus:outline-hidden focus:ring-2 focus:ring-yellow-300 focus:ring-opacity-50',
+        'text-accent-foreground shadow-md',
+        'focus:ring-primary focus:ring-opacity-50 focus:ring-2 focus:outline-hidden',
         className
       )}
     >
       <Link
         tabIndex={-1}
         href={href}
-        className="relative z-10 whitespace-nowrap px-4"
+        className="relative z-10 px-4 whitespace-nowrap"
       >
         {children}
       </Link>

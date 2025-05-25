@@ -5,8 +5,8 @@ export default function SettingsSkeleton() {
   return (
     <Gutter>
       <div className="z-40 flex h-full min-h-176 flex-col gap-2 lg:min-h-152 lg:flex-row">
-        <Skeleton className="h-14 w-full rounded-xl bg-neutral-900 lg:min-h-152 lg:w-64" />
-        <Skeleton className="w-full flex-1 rounded-xl bg-neutral-900 md:min-h-176 lg:min-h-152" />
+        <Skeleton className="bg-background/50 h-14 w-full rounded-xl lg:min-h-152 lg:w-64" />
+        <Skeleton className="bg-background/50 w-full flex-1 rounded-xl md:min-h-176 lg:min-h-152" />
       </div>
     </Gutter>
   )
@@ -14,12 +14,12 @@ export default function SettingsSkeleton() {
 
 export function ProfileSkeleton() {
   return (
-    <Skeleton className="flex h-full flex-col gap-2 bg-neutral-900 md:min-h-176 lg:min-h-152 lg:flex-row" />
+    <Skeleton className="bg-card flex h-full flex-col gap-2 md:min-h-176 lg:min-h-152 lg:flex-row" />
   )
 }
 
 export function NavigationSkeleton() {
   return (
-    <Skeleton className="h-14 w-full rounded-xl bg-neutral-900 lg:min-h-152 lg:w-64" />
+    <Skeleton className="bg-card h-14 w-full rounded-xl lg:min-h-152 lg:w-64" />
   )
 }
