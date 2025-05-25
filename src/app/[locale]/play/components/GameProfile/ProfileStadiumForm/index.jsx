@@ -111,7 +111,7 @@ const ProfileStadiumForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mt-2 flex justify-between gap-x-1 text-accent-foreground"
+      className="text-accent-foreground mt-2 flex justify-between gap-x-1"
     >
       <Select
         name="formation"
@@ -119,7 +119,7 @@ const ProfileStadiumForm = () => {
         value={teamConcat.find((player) => player.is_captain)?.player_id ?? ''}
         onValueChange={(value) => dispatch(setCaptain(value))}
       >
-        <SelectTrigger className="bg-background xs:px-2 text-foreground hover:border-primary h-10 w-36 rounded-sm border-neutral-400 px-1.5 text-xs sm:w-40 md:w-48">
+        <SelectTrigger className="xs:px-2 text-foreground bg-background dark:bg-background hover:border-primary border-muted h-10 w-36 rounded px-1.5 text-xs sm:w-40 md:w-48">
           <SelectValue placeholder={t('Kapitan tanlang')} />
         </SelectTrigger>
         <SelectContent>
@@ -144,7 +144,7 @@ const ProfileStadiumForm = () => {
       <Button
         type="submit"
         disabled={isLoading}
-        className="bg-background text-foreground 2xs:min-w-28 xs:min-w-28 h-10 min-w-24 rounded-sm border border-accent text-sm font-medium transition-all hover:border-border hover:bg-accent hover:text-accent-foreground sm:min-w-32 md:text-base"
+        className="bg-background text-foreground 2xs:min-w-28 xs:min-w-28 border-accent hover:border-border hover:bg-accent hover:text-accent-foreground h-10 min-w-24 rounded-sm border text-sm font-medium transition-all sm:min-w-32 md:text-base"
       >
         {isLoading ? (
           <Loader2 className="mx-auto size-6 animate-spin" />

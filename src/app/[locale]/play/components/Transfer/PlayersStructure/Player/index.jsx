@@ -62,7 +62,7 @@ const Player = ({ player }) => {
 
   return (
     <>
-      <div className="fade-in-fast relative z-30 flex h-min select-none flex-col items-center justify-center text-sm text-neutral-700 sm:text-base">
+      <div className="fade-in-fast relative z-30 flex h-min flex-col items-center justify-center text-sm text-neutral-700 select-none sm:text-base">
         {!player.name && (
           <>
             <Image
@@ -71,13 +71,13 @@ const Player = ({ player }) => {
               width={48}
               height={48}
               draggable={false}
-              className="size-6 xs:size-8 md:size-10 lg:size-8 xl:size-10"
+              className="xs:size-8 size-6 md:size-10 lg:size-8 xl:size-10"
             />
           </>
         )}
         {player.name && (
           <>
-            <div className="relative size-7 xs:size-8 md:size-10 lg:size-8 xl:size-10">
+            <div className="xs:size-8 relative size-7 md:size-10 lg:size-8 xl:size-10">
               <Image
                 src={tShirt || ''}
                 alt="player tshirt"
@@ -99,13 +99,13 @@ const Player = ({ player }) => {
                 />
               )}
             </div>
-            <p className="text-shadow-2xs text-shadow-black  line-clamp-1 text-3xs text-foreground xs:text-2xs xs:text-xs md:text-sm">
+            <p className="text-3xs text-foreground xs:text-2xs xs:text-xs line-clamp-1 text-shadow-2xs text-shadow-black md:text-sm">
               {firstName} {lastName.slice(0, 1).toUpperCase()} {lastName && '.'}
             </p>
             <div className="flex items-center gap-0.5 sm:gap-1">
               <button
                 onClick={handleTransfer}
-                className="size-4 overflow-hidden rounded-sm border border-neutral-900 transition-all hover:border-primary sm:size-5"
+                className="hover:border-primary size-4 overflow-hidden rounded-sm border border-neutral-900 transition-all sm:size-5"
               >
                 <Image
                   width={16}
@@ -121,7 +121,7 @@ const Player = ({ player }) => {
               </div>
               <button
                 onClick={toggleDeleteModal}
-                className="size-4 rounded-sm border border-neutral-900 transition-all hover:border-primary sm:size-5"
+                className="border-border hover:border-primary size-4 rounded-sm border transition-all sm:size-5"
               >
                 <Image
                   width={16}

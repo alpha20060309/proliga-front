@@ -49,7 +49,7 @@ const Match = ({ match }) => {
   return (
     <article
       onClick={handleClick}
-      className="flex h-12 w-full cursor-pointer select-none items-center rounded-lg border border-neutral-800 bg-neutral-900/80 px-1 xs:px-2"
+      className="xs:px-2 border-border bg-secondary flex h-12 w-full cursor-pointer items-center rounded-lg border px-1 select-none"
     >
       <MatchTeamDisplay
         name={getCorrectName({
@@ -70,7 +70,7 @@ const Match = ({ match }) => {
         />
         <TooltipProvider>
           <Tooltip className="m-0 p-0">
-            <TooltipTrigger className="text-xs font-medium leading-3 tracking-wider">
+            <TooltipTrigger className="text-xs leading-3 font-medium tracking-wider">
               <time>{date}</time>
             </TooltipTrigger>
             <TooltipContent>

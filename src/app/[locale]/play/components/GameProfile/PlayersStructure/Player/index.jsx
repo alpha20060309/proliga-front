@@ -87,7 +87,7 @@ const Player = ({ player }) => {
               />
             )}
           </div>
-          <p className="text-foreground xs:text-2xs xs:text-xs line-clamp-1 text-3xs text-shadow-2xs text-shadow-black md:text-sm">
+          <p className="text-secondary-foreground xs:text-2xs xs:text-xs text-3xs line-clamp-1 text-shadow-2xs md:text-sm">
             {firstName} {lastName.slice(0, 1).toUpperCase()} {lastName && '.'}
           </p>
           <div className="flex items-center gap-0.5">
@@ -104,7 +104,7 @@ const Player = ({ player }) => {
                 className="h-full w-full"
               />
             </button>
-            <div className="bg-primary flex h-4 w-6 cursor-default items-center justify-center rounded-sm border border-neutral-800 text-center text-xs font-bold text-neutral-950 sm:h-5 sm:w-8 md:text-sm">
+            <div className="bg-primary border-border text-accent-foreground flex h-4 w-6 cursor-default items-center justify-center rounded-sm border text-center text-xs font-bold sm:h-5 sm:w-8 md:text-sm">
               {player.is_captain
                 ? (currentPlayerPoint?.point ?? 0) * 2
                 : (currentPlayerPoint?.point ?? 0)}

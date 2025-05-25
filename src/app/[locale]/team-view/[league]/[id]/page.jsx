@@ -2,7 +2,6 @@
 
 import TeamProfile from '../../components/TeamProfile'
 import TeamTabs from '../../components/GameNavigation'
-import Gutter from 'components/Gutter'
 import { useEffect, useMemo } from 'react'
 import { TOUR_STATUS } from 'app/utils/tour.util'
 import { useDispatch, useSelector } from 'react-redux'
@@ -22,8 +21,10 @@ import { setCurrentCompetition } from 'app/lib/features/competition/competition.
 import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
 import { selectBanners } from 'app/lib/features/banner/banner.selector'
 import Spinner from 'components/Spinner'
+import { use } from 'react'
 
 const TeamView = ({ params }) => {
+  const { id, league } = use(params)
   const dispatch = useDispatch()
   const currentTeam = useSelector(selectCurrentTeam)
   const competitions = useSelector(selectCompetition)
@@ -75,67 +76,67 @@ const TeamView = ({ params }) => {
   }, [dispatch, banners?.length])
 
   useEffect(() => {
-    if (params?.id) {
-      dispatch(fetchSelectedTeam({ id: params.id }))
+    if (id) {
+      dispatch(fetchSelectedTeam({ id }))
     }
-  }, [dispatch, params?.id])
+  }, [dispatch, id])
 
   useEffect(() => {
-    if (params.league && currentTeam?.registered_tour_id) {
+    if (league && currentTeam?.registered_tour_id) {
       dispatch(
         fetchTeamViewTours({
-          competition_id: params.league,
+          competition_id: league,
           registered_tour_id: currentTeam?.registered_tour_id,
         })
       )
     }
-  }, [currentTeam, dispatch, params?.league, currentTeam?.registered_tour_id])
+  }, [currentTeam, dispatch, league, currentTeam?.registered_tour_id])
 
   useEffect(() => {
     if (
-      params?.id &&
-      params?.league &&
+      id &&
+      league &&
       currentTour?.id &&
       currentTour?.status !== TOUR_STATUS.notStartedTransfer
     ) {
       dispatch(
         fetchTeamPlayers({
-          team_id: params?.id,
-          competition_id: params.league,
+          team_id: id,
+          competition_id: league,
           tour_id: currentTour.id,
         })
       )
     }
-  }, [params, currentTour, dispatch])
+  }, [id, league, currentTour, dispatch])
 
   useEffect(() => {
-    if (currentTour?.id && params?.league && teamConcat?.length > 0) {
+    if (currentTour?.id && league && teamConcat?.length > 0) {
       dispatch(
         fetchPlayerPoint({
-          competition_id: params.league,
+          competition_id: league,
           tour_id: currentTour.id,
           teamConcat: teamConcat,
         })
       )
     }
-  }, [teamConcat, dispatch, currentTour?.id, params?.league])
+  }, [teamConcat, dispatch, currentTour?.id, league])
 
   useEffect(() => {
-    if (competitions?.length > 0 && params.league) {
-      dispatch(setCurrentCompetition(params.league))
+    if (competitions?.length > 0 && league) {
+      dispatch(setCurrentCompetition(league))
     }
-  }, [dispatch, params?.league, competitions?.length])
+  }, [dispatch, league, competitions?.length])
 
   useEffect(() => {
-    if (params.id && currentTour?.id) {
+    if (id && currentTour?.id) {
       dispatch(
         fetchTourTeams({
-          team_id: params.id,
+          team_id: id,
           currentTour,
         })
       )
     }
-  }, [params?.id, dispatch, currentTour])
+  }, [id, dispatch, currentTour])
 
   useEffect(() => {
     if (currentTour?.status === TOUR_STATUS.notStartedTransfer) {
@@ -147,14 +148,10 @@ const TeamView = ({ params }) => {
     return <Spinner />
   }
   return (
-    <div className="flex flex-col gap-4 overflow-hidden bg-linear-to-tr from-red-800 to-blue-900 pt-20 text-neutral-700">
-      <Gutter>
-        <section className="flex flex-col gap-4 overflow-hidden">
-          <TeamTabs />
-          <TeamProfile />
-        </section>
-      </Gutter>
-    </div>
+    <section className="flex flex-col gap-4 overflow-hidden">
+      <TeamTabs />
+      <TeamProfile />
+    </section>
   )
 }
 

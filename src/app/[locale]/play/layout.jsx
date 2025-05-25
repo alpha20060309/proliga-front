@@ -1,3 +1,4 @@
+'use client'
 import WorldNews from './components/WorldNews'
 import RulesSlider from './components/RulesSlider'
 

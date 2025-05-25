@@ -8,7 +8,6 @@ import { TOUR_STATUS } from 'app/utils/tour.util'
 import { useSelector } from 'react-redux'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
-import Image from 'next/image'
 import GameBriefSkeleton from './Skeleton'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
@@ -21,6 +20,7 @@ import {
   selectCurrentTourTeam,
   selectTourTeams,
 } from 'app/lib/features/tourTeam/tourTeam.selector'
+import { Copy } from 'lucide-react'
 
 const GameBrief = () => {
   const [nextTour, setNextTour] = useState(null)
@@ -69,8 +69,8 @@ const GameBrief = () => {
       className={cn(
         'lg:mx-0 lg:w-1/2 lg:max-w-[24rem] lg:gap-4 lg:px-6 xl:h-min xl:max-w-136',
         'fade-in-fast mx-auto flex h-min min-h-96 w-full max-w-lg flex-col',
-        'gap-3 rounded-xl border border-primary border-opacity-50 bg-background',
-        'px-4 py-4 transition-all hover:border-opacity-100',
+        'border-primary border-opacity-50 bg-background gap-3 rounded-xl border',
+        'hover:border-opacity-100 px-4 py-4 transition-all',
         isLoading ? 'justify-center' : 'justify-between'
       )}
     >
@@ -78,7 +78,7 @@ const GameBrief = () => {
         <GameBriefSkeleton />
       ) : (
         <>
-          <Container className="border-b border-neutral-700">
+          <Container className="border-border border-b">
             <Item>
               <Title>{t('Team id')}</Title>
               <Content
@@ -87,13 +87,7 @@ const GameBrief = () => {
                 }
                 onClick={() => handleClick(currentTeam?.id)}
               >
-                <Image
-                  width="20"
-                  height="20"
-                  className="filter-white size-5"
-                  src="/icons/copy.svg"
-                  alt="copy"
-                />
+                <Copy className="size-5" />
                 {currentTeam?.id}
               </Content>
             </Item>
@@ -102,11 +96,11 @@ const GameBrief = () => {
               <Content className={'normal-case'}>{currentTeam?.name}</Content>
             </Item>
           </Container>
-          <Container className="border-b border-neutral-700">
+          <Container className="border-border border-b">
             <Item>
               <Title> {t('Keyingi Tur')}</Title>
               {currentTour?.status !== TOUR_STATUS.notStartedTransfer ? (
-                <Content className="text-sm uppercase text-primary md:text-base">
+                <Content className="text-primary text-sm uppercase md:text-base">
                   {getCorrectName({
                     lang,
                     uz: nextTour?.name,
@@ -132,7 +126,7 @@ const GameBrief = () => {
               )}
             </Item>
           </Container>
-          <Container className="border-b border-neutral-700">
+          <Container className="border-border border-b">
             <Item>
               <Title>{t('Tur')}</Title>
               {currentTour?.status !== TOUR_STATUS.notStartedTransfer ? (
@@ -162,7 +156,7 @@ const GameBrief = () => {
               )}
             </Item>
           </Container>
-          <Container className="border-b border-neutral-700">
+          <Container className="border-border border-b">
             <Item>
               <Title>{t('Turnirdagi ochkolar')}</Title>
               <Content>{currentTeam?.point ?? '0'}</Content>
@@ -172,7 +166,7 @@ const GameBrief = () => {
               <Content>{currentCompetition?.average_team_point ?? '0'}</Content>
             </Item>
           </Container>
-          <Container className="border-b border-neutral-700">
+          <Container className="border-border border-b">
             <Item>
               <Title>{t('Chempionat')}</Title>
               <Content className="capitalize">
@@ -195,14 +189,14 @@ const GameBrief = () => {
             <Item>
               <Title>{t('Jamoa narxi')}</Title>
               <Content className={'flex items-center gap-1'}>
-                <PercentCircle className="size-5 text-primary/90" />
+                <PercentCircle className="dark:text-accent size-5" />
                 {teamPrice ?? 0}
               </Content>
             </Item>
             <Item>
               <Title>{t('Balans')}</Title>
               <Content className={'flex items-center gap-1'}>
-                <Coins className="size-5 text-primary/90" />
+                <Coins className="dark:text-accent size-5" />
                 {teamBalance ?? 0}
               </Content>
             </Item>
@@ -228,7 +222,7 @@ const Item = ({ children, className }) => {
 
 const Title = ({ children, className }) => {
   return (
-    <h3 className={cn('text-base text-foreground', className)}>{children}</h3>
+    <h3 className={cn('text-foreground text-base', className)}>{children}</h3>
   )
 }
 
@@ -237,7 +231,7 @@ const Content = ({ children, className, onClick }) => {
     <p
       onClick={onClick}
       className={cn(
-        'text-end text-sm uppercase text-primary xl:text-base',
+        'dark:text-primary text-end text-sm uppercase xl:text-base',
         className
       )}
     >

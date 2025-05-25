@@ -1,6 +1,5 @@
 import Box from '@mui/material/Box'
-import StyledTab from './StyledTab'
-import StyledTabs from './StyledTabs'
+import { StyledTab, StyledTabs } from 'components/StyledTabs'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { TOUR_STATUS, getTourName } from 'app/utils/tour.util'
@@ -63,8 +62,9 @@ export default function TourTabs() {
       <StyledTabs
         value={currentTourIndex}
         variant="scrollable"
-        scrollButtons="auto"
-        className="fade-in text-foreground disabled:text-muted snap-x snap-center rounded"
+        scrollButtons
+        allowScrollButtonsMobile
+        className="fade-in text-foreground disabled:text-muted-foreground snap-x snap-center rounded"
         aria-label="tour tabs"
         sx={{
           [`& .${tabsClasses.scrollButtons}`]: {
@@ -88,7 +88,7 @@ export default function TourTabs() {
                 <p className="text-foreground text-start text-xs font-medium md:text-sm xl:text-base">
                   {getCorrectName({ lang, uz: item?.name, ru: item?.name_ru })}
                 </p>
-                <p className="text-foreground max-w-28 text-3xs capitalize sm:text-xs">
+                <p className="text-foreground text-3xs max-w-28 capitalize sm:text-xs">
                   {getTourName(item.status, t)}
                 </p>
               </div>

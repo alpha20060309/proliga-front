@@ -3,7 +3,7 @@
 import { useEffect, useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, RefreshCcw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Select,
@@ -15,13 +15,12 @@ import {
 import { fetchMatches } from 'app/lib/features/match/match.thunk'
 import Match from './Match'
 import MatchSkeleton from './Match/Skeleton'
+import MatchEvent from 'components/Modals/MatchEvent'
 import { Pagination } from 'components/Table/Pagination'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { selectMatches } from 'app/lib/features/match/match.selector'
 import { selectTours } from 'app/lib/features/tour/tour.selector'
 import { usePathname } from 'next/navigation'
-import { RefreshCcw } from 'lucide-react'
-import MatchEvent from 'components/Modals/MatchEvent'
 
 const Matches = () => {
   const path = usePathname()
@@ -72,6 +71,13 @@ const Matches = () => {
     }
   }
 
+  console.log(
+    season?.id,
+    competition_id,
+    currentTour?.id,
+    toursLoading,
+    teamLoading
+  )
   useEffect(() => {
     if (
       season?.id &&
@@ -120,18 +126,21 @@ const Matches = () => {
           <Button
             variant="outline"
             size="icon"
-            className="size-9 border-neutral-400"
+            className="border-border size-9"
             onClick={handleDecrementTourIndex}
             disabled={tourIndex === 0}
           >
-            <ChevronLeft className="size-5" />
+            <ChevronLeft className="text-foreground size-5" />
           </Button>
           <Select
             value={currentTour?.id || ''}
             onValueChange={handleChangeTour}
             defaultValue=""
           >
-            <SelectTrigger className="border-muted h-9 w-20 rounded-xs border-2 border-x-0 border-t-0 text-center text-base ring-0 ring-offset-0 outline-hidden hover:outline-hidden">
+            <SelectTrigger
+              showIcon={false}
+              className="border-muted h-9 w-20 rounded-xs border-2 border-x-0 border-t-0 text-center text-base ring-0 ring-offset-0 outline-hidden hover:outline-hidden"
+            >
               <SelectValue placeholder={t('Tur')} />
             </SelectTrigger>
             <SelectContent>
@@ -149,20 +158,20 @@ const Matches = () => {
           <Button
             variant="outline"
             size="icon"
-            className="size-9 border-neutral-400"
+            className="border-muted size-9"
             onClick={handleIncrementTourIndex}
             disabled={tourIndex === tours.length - 1}
           >
-            <ChevronRight className="size-5" />
+            <ChevronRight className="text-foreground size-5" />
           </Button>
         </div>
         <Button
           onClick={refreshData}
           variant="outline"
           size="icon"
-          className="size-9 border-neutral-400"
+          className="border-muted size-9"
         >
-          <RefreshCcw className="size-5" />
+          <RefreshCcw className="text-foreground size-5" />
         </Button>
       </div>
       <div className="flex-1 space-y-1">

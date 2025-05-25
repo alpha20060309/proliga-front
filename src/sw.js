@@ -41,9 +41,8 @@ const queue = new BackgroundSyncQueue('sync-queue')
 const backgroundSync = async (event) => {
   try {
     const response = await fetch(event.request.clone())
-    console.log(response)
     return response
-  // eslint-disable-next-line no-unused-vars
+    // eslint-disable-next-line no-unused-vars
   } catch (error) {
     await queue.pushRequest({ request: event.request })
     return Response.error()

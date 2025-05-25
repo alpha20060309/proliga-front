@@ -36,6 +36,7 @@ import { selectPlayers } from 'app/lib/features/player/player.selector'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { Loader2 } from 'lucide-react'
+import { Undo2, Compass } from 'lucide-react'
 
 const TransferStadiumForm = () => {
   const { t } = useTranslation()
@@ -214,7 +215,7 @@ const TransferStadiumForm = () => {
         value={teamConcat.find((player) => player.is_captain)?.player_id ?? ''}
         onValueChange={(value) => dispatch(setCaptain(value))}
       >
-        <SelectTrigger className="border-muted bg-background xs:px-2 text-foreground hover:border-primary h-10 w-36 rounded-sm px-1.5 text-xs sm:w-40 md:w-48">
+        <SelectTrigger className="border-muted bg-background dark:bg-background xs:px-2 text-foreground hover:border-primary h-10 w-36 rounded-sm px-1.5 text-xs sm:w-40 md:w-48">
           <SelectValue placeholder={t('Kapitan tanlang')} />
         </SelectTrigger>
         <SelectContent>
@@ -243,33 +244,20 @@ const TransferStadiumForm = () => {
             type="button"
             variant="default"
             title="Avto jamoa yigish"
-            className="bg-background text-foregroundtransition-all hover:border-primary border-muted flex w-full max-w-10 min-w-5 items-center justify-center gap-1 rounded-sm border px-2 sm:w-full sm:max-w-max"
+            className="bg-background text-foreground hover:border-primary border-border flex size-10 items-center justify-center gap-1 rounded-sm border transition-all"
           >
-            <Image
-              src="/icons/auto.svg"
-              alt="auto assemble team"
-              width={24}
-              height={24}
-              draggable={false}
-              className="filter-white size-6"
-            />
+            <Compass className="size-6" />
           </Button>
         )}
         <Button
           type="button"
           variant="default"
+          size="icon"
           onClick={() => dispatch(revertTeamPlayers())}
           title={t('orqaga qaytish')}
-          className="bg-background text-foreground hover:border-primary border-muted flex w-full max-w-10 items-center justify-center gap-1 rounded-sm border px-2 transition-all sm:w-full sm:max-w-max"
+          className="bg-background text-foreground hover:border-primary border-border hover:text-accent-foreground flex size-10 items-center justify-center gap-1 rounded border transition-all"
         >
-          <Image
-            src="/icons/revert.svg"
-            alt="auto assemble team"
-            width={24}
-            height={24}
-            draggable={false}
-            className="filter-white size-6 h-auto w-auto"
-          />
+          <Undo2 className="size-6" />
         </Button>
       </div>
       <Button

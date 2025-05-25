@@ -31,8 +31,10 @@ import {
 } from 'app/lib/features/package/package.selector'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
-
+import { use } from 'react'
 const ConfirmPayment = ({ params }) => {
+  const { packageId } = use(params)
+
   const { t } = useTranslation()
   const router = useTransitionRouter()
   const dispatch = useDispatch()
@@ -65,8 +67,8 @@ const ConfirmPayment = ({ params }) => {
   ])
 
   useEffect(() => {
-    dispatch(setCurrentPackage(+params.packageId))
-  }, [params, dispatch])
+    dispatch(setCurrentPackage(+packageId))
+  }, [packageId, dispatch])
 
   useEffect(() => {
     if (packages?.length === 0) {
