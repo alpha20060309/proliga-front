@@ -137,56 +137,56 @@
   --radius: 0.5rem;
 
   /* Base colors */
-  --background: hsl(0, 0%, 98%);
-  --foreground: hsl(0, 0%, 10%);
-  --card: hsl(0, 0%, 96%);
-  --card-foreground: hsl(0, 0%, 10%);
-  --popover: hsl(0, 0%, 96%);
-  --popover-foreground: hsl(60, 11%, 4%);
+  --background: #fafafa;
+  --foreground: #1a1a1a;
+  --card: #f5f5f5;
+  --card-foreground: #1a1a1a;
+  --popover: #f5f5f5;
+  --popover-foreground: #0b0b09;
 
   /* Brand colors */
   --primary: #fff400;
-  --primary-foreground: hsl(0, 0%, 10%);
-  --secondary: hsl(0, 0%, 90%);
-  --secondary-foreground: hsl(0, 0%, 95%);
+  --primary-foreground: #1a1a1a;
+  --secondary: #e6e6e6;
+  --secondary-foreground: #f2f2f2;
 
   /* Status colors */
-  --success: hsl(142, 100%, 30%);
-  --success-foreground: hsl(0, 0%, 100%);
-  --warning: hsl(48, 100%, 45%);
-  --warning-foreground: hsl(0, 0%, 10%);
-  --error: hsl(0, 100%, 45%);
-  --error-foreground: hsl(0, 0%, 100%);
-  --info: hsl(200, 100%, 35%);
-  --info-foreground: hsl(0, 0%, 100%);
+  --success: #009938;
+  --success-foreground: #ffffff;
+  --warning: #e6b800;
+  --warning-foreground: #1a1a1a;
+  --error: #e60000;
+  --error-foreground: #ffffff;
+  --info: #0077b3;
+  --info-foreground: #ffffff;
 
   /* UI colors */
-  --muted: hsl(0, 0%, 94%);
-  --muted-foreground: hsl(0, 0%, 40%);
-  --accent: hsl(52, 100%, 50%);
-  --accent-foreground: hsl(0, 0%, 10%);
-  --destructive: hsl(0, 84%, 60%);
-  --border: hsl(0, 0%, 88%);
-  --input: hsl(0, 0%, 93%);
-  --ring: hsl(52, 100%, 50%);
+  --muted: #f0f0f0;
+  --muted-foreground: #666666;
+  --accent: #ffdd00;
+  --accent-foreground: #1a1a1a;
+  --destructive: #ef4343;
+  --border: #e0e0e0;
+  --input: #ededed;
+  --ring: #ffdd00;
 
   /* Chart colors */
-  --chart-1: hsl(0, 100%, 35%);
-  --chart-2: hsl(240, 100%, 35%);
-  --chart-3: hsl(52, 100%, 35%);
-  --chart-4: hsl(270, 70%, 50%);
-  --chart-5: hsl(360, 100%, 60%);
+  --chart-1: #b30000;
+  --chart-2: #0000b3;
+  --chart-3: #b39b00;
+  --chart-4: #8026d9;
+  --chart-5: #ff3333;
 
   /* Sidebar colors */
-  --sidebar: hsl(0, 0%, 96%);
-  --sidebar-foreground: hsl(0, 0%, 10%);
-  --sidebar-primary: hsl(0, 0%, 10%);
-  --sidebar-primary-foreground: hsl(0, 0%, 96%);
-  --sidebar-accent: hsl(0, 0%, 93%);
-  --sidebar-accent-foreground: hsl(0, 0%, 10%);
-  --sidebar-border: hsl(0, 0%, 88%);
-  --sidebar-ring: hsl(0, 0%, 60%);
-  --destructive-foreground: hsl(0, 0%, 100%);
+  --sidebar: #f5f5f5;
+  --sidebar-foreground: #1a1a1a;
+  --sidebar-primary: #1a1a1a;
+  --sidebar-primary-foreground: #f5f5f5;
+  --sidebar-accent: #ededed;
+  --sidebar-accent-foreground: #1a1a1a;
+  --sidebar-border: #e0e0e0;
+  --sidebar-ring: #999999;
+  --destructive-foreground: #ffffff;
 
   /* Typography */
   --letter-spacing: 0em;
@@ -198,76 +198,75 @@
   --scrollbar-radius: 20px;
   --scrollbar-radius-sm: 5px;
   --scrollbar-border-width: 5px;
-  --scrollbar-thumb-bg: hsl(0, 0%, 80%);
-  --scrollbar-thumb-hover-bg: hsl(0, 0%, 60%);
+  --scrollbar-thumb-bg: #cccccc;
+  --scrollbar-thumb-hover-bg: #999999;
 
   /* Form elements */
   --autofill-shadow-size: 30px;
-  --autofill-shadow-color: rgb(35, 35, 35);
-  --autofill-text-color: rgb(240, 240, 240);
+  --autofill-shadow-color: #232323;
+  --autofill-text-color: #f0f0f0;
   --select-shadow-spread: 10px;
   --select-shadow-size: 100px;
   --select-shadow-color: #000;
   --radix-context-menu-content-available-height: 60vh;
-
 }
 
 .SelectContent {
-	max-height: var(--radix-select-content-available-height);
+  max-height: var(--radix-select-content-available-height);
 }
 
 :root.dark {
   /* Base colors */
-  --background: hsl(0, 0%, 5%);
-  --foreground: hsl(0, 0%, 95%);
-  --card: hsl(0, 0%, 15%);
-  --card-foreground: hsl(0, 0%, 95%);
-  --popover: hsl(0, 0%, 12%);
-  --popover-foreground: hsl(52, 100%, 50%);
+  --background: #0d0d0d;
+  --foreground: #f2f2f2;
+  --card: #262626;
+  --card-foreground: #f2f2f2;
+  --popover: #1f1f1f;
+  --popover-foreground: #ffdd00;
 
   /* Brand colors */
   --primary: #fffd00;
-  --primary-foreground: hsl(0, 0%, 10%);
-  --secondary: hsl(0, 0%, 20%);
-  --secondary-foreground: hsl(0, 0%, 95%);
+  --primary-foreground: #1a1a1a;
+  --secondary: #333333;
+  --secondary-foreground: #f2f2f2;
 
   /* Status colors */
-  --success: hsl(142, 76%, 46%);
-  --success-foreground: hsl(0, 0%, 100%);
-  --warning: hsl(48, 96%, 63%);
-  --warning-foreground: hsl(0, 0%, 10%);
-  --error: hsl(0, 84%, 70%);
-  --error-foreground: hsl(0, 0%, 100%);
-  --info: hsl(200, 98%, 49%);
-  --info-foreground: hsl(0, 0%, 100%);
+  --success: #1cce5e;
+  --success-foreground: #ffffff;
+  --warning: #fbd746;
+  --warning-foreground: #1a1a1a;
+  --error: #f37272;
+  --error-foreground: #ffffff;
+  --info: #02a6f7;
+  --info-foreground: #ffffff;
 
   /* UI colors */
-  --muted: hsl(0, 0%, 20%);
-  --muted-foreground: hsl(0, 0%, 70%);
-  --accent: hsl(52, 80%, 60%);
-  --accent-foreground: hsl(0, 0%, 0%);
-  --destructive: hsl(0, 84%, 70%);
-  --border: hsl(0, 0%, 25%);
-  --input: hsl(0, 0%, 20%);
-  --ring: hsl(52, 100%, 60%);
+  --muted: #333333;
+  --muted-foreground: #b3b3b3;
+  --accent: #ebd547;
+  --accent-foreground: #000000;
+  --destructive: #f37272;
+  --border: #404040;
+  --input: #333333;
+  --ring: #ffe433;
 
   /* Chart colors */
-  --chart-1: hsl(0, 100%, 30%);
-  --chart-2: hsl(240, 100%, 30%);
-  --chart-3: hsl(52, 100%, 30%);
-  --chart-4: hsl(270, 70%, 50%);
-  --chart-5: hsl(360, 100%, 60%);
+  --chart-1: #990000;
+  --chart-2: #000099;
+  --chart-3: #998500;
+  --chart-4: #8026d9;
+  --chart-5: #ff3333;
 
   /* Sidebar colors */
-  --sidebar: hsl(0, 0%, 15%);
-  --sidebar-foreground: hsl(0, 0%, 95%);
-  --sidebar-primary: hsl(0, 0%, 20%);
-  --sidebar-primary-foreground: hsl(0, 0%, 95%);
-  --sidebar-accent: hsl(0, 0%, 12%);
-  --sidebar-accent-foreground: hsl(0, 0%, 95%);
-  --sidebar-border: hsl(0, 63%, 37%);
-  --sidebar-ring: hsl(0, 0%, 40%);
-  --destructive-foreground: hsl(0, 0%, 100%);
+  --sidebar: #262626;
+  --sidebar-foreground: #f2f2f2;
+  --sidebar-primary: #333333;
+  --sidebar-primary-foreground: #f2f2f2;
+  --sidebar-accent: #1f1f1f;
+  --sidebar-accent-foreground: #f2f2f2;
+  --sidebar-border: #9a2323;
+  --sidebar-ring: #666666;
+  --destructive-foreground: #ffffff;
 }
 
 @layer base {

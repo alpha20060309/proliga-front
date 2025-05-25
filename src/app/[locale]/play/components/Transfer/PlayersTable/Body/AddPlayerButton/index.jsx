@@ -61,7 +61,7 @@ const AddPlayerButton = ({
       >
         <Plus
           className={cn(
-            'size-5 select-none sm:size-6',
+            'bg-foreground size-5 rounded p-1 shadow-sm select-none sm:size-6 dark:bg-transparent',
             condition ? 'text-primary' : 'text-muted-foreground'
           )}
         />
