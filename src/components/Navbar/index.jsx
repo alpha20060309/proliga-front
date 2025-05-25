@@ -15,6 +15,7 @@ import ChangeLanguageDropdown from './Language'
 import Notification from './Notification'
 import Marquee from 'components/Marquee'
 import ThemeSwither from './ThemeSwitch'
+import ThemeCustomizer from './ThemeCustomizer'
 
 const Navbar = () => {
   const path = usePathname()
@@ -64,6 +65,7 @@ const Navbar = () => {
               <ChangeLanguageDropdown />
               <Notification />
               <ThemeSwither />
+              <ThemeCustomizer />
               <NavbarUserMobile handleToggleModal={() => setModalOpen(true)} />
               <NavbarUserDesktop />
             </div>

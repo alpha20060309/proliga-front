@@ -63,6 +63,14 @@
   --animate-gradient: gradient 3s ease infinite;
   --animate-rainbow: rainbow var(--speed, 2s) infinite linear;
 
+  /* Letter Spacing */
+  --tracking-tighter: calc(var(--letter-spacing) - 0.05em);
+  --tracking-tight: calc(var(--letter-spacing) - 0.025em);
+  --tracking-normal: var(--letter-spacing);
+  --tracking-wide: calc(var(--letter-spacing) + 0.025em);
+  --tracking-wider: calc(var(--letter-spacing) + 0.05em);
+  --tracking-widest: calc(var(--letter-spacing) + 0.1em);
+
   /*text size  */
   --text-2xs: 0.6875rem;
   --text-2xs--line-height: 0.775rem;
@@ -256,6 +264,11 @@
 }
 
 @layer base {
+  body {
+    letter-spacing: var(--letter-spacing);
+    font-family: var(--font-sans);
+  }
+
   *,
   ::after,
   ::before,
