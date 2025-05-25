@@ -23,7 +23,7 @@ const Article = ({ item }) => {
     <>
       <article
         onClick={handleClick}
-        className="group flex h-[100px] w-auto overflow-hidden rounded-sm bg-card hover:cursor-pointer"
+        className="group bg-card flex h-[100px] w-auto overflow-hidden rounded-sm hover:cursor-pointer"
       >
         <section className="my-auto flex aspect-4/3 h-full w-24 shrink-0 items-center justify-center md:w-32">
           <img
@@ -33,17 +33,17 @@ const Article = ({ item }) => {
           />
         </section>
         <section className="flex h-full w-full flex-col space-y-1 px-2 py-1">
-          <h4 className="line-clamp-3 h-full w-auto max-w-full flex-1 break-all text-xs text-foreground hover:underline md:text-sm">
+          <h4 className="text-foreground line-clamp-3 h-full w-auto max-w-full flex-1 text-xs break-all hover:underline md:text-sm">
             {getCorrectName({ lang, uz: item?.name, ru: item?.name_ru })}
           </h4>
           <div className="flex w-full flex-wrap items-center justify-between">
-            <div className="flex items-center space-x-1 text-xs text-muted-foreground">
+            <div className="text-muted-foreground flex items-center space-x-1 text-xs">
               <div className="flex items-center gap-1">
                 <CalendarDays className="size-4" />
                 <time dateTime={date}>{date}</time>
               </div>
               <div className="flex items-center gap-1">
-                <Eye className="size-4 text-foreground" />
+                <Eye className="text-foreground size-4" />
                 <span>{item.view_count || 0}</span>
               </div>
             </div>

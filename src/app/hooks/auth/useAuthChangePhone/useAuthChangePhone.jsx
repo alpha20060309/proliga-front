@@ -64,7 +64,6 @@ export const useAuthChangePhone = () => {
           return handleError('An unknown error occurred')
         }
 
-
         await signIn('credentials', {
           phone,
           password,

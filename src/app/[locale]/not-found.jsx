@@ -24,7 +24,7 @@ export default function NotFound() {
 
           <Link
             href="/"
-            className="bg-warning hover:bg-link rounded px-4 py-2 text-accent-foreground transition-colors"
+            className="bg-warning hover:bg-link text-accent-foreground rounded px-4 py-2 transition-colors"
           >
             Bosh sahifaga qaytish
           </Link>

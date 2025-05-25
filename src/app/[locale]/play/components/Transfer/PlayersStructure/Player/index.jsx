@@ -62,7 +62,7 @@ const Player = ({ player }) => {
 
   return (
     <>
-      <div className="fade-in-fast relative z-30 flex h-min flex-col items-center justify-center text-sm text-neutral-700 select-none sm:text-base">
+      <div className="fade-in-fast text-muted-foreground relative z-30 flex h-min flex-col items-center justify-center text-sm select-none sm:text-base">
         {!player.name && (
           <>
             <Image
@@ -99,7 +99,7 @@ const Player = ({ player }) => {
                 />
               )}
             </div>
-            <p className="text-3xs text-foreground xs:text-2xs xs:text-xs line-clamp-1 text-shadow-2xs text-shadow-black md:text-sm">
+            <p className="text-3xs text-secondary-foreground xs:text-2xs xs:text-xs line-clamp-1 text-shadow-2xs md:text-sm">
               {firstName} {lastName.slice(0, 1).toUpperCase()} {lastName && '.'}
             </p>
             <div className="flex items-center gap-0.5 sm:gap-1">

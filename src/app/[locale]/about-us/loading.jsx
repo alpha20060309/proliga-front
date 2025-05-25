@@ -10,7 +10,7 @@ const Loading = () => {
 
 function AboutUsSkeleton() {
   return (
-    <div className="mx-auto my-6 min-h-[40vh] w-full max-w-4xl rounded-xl bg-card/75 px-2 py-4 shadow-md shadow-neutral-600 sm:p-4 md:p-6">
+    <div className="bg-card/75 mx-auto my-6 min-h-[40vh] w-full max-w-4xl rounded-xl px-2 py-4 shadow-md shadow-neutral-600 sm:p-4 md:p-6">
       <Skeleton className="mx-auto mb-4 h-6 w-3/5 sm:w-1/2 xl:w-2/5" />
       <Skeleton className="mb-2 h-4 w-full" />
       <Skeleton className="mb-2 h-4 w-full" />

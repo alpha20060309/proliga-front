@@ -360,7 +360,7 @@
 
 @utility loader {
   border: 16px solid var(--color-background);
-  border-top: 16px solid var(--color-primary);
+  border-top: 16px solid var(--color-accent);
   border-radius: 50%;
   width: 120px;
   height: 120px;

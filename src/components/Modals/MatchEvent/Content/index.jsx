@@ -25,14 +25,14 @@ const MatchEventContent = () => {
         style={{
           height: events?.length ? `${events?.length * 3.6 || 0}rem` : '100%',
         }}
-        className="absolute bottom-0 left-1/2 top-0 w-px -translate-x-1/2 transform bg-neutral-600"
+        className="absolute top-0 bottom-0 left-1/2 w-px -translate-x-1/2 transform bg-neutral-600"
       />
       {events?.length > 0 ? (
         events.map((event, index) => (
           <MatchEvent key={index} index={index} event={event} />
         ))
       ) : (
-        <div className="z-10 rounded-sm bg-background px-3 py-1.5 text-center text-sm text-foregroundshadow-sm shadow-neutral-700">
+        <div className="bg-background text-foregroundshadow-sm z-10 rounded-sm px-3 py-1.5 text-center text-sm shadow-neutral-700">
           {currentMatch?.status === MATCH_STATUS.NOT_STARTED
             ? t("The match hasn't started yet. Stay tuned for updates!")
             : t(

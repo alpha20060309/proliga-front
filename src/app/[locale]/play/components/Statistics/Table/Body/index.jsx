@@ -13,7 +13,7 @@ const Body = ({ table, flexRender }) => {
       {table.getRowModel().rows.map((row) => (
         <tr
           key={row.id}
-          className="mx-auto w-full border-b border-neutral-700 hover:bg-background"
+          className="hover:bg-background mx-auto w-full border-b border-neutral-700"
         >
           {row.getVisibleCells().map((cell) => (
             <td

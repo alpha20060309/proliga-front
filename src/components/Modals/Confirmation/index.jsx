@@ -18,7 +18,7 @@ const Confirmation = ({ onConfirm, onCancel, isModalOpen, setModalOpen }) => {
         </DialogTitle>
         <div className="flex items-center gap-1">
           <Button
-            className="border-destructive bg-destructive text-destructive-foreground hover:bg-destructive/80 h-auto w-36 rounded-md border-2 py-2 font-medium transition-all select-none focus:outline-white md:w-44"
+            className="border-destructive bg-destructive text-destructive-foreground hover:bg-destructive/80 focus:outline-foreground h-auto w-36 rounded-md border-2 py-2 font-medium transition-all select-none md:w-44"
             onClick={onConfirm}
             tabIndex={0}
             autoFocus={true}
@@ -26,7 +26,7 @@ const Confirmation = ({ onConfirm, onCancel, isModalOpen, setModalOpen }) => {
             {t('Tasdiqlash')}
           </Button>
           <Button
-            className="border-secondary bg-secondary text-secondary-foreground hover:border-secondary/80 hover:bg-secondary/80 hover:text-secondary-foreground h-auto w-36 rounded-md border-2 py-2 font-medium transition-all select-none md:w-44"
+            className="border-secondary bg-secondary text-foreground hover:border-secondary/80 hover:bg-secondary/80 hover:text-secondary-foreground h-auto w-36 rounded-md border-2 py-2 font-medium transition-all select-none md:w-44"
             onClick={onCancel}
           >
             {t('Qaytish')}

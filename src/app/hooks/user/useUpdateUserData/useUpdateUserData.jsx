@@ -21,14 +21,13 @@ export const useUpdateUserData = () => {
       userTable,
       cb = () => {},
     }) => {
-
       if (!name) {
         setError(t('Ism kiriting'))
-        return toast.warning(t('Ism kiriting'), { theme: 'dark' })
+        return toast.warning(t('Ism kiriting'))
       }
       if (!gender) {
         setError(t('Jinsni tanlang'))
-        return toast.warning(t('Jinsni tanlang'), { theme: 'dark' })
+        return toast.warning(t('Jinsni tanlang'))
       }
       if (!birth_date) {
         setError(t("Tug'ilgan yilingizni kiriting"))
@@ -84,8 +83,7 @@ export const useUpdateUserData = () => {
         toast.error(
           error instanceof Error
             ? error.message
-            : t('An unknown error occurred'),
-          { theme: 'dark' }
+            : t('An unknown error occurred')
         )
       } finally {
         setIsLoading(false)

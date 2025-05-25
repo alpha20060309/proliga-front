@@ -16,7 +16,7 @@ export const useGetPage = () => {
 
       if (!name) {
         setError('Name is required')
-        toast.error('Name is required', { theme: 'dark' })
+        toast.error('Name is required')
         return
       }
 
@@ -39,8 +39,7 @@ export const useGetPage = () => {
           toast.error(
             error instanceof Error
               ? error.message
-              : t('An unknown error occurred'),
-            { theme: 'dark' }
+              : t('An unknown error occurred')
           )
           return
         }
@@ -56,8 +55,7 @@ export const useGetPage = () => {
         toast.error(
           error instanceof Error
             ? error.message
-            : t('An unknown error occurred'),
-          { theme: 'dark' }
+            : t('An unknown error occurred')
         )
       } finally {
         setIsLoading(false)

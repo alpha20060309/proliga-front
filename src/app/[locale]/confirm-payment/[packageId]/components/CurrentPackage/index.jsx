@@ -16,17 +16,17 @@ const CurrentPackage = () => {
       return t("Maksimum klub oyi'nchilarini")
   }
   return (
-    <div className="flex flex-row items-center gap-4 rounded-md bg-card p-4 md:h-24 md:p-6">
-      <span className="hidden size-12 items-center justify-center rounded-full bg-background font-bold text-neutral-300 sm:flex">
+    <div className="bg-card flex flex-row items-center gap-4 rounded-md p-4 md:h-24 md:p-6">
+      <span className="bg-background hidden size-12 items-center justify-center rounded-full font-bold text-neutral-300 sm:flex">
         1
       </span>
       <div className="flex w-full flex-col items-center justify-between gap-2 sm:flex-row sm:gap-0">
-        <div className="select-none space-x-2 text-sm xs:text-base sm:text-lg">
+        <div className="xs:text-base space-x-2 text-sm select-none sm:text-lg">
           {getPackageText(currentPackage).replace('$', currentPackage?.amount)}
         </div>
         <NumericFormat
           value={currentPackage?.price / 100 || 0}
-          className="w-min select-none border-none bg-transparent text-center text-sm font-bold text-foreground outline-hidden xs:text-base md:text-2xl"
+          className="text-foreground xs:text-base w-min border-none bg-transparent text-center text-sm font-bold outline-hidden select-none md:text-2xl"
           defaultValue={0}
           readOnly
           thousandSeparator

@@ -19,7 +19,7 @@ export const useUpdateUserPhoto = () => {
 
         if (!path) {
           setError(t('Rasmni tanlang'))
-          toast.warning(t('Rasmni tanlang'), { theme: 'dark' })
+          toast.warning(t('Rasmni tanlang'))
           return
         }
 
@@ -68,8 +68,7 @@ export const useUpdateUserPhoto = () => {
         toast.error(
           error instanceof Error
             ? error.message
-            : t('An unknown error occurred'),
-          { theme: 'dark' }
+            : t('An unknown error occurred')
         )
       } finally {
         setIsLoading(false)

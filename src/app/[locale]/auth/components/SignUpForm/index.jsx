@@ -195,7 +195,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
                 type="button"
                 variant="ghost"
                 size="icon"
-                className="hover:bg-foreground/10 dark:hover:bg-foreground/10 absolute  top-0 right-0"
+                className="hover:bg-foreground/10 dark:hover:bg-foreground/10 absolute top-0 right-0"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               >
                 {showConfirmPassword ? (

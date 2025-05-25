@@ -67,7 +67,7 @@ const TeamMaxClubMembersModal = () => {
                     >
                       <Button
                         variant="ghost"
-                        className="relative h-full w-full justify-start rounded-none border-l-4 border-primary px-4 py-2 text-left hover:bg-primary/10"
+                        className="border-primary hover:bg-primary/10 relative h-full w-full justify-start rounded-none border-l-4 px-4 py-2 text-left"
                       >
                         <div>
                           <Badge variant="secondary" className="mb-2">
@@ -84,7 +84,7 @@ const TeamMaxClubMembersModal = () => {
                             )}
                           </p>
                         </div>
-                        <ArrowRight className="absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 transform text-primary" />
+                        <ArrowRight className="text-primary absolute top-1/2 right-4 h-5 w-5 -translate-y-1/2 transform" />
                       </Button>
                     </Link>
                   </CardContent>
@@ -93,7 +93,7 @@ const TeamMaxClubMembersModal = () => {
           )}
         </div>
         <div className="mt-6 flex items-center justify-center space-x-2 text-sm">
-          <Users className="h-4 w-4 text-primary" />
+          <Users className="text-primary h-4 w-4" />
           <p className="text-muted-foreground font-medium">
             {t('Build a stronger team for victory! ')}
           </p>

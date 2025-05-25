@@ -20,17 +20,17 @@ export const useUpdateTourTeam = () => {
 
       if (!team_id) {
         setError(t('Jamoa ID kiritilmagan!'))
-        toast.error(t('Jamoa ID kiritilmagan!'), { theme: 'dark' })
+        toast.error(t('Jamoa ID kiritilmagan!'))
         return
       }
       if (!tour_id) {
         setError(t('Turnir ID kiritilmagan!'))
-        toast.error(t('Turnir ID kiritilmagan!'), { theme: 'dark' })
+        toast.error(t('Turnir ID kiritilmagan!'))
         return
       }
       if (count_of_transfers === null || count_of_transfers === undefined) {
         setError(t('Transfer soni kiritilmagan!'))
-        toast.error(t('Transfer soni kiritilmagan!'), { theme: 'dark' })
+        toast.error(t('Transfer soni kiritilmagan!'))
         return
       }
       try {
@@ -42,7 +42,7 @@ export const useUpdateTourTeam = () => {
           .eq('team_id', team_id)
           .eq('tour_id', tour_id)
           .is('deleted_at', null)
-          .select("*")
+          .select('*')
 
         if (error) {
           setError(
@@ -53,8 +53,7 @@ export const useUpdateTourTeam = () => {
           toast.error(
             error instanceof Error
               ? error.message
-              : t('An unknown error occurred'),
-            { theme: 'dark' }
+              : t('An unknown error occurred')
           )
           return
         }
@@ -72,8 +71,7 @@ export const useUpdateTourTeam = () => {
         toast.error(
           error instanceof Error
             ? error.message
-            : t('An unknown error occurred'),
-          { theme: 'dark' }
+            : t('An unknown error occurred')
         )
       } finally {
         setIsLoading(false)

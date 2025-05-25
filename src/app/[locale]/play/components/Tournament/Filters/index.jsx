@@ -24,7 +24,7 @@ const TournamentSelectedTour = ({ tour, setTour }) => {
       value={tour}
       onValueChange={handleSelectTour}
     >
-      <SelectTrigger className="h-8 w-1/3 max-w-36 truncate rounded-sm border-neutral-500 bg-background px-2 text-secondary-foreground shadow-sm">
+      <SelectTrigger className="bg-background text-secondary-foreground h-8 w-1/3 max-w-36 truncate rounded-sm border-neutral-500 px-2 shadow-sm">
         <SelectValue />
       </SelectTrigger>
       <SelectContent>

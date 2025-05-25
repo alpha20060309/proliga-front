@@ -11,7 +11,7 @@ const CompeteSlide = () => {
           src="/images/promotion-stats.png"
           alt="competition"
           width={400}
-          className="xs:size-80 bg-foreground p-2 rounded mx-auto size-72 md:mx-0 md:size-88 xl:size-112"
+          className="xs:size-80 bg-foreground mx-auto size-72 rounded p-2 md:mx-0 md:size-88 xl:size-112"
           height={400}
           unoptimized
         />

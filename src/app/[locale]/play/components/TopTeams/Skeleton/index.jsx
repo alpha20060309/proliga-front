@@ -12,9 +12,9 @@ const TopTeamsSkeleton = () => {
 
 const TopTeams = () => {
   return (
-    <Card className="w-full rounded-xl bg-background p-5 text-foreground">
+    <Card className="bg-background text-foreground w-full rounded-xl p-5">
       <Skeleton className="h-7 w-3/4 bg-neutral-500" />
-      <div className="mt-4 grid h-auto min-h-32 grid-cols-2 gap-2 xs:grid-cols-3">
+      <div className="xs:grid-cols-3 mt-4 grid h-auto min-h-32 grid-cols-2 gap-2">
         {[1, 2, 3].map((index) => (
           <TeamPlaceSkeleton key={index} />
         ))}
@@ -34,16 +34,16 @@ const TeamPlaceSkeleton = () => {
         <Skeleton className="h-4 w-full" />
         <Skeleton className="h-4 w-3/4" />
       </div>
-      <Skeleton className="absolute bottom-0 right-0 size-6 rounded-br-lg rounded-tl-lg bg-yellow-500" />
+      <Skeleton className="absolute right-0 bottom-0 size-6 rounded-tl-lg rounded-br-lg bg-yellow-500" />
     </div>
   )
 }
 
 const TopPlayers = () => {
   return (
-    <Card className="w-full rounded-xl bg-background p-5 text-foreground">
+    <Card className="bg-background text-foreground w-full rounded-xl p-5">
       <Skeleton className="h-7 w-3/4 bg-neutral-500" />
-      <div className="mt-4 grid grid-cols-2 gap-2 xs:grid-cols-3">
+      <div className="xs:grid-cols-3 mt-4 grid grid-cols-2 gap-2">
         {[1, 2, 3].map((index) => (
           <PlayerPlaceSkeleton key={index} />
         ))}
@@ -63,7 +63,7 @@ const PlayerPlaceSkeleton = () => {
         <Skeleton className="h-4 w-full" />
         <Skeleton className="h-4 w-3/4" />
       </div>
-      <Skeleton className="absolute bottom-0 right-0 size-6 rounded-br-lg rounded-tl-lg bg-yellow-500" />
+      <Skeleton className="absolute right-0 bottom-0 size-6 rounded-tl-lg rounded-br-lg bg-yellow-500" />
     </div>
   )
 }

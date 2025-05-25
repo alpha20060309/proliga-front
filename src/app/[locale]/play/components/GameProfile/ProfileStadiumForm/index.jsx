@@ -55,7 +55,7 @@ const ProfileStadiumForm = () => {
     })
 
     if (captains.length !== 1) {
-      toast.warning(t('Kapitan tanlanmagan'), { theme: 'dark' })
+      toast.warning(t('Kapitan tanlanmagan'))
       return
     }
 
@@ -78,8 +78,7 @@ const ProfileStadiumForm = () => {
         toast.warning(
           t('identifikatori bolgan va holatida bolgan oyinchi yaroqsiz')
             .replace('$', player?.id)
-            .replace('*', getCorrentPlayerPosition(player?.position, lang)),
-          { theme: 'dark' }
+            .replace('*', getCorrentPlayerPosition(player?.position, lang))
         )
         return (valid = false)
       }
@@ -98,7 +97,7 @@ const ProfileStadiumForm = () => {
       playersCount.STR < 2 ||
       playersCount.STR > 3
     ) {
-      toast.error(t('Jamoa formatsiyasi notogri'), { theme: 'dark' })
+      toast.error(t('Jamoa formatsiyasi notogri'))
       return false
     }
     return true

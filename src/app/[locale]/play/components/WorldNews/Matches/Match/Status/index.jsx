@@ -1,6 +1,6 @@
-import { Badge } from "@/components/ui/badge"
-import { useTranslation } from "react-i18next"
-import { MATCH_STATUS } from "app/utils/match.util"
+import { Badge } from '@/components/ui/badge'
+import { useTranslation } from 'react-i18next'
+import { MATCH_STATUS } from 'app/utils/match.util'
 
 const MatchStatus = ({ status, homeScore, awayScore }) => {
   const { t } = useTranslation()
@@ -10,7 +10,7 @@ const MatchStatus = ({ status, homeScore, awayScore }) => {
       return (
         <Badge
           variant="secondary"
-          className="bg-card py-px text-2xs font-normal sm:text-xs"
+          className="bg-card text-2xs py-px font-normal sm:text-xs"
         >
           {t('Boshlanmagan')}
         </Badge>
@@ -19,7 +19,7 @@ const MatchStatus = ({ status, homeScore, awayScore }) => {
       return (
         <Badge
           variant="default"
-          className="animate-pulse py-px text-2xs font-normal sm:text-xs"
+          className="text-2xs animate-pulse py-px font-normal sm:text-xs"
         >
           {homeScore} - {awayScore}
         </Badge>

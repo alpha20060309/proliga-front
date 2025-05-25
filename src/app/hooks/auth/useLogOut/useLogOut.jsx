@@ -70,7 +70,7 @@ export const useLogOut = () => {
 
         // No need for manual redirect as we're using redirect: true
         if (showMessage) {
-          toast.success(t('Tizimdan chiqdingiz'), { theme: 'dark' })
+          toast.success(t('Tizimdan chiqdingiz'))
         }
         cb()
       } catch (error) {
@@ -78,8 +78,7 @@ export const useLogOut = () => {
         toast.error(
           error instanceof Error
             ? error.message
-            : t('An unknown error occurred'),
-          { theme: 'dark' }
+            : t('An unknown error occurred')
         )
       }
     },

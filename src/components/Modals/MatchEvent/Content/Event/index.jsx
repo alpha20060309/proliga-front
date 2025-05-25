@@ -67,7 +67,7 @@ const MatchEvent = ({ event, index }) => {
       )}
     >
       {isTextOnly ? (
-        <div className="z-10 rounded-sm bg-background px-3 py-1.5 text-center text-sm text-foreground shadow-sm shadow-neutral-700">
+        <div className="bg-background text-foreground z-10 rounded-sm px-3 py-1.5 text-center text-sm shadow-sm shadow-neutral-700">
           {renderHeader(event.event_type)}
         </div>
       ) : (
@@ -118,7 +118,7 @@ const MatchEvent = ({ event, index }) => {
               isHome ? 'pl-4 text-left' : 'pr-4 text-right'
             )}
           >
-            <div className="text-sm text-foreground/70">{event.minute}`</div>
+            <div className="text-foreground/70 text-sm">{event.minute}`</div>
           </div>
         </>
       )}

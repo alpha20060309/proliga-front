@@ -51,7 +51,7 @@ export default function MotionNumber({
         cancelAnimationFrame(animationFrameId.current)
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value, duration])
 
   const formattedValue = `${prefix}${displayValue.toFixed(decimals)}${suffix}`

@@ -14,7 +14,7 @@ const TransferTableHead = ({ table }) => {
                 colSpan={header.colSpan}
                 {...{
                   className: header.column.getCanSort()
-                    ? 'cursor-pointer text-center select-none px-0.5 py-1 text-xs xs:text-sm font-medium md:p-1 md:text-start min-w-6 sm:min-w-max'
+                    ? 'cursor-pointer text-center select-none px-0.5 py-1 text-foreground text-xs xs:text-sm font-medium md:p-1 md:text-start min-w-6 sm:min-w-max'
                     : ' px-0.5 md:p-1 text-start ',
                   onClick: header.column.getToggleSortingHandler(),
                 }}
@@ -30,7 +30,7 @@ const TransferTableHead = ({ table }) => {
                       alt="triangle arrow"
                       width={12}
                       height={12}
-                      className="hidden rotate-180 xs:size-4 sm:inline-block lg:hidden xl:inline-block"
+                      className="xs:size-4 hidden rotate-180 sm:inline-block lg:hidden xl:inline-block"
                     />
                   ),
                   desc: (
@@ -39,7 +39,7 @@ const TransferTableHead = ({ table }) => {
                       alt="triangle arrow"
                       width={12}
                       height={12}
-                      className="hidden xs:size-4 sm:inline-block lg:hidden xl:inline-block"
+                      className="xs:size-4 hidden sm:inline-block lg:hidden xl:inline-block"
                     />
                   ),
                 }[header.column.getIsSorted()] ?? (
@@ -48,7 +48,7 @@ const TransferTableHead = ({ table }) => {
                     alt="triangle arrow"
                     width={12}
                     height={12}
-                    className="hidden rotate-180 xs:size-4 sm:inline-block lg:hidden xl:inline-block"
+                    className="xs:size-4 hidden rotate-180 sm:inline-block lg:hidden xl:inline-block"
                   />
                 )}
               </th>

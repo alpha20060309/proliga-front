@@ -24,7 +24,7 @@ const PaymentPackages = () => {
         <PackagesSkeleton />
       ) : (
         <div className="container mx-auto px-4 py-8">
-          <h1 className="mb-8 text-center text-xl font-bold text-foreground sm:text-2xl lg:text-3xl">
+          <h1 className="text-foreground mb-8 text-center text-xl font-bold sm:text-2xl lg:text-3xl">
             {t('O‘yiningizni mukammallikka yetkazing')}
           </h1>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

@@ -60,7 +60,7 @@ const ResetPasswordForm = () => {
   return (
     <div className="bg-background mx-auto w-full max-w-md space-y-8 rounded-lg border border-neutral-800 p-6 shadow-sm shadow-neutral-600">
       <div className="flex items-center gap-2">
-        <Lock className="h-8 w-8 text-primary" />
+        <Lock className="text-primary h-8 w-8" />
         <h1 className="text-2xl font-bold">{t('Parol Yangilash')}</h1>
       </div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-2">
@@ -83,13 +83,13 @@ const ResetPasswordForm = () => {
               type="button"
               variant="ghost"
               size="icon"
-              className="absolute right-0 top-0 hover:bg-transparent"
+              className="absolute top-0 right-0 hover:bg-transparent"
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? (
-                <EyeOff className="size-6 text-secondary-foreground" />
+                <EyeOff className="text-secondary-foreground size-6" />
               ) : (
-                <Eye className="size-6 text-secondary-foreground" />
+                <Eye className="text-secondary-foreground size-6" />
               )}
             </Button>
           </div>
@@ -117,20 +117,20 @@ const ResetPasswordForm = () => {
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
             >
               {showConfirmPassword ? (
-                <EyeOff className="size-6 text-secondary-foreground" />
+                <EyeOff className="text-secondary-foreground size-6" />
               ) : (
-                <Eye className="size-6 text-secondary-foreground" />
+                <Eye className="text-secondary-foreground size-6" />
               )}
             </Button>
           </div>
         </div>
         <Button
           type="submit"
-          className="mt-4 h-12 w-full rounded-sm border border-yellow-400 bg-neutral-900 font-bold text-foreground transition-all duration-300 hover:bg-yellow-400 hover:text-neutral-900"
+          className="text-foreground mt-4 h-12 w-full rounded-sm border border-yellow-400 bg-neutral-900 font-bold transition-all duration-300 hover:bg-yellow-400 hover:text-neutral-900"
           disabled={isPending}
         >
           {isPending ? (
-            <Loader2 className="size-8 animate-spin text-foreground" />
+            <Loader2 className="text-foreground size-8 animate-spin" />
           ) : (
             t('Parol Yangilash')
           )}

@@ -11,7 +11,7 @@ export default function SettingsPage() {
 
   return (
     <SettingsContainer>
-      <h2 className="text-xl font-bold tracking-tight text-foreground">
+      <h2 className="text-foreground text-xl font-bold tracking-tight">
         {t('Security settings')}
       </h2>
       <section className="flex flex-col gap-4 lg:flex-row">
@@ -34,7 +34,7 @@ export default function SettingsPage() {
 
 const FormContainer = ({ children }) => {
   return (
-    <div className="w-full rounded-lg border border-border bg-background p-2 py-6 lg:px-4">
+    <div className="border-border bg-background w-full rounded-lg border p-2 py-6 lg:px-4">
       {children}
     </div>
   )

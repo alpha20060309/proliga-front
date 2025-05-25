@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { useDispatch, useSelector } from 'react-redux'
 import { setBalanceModal } from 'app/lib/features/currentTeam/currentTeam.slice'
 import { setPlayerTransferModal } from 'app/lib/features/teamPlayer/teamPlayer.slice'
@@ -10,6 +9,7 @@ import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.sele
 import { selectCurrentPlayer } from 'app/lib/features/player/player.selector'
 import { cn } from '@/lib/utils'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
+import { ArrowUpDown, Check } from 'lucide-react'
 
 const SwapPlayerButton = ({ cell, handleSwapPlayer, teamBalance }) => {
   const { t } = useTranslation()
@@ -35,9 +35,9 @@ const SwapPlayerButton = ({ cell, handleSwapPlayer, teamBalance }) => {
     } else {
       if (currentTeam?.balance === max_balance) {
         toggleModal()
-        toast.info(t('Max balance has been reached!'), { theme: 'dark' })
+        toast.info(t('Max balance has been reached!'))
       } else {
-        toast.info(t('Not enough balance.'), { theme: 'dark' })
+        toast.info(t('Not enough balance.'))
         toggleModal()
         transfer_show_modals && dispatch(setBalanceModal(true))
       }
@@ -54,14 +54,7 @@ const SwapPlayerButton = ({ cell, handleSwapPlayer, teamBalance }) => {
         className="fade-in-fast flex h-full w-full cursor-pointer items-center justify-center p-1 md:w-auto"
         key={cell.column.id}
       >
-        <Image
-          src="/icons/check.svg"
-          alt="plus"
-          width={24}
-          draggable={false}
-          height={24}
-          className="filter-green-500 size-5 select-none sm:size-6"
-        />
+        <Check className="size-5 text-green-500 select-none sm:size-6" />
       </td>
     )
   } else {
@@ -71,16 +64,11 @@ const SwapPlayerButton = ({ cell, handleSwapPlayer, teamBalance }) => {
         key={cell.column.id}
         onClick={handleClick}
       >
-        <Image
-          src="/icons/swap-circle.svg"
-          alt="plus"
-          width={24}
-          draggable={false}
+        <ArrowUpDown
           className={cn(
             'size-5 select-none sm:size-6',
-            condition ? 'filter-primary' : 'filter-neutral-400'
+            condition ? 'text-primary' : 'text-muted'
           )}
-          height={24}
         />
       </td>
     )

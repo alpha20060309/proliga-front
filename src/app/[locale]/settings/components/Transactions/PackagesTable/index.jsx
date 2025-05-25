@@ -53,7 +53,7 @@ function TransactionsPackagesTable() {
       accessorFn: (row) => row?.transaction_id ?? '',
       cell: (info) => (
         <Popover>
-          <PopoverTrigger className="cursor-pointer select-none text-sm font-bold text-primary md:text-base">
+          <PopoverTrigger className="text-primary cursor-pointer text-sm font-bold select-none md:text-base">
             ******
           </PopoverTrigger>
           <PopoverContent
@@ -117,7 +117,7 @@ function TransactionsPackagesTable() {
 
   return (
     <section className="flex h-full w-full flex-1 flex-col justify-between gap-1 overflow-x-auto">
-      <table className="w-full min-w-96 table-fixed rounded-sm text-2xs sm:text-xs lg:text-sm">
+      <table className="text-2xs w-full min-w-96 table-fixed rounded-sm sm:text-xs lg:text-sm">
         <TransactionsTableHead table={table} />
         <TransactionsTableBody table={table} flexRender={flexRender} />
       </table>
@@ -146,7 +146,7 @@ const PackageIcon = ({ type, amount, name }) => {
   return (
     <Popover>
       <PopoverTrigger>
-        <span className="flex cursor-pointer items-center gap-0.5 text-sm font-bold text-primary md:text-base">
+        <span className="text-primary flex cursor-pointer items-center gap-0.5 text-sm font-bold md:text-base">
           {renderIcons()} {amount}
         </span>
       </PopoverTrigger>
@@ -167,7 +167,7 @@ export const PaymentOptionIcon = ({ system }) => {
             src="./icons/click-up.svg"
             alt="click up"
             width={20}
-            className="h-7 w-12 xs:w-16 md:h-8 md:w-20"
+            className="xs:w-16 h-7 w-12 md:h-8 md:w-20"
             height={20}
           />
         </span>
@@ -180,14 +180,14 @@ export const PaymentOptionIcon = ({ system }) => {
             alt="payme"
             width={20}
             height={20}
-            className="h-7 w-12 xs:w-16 md:h-8 md:w-20"
+            className="xs:w-16 h-7 w-12 md:h-8 md:w-20"
           />
         </span>
       )
     case PAYMENT_OPTIONS.WALLET:
       return (
-        <span className="flex items-center gap-0.5 text-xs xs:text-sm md:gap-1 md:text-base">
-          <Wallet className="size-4 xs:size-5" />
+        <span className="xs:text-sm flex items-center gap-0.5 text-xs md:gap-1 md:text-base">
+          <Wallet className="xs:size-5 size-4" />
           {t('Balans')}
         </span>
       )

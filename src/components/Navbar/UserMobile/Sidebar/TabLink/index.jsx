@@ -52,7 +52,7 @@ const SidebarTabLink = ({ title, tab, toggleModal }) => {
       />
       <Link
         className={cn(
-          'block h-full w-2 select-none rounded-md',
+          'block h-full w-2 rounded-md select-none',
           tabStyling({
             tab,
             ACTIVE: sidebarStyles.active,

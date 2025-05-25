@@ -82,11 +82,11 @@ const SettingsAlert = ({
             {message}
           </p>
           {actionText && (
-            <p className="mt-3 text-sm md:ml-6 md:mt-0">
+            <p className="mt-3 text-sm md:mt-0 md:ml-6">
               <button
                 onClick={onAction}
                 className={cn(
-                  'whitespace-nowrap font-medium transition-all duration-300 ease-in-out',
+                  'font-medium whitespace-nowrap transition-all duration-300 ease-in-out',
                   'transform hover:translate-x-1',
                   defaultActionColor,
                   actionClassName
@@ -110,10 +110,10 @@ const SettingsAlert = ({
               onClick={() => setIsVisible(false)}
               className={cn(
                 'inline-flex rounded-md p-1.5 transition-all duration-300 ease-in-out',
-                'hover:bg-opacity-20 focus:outline-hidden focus:ring-2 focus:ring-white focus:ring-offset-2',
+                'hover:bg-opacity-20 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:outline-hidden',
                 'transform',
                 defaultTextColor,
-                `focus:ring-offset-${defaultBgColor} hover:bg-neutral-50 hover:bg-opacity-20`,
+                `focus:ring-offset-${defaultBgColor} hover:bg-opacity-20 hover:bg-neutral-50`,
                 dismissClassName
               )}
             >

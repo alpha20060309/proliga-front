@@ -45,7 +45,7 @@ const PlayerInfo = () => {
 
   return (
     <Dialog open={infoModal && currentPlayer?.id} onOpenChange={setModalOpen}>
-      <DialogContent className="overflox-y-auto z-50 flex max-h-[90vh] min-h-[50vh] w-[98%] max-w-4xl flex-col gap-4 overflow-y-auto rounded-xl border border-neutral-500 bg-background px-2 pb-4 pt-4 text-secondary-foreground xs:mx-auto xs:px-4 md:px-6 md:pb-4 md:pt-6 2xl:max-w-5xl">
+      <DialogContent className="overflox-y-auto bg-background text-secondary-foreground xs:mx-auto xs:px-4 z-50 flex max-h-[90vh] min-h-[50vh] w-[98%] max-w-4xl flex-col gap-4 overflow-y-auto rounded-xl border border-neutral-500 px-2 pt-4 pb-4 md:px-6 md:pt-6 md:pb-4 2xl:max-w-5xl">
         <PlayerPhoto
           currentPlayer={currentPlayer}
           position={getCorrentPlayerPosition(
@@ -55,7 +55,7 @@ const PlayerInfo = () => {
           )}
         />
         <PlayerStatisticsTable matches={matches} />
-        <div className="mt-auto flex flex-wrap justify-center gap-x-1 gap-y-0 text-nowrap text-xs md:gap-x-2 md:text-sm">
+        <div className="mt-auto flex flex-wrap justify-center gap-x-1 gap-y-0 text-xs text-nowrap md:gap-x-2 md:text-sm">
           <div>
             <span>{t("QO'")}</span> - {t('Quriq Oyin')},
           </div>

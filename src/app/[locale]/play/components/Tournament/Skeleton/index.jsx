@@ -5,7 +5,7 @@ import { PaginationSkeleton } from 'components/Table/Pagination'
 const TournamentSkeleton = ({ paginationCount, rows, cols }) => {
   return (
     <section className="flex w-full flex-col gap-2 lg:flex-row">
-      <div className="flex h-full min-h-160 w-full flex-1 table-auto flex-col overflow-x-auto rounded-xl bg-background px-2 py-4 text-secondary-foreground xs:px-3 md:p-5 lg:w-2/3">
+      <div className="bg-background text-secondary-foreground xs:px-3 flex h-full min-h-160 w-full flex-1 table-auto flex-col overflow-x-auto rounded-xl px-2 py-4 md:p-5 lg:w-2/3">
         <TournamentTableSkeleton
           rows={rows}
           cols={cols}
@@ -41,7 +41,7 @@ export const TournamentTableSkeleton = ({
           {[...Array(rows)].map((_, rowIndex) => (
             <tr
               key={rowIndex}
-              className="mx-auto border-b border-neutral-700 bg-neutral-900 text-center odd:bg-stone-950 hover:bg-card md:text-start"
+              className="hover:bg-card mx-auto border-b border-neutral-700 bg-neutral-900 text-center odd:bg-stone-950 md:text-start"
             >
               {[...Array(cols)].map((_, cellIndex) => (
                 <td

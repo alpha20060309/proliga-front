@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { cn } from '@/lib/utils'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
+import { Plus, Check, X } from 'lucide-react'
 
 const AddPlayerButton = ({
   cell,
@@ -35,9 +36,9 @@ const AddPlayerButton = ({
       handleAddPlayer(cell.row.original)
     } else {
       if (currentTeam?.balance === max_balance) {
-        toast.info(t('Max balance has been reached!'), { theme: 'dark' })
+        toast.info(t('Max balance has been reached!'))
       } else {
-        toast.info(t('Not enough balance.'), { theme: 'dark' })
+        toast.info(t('Not enough balance.'))
         transfer_show_modals && dispatch(setBalanceModal(true))
       }
     }
@@ -46,53 +47,34 @@ const AddPlayerButton = ({
   if (isPlayerInTeam) {
     return (
       <td
-        className="fade-in-fast flex h-full w-full cursor-pointer items-center justify-center p-0.5 xs:p-1 md:w-auto"
+        className="fade-in-fast xs:p-1 flex h-full w-full cursor-pointer items-center justify-center p-0.5 md:w-auto"
         key={cell.column.id}
       >
-        <Image
-          src="/icons/check.svg"
-          alt="plus"
-          width={24}
-          draggable={false}
-          height={24}
-          className="filter-green-500 size-5 select-none sm:size-6"
-        />
+        <Check className="size-5 text-green-500 select-none sm:size-6" />
       </td>
     )
   } else if (!isPlayerInTeam && totalPlayersCount < 11) {
     return (
       <td
-        className="fade-in-fast flex h-full w-full cursor-pointer items-center justify-center p-0.5 xs:p-1 md:w-auto"
+        className="fade-in-fast xs:p-1 flex h-full w-full cursor-pointer items-center justify-center p-0.5 md:w-auto"
         key={cell.column.id}
         onClick={handleClick}
       >
-        <Image
-          src="/icons/plus.svg"
-          alt="plus"
-          width={24}
-          draggable={false}
+        <Plus
           className={cn(
             'size-5 select-none sm:size-6',
-            condition ? 'filter-primary' : 'filter-neutral-400'
+            condition ? 'text-primary' : 'text-muted-foreground'
           )}
-          height={24}
         />
       </td>
     )
   } else if (!isPlayerInTeam && totalPlayersCount >= 11) {
     return (
       <td
-        className="fade-in-fast flex h-full w-full cursor-pointer items-center justify-center p-0.5 xs:p-1 md:w-auto"
+        className="fade-in-fast xs:p-1 flex h-full w-full cursor-pointer items-center justify-center p-0.5 md:w-auto"
         key={cell.column.id}
       >
-        <Image
-          src="/icons/close-circle.svg"
-          alt="plus"
-          width={24}
-          draggable={false}
-          className="filter-neutral-400 size-5 h-full select-none opacity-80 sm:size-6"
-          height={24}
-        />
+        <X className="text-muted-foreground size-5 select-none sm:size-6" />
       </td>
     )
   }

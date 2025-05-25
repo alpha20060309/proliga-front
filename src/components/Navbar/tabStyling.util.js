@@ -1,5 +1,5 @@
 import { TABS } from 'app/utils/tabs.util'
-import { TOUR_STATUS} from 'app/utils/tour.util'
+import { TOUR_STATUS } from 'app/utils/tour.util'
 
 export const tabStyling = ({
   tab,

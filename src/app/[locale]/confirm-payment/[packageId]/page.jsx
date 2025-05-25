@@ -54,7 +54,7 @@ const ConfirmPayment = ({ params }) => {
       !currentCompetition?.id ||
       !userTable?.id
     ) {
-      toast.info(t('Iltimos, avval jamoani tanlang!'), { theme: 'dark' })
+      toast.info(t('Iltimos, avval jamoani tanlang!'))
       router.push('/championships')
     }
   }, [

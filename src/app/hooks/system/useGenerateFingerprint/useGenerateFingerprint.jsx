@@ -20,8 +20,7 @@ export function useGenerateFingerprint() {
         error instanceof Error ? error.message : t('An unknown error occurred')
       )
       toast.error(
-        error instanceof Error ? error.message : t('An unknown error occurred'),
-        { theme: 'dark' }
+        error instanceof Error ? error.message : t('An unknown error occurred')
       )
     }
   }, [dispatch, t])

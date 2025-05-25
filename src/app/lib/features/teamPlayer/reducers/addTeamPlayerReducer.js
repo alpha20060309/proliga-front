@@ -69,13 +69,13 @@ export const addTeamPlayerReducer = (state, action) => {
 
   const emptyPlayer = teamConcat.find((player) => !player.name)
   if (!emptyPlayer) {
-    toast.warning(t('Boshqa oyinchi qoshish mumkin emas!'), { theme: 'dark' })
+    toast.warning(t('Boshqa oyinchi qoshish mumkin emas!'))
     return state
   }
 
   const existingPlayer = teamConcat.find((p) => p.player_id === player.id)
   if (existingPlayer) {
-    toast.warning(t('Ushbu oyinchi allaqachon oyinda!'), { theme: 'dark' })
+    toast.warning(t('Ushbu oyinchi allaqachon oyinda!'))
     return state
   }
 
@@ -94,8 +94,7 @@ export const addTeamPlayerReducer = (state, action) => {
       t("Ushbu klubdan $ ta oyinchi qo'shib bo'lmaydi!").replace(
         '$',
         maxTeamPlayers
-      ),
-      { theme: 'dark' }
+      )
     )
     state.transferModal = false
     state.clubModal = transfer_show_modals

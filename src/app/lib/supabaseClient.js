@@ -38,5 +38,5 @@ export const SUPABASE_PROVIDERS = {
   EMAIL: 'email',
   GOOGLE: 'google',
   FACEBOOK: 'facebook',
-  YANDEX: 'yandex'
+  YANDEX: 'yandex',
 }

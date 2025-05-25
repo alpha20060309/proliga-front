@@ -68,7 +68,7 @@ const TeamBalanceModal = () => {
                     >
                       <Button
                         variant="ghost"
-                        className="relative h-full w-full justify-start rounded-none border-l-4 border-primary px-4 py-2 text-left hover:bg-primary/10"
+                        className="border-primary hover:bg-primary/10 relative h-full w-full justify-start rounded-none border-l-4 px-4 py-2 text-left"
                       >
                         <div>
                           <Badge variant="secondary" className="mb-2">
@@ -84,7 +84,7 @@ const TeamBalanceModal = () => {
                             )}
                           </p>
                         </div>
-                        <ArrowRight className="absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 transform text-primary" />
+                        <ArrowRight className="text-primary absolute top-1/2 right-4 h-5 w-5 -translate-y-1/2 transform" />
                       </Button>
                     </Link>
                   </CardContent>

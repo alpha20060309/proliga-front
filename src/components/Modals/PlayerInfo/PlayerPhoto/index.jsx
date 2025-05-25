@@ -27,7 +27,7 @@ const PlayerPhoto = ({ currentPlayer, position }) => {
       </div>
       <section className="flex flex-1 flex-col justify-between gap-2">
         <div>
-          <DialogTitle className="mb-1 truncate text-lg font-bold text-primary sm:text-xl md:text-2xl">
+          <DialogTitle className="text-primary mb-1 truncate text-lg font-bold sm:text-xl md:text-2xl">
             {getCorrectName({
               lang,
               uz: currentPlayer?.name,
@@ -43,9 +43,9 @@ const PlayerPhoto = ({ currentPlayer, position }) => {
               draggable={false}
               loading="lazy"
               onError={(e) => (e.currentTarget.src = '/icons/football.svg')}
-              className="size-5 rounded-full bg-secondary md:size-6 lg:size-7"
+              className="bg-secondary size-5 rounded-full md:size-6 lg:size-7"
             />
-            <p className="text-sm font-medium text-secondary-foreground md:text-base">
+            <p className="text-secondary-foreground text-sm font-medium md:text-base">
               {getCorrectName({
                 lang,
                 uz: currentPlayer?.club?.name,
@@ -96,21 +96,21 @@ const PlayerPhoto = ({ currentPlayer, position }) => {
 }
 
 const Stat = ({ icon, value, label }) => (
-  <div className="flex items-center gap-1.5 rounded-md bg-card p-1.5 text-xs sm:p-2 sm:text-sm">
-    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-secondary sm:h-7 sm:w-7">
+  <div className="bg-card flex items-center gap-1.5 rounded-md p-1.5 text-xs sm:p-2 sm:text-sm">
+    <div className="bg-secondary flex h-6 w-6 items-center justify-center rounded-full sm:h-7 sm:w-7">
       {icon}
     </div>
     <div>
-      <p className="font-semibold text-foreground">{value ?? 0}</p>
+      <p className="text-foreground font-semibold">{value ?? 0}</p>
       <p className="text-xs text-neutral-400">{label}</p>
     </div>
   </div>
 )
 
 const SmallerStat = ({ value, label }) => (
-  <div className="flex items-center justify-between gap-1 rounded-md bg-cardy-1 text-xs xs:py-2">
+  <div className="bg-cardy-1 xs:py-2 flex items-center justify-between gap-1 rounded-md text-xs">
     <p className="text-3xs leading-tight text-neutral-400">{label}</p>
-    <p className="font-semibold leading-tight text-foreground">{value ?? 0}</p>
+    <p className="text-foreground leading-tight font-semibold">{value ?? 0}</p>
   </div>
 )
 

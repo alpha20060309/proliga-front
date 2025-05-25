@@ -5,7 +5,7 @@ const SidebarSystemLink = ({ children, href, handleToggle }) => {
     <Link
       href={href}
       onClick={handleToggle}
-      className="flex h-full w-full gap-2 rounded-sm bg-foreground/20 p-2 hover:bg-secondary"
+      className="bg-foreground/20 hover:bg-secondary flex h-full w-full gap-2 rounded-sm p-2"
     >
       {children}
     </Link>

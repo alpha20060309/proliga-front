@@ -100,7 +100,7 @@ const ScoreBoard = () => {
         <div
           className={cn(
             'flex w-full items-center justify-center gap-1 rounded-full px-2 py-1 text-xs sm:w-auto sm:text-sm',
-            'animate-pulse bg-background text-secondary-foreground'
+            'bg-background text-secondary-foreground animate-pulse'
           )}
         >
           {t('Jarayonda')}

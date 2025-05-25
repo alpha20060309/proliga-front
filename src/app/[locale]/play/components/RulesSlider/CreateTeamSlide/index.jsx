@@ -24,7 +24,7 @@ const CreateTeamSlide = () => {
           </div>
         </div>
       </div>
-      <div className="h-auto max-h-144 w-full flex-1 items-end self-center xs:w-4/5 md:w-auto">
+      <div className="xs:w-4/5 h-auto max-h-144 w-full flex-1 items-end self-center md:w-auto">
         <Image
           src="/images/promotion-1.png"
           width={380}

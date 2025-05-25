@@ -7,7 +7,7 @@ const TopTeams = dynamic(() => import('../TopTeams'), {
 const SidePagesTemplate = ({ children }) => {
   return (
     <section className="flex w-full flex-col gap-2 lg:flex-row">
-      <div className="flex h-full min-h-160 w-full flex-1 table-auto flex-col overflow-x-auto rounded-xl bg-background px-2 py-4 text-secondary-foreground xs:px-3 lg:w-2/3 lg:px-4">
+      <div className="bg-background text-secondary-foreground xs:px-3 flex h-full min-h-160 w-full flex-1 table-auto flex-col overflow-x-auto rounded-xl px-2 py-4 lg:w-2/3 lg:px-4">
         {children}
       </div>
       <TopTeams />

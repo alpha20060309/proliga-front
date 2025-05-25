@@ -33,7 +33,7 @@ const Head = ({ table }) => {
                       width={12}
                       height={12}
                       className={cn(
-                        'size-3.5 rotate-180 xs:size-4 lg:size-0 xl:size-4',
+                        'xs:size-4 size-3.5 rotate-180 lg:size-0 xl:size-4',
                         header.column.columnDef.header
                           ? 'hidden lg:inline-block'
                           : 'hidden'
@@ -47,7 +47,7 @@ const Head = ({ table }) => {
                       width={12}
                       height={12}
                       className={cn(
-                        'size-3.5 xs:size-4 lg:size-0 xl:size-4',
+                        'xs:size-4 size-3.5 lg:size-0 xl:size-4',
                         header.column.columnDef.header
                           ? 'hidden lg:inline-block'
                           : 'hidden'
@@ -61,14 +61,14 @@ const Head = ({ table }) => {
                     width={12}
                     height={12}
                     className={cn(
-                      'size-3.5 xs:size-4 lg:size-0 xl:size-4',
+                      'xs:size-4 size-3.5 lg:size-0 xl:size-4',
                       header.column.columnDef.header
                         ? 'hidden lg:inline-block'
                         : 'hidden'
                     )}
                   />
                 )}
-                <span className="-left-0 top-8 z-40 hidden h-auto w-min rounded-md border border-neutral-200 bg-background p-1 shadow-md outline-hidden group-hover:absolute group-hover:block data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2">
+                <span className="bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 top-8 -left-0 z-40 hidden h-auto w-min rounded-md border border-neutral-200 p-1 shadow-md outline-hidden group-hover:absolute group-hover:block">
                   {header.column.columnDef?.meta?.title}
                 </span>
               </th>

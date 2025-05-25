@@ -1,5 +1,4 @@
 import { Link } from 'next-view-transitions'
-import Image from 'next/image'
 import { toast } from 'sonner'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
@@ -12,6 +11,7 @@ import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.sele
 import { selectCurrentPackage } from 'app/lib/features/package/package.selector'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { useSession } from 'next-auth/react'
+import { Loader } from 'lucide-react'
 
 const ConfirmPaymentTab = ({ paymentOption }) => {
   const { lastVisitedTeam } = useSelector((store) => store.currentTeam)
@@ -29,12 +29,10 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
     useBuyPackageWithClick()
 
   const handleConfirmPayment = async () => {
-    if (!currentPackage?.id)
-      return toast.error(t('Joriy paket yo‘q!'), { theme: 'dark' })
-    if (!paymentOption)
-      return toast.error(t('To‘lov varianti topilmadi!'), { theme: 'dark' })
+    if (!currentPackage?.id) return toast.error(t('Joriy paket yo‘q!'))
+    if (!paymentOption) return toast.error(t('To‘lov varianti topilmadi!'))
     if (userTable.balance < currentPackage?.price) {
-      return toast.error(t('Mablag‘ yetarli emas!'), { theme: 'dark' })
+      return toast.error(t('Mablag‘ yetarli emas!'))
     }
     if (paymentOption === PAYMENT_OPTIONS.WALLET) {
       await buyPackageWithWallet({
@@ -57,12 +55,12 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
   }
 
   return (
-    <section className="mt-auto flex flex-col items-start justify-between gap-2 rounded-md bg-linear-to-l from-neutral-800 to-stone-900 p-4 md:h-auto md:flex-row md:items-center md:p-6">
-      <div className="flex items-center justify-center gap-2 text-sm font-medium xs:text-base md:text-lg">
+    <section className="from-secondary to-card mt-auto flex flex-col items-start justify-between gap-2 rounded-md bg-linear-to-l p-4 md:h-auto md:flex-row md:items-center md:p-6">
+      <div className="xs:text-base flex items-center justify-center gap-2 text-sm font-medium md:text-lg">
         <p>{t("To'lov miqdori")}</p>
         <NumericFormat
           value={currentPackage?.price / 100 || 0}
-          className="text w-min select-none border-none bg-transparent text-base font-bold outline-hidden xs:text-lg sm:text-xl"
+          className="text xs:text-lg w-min border-none bg-transparent text-base font-bold outline-hidden select-none sm:text-xl"
           defaultValue={0}
           readOnly
           thousandSeparator
@@ -75,23 +73,17 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
       <div className="flex items-center gap-1 self-end font-medium md:self-auto">
         <Link
           href={'/play/' + lastVisitedTeam}
-          className="flex h-10 w-24 items-center justify-center rounded-sm border border-neutral-300 bg-background text-center text-sm text-neutral-300 transition-all hover:border-neutral-100 hover:bg-opacity-75 hover:text-foreground lg:w-32 lg:text-base"
+          className="bg-background hover:bg-opacity-75 hover:text-foreground border-muted-foreground text-muted-foreground hover:border-primary flex h-10 w-24 items-center justify-center rounded-sm border text-center text-sm transition-all lg:w-32 lg:text-base"
         >
           {t('Qaytish')}
         </Link>
         <button
           onClick={handleConfirmPayment}
           disabled={isLoading || isClickLoading || isPaymeLoading}
-          className="flex h-10 w-24 items-center justify-center rounded-sm border border-primary bg-background text-sm text-neutral-50 transition-all hover:bg-opacity-75 hover:text-primary lg:w-32 lg:text-base"
+          className="border-primary bg-background hover:bg-opacity-75 hover:text-primary text-foreground flex h-10 w-24 items-center justify-center rounded-sm border text-sm transition-all lg:w-32 lg:text-base"
         >
           {isLoading || isClickLoading || isPaymeLoading ? (
-            <Image
-              src="/icons/loading.svg"
-              width={24}
-              height={24}
-              alt="loading"
-              className="filter-white mx-auto size-5 animate-spin"
-            />
+            <Loader className="text-foreground mx-auto size-5 animate-spin" />
           ) : (
             t("To'lash")
           )}

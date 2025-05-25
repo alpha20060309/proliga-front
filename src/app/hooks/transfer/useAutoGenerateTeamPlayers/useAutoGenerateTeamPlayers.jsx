@@ -20,7 +20,7 @@ export const useAutoGenerateTeamPlayers = () => {
 
       if (!team_id) {
         setError(t('Jamoa ID kiritilmagan!'))
-        toast.error(t('Jamoa ID kiritilmagan!'), { theme: 'dark' })
+        toast.error(t('Jamoa ID kiritilmagan!'))
       }
 
       try {
@@ -41,8 +41,7 @@ export const useAutoGenerateTeamPlayers = () => {
           toast.error(
             error instanceof Error
               ? error.message
-              : t('An unknown error occurred'),
-            { theme: 'dark' }
+              : t('An unknown error occurred')
           )
           return
         }
@@ -66,8 +65,7 @@ export const useAutoGenerateTeamPlayers = () => {
         toast.error(
           error instanceof Error
             ? error.message
-            : t('An unknown error occurred'),
-          { theme: 'dark' }
+            : t('An unknown error occurred')
         )
       } finally {
         setIsLoading(false)

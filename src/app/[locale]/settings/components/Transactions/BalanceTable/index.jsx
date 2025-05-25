@@ -49,7 +49,7 @@ function CabinetTransactionsBalanceTable() {
       id: 'code',
       cell: (info) => (
         <Popover>
-          <PopoverTrigger className="cursor-pointer select-none text-sm font-bold text-primary md:text-base">
+          <PopoverTrigger className="text-primary cursor-pointer text-sm font-bold select-none md:text-base">
             ******
           </PopoverTrigger>
           <PopoverContent
@@ -90,7 +90,7 @@ function CabinetTransactionsBalanceTable() {
   })
   return (
     <section className="flex h-full w-full flex-1 flex-col justify-between gap-1 overflow-x-auto">
-      <table className="w-full table-fixed rounded-sm text-2xs xs:text-xs md:text-sm">
+      <table className="text-2xs xs:text-xs w-full table-fixed rounded-sm md:text-sm">
         <TransactionsTableHead table={table} />
         <TransactionsTableBody table={table} flexRender={flexRender} />
       </table>

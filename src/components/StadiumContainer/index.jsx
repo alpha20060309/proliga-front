@@ -10,7 +10,7 @@ const StadiumContainer = ({ children, hideShareButton = false }) => {
 
   const handleCopy = (value) => {
     navigator.clipboard.writeText(value)
-    toast.info(t('Buferga muvaffaqiyatli nusxalandi!'), { theme: 'dark' })
+    toast.info(t('Buferga muvaffaqiyatli nusxalandi!'))
   }
 
   const handleShare = async () => {
@@ -33,17 +33,17 @@ const StadiumContainer = ({ children, hideShareButton = false }) => {
         height={600}
         draggable={false}
         priority
-        className="w-full select-none rounded-xs"
+        className="w-full rounded-xs select-none"
       />
       {!hideShareButton && (
         <Button
           onClick={handleShare}
           className={cn(
-            'absolute bottom-3 right-4 z-20 size-6 cursor-pointer border border-primary bg-transparent p-0 xs:bottom-4 xs:right-5 sm:bottom-5 sm:right-7 md:size-7'
+            'border-primary xs:bottom-4 xs:right-5 absolute right-4 bottom-3 z-20 size-6 cursor-pointer border bg-transparent p-0 sm:right-7 sm:bottom-5 md:size-7'
           )}
           aria-label="Share"
         >
-          <Share2 className="size-3.5 text-primary md:size-4" />
+          <Share2 className="text-primary size-3.5 md:size-4" />
         </Button>
       )}
       {children}

@@ -18,7 +18,7 @@ const PriceFilter = ({ column, columnFilterValue }) => {
         }
         defaultValue={MIN[0]}
       >
-        <SelectTrigger className="h-8 w-full min-w-8 max-w-24 select-none rounded-sm border border-neutral-500 bg-background text-secondary-foreground md:min-w-max">
+        <SelectTrigger className="bg-background text-secondary-foreground h-8 w-full max-w-24 min-w-8 rounded-sm border border-neutral-500 select-none md:min-w-max">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
@@ -42,7 +42,7 @@ const PriceFilter = ({ column, columnFilterValue }) => {
         }
         defaultValue={MAX[0]}
       >
-        <SelectTrigger className="h-8 w-full min-w-8 max-w-24 select-none rounded-sm border border-neutral-500 bg-background text-secondary-foreground md:min-w-max">
+        <SelectTrigger className="bg-background text-secondary-foreground h-8 w-full max-w-24 min-w-8 rounded-sm border border-neutral-500 select-none md:min-w-max">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>

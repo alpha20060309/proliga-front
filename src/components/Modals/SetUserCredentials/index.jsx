@@ -89,7 +89,7 @@ function SetUserCredentials() {
     <Dialog open={user?.id && phoneModal} onOpenChange={setModalOpen}>
       <DialogContent
         showCloseButton={false}
-        className="w-[98%] max-w-md rounded-xl bg-background p-5 text-foreground sm:p-6"
+        className="bg-background text-foreground w-[98%] max-w-md rounded-xl p-5 sm:p-6"
       >
         <DialogTitle>{t('Enter your credentials.')}</DialogTitle>
         <DialogDescription>
@@ -106,7 +106,7 @@ function SetUserCredentials() {
                 name="phone"
                 placeholder={'99-999-99-99'}
                 defaultCountry="UZ"
-                className="h-10 border-neutral-500 bg-background text-secondary-foreground placeholder:text-neutral-500"
+                className="bg-background text-secondary-foreground h-10 border-neutral-500 placeholder:text-neutral-500"
                 value={phone}
                 onChange={setPhone}
               />
@@ -117,7 +117,7 @@ function SetUserCredentials() {
                 type="email"
                 name="email"
                 id="email"
-                className="h-10 rounded-sm border-neutral-500 bg-background pl-10 text-secondary-foreground placeholder:text-neutral-500"
+                className="bg-background text-secondary-foreground h-10 rounded-sm border-neutral-500 pl-10 placeholder:text-neutral-500"
                 placeholder="example@xyz.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -127,7 +127,7 @@ function SetUserCredentials() {
           </section>
           <Button
             type="submit"
-            className="h-10 w-full rounded-sm border border-primary bg-neutral-900 text-neutral-50 transition-all hover:bg-background"
+            className="border-primary hover:bg-background h-10 w-full rounded-sm border bg-neutral-900 text-neutral-50 transition-all"
             disabled={isLoading}
           >
             {isLoading ? (

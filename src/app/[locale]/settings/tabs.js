@@ -9,21 +9,21 @@ export const SETTINGS_TABS = [
   {
     key: SETTINGS_TAB.PROFILE,
     title: 'Profil',
-    icon: "User",
+    icon: 'User',
   },
   {
     key: SETTINGS_TAB.SETTINGS,
     title: 'Sozlamalar',
-    icon: "Cog",
+    icon: 'Cog',
   },
   {
     key: SETTINGS_TAB.HISTORY,
     title: 'Xarajatlar',
-    icon: "History",
+    icon: 'History',
   },
   {
     key: SETTINGS_TAB.SECURITY,
     title: 'Security',
-    icon: "Shield"
+    icon: 'Shield',
   },
 ]

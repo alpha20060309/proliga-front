@@ -2,7 +2,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 const PlayersTableSkeleton = () => {
   return (
-    <div className="fade-in-fast min-h-auto mx-auto h-min w-full max-w-160 border-collapse overflow-x-auto rounded-xl border border-primary border-opacity-50 bg-background px-2 py-4 text-secondary-foreground shadow-md shadow-neutral-600 transition-all hover:border-opacity-100 xs:px-3 sm:px-4 md:text-sm lg:w-1/2 lg:max-w-md xl:max-w-136 2xl:max-w-xl">
+    <div className="fade-in-fast border-primary border-opacity-50 bg-background text-secondary-foreground hover:border-opacity-100 xs:px-3 mx-auto h-min min-h-auto w-full max-w-160 border-collapse overflow-x-auto rounded-xl border px-2 py-4 shadow-md shadow-neutral-600 transition-all sm:px-4 md:text-sm lg:w-1/2 lg:max-w-md xl:max-w-136 2xl:max-w-xl">
       <TeamOverviewSkeleton />
       <TransferTableFiltersSkeleton />
       <table className="w-full min-w-80 table-auto text-xs xl:text-sm">
@@ -50,7 +50,7 @@ const TransferTableBodySkeleton = () => {
 
 const TransferTableFiltersSkeleton = () => {
   return (
-    <div className="grid w-full grid-cols-4 grid-rows-2 gap-x-0.5 gap-y-2 text-sm xs:text-xs sm:grid-rows-1 md:gap-1 lg:grid-rows-2 xl:grid-rows-1 xl:gap-y-1.5 2xl:text-sm">
+    <div className="xs:text-xs grid w-full grid-cols-4 grid-rows-2 gap-x-0.5 gap-y-2 text-sm sm:grid-rows-1 md:gap-1 lg:grid-rows-2 xl:grid-rows-1 xl:gap-y-1.5 2xl:text-sm">
       {[...Array(5)].map((_, index) => (
         <Skeleton key={index} className="h-8 w-full" />
       ))}

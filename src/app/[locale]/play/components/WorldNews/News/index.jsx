@@ -40,12 +40,12 @@ const News = () => {
     <div
       className={cn(
         'relative mx-auto flex h-min min-h-168 w-full max-w-lg flex-col',
-        'items-stretch justify-between rounded-xl bg-background p-4 md:p-6 lg:mx-0 lg:w-auto',
-        'gap-2 border border-border lg:min-w-72 lg:flex-1'
+        'bg-background items-stretch justify-between rounded-xl p-4 md:p-6 lg:mx-0 lg:w-auto',
+        'border-border gap-2 border lg:min-w-72 lg:flex-1'
       )}
     >
       <div className="flex items-center justify-between">
-        <h3 className="flex items-center gap-2 text-xl font-semibold text-foreground">
+        <h3 className="text-foreground flex items-center gap-2 text-xl font-semibold">
           <Newspaper className="size-6" />
           {t('Yangiliklar')}
         </h3>
@@ -53,7 +53,7 @@ const News = () => {
           onClick={refreshData}
           variant="outline"
           size="sm"
-          className="h-8 py-0 text-sm text-foreground hover:text-foreground"
+          className="text-foreground hover:text-foreground h-8 py-0 text-sm"
         >
           <RefreshCcw className="mr-2 size-4" />
           {t('Refresh')}
@@ -64,7 +64,7 @@ const News = () => {
           <Article key={item.id} item={item} />
         ))}
         {news?.length === 0 && (
-          <p className="mt-2 text-center text-muted-foreground">
+          <p className="text-muted-foreground mt-2 text-center">
             {t('Yangiliklar mavjud emas!')}
           </p>
         )}

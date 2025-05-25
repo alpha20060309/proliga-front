@@ -43,8 +43,9 @@ export function Pagination({
           onClick={() => onPageChange(i - 1)}
           disabled={disabled || totalPages === 0}
           className={cn(
-            'size-7 p-0 md:size-8 bg-background border border-muted text-foreground hover:bg-accent hover:text-accent-foreground',
-            isCurrentPage && 'bg-primary text-primary-foreground hover:bg-primary/90',
+            'bg-background border-muted text-foreground hover:bg-accent hover:text-accent-foreground size-7 border p-0 md:size-8',
+            isCurrentPage &&
+              'bg-primary text-primary-foreground hover:bg-primary/90',
             buttonClassName
           )}
         >
@@ -64,32 +65,36 @@ export function Pagination({
         variant="outline"
         size="sm"
         className={cn(
-          'size-7 p-0 md:size-8 bg-background text-foreground hover:bg-accent hover:text-accent-foreground border-border',
+          'bg-background text-foreground hover:bg-accent hover:text-accent-foreground border-border size-7 p-0 md:size-8',
           buttonClassName
         )}
         onClick={() => onPageChange(0)}
         disabled={currentPage === 0 || disabled || totalPages === 0}
       >
-        <ChevronsLeft className={cn('size-5 text-muted-foreground', iconClassName)} />
+        <ChevronsLeft
+          className={cn('text-muted-foreground size-5', iconClassName)}
+        />
       </Button>
       <Button
         variant="outline"
         size="sm"
         className={cn(
-          'size-7 p-0 md:size-8 bg-background text-foreground hover:bg-accent hover:text-accent-foreground border-border',
+          'bg-background text-foreground hover:bg-accent hover:text-accent-foreground border-border size-7 p-0 md:size-8',
           buttonClassName
         )}
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 0 || disabled || totalPages === 0}
       >
-        <ChevronLeft className={cn('size-5 text-muted-foreground', iconClassName)} />
+        <ChevronLeft
+          className={cn('text-muted-foreground size-5', iconClassName)}
+        />
       </Button>
       {renderPageNumbers()}
       <Button
         variant="outline"
         size="sm"
         className={cn(
-          'size-7 p-0 md:size-8 bg-background text-foreground hover:bg-accent hover:text-accent-foreground border-border',
+          'bg-background text-foreground hover:bg-accent hover:text-accent-foreground border-border size-7 p-0 md:size-8',
           buttonClassName
         )}
         onClick={() => onPageChange(currentPage + 1)}
@@ -97,13 +102,15 @@ export function Pagination({
           currentPage === totalPages - 1 || disabled || totalPages === 0
         }
       >
-        <ChevronRight className={cn('size-5 text-muted-foreground', iconClassName)} />
+        <ChevronRight
+          className={cn('text-muted-foreground size-5', iconClassName)}
+        />
       </Button>
       <Button
         variant="outline"
         size="sm"
         className={cn(
-          'size-7 p-0 md:size-8 bg-background text-foreground hover:bg-accent hover:text-accent-foreground border-border',
+          'bg-background text-foreground hover:bg-accent hover:text-accent-foreground border-border size-7 p-0 md:size-8',
           buttonClassName
         )}
         onClick={() => onPageChange(totalPages - 1)}
@@ -111,7 +118,9 @@ export function Pagination({
           currentPage === totalPages - 1 || disabled || totalPages === 0
         }
       >
-        <ChevronsRight className={cn('size-5 text-muted-foreground', iconClassName)} />
+        <ChevronsRight
+          className={cn('text-muted-foreground size-5', iconClassName)}
+        />
       </Button>
     </section>
   )
@@ -123,33 +132,33 @@ export const PaginationSkeleton = ({ count = 5, className }) => {
       <Button
         variant="outline"
         disabled
-        className="size-7 animate-pulse p-0 md:size-8 bg-muted text-muted-foreground border-border"
+        className="bg-muted text-muted-foreground border-border size-7 animate-pulse p-0 md:size-8"
       >
-        <ChevronsLeft className="size-5 text-muted-foreground" />
+        <ChevronsLeft className="text-muted-foreground size-5" />
       </Button>
       <Button
         variant="outline"
         disabled
-        className="size-7 animate-pulse p-0 md:size-8 bg-muted text-muted-foreground border-border"
+        className="bg-muted text-muted-foreground border-border size-7 animate-pulse p-0 md:size-8"
       >
-        <ChevronLeft className="size-5 text-muted-foreground" />
+        <ChevronLeft className="text-muted-foreground size-5" />
       </Button>
       {Array.from({ length: count }).map((_, index) => (
-        <Skeleton key={index} className="size-7 md:size-8 bg-muted" />
+        <Skeleton key={index} className="bg-muted size-7 md:size-8" />
       ))}
       <Button
         variant="outline"
         disabled
-        className="size-7 animate-pulse p-0 md:size-8 bg-muted text-muted-foreground border-border"
+        className="bg-muted text-muted-foreground border-border size-7 animate-pulse p-0 md:size-8"
       >
-        <ChevronRight className="size-5 text-muted-foreground" />
+        <ChevronRight className="text-muted-foreground size-5" />
       </Button>
       <Button
         variant="outline"
         disabled
-        className="size-7 animate-pulse p-0 md:size-8 bg-muted text-muted-foreground border-border"
+        className="bg-muted text-muted-foreground border-border size-7 animate-pulse p-0 md:size-8"
       >
-        <ChevronsRight className="size-5 text-muted-foreground" />
+        <ChevronsRight className="text-muted-foreground size-5" />
       </Button>
     </div>
   )

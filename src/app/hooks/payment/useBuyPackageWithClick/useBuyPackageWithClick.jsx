@@ -1,4 +1,3 @@
-
 import { useState, useCallback } from 'react'
 import { toast } from 'sonner'
 import { useTranslation } from 'react-i18next'
@@ -23,16 +22,16 @@ export const useBuyPackageWithClick = () => {
 
       if (!userTable?.id) {
         setError('User not found')
-        toast.error('User not found', { theme: 'dark' })
+        toast.error('User not found')
         return
       }
       if (!currentTeam?.id) {
         setError(t('Jamoa ID kiritilmagan!'))
-        toast.error(t('Jamoa ID kiritilmagan!'), { theme: 'dark' })
+        toast.error(t('Jamoa ID kiritilmagan!'))
       }
       if (!currentPackage || !currentPackage?.price) {
         setError(t('Joriy paket yo‘q!'))
-        toast.error(t('Joriy paket yo‘q!'), { theme: 'dark' })
+        toast.error(t('Joriy paket yo‘q!'))
         return
       }
 
@@ -57,8 +56,7 @@ export const useBuyPackageWithClick = () => {
         toast.error(
           error instanceof Error
             ? error.message
-            : t('An unknown error occurred'),
-          { theme: 'dark' }
+            : t('An unknown error occurred')
         )
       } finally {
         setIsLoading(false)

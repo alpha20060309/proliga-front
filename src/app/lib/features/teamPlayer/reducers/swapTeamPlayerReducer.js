@@ -1,4 +1,4 @@
-import { PLAYER_POSITION} from 'app/utils/player.util'
+import { PLAYER_POSITION } from 'app/utils/player.util'
 import { toast } from 'sonner'
 
 export const swapTeamPlayerReducer = (state, action) => {
@@ -68,8 +68,7 @@ export const swapTeamPlayerReducer = (state, action) => {
       t("Ushbu klubdan $ ta oyinchi qo'shib bo'lmaydi!").replace(
         '$',
         maxTeamPlayers
-      ),
-      { theme: 'dark' }
+      )
     )
     state.transferModal = false
     state.clubModal = transfer_show_modals
@@ -85,7 +84,7 @@ export const swapTeamPlayerReducer = (state, action) => {
     evaluateTeamClubId()
     calcTeamPrice()
     state.transferModal = false
-    toast.success(t("Oyinchi muvaffaqiyatli o'zgartirildi!"), { theme: 'dark' })
+    toast.success(t("Oyinchi muvaffaqiyatli o'zgartirildi!"))
     return state
   }
   if (player.position === PLAYER_POSITION.DEF && state.DEF.length > 0) {
@@ -97,7 +96,7 @@ export const swapTeamPlayerReducer = (state, action) => {
     evaluateTeamClubId()
     calcTeamPrice()
     state.transferModal = false
-    toast.success(t("Oyinchi muvaffaqiyatli o'zgartirildi!"), { theme: 'dark' })
+    toast.success(t("Oyinchi muvaffaqiyatli o'zgartirildi!"))
     return state
   }
   if (player.position === PLAYER_POSITION.MID && state.MID.length > 0) {
@@ -109,7 +108,7 @@ export const swapTeamPlayerReducer = (state, action) => {
     evaluateTeamClubId()
     calcTeamPrice()
     state.transferModal = false
-    toast.success(t("Oyinchi muvaffaqiyatli o'zgartirildi!"), { theme: 'dark' })
+    toast.success(t("Oyinchi muvaffaqiyatli o'zgartirildi!"))
     return state
   }
   if (player.position === PLAYER_POSITION.STR && state.STR.length > 0) {
@@ -121,7 +120,7 @@ export const swapTeamPlayerReducer = (state, action) => {
     evaluateTeamClubId()
     calcTeamPrice()
     state.transferModal = false
-    toast.success(t("Oyinchi muvaffaqiyatli o'zgartirildi!"), { theme: 'dark' })
+    toast.success(t("Oyinchi muvaffaqiyatli o'zgartirildi!"))
     return state
   }
 }

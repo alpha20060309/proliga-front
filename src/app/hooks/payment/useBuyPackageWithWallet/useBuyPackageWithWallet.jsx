@@ -19,11 +19,11 @@ export const useBuyPackageWithWallet = () => {
 
       if (!team_id) {
         setError(t('Jamoa ID kiritilmagan!'))
-        toast.error(t('Jamoa ID kiritilmagan!'), { theme: 'dark' })
+        toast.error(t('Jamoa ID kiritilmagan!'))
       }
       if (!package_id) {
         setError('Package not found')
-        toast.error(t('Paket topilmadi'), { theme: 'dark' })
+        toast.error(t('Paket topilmadi'))
         return
       }
 
@@ -52,8 +52,7 @@ export const useBuyPackageWithWallet = () => {
           toast.error(
             error instanceof Error
               ? error.message
-              : t('An unknown error occurred'),
-            { theme: 'dark' }
+              : t('An unknown error occurred')
           )
           return
         }
@@ -73,8 +72,7 @@ export const useBuyPackageWithWallet = () => {
         toast.error(
           error instanceof Error
             ? error.message
-            : t('An unknown error occurred'),
-          { theme: 'dark' }
+            : t('An unknown error occurred')
         )
       } finally {
         setIsLoading(false)

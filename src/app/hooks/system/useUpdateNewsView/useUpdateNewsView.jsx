@@ -19,7 +19,7 @@ export const useUpdateNewsView = () => {
 
       if (!news_id) {
         setError('News Id is required')
-        toast.error('News Id is required', { theme: 'dark' })
+        toast.error('News Id is required')
         return
       }
 
@@ -39,8 +39,7 @@ export const useUpdateNewsView = () => {
           toast.error(
             error instanceof Error
               ? error.message
-              : t('An unknown error occurred'),
-            { theme: 'dark' }
+              : t('An unknown error occurred')
           )
           return
         }
@@ -57,8 +56,7 @@ export const useUpdateNewsView = () => {
         toast.error(
           error instanceof Error
             ? error.message
-            : t('An unknown error occurred'),
-          { theme: 'dark' }
+            : t('An unknown error occurred')
         )
       } finally {
         setIsLoading(false)

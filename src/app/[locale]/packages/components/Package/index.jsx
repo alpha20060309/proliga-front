@@ -30,7 +30,7 @@ const PackageContainer = ({ packageType }) => {
     <Card className="border-yellow-500 bg-neutral-900 transition-all hover:border-yellow-400">
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-lg font-bold text-foreground xs:text-xl">
+          <CardTitle className="text-foreground xs:text-xl text-lg font-bold">
             {getPackageTitle(packageType)}
           </CardTitle>
           <PackageIcon type={packageType} />
@@ -44,12 +44,12 @@ const PackageContainer = ({ packageType }) => {
             .map((item, index) => (
               <div
                 key={index}
-                className="flex items-center justify-between rounded-sm bg-card p-2 transition-all hover:bg-secondary"
+                className="bg-card hover:bg-secondary flex items-center justify-between rounded-sm p-2 transition-all"
               >
                 <div className="flex cursor-default items-center space-x-2">
                   <Badge
                     variant="outline"
-                    className="border border-yellow-200 bg-primary/15 text-yellow-400"
+                    className="bg-primary/15 border border-yellow-200 text-yellow-400"
                   >
                     {item.amount}
                   </Badge>
@@ -61,7 +61,7 @@ const PackageContainer = ({ packageType }) => {
                   asChild
                   variant="outline"
                   size="sm"
-                  className="bg-yellow-500 text-neutral-900 transition-all hover:bg-primary hover:text-neutral-900"
+                  className="hover:bg-primary bg-yellow-500 text-neutral-900 transition-all hover:text-neutral-900"
                 >
                   <Link href={`/confirm-payment/${item.id}`}>
                     {t('Tanlash')}
@@ -78,11 +78,11 @@ const PackageContainer = ({ packageType }) => {
 const PackageIcon = ({ type }) => {
   switch (type) {
     case PACKAGE_TYPE.team_balance:
-      return <Coins className="h-6 w-6 text-primary/90" />
+      return <Coins className="text-primary/90 h-6 w-6" />
     case PACKAGE_TYPE.transfer_count:
-      return <Zap className="h-6 w-6 text-primary/90" />
+      return <Zap className="text-primary/90 h-6 w-6" />
     case PACKAGE_TYPE.single_club_count:
-      return <Users className="h-6 w-6 text-primary/90" />
+      return <Users className="text-primary/90 h-6 w-6" />
     default:
       return null
   }

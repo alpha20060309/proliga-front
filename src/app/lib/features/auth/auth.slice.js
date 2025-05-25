@@ -33,7 +33,6 @@ const authSlice = createSlice({
     setPhoneModal: (state, action) => {
       state.phoneModal = action.payload
     },
-
   },
   extraReducers: authExtraReducer,
 })

@@ -32,7 +32,7 @@ export const useUpdateTeam = () => {
           .from('team')
           .update({ is_team_created: true })
           .eq('id', team_id)
-          .select("*")
+          .select('*')
           .is('deleted_at', null)
           .single()
 
@@ -45,8 +45,7 @@ export const useUpdateTeam = () => {
           toast.error(
             error instanceof Error
               ? error.message
-              : t('An unknown error occurred'),
-            { theme: 'dark' }
+              : t('An unknown error occurred')
           )
           return
         }
@@ -63,8 +62,7 @@ export const useUpdateTeam = () => {
         toast.error(
           error instanceof Error
             ? error.message
-            : t('An unknown error occurred'),
-          { theme: 'dark' }
+            : t('An unknown error occurred')
         )
       } finally {
         setIsLoading(false)

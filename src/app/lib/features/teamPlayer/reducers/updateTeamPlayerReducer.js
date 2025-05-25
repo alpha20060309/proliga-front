@@ -1,4 +1,4 @@
-import { PLAYER_POSITION} from 'app/utils/player.util'
+import { PLAYER_POSITION } from 'app/utils/player.util'
 import { toast } from 'sonner'
 
 export const updateTeamPlayerReducer = (state, action) => {
@@ -74,8 +74,7 @@ export const updateTeamPlayerReducer = (state, action) => {
       t("Ushbu klubdan $ ta oyinchi qo'shib bo'lmaydi!").replace(
         '$',
         maxTeamPlayers
-      ),
-      { theme: 'dark' }
+      )
     )
     state.transferModal = false
     state.clubModal = transfer_show_modals

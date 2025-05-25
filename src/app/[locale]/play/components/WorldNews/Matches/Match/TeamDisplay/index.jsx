@@ -12,7 +12,7 @@ const MatchTeamDisplay = ({
   return (
     <div
       className={cn(
-        'flex h-full w-[35%] items-center gap-x-1 xs:gap-x-2',
+        'xs:gap-x-2 flex h-full w-[35%] items-center gap-x-1',
         alignment === 'right' &&
           'w-1/3 flex-row-reverse items-center space-x-reverse',
         isWinner && 'font-bold'
@@ -22,9 +22,9 @@ const MatchTeamDisplay = ({
         className={cn(
           'relative',
           isWinner &&
-            "after:absolute after:bottom-0 after:left-0 after:right-0 after:top-0 after:animate-ping after:rounded-full after:bg-primary after:opacity-75 after:content-['']",
+            "after:bg-primary after:absolute after:top-0 after:right-0 after:bottom-0 after:left-0 after:animate-ping after:rounded-full after:opacity-75 after:content-['']",
           isDraw &&
-            "after:absolute after:bottom-0 after:left-0 after:right-0 after:top-0 after:animate-ping after:rounded-full after:bg-neutral-500 after:opacity-50 after:content-['']"
+            "after:absolute after:top-0 after:right-0 after:bottom-0 after:left-0 after:animate-ping after:rounded-full after:bg-neutral-500 after:opacity-50 after:content-['']"
         )}
       >
         <img
@@ -34,8 +34,8 @@ const MatchTeamDisplay = ({
           height={40}
           onError={(e) => (e.currentTarget.src = '/icons/football.svg')}
           className={cn(
-            'size-7 min-w-7 rounded-full xs:size-8',
-            isWinner && 'ring-2 ring-primary',
+            'xs:size-8 size-7 min-w-7 rounded-full',
+            isWinner && 'ring-primary ring-2',
             isDraw && 'ring-2 ring-neutral-500'
           )}
         />
@@ -43,7 +43,7 @@ const MatchTeamDisplay = ({
       <div className="flex max-w-full flex-col truncate text-wrap">
         <span
           className={cn(
-            'break-words text-xs md:text-sm',
+            'text-xs break-words md:text-sm',
             alignment === 'left' ? 'text-left' : 'text-right'
           )}
         >

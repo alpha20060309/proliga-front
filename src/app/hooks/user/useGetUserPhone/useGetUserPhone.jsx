@@ -20,7 +20,7 @@ export const useGetUserPhone = () => {
 
       if (!phone) {
         setError('Telefon raqam kiritilmagan')
-        toast.error(t('Telefon raqam kiritilmagan'), { theme: 'dark' })
+        toast.error(t('Telefon raqam kiritilmagan'))
         return
       }
 
@@ -40,7 +40,7 @@ export const useGetUserPhone = () => {
               ? error.message
               : t('An unknown error occurred')
           )
-          toast.error(t('Bunaqa raqamli foydalanuvchi yoq'), { theme: 'dark' })
+          toast.error(t('Bunaqa raqamli foydalanuvchi yoq'))
           return
         }
         if (error) {
@@ -52,8 +52,7 @@ export const useGetUserPhone = () => {
           toast.error(
             error instanceof Error
               ? error.message
-              : t('An unknown error occurred'),
-            { theme: 'dark' }
+              : t('An unknown error occurred')
           )
           return
         }
@@ -75,8 +74,7 @@ export const useGetUserPhone = () => {
         toast.error(
           error instanceof Error
             ? error.message
-            : t('An unknown error occurred'),
-          { theme: 'dark' }
+            : t('An unknown error occurred')
         )
       } finally {
         setIsLoading(false)

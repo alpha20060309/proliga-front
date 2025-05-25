@@ -23,7 +23,7 @@ export default function PhoneVerification({ phone, otp, setPhone, setOtp }) {
           placeholder={userTable?.phone}
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          className="border-neutral-600 bg-card"
+          className="bg-card border-neutral-600"
         />
       </div>
 
@@ -35,13 +35,13 @@ export default function PhoneVerification({ phone, otp, setPhone, setOtp }) {
           placeholder={t('Kodni kiriting')}
           value={otp}
           onChange={(e) => setOtp(e.target.value)}
-          className="h-10 w-40 border border-neutral-600 bg-card text-foreground focus:border-primary focus:ring-primary"
+          className="bg-card text-foreground focus:border-primary focus:ring-primary h-10 w-40 border border-neutral-600"
         />
         <Button
           type="button"
           variant="default"
           size="sm"
-          className="flex h-10 items-center gap-2 border border-blue-600 bg-card text-neutral-50 hover:bg-blue-500"
+          className="bg-card flex h-10 items-center gap-2 border border-blue-600 text-neutral-50 hover:bg-blue-500"
         >
           <Send className="size-4" />
           {t('Send')}

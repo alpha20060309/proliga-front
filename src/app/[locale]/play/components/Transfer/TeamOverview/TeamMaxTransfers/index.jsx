@@ -6,6 +6,7 @@ import { setTransferModal } from 'app/lib/features/currentTeam/currentTeam.slice
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { selectCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.selector'
 import MotionNumber from 'components/MotionNumber'
+import { MoveUp } from 'lucide-react'
 
 const TeamMaxTransfers = () => {
   const dispatch = useDispatch()
@@ -26,22 +27,16 @@ const TeamMaxTransfers = () => {
         className="group w-1/2 cursor-pointer capitalize md:w-auto"
         onClick={() => dispatch(setTransferModal(!transferModal))}
       >
-        <header className="flex cursor-pointer text-neutral-400 transition-all group-hover:text-neutral-50 group-hover:underline">
+        <header className="text-muted-foreground group-hover:text-foreground flex cursor-pointer transition-all group-hover:underline">
           <h3
             title="Maksimum sotib olish mumkin bolgan o'yinchilar"
             className="text-xs sm:text-xs lg:text-xs 2xl:text-sm"
           >
             {t('transferlar')}
           </h3>
-          <Image
-            src="/icons/arrow-bold-up.svg"
-            alt="arrow"
-            width={16}
-            height={16}
-            className="filter-neutral-400 group-hover:filter-neutral-50 size-3.5 translate-x-0 rotate-45 self-center transition-all group-hover:translate-x-1 xs:size-4"
-          />
+          <MoveUp className="text-muted-foreground group-hover:text-foreground xs:size-4 size-3.5 translate-x-0 rotate-45 self-center transition-all group-hover:translate-x-1" />
         </header>
-        <p className="text-2xl font-bold xl:text-3xl">
+        <p className="text-foreground text-2xl font-bold xl:text-3xl">
           <span
             className={
               currentTransferCount === 0 ? 'text-red-500' : 'text-foreground'

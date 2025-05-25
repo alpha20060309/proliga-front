@@ -29,7 +29,7 @@ const PackagesSkeleton = () => {
           >
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-xl font-bold text-foreground">
+                <CardTitle className="text-foreground text-xl font-bold">
                   <Skeleton className="h-6 w-24" />
                 </CardTitle>
                 <PackageIcon type={packageType} />
@@ -41,7 +41,7 @@ const PackagesSkeleton = () => {
                 {[1, 2, 3].map((item, index) => (
                   <div
                     key={index}
-                    className="flex items-center justify-between rounded-sm bg-card p-2 transition-all hover:bg-secondary"
+                    className="bg-card hover:bg-secondary flex items-center justify-between rounded-sm p-2 transition-all"
                   >
                     <div className="flex items-center space-x-2">
                       <Skeleton className="h-6 w-12" />
@@ -64,7 +64,7 @@ export const PackageSkeleton = () => {
     <Card className="border-yellow-500 bg-neutral-900 transition-all hover:border-yellow-400">
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-xl font-bold text-foreground">
+          <CardTitle className="text-foreground text-xl font-bold">
             <Skeleton className="h-6 w-24" />
           </CardTitle>
         </div>
@@ -75,7 +75,7 @@ export const PackageSkeleton = () => {
           {[1, 2, 3].map((item, index) => (
             <div
               key={index}
-              className="flex items-center justify-between rounded-sm bg-card p-2 transition-all hover:bg-secondary"
+              className="bg-card hover:bg-secondary flex items-center justify-between rounded-sm p-2 transition-all"
             >
               <div className="flex items-center space-x-2">
                 <Skeleton className="h-6 w-12" />

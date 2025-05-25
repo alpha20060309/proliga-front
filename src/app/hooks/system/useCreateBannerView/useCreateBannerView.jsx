@@ -15,19 +15,19 @@ export const useCreateBannerView = () => {
 
       if (!userTable?.id) {
         setError('User not found')
-        toast.error('User not found', { theme: 'dark' })
+        toast.error('User not found')
         return
       }
 
       if (!banner_id) {
         setError('Banner id is required')
-        toast.error('Banner id is required', { theme: 'dark' })
+        toast.error('Banner id is required')
         return
       }
 
       if (!agent || !geo) {
         setError('Agent or geo is not found')
-        toast.error('Agent or geo is not found', { theme: 'dark' })
+        toast.error('Agent or geo is not found')
         return
       }
 
@@ -48,8 +48,7 @@ export const useCreateBannerView = () => {
           toast.error(
             error instanceof Error
               ? error.message
-              : t('An unknown error occurred'),
-            { theme: 'dark' }
+              : t('An unknown error occurred')
           )
           return
         }
@@ -62,8 +61,7 @@ export const useCreateBannerView = () => {
         toast.error(
           error instanceof Error
             ? error.message
-            : t('An unknown error occurred'),
-          { theme: 'dark' }
+            : t('An unknown error occurred')
         )
       } finally {
         setIsLoading(false)

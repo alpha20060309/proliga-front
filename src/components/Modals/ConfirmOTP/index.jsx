@@ -44,7 +44,7 @@ const ConfirmOTP = ({
     e.preventDefault()
 
     if (code.length !== 6) {
-      toast.warning('Kod 6 ta harf bolishi shart!', { theme: 'dark' })
+      toast.warning('Kod 6 ta harf bolishi shart!')
       return
     }
     if (defaultHook) {
@@ -79,7 +79,7 @@ const ConfirmOTP = ({
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setModalOpen}>
-      <DialogContent className="flex w-min min-w-80 flex-col items-center justify-between gap-2 rounded-xl bg-background p-6 text-foreground shadow-sm shadow-neutral-500">
+      <DialogContent className="bg-background text-foreground flex w-min min-w-80 flex-col items-center justify-between gap-2 rounded-xl p-6 shadow-sm shadow-neutral-500">
         <form
           onSubmit={handleConfirm}
           className="flex flex-col items-start gap-6"
@@ -105,7 +105,7 @@ const ConfirmOTP = ({
           <Button
             type="submit"
             disabled={isLoading}
-            className="h-10 w-full rounded-sm border border-primary bg-neutral-900 text-foreground transition-all hover:bg-background"
+            className="border-primary text-foreground hover:bg-background h-10 w-full rounded-sm border bg-neutral-900 transition-all"
           >
             {t('Tasdiqlash')}
           </Button>

@@ -14,6 +14,6 @@ const i18nConfig = {
     },
   },
   fallbackLng: 'uz',
-};
+}
 
-export default i18nConfig;
+export default i18nConfig

@@ -34,7 +34,7 @@ const JournalTableHead = ({ table }) => {
                       width={12}
                       height={12}
                       className={cn(
-                        'size-3.5 rotate-180 xs:size-4',
+                        'xs:size-4 size-3.5 rotate-180',
                         header.column.columnDef.header
                           ? 'inline-block'
                           : 'hidden'
@@ -48,7 +48,7 @@ const JournalTableHead = ({ table }) => {
                       width={12}
                       height={12}
                       className={cn(
-                        'size-3.5 xs:size-4',
+                        'xs:size-4 size-3.5',
                         header.column.columnDef.header
                           ? 'inline-block'
                           : 'hidden'
@@ -62,7 +62,7 @@ const JournalTableHead = ({ table }) => {
                     width={12}
                     height={12}
                     className={cn(
-                      'size-3.5 xs:size-4',
+                      'xs:size-4 size-3.5',
                       header.column.columnDef.header ? 'inline-block' : 'hidden'
                     )}
                   />

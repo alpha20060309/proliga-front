@@ -48,7 +48,7 @@ const Marquee = ({ text, className, textClassName }) => {
     <div
       ref={containerRef}
       className={cn(
-        'overflow-hidden border-y border-primary/50 text-xs text-secondary-foreground',
+        'border-primary/50 text-secondary-foreground overflow-hidden border-y text-xs',
         className
       )}
     >
@@ -56,7 +56,7 @@ const Marquee = ({ text, className, textClassName }) => {
         ref={textRef}
         style={{ x }}
         className={cn(
-          'inline-flex whitespace-nowrap font-bold uppercase tracking-wider',
+          'inline-flex font-bold tracking-wider whitespace-nowrap uppercase',
           textClassName
         )}
       >
