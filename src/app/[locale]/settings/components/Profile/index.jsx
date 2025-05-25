@@ -77,7 +77,7 @@ const SettingsProfile = () => {
             className="bg-accent hover:bg-accent text-accent-foreground flex cursor-pointer items-center justify-center gap-1 rounded-md px-3 py-1.5 text-base font-medium transition-all"
             onClick={() => handleClick(user?.id)}
           >
-            <Copy className="text-foreground size-4" />
+            <Copy className="text-accent-foreground size-4" />
             {user?.id}
           </div>
         </div>
@@ -115,7 +115,7 @@ const SettingsProfile = () => {
           </p>
         </ProfileItem>
       </section>
-      <div className="bg-card/50 border-border text-muted-foreground line-clamp-5 h-28 max-w-full overflow-y-scroll rounded-lg border p-2 text-sm text-wrap break-words md:p-4">
+      <div className="bg-card/50 border-border text-muted-foreground line-clamp-5 h-28 max-w-full overflow-y-scroll rounded-lg border p-2 text-sm text-wrap break-words shadow md:p-4">
         {user?.bio ? user?.bio : t("Ma'lumot yo'q")}
       </div>
       <RefillBalanceBox />
@@ -125,7 +125,7 @@ const SettingsProfile = () => {
 
 const ProfileItem = ({ children }) => {
   return (
-    <div className="bg-card/50 border-border flex items-center gap-2 rounded-lg border p-2 xl:p-4">
+    <div className="bg-card/50 border-border flex items-center gap-2 rounded-lg border p-2 shadow xl:p-4">
       {children}
     </div>
   )

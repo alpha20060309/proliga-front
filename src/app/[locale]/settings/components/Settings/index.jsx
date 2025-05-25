@@ -124,13 +124,14 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
                   className="bg-card text-foreground border-input placeholder:text-muted-foreground"
                 />
               </article>
-              <article className="flex flex-col flex-wrap justify-between">
+              <article className="space-y-1">
                 <Label className="text-sm font-medium" htmlFor="birthdate">
                   {t("Tug'ilgan kuni")}
                 </Label>
                 <Input
                   id="birthdate"
                   type="date"
+                  placeholder={t("Tug'ilgan kuni")}
                   value={
                     date instanceof Date
                       ? date.toISOString().split('T')[0]

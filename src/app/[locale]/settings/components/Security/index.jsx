@@ -34,7 +34,7 @@ export default function SettingsPage() {
 
 const FormContainer = ({ children }) => {
   return (
-    <div className="w-full rounded-lg border border-border bg-background/50 p-2 py-6 lg:px-4">
+    <div className="w-full rounded-lg border border-border bg-background p-2 py-6 lg:px-4">
       {children}
     </div>
   )

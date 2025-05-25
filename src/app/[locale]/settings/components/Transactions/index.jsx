@@ -49,21 +49,21 @@ const CabinetTransactionsHistory = () => {
   return (
     <SettingsContainer>
       <div className="mb-2 flex flex-col gap-1 sm:mb-0 sm:justify-between md:flex-row">
-        <h3 className="mb-1 flex justify-between text-xl font-bold tracking-tight text-foreground md:mb-0 md:block">
+        <h3 className="text-foreground mb-1 flex justify-between text-xl font-bold tracking-tight md:mb-0 md:block">
           {t('Xarajatlar tarixi')}
           <Button
             onClick={refreshData}
             variant="outline"
             size="sm"
-            className="flex size-8 justify-center p-0 text-secondary-foreground hover:text-foreground md:hidden"
+            className="text-secondary-foreground hover:text-foreground flex size-8 justify-center p-0 md:hidden"
           >
             <RefreshCcw className="size-4" />
           </Button>
         </h3>
-        <div className="flex w-full overflow-hidden rounded-lg bg-neutral-900 sm:w-96">
+        <div className="bg-card flex w-full overflow-hidden rounded-lg shadow sm:w-96">
           <Button
             className={cn(
-              'flex h-9 flex-1 items-center justify-center font-bold',
+              'flex h-9 flex-1 items-center justify-center font-bold shadow',
               'rounded-none text-sm font-medium transition-all disabled:opacity-50',
               currentTab === TRANSACTIONTABS.BALANCE ? active : passive
             )}
@@ -74,7 +74,7 @@ const CabinetTransactionsHistory = () => {
           </Button>
           <Button
             className={cn(
-              'flex h-9 flex-1 items-center justify-center font-bold',
+              'flex h-9 flex-1 items-center justify-center font-bold shadow',
               'rounded-none text-sm font-medium transition-all disabled:opacity-50',
               currentTab === TRANSACTIONTABS.EXPENSES ? active : passive
             )}
@@ -88,7 +88,7 @@ const CabinetTransactionsHistory = () => {
           onClick={refreshData}
           variant="outline"
           size="sm"
-          className="hidden h-9 w-32 items-center justify-center gap-1 self-end p-0 text-sm text-secondary-foreground hover:text-foreground md:flex"
+          className="text-foreground/80 hover:text-foreground hidden h-9 w-32 items-center justify-center gap-1 self-end p-0 text-sm md:flex"
         >
           <RefreshCcw className="size-4" />
           {t('Refresh')}
@@ -102,7 +102,7 @@ const CabinetTransactionsHistory = () => {
             {balances?.length > 0 ? (
               <CabinetTransactionsBalanceTable />
             ) : (
-              <p className="fade-in-fast flex min-h-96 items-center justify-center text-center text-neutral-300">
+              <p className="fade-in-fast text-foreground flex min-h-96 items-center justify-center text-center">
                 {t('Balans haqida malumot topilmadi!')}
               </p>
             )}
@@ -116,7 +116,7 @@ const CabinetTransactionsHistory = () => {
             {expenses?.length > 0 ? (
               <CabinetTransactionsExpensesTable />
             ) : (
-              <p className="fade-in-fast flex min-h-96 items-center justify-center text-center text-neutral-300">
+              <p className="fade-in-fast text-foreground flex min-h-96 items-center justify-center text-center">
                 {t('Paketlar haqida malumoti topilmadi!')}
               </p>
             )}
@@ -131,7 +131,7 @@ const TRANSACTIONTABS = {
   EXPENSES: 'expenses',
 }
 
-const active = 'bg-background text-primary opacity-100'
-const passive = 'bg-transparent text-neutral-400/80 hover:bg-background/30'
+const active = 'bg-accent text-accent-foreground'
+const passive = 'bg-transparent text-muted-foreground hover:bg-background/30'
 
 export default CabinetTransactionsHistory

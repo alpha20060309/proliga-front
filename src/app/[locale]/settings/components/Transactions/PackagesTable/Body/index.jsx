@@ -20,14 +20,14 @@ const Body = ({ table, flexRender }) => {
         <tr
           key={row.id}
           className={cn(
-            'mx-auto w-full border-b border-l-2 border-neutral-700 bg-background even:bg-neutral-900',
+            'border-border bg-background even:bg-secondary mx-auto w-full border-b border-l-2',
             condition(row?.original?.status)
           )}
         >
           {row.getVisibleCells().map((cell) => (
             <td
               className={
-                'h-14 w-min max-w-24 break-words px-0.5 text-center sm:min-w-6 md:max-w-max md:px-1 md:text-start lg:h-12'
+                'h-14 w-min max-w-24 px-0.5 text-center break-words sm:min-w-6 md:max-w-max md:px-1 md:text-start lg:h-12'
               }
               key={cell.id}
             >

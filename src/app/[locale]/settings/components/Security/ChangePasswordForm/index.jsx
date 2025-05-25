@@ -60,13 +60,13 @@ function ChangePasswordForm() {
         onSubmit={handleSubmit}
         className="flex flex-col gap-4 px-1 sm:max-w-96"
       >
-        <section>
-          <div className="relative sm:max-w-96">
-            <Label htmlFor="newPassword">{t('Yangi parol')}</Label>
+        <div className="relative space-y-1 sm:max-w-96">
+          <Label htmlFor="newPassword">{t('Yangi parol')}</Label>
+          <div className="relative">
             <Input
               id="newPassword"
               name="newPassword"
-              className="border-input h-10 pr-10"
+              className="border-border bg-input h-10 pr-10"
               type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -75,24 +75,26 @@ function ChangePasswordForm() {
               type="button"
               variant="ghost"
               size="icon"
-              className="absolute right-0 bottom-0 hover:bg-transparent"
+              className="hover:bg-foreground/10 dark:hover:bg-foreground/10 absolute top-0.5 right-0.5"
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? (
-                <EyeOff className="text-secondary-foreground h-5 w-5" />
+                <EyeOff className="text-muted-foreground hover:text-foreground size-5" />
               ) : (
-                <Eye className="text-secondary-foreground h-5 w-5" />
+                <Eye className="text-muted-foreground hover:text-foreground size-5" />
               )}
             </Button>
           </div>
-          <div className="relative sm:max-w-96">
-            <Label htmlFor="confirmPassword">
-              {t('Yangi parolni qayta kiriting')}
-            </Label>
+        </div>
+        <div className="relative space-y-1 sm:max-w-96">
+          <Label htmlFor="confirmPassword">
+            {t('Yangi parolni qayta kiriting')}
+          </Label>
+          <div className="relative">
             <Input
               id="confirmPassword"
               name="confirmPassword"
-              className="border-input h-10 pr-10"
+              className="border-border bg-input h-10 pr-10"
               type={showConfirmPassword ? 'text' : 'password'}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
@@ -101,19 +103,19 @@ function ChangePasswordForm() {
               type="button"
               variant="ghost"
               size="icon"
-              className="absolute right-0 bottom-0 hover:bg-transparent"
+              className="hover:bg-foreground/10 dark:hover:bg-foreground/10 absolute top-0.5 right-0.5"
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
             >
               {showConfirmPassword ? (
-                <EyeOff className="text-secondary-foreground h-5 w-5" />
+                <EyeOff className="text-muted-foreground hover:text-foreground size-5" />
               ) : (
-                <Eye className="text-secondary-foreground h-5 w-5" />
+                <Eye className="text-muted-foreground hover:text-foreground size-5" />
               )}
             </Button>
           </div>
-        </section>
+        </div>
         <Button
-          className="border-accent/75 text-secondary-foreground hover:border-accent xs:max-w-40 h-10 w-full rounded-sm border bg-secondary text-sm font-semibold transition-all"
+          className="border-accent/75 text-foreground hover:text-accent-foreground hover:border-foreground/50 xs:max-w-40 bg-secondary h-10 w-full rounded-sm border text-sm font-semibold transition-all"
           type="submit"
           disabled={isLoading}
         >

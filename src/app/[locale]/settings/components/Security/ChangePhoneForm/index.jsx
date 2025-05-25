@@ -70,25 +70,25 @@ export default function ChangePhoneForm() {
         onSubmit={handleSubmit}
         className="flex flex-col gap-4 px-1 sm:max-w-96"
       >
-        <section>
+        <div className="relative space-y-1">
+          <Label htmlFor="phone">{t('New Phone Number')}:</Label>
+          <PhoneInput
+            id="phone"
+            name="phone"
+            defaultCountry="UZ"
+            className="text-foreground placeholder:text-muted-foreground h-10 rounded"
+            value={''}
+            placeholder={'99-999-99-99'}
+            onChange={setPhone}
+          />
+        </div>
+        <div className="relative space-y-1 sm:max-w-96">
+          <Label htmlFor="oldPassword">{t('Parol')}</Label>
           <div className="relative">
-            <Label htmlFor="phone">{t('New Phone Number')}:</Label>
-            <PhoneInput
-              id="phone"
-              name="phone"
-              defaultCountry="UZ"
-              className="text-secondary-foreground border-input bg-secondary placeholder:text-muted h-10 rounded-sm"
-              value={''}
-              placeholder={'99-999-99-99'}
-              onChange={setPhone}
-            />
-          </div>
-          <div className="relative sm:max-w-96">
-            <Label htmlFor="oldPassword">{t('Parol')}</Label>
             <Input
               id="oldPassword"
               name="oldPassword"
-              className="border-input bg-secondary h-10 pr-10"
+              className="border-border bg-input h-10 pr-10"
               type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -97,19 +97,19 @@ export default function ChangePhoneForm() {
               type="button"
               variant="ghost"
               size="icon"
-              className="absolute right-0 bottom-0 hover:bg-transparent"
+              className="hover:bg-foreground/10 dark:hover:bg-foreground/10 absolute top-0.5 right-0.5"
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? (
-                <EyeOff className="text-secondary-foreground h-5 w-5" />
+                <EyeOff className="text-muted-foreground hover:text-foreground size-5" />
               ) : (
-                <Eye className="text-secondary-foreground h-5 w-5" />
+                <Eye className="text-muted-foreground hover:text-foreground size-5" />
               )}
             </Button>
           </div>
-        </section>
+        </div>
         <Button
-          className="border-accent/75 text-secondary-foreground hover:border-primary xs:max-w-40 bg-secondary h-10 w-full rounded-sm border text-sm font-semibold transition-all"
+          className="border-accent/75 text-foreground hover:text-accent-foreground hover:border-foreground/50 xs:max-w-40 bg-secondary h-10 w-full rounded-sm border text-sm font-semibold transition-all"
           type="submit"
           disabled={isLoading}
         >

@@ -71,7 +71,7 @@ function CabinetTransactionsBalanceTable() {
     columnHelper.accessor('sum', {
       accessorFn: (row) => formatCurrency({ value: row?.price || 0, t }),
       id: 'sum',
-      cell: (info) => <span className="text-green-500">{info.getValue()}</span>,
+      cell: (info) => <span className="text-success">{info.getValue()}</span>,
       header: t('Narx'),
     }),
   ]
