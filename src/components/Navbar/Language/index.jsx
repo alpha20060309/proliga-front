@@ -9,50 +9,29 @@ import Image from 'next/image'
 import { LANGUAGE } from 'app/utils/languages.util'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { useUpdateUserLanguage } from 'app/hooks/user/useUpdateUserLanguage/useUpdateUserLanguage'
 import { setLanguage } from 'app/lib/features/systemLanguage/systemLanguage.slice'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { Globe } from 'lucide-react'
 import { useRouter, usePathname } from 'next/navigation'
+import { setLanguageCookie } from 'app/utils/setLanguageCookie'
 import i18nConfig from 'app/lib/i18n.config'
-import { useEffect } from 'react'
 
 const ChangeLanguageDropdown = () => {
   const dispatch = useDispatch()
   const { lang } = useSelector((store) => store.systemLanguage)
-  const userTable = useSelector(selectUserTable)
-  const { updateUserLanguage } = useUpdateUserLanguage()
-
   const { i18n } = useTranslation()
   const currentLocale = i18n.language
   const router = useRouter()
   const currentPathname = usePathname()
 
-  useEffect(() => {
-    if (i18n.language !== lang) {
-      dispatch(setLanguage({ lang: i18n.language }))
-    }
-  }, [i18n.language, dispatch, lang])
-
   const handleChange = async (newLocale) => {
-    console.log(newLocale)
-    // set cookie for next-i18n-router
-    const days = 30
-    const date = new Date()
-    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000)
-    const expires = date.toUTCString()
-    document.cookie = `NEXT_LOCALE=${newLocale};expires=${expires};path=/`
+    setLanguageCookie(newLocale)
+    dispatch(setLanguage({ lang: newLocale }))
 
-    // redirect to the new locale path
     if (
       currentLocale === i18nConfig.defaultLocale &&
       !i18nConfig.prefixDefault
     ) {
       router.push('/' + newLocale + currentPathname)
-      dispatch(setLanguage({ lang: newLocale }))
-      if (userTable?.id) {
-        return await updateUserLanguage({ lang: newLocale, userTable })
-      }
     } else {
       router.push(currentPathname.replace(`/${currentLocale}`, `/${newLocale}`))
     }

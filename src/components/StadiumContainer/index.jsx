@@ -43,7 +43,7 @@ const StadiumContainer = ({ children, hideShareButton = false }) => {
           )}
           aria-label="Share"
         >
-          <Share2 className="text-primary size-3.5 md:size-4" />
+          <Share2 className="text-primary hover:text-foreground size-3.5 md:size-4" />
         </Button>
       )}
       {children}
