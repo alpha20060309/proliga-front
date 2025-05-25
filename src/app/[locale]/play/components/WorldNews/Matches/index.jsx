@@ -139,7 +139,7 @@ const Matches = () => {
           >
             <SelectTrigger
               showIcon={false}
-              className="border-muted h-9 w-20 rounded-xs border-2 border-x-0 border-t-0 text-center text-base ring-0 ring-offset-0 outline-hidden hover:outline-hidden"
+              className="border-muted h-9 w-24 rounded-xs border-2 border-x-0 border-t-0 text-center text-base ring-0 ring-offset-0 outline-hidden hover:outline-hidden"
             >
               <SelectValue placeholder={t('Tur')} />
             </SelectTrigger>

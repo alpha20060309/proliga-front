@@ -253,7 +253,7 @@ const TransferStadiumForm = () => {
           size="icon"
           onClick={() => dispatch(revertTeamPlayers())}
           title={t('orqaga qaytish')}
-          className="bg-background text-foreground hover:border-primary border-border hover:text-accent-foreground flex size-10 items-center justify-center gap-1 rounded border transition-all"
+          className="bg-background text-foreground hover:border-primary border-border hover:text-accent-foreground flex size-10 items-center justify-center gap-1 rounded-sm border transition-all"
         >
           <Undo2 className="size-6" />
         </Button>

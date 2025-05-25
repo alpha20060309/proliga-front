@@ -115,7 +115,7 @@ const ColorModifier = () => {
   )
 
   return (
-    <Accordion className="w-full">
+    <Accordion className="w-full rounded-[4px] bg-[#232323] text-[#fff]">
       {Object.entries(colorKeys).map(([category, keys]) => (
         <AccordionItem value={category} key={category}>
           <AccordionTrigger className="text-base">

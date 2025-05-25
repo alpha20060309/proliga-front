@@ -54,7 +54,7 @@ const Championship = ({ game }) => {
     <>
       <Card
         className={cn(
-          'bg-card/10 relative flex h-32 items-start overflow-hidden rounded-lg border',
+          'bg-card/10 relative flex h-32 items-start overflow-hidden shadow rounded-lg border',
           'justify-center px-3 transition-all',
           cardVariants
         )}

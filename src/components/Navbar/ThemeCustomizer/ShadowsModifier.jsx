@@ -2,9 +2,6 @@
 
 import React, { useEffect, useState } from 'react'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
-import { Slider } from '@/components/ui/slider'
 
 // Constants
 const SHADOW_KEYS = [
@@ -196,9 +193,9 @@ const ShadowModifier = () => {
     if (key === 'shadow-color') {
       return (
         <div key={key} className="mb-2 flex items-center space-x-2">
-          <Label htmlFor={key} className="w-48 text-xs capitalize">
+          <label htmlFor={key} className="w-48 text-xs capitalize">
             {label.charAt(0).toUpperCase() + label.slice(1)}
-          </Label>
+          </label>
           <input
             type="color"
             id={key}
@@ -213,39 +210,38 @@ const ShadowModifier = () => {
 
     return (
       <div key={key} className="mb-2 flex items-center space-x-2">
-        <Label htmlFor={key} className="w-48 text-xs capitalize">
+        <label htmlFor={key} className="w-48 text-xs capitalize">
           {label.charAt(0).toUpperCase() + label.slice(1)}
-        </Label>
+        </label>
         {key === 'shadow-opacity' ? (
           <div className="flex w-full items-center space-x-2">
-            <Slider
+            <input
+              type="range"
               value={[parseFloat(value) || 0]}
               min={0}
               max={1}
               step={0.01}
-              onValueChange={(values) =>
-                handleChange(key, values[0].toString())
-              }
+              onChange={(e) => handleChange(key, e.target.value)}
               className="w-full"
             />
-            <Input
+            <input
               type="number"
               value={numericValue}
               onChange={(e) => handleChange(key, e.target.value)}
               min={0}
               max={1}
               step={0.01}
-              className="h-8 w-20 text-xs"
+              className="h-8 w-20 border border-black px-2 text-xs"
             />
           </div>
         ) : (
           <div className="flex items-center space-x-2">
-            <Input
+            <input
               type="number"
               id={key}
               value={numericValue}
               onChange={(e) => handleChange(key, e.target.value)}
-              className="h-8 w-24 text-xs"
+              className="h-8 w-24 border border-black px-2 text-xs"
             />
             {unit && <span className="text-xs">{unit}</span>}
           </div>
@@ -257,28 +253,12 @@ const ShadowModifier = () => {
     )
   }
 
-  // Shadow preview elements
-  const previewShadows = (
-    <div className="mt-6 grid grid-cols-4 gap-4">
-      <div className="bg-card rounded p-3 text-xs shadow-xs">shadow-xs</div>
-      <div className="bg-card rounded p-3 text-xs shadow-sm">shadow-sm</div>
-      <div className="bg-card rounded p-3 text-xs shadow">shadow</div>
-      <div className="bg-card rounded p-3 text-xs shadow-md">shadow-md</div>
-      <div className="bg-card rounded p-3 text-xs shadow-lg">shadow-lg</div>
-      <div className="bg-card rounded p-3 text-xs shadow-xl">shadow-xl</div>
-      <div className="bg-card rounded p-3 text-xs shadow-2xl">shadow-2xl</div>
-    </div>
-  )
-
   return (
-    <Card className="w-full">
+    <Card className="w-full rounded-[4px] bg-[#232323] text-[#fff]">
       <CardHeader>
-        <CardTitle className="text-base shadow-xl">Shadow Properties</CardTitle>
+        <CardTitle className="text-base">Shadow Properties</CardTitle>
       </CardHeader>
-      <CardContent>
-        {SHADOW_KEYS.map(renderInput)}
-        {previewShadows}
-      </CardContent>
+      <CardContent>{SHADOW_KEYS.map(renderInput)}</CardContent>
     </Card>
   )
 }

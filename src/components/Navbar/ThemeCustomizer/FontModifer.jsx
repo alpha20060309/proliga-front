@@ -1,13 +1,5 @@
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Label } from '@/components/ui/label'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 
 export const fonts = {
   // Sans-serif fonts
@@ -70,30 +62,24 @@ const FontModifier = () => {
   }
 
   return (
-    <Card className="w-full">
+    <Card className="w-full rounded-[4px] bg-[#232323] text-[#fff]">
       <CardHeader className="py-2">
         <CardTitle className="text-base">Global Font Modifier</CardTitle>
       </CardHeader>
       <CardContent className="py-2">
         <div className="mb-3">
-          <Label
-            htmlFor="font-select"
-            className="text-foreground text-lg font-medium dark:text-white"
+          <select
+            id="font-select"
+            value={selectedFont}
+            onChange={(e) => handleFontChange(e.target.value)}
+            className="mt-2 w-full rounded-[4px] border border-[#333] bg-[#1a1a1a] px-3 py-2 text-sm text-[#fff] focus:border-[#666] focus:outline-none"
           >
-            Select Website Font
-          </Label>
-          <Select value={selectedFont} onValueChange={handleFontChange}>
-            <SelectTrigger id="font-select" className="mt-2">
-              <SelectValue placeholder="Select a font" />
-            </SelectTrigger>
-            <SelectContent>
-              {Object.keys(fonts).map((fontName) => (
-                <SelectItem key={fontName} value={fontName}>
-                  {fontName}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+            {Object.keys(fonts).map((fontName) => (
+              <option key={fontName} value={fontName}>
+                {fontName}
+              </option>
+            ))}
+          </select>
         </div>
       </CardContent>
     </Card>

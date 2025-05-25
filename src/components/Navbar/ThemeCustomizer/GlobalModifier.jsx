@@ -2,9 +2,6 @@
 
 import React, { useState, useEffect } from 'react'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
-import { Slider } from '@/components/ui/slider'
 
 const GlobalModifier = ({
   initialSpacing = 0.25,
@@ -55,21 +52,23 @@ const GlobalModifier = ({
 
   return (
     <div className="flex w-full gap-4 space-y-4">
-      <Card className="w-full">
+      <Card className="w-full rounded-[4px] bg-[#232323]">
         <CardHeader className="py-2">
-          <CardTitle className="text-base">Global Style Modifiers</CardTitle>
+          <CardTitle className="text-base text-[#fff]">
+            Global Style Modifiers
+          </CardTitle>
         </CardHeader>
         <CardContent className="py-2">
           <div className="mb-3">
             <div className="mb-1.5 flex items-center justify-between">
-              <Label
+              <label
                 htmlFor="global-spacing-slider"
-                className="text-foreground text-lg font-medium dark:text-white"
+                className="text-lg font-medium text-[#fff]"
               >
                 Spacing Size
-              </Label>
+              </label>
               <div className="flex items-center gap-2">
-                <Input
+                <input
                   id="global-spacing-input"
                   type="number"
                   value={spacing}
@@ -80,32 +79,33 @@ const GlobalModifier = ({
                   min={0.15}
                   max={0.35}
                   step={0.001}
-                  className="h-6 w-24 px-2 text-xs"
+                  className="h-6 w-24 border-[#333] bg-[#1a1a1a] px-2 text-xs text-[#fff]"
                 />
-                <span className="text-muted-foreground text-xs">rem</span>
+                <span className="text-xs text-[#999]">rem</span>
               </div>
             </div>
-            <Slider
+            <input
+              type="range"
               id="global-spacing-slider"
               value={[spacing]}
               min={0.15}
               max={0.35}
               step={0.001}
-              onValueChange={(values) => handleSpacingChange(values[0])}
+              onChange={(e) => handleSpacingChange(e.target.value)}
               className="py-1"
             />
           </div>
 
           <div className="mb-3">
             <div className="mb-1.5 flex items-center justify-between">
-              <Label
+              <label
                 htmlFor="global-letter-spacing-slider"
-                className="text-foreground text-lg font-medium dark:text-white"
+                className="text-lg font-medium text-[#fff]"
               >
                 Letter Spacing
-              </Label>
+              </label>
               <div className="flex items-center gap-2">
-                <Input
+                <input
                   id="global-letter-spacing-input"
                   type="number"
                   value={letterSpacing}
@@ -116,32 +116,33 @@ const GlobalModifier = ({
                   min={-0.05}
                   max={0.05}
                   step={0.001}
-                  className="h-6 w-24 px-2 text-xs"
+                  className="h-6 w-24 border-[#333] bg-[#1a1a1a] px-2 text-xs text-[#fff]"
                 />
-                <span className="text-muted-foreground text-xs">em</span>
+                <span className="text-xs text-[#999]">em</span>
               </div>
             </div>
-            <Slider
+            <input
+              type="range"
               id="global-letter-spacing-slider"
               value={[letterSpacing]}
               min={-0.1}
               max={0.5}
               step={0.001}
-              onValueChange={(values) => handleLetterSpacingChange(values[0])}
+              onChange={(e) => handleLetterSpacingChange(e.target.value)}
               className="py-1"
             />
           </div>
 
           <div className="mb-3">
             <div className="mb-1.5 flex items-center justify-between">
-              <Label
+              <label
                 htmlFor="global-radius-slider"
-                className="text-foreground text-lg font-medium dark:text-white"
+                className="text-lg font-medium text-[#fff]"
               >
                 Border Radius
-              </Label>
+              </label>
               <div className="flex items-center gap-2">
-                <Input
+                <input
                   id="global-radius-input"
                   type="number"
                   value={borderRadius}
@@ -152,18 +153,19 @@ const GlobalModifier = ({
                   min={0}
                   max={5}
                   step={0.05}
-                  className="h-6 w-24 px-2 text-xs"
+                  className="h-6 w-24 border-[#333] bg-[#1a1a1a] px-2 text-xs text-[#fff]"
                 />
-                <span className="text-muted-foreground text-xs">rem</span>
+                <span className="text-xs text-[#999]">rem</span>
               </div>
             </div>
-            <Slider
+            <input
+              type="range"
               id="global-radius-slider"
               value={[borderRadius]}
               min={0}
               max={5}
               step={0.05}
-              onValueChange={(values) => handleBorderRadiusChange(values[0])}
+              onChange={(e) => handleBorderRadiusChange(e.target.value)}
               className="py-1"
             />
           </div>
