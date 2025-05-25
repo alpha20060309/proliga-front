@@ -59,8 +59,8 @@ const TeamBalanceModal = () => {
           {packages.map(
             (item) =>
               item.type === PACKAGE_TYPE.team_balance && (
-                <Card key={item.id} className="overflow-hidden">
-                  <CardContent className="bg-neutral-900 p-0">
+                <Card key={item.id} className="overflow-hidden py-2">
+                  <CardContent className="p-0">
                     <Link
                       href={`/confirm-payment/${item.id}`}
                       className="block"
@@ -71,10 +71,13 @@ const TeamBalanceModal = () => {
                         className="border-primary hover:bg-primary/10 relative h-full w-full justify-start rounded-none border-l-4 px-4 py-2 text-left"
                       >
                         <div>
-                          <Badge variant="secondary" className="mb-2">
+                          <Badge
+                            variant="secondary"
+                            className="text-foreground mb-2"
+                          >
                             +{item.amount - defaultBalance} {t('Coins')}
                           </Badge>
-                          <h3 className="text-lg font-semibold">
+                          <h3 className="text-foreground text-lg font-semibold">
                             {t('Increase your balance!')}
                           </h3>
                           <p className="text-muted-foreground text-sm">
@@ -84,7 +87,7 @@ const TeamBalanceModal = () => {
                             )}
                           </p>
                         </div>
-                        <ArrowRight className="text-primary absolute top-1/2 right-4 h-5 w-5 -translate-y-1/2 transform" />
+                        <ArrowRight className="text-foreground dark:text-primary absolute top-1/2 right-4 h-5 w-5 -translate-y-1/2 transform" />
                       </Button>
                     </Link>
                   </CardContent>

@@ -55,8 +55,8 @@ const TeamMaxTransfersModal = () => {
           {packages.map(
             (transfer) =>
               transfer.type === PACKAGE_TYPE.transfer_count && (
-                <Card key={transfer.id} className="overflow-hidden">
-                  <CardContent className="bg-neutral-900 p-0">
+                <Card key={transfer.id} className="overflow-hidden py-2">
+                  <CardContent className="p-0">
                     <Link
                       href={`/confirm-payment/${transfer.id}`}
                       className="block"
@@ -64,10 +64,13 @@ const TeamMaxTransfersModal = () => {
                     >
                       <Button
                         variant="ghost"
-                        className="border-primary hover:bg-primary/10 relative h-full w-full justify-start rounded-none border-l-4 px-4 py-2 text-left"
+                        className="border-primary text-foreground hover:bg-primary/10 relative h-full w-full justify-start rounded-none border-l-4 px-4 py-2 text-left"
                       >
                         <div>
-                          <Badge variant="secondary" className="mb-2">
+                          <Badge
+                            variant="secondary"
+                            className="text-foreground mb-2"
+                          >
                             +{transfer.amount - defaultTransfers}{' '}
                             {t('Transfers')}
                           </Badge>
@@ -81,7 +84,7 @@ const TeamMaxTransfersModal = () => {
                             )}
                           </p>
                         </div>
-                        <ArrowRight className="text-primary absolute top-1/2 right-4 h-5 w-5 -translate-y-1/2 transform" />
+                        <ArrowRight className="text-foreground dark:text-primary absolute top-1/2 right-4 h-5 w-5 -translate-y-1/2 transform" />
                       </Button>
                     </Link>
                   </CardContent>
@@ -90,7 +93,7 @@ const TeamMaxTransfersModal = () => {
           )}
         </div>
         <div className="mt-6 flex items-center justify-center space-x-2 text-sm">
-          <Zap className="h-4 w-4 text-yellow-400" />
+          <Zap className="text-accent h-4 w-4" />
           <p className="text-muted-foreground font-medium">
             {t('Upgrade now for instant access!')}
           </p>

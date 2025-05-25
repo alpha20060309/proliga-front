@@ -7,11 +7,11 @@ import { Zap, Users, CircleDollarSign } from 'lucide-react'
 const PackageIcon = ({ type }) => {
   switch (type) {
     case PACKAGE_TYPE.team_balance:
-      return <CircleDollarSign className="h-6 w-6 text-yellow-500" />
+      return <CircleDollarSign className="text-accent h-6 w-6" />
     case PACKAGE_TYPE.transfer_count:
-      return <Zap className="h-6 w-6 text-yellow-500" />
+      return <Zap className="text-accent h-6 w-6" />
     case PACKAGE_TYPE.single_club_count:
-      return <Users className="h-6 w-6 text-yellow-500" />
+      return <Users className="text-accent h-6 w-6" />
     default:
       return null
   }
@@ -25,7 +25,7 @@ const PackagesSkeleton = () => {
         {Object.values(PACKAGE_TYPE).map((packageType) => (
           <Card
             key={packageType}
-            className="border-yellow-500 bg-neutral-900 transition-all hover:border-yellow-400"
+            className="border-accent bg-card hover:border-accent transition-all"
           >
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
@@ -36,7 +36,7 @@ const PackagesSkeleton = () => {
               </div>
             </CardHeader>
             <CardContent className="pt-4">
-              <Separator className="mb-4 bg-yellow-500/20" />
+              <Separator className="bg-accent/20 mb-4" />
               <div className="space-y-4">
                 {[1, 2, 3].map((item, index) => (
                   <div

@@ -17,7 +17,7 @@ const CurrentPackage = () => {
   }
   return (
     <div className="bg-card flex flex-row items-center gap-4 rounded-md p-4 md:h-24 md:p-6">
-      <span className="bg-background hidden size-12 items-center justify-center rounded-full font-bold text-neutral-300 sm:flex">
+      <span className="bg-background text-muted-foreground hidden size-12 items-center justify-center rounded-full font-bold sm:flex">
         1
       </span>
       <div className="flex w-full flex-col items-center justify-between gap-2 sm:flex-row sm:gap-0">

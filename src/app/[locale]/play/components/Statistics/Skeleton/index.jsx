@@ -20,7 +20,7 @@ const StatisticsTableBodySkeleton = () => {
       {[...Array(14)].map((_, rowIndex) => (
         <tr
           key={rowIndex}
-          className="hover:bg-background mx-auto w-full border-b border-neutral-700"
+          className="hover:bg-background border-border mx-auto w-full border-b"
         >
           {[...Array(10)].map((_, cellIndex) => (
             <td

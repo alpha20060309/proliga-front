@@ -20,7 +20,7 @@ const WalletPaymentOption = ({
     <div
       onClick={() => setPaymentOption(PAYMENT_OPTIONS.WALLET)}
       className={cn(
-        'bg-background flex size-36 cursor-pointer flex-col justify-center gap-2 rounded-xl border transition-all sm:size-44 lg:size-56 xl:size-60',
+        'bg-secondary flex size-36 cursor-pointer flex-col justify-center gap-2 rounded-xl border transition-all sm:size-44 lg:size-56 xl:size-60',
         paymentOption === PAYMENT_OPTIONS.WALLET ? active : passive
       )}
     >
@@ -31,7 +31,7 @@ const WalletPaymentOption = ({
         </h4>
         <NumericFormat
           value={userTable?.balance / 100 || 0}
-          className="text-card mx-1 w-full max-w-32 border-none bg-transparent text-center text-sm font-bold outline-hidden select-none md:max-w-40 xl:text-base"
+          className="text-foreground mx-1 w-full max-w-32 border-none bg-transparent text-center text-sm font-bold outline-hidden select-none md:max-w-40 xl:text-base"
           defaultValue={0}
           readOnly
           thousandSeparator

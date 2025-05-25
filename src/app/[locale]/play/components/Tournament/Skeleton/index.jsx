@@ -41,7 +41,7 @@ export const TournamentTableSkeleton = ({
           {[...Array(rows)].map((_, rowIndex) => (
             <tr
               key={rowIndex}
-              className="hover:bg-card mx-auto border-b border-neutral-700 bg-neutral-900 text-center odd:bg-stone-950 md:text-start"
+              className="hover:bg-card border-border bg-background odd:bg-secondary mx-auto border-b text-center md:text-start"
             >
               {[...Array(cols)].map((_, cellIndex) => (
                 <td

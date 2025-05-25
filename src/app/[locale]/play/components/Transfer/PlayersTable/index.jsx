@@ -153,9 +153,9 @@ function PlayersTable() {
       className={cn(
         'bg-background mx-auto flex w-full max-w-lg border-collapse flex-col gap-0',
         'border-primary border-opacity-50 overflow-x-auto rounded-xl border',
-        'text-secondary-foreground shadow transition-all',
+        'text-secondary-foreground hover:border-opacity-100 shadow transition-all 2xl:max-w-xl',
         'xs:p-3 p-2 md:text-sm lg:w-1/2 lg:max-w-md xl:max-w-lg xl:p-4',
-        'fade-in-fast hover:border-opacity-100 2xl:max-w-xl'
+        'fade-in-fast'
       )}
     >
       <TeamOverview />

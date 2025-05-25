@@ -14,7 +14,7 @@ const PaymePaymentOption = ({
     <div
       onClick={() => setPaymentOption(PAYMENT_OPTIONS.PAYME)}
       className={cn(
-        'flex size-36 cursor-pointer flex-col justify-center gap-2 rounded-xl border bg-stone-950 transition-all sm:size-44 lg:size-56 xl:size-60',
+        'bg-secondary flex size-36 cursor-pointer flex-col justify-center gap-2 rounded-xl border transition-all sm:size-44 lg:size-56 xl:size-60',
         paymentOption === PAYMENT_OPTIONS.PAYME ? active : passive
       )}
     >
@@ -27,7 +27,7 @@ const PaymePaymentOption = ({
         alt="payme"
       />
       <div className="w-full self-center text-center">
-        <p className="mx-2 text-center text-xs text-neutral-400 select-none lg:text-sm">
+        <p className="text-foreground mx-2 text-center text-xs select-none lg:text-sm">
           {t('Payme orqali tolov qilish')}
         </p>
       </div>

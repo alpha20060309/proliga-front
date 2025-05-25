@@ -11,7 +11,9 @@ const CreateTeamSlide = () => {
           <h2 className="carousel-header font-bold uppercase">
             {t("jamoa yig'ing")}
           </h2>
-          <p className="carousel-text max-w-lg">{t('promotion_text')}</p>
+          <p className="carousel-text text-muted-foreground max-w-lg">
+            {t('promotion_text')}
+          </p>
           <div className="relative hidden h-full w-full self-start md:block">
             <Image
               width={200}

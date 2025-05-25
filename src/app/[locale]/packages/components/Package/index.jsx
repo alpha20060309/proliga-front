@@ -27,7 +27,7 @@ const PackageContainer = ({ packageType }) => {
   }
 
   return (
-    <Card className="border-yellow-500 bg-neutral-900 transition-all hover:border-yellow-400">
+    <Card className="border-accent hover:border-accent shadow transition-all">
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
           <CardTitle className="text-foreground xs:text-xl text-lg font-bold">
@@ -36,24 +36,24 @@ const PackageContainer = ({ packageType }) => {
           <PackageIcon type={packageType} />
         </div>
       </CardHeader>
-      <CardContent className="pt-4">
-        <Separator className="mb-4 bg-yellow-500/20" />
+      <CardContent className="space-y-0 pt-4">
+        <Separator className="bg-accent/20 mb-4" />
         <div className="space-y-4">
           {packages
             .filter((item) => item.type === packageType)
             .map((item, index) => (
               <div
                 key={index}
-                className="bg-card hover:bg-secondary flex items-center justify-between rounded-sm p-2 transition-all"
+                className="bg-card hover:bg-secondary flex items-center justify-between rounded-sm p-2 shadow transition-all"
               >
                 <div className="flex cursor-default items-center space-x-2">
                   <Badge
                     variant="outline"
-                    className="bg-primary/15 border border-yellow-200 text-yellow-400"
+                    className="bg-primary/15 border-accent text-foreground dark:text-accent border"
                   >
                     {item.amount}
                   </Badge>
-                  <span className="text-sm text-neutral-300">
+                  <span className="text-muted-foreground text-sm">
                     {t('ga oshirish')}
                   </span>
                 </div>
@@ -61,7 +61,7 @@ const PackageContainer = ({ packageType }) => {
                   asChild
                   variant="outline"
                   size="sm"
-                  className="hover:bg-primary bg-yellow-500 text-neutral-900 transition-all hover:text-neutral-900"
+                  className="hover:bg-primary bg-accent text-foreground/80 hover:text-foreground transition-all"
                 >
                   <Link href={`/confirm-payment/${item.id}`}>
                     {t('Tanlash')}

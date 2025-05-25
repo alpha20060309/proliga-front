@@ -32,7 +32,7 @@ const TransferTableBodySkeleton = () => {
       {[...Array(7)].map((_, rowIndex) => (
         <tr
           key={rowIndex}
-          className="w-full border-b border-neutral-700 odd:bg-neutral-900"
+          className="border-border odd:bg-secondary w-full border-b"
         >
           {[...Array(5)].map((_, cellIndex) => (
             <td key={cellIndex} className="p-1">
