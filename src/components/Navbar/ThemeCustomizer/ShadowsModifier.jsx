@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import {
   hexToHsl,
@@ -9,11 +9,17 @@ import {
   SHADOW_KEYS,
   updateShadows,
 } from 'app/utils/shadow.utils'
+import { useSelector, useDispatch } from 'react-redux'
+import {
+  setDarkTheme,
+  setLightTheme,
+} from 'app/lib/features/systemConfig/systemConfig.slice'
+import { useTheme } from 'next-themes'
 
 const ShadowModifier = () => {
-  const [values, setValues] = useState({})
-
-  console.log(values)
+  const { theme } = useTheme()
+  const { darkTheme, lightTheme } = useSelector((store) => store.systemConfig)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const rootStyles = getComputedStyle(document.documentElement)
@@ -28,12 +34,15 @@ const ShadowModifier = () => {
       })
     )
 
-    setValues(initial)
+    theme === 'dark'
+      ? dispatch(setDarkTheme({ type: 'shadows', data: initial }))
+      : dispatch(setLightTheme({ type: 'shadows', data: initial }))
+
     Object.entries(initial).forEach(([key, value]) => {
       document.documentElement.style.setProperty(`--${key}`, value)
     })
     updateShadows(initial)
-  }, [])
+  }, [dispatch, theme])
 
   const handleChange = (key, value) => {
     if (
@@ -45,17 +54,19 @@ const ShadowModifier = () => {
       value = `${value}${UNITS[key]}`
     }
     document.documentElement.style.setProperty(`--${key}`, value)
-    setValues((prev) => {
-      const updated = { ...prev, [key]: value }
-      updateShadows(updated)
-      return updated
-    })
+    theme === 'dark'
+      ? dispatch(setDarkTheme({ type: 'shadows', data: { [key]: value } }))
+      : dispatch(setLightTheme({ type: 'shadows', data: { [key]: value } }))
+    updateShadows({ [key]: value })
   }
 
   const renderInput = (key) => {
     const label = key.replace('shadow-', '').replace(/-/g, ' ')
     const unit = key in UNITS ? UNITS[key] : ''
-    const value = values[key] || DEFAULT_VALUES[key] || ''
+    const value =
+      theme === 'dark'
+        ? darkTheme.shadows[key]
+        : lightTheme.shadows[key] || DEFAULT_VALUES[key] || ''
     const numericValue = value.replace(/[^\d.-]/g, '')
 
     if (key === 'shadow-color') {

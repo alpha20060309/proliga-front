@@ -1,34 +1,21 @@
-import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { fonts } from 'app/utils/fonts.util'
+import { useSelector, useDispatch } from 'react-redux'
+import { useTheme } from 'next-themes'
+import {
+  setDarkTheme,
+  setLightTheme,
+} from 'app/lib/features/systemConfig/systemConfig.slice'
 
 const FontModifier = () => {
-  const [selectedFont, setSelectedFont] = useState('Inter')
-
-  useEffect(() => {
-    // Update the font on the root element
-    document.documentElement.style.setProperty(
-      '--font-sans',
-      fonts[selectedFont]
-    )
-
-    // Force update CSS variables
-    document.body.style.fontFamily = fonts[selectedFont]
-
-    // Store the selection in localStorage for persistence
-    localStorage.setItem('selectedFont', selectedFont)
-  }, [selectedFont])
-
-  // Load saved font preference on initial render
-  useEffect(() => {
-    const savedFont = localStorage.getItem('selectedFont')
-    if (savedFont && fonts[savedFont]) {
-      setSelectedFont(savedFont)
-    }
-  }, [])
+  const dispatch = useDispatch()
+  const { theme } = useTheme()
+  const { darkTheme, lightTheme } = useSelector((store) => store.systemConfig)
 
   const handleFontChange = (font) => {
-    setSelectedFont(font)
+    theme === 'dark'
+      ? dispatch(setDarkTheme({ type: 'font', data: font }))
+      : dispatch(setLightTheme({ type: 'font', data: font }))
   }
 
   return (
@@ -40,7 +27,7 @@ const FontModifier = () => {
         <div className="mb-3">
           <select
             id="font-select"
-            value={selectedFont}
+            value={theme === 'dark' ? darkTheme.font : lightTheme.font}
             onChange={(e) => handleFontChange(e.target.value)}
             className="mt-2 w-full rounded-[4px] border border-[#333] bg-[#1a1a1a] px-3 py-2 text-sm text-[#fff] focus:border-[#666] focus:outline-none"
           >

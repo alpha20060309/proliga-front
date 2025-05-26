@@ -3,6 +3,26 @@ import { systemConfigExtraReducer } from './systemConfig.extraReducer'
 
 const initialState = {
   config: {},
+  lightTheme: {
+    colors: {},
+    font: "",
+    global: {
+      spacing: 0,
+      letterSpacing: 0,
+      borderRadius: 0,
+    },
+    shadows: {},
+  },
+  darkTheme: {
+    colors: {},
+    font: "",
+    global: {
+      spacing: 0,
+      letterSpacing: 0,
+      borderRadius: 0,
+    },
+    shadows: {},
+  },
   isLoading: false,
   error: null,
 }
@@ -10,7 +30,48 @@ const initialState = {
 const systemConfigSlice = createSlice({
   name: 'systemConfig',
   initialState,
+  reducers: {
+    setDarkTheme: (state, action) => {
+      const { type, data } = action.payload
+
+      switch (type) {
+        case 'colors':
+          state.darkTheme.colors = data
+          break
+        case 'font':
+          state.darkTheme.font = data
+          break
+        case 'global':
+          state.darkTheme.global = data
+          break
+        case 'shadows':
+          state.darkTheme.shadows = data
+          break
+      }
+
+    },
+    setLightTheme: (state, action) => {
+      const { type, data } = action.payload
+
+      switch (type) {
+        case 'colors':
+          state.lightTheme.colors = data
+          break
+        case 'font':
+          state.lightTheme.font = data
+          break
+        case 'global':
+          state.lightTheme.global = data
+          break
+        case 'shadows':
+          state.lightTheme.shadows = data
+          break
+      }
+    },
+  },
   extraReducers: systemConfigExtraReducer,
 })
+
+export const { setDarkTheme, setLightTheme } = systemConfigSlice.actions
 
 export default systemConfigSlice.reducer

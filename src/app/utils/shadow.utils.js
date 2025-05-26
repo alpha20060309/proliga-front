@@ -79,22 +79,18 @@ export const updateShadows = (values) => {
   SHADOW_VARIANTS.forEach(({ name, multiplier }) => {
     const varName = `--shadow${name ? '-' + name : ''}`
 
-    // Apply multiplier to numeric values
     const xNum = parseFloat(x)
     const yNum = parseFloat(y)
     const blurNum = parseFloat(blur)
     const spreadNum = parseFloat(spread)
     const opacityNum = parseFloat(opacity)
 
-    // Round to 2 decimal places
     const roundToTwo = (num) => Math.round(num * 100) / 100
 
     const finalX = `${roundToTwo(xNum * multiplier)}px`
     const finalY = `${roundToTwo(yNum * multiplier)}px`
     const finalBlur = `${roundToTwo(blurNum * multiplier)}px`
     const finalSpread = `${roundToTwo(spreadNum * multiplier)}px`
-    // Opacity can be more precise, but rounding if desired:
-    // const finalOpacity = roundToTwo(Math.max(0, Math.min(1, opacityNum * multiplier))) 
     const finalOpacity = Math.max(0, Math.min(1, opacityNum * multiplier))
 
 

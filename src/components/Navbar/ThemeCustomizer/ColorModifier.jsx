@@ -1,7 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import { Label } from '@/components/ui/label'
+import React from 'react'
 import { useTheme } from 'next-themes'
 import {
   Accordion,
@@ -9,44 +8,23 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from '@/components/ui/accordion'
-import { colorKeys } from 'app/utils/colors.util'
-
-const toVarName = (key) => `--${key}`
+import { colorKeys, toVarName } from 'app/utils/colors.util'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  setDarkTheme,
+  setLightTheme,
+} from 'app/lib/features/systemConfig/systemConfig.slice'
 
 const ColorModifier = () => {
-  const [values, setValues] = useState({})
   const { theme } = useTheme()
-
-  useEffect(() => {
-    // Wait for the DOM to be fully rendered to get computed styles
-    const loadColorValues = () => {
-      const rootStyles = getComputedStyle(document.documentElement)
-      const initial = {}
-      Object.values(colorKeys)
-        .flat()
-        .forEach((key) => {
-          initial[key] =
-            rootStyles.getPropertyValue(toVarName(key)).trim() || '#000000'
-        })
-      setValues(initial)
-    }
-
-    // Initial load
-    loadColorValues()
-
-    // Re-load when theme changes
-    const observer = new MutationObserver(loadColorValues)
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-    })
-
-    return () => observer.disconnect()
-  }, [theme])
+  const dispatch = useDispatch()
+  const { darkTheme, lightTheme } = useSelector((store) => store.systemConfig)
 
   const handleChange = (key, color) => {
     document.documentElement.style.setProperty(toVarName(key), color)
-    setValues((prev) => ({ ...prev, [key]: color }))
+    theme === 'dark'
+      ? dispatch(setDarkTheme({ type: 'colors', data: { [key]: color } }))
+      : dispatch(setLightTheme({ type: 'colors', data: { [key]: color } }))
   }
 
   const formatColor = (color) => {
@@ -63,17 +41,23 @@ const ColorModifier = () => {
 
   const renderColorPicker = (key) => (
     <div key={key} className="mb-2 flex items-center space-x-2">
-      <Label htmlFor={key} className="w-48 text-xs capitalize">
+      <label htmlFor={key} className="w-48 text-xs capitalize">
         {key.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())}
-      </Label>
+      </label>
       <input
         type="color"
         id={key}
-        value={formatColor(values[key] || '#000000')}
+        value={formatColor(
+          theme === 'dark' ? darkTheme.colors[key] : lightTheme.colors[key]
+        )}
         onChange={(e) => handleChange(key, e.target.value)}
         className="h-8 w-8 rounded border-none p-0"
       />
-      <span className="w-20 font-mono text-xs">{formatColor(values[key])}</span>
+      <span className="w-20 font-mono text-xs">
+        {formatColor(
+          theme === 'dark' ? darkTheme.colors[key] : lightTheme.colors[key]
+        )}
+      </span>
     </div>
   )
 
