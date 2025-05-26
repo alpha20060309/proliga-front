@@ -32,6 +32,7 @@ export const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
     margin: theme.spacing(1, 0),
     padding: 0,
     overflow: 'unset',
+    fontFamily: 'var(--font-sans)',
     color: 'var(--color-foreground)',
     '&.Mui-selected': {
       color: 'var(--color-accent-foreground)',

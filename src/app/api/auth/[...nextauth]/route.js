@@ -43,6 +43,8 @@ export const {
         session.user.ntf_topics = user?.ntf_topics || null
         session.user.ntf_enabled = user?.ntf_enabled || false
         session.user.ntf_token_created_at = user?.ntf_token_created_at || null
+        session.user.dark_theme = user?.dark_theme || {}
+        session.user.light_theme = user?.light_theme || {}
       }
       return session
     },

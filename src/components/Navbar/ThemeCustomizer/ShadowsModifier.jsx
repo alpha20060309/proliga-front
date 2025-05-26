@@ -13,12 +13,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import {
   setDarkTheme,
   setLightTheme,
-} from 'app/lib/features/systemConfig/systemConfig.slice'
+} from 'app/lib/features/auth/auth.slice'
 import { useTheme } from 'next-themes'
 
 const ShadowModifier = () => {
   const { theme } = useTheme()
-  const { darkTheme, lightTheme } = useSelector((store) => store.systemConfig)
+  const { darkTheme, lightTheme } = useSelector((store) => store.auth.user)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -55,8 +55,18 @@ const ShadowModifier = () => {
     }
     document.documentElement.style.setProperty(`--${key}`, value)
     theme === 'dark'
-      ? dispatch(setDarkTheme({ type: 'shadows', data: { [key]: value } }))
-      : dispatch(setLightTheme({ type: 'shadows', data: { [key]: value } }))
+      ? dispatch(
+          setDarkTheme({
+            type: 'shadows',
+            data: { ...darkTheme.shadows, [key]: value },
+          })
+        )
+      : dispatch(
+          setLightTheme({
+            type: 'shadows',
+            data: { ...lightTheme.shadows, [key]: value },
+          })
+        )
     updateShadows({ [key]: value })
   }
 
@@ -67,6 +77,8 @@ const ShadowModifier = () => {
       theme === 'dark'
         ? darkTheme.shadows[key]
         : lightTheme.shadows[key] || DEFAULT_VALUES[key] || ''
+    if (!value) return
+
     const numericValue = value.replace(/[^\d.-]/g, '')
 
     if (key === 'shadow-color') {

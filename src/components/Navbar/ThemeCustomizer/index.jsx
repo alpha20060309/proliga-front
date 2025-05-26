@@ -11,8 +11,31 @@ import ColorModifier from './ColorModifier'
 import FontModifier from './FontModifer'
 import GlobalModifier from './GlobalModifier'
 import ShadowModifier from './ShadowsModifier'
+import { Save, RotateCcw, Loader2 } from 'lucide-react'
+import { useSelector } from 'react-redux'
+import { useUpdateUserThemes } from 'app/hooks/user/useUpdateUserThemes/useUpdateUserThemes'
+import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { toast } from 'sonner'
 
 const ThemeCustomizer = () => {
+  const { darkTheme, lightTheme } = useSelector((state) => state.systemConfig)
+  const user = useSelector(selectUserTable)
+
+  const { updateUserThemes, isLoading } = useUpdateUserThemes()
+
+  const handleSave = async () => {
+    try {
+      await updateUserThemes({
+        darkTheme,
+        lightTheme,
+        userTable: user,
+      })
+      toast.success('Theme saved successfully')
+    } catch (error) {
+      toast.error(error)
+    }
+  }
+
   return (
     <Sheet>
       <SheetTrigger className="relative flex size-8 items-center justify-center bg-transparent p-0 font-sans font-medium hover:bg-transparent">
@@ -37,6 +60,13 @@ const ThemeCustomizer = () => {
             Theme Customizer
           </SheetTitle>
         </SheetHeader>
+        <button
+          onClick={() => localStorage.removeItem('isUserThemeSet')}
+          className="flex cursor-pointer items-center justify-center gap-2 rounded-[4px] border border-neutral-700 bg-neutral-800 p-2 text-white transition-all hover:scale-[0.98]"
+        >
+          <RotateCcw className="size-6" />
+          Reset
+        </button>
         <Tabs defaultValue="color">
           <TabsList className="w-full rounded-[4px] bg-[#f5f5f5]">
             <TabsTrigger
@@ -77,6 +107,18 @@ const ThemeCustomizer = () => {
             <ShadowModifier />
           </TabsContent>
         </Tabs>
+        <button
+          disabled={isLoading}
+          onClick={handleSave}
+          className="flex w-full items-center justify-center gap-2 rounded-[4px] bg-green-500 p-2 text-white"
+        >
+          {isLoading ? (
+            <Loader2 className="size-6 animate-spin" />
+          ) : (
+            <Save className="size-6" />
+          )}
+          Save
+        </button>
       </SheetContent>
     </Sheet>
   )

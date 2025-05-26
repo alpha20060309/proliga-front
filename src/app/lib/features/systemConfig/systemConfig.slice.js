@@ -3,6 +3,15 @@ import { systemConfigExtraReducer } from './systemConfig.extraReducer'
 
 const initialState = {
   config: {},
+  theme: {
+    lightColors: {},
+    darkColors: {},
+    font: "",
+    letterSpacing: 0,
+    radius: 0,
+    shadows: {},
+    spacing: 0,
+  },
   lightTheme: {
     colors: {},
     font: "",

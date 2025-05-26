@@ -4,7 +4,7 @@ const withSerwist = withSerwistInit({
   swSrc: "/src/sw.js",
   swDest: "public/sw.js",
   scope: "/",
-  disable: process.env.NODE_ENV === 'development',
+  // disable: process.env.NODE_ENV === 'development',
   include: [
     '/',
     '/manifest.json',

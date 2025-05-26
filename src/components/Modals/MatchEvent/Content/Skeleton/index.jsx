@@ -58,7 +58,7 @@ const SkeletonEventSide = ({ isReversed, eventType }) => (
       <SkeletonBar
         className={cn(
           isReversed ? 'mr-auto' : 'ml-auto',
-          eventType === 'transfer' && 'bg-error/50',
+          eventType === 'transfer' && 'bg-destructive/50',
           'h-3 w-16'
         )}
       />

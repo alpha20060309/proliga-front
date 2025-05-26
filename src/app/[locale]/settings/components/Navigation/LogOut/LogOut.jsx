@@ -11,7 +11,7 @@ const SettingsSidebarLogOut = () => {
   return (
     <button
       onClick={logOut}
-      className="bg-error/80 hover:bg-error text-secondary-foreground hover:bg-opacity-35 mt-auto flex h-min w-full cursor-pointer items-center justify-center gap-2 rounded-md p-2 transition-colors lg:w-auto lg:justify-start lg:px-8"
+      className="bg-destructive/80 hover:bg-destructive text-secondary-foreground hover:bg-opacity-35 mt-auto flex h-min w-full cursor-pointer items-center justify-center gap-2 rounded-md p-2 transition-colors lg:w-auto lg:justify-start lg:px-8"
     >
       <LogOut className="size-5" />
       <p className="hidden text-nowrap lg:block lg:text-sm">
