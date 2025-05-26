@@ -127,7 +127,7 @@ function SetUserCredentials() {
           </section>
           <Button
             type="submit"
-            className="border-primary hover:bg-background bg-background h-10 w-full rounded-sm border transition-all"
+            className="border-primary text-foreground hover:bg-background bg-background h-10 w-full rounded-sm border transition-all"
             disabled={isLoading}
           >
             {isLoading ? (
