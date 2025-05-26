@@ -20,7 +20,7 @@ const CompeteSlide = () => {
         <h2 className="carousel-header font-bold uppercase">
           {t('Raqobatlashing')}
         </h2>
-        <p className="carousel-text text-muted-foreground max-w-lg">
+        <p className="xs:text-sm text-muted-foreground max-w-lg text-xs lg:text-base xl:text-lg">
           {t('Boshqa foydalanuvchilar')}
         </p>
       </div>

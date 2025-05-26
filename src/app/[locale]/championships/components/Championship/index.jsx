@@ -54,7 +54,7 @@ const Championship = ({ game }) => {
     <>
       <Card
         className={cn(
-          'bg-card/10 relative flex h-32 items-start overflow-hidden shadow rounded-lg border',
+          'bg-card/10 relative flex h-32 items-start overflow-hidden rounded-lg border shadow',
           'justify-center px-3 transition-all',
           cardVariants
         )}
@@ -72,12 +72,12 @@ const Championship = ({ game }) => {
           <img
             src={getUrl(game.flag)}
             alt={game.title}
-            className="z-10 size-14 rounded-xl bg-white p-1 select-none"
+            className="bg-white z-10 size-14 rounded-xl p-1 select-none"
             draggable={false}
             loading="lazy"
           />
           <div>
-            <CardTitle className="text-base font-bold text-white capitalize select-none md:text-lg xl:text-xl">
+            <CardTitle className="text-foreground text-base font-bold capitalize select-none md:text-lg xl:text-xl">
               {getCorrectName({ lang, uz: game?.name, ru: game?.name_ru })}
             </CardTitle>
             <div className="p-0">{renderGameStatus(game, currentGame, t)}</div>

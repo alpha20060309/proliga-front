@@ -19,7 +19,9 @@ const WinPrizesSlide = () => {
         <h2 className="carousel-header font-bold uppercase">
           {t('Sovrinlarni yutib oling')}
         </h2>
-        <p className="carousel-text text-muted-foreground">{t('Eng ko‘p ball')}</p>
+        <p className="xs:text-sm text-muted-foreground text-xs lg:text-base xl:text-lg">
+          {t('Eng ko‘p ball')}
+        </p>
       </div>
       <div className="z grid grid-cols-2 grid-rows-2 justify-center gap-2 sm:flex sm:grid-rows-1 md:gap-4 xl:gap-8">
         {prizes.map(
@@ -35,6 +37,7 @@ const WinPrizesSlide = () => {
 const Prize = ({ prize }) => {
   const { t } = useTranslation()
   const { lang } = useSelector((store) => store.systemLanguage)
+
   return (
     <div
       className={cn(
@@ -46,7 +49,7 @@ const Prize = ({ prize }) => {
       <p className="mb-1 text-xs sm:text-sm md:mb-2 md:text-lg xl:text-xl">
         {getCorrectName({ lang, uz: prize?.name, ru: prize?.name_ru })}
       </p>
-      <div className="flex aspect-square items-center justify-center overflow-hidden rounded-xl bg-white p-1 lg:p-2">
+      <div className="bg-background flex aspect-square items-center justify-center overflow-hidden rounded-xl p-1 lg:p-2">
         <img
           src={getUrl(prize?.image)}
           alt={prize?.name}

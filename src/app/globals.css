@@ -59,7 +59,6 @@
 
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
-  --animate-float-ball: float-ball 20s ease-in-out infinite;
   --animate-gradient: gradient 3s ease infinite;
   --animate-rainbow: rainbow var(--speed, 2s) infinite linear;
 
@@ -79,7 +78,15 @@
   --text-3xs: 0.625rem;
   --text-3xs--line-height: 0.7rem;
   --text-3xs--font-weight: 400;
-  --radix-context-menu-content-available-height: 60vh;
+
+  --shadow-2xs: var(--shadow-2xs);
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow: var(--shadow);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-2xl: var(--shadow-2xl);
 
   @keyframes accordion-down {
     from {
@@ -95,21 +102,6 @@
     }
     to {
       height: 0;
-    }
-  }
-  @keyframes float-ball {
-    0%,
-    100% {
-      transform: translate(0, 0);
-    }
-    25% {
-      transform: translate(25%, 25%);
-    }
-    50% {
-      transform: translate(50%, 0%);
-    }
-    75% {
-      transform: translate(25%, -25%);
     }
   }
   @keyframes gradient {
@@ -163,7 +155,7 @@
   /* UI colors */
   --muted: #f0f0f0;
   --muted-foreground: #666666;
-  --accent: #ddaa00;
+  --accent: #dddd00;
   --accent-foreground: #1a1a1a;
   --destructive: #ef4343;
   --border: #e0e0e0;
@@ -200,19 +192,6 @@
   --scrollbar-border-width: 5px;
   --scrollbar-thumb-bg: #cccccc;
   --scrollbar-thumb-hover-bg: #999999;
-
-  /* Form elements */
-  --autofill-shadow-size: 30px;
-  --autofill-shadow-color: #232323;
-  --autofill-text-color: #f0f0f0;
-  --select-shadow-spread: 10px;
-  --select-shadow-size: 100px;
-  --select-shadow-color: #000;
-  --radix-context-menu-content-available-height: 60vh;
-}
-
-.SelectContent {
-  max-height: var(--radix-select-content-available-height);
 }
 
 :root.dark {
@@ -358,10 +337,6 @@
 
 @utility carousel-header {
   @apply xs:text-lg text-foreground text-base md:text-xl xl:text-2xl 2xl:text-3xl;
-}
-
-@utility carousel-text {
-  @apply xs:text-sm text-muted-foreground text-xs lg:text-base xl:text-lg;
 }
 
 @utility loader {

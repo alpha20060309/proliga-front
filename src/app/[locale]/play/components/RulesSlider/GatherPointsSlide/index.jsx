@@ -10,7 +10,7 @@ const GatherPointsSlide = () => {
         <h2 className="carousel-header font-bold uppercase">
           {t('Ochkolar yiging')}
         </h2>
-        <p className="carousel-text text-muted-foreground md:max-w-lg xl:max-w-xl">
+        <p className="xs:text-sm text-muted-foreground text-xs md:max-w-lg lg:text-base xl:max-w-xl xl:text-lg">
           {t("Har bir o'yinchi")}
         </p>
       </div>

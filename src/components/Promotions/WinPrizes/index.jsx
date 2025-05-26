@@ -34,7 +34,7 @@ const Prize = ({ prize }) => {
       <p className="text-foreground mb-1 text-lg md:mb-2 xl:text-xl">
         {getCorrectName({ lang, uz: prize?.name, ru: prize?.name_ru })}
       </p>
-      <div className="flex aspect-square items-center justify-center overflow-hidden rounded-xl bg-white p-1 lg:p-2">
+      <div className="bg-background flex aspect-square items-center justify-center overflow-hidden rounded-xl p-1 lg:p-2">
         <Image
           src={prize?.image}
           alt={prize?.name}
