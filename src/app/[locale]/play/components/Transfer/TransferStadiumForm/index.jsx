@@ -213,7 +213,7 @@ const TransferStadiumForm = () => {
         value={teamConcat.find((player) => player.is_captain)?.player_id ?? ''}
         onValueChange={(value) => dispatch(setCaptain(value))}
       >
-        <SelectTrigger className="border-muted bg-background dark:bg-background xs:px-2 text-foreground hover:border-primary w-36 rounded-sm px-1.5 text-xs data-[size=default]:h-10 sm:w-40 md:w-48">
+        <SelectTrigger className="bg-background dark:bg-background border-foreground/50 xs:px-2 text-foreground hover:border-primary w-36 rounded-sm px-1.5 text-xs data-[size=default]:h-10 sm:w-40 sm:text-sm md:w-48">
           <SelectValue placeholder={t('Kapitan tanlang')} />
         </SelectTrigger>
         <SelectContent>
@@ -261,7 +261,7 @@ const TransferStadiumForm = () => {
       <Button
         type="submit"
         disabled={isLoading}
-        className="bg-background text-foreground 2xs:min-w-28 xs:min-w-28 border-accent hover:border-accent-foreground hover:bg-accent hover:text-accent-foreground h-10 min-w-24 rounded-sm border text-sm font-medium transition-all sm:min-w-32 md:text-base"
+        className="bg-background text-foreground 2xs:min-w-28 xs:min-w-28 border-accent hover:border-accent-foreground hover:bg-accent hover:text-accent-foreground h-10 min-w-24 rounded-sm border text-sm font-medium transition-all sm:min-w-32"
       >
         {isLoading ? (
           <Loader2 className="text-foreground mx-auto size-6 animate-spin" />

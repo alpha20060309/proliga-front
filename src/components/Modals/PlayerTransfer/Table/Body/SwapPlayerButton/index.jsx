@@ -54,7 +54,7 @@ const SwapPlayerButton = ({ cell, handleSwapPlayer, teamBalance }) => {
         className="fade-in-fast flex h-full w-full cursor-pointer items-center justify-center p-1 md:w-auto"
         key={cell.column.id}
       >
-        <Check className="bg-foreground size-5 rounded p-1 text-green-500 shadow-sm select-none sm:size-6" />
+        <Check className="border-foreground text-foreground dark:bg-background size-5 rounded border bg-green-500 p-1 shadow-sm select-none sm:size-6 dark:border-green-500 dark:text-green-500" />
       </td>
     )
   } else {
@@ -66,8 +66,10 @@ const SwapPlayerButton = ({ cell, handleSwapPlayer, teamBalance }) => {
       >
         <ArrowUpDown
           className={cn(
-            'bg-foreground size-5 rounded p-1 shadow-sm select-none sm:size-6 dark:bg-transparent',
-            condition ? 'text-primary' : 'text-muted'
+            'size-5 rounded border p-1 shadow-sm select-none sm:size-6',
+            condition
+              ? 'bg-primary text-foreground border-foreground dark:text-primary dark:bg-background dark:border-primary'
+              : 'text-muted-foreground border-muted-foreground'
           )}
         />
       </td>

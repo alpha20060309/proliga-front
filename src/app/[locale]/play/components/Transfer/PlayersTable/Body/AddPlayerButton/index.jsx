@@ -46,23 +46,25 @@ const AddPlayerButton = ({
   if (isPlayerInTeam) {
     return (
       <td
-        className="fade-in-fast xs:p-1 flex h-full w-full cursor-pointer items-center justify-center p-0.5 md:w-auto"
+        className="xs:p-1 flex h-full w-full cursor-pointer items-center justify-center p-0.5 md:w-auto"
         key={cell.column.id}
       >
-        <Check className="size-5 text-green-500 select-none sm:size-6" />
+        <Check className="border-foreground text-foreground size-5 rounded border bg-green-500 p-1 shadow-sm select-none sm:size-6 dark:border-green-500 dark:bg-background dark:text-green-500" />
       </td>
     )
   } else if (!isPlayerInTeam && totalPlayersCount < 11) {
     return (
       <td
-        className="fade-in-fast xs:p-1 flex h-full w-full cursor-pointer items-center justify-center p-0.5 md:w-auto"
+        className="xs:p-1 flex h-full w-full cursor-pointer items-center justify-center p-0.5 md:w-auto"
         key={cell.column.id}
         onClick={handleClick}
       >
         <Plus
           className={cn(
-            'bg-foreground size-5 rounded p-1 shadow-sm select-none sm:size-6 dark:bg-transparent',
-            condition ? 'text-primary' : 'text-muted-foreground'
+            'bg-background size-5 rounded border p-1 shadow-sm select-none sm:size-6 dark:bg-transparent',
+            condition
+              ? 'bg-primary text-foreground border-foreground dark:text-primary dark:border-primary'
+              : 'text-muted-foreground border-muted-foreground'
           )}
         />
       </td>
@@ -70,10 +72,10 @@ const AddPlayerButton = ({
   } else if (!isPlayerInTeam && totalPlayersCount >= 11) {
     return (
       <td
-        className="fade-in-fast xs:p-1 flex h-full w-full cursor-pointer items-center justify-center p-0.5 md:w-auto"
+        className="xs:p-1 flex h-full w-full cursor-pointer items-center justify-center p-0.5 md:w-auto"
         key={cell.column.id}
       >
-        <X className="text-muted-foreground size-5 select-none sm:size-6" />
+        <X className="border-muted-foreground text-muted-foreground size-5 rounded border p-1 shadow-sm select-none sm:size-6" />
       </td>
     )
   }

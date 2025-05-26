@@ -9,13 +9,13 @@ const GameNavigation = () => {
 
   return (
     <>
-      <section className="hidden lg:block">
+      <section className="animate-in fade-in-0 hidden w-full duration-500 lg:block">
         <Gutter>
           {gameTab === TABS.GameProfile && <Tabs />}
           {gameTab === TABS.Transfer && <Tabs />}
         </Gutter>
       </section>
-      <section className="block lg:hidden">
+      <section className="animate-in fade-in-0 block w-full duration-500 lg:hidden">
         {gameTab === TABS.GameProfile && <Tabs />}
         {gameTab === TABS.Transfer && <Tabs />}
       </section>

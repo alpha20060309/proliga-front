@@ -71,7 +71,7 @@ const GameBrief = () => {
                 }
                 onClick={() => handleClick(currentTeam?.id)}
               >
-                <Copy className="size-5 text-foreground" />
+                <Copy className="text-foreground size-5" />
                 {currentTeam?.id}
               </Content>
             </Item>
@@ -80,10 +80,10 @@ const GameBrief = () => {
               <Content>{currentTeam?.name}</Content>
             </Item>
           </Container>
-          <Container className="border-b border-border">
+          <Container className="border-border border-b">
             <Item>
               <Title> {t('Keyingi Tur')}</Title>
-              <Content className="text-primary text-sm md:text-base">
+              <Content className="text-sm md:text-base">
                 {getCorrectName({
                   lang,
                   uz: nextTour?.name,
@@ -149,14 +149,14 @@ const GameBrief = () => {
             <Item>
               <Title>{t('Jamoa narxi')}</Title>
               <Content className={'flex items-center gap-1'}>
-                <PercentCircle className="text-primary/90 size-5" />
+                <PercentCircle className="text-accent size-5" />
                 {teamPrice ?? 0}
               </Content>
             </Item>
             <Item>
               <Title>{t('Balans')}</Title>
               <Content className={'flex items-center gap-1'}>
-                <Coins className="text-primary/90 size-5" />
+                <Coins className="text-accent size-5" />
                 {teamBalance ?? 0}
               </Content>
             </Item>
@@ -182,7 +182,9 @@ const Item = ({ children, className }) => {
 
 const Title = ({ children, className }) => {
   return (
-    <h3 className={cn('text-foreground text-base', className)}>{children}</h3>
+    <h3 className={cn('text-foreground/80 text-base', className)}>
+      {children}
+    </h3>
   )
 }
 
@@ -191,7 +193,7 @@ const Content = ({ children, className, onClick }) => {
     <p
       onClick={onClick}
       className={cn(
-        'text-primary text-end text-sm uppercase xl:text-base',
+        'text-foreground text-end text-sm uppercase xl:text-base',
         className
       )}
     >

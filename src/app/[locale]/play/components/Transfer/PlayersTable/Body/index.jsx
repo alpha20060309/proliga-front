@@ -58,7 +58,7 @@ const TransferTableBody = ({ table, flexRender }) => {
       {table.getRowModel().rows.map((row) => (
         <tr
           key={row.id}
-          className="border-muted-foreground bg-background text-foreground odd:bg-muted hover:bg-background mx-auto border-b"
+          className="border-muted-foreground bg-card/80 text-foreground odd:bg-muted hover:bg-background mx-auto border-b"
         >
           {row.getVisibleCells().map((cell) => (
             <td

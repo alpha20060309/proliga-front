@@ -222,7 +222,9 @@ const Item = ({ children, className }) => {
 
 const Title = ({ children, className }) => {
   return (
-    <h3 className={cn('text-foreground text-base', className)}>{children}</h3>
+    <h3 className={cn('text-foreground/80 text-base', className)}>
+      {children}
+    </h3>
   )
 }
 
@@ -231,7 +233,7 @@ const Content = ({ children, className, onClick }) => {
     <p
       onClick={onClick}
       className={cn(
-        'dark:text-primary text-end text-sm uppercase xl:text-base',
+        'text-foreground text-end text-sm uppercase xl:text-base',
         className
       )}
     >

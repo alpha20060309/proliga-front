@@ -64,7 +64,7 @@ export default function TourTabs() {
         variant="scrollable"
         scrollButtons
         allowScrollButtonsMobile
-        className="fade-in text-foreground disabled:text-muted-foreground snap-x snap-center rounded"
+        className="fade-in animate-in text-foreground disabled:text-muted-foreground snap-x snap-center rounded duration-500"
         aria-label="tour tabs"
         sx={{
           [`& .${tabsClasses.scrollButtons}`]: {
