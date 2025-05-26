@@ -84,6 +84,42 @@ const CustomThemeProvider = ({ children }) => {
     updateShadows(initial)
   }, [dispatch, theme])
 
+  //Global
+  useEffect(() => {
+    // Get initial values from root styles on component mount
+    const rootStyles = getComputedStyle(document.documentElement)
+    const initialSpacingValue = parseFloat(
+      rootStyles.getPropertyValue('--spacing').trim()
+    )
+    const initialLetterSpacingValue = parseFloat(
+      rootStyles.getPropertyValue('--letter-spacing').trim()
+    )
+    const initialBorderRadiusValue = parseFloat(
+      rootStyles.getPropertyValue('--radius').trim()
+    )
+    theme === 'dark'
+      ? dispatch(
+          setDarkTheme({
+            type: 'global',
+            data: {
+              spacing: initialSpacingValue,
+              letterSpacing: initialLetterSpacingValue,
+              borderRadius: initialBorderRadiusValue,
+            },
+          })
+        )
+      : dispatch(
+          setLightTheme({
+            type: 'global',
+            data: {
+              spacing: initialSpacingValue,
+              letterSpacing: initialLetterSpacingValue,
+              borderRadius: initialBorderRadiusValue,
+            },
+          })
+        )
+  }, [dispatch, theme])
+
   return children
 }
 

@@ -6,21 +6,13 @@ const initialState = {
   lightTheme: {
     colors: {},
     font: "",
-    global: {
-      spacing: 0,
-      letterSpacing: 0,
-      borderRadius: 0,
-    },
+    global: {},
     shadows: {},
   },
   darkTheme: {
     colors: {},
     font: "",
-    global: {
-      spacing: 0,
-      letterSpacing: 0,
-      borderRadius: 0,
-    },
+    global: {},
     shadows: {},
   },
   isLoading: false,

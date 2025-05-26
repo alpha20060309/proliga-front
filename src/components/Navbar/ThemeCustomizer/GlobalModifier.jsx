@@ -1,53 +1,34 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { useTheme } from 'next-themes'
+import { useSelector, useDispatch } from 'react-redux'
+import {
+  setDarkTheme,
+  setLightTheme,
+} from 'app/lib/features/systemConfig/systemConfig.slice'
 
-const GlobalModifier = ({
-  initialSpacing = 0.25,
-  initialLetterSpacing = 0.0625,
-  initialBorderRadius = 0.25,
-  onSpacingChange,
-  onLetterSpacingChange,
-  onBorderRadiusChange,
-}) => {
-  const [spacing, setSpacing] = useState(initialSpacing)
-  const [letterSpacing, setLetterSpacing] = useState(initialLetterSpacing)
-  const [borderRadius, setBorderRadius] = useState(initialBorderRadius)
+const GlobalModifier = () => {
+  const dispatch = useDispatch()
+  const { theme } = useTheme()
+  const { darkTheme, lightTheme } = useSelector((store) => store.systemConfig)
 
-  useEffect(() => {
-    // Get initial values from root styles on component mount
-    const rootStyles = getComputedStyle(document.documentElement)
-    const initialSpacingValue = parseFloat(
-      rootStyles.getPropertyValue('--spacing').trim()
-    )
-    const initialLetterSpacingValue = parseFloat(
-      rootStyles.getPropertyValue('--letter-spacing').trim()
-    )
-    const initialBorderRadiusValue = parseFloat(
-      rootStyles.getPropertyValue('--radius').trim()
-    )
-    setSpacing(initialSpacingValue)
-    setLetterSpacing(initialLetterSpacingValue)
-    setBorderRadius(initialBorderRadiusValue)
-  }, [])
-
-  const handleSpacingChange = (value) => {
-    setSpacing(value)
-    document.documentElement.style.setProperty('--spacing', `${value}rem`)
-    onSpacingChange?.(value)
-  }
-
-  const handleLetterSpacingChange = (value) => {
-    setLetterSpacing(value)
-    document.documentElement.style.setProperty('--letter-spacing', `${value}em`)
-    onLetterSpacingChange?.(value)
-  }
-
-  const handleBorderRadiusChange = (value) => {
-    setBorderRadius(value)
-    document.documentElement.style.setProperty('--radius', `${value}rem`)
-    onBorderRadiusChange?.(value)
+  const handleChange = (type, value, key) => {
+    theme === 'dark'
+      ? dispatch(
+          setDarkTheme({
+            type: 'global',
+            data: { ...darkTheme.global, [key]: value },
+          })
+        )
+      : dispatch(
+          setLightTheme({
+            type: 'global',
+            data: { ...lightTheme.global, [key]: value },
+          })
+        )
+    document.documentElement.style.setProperty(`--${type}`, `${value}rem`)
   }
 
   return (
@@ -67,32 +48,28 @@ const GlobalModifier = ({
               >
                 Spacing Size
               </label>
-              <div className="flex items-center gap-2">
-                <input
-                  id="global-spacing-input"
-                  type="number"
-                  value={spacing}
-                  onChange={(e) => {
-                    const newValue = Number(e.target.value)
-                    handleSpacingChange(newValue)
-                  }}
-                  min={0.15}
-                  max={0.35}
-                  step={0.001}
-                  className="h-6 w-24 border-[#333] bg-[#1a1a1a] px-2 text-xs text-[#fff]"
-                />
-                <span className="text-xs text-[#999]">rem</span>
-              </div>
+              <span className="text-xs text-[#999]">
+                {theme === 'dark'
+                  ? darkTheme.global.spacing
+                  : lightTheme.global.spacing}
+                rem
+              </span>
             </div>
             <input
               type="range"
               id="global-spacing-slider"
-              value={[spacing]}
+              value={
+                theme === 'dark'
+                  ? darkTheme.global.spacing
+                  : lightTheme.global.spacing
+              }
               min={0.15}
               max={0.35}
               step={0.001}
-              onChange={(e) => handleSpacingChange(e.target.value)}
-              className="py-1"
+              onChange={(e) =>
+                handleChange('spacing', e.target.value, 'spacing')
+              }
+              className="w-full py-1"
             />
           </div>
 
@@ -104,35 +81,30 @@ const GlobalModifier = ({
               >
                 Letter Spacing
               </label>
-              <div className="flex items-center gap-2">
-                <input
-                  id="global-letter-spacing-input"
-                  type="number"
-                  value={letterSpacing}
-                  onChange={(e) => {
-                    const newValue = Number(e.target.value)
-                    handleLetterSpacingChange(newValue)
-                  }}
-                  min={-0.05}
-                  max={0.05}
-                  step={0.001}
-                  className="h-6 w-24 border-[#333] bg-[#1a1a1a] px-2 text-xs text-[#fff]"
-                />
-                <span className="text-xs text-[#999]">em</span>
-              </div>
+              <span className="text-xs text-[#999]">
+                {theme === 'dark'
+                  ? darkTheme.global.letterSpacing
+                  : lightTheme.global.letterSpacing}
+                rem
+              </span>
             </div>
             <input
               type="range"
               id="global-letter-spacing-slider"
-              value={[letterSpacing]}
+              value={
+                theme === 'dark'
+                  ? darkTheme.global.letterSpacing
+                  : lightTheme.global.letterSpacing
+              }
               min={-0.1}
               max={0.5}
               step={0.001}
-              onChange={(e) => handleLetterSpacingChange(e.target.value)}
-              className="py-1"
+              onChange={(e) =>
+                handleChange('letter-spacing', e.target.value, 'letterSpacing')
+              }
+              className="w-full py-1"
             />
           </div>
-
           <div className="mb-3">
             <div className="mb-1.5 flex items-center justify-between">
               <label
@@ -141,32 +113,28 @@ const GlobalModifier = ({
               >
                 Border Radius
               </label>
-              <div className="flex items-center gap-2">
-                <input
-                  id="global-radius-input"
-                  type="number"
-                  value={borderRadius}
-                  onChange={(e) => {
-                    const newValue = Number(e.target.value)
-                    handleBorderRadiusChange(newValue)
-                  }}
-                  min={0}
-                  max={5}
-                  step={0.05}
-                  className="h-6 w-24 border-[#333] bg-[#1a1a1a] px-2 text-xs text-[#fff]"
-                />
-                <span className="text-xs text-[#999]">rem</span>
-              </div>
+              <span className="text-xs text-[#999]">
+                {theme === 'dark'
+                  ? darkTheme.global.borderRadius
+                  : lightTheme.global.borderRadius}
+                rem
+              </span>
             </div>
             <input
               type="range"
               id="global-radius-slider"
-              value={[borderRadius]}
+              value={
+                theme === 'dark'
+                  ? darkTheme.global.borderRadius
+                  : lightTheme.global.borderRadius
+              }
               min={0}
               max={5}
               step={0.05}
-              onChange={(e) => handleBorderRadiusChange(e.target.value)}
-              className="py-1"
+              onChange={(e) =>
+                handleChange('radius', e.target.value, 'borderRadius')
+              }
+              className="w-full py-1"
             />
           </div>
         </CardContent>
