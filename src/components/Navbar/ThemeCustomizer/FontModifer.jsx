@@ -2,13 +2,16 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { fonts } from 'app/utils/fonts.util'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTheme } from 'next-themes'
-import { setDarkTheme, setLightTheme } from 'app/lib/features/auth/auth.slice'
+import {
+  setDarkTheme,
+  setLightTheme,
+} from 'app/lib/features/systemConfig/systemConfig.slice'
 
 const FontModifier = () => {
   const dispatch = useDispatch()
   const { theme } = useTheme()
-  const { darkTheme, lightTheme } = useSelector((store) => store.auth.user)
-  console.log('theme', theme)
+  const { darkTheme, lightTheme } = useSelector((store) => store.systemConfig)
+
   const handleFontChange = (font) => {
     theme === 'dark'
       ? dispatch(setDarkTheme({ type: 'font', data: font }))

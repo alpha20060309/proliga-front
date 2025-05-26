@@ -14,111 +14,198 @@ import {
   UNITS,
   updateShadows,
 } from 'app/utils/shadow.utils'
+import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 
 const CustomThemeProvider = ({ children }) => {
   const dispatch = useDispatch()
   const { theme } = useTheme()
   const { darkTheme, lightTheme } = useSelector((store) => store.systemConfig)
+  const user = useSelector(selectUserTable)
 
-  // Colors
+  // Load user-specific themes into Redux store when user data is available
   useEffect(() => {
-    const loadColorValues = () => {
-      const rootStyles = getComputedStyle(document.documentElement)
-      const initial = {}
-      Object.values(colorKeys)
-        .flat()
-        .forEach((key) => {
-          initial[key] =
-            rootStyles.getPropertyValue(toVarName(key)).trim() || '#000000'
-        })
-      theme === 'dark'
-        ? dispatch(setDarkTheme({ type: 'colors', data: initial }))
-        : dispatch(setLightTheme({ type: 'colors', data: initial }))
+    const isAuthenticated = localStorage.getItem('isAuthenticated')
+    if (isAuthenticated && user?.id) {
+      const { light_theme, dark_theme: userDarkTheme } = user // Renamed to avoid conflict
+      if (light_theme) {
+        if (light_theme.colors)
+          dispatch(setLightTheme({ type: 'colors', data: light_theme.colors }))
+        if (light_theme.shadows)
+          dispatch(
+            setLightTheme({ type: 'shadows', data: light_theme.shadows })
+          )
+        if (light_theme.global)
+          dispatch(setLightTheme({ type: 'global', data: light_theme.global }))
+        if (light_theme.font)
+          dispatch(setLightTheme({ type: 'font', data: light_theme.font }))
+      }
+      if (userDarkTheme) {
+        if (userDarkTheme.colors)
+          dispatch(setDarkTheme({ type: 'colors', data: userDarkTheme.colors }))
+        if (userDarkTheme.shadows)
+          dispatch(
+            setDarkTheme({ type: 'shadows', data: userDarkTheme.shadows })
+          )
+        if (userDarkTheme.global)
+          dispatch(setDarkTheme({ type: 'global', data: userDarkTheme.global }))
+        if (userDarkTheme.font)
+          dispatch(setDarkTheme({ type: 'font', data: userDarkTheme.font }))
+      }
+    }
+  }, [dispatch, user])
+
+  // Colors: Initialize store from DOM/defaults if empty, and handle theme switches
+  useEffect(() => {
+    const loadInitialColorValuesIfNeeded = () => {
+      const currentStoreColors =
+        theme === 'dark' ? darkTheme.colors : lightTheme.colors
+      if (!currentStoreColors || Object.keys(currentStoreColors).length === 0) {
+        const rootStyles = getComputedStyle(document.documentElement)
+        const initialColors = {}
+        Object.values(colorKeys)
+          .flat()
+          .forEach((key) => {
+            initialColors[key] =
+              rootStyles.getPropertyValue(toVarName(key)).trim() || '#000000'
+          })
+        if (theme === 'dark') {
+          dispatch(setDarkTheme({ type: 'colors', data: initialColors }))
+        } else {
+          dispatch(setLightTheme({ type: 'colors', data: initialColors }))
+        }
+      }
     }
 
-    loadColorValues()
+    loadInitialColorValuesIfNeeded()
 
-    const observer = new MutationObserver(loadColorValues)
+    const observer = new MutationObserver(loadInitialColorValuesIfNeeded)
     observer.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ['class'],
+      attributeFilter: ['class'], // Observe class changes on <html> for theme switches
     })
 
     return () => observer.disconnect()
-  }, [theme, dispatch])
+  }, [theme, dispatch, darkTheme.colors, lightTheme.colors])
 
-  // Fonts
+  // Colors: Apply from Redux store to DOM
   useEffect(() => {
-    if (darkTheme.font || lightTheme.font) {
-      document.documentElement.style.setProperty(
-        '--font-sans',
-        theme === 'dark' ? darkTheme.font : lightTheme.font
-      )
-
-      document.body.style.fontFamily =
-        theme === 'dark' ? darkTheme.font : lightTheme.font
+    const colorsToApply =
+      theme === 'dark' ? darkTheme.colors : lightTheme.colors
+    if (colorsToApply && Object.keys(colorsToApply).length > 0) {
+      Object.entries(colorsToApply).forEach(([key, value]) => {
+        if (value) {
+          document.documentElement.style.setProperty(toVarName(key), value)
+        }
+      })
     }
+  }, [theme, darkTheme.colors, lightTheme.colors])
+
+  // Fonts: Apply from Redux store to DOM
+  useEffect(() => {
+    const fontToApply = theme === 'dark' ? darkTheme.font : lightTheme.font
+    if (fontToApply) {
+      document.documentElement.style.setProperty('--font-sans', fontToApply)
+      document.body.style.fontFamily = fontToApply
+    }
+    // else you might want to set a default font if nothing is in the store
   }, [theme, darkTheme.font, lightTheme.font])
 
-  // Shadows
+  // Shadows: Initialize store from DOM/defaults if empty, then apply from Redux store to DOM
   useEffect(() => {
-    const rootStyles = getComputedStyle(document.documentElement)
-    const initial = Object.fromEntries(
-      SHADOW_KEYS.map((key) => {
-        let value =
-          rootStyles.getPropertyValue(`--${key}`).trim() || DEFAULT_VALUES[key]
-        if (key in UNITS && value && !isNaN(Number(value))) {
-          value = `${value}${UNITS[key]}`
+    let shadowsToApply =
+      theme === 'dark' ? darkTheme.shadows : lightTheme.shadows
+
+    // Initialize store if empty for the current theme
+    if (!shadowsToApply || Object.keys(shadowsToApply).length === 0) {
+      const rootStyles = getComputedStyle(document.documentElement)
+      const initialShadowData = Object.fromEntries(
+        SHADOW_KEYS.map((key) => {
+          let value =
+            rootStyles.getPropertyValue(`--${key}`).trim() ||
+            DEFAULT_VALUES[key]
+          if (
+            key in UNITS &&
+            value &&
+            !isNaN(Number(value)) &&
+            typeof value === 'string' &&
+            !value.endsWith(UNITS[key])
+          ) {
+            value = `${value}${UNITS[key]}`
+          }
+          return [key, value]
+        })
+      )
+      if (theme === 'dark') {
+        dispatch(setDarkTheme({ type: 'shadows', data: initialShadowData }))
+      } else {
+        dispatch(setLightTheme({ type: 'shadows', data: initialShadowData }))
+      }
+      // The store will update, and this effect will re-run.
+      // shadowsToApply will be populated in the next run.
+      return // Exit early, let re-run handle application
+    }
+
+    // Apply shadows from store to DOM
+    if (shadowsToApply && Object.keys(shadowsToApply).length > 0) {
+      Object.entries(shadowsToApply).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          document.documentElement.style.setProperty(`--${key}`, String(value))
         }
-        return [key, value]
       })
-    )
+      updateShadows(shadowsToApply)
+    }
+  }, [dispatch, theme, darkTheme.shadows, lightTheme.shadows])
 
-    theme === 'dark'
-      ? dispatch(setDarkTheme({ type: 'shadows', data: initial }))
-      : dispatch(setLightTheme({ type: 'shadows', data: initial }))
-
-    Object.entries(initial).forEach(([key, value]) => {
-      document.documentElement.style.setProperty(`--${key}`, value)
-    })
-    updateShadows(initial)
-  }, [dispatch, theme])
-
-  //Global
+  // Global Styles (spacing, letterSpacing, borderRadius): Initialize store from DOM/defaults if empty
   useEffect(() => {
-    // Get initial values from root styles on component mount
-    const rootStyles = getComputedStyle(document.documentElement)
-    const initialSpacingValue = parseFloat(
-      rootStyles.getPropertyValue('--spacing').trim()
-    )
-    const initialLetterSpacingValue = parseFloat(
-      rootStyles.getPropertyValue('--letter-spacing').trim()
-    )
-    const initialBorderRadiusValue = parseFloat(
-      rootStyles.getPropertyValue('--radius').trim()
-    )
-    theme === 'dark'
-      ? dispatch(
-          setDarkTheme({
-            type: 'global',
-            data: {
-              spacing: initialSpacingValue,
-              letterSpacing: initialLetterSpacingValue,
-              borderRadius: initialBorderRadiusValue,
-            },
-          })
+    const currentGlobalConfig =
+      theme === 'dark' ? darkTheme.global : lightTheme.global
+    if (!currentGlobalConfig || Object.keys(currentGlobalConfig).length === 0) {
+      const rootStyles = getComputedStyle(document.documentElement)
+      const initialGlobalData = {
+        spacing:
+          parseFloat(rootStyles.getPropertyValue('--spacing').trim()) ||
+          DEFAULT_VALUES.spacing,
+        letterSpacing:
+          parseFloat(rootStyles.getPropertyValue('--letter-spacing').trim()) ||
+          DEFAULT_VALUES.letterSpacing,
+        borderRadius:
+          parseFloat(rootStyles.getPropertyValue('--radius').trim()) ||
+          DEFAULT_VALUES.borderRadius,
+      }
+      if (theme === 'dark') {
+        dispatch(setDarkTheme({ type: 'global', data: initialGlobalData }))
+      } else {
+        dispatch(setLightTheme({ type: 'global', data: initialGlobalData }))
+      }
+    }
+  }, [dispatch, theme, darkTheme.global, lightTheme.global])
+
+  // Global Styles: Apply from Redux store to DOM
+  useEffect(() => {
+    const globalToApply =
+      theme === 'dark' ? darkTheme.global : lightTheme.global
+    if (globalToApply) {
+      if (globalToApply.spacing !== undefined) {
+        document.documentElement.style.setProperty(
+          '--spacing',
+          `${globalToApply.spacing}rem`
         )
-      : dispatch(
-          setLightTheme({
-            type: 'global',
-            data: {
-              spacing: initialSpacingValue,
-              letterSpacing: initialLetterSpacingValue,
-              borderRadius: initialBorderRadiusValue,
-            },
-          })
+      }
+      if (globalToApply.letterSpacing !== undefined) {
+        document.documentElement.style.setProperty(
+          '--letter-spacing',
+          `${globalToApply.letterSpacing}em`
         )
-  }, [dispatch, theme])
+      }
+      if (globalToApply.borderRadius !== undefined) {
+        document.documentElement.style.setProperty(
+          '--radius',
+          `${globalToApply.borderRadius}rem`
+        )
+      }
+    }
+  }, [theme, darkTheme.global, lightTheme.global])
 
   return children
 }

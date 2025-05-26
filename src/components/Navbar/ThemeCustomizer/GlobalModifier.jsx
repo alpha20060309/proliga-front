@@ -4,12 +4,15 @@ import React from 'react'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { useTheme } from 'next-themes'
 import { useSelector, useDispatch } from 'react-redux'
-import { setDarkTheme, setLightTheme } from 'app/lib/features/auth/auth.slice'
+import {
+  setDarkTheme,
+  setLightTheme,
+} from 'app/lib/features/systemConfig/systemConfig.slice'
 
 const GlobalModifier = () => {
   const dispatch = useDispatch()
   const { theme } = useTheme()
-  const { darkTheme, lightTheme } = useSelector((store) => store.auth.user)
+  const { darkTheme, lightTheme } = useSelector((store) => store.systemConfig)
 
   const handleChange = (type, value, key) => {
     theme === 'dark'

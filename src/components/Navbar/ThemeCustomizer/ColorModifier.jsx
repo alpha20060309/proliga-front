@@ -11,8 +11,8 @@ import {
 import { colorKeys, toVarName } from 'app/utils/colors.util'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  setDarkTheme,
   setLightTheme,
+  setDarkTheme,
 } from 'app/lib/features/systemConfig/systemConfig.slice'
 
 const ColorModifier = () => {
@@ -23,8 +23,18 @@ const ColorModifier = () => {
   const handleChange = (key, color) => {
     document.documentElement.style.setProperty(toVarName(key), color)
     theme === 'dark'
-      ? dispatch(setDarkTheme({ type: 'colors', data: { [key]: color } }))
-      : dispatch(setLightTheme({ type: 'colors', data: { [key]: color } }))
+      ? dispatch(
+          setDarkTheme({
+            type: 'colors',
+            data: { ...darkTheme.colors, [key]: color },
+          })
+        )
+      : dispatch(
+          setLightTheme({
+            type: 'colors',
+            data: { ...lightTheme.colors, [key]: color },
+          })
+        )
   }
 
   const formatColor = (color) => {
@@ -48,7 +58,9 @@ const ColorModifier = () => {
         type="color"
         id={key}
         value={formatColor(
-          theme === 'dark' ? darkTheme.colors[key] : lightTheme.colors[key]
+          theme === 'dark'
+            ? darkTheme.colors[key] || '#000000'
+            : lightTheme.colors[key] || '#000000'
         )}
         onChange={(e) => handleChange(key, e.target.value)}
         className="h-8 w-8 rounded border-none p-0"

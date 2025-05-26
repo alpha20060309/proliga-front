@@ -1,6 +1,5 @@
 'use client'
 
-import React, { useEffect } from 'react'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import {
   hexToHsl,
@@ -13,36 +12,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import {
   setDarkTheme,
   setLightTheme,
-} from 'app/lib/features/auth/auth.slice'
+} from 'app/lib/features/systemConfig/systemConfig.slice'
 import { useTheme } from 'next-themes'
 
 const ShadowModifier = () => {
   const { theme } = useTheme()
-  const { darkTheme, lightTheme } = useSelector((store) => store.auth.user)
+  const { darkTheme, lightTheme } = useSelector((store) => store.systemConfig)
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    const rootStyles = getComputedStyle(document.documentElement)
-    const initial = Object.fromEntries(
-      SHADOW_KEYS.map((key) => {
-        let value =
-          rootStyles.getPropertyValue(`--${key}`).trim() || DEFAULT_VALUES[key]
-        if (key in UNITS && value && !isNaN(Number(value))) {
-          value = `${value}${UNITS[key]}`
-        }
-        return [key, value]
-      })
-    )
-
-    theme === 'dark'
-      ? dispatch(setDarkTheme({ type: 'shadows', data: initial }))
-      : dispatch(setLightTheme({ type: 'shadows', data: initial }))
-
-    Object.entries(initial).forEach(([key, value]) => {
-      document.documentElement.style.setProperty(`--${key}`, value)
-    })
-    updateShadows(initial)
-  }, [dispatch, theme])
 
   const handleChange = (key, value) => {
     if (

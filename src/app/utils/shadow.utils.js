@@ -14,6 +14,10 @@ export const DEFAULT_VALUES = {
   'shadow-spread': '0px',
   'shadow-offset-x': '0px',
   'shadow-offset-y': '1px',
+  // Defaults for global styles, used in CustomThemeProvider
+  spacing: 4,        // Used as a fallback for --spacing
+  letterSpacing: 0,  // Used as a fallback for --letter-spacing
+  borderRadius: 16,   // Used as a fallback for --radius (e.g., 0.5rem if base is 16px)
 }
 
 export const UNITS = {
