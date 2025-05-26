@@ -9,7 +9,7 @@ const MatchEventHeader = ({ started_date }) => {
   const currentCompetition = useSelector(selectCurrentCompetition)
 
   return (
-    <section className="relative h-min border-b border-white/10 p-4">
+    <section className="border-border relative h-min border-b p-4">
       <DialogTitle className="text-center text-xl font-semibold">
         {getCorrectName({
           lang,
@@ -17,7 +17,7 @@ const MatchEventHeader = ({ started_date }) => {
           ru: currentCompetition?.name_ru,
         })}
       </DialogTitle>
-      <div className="mt-1 flex justify-center gap-2 text-center text-sm text-gray-400">
+      <div className="text-muted-foreground mt-1 flex justify-center gap-2 text-center text-sm">
         <time>{formatDate(started_date, 'notifications')}</time>
       </div>
     </section>

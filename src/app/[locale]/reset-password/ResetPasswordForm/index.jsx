@@ -58,7 +58,7 @@ const ResetPasswordForm = () => {
   }, [phone, code, router])
 
   return (
-    <div className="bg-background mx-auto w-full max-w-md space-y-8 rounded-lg border border-neutral-800 p-6 shadow-sm shadow-neutral-600">
+    <div className="bg-background border-border shadow-muted mx-auto w-full max-w-md space-y-8 rounded-lg border p-6 shadow-sm">
       <div className="flex items-center gap-2">
         <Lock className="text-primary h-8 w-8" />
         <h1 className="text-2xl font-bold">{t('Parol Yangilash')}</h1>
@@ -126,7 +126,7 @@ const ResetPasswordForm = () => {
         </div>
         <Button
           type="submit"
-          className="text-foreground mt-4 h-12 w-full rounded-sm border border-yellow-400 bg-neutral-900 font-bold transition-all duration-300 hover:bg-yellow-400 hover:text-neutral-900"
+          className="text-foreground border-accent bg-background hover:bg-accent hover:text-foreground mt-4 h-12 w-full rounded-sm border font-bold transition-all duration-300"
           disabled={isPending}
         >
           {isPending ? (

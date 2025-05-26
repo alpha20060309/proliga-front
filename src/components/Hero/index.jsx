@@ -22,11 +22,11 @@ const Hero = async ({ params }) => {
         <div className="animate-in fade-in bg-accent-foreground/25 dark:bg-accent-foreground/60 absolute inset-0 duration-500" />
       </div>
       <div className="text-secondary-foreground mx-1 flex h-svh flex-col items-center justify-center gap-6 md:h-screen">
-        <div className="xs:gap-1 flex flex-col gap-0 text-center uppercase md:gap-2">
-          <h2 className="xs:text-3xl animate-in fade-in text-2xl font-semibold duration-1000 sm:text-4xl 2xl:text-5xl">
+        <div className="xs:gap-1 flex flex-col gap-0 text-center uppercase antialiased md:gap-2">
+          <h2 className="xs:text-3xl text-2xl font-semibold sm:text-4xl 2xl:text-5xl">
             {t("O'z futbol jamoangizni")}
           </h2>
-          <h2 className="xs:text-4xl animate-in fade-in text-3xl font-bold sm:text-5xl lg:text-6xl 2xl:text-7xl">
+          <h2 className="xs:text-4xl text-3xl font-bold sm:text-5xl lg:text-6xl 2xl:text-7xl">
             {t('Biz bilan yarating')}
           </h2>
         </div>

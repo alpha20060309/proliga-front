@@ -79,7 +79,7 @@ const ConfirmOTP = ({
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setModalOpen}>
-      <DialogContent className="bg-background text-foreground flex w-min min-w-80 flex-col items-center justify-between gap-2 rounded-xl p-6 shadow-sm shadow-neutral-500">
+      <DialogContent className="bg-background text-foreground shadow-border flex w-min min-w-80 flex-col items-center justify-between gap-2 rounded-xl p-6 shadow-sm">
         <form
           onSubmit={handleConfirm}
           className="flex flex-col items-start gap-6"
@@ -105,7 +105,7 @@ const ConfirmOTP = ({
           <Button
             type="submit"
             disabled={isLoading}
-            className="border-primary text-foreground hover:bg-background h-10 w-full rounded-sm border bg-neutral-900 transition-all"
+            className="border-primary text-foreground hover:bg-background bg-background h-10 w-full rounded-sm border transition-all"
           >
             {t('Tasdiqlash')}
           </Button>

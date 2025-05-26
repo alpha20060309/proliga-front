@@ -106,7 +106,7 @@ function SetUserCredentials() {
                 name="phone"
                 placeholder={'99-999-99-99'}
                 defaultCountry="UZ"
-                className="bg-background text-secondary-foreground h-10 border-neutral-500 placeholder:text-neutral-500"
+                className="bg-background text-foreground border-border placeholder:text-muted-foreground h-10"
                 value={phone}
                 onChange={setPhone}
               />
@@ -117,7 +117,7 @@ function SetUserCredentials() {
                 type="email"
                 name="email"
                 id="email"
-                className="bg-background text-secondary-foreground h-10 rounded-sm border-neutral-500 pl-10 placeholder:text-neutral-500"
+                className="bg-background text-foreground border-border placeholder:text-muted-foreground h-10 rounded-sm pl-10"
                 placeholder="example@xyz.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -127,7 +127,7 @@ function SetUserCredentials() {
           </section>
           <Button
             type="submit"
-            className="border-primary hover:bg-background h-10 w-full rounded-sm border bg-neutral-900 text-neutral-50 transition-all"
+            className="border-primary hover:bg-background bg-background h-10 w-full rounded-sm border transition-all"
             disabled={isLoading}
           >
             {isLoading ? (

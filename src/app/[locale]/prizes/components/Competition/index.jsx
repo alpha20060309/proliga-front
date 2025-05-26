@@ -23,13 +23,13 @@ const PrizeCompetition = ({ competition }) => {
   if (!hasPrize) return <></>
 
   return (
-    <article className="transitiona-all group bg-background/25 hover:bg-background/40 flex flex-1 flex-col rounded-xl border border-neutral-100/50 p-2 backdrop-blur-xs hover:border-neutral-100 md:p-4">
-      <div className="group-hover:border-primary mb-2 flex items-center gap-2 border-b border-neutral-500/80 pb-2 transition-all">
+    <article className="transitiona-all group bg-background/25 hover:bg-background/40 border-border hover:border-card flex flex-1 flex-col rounded-xl border p-2 backdrop-blur-xs md:p-4">
+      <div className="group-hover:border-primary border-border mb-2 flex items-center gap-2 border-b pb-2 transition-all">
         <img
           src={getUrl(competition.flag)}
           loading="lazy"
           alt={competition.title}
-          className="z-10 size-10 rounded-full bg-white p-1 select-none"
+          className="bg-background z-10 size-10 rounded-full p-1 select-none"
           draggable={false}
         />
         <h2 className="text-lg xl:text-xl">

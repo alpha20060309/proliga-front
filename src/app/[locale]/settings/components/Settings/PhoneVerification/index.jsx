@@ -14,7 +14,7 @@ export default function PhoneVerification({ phone, otp, setPhone, setOtp }) {
   return (
     <section className="flex items-end gap-2">
       <div className="space-y-1">
-        <Label htmlFor="phone" className="text-sm font-medium text-neutral-300">
+        <Label htmlFor="phone" className="text-foreground text-sm font-medium">
           {t('Telefon raqam')}
         </Label>
         <PhoneInput
@@ -23,7 +23,7 @@ export default function PhoneVerification({ phone, otp, setPhone, setOtp }) {
           placeholder={userTable?.phone}
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          className="bg-card border-neutral-600"
+          className="bg-card border-border"
         />
       </div>
 
@@ -35,13 +35,13 @@ export default function PhoneVerification({ phone, otp, setPhone, setOtp }) {
           placeholder={t('Kodni kiriting')}
           value={otp}
           onChange={(e) => setOtp(e.target.value)}
-          className="bg-card text-foreground focus:border-primary focus:ring-primary h-10 w-40 border border-neutral-600"
+          className="bg-card text-foreground focus:border-primary focus:ring-primary border-border h-10 w-40 border"
         />
         <Button
           type="button"
           variant="default"
           size="sm"
-          className="bg-card flex h-10 items-center gap-2 border border-blue-600 text-neutral-50 hover:bg-blue-500"
+          className="bg-card border-border text-foreground hover:bg-accent flex h-10 items-center gap-2 border"
         >
           <Send className="size-4" />
           {t('Send')}

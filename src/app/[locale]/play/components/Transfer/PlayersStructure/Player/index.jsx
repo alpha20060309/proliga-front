@@ -105,7 +105,7 @@ const Player = ({ player }) => {
             <div className="flex items-center gap-0.5 sm:gap-1">
               <button
                 onClick={handleTransfer}
-                className="hover:border-primary size-4 overflow-hidden rounded-sm border border-neutral-900 transition-all sm:size-5"
+                className="hover:border-primary border-border size-4 overflow-hidden rounded-sm border transition-all sm:size-5"
               >
                 <Image
                   width={16}
@@ -116,7 +116,7 @@ const Player = ({ player }) => {
                   className="h-full w-full"
                 />
               </button>
-              <div className="flex h-4 w-6 cursor-default items-center justify-center rounded-sm border border-neutral-800 bg-neutral-50 text-center text-xs font-bold text-neutral-950 sm:h-5 sm:w-8 md:text-sm">
+              <div className="border-border bg-background text-foreground flex h-4 w-6 cursor-default items-center justify-center rounded-sm border text-center text-xs font-bold sm:h-5 sm:w-8 md:text-sm">
                 {player.price ?? '00'}
               </div>
               <button

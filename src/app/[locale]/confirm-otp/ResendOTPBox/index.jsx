@@ -41,13 +41,13 @@ export default function ResendOTPBox({ phone, className }) {
           'h-7 border bg-transparent px-2 text-xs',
           isResendEnabled
             ? 'text-primary hover:text-primary/70'
-            : 'text-neutral-300'
+            : 'text-muted-foreground'
         )}
       >
         <RefreshCcw
           className={cn(
             'mr-1.5 size-4',
-            isResendEnabled ? 'text-primary' : 'text-neutral-300'
+            isResendEnabled ? 'text-primary' : 'text-muted-foreground'
           )}
         />
         {t('Qayta jo‘natish')}

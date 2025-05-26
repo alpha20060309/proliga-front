@@ -61,7 +61,7 @@ const PackagesSkeleton = () => {
 
 export const PackageSkeleton = () => {
   return (
-    <Card className="border-yellow-500 bg-neutral-900 transition-all hover:border-yellow-400">
+    <Card className="border-accent bg-card hover:border-accent transition-all">
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
           <CardTitle className="text-foreground text-xl font-bold">
@@ -70,7 +70,7 @@ export const PackageSkeleton = () => {
         </div>
       </CardHeader>
       <CardContent className="pt-4">
-        <Separator className="mb-4 bg-yellow-500/20" />
+        <Separator className="bg-accent/20 mb-4" />
         <div className="space-y-4">
           {[1, 2, 3].map((item, index) => (
             <div

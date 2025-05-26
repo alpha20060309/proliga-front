@@ -30,13 +30,13 @@ const MatchEventScore = () => {
   )
 
   return (
-    <section className="h-min bg-linear-to-r from-blue-800/20 via-yellow-800/20 to-red-800/20 py-3">
+    <section className="from-chart-1/20 via-chart-3/20 to-chart-2/20 h-min bg-linear-to-r py-3">
       <div className="flex items-center justify-center gap-4">
         <div className="flex w-1/3 flex-col items-center justify-center gap-2 text-center sm:w-[40%]">
           <img
             src={getUrl(homeImg)}
             alt="Arsenal"
-            className="size-10 rounded-full shadow-sm shadow-neutral-400 sm:size-16"
+            className="shadow-border size-10 rounded-full shadow-sm sm:size-16"
           />
           <h3 className="text-sm font-bold sm:text-base">
             {getCorrectName({
@@ -48,13 +48,13 @@ const MatchEventScore = () => {
         </div>
         <div className="flex w-1/3 flex-col items-center justify-center gap-2 text-center sm:w-[20%]">
           <section className="flex items-center justify-center gap-3">
-            <span className="text-3xl font-bold text-neutral-50 sm:text-4xl">
+            <span className="text-foreground text-3xl font-bold sm:text-4xl">
               {currentMatch?.home_club_result || 0}
             </span>
-            <span className="text-3xl font-light text-gray-400 sm:text-4xl">
+            <span className="text-muted-foreground text-3xl font-light sm:text-4xl">
               :
             </span>
-            <span className="text-3xl font-bold text-neutral-50 sm:text-4xl">
+            <span className="text-foreground text-3xl font-bold sm:text-4xl">
               {currentMatch?.away_club_result || 0}
             </span>
           </section>
@@ -64,7 +64,7 @@ const MatchEventScore = () => {
           <img
             src={getUrl(awayImg)}
             alt="Manchester City"
-            className="size-10 rounded-full shadow-sm shadow-neutral-400 sm:size-16"
+            className="shadow-border size-10 rounded-full shadow-sm sm:size-16"
           />
           <h3 className="text-sm font-bold sm:text-base">
             {getCorrectName({
@@ -89,7 +89,7 @@ const ScoreBoard = () => {
         <div
           className={cn(
             'flex w-full items-center justify-center gap-1 rounded-full px-2 py-1 text-xs sm:w-auto sm:text-sm',
-            'bg-background text-secondary-foreground'
+            'bg-background text-foreground'
           )}
         >
           {t('Boshlanmagan')}
@@ -100,7 +100,7 @@ const ScoreBoard = () => {
         <div
           className={cn(
             'flex w-full items-center justify-center gap-1 rounded-full px-2 py-1 text-xs sm:w-auto sm:text-sm',
-            'bg-background text-secondary-foreground animate-pulse'
+            'bg-background text-foreground animate-pulse'
           )}
         >
           {t('Jarayonda')}
@@ -111,7 +111,7 @@ const ScoreBoard = () => {
         <div
           className={cn(
             'flex w-full items-center justify-center gap-1 rounded-full px-2 py-1 text-xs sm:w-auto sm:text-sm',
-            'bg-green-500/20 text-green-400'
+            'bg-green-500/20 text-green-400' 
           )}
         >
           <Timer className="h-4 w-4" />

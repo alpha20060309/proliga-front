@@ -6,7 +6,7 @@ import { PrizesSkeleton } from '../PrizesSkeleton'
 
 const PrizesTitle = dynamic(() => import('../PrizesTitle'), {
   ssr: false,
-  loading: () => <Skeleton className="mb-4 h-12 w-48 bg-neutral-500" />,
+  loading: () => <Skeleton className="bg-muted mb-4 h-12 w-48" />,
 })
 const PrizeCompetition = dynamic(() => import('../Competition'), {
   ssr: false,

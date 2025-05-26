@@ -42,7 +42,7 @@ const Player = ({ player }) => {
   const tShirt = staticPath + '/club-svg/' + clubPath + '/app.svg'
 
   return (
-    <div className="flex h-min flex-col items-center justify-center text-sm text-neutral-700 select-none sm:text-base">
+    <div className="text-muted text-sms flex h-min flex-col items-center justify-center select-none sm:text-base">
       {!player.name && (
         <>
           <Image
@@ -82,7 +82,7 @@ const Player = ({ player }) => {
             {firstName} {lastName.slice(0, 1).toUpperCase()} {lastName && '.'}
           </p>
           <div className="flex items-center gap-0.5">
-            <div className="bg-primary flex h-4 w-6 cursor-default items-center justify-center rounded-sm border border-neutral-800 text-center text-xs font-bold text-neutral-950 sm:h-5 sm:w-8 md:text-sm">
+            <div className="bg-primary border-border text-foreground flex h-4 w-6 cursor-default items-center justify-center rounded-sm border text-center text-xs font-bold sm:h-5 sm:w-8 md:text-sm">
               {player.is_captain
                 ? (currentPlayerPoint?.point ?? 0) * 2
                 : (currentPlayerPoint?.point ?? 0)}

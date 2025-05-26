@@ -27,7 +27,7 @@ const PlayerPhoto = ({ currentPlayer, position }) => {
       </div>
       <section className="flex flex-1 flex-col justify-between gap-2">
         <div>
-          <DialogTitle className="text-foreground dark:text-accent mb-1 truncate text-lg font-bold sm:text-xl md:text-2xl">
+          <DialogTitle className="text-accent mb-1 truncate text-lg font-bold sm:text-xl md:text-2xl">
             {getCorrectName({
               lang,
               uz: currentPlayer?.name,
@@ -104,14 +104,14 @@ const Stat = ({ icon, value, label }) => (
     </div>
     <div>
       <p className="text-foreground font-semibold">{value ?? 0}</p>
-      <p className="text-xs text-neutral-400">{label}</p>
+      <p className="text-muted-foreground text-xs">{label}</p>
     </div>
   </div>
 )
 
 const SmallerStat = ({ value, label }) => (
   <div className="bg-cardy-1 xs:py-2 flex items-center justify-between gap-1 rounded-md text-xs">
-    <p className="text-3xs leading-tight text-neutral-400">{label}</p>
+    <p className="text-3xs text-muted-foreground leading-tight">{label}</p>
     <p className="text-foreground leading-tight font-semibold">{value ?? 0}</p>
   </div>
 )

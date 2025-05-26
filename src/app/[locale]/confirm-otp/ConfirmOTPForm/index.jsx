@@ -36,7 +36,7 @@ const ConfirmOTPForm = ({ redirect, phone }) => {
   }
 
   return (
-    <div className="bg-background mx-auto w-full max-w-md space-y-8 rounded-lg border border-neutral-800 p-6 shadow-sm shadow-neutral-600">
+    <div className="bg-background mx-auto w-full max-w-md space-y-8 rounded-lg border border-border p-6 shadow-sm">
       <div className="flex items-center gap-2">
         <ShieldCheck className="text-primary h-8 w-8" />
         <h1 className="text-2xl font-bold">{t('SMS Kod Tasdiqlash')}</h1>
@@ -82,7 +82,7 @@ const ConfirmOTPForm = ({ redirect, phone }) => {
         <ResendOTPBox phone={phone} className={'my-2'} />
         <Button
           type="submit"
-          className="text-foreground h-12 w-full rounded-sm border border-yellow-400 bg-neutral-900 font-bold transition-all duration-300 hover:bg-yellow-400 hover:text-neutral-900"
+          className="text-foreground h-12 w-full rounded-sm border border-accent bg-bak font-bold transition-all duration-300 hover:bg-yellow-400 hover:text-neutral-900"
           disabled={isLoading}
         >
           {isLoading ? (

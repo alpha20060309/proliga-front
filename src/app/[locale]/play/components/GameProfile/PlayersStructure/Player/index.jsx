@@ -50,7 +50,7 @@ const Player = ({ player }) => {
   const lastName = name?.split(' ')[1] ?? ''
 
   return (
-    <div className="flex h-min flex-col items-center justify-center text-sm text-neutral-700 select-none sm:text-base">
+    <div className="text-muted-foreground flex h-min flex-col items-center justify-center text-sm select-none sm:text-base">
       {!player.name && (
         <>
           <Image

@@ -62,7 +62,7 @@ const GameBrief = () => {
         <GameBriefSkeleton />
       ) : (
         <>
-          <Container className="border-b border-neutral-700">
+          <Container className="border-border border-b">
             <Item>
               <Title className="">{t('Team id')}</Title>
               <Content
@@ -71,7 +71,7 @@ const GameBrief = () => {
                 }
                 onClick={() => handleClick(currentTeam?.id)}
               >
-                <Copy className="size-5 text-white" />
+                <Copy className="size-5 text-foreground" />
                 {currentTeam?.id}
               </Content>
             </Item>
@@ -80,7 +80,7 @@ const GameBrief = () => {
               <Content>{currentTeam?.name}</Content>
             </Item>
           </Container>
-          <Container className="border-b border-neutral-700">
+          <Container className="border-b border-border">
             <Item>
               <Title> {t('Keyingi Tur')}</Title>
               <Content className="text-primary text-sm md:text-base">
@@ -100,7 +100,7 @@ const GameBrief = () => {
               )}
             </Item>
           </Container>
-          <Container className="border-b border-neutral-700">
+          <Container className="border-border border-b">
             <Item>
               <Title>{t('Tur')}</Title>
               <Content>
@@ -116,7 +116,7 @@ const GameBrief = () => {
               <Content>{currentTourTeam?.point ?? '0'}</Content>
             </Item>
           </Container>
-          <Container className="border-b border-neutral-700">
+          <Container className="border-border border-b">
             <Item>
               <Title>{t('Turnirdagi ochkolar')}</Title>
               <Content>{currentTeam?.point ?? '0'}</Content>
@@ -126,7 +126,7 @@ const GameBrief = () => {
               <Content>{currentCompetition?.average_team_point ?? '0'}</Content>
             </Item>
           </Container>
-          <Container className="border-b border-neutral-700">
+          <Container className="border-border border-b">
             <Item>
               <Title>{t('Chempionat')}</Title>
               <Content className="capitalize">

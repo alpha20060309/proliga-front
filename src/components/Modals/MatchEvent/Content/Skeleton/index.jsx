@@ -4,7 +4,7 @@ export default function MatchEventSkeleton() {
   return (
     <section className="relative flex h-full max-h-[calc(90vh-320px)] flex-col gap-4 overflow-y-auto px-4 py-4">
       {/* Center line */}
-      <span className="absolute top-0 bottom-0 left-1/2 w-px -translate-x-1/2 transform bg-neutral-600" />
+      <span className="bg-muted absolute top-0 bottom-0 left-1/2 w-px -translate-x-1/2 transform" />
 
       <SkeletonEventHeader />
       <SkeletonEvent />
@@ -25,7 +25,7 @@ export default function MatchEventSkeleton() {
 
 const SkeletonEventHeader = () => (
   <div className="flex items-center justify-center">
-    <div className="z-10 h-6 w-24 animate-pulse rounded-sm bg-gray-800 px-3 py-1.5 text-center text-sm" />
+    <div className="bg-muted-foreground z-10 h-6 w-24 animate-pulse rounded-sm px-3 py-1.5 text-center text-sm" />
   </div>
 )
 
@@ -50,7 +50,7 @@ const SkeletonEventSide = ({ isReversed, eventType }) => (
       className={cn(
         'mb-1',
         isReversed ? 'mr-auto' : 'ml-auto',
-        eventType === 'transfer' && 'bg-green-700/50',
+        eventType === 'transfer' && 'bg-success/50',
         'h-4 w-24'
       )}
     />
@@ -58,7 +58,7 @@ const SkeletonEventSide = ({ isReversed, eventType }) => (
       <SkeletonBar
         className={cn(
           isReversed ? 'mr-auto' : 'ml-auto',
-          eventType === 'transfer' && 'bg-red-700/50',
+          eventType === 'transfer' && 'bg-error/50',
           'h-3 w-16'
         )}
       />
@@ -70,11 +70,11 @@ const SkeletonEventIcon = ({ eventType }) => (
   <div className="flex w-2/12 items-center justify-center">
     <div
       className={cn(
-        'z-10 flex size-10 animate-pulse items-center justify-center rounded-full bg-gray-700'
+        'bg-muted z-10 flex size-10 animate-pulse items-center justify-center rounded-full'
       )}
     >
       {eventType === 'transfer' && (
-        <SkeletonBar className="h-4 w-4 rounded-sm bg-white/30" />
+        <SkeletonBar className="bg-foreground/30 h-4 w-4 rounded-sm" />
       )}
       {eventType === 'card' && (
         <SkeletonBar className="h-6 w-4 rounded-xs bg-yellow-500/50" />
@@ -92,5 +92,7 @@ const SkeletonEventTime = ({ isReversed }) => (
 )
 
 const SkeletonBar = ({ className }) => (
-  <div className={cn('animate-pulse rounded-sm bg-gray-700', className)} />
+  <div
+    className={cn('bg-muted-foreground animate-pulse rounded-sm', className)}
+  />
 )

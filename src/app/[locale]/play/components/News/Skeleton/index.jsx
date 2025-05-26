@@ -16,11 +16,11 @@ function ArticleSkeleton() {
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center space-x-1">
             <div className="flex items-center space-x-1">
-              <CalendarDays className="size-4 animate-pulse text-neutral-500" />
+              <CalendarDays className="size-4 animate-pulse text-muted-foreground" />
               <Skeleton className="h-4 w-16" />
             </div>
             <div className="flex items-center space-x-1">
-              <Eye className="size-4 animate-pulse text-neutral-500" />
+              <Eye className="size-4 animate-pulse text-muted-foreground" />
               <Skeleton className="h-4 w-10" />
             </div>
           </div>
@@ -37,7 +37,7 @@ export function NewsSkeleton({ count = 5, paginationCount = 5 }) {
       className={cn(
         'relative mx-auto flex h-min min-h-168 w-full max-w-lg flex-col',
         'bg-background items-stretch justify-between rounded-xl p-4 md:p-6 lg:mx-0',
-        'gap-2 border border-neutral-600 lg:w-auto lg:min-w-72 lg:flex-1'
+        'gap-2 border border-border lg:w-auto lg:min-w-72 lg:flex-1'
       )}
     >
       <Skeleton className="h-8 w-32 self-start" />

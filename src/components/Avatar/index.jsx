@@ -20,7 +20,7 @@ const Avatar = ({ className }) => {
             e.target.src = '/icons/user.svg'
           }}
           className={cn(
-            'aspect-square size-8 bg-neutral-100 select-none',
+            'bg-background aspect-square size-8 select-none',
             className
           )}
         />
@@ -56,7 +56,7 @@ const Avatar = ({ className }) => {
   return (
     <User
       className={cn(
-        'size-8 bg-neutral-200 p-px text-neutral-950 select-none lg:p-0.5',
+        'bg-background text-foreground size-8 p-px select-none lg:p-0.5',
         className
       )}
     />

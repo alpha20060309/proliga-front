@@ -44,28 +44,28 @@ export default function Error({ reset }) {
   }, [router])
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-neutral-900 p-4">
-      <Card className="bg-card w-full max-w-md border-4 border-red-500">
+    <div className="bg-background flex min-h-screen items-center justify-center p-4">
+      <Card className="bg-card border-error w-full max-w-md border-4">
         <div className="p-6 text-center">
-          <h1 className="mb-4 text-6xl font-bold text-red-500">500</h1>
+          <h1 className="text-error mb-4 text-6xl font-bold">500</h1>
           <div className="relative mx-auto mb-6 h-24 w-24">
-            <div className="absolute inset-0 rounded-full bg-red-500"></div>
-            <div className="absolute inset-2 rounded-full bg-gray-800"></div>
+            <div className="bg-error absolute inset-0 rounded-full"></div>
+            <div className="bg-background absolute inset-2 rounded-full"></div>
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-2xl font-bold text-red-500">STOP</span>
+              <span className="text-error text-2xl font-bold">STOP</span>
             </div>
           </div>
-          <h2 className="mb-4 text-2xl font-semibold text-red-400">
+          <h2 className="text-error mb-4 text-2xl font-semibold">
             O&apos;yinda texnik to&apos;xtash!
           </h2>
-          <p className="mb-6 text-neutral-300">
+          <p className="text-muted-foreground mb-6">
             Afsuski, serverda xatolik yuz berdi. Jamoamiz bu muammoni hal qilish
             ustida ishlamoqda.
           </p>
           <div className="space-y-2">
             <Button
               onClick={reset}
-              className="w-full bg-red-500 text-neutral-900 hover:bg-red-600"
+              className="bg-error text-foreground hover:bg-error/80 w-full"
             >
               Qayta urinish
             </Button>

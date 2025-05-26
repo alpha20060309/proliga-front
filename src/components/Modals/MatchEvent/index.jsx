@@ -38,7 +38,7 @@ function MatchEventModal() {
 
   return (
     <Dialog open={isModalOpen && currentMatch?.id} onOpenChange={setModalOpen}>
-      <DialogContent className="text-foreground flex h-[75vh] w-[98%] max-w-2xl flex-col gap-0 rounded-xl border border-neutral-800 bg-linear-to-b from-gray-900 via-neutral-950 to-black p-0">
+      <DialogContent className="text-foreground border-muted-foreground from-sidebar via-sidebar to-sidebar flex h-[75vh] w-[98%] max-w-2xl flex-col gap-0 rounded-xl border bg-linear-to-b p-0">
         <MatchEventHeader
           started_date={currentMatch?.started_date}
           finished_date={currentMatch?.finished_date}
@@ -49,7 +49,7 @@ function MatchEventModal() {
         <AnimatePresence>
           {isModalOpen && (
             <motion.button
-              className="text-foreground absolute right-6 bottom-4 rounded-full bg-gray-800 p-2 shadow-sm shadow-neutral-400"
+              className="shadow-border bg-secondary absolute right-6 bottom-4 rounded-full p-2 shadow-sm"
               variants={refreshButtonVariants}
               initial="hidden"
               animate="visible"
@@ -58,7 +58,7 @@ function MatchEventModal() {
               whileTap="tap"
               onClick={handleRefresh}
             >
-              <RefreshCcw className="size-5 text-neutral-50" />
+              <RefreshCcw className="text-foreground size-5" />
             </motion.button>
           )}
         </AnimatePresence>

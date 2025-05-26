@@ -24,7 +24,7 @@ const MatchTeamDisplay = ({
           isWinner &&
             "after:bg-primary after:absolute after:top-0 after:right-0 after:bottom-0 after:left-0 after:animate-ping after:rounded-full after:opacity-75 after:content-['']",
           isDraw &&
-            "after:absolute after:top-0 after:right-0 after:bottom-0 after:left-0 after:animate-ping after:rounded-full after:bg-neutral-500 after:opacity-50 after:content-['']"
+            "after:bg-muted-foreground/80 after:absolute after:top-0 after:right-0 after:bottom-0 after:left-0 after:animate-ping after:rounded-full after:opacity-50 after:content-['']"
         )}
       >
         <img
@@ -36,7 +36,7 @@ const MatchTeamDisplay = ({
           className={cn(
             'xs:size-8 size-7 min-w-7 rounded-full',
             isWinner && 'ring-primary ring-2',
-            isDraw && 'ring-2 ring-neutral-500'
+            isDraw && 'ring-muted-foreground ring-2'
           )}
         />
       </div>
@@ -54,7 +54,7 @@ const MatchTeamDisplay = ({
             className={cn(
               'text-sm',
               isWinner && 'ring-primary',
-              isDraw && 'ring-neutral-500',
+              isDraw && 'ring-muted-foreground',
               alignment === 'left' ? 'text-left' : 'text-right'
             )}
           />

@@ -3,7 +3,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 const MatchSkeleton = () => {
   return (
-    <Card className="h-12 overflow-hidden">
+    <Card className="h-12 space-y-0 overflow-hidden p-0">
       <CardContent className="xs:px-2 xs:py-3 flex h-12 items-center gap-1 px-1 py-2.5">
         <div className="xs:gap-2 flex w-full items-center gap-1">
           <Skeleton className="xs:size-8 size-7 rounded-full" />

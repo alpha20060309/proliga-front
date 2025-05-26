@@ -49,7 +49,7 @@ const PackageContainer = ({ packageType }) => {
                 <div className="flex cursor-default items-center space-x-2">
                   <Badge
                     variant="outline"
-                    className="bg-primary/15 border-accent text-foreground dark:text-accent border"
+                    className="bg-primary/15 border-accent text-accent border"
                   >
                     {item.amount}
                   </Badge>
@@ -78,11 +78,11 @@ const PackageContainer = ({ packageType }) => {
 const PackageIcon = ({ type }) => {
   switch (type) {
     case PACKAGE_TYPE.team_balance:
-      return <Coins className="text-primary/90 h-6 w-6" />
+      return <Coins className="text-accent h-6 w-6" />
     case PACKAGE_TYPE.transfer_count:
-      return <Zap className="text-primary/90 h-6 w-6" />
+      return <Zap className="text-accent h-6 w-6" />
     case PACKAGE_TYPE.single_club_count:
-      return <Users className="text-primary/90 h-6 w-6" />
+      return <Users className="text-accent h-6 w-6" />
     default:
       return null
   }

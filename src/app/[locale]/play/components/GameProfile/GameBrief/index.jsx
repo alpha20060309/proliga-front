@@ -189,14 +189,14 @@ const GameBrief = () => {
             <Item>
               <Title>{t('Jamoa narxi')}</Title>
               <Content className={'flex items-center gap-1'}>
-                <PercentCircle className="dark:text-accent size-5" />
+                <PercentCircle className="text-accent size-5" />
                 {teamPrice ?? 0}
               </Content>
             </Item>
             <Item>
               <Title>{t('Balans')}</Title>
               <Content className={'flex items-center gap-1'}>
-                <Coins className="dark:text-accent size-5" />
+                <Coins className="text-accent size-5" />
                 {teamBalance ?? 0}
               </Content>
             </Item>

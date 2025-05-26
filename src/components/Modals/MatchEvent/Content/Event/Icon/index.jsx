@@ -1,15 +1,22 @@
 import { MATCH_EVENTS } from 'app/utils/match.util'
+import { RefreshCcw } from 'lucide-react'
 
 const MatchEventIcon = ({ type }) => {
   switch (type) {
     case MATCH_EVENTS.GOAL:
-      return <img src="/icons/football.svg" alt="GOAL" className="size-7" />
+      return (
+        <img
+          src="/icons/football.svg"
+          alt="GOAL"
+          className="filter-black dark:filter-white size-7"
+        />
+      )
     case MATCH_EVENTS.MISSED_PENALTY:
       return (
         <img
           src="/icons/missed-penalty.svg"
           alt="missed penalty"
-          className="size-7"
+          className="filter-black dark:filter-white size-7"
         />
       )
     case MATCH_EVENTS.HIT_PENALTY:
@@ -17,17 +24,11 @@ const MatchEventIcon = ({ type }) => {
         <img
           src="/icons/hit-penalty.svg"
           alt="Penalty hit"
-          className="size-7"
+          className="filter-black dark:filter-white size-7"
         />
       )
     case MATCH_EVENTS.TRANSFER:
-      return (
-        <img
-          src="/icons/arrows-transfer.svg"
-          alt="transfer players"
-          className="size-7"
-        />
-      )
+      return <RefreshCcw className="text-foreground size-7" />
     case MATCH_EVENTS.RED_CARD:
       return (
         <img

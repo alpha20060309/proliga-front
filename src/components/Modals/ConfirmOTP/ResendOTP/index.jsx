@@ -44,7 +44,7 @@ export default function ResendOTP() {
           'h-7 border bg-transparent px-2 text-xs',
           isResendEnabled
             ? 'text-primary hover:text-primary/70'
-            : 'text-neutral-300'
+            : 'text-foreground'
         )}
       >
         <RefreshCcw

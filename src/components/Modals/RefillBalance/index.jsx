@@ -159,6 +159,6 @@ const PaymentOption = ({ onClick, style, img, alt }) => {
 }
 
 const ACTIVE = 'border-accent'
-const PASSIVE = 'border-accent hover:border-yellow-600'
+const PASSIVE = 'border-accent hover:border-primary'
 
 export default memo(RefillBalance)

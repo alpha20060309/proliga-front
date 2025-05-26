@@ -15,7 +15,7 @@ async function Home({ params }) {
   return (
     <>
       <Hero params={params} />
-      <Promotions />
+      <Promotions params={params} />
     </>
   )
 }
