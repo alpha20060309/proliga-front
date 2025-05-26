@@ -26,7 +26,7 @@ const CustomThemeProvider = ({ children }) => {
   useEffect(() => {
     const isAuthenticated = localStorage.getItem('isAuthenticated')
     if (isAuthenticated && user?.id) {
-      const { light_theme, dark_theme: userDarkTheme } = user // Renamed to avoid conflict
+      const { light_theme, dark_theme } = user // Renamed to avoid conflict
       if (light_theme) {
         if (light_theme.colors)
           dispatch(setLightTheme({ type: 'colors', data: light_theme.colors }))
@@ -39,17 +39,15 @@ const CustomThemeProvider = ({ children }) => {
         if (light_theme.font)
           dispatch(setLightTheme({ type: 'font', data: light_theme.font }))
       }
-      if (userDarkTheme) {
-        if (userDarkTheme.colors)
-          dispatch(setDarkTheme({ type: 'colors', data: userDarkTheme.colors }))
-        if (userDarkTheme.shadows)
-          dispatch(
-            setDarkTheme({ type: 'shadows', data: userDarkTheme.shadows })
-          )
-        if (userDarkTheme.global)
-          dispatch(setDarkTheme({ type: 'global', data: userDarkTheme.global }))
-        if (userDarkTheme.font)
-          dispatch(setDarkTheme({ type: 'font', data: userDarkTheme.font }))
+      if (dark_theme) {
+        if (dark_theme.colors)
+          dispatch(setDarkTheme({ type: 'colors', data: dark_theme.colors }))
+        if (dark_theme.shadows)
+          dispatch(setDarkTheme({ type: 'shadows', data: dark_theme.shadows }))
+        if (dark_theme.global)
+          dispatch(setDarkTheme({ type: 'global', data: dark_theme.global }))
+        if (dark_theme.font)
+          dispatch(setDarkTheme({ type: 'font', data: dark_theme.font }))
       }
     }
   }, [dispatch, user])
@@ -59,6 +57,7 @@ const CustomThemeProvider = ({ children }) => {
     const loadInitialColorValuesIfNeeded = () => {
       const currentStoreColors =
         theme === 'dark' ? darkTheme.colors : lightTheme.colors
+
       if (!currentStoreColors || Object.keys(currentStoreColors).length === 0) {
         const rootStyles = getComputedStyle(document.documentElement)
         const initialColors = {}
@@ -107,7 +106,6 @@ const CustomThemeProvider = ({ children }) => {
       document.documentElement.style.setProperty('--font-sans', fontToApply)
       document.body.style.fontFamily = fontToApply
     }
-    // else you might want to set a default font if nothing is in the store
   }, [theme, darkTheme.font, lightTheme.font])
 
   // Shadows: Initialize store from DOM/defaults if empty, then apply from Redux store to DOM
@@ -115,7 +113,6 @@ const CustomThemeProvider = ({ children }) => {
     let shadowsToApply =
       theme === 'dark' ? darkTheme.shadows : lightTheme.shadows
 
-    // Initialize store if empty for the current theme
     if (!shadowsToApply || Object.keys(shadowsToApply).length === 0) {
       const rootStyles = getComputedStyle(document.documentElement)
       const initialShadowData = Object.fromEntries(
@@ -140,8 +137,6 @@ const CustomThemeProvider = ({ children }) => {
       } else {
         dispatch(setLightTheme({ type: 'shadows', data: initialShadowData }))
       }
-      // The store will update, and this effect will re-run.
-      // shadowsToApply will be populated in the next run.
       return // Exit early, let re-run handle application
     }
 
@@ -160,6 +155,7 @@ const CustomThemeProvider = ({ children }) => {
   useEffect(() => {
     const currentGlobalConfig =
       theme === 'dark' ? darkTheme.global : lightTheme.global
+      
     if (!currentGlobalConfig || Object.keys(currentGlobalConfig).length === 0) {
       const rootStyles = getComputedStyle(document.documentElement)
       const initialGlobalData = {
