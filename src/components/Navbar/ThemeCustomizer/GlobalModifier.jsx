@@ -115,8 +115,8 @@ const GlobalModifier = () => {
               </label>
               <span className="text-xs text-[#999]">
                 {theme === 'dark'
-                  ? darkTheme.global.borderRadius
-                  : lightTheme.global.borderRadius}
+                  ? darkTheme.global.radius
+                  : lightTheme.global.radius}
                 rem
               </span>
             </div>
@@ -125,15 +125,13 @@ const GlobalModifier = () => {
               id="global-radius-slider"
               value={
                 theme === 'dark'
-                  ? darkTheme.global.borderRadius
-                  : lightTheme.global.borderRadius
+                  ? darkTheme.global.radius
+                  : lightTheme.global.radius
               }
               min={0}
               max={5}
               step={0.05}
-              onChange={(e) =>
-                handleChange('radius', e.target.value, 'borderRadius')
-              }
+              onChange={(e) => handleChange('radius', e.target.value, 'radius')}
               className="w-full py-1"
             />
           </div>

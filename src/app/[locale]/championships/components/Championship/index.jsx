@@ -72,7 +72,7 @@ const Championship = ({ game }) => {
           <img
             src={getUrl(game.flag)}
             alt={game.title}
-            className="bg-white z-10 size-14 rounded-xl p-1 select-none"
+            className="z-10 size-14 rounded-xl bg-white p-1 select-none"
             draggable={false}
             loading="lazy"
           />
@@ -102,7 +102,7 @@ const renderGameStatus = (game, currentGame, t) => {
         <Badge variant="destructive" className="text-destructive-foreground">
           {t('Inactive')}
         </Badge>
-        <p className="text-secondary-foreground">{t('Tez Kunda')}</p>
+        <p className="text-secondary-foreground/70">{t('Tez Kunda')}</p>
       </div>
     )
   }
@@ -111,7 +111,7 @@ const renderGameStatus = (game, currentGame, t) => {
     return (
       <div className="text-secondary-foreground flex gap-1 text-xs select-none sm:text-sm">
         <p>{t('Deadline')}: </p>
-        <span className="font-semibold text-yellow-400">
+        <span className="text-accent font-semibold">
           {formatDate(game?.deadline)}
         </span>
       </div>
@@ -120,10 +120,10 @@ const renderGameStatus = (game, currentGame, t) => {
 
   return (
     <div className="mt-1 flex items-center gap-2 text-xs select-none sm:text-sm">
-      <Badge className="bg-amber-400 font-medium text-amber-900 capitalize hover:bg-amber-400/90 dark:bg-amber-500 dark:text-amber-950 dark:hover:bg-amber-500/90">
+      <Badge className="bg-muted/80 text-muted-foreground font-medium capitalize">
         {t('closed')}
       </Badge>
-      <p className="text-secondary-foreground/80">{t('Registration Ended')}</p>
+      <p className="text-secondary-foreground/70">{t('Registration Ended')}</p>
     </div>
   )
 }

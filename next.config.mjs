@@ -21,7 +21,6 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    // domains: ['proliga.uz'],
     remotePatterns: [
       {
         protocol: 'https',

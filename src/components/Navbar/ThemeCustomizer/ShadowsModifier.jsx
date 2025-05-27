@@ -3,7 +3,7 @@
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import {
   hexToHsl,
-  DEFAULT_VALUES,
+  DEFAULT_SHADOWS,
   UNITS,
   SHADOW_KEYS,
   updateShadows,
@@ -52,7 +52,7 @@ const ShadowModifier = () => {
     const value =
       theme === 'dark'
         ? darkTheme.shadows[key]
-        : lightTheme.shadows[key] || DEFAULT_VALUES[key] || ''
+        : lightTheme.shadows[key] || DEFAULT_SHADOWS[key] || ''
     if (!value) return
 
     const numericValue = value.replace(/[^\d.-]/g, '')

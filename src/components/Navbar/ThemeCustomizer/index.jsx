@@ -11,7 +11,7 @@ import ColorModifier from './ColorModifier'
 import FontModifier from './FontModifer'
 import GlobalModifier from './GlobalModifier'
 import ShadowModifier from './ShadowsModifier'
-import { Save, Loader2 } from 'lucide-react'
+import { Save, Loader2, RefreshCw } from 'lucide-react'
 import { useSelector } from 'react-redux'
 import { useUpdateUserThemes } from 'app/hooks/user/useUpdateUserThemes/useUpdateUserThemes'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
@@ -34,6 +34,23 @@ const ThemeCustomizer = () => {
         userTable: user,
       })
       toast.success('Theme saved successfully')
+    } catch (error) {
+      toast.error(error)
+    }
+  }
+
+  const handleReset = async () => {
+    try {
+      if (!user?.id) {
+        toast.error('Please Login to save your theme')
+        return
+      }
+      await updateUserThemes({
+        darkTheme: null,
+        lightTheme: null,
+        userTable: user,
+      })
+      toast.success('Successfully reset theme')
     } catch (error) {
       toast.error(error)
     }
@@ -63,6 +80,17 @@ const ThemeCustomizer = () => {
             Theme Customizer
           </SheetTitle>
         </SheetHeader>
+        <button
+          onClick={handleReset}
+          className="flex w-full items-center justify-center gap-2 rounded-[4px] bg-red-500 p-2 text-white transition-all hover:bg-red-600"
+        >
+          {isLoading ? (
+            <Loader2 className="size-6 animate-spin" />
+          ) : (
+            <RefreshCw className="size-6" />
+          )}
+          Reset
+        </button>
         <Tabs defaultValue="color">
           <TabsList className="w-full rounded-[4px] bg-[#f5f5f5]">
             <TabsTrigger
@@ -106,7 +134,7 @@ const ThemeCustomizer = () => {
         <button
           disabled={isLoading}
           onClick={handleSave}
-          className="flex w-full items-center justify-center gap-2 rounded-[4px] bg-green-500 p-2 text-white"
+          className="flex w-full items-center justify-center gap-2 rounded-[4px] bg-green-500 p-2 text-white transition-all hover:bg-green-600"
         >
           {isLoading ? (
             <Loader2 className="size-6 animate-spin" />

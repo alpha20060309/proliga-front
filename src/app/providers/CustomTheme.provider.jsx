@@ -10,6 +10,10 @@ import {
 } from 'app/lib/features/systemConfig/systemConfig.slice'
 import { SHADOW_KEYS, updateShadows } from 'app/utils/shadow.utils'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import {
+  DEFAULT_LIGHT_THEME,
+  DEFAULT_DARK_THEME,
+} from 'app/utils/default-theme.util'
 
 const CustomThemeProvider = ({ children }) => {
   const dispatch = useDispatch()
@@ -20,24 +24,38 @@ const CustomThemeProvider = ({ children }) => {
   // Load user themes into Redux store
   useEffect(() => {
     const isAuthenticated = localStorage.getItem('isAuthenticated')
-    if (!isAuthenticated || !user?.id) return
-
-    const { light_theme, dark_theme } = user
     const themeTypes = ['colors', 'shadows', 'global', 'font']
 
-    if (light_theme) {
+    if (!isAuthenticated || !user?.id) {
+      themeTypes.forEach((type) => {
+        dispatch(setLightTheme({ type, data: DEFAULT_LIGHT_THEME[type] }))
+        dispatch(setDarkTheme({ type, data: DEFAULT_DARK_THEME[type] }))
+      })
+      return
+    }
+    const { light_theme, dark_theme } = user
+
+    if (light_theme?.colors?.length > 0) {
       themeTypes.forEach((type) => {
         if (light_theme[type]) {
           dispatch(setLightTheme({ type, data: light_theme[type] }))
         }
       })
+    } else {
+      themeTypes.forEach((type) => {
+        dispatch(setLightTheme({ type, data: DEFAULT_LIGHT_THEME[type] }))
+      })
     }
 
-    if (dark_theme) {
+    if (dark_theme?.colors?.length > 0) {
       themeTypes.forEach((type) => {
         if (dark_theme[type]) {
           dispatch(setDarkTheme({ type, data: dark_theme[type] }))
         }
+      })
+    } else {
+      themeTypes.forEach((type) => {
+        dispatch(setDarkTheme({ type, data: DEFAULT_DARK_THEME[type] }))
       })
     }
   }, [dispatch, user])

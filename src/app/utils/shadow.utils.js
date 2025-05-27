@@ -7,17 +7,13 @@ export const SHADOW_KEYS = [
   'shadow-offset-y',
 ]
 
-export const DEFAULT_VALUES = {
+export const DEFAULT_SHADOWS = {
   'shadow-color': '0, 0%, 30%',
   'shadow-opacity': '0.08',
   'shadow-blur': '3px',
   'shadow-spread': '0px',
   'shadow-offset-x': '0px',
   'shadow-offset-y': '1px',
-  // Defaults for global styles, used in CustomThemeProvider
-  spacing: 4,        // Used as a fallback for --spacing
-  letterSpacing: 0,  // Used as a fallback for --letter-spacing
-  borderRadius: 16,   // Used as a fallback for --radius (e.g., 0.5rem if base is 16px)
 }
 
 export const UNITS = {
@@ -77,7 +73,7 @@ export const updateShadows = (values) => {
     'shadow-color': color,
     'shadow-opacity': opacity,
   } = Object.fromEntries(
-    Object.entries(DEFAULT_VALUES).map(([k, v]) => [k, values[k] || v])
+    Object.entries(DEFAULT_SHADOWS).map(([k, v]) => [k, values[k] || v])
   )
 
   SHADOW_VARIANTS.forEach(({ name, multiplier }) => {

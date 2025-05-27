@@ -14,6 +14,7 @@ import { Globe } from 'lucide-react'
 import { useRouter, usePathname } from 'next/navigation'
 import { setLanguageCookie } from 'app/utils/setLanguageCookie'
 import i18nConfig from 'app/lib/i18n.config'
+import { useEffect } from 'react'
 
 const ChangeLanguageDropdown = () => {
   const dispatch = useDispatch()
@@ -22,6 +23,12 @@ const ChangeLanguageDropdown = () => {
   const currentLocale = i18n.language
   const router = useRouter()
   const currentPathname = usePathname()
+
+  useEffect(() => {
+    if (i18n.language !== lang) {
+      dispatch(setLanguage({ lang: i18n.language }))
+    }
+  }, [lang, i18n.language, dispatch])
 
   const handleChange = async (newLocale) => {
     setLanguageCookie(newLocale)
