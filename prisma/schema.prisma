@@ -914,6 +914,7 @@ model user {
   user_activity_user_activity_updated_byTouser     user_activity[]       @relation("user_activity_updated_byTouser")
   user_activity_user_activity_user_idTouser        user_activity[]       @relation("user_activity_user_idTouser")
   user_prize                                       user_prize[]
+  user_theme                                       user_theme[]
 
   @@index([guid])
   @@index([id], map: "idx_user_id")
@@ -992,6 +993,16 @@ model user_prize {
   @@index([season_id], map: "idx_user_prize_season_id")
   @@index([team_id], map: "idx_user_prize_team_id")
   @@index([user_id], map: "idx_user_prize_user_id")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model user_theme {
+  id          Int      @id
+  user_id     Int
+  light_theme Json?
+  dark_theme  Json?
+  is_global   Boolean?
+  user        user     @relation(fields: [user_id], references: [id], onDelete: SetNull, onUpdate: SetNull)
 }
 
 enum System {

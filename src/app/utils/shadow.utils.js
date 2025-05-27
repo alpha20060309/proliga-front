@@ -8,7 +8,7 @@ export const SHADOW_KEYS = [
 ]
 
 export const DEFAULT_SHADOWS = {
-  'shadow-color': '0, 0%, 30%',
+  'shadow-color': '#4D4D4D',
   'shadow-opacity': '0.08',
   'shadow-blur': '3px',
   'shadow-spread': '0px',

@@ -16,6 +16,7 @@ import { useSelector } from 'react-redux'
 import { useUpdateUserThemes } from 'app/hooks/user/useUpdateUserThemes/useUpdateUserThemes'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { toast } from 'sonner'
+import SelectTheme from './SelectTheme'
 
 const ThemeCustomizer = () => {
   const { darkTheme, lightTheme } = useSelector((state) => state.systemConfig)
@@ -91,6 +92,7 @@ const ThemeCustomizer = () => {
           )}
           Reset
         </button>
+        <SelectTheme />
         <Tabs defaultValue="color">
           <TabsList className="w-full rounded-[4px] bg-[#f5f5f5]">
             <TabsTrigger

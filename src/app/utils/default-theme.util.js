@@ -1,4 +1,5 @@
 import { DEFAULT_SHADOWS } from './shadow.utils'
+
 export const DEFAULT_LIGHT_THEME = {
   colors: {
     background: '#fafafa',
