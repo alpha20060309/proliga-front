@@ -3,6 +3,7 @@
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import {
   hexToHsl,
+  hslStringToHex,
   DEFAULT_SHADOWS,
   UNITS,
   SHADOW_KEYS,
@@ -56,7 +57,8 @@ const ShadowModifier = () => {
         : lightTheme.shadows[key] || DEFAULT_SHADOWS[key] || ''
     if (!value) return
 
-    const numericValue = value.replace(/[^\d.-]/g, '')
+    const numericValue =
+      typeof value === 'string' ? value.replace(/[^\d.-]/g, '') : ''
 
     if (key === 'shadow-color') {
       return (
@@ -67,7 +69,7 @@ const ShadowModifier = () => {
           <input
             type="color"
             id={key}
-            value={value}
+            value={hslStringToHex(value)}
             onChange={(e) => handleChange(key, hexToHsl(e.target.value))}
             className="h-8 w-8 rounded border-none p-0"
           />

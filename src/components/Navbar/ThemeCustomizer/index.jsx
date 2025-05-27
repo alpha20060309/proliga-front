@@ -41,7 +41,7 @@ const ThemeCustomizer = () => {
   const handleSave = async () => {
     try {
       if (!user?.id) {
-        toast.error('Please Login to save your theme')
+        toast.error(t('Please Login to save your theme'))
         return
       }
       await updateUserThemes({
@@ -56,7 +56,7 @@ const ThemeCustomizer = () => {
           setPresetName('')
         },
       })
-      toast.success('Theme saved successfully')
+      toast.success(t('Theme saved successfully'))
     } catch (error) {
       toast.error(error)
     }
@@ -70,7 +70,7 @@ const ThemeCustomizer = () => {
           lightTheme: null,
           userTable: user,
         })
-        toast.success('Successfully saved the default theme')
+        toast.success(t('Successfully saved the default theme'))
       } catch (error) {
         toast.error(error)
       }
@@ -84,7 +84,7 @@ const ThemeCustomizer = () => {
 
     dispatch(setSelectedTheme(''))
 
-    !user?.id && toast.success('Theme is reset to default')
+    !user?.id && toast.success(t('Theme is reset to default'))
   }
 
   return (
@@ -114,7 +114,7 @@ const ThemeCustomizer = () => {
         </SheetHeader>
         <button
           onClick={handleReset}
-          className="group bg-destructive/90 text-destructive-foreground hover:bg-destructive focus:ring-destructive mb-4 flex w-full items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm font-medium shadow-sm transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+          className="group mb-4 flex w-full items-center justify-center gap-2 rounded-md bg-[#6b7280] px-4 py-2.5 text-sm font-medium text-[#ffffff] shadow-sm transition-colors hover:bg-[#4b5563] focus:ring-2 focus:ring-[#6b7280] focus:ring-offset-2 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
           aria-label="Reset theme to default"
         >
           <RefreshCw className="size-4 transition-transform group-hover:rotate-180" />
@@ -172,7 +172,11 @@ const ThemeCustomizer = () => {
           ) : (
             <Save className="size-4 transition-transform group-hover:scale-110" />
           )}
-          {isLoading ? 'Saving Changes...' : 'Save Changes'}
+          {isLoading ? (
+            <Loader2 className="size-4 animate-spin" />
+          ) : (
+            t('Save Changes')
+          )}
         </button>
         {user?.id && user?.is_admin && (
           <div className="my-4 flex flex-col gap-2">

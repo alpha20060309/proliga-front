@@ -663,5 +663,10 @@
   "Blur": "Размытие",
   "Spread": "Распространение",
   "Offset x": "Смещение по оси X",
-  "Offset y": "Смещение по оси Y"
+  "Offset y": "Смещение по оси Y",
+  "Successfully saved the default theme": "Стандартная тема успешно сохранена",
+  "Theme is reset to default": "Тема сброшена к настройкам по умолчанию",
+  "Please Login to save your theme": "Пожалуйста, войдите, чтобы сохранить тему",
+  "Theme saved successfully": "Тема успешно сохранена",
+  "Save Changes": "Сохранить изменения"
 }

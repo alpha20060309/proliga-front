@@ -8,7 +8,7 @@ export const SHADOW_KEYS = [
 ]
 
 export const DEFAULT_SHADOWS = {
-  'shadow-color': '#4D4D4D',
+  'shadow-color': '0, 0%, 30%',
   'shadow-opacity': '0.08',
   'shadow-blur': '3px',
   'shadow-spread': '0px',
@@ -62,6 +62,30 @@ export const hexToHsl = (hex) => {
           ? ((b - r) / (max - min) + 2) * 60
           : ((r - g) / (max - min) + 4) * 60
   return `${Math.round(h)}, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%`
+}
+
+export const hslStringToHex = (hslString) => {
+  if (!hslString || typeof hslString !== 'string') return '#000000'
+  const parts = hslString.split(',').map((s) => s.trim())
+  if (parts.length !== 3) return '#000000'
+
+  const h = parseInt(parts[0])
+  const s = parseInt(parts[1].replace('%', '')) / 100
+  const l = parseInt(parts[2].replace('%', '')) / 100
+
+  if (isNaN(h) || isNaN(s) || isNaN(l)) return '#000000'
+
+  const k = (n) => (n + h / 30) % 12
+  const a = s * Math.min(l, 1 - l)
+  const f = (n) =>
+    l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)))
+
+  const toHex = (x) => {
+    const hex = Math.round(x * 255).toString(16)
+    return hex.length === 1 ? '0' + hex : hex
+  }
+
+  return `#${toHex(f(0))}${toHex(f(8))}${toHex(f(4))}`
 }
 
 export const updateShadows = (values) => {

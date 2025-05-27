@@ -20,7 +20,6 @@ const SelectTheme = () => {
   const dispatch = useDispatch()
   const { selectedTheme, themes } = useSelector((store) => store.systemConfig)
   const { t } = useTranslation()
- 
 
   const handleThemeChange = (value) => {
     dispatch(setSelectedTheme(value))
@@ -48,7 +47,9 @@ const SelectTheme = () => {
 
   return (
     <div className="w-full space-y-2">
-      <label className="text-sm font-medium text-white">{t('Select Theme')}</label>
+      <label className="text-sm font-medium text-white">
+        {t('Select Theme')}
+      </label>
       <Select value={selectedTheme || ''} onValueChange={handleThemeChange}>
         <SelectTrigger
           style={{
@@ -62,7 +63,7 @@ const SelectTheme = () => {
             outline: 'none',
           }}
         >
-          <SelectValue placeholder="Select a theme" />
+          <SelectValue placeholder={t('Select Theme')} />
         </SelectTrigger>
         <SelectContent
           style={{

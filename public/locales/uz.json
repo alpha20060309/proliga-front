@@ -663,5 +663,10 @@
   "Blur": "Qorongʻilik",
   "Spread": "Tarqalish",
   "Offset x": " X o‘qi bo‘yicha siljish\n\n",
-  "Offset y": " Y o‘qi bo‘yicha siljish"
+  "Offset y": " Y o‘qi bo‘yicha siljish",
+  "Successfully saved the default theme": "Standart mavzu muvaffaqiyatli saqlandi",
+  "Theme is reset to default": "Mavzu standart holatga qaytarildi",
+  "Please Login to save your theme": "Mavzuni saqlash uchun tizimga kiring",
+  "Theme saved successfully": "Mavzu muvaffaqiyatli saqlandi",
+  "Save Changes": "O‘zgartirishlarni saqlash"
 }
