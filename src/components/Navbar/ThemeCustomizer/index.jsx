@@ -101,10 +101,11 @@ const ThemeCustomizer = () => {
         </SheetHeader>
         <button
           onClick={handleReset}
-          className="flex w-full items-center justify-center gap-2 rounded-[4px] bg-red-500 p-2 text-white transition-all hover:bg-red-600"
+          className="group bg-destructive/90 text-destructive-foreground hover:bg-destructive focus:ring-destructive mb-4 flex w-full items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm font-medium shadow-sm transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+          aria-label="Reset theme to default"
         >
-          <RefreshCw className="size-6" />
-          Reset
+          <RefreshCw className="size-4 transition-transform group-hover:rotate-180" />
+          Reset to Default
         </button>
         <SelectTheme />
         <Tabs defaultValue="color">
@@ -150,15 +151,26 @@ const ThemeCustomizer = () => {
         <button
           disabled={isLoading}
           onClick={handleSave}
-          className="flex w-full items-center justify-center gap-2 rounded-[4px] bg-green-500 p-2 text-white transition-all hover:bg-green-600"
+          className="group bg-primary/90 text-primary-foreground hover:bg-primary focus:ring-primary mt-4 flex w-full items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm font-medium shadow-sm transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+          aria-label="Save theme changes"
         >
           {isLoading ? (
-            <Loader2 className="size-6 animate-spin" />
+            <Loader2 className="size-4 animate-spin" />
           ) : (
-            <Save className="size-6" />
+            <Save className="size-4 transition-transform group-hover:scale-110" />
           )}
-          Save
+          {isLoading ? 'Saving Changes...' : 'Save Changes'}
         </button>
+        {user?.id && (
+          <div className="mt-4 flex items-center justify-center gap-2">
+            <input
+              type="checkbox"
+              name="theme-customizer"
+              id="theme-customizer"
+            />
+            <label htmlFor="theme-customizer">Save as a preset</label>
+          </div>
+        )}
       </SheetContent>
     </Sheet>
   )
