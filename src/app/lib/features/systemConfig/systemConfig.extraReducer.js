@@ -27,6 +27,7 @@ export const systemConfigExtraReducer = (builder) => {
     .addCase(fetchThemes.fulfilled, (state, action) => {
       state.themes = action.payload?.data || []
       state.isLoading = false
+      localStorage.setItem('themes', JSON.stringify(state.themes))
     })
     .addCase(fetchThemes.rejected, (state, action) => {
       state.error = action?.error?.message

@@ -12,13 +12,23 @@ import FontModifier from './FontModifer'
 import GlobalModifier from './GlobalModifier'
 import ShadowModifier from './ShadowsModifier'
 import { Save, Loader2, RefreshCw } from 'lucide-react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useUpdateUserThemes } from 'app/hooks/user/useUpdateUserThemes/useUpdateUserThemes'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { toast } from 'sonner'
 import SelectTheme from './SelectTheme'
+import {
+  setDarkTheme,
+  setLightTheme,
+} from 'app/lib/features/systemConfig/systemConfig.slice'
+import {
+  DEFAULT_DARK_THEME,
+  DEFAULT_LIGHT_THEME,
+} from 'app/utils/default-theme.util'
+import { setSelectedTheme } from 'app/lib/features/systemConfig/systemConfig.slice'
 
 const ThemeCustomizer = () => {
+  const dispatch = useDispatch()
   const { darkTheme, lightTheme } = useSelector((state) => state.systemConfig)
   const user = useSelector(selectUserTable)
   const { updateUserThemes, isLoading } = useUpdateUserThemes()
@@ -41,20 +51,28 @@ const ThemeCustomizer = () => {
   }
 
   const handleReset = async () => {
-    try {
-      if (!user?.id) {
-        toast.error('Please Login to save your theme')
-        return
+    if (user?.id) {
+      try {
+        await updateUserThemes({
+          darkTheme: null,
+          lightTheme: null,
+          userTable: user,
+        })
+        toast.success('Successfully saved the default theme')
+      } catch (error) {
+        toast.error(error)
       }
-      await updateUserThemes({
-        darkTheme: null,
-        lightTheme: null,
-        userTable: user,
-      })
-      toast.success('Successfully reset theme')
-    } catch (error) {
-      toast.error(error)
     }
+    const themeTypes = ['colors', 'shadows', 'global', 'font']
+
+    themeTypes.forEach((type) => {
+      dispatch(setLightTheme({ type, data: DEFAULT_LIGHT_THEME[type] }))
+      dispatch(setDarkTheme({ type, data: DEFAULT_DARK_THEME[type] }))
+    })
+
+    dispatch(setSelectedTheme(''))
+
+    !user?.id && toast.success('Theme is reset to default')
   }
 
   return (
@@ -85,11 +103,7 @@ const ThemeCustomizer = () => {
           onClick={handleReset}
           className="flex w-full items-center justify-center gap-2 rounded-[4px] bg-red-500 p-2 text-white transition-all hover:bg-red-600"
         >
-          {isLoading ? (
-            <Loader2 className="size-6 animate-spin" />
-          ) : (
-            <RefreshCw className="size-6" />
-          )}
+          <RefreshCw className="size-6" />
           Reset
         </button>
         <SelectTheme />

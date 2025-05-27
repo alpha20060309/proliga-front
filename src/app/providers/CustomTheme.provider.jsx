@@ -41,10 +41,6 @@ const CustomThemeProvider = ({ children }) => {
           dispatch(setLightTheme({ type, data: light_theme[type] }))
         }
       })
-    } else {
-      themeTypes.forEach((type) => {
-        dispatch(setLightTheme({ type, data: DEFAULT_LIGHT_THEME[type] }))
-      })
     }
 
     if (dark_theme?.colors?.length > 0) {
@@ -52,10 +48,6 @@ const CustomThemeProvider = ({ children }) => {
         if (dark_theme[type]) {
           dispatch(setDarkTheme({ type, data: dark_theme[type] }))
         }
-      })
-    } else {
-      themeTypes.forEach((type) => {
-        dispatch(setDarkTheme({ type, data: DEFAULT_DARK_THEME[type] }))
       })
     }
   }, [dispatch, user])
