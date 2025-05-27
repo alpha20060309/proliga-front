@@ -11,7 +11,14 @@ export const useUpdateUserThemes = () => {
   const { update } = useSession()
 
   const updateUserThemes = useCallback(
-    async ({ darkTheme, lightTheme, userTable, cb = () => {} }) => {
+    async ({
+      darkTheme,
+      lightTheme,
+      userTable,
+      savePreset,
+      presetName,
+      cb = () => {},
+    }) => {
       if (!userTable?.id) {
         setError('User not authenticated')
         return toast.error(t('Foydalanuvchi autentifikatsiya qilinmagan'))
@@ -43,6 +50,20 @@ export const useUpdateUserThemes = () => {
               : t('An unknown error occurred')
           )
           return { error, data }
+        }
+
+        if (savePreset) {
+          const { error } = await supabase.from('theme').insert({
+            name: presetName,
+            user_id: userTable?.id,
+            dark_theme: darkTheme,
+            light_theme: lightTheme,
+            is_global: true,
+          })
+
+          if (error) {
+            setError(error)
+          }
         }
 
         cb()

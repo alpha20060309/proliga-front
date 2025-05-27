@@ -1,13 +1,11 @@
 'use client'
 
-import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   setDarkTheme,
   setLightTheme,
   setSelectedTheme,
 } from 'app/lib/features/systemConfig/systemConfig.slice'
-import { fetchThemes } from 'app/lib/features/systemConfig/systemConfig.thunk'
 import {
   Select,
   SelectContent,
@@ -21,9 +19,7 @@ const SelectTheme = () => {
   const dispatch = useDispatch()
   const { selectedTheme, themes } = useSelector((store) => store.systemConfig)
 
-  useEffect(() => {
-    dispatch(fetchThemes())
-  }, [dispatch])
+ 
 
   const handleThemeChange = (value) => {
     dispatch(setSelectedTheme(value))

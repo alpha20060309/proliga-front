@@ -16,7 +16,6 @@ import { useTranslation } from 'react-i18next'
 import { sidebarStyles } from './sidebarStyles.util'
 import { cn } from '@/lib/utils'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
-import { Button } from '@/components/ui/button'
 
 const MobileSidebar = ({ isModalOpen, setModalOpen }) => {
   const path = usePathname()
@@ -164,29 +163,34 @@ const MobileSidebar = ({ isModalOpen, setModalOpen }) => {
             </Link>
           </div>
         </div>
-        <section className="mt-auto w-full space-y-1 rounded-md">
+        <section className="mt-auto flex w-full flex-col gap-1 rounded-md">
           {userTable?.id ? (
             <>
-              <SystemLink
-                handleToggle={() => setModalOpen(false)}
+              <Link
+                className="hover:bg-secondary bg-card border-border flex h-full w-full gap-2 rounded-sm border p-2"
+                onClick={() => setModalOpen(false)}
                 href="/settings"
               >
                 <Settings className="text-foreground h-6 w-6" />
                 <p>{t('Sozlamalar')}</p>
-              </SystemLink>
-              <Button
+              </Link>
+              <button
                 onClick={handleLogOut}
-                className="hover:bg-secondary bg-background flex h-full w-full gap-2 rounded-sm p-2"
+                className="hover:bg-secondary bg-card border-border flex h-full w-full gap-2 rounded-sm border p-2"
               >
                 <LogOut className="text-foreground h-6 w-6" />
                 <p>{t('Tizimdan chiqish')}</p>
-              </Button>
+              </button>
             </>
           ) : (
-            <SystemLink handleToggle={() => setModalOpen(false)} href="/auth">
+            <Link
+              className="hover:bg-secondary bg-card border-border flex h-full w-full gap-2 rounded-sm border p-2"
+              onClick={() => setModalOpen(false)}
+              href="/auth"
+            >
               <LogIn className="text-foreground h-6 w-6" />
               <p>{t('Tizimga kirish_1')}</p>
-            </SystemLink>
+            </Link>
           )}
         </section>
         <SheetDescription className="sr-only">
@@ -194,18 +198,6 @@ const MobileSidebar = ({ isModalOpen, setModalOpen }) => {
         </SheetDescription>
       </SheetContent>
     </Sheet>
-  )
-}
-
-const SystemLink = ({ children, href, handleToggle }) => {
-  return (
-    <Link
-      href={href}
-      onClick={handleToggle}
-      className="bg-foreground/20 hover:bg-secondary flex h-full w-full gap-2 rounded-sm p-2"
-    >
-      {children}
-    </Link>
   )
 }
 

@@ -14,6 +14,7 @@ import {
 } from 'app/lib/features/systemNotification/systemNotification.thunk'
 import dynamic from 'next/dynamic'
 const registerSW = dynamic(() => import('app/lib/registerSw'), { ssr: false })
+import { fetchThemes } from 'app/lib/features/systemConfig/systemConfig.thunk'
 
 const InitialStateProvider = ({ children }) => {
   const dispatch = useDispatch()
@@ -27,6 +28,7 @@ const InitialStateProvider = ({ children }) => {
       dispatch(fetchPrizes()),
       dispatch(fetchBroadcastNotifications()),
       dispatch(fetchSystemConfig()),
+      dispatch(fetchThemes()),
       generateFingerprint(),
       getUserAgent(),
     ])

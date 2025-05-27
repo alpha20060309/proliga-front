@@ -884,6 +884,7 @@ model user {
   ntf_token_created_at                             DateTime?             @db.Timestamptz(6)
   light_theme                                      Json?
   dark_theme                                       Json?
+  is_admin                                         Boolean?              @default(false)
   accounts                                         account[]
   banner_view                                      banner_view[]
   club_club_created_byTouser                       club[]                @relation("club_created_byTouser")

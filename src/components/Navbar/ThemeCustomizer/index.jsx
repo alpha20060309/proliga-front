@@ -26,9 +26,13 @@ import {
   DEFAULT_LIGHT_THEME,
 } from 'app/utils/default-theme.util'
 import { setSelectedTheme } from 'app/lib/features/systemConfig/systemConfig.slice'
+import { useState } from 'react'
+import { fetchThemes } from 'app/lib/features/systemConfig/systemConfig.thunk'
 
 const ThemeCustomizer = () => {
   const dispatch = useDispatch()
+  const [presetName, setPresetName] = useState('')
+  const [savePreset, setSavePreset] = useState(false)
   const { darkTheme, lightTheme } = useSelector((state) => state.systemConfig)
   const user = useSelector(selectUserTable)
   const { updateUserThemes, isLoading } = useUpdateUserThemes()
@@ -43,6 +47,13 @@ const ThemeCustomizer = () => {
         darkTheme,
         lightTheme,
         userTable: user,
+        savePreset,
+        presetName,
+        cb: () => {
+          dispatch(fetchThemes())
+          setSavePreset(false)
+          setPresetName('')
+        },
       })
       toast.success('Theme saved successfully')
     } catch (error) {
@@ -81,6 +92,7 @@ const ThemeCustomizer = () => {
         <Palette className="size-5 text-[#000] select-none hover:text-[#ffdd00] dark:text-[#fff] dark:hover:text-[#ffdd00]" />
       </SheetTrigger>
       <SheetContent
+        className={'overflow-y-auto'}
         style={{
           backgroundColor: '#232323',
           fontFamily: 'Inter, sans-serif',
@@ -151,7 +163,7 @@ const ThemeCustomizer = () => {
         <button
           disabled={isLoading}
           onClick={handleSave}
-          className="group bg-primary/90 text-primary-foreground hover:bg-primary focus:ring-primary mt-4 flex w-full items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm font-medium shadow-sm transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+          className="group mt-4 flex w-full items-center justify-center gap-2 rounded-md bg-[#ffdd00] px-4 py-2.5 text-sm font-medium text-black shadow-sm transition-colors focus:ring-2 focus:ring-[#ffdd00] focus:ring-offset-2 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
           aria-label="Save theme changes"
         >
           {isLoading ? (
@@ -161,14 +173,31 @@ const ThemeCustomizer = () => {
           )}
           {isLoading ? 'Saving Changes...' : 'Save Changes'}
         </button>
-        {user?.id && (
-          <div className="mt-4 flex items-center justify-center gap-2">
+        {user?.id && user?.is_admin && (
+          <div className="my-4 flex flex-col gap-2">
+            <div className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                id="save-preset"
+                name="save-preset"
+                className="h-4 w-4 rounded border-gray-300 text-[#ffdd00] focus:ring-[#ffdd00]"
+                onChange={(e) => setSavePreset(e.target.checked)}
+              />
+              <label
+                htmlFor="save-preset"
+                className="text-sm text-gray-700 dark:text-gray-200"
+              >
+                Save as a preset
+              </label>
+            </div>
+
             <input
-              type="checkbox"
-              name="theme-customizer"
-              id="theme-customizer"
+              type="text"
+              placeholder="Enter preset name"
+              className="focus:border-primary focus:ring-primary w-full rounded-md border border-gray-300 px-3 py-2 text-sm placeholder:text-gray-400 focus:ring-1 focus:outline-none"
+              value={presetName}
+              onChange={(e) => setPresetName(e.target.value)}
             />
-            <label htmlFor="theme-customizer">Save as a preset</label>
           </div>
         )}
       </SheetContent>

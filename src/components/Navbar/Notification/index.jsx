@@ -131,8 +131,8 @@ const Notification = () => {
           <Badge
             variant="destructive"
             className={cn(
-              'text-3xs absolute -top-0.5 -right-0.5 flex size-3.5 items-center justify-center rounded-full p-1',
-              isNotificationsOpen ? 'bg-card' : 'bg-red-700'
+              'text-3xs absolute -top-0.5 -right-0.5 flex size-3.5 animate-pulse items-center justify-center rounded-full p-1',
+              isNotificationsOpen ? 'bg-card' : 'bg-destructive'
             )}
           >
             {unreadCount}

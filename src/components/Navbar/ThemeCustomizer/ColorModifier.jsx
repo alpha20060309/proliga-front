@@ -16,13 +16,13 @@ import {
 } from 'app/lib/features/systemConfig/systemConfig.slice'
 
 const ColorModifier = () => {
-  const { theme } = useTheme()
+  const { resolvedTheme } = useTheme()
   const dispatch = useDispatch()
   const { darkTheme, lightTheme } = useSelector((store) => store.systemConfig)
 
   const handleChange = (key, color) => {
     document.documentElement.style.setProperty(toVarName(key), color)
-    theme === 'dark'
+    resolvedTheme === 'dark'
       ? dispatch(
           setDarkTheme({
             type: 'colors',
@@ -58,7 +58,7 @@ const ColorModifier = () => {
         type="color"
         id={key}
         value={formatColor(
-          theme === 'dark'
+          resolvedTheme === 'dark'
             ? darkTheme.colors[key] || '#000000'
             : lightTheme.colors[key] || '#000000'
         )}
@@ -67,14 +67,20 @@ const ColorModifier = () => {
       />
       <span className="w-20 font-mono text-xs">
         {formatColor(
-          theme === 'dark' ? darkTheme.colors[key] : lightTheme.colors[key]
+          resolvedTheme === 'dark'
+            ? darkTheme.colors[key]
+            : lightTheme.colors[key]
         )}
       </span>
     </div>
   )
 
   return (
-    <Accordion className="w-full rounded-[4px] bg-[#232323] text-[#fff]">
+    <Accordion
+      type="single"
+      collapsible
+      className="w-full rounded-[4px] bg-[#232323] text-[#fff]"
+    >
       {Object.entries(colorKeys).map(([category, keys]) => (
         <AccordionItem value={category} key={category}>
           <AccordionTrigger className="text-base">

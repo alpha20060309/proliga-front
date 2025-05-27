@@ -24,12 +24,6 @@ export const fetchSystemConfig = createAsyncThunk(
 export const fetchThemes = createAsyncThunk(
   'systemConfig/fetchThemes',
   async () => {
-    const themes = JSON.parse(localStorage.getItem('themes'))
-
-    if (themes?.length > 0) {
-      return { data: themes, error: null }
-    }
-
     const { data, error } = await supabase
       .from('theme')
       .select('*')
