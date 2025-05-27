@@ -14,9 +14,11 @@ import {
   setLightTheme,
   setDarkTheme,
 } from 'app/lib/features/systemConfig/systemConfig.slice'
+import { useTranslation } from 'react-i18next'
 
 const ColorModifier = () => {
   const { resolvedTheme } = useTheme()
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const { darkTheme, lightTheme } = useSelector((store) => store.systemConfig)
 
@@ -84,7 +86,7 @@ const ColorModifier = () => {
       {Object.entries(colorKeys).map(([category, keys]) => (
         <AccordionItem value={category} key={category}>
           <AccordionTrigger className="text-base">
-            {category.charAt(0).toUpperCase() + category.slice(1)} Colors
+            {t(category.charAt(0).toUpperCase() + category.slice(1))}
           </AccordionTrigger>
           <AccordionContent>{keys.map(renderColorPicker)}</AccordionContent>
         </AccordionItem>

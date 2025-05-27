@@ -15,6 +15,7 @@ import {
 import dynamic from 'next/dynamic'
 const registerSW = dynamic(() => import('app/lib/registerSw'), { ssr: false })
 import { fetchThemes } from 'app/lib/features/systemConfig/systemConfig.thunk'
+import { useGenerateLanguage } from 'app/hooks/system/useGenerateLanguage/useGenerateLanguage'
 
 const InitialStateProvider = ({ children }) => {
   const dispatch = useDispatch()
@@ -44,6 +45,13 @@ const InitialStateProvider = ({ children }) => {
   useEffect(() => {
     registerSW()
   }, [])
+
+  const { generate } = useGenerateLanguage()
+
+  useEffect(() => {
+    const fetch = async () => await generate()
+    fetch()
+  }, [generate])
 
   return children
 }

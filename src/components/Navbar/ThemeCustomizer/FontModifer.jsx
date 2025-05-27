@@ -6,8 +6,10 @@ import {
   setDarkTheme,
   setLightTheme,
 } from 'app/lib/features/systemConfig/systemConfig.slice'
+import { useTranslation } from 'react-i18next'
 
 const FontModifier = () => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const { theme } = useTheme()
   const { darkTheme, lightTheme } = useSelector((store) => store.systemConfig)
@@ -21,7 +23,7 @@ const FontModifier = () => {
   return (
     <Card className="w-full rounded-[4px] bg-[#232323] text-[#fff]">
       <CardHeader className="py-2">
-        <CardTitle className="text-base">Global Font Modifier</CardTitle>
+        <CardTitle className="text-base">{t('Font')}</CardTitle>
       </CardHeader>
       <CardContent className="py-2">
         <div className="mb-3">

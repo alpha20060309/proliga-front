@@ -8,8 +8,10 @@ import {
   setDarkTheme,
   setLightTheme,
 } from 'app/lib/features/systemConfig/systemConfig.slice'
+import { useTranslation } from 'react-i18next'
 
 const GlobalModifier = () => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const { theme } = useTheme()
   const { darkTheme, lightTheme } = useSelector((store) => store.systemConfig)
@@ -36,7 +38,7 @@ const GlobalModifier = () => {
       <Card className="w-full rounded-[4px] bg-[#232323]">
         <CardHeader className="py-2">
           <CardTitle className="text-base text-[#fff]">
-            Global Style Modifiers
+            {t('Global Style Modifiers')}
           </CardTitle>
         </CardHeader>
         <CardContent className="py-2">
@@ -46,7 +48,7 @@ const GlobalModifier = () => {
                 htmlFor="global-spacing-slider"
                 className="text-lg font-medium text-[#fff]"
               >
-                Spacing Size
+                {t('Spacing Size')}
               </label>
               <span className="text-xs text-[#999]">
                 {theme === 'dark'
@@ -79,7 +81,7 @@ const GlobalModifier = () => {
                 htmlFor="global-letter-spacing-slider"
                 className="text-lg font-medium text-[#fff]"
               >
-                Letter Spacing
+                {t('Letter Spacing')}
               </label>
               <span className="text-xs text-[#999]">
                 {theme === 'dark'
@@ -111,7 +113,7 @@ const GlobalModifier = () => {
                 htmlFor="global-radius-slider"
                 className="text-lg font-medium text-[#fff]"
               >
-                Border Radius
+                {t('Border Radius')}
               </label>
               <span className="text-xs text-[#999]">
                 {theme === 'dark'

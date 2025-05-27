@@ -14,11 +14,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { useTranslation } from 'react-i18next'
 
 const SelectTheme = () => {
   const dispatch = useDispatch()
   const { selectedTheme, themes } = useSelector((store) => store.systemConfig)
-
+  const { t } = useTranslation()
  
 
   const handleThemeChange = (value) => {
@@ -47,7 +48,7 @@ const SelectTheme = () => {
 
   return (
     <div className="w-full space-y-2">
-      <label className="text-sm font-medium text-white">Select Theme</label>
+      <label className="text-sm font-medium text-white">{t('Select Theme')}</label>
       <Select value={selectedTheme || ''} onValueChange={handleThemeChange}>
         <SelectTrigger
           style={{

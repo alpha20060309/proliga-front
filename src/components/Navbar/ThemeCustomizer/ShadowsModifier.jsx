@@ -14,12 +14,13 @@ import {
   setLightTheme,
 } from 'app/lib/features/systemConfig/systemConfig.slice'
 import { useTheme } from 'next-themes'
+import { useTranslation } from 'react-i18next'
 
 const ShadowModifier = () => {
   const { theme } = useTheme()
   const { darkTheme, lightTheme } = useSelector((store) => store.systemConfig)
   const dispatch = useDispatch()
-
+  const { t } = useTranslation()
   const handleChange = (key, value) => {
     if (
       key in UNITS &&
@@ -61,7 +62,7 @@ const ShadowModifier = () => {
       return (
         <div key={key} className="mb-2 flex items-center space-x-2">
           <label htmlFor={key} className="w-48 text-xs capitalize">
-            {label.charAt(0).toUpperCase() + label.slice(1)}
+            {t(label.charAt(0).toUpperCase() + label.slice(1))}
           </label>
           <input
             type="color"
@@ -78,7 +79,7 @@ const ShadowModifier = () => {
     return (
       <div key={key} className="mb-2 flex items-center space-x-2">
         <label htmlFor={key} className="w-48 text-xs capitalize">
-          {label.charAt(0).toUpperCase() + label.slice(1)}
+          {t(label.charAt(0).toUpperCase() + label.slice(1))}
         </label>
         {key === 'shadow-opacity' ? (
           <div className="flex w-full items-center space-x-2">
@@ -125,20 +126,20 @@ const ShadowModifier = () => {
   // Shadow preview elements
   const previewShadows = (
     <div className="mt-6 grid grid-cols-4 gap-4">
-      <div className="bg-card rounded p-3 text-xs shadow-xs">shadow-xs</div>
-      <div className="bg-card rounded p-3 text-xs shadow-sm">shadow-sm</div>
-      <div className="bg-card rounded p-3 text-xs shadow">shadow</div>
-      <div className="bg-card rounded p-3 text-xs shadow-md">shadow-md</div>
-      <div className="bg-card rounded p-3 text-xs shadow-lg">shadow-lg</div>
-      <div className="bg-card rounded p-3 text-xs shadow-xl">shadow-xl</div>
-      <div className="bg-card rounded p-3 text-xs shadow-2xl">shadow-2xl</div>
+      <div className="bg-card rounded p-3 text-xs shadow-xs">xs</div>
+      <div className="bg-card rounded p-3 text-xs shadow-sm">sm</div>
+      <div className="bg-card rounded p-3 text-xs shadow">md</div>
+      <div className="bg-card rounded p-3 text-xs shadow-md">big</div>
+      <div className="bg-card rounded p-3 text-xs shadow-lg">lg</div>
+      <div className="bg-card rounded p-3 text-xs shadow-xl">xl</div>
+      <div className="bg-card rounded p-3 text-xs shadow-2xl">2xl</div>
     </div>
   )
 
   return (
     <Card className="w-full rounded-[4px] bg-[#232323] text-[#fff]">
       <CardHeader>
-        <CardTitle className="text-base shadow">Shadow Properties</CardTitle>
+        <CardTitle className="text-base">{t('Shadow Properties')}</CardTitle>
       </CardHeader>
       <CardContent>
         {SHADOW_KEYS.map(renderInput)}

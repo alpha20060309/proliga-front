@@ -28,7 +28,7 @@ import {
 import { setSelectedTheme } from 'app/lib/features/systemConfig/systemConfig.slice'
 import { useState } from 'react'
 import { fetchThemes } from 'app/lib/features/systemConfig/systemConfig.thunk'
-
+import { useTranslation } from 'react-i18next'
 const ThemeCustomizer = () => {
   const dispatch = useDispatch()
   const [presetName, setPresetName] = useState('')
@@ -36,6 +36,7 @@ const ThemeCustomizer = () => {
   const { darkTheme, lightTheme } = useSelector((state) => state.systemConfig)
   const user = useSelector(selectUserTable)
   const { updateUserThemes, isLoading } = useUpdateUserThemes()
+  const { t } = useTranslation()
 
   const handleSave = async () => {
     try {
@@ -108,7 +109,7 @@ const ThemeCustomizer = () => {
       >
         <SheetHeader>
           <SheetTitle className="text-[#fff] dark:text-[#fff]">
-            Theme Customizer
+            {t('Theme Customizer')}
           </SheetTitle>
         </SheetHeader>
         <button
@@ -117,7 +118,7 @@ const ThemeCustomizer = () => {
           aria-label="Reset theme to default"
         >
           <RefreshCw className="size-4 transition-transform group-hover:rotate-180" />
-          Reset to Default
+          {t('Reset to Default')}
         </button>
         <SelectTheme />
         <Tabs defaultValue="color">
@@ -126,25 +127,25 @@ const ThemeCustomizer = () => {
               value="color"
               className="rounded-[4px] text-[#1a1a1a] data-[state=active]:bg-[#ffdd00] data-[state=active]:text-[#1a1a1a] dark:text-[#1a1a1a] dark:data-[state=active]:bg-[#ffdd00] dark:data-[state=active]:text-[#1a1a1a]"
             >
-              Color
+              {t('Color')}
             </TabsTrigger>
             <TabsTrigger
               value="font"
               className="rounded-[4px] text-[#1a1a1a] data-[state=active]:bg-[#ffdd00] data-[state=active]:text-[#1a1a1a] dark:text-[#1a1a1a] dark:data-[state=active]:bg-[#ffdd00] dark:data-[state=active]:text-[#1a1a1a]"
             >
-              Font
+              {t('Font')}
             </TabsTrigger>
             <TabsTrigger
               value="global"
               className="rounded-[4px] text-[#1a1a1a] data-[state=active]:bg-[#ffdd00] data-[state=active]:text-[#1a1a1a] dark:text-[#1a1a1a] dark:data-[state=active]:bg-[#ffdd00] dark:data-[state=active]:text-[#1a1a1a]"
             >
-              Global
+              {t('Global')}
             </TabsTrigger>
             <TabsTrigger
               value="shadow"
               className="rounded-[4px] text-[#1a1a1a] data-[state=active]:bg-[#ffdd00] data-[state=active]:text-[#1a1a1a] dark:text-[#1a1a1a] dark:data-[state=active]:bg-[#ffdd00] dark:data-[state=active]:text-[#1a1a1a]"
             >
-              Shadow
+              {t('Shadow')}
             </TabsTrigger>
           </TabsList>
           <TabsContent value="color">
@@ -187,13 +188,13 @@ const ThemeCustomizer = () => {
                 htmlFor="save-preset"
                 className="text-sm text-gray-700 dark:text-gray-200"
               >
-                Save as a preset
+                {t('Save as a preset')}
               </label>
             </div>
 
             <input
               type="text"
-              placeholder="Enter preset name"
+              placeholder={t('Enter preset name')}
               className="focus:border-primary focus:ring-primary w-full rounded-md border border-gray-300 px-3 py-2 text-sm placeholder:text-gray-400 focus:ring-1 focus:outline-none"
               value={presetName}
               onChange={(e) => setPresetName(e.target.value)}
