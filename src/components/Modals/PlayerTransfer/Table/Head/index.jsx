@@ -26,7 +26,7 @@ const TransferTableHead = ({ table }) => {
                 {{
                   asc: (
                     <Image
-                      src="/icons/arrow-active-top.svg"
+                      src="/icons/arrow-active.svg"
                       alt="triangle arrow"
                       width={12}
                       height={12}
@@ -35,7 +35,7 @@ const TransferTableHead = ({ table }) => {
                   ),
                   desc: (
                     <Image
-                      src="/icons/arrow-active-top.svg"
+                      src="/icons/arrow-active.svg"
                       alt="triangle arrow"
                       width={12}
                       height={12}

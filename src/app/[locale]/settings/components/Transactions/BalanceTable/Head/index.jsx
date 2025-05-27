@@ -27,7 +27,7 @@ const TransactionsTableHead = ({ table }) => {
                 {{
                   asc: (
                     <Image
-                      src="/icons/arrow-active-top.svg"
+                      src="/icons/arrow-active.svg"
                       alt="triangle arrow"
                       width={12}
                       height={12}
@@ -36,7 +36,7 @@ const TransactionsTableHead = ({ table }) => {
                   ),
                   desc: (
                     <Image
-                      src="/icons/arrow-active-top.svg"
+                      src="/icons/arrow-active.svg"
                       alt="triangle arrow"
                       width={12}
                       height={12}
