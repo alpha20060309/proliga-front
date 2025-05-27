@@ -4,22 +4,17 @@ import { styled } from '@mui/material'
 export const StyledTabs = styled((props) => (
   <Tabs
     {...props}
-    style={{
-      scrollSnapAlign: 'center',
+    slotProps={{
+      indicator: {
+        ...props.slotProps?.indicator,
+        style: {
+          ...props.slotProps?.indicator?.style,
+          backgroundColor: 'var(--color-primary)',
+        },
+      },
     }}
   />
-))({
-  '& .MuiTabs-indicator': {
-    display: 'flex',
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
-  },
-  '& .MuiTabs-indicatorSpan': {
-    width: '100%',
-    borderRadius: '2px',
-    backgroundColor: '#fff400',
-  },
-})
+))({})
 
 export const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
   ({ theme }) => ({
@@ -35,12 +30,10 @@ export const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
     fontFamily: 'var(--font-sans)',
     color: 'var(--color-foreground)',
     '&.Mui-selected': {
-      color: 'var(--color-accent-foreground)',
-      backgroundColor: 'var(--color-secondary)',
+      backgroundColor: 'rgb(from var(--color-primary) r g b / 0.2)',
       borderRadius: 'var(--radius-sm)',
     },
     '&.Mui-disabled': {
-      color: 'var(--color-foreground)',
       opacity: 0.5,
     },
   })

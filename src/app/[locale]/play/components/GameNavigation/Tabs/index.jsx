@@ -76,7 +76,7 @@ export default function TourTabs() {
           <StyledTab
             key={item.id}
             onClick={() => handleClick(index)}
-            className="hover:bg-primary hover:bg-opacity-10 w-32 space-y-0 rounded-sm disabled:cursor-default sm:w-40"
+            className="w-32 space-y-0 disabled:cursor-default sm:w-40"
             disabled={
               currentTeam?.is_team_created
                 ? item.status === TOUR_STATUS.notStarted ||

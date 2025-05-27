@@ -100,7 +100,7 @@ const GameBrief = () => {
             <Item>
               <Title> {t('Keyingi Tur')}</Title>
               {currentTour?.status !== TOUR_STATUS.notStartedTransfer ? (
-                <Content className="text-primary text-sm uppercase md:text-base">
+                <Content className="text-sm uppercase md:text-base">
                   {getCorrectName({
                     lang,
                     uz: nextTour?.name,

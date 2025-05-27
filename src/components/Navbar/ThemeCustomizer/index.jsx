@@ -11,7 +11,7 @@ import ColorModifier from './ColorModifier'
 import FontModifier from './FontModifer'
 import GlobalModifier from './GlobalModifier'
 import ShadowModifier from './ShadowsModifier'
-import { Save, RotateCcw, Loader2 } from 'lucide-react'
+import { Save, Loader2 } from 'lucide-react'
 import { useSelector } from 'react-redux'
 import { useUpdateUserThemes } from 'app/hooks/user/useUpdateUserThemes/useUpdateUserThemes'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
@@ -20,11 +20,14 @@ import { toast } from 'sonner'
 const ThemeCustomizer = () => {
   const { darkTheme, lightTheme } = useSelector((state) => state.systemConfig)
   const user = useSelector(selectUserTable)
-
   const { updateUserThemes, isLoading } = useUpdateUserThemes()
 
   const handleSave = async () => {
     try {
+      if (!user?.id) {
+        toast.error('Please Login to save your theme')
+        return
+      }
       await updateUserThemes({
         darkTheme,
         lightTheme,
@@ -60,13 +63,6 @@ const ThemeCustomizer = () => {
             Theme Customizer
           </SheetTitle>
         </SheetHeader>
-        <button
-          onClick={() => localStorage.removeItem('isUserThemeSet')}
-          className="flex cursor-pointer items-center justify-center gap-2 rounded-[4px] border border-neutral-700 bg-neutral-800 p-2 text-white transition-all hover:scale-[0.98]"
-        >
-          <RotateCcw className="size-6" />
-          Reset
-        </button>
         <Tabs defaultValue="color">
           <TabsList className="w-full rounded-[4px] bg-[#f5f5f5]">
             <TabsTrigger

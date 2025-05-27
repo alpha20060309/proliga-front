@@ -31,7 +31,7 @@ const RankingTeams = () => {
 
 const TeamPlace = ({ team, index }) => {
   return (
-    <div className="bg-background relative min-h-32 rounded-sm p-2">
+    <div className="bg-white relative min-h-32 rounded-sm p-2">
       <div className="flex items-center justify-between">
         <Image
           src={`/icons/${index + 1}-place.svg`}

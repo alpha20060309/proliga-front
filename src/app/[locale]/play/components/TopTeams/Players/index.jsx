@@ -40,7 +40,7 @@ const PlayerPlace = ({ player, index }) => {
   )
 
   return (
-    <div className="bg-card relative min-h-32 rounded-sm p-2">
+    <div className="bg-white relative min-h-32 rounded-sm p-2">
       <div className="flex items-center justify-between">
         <img
           src={getUrl(image)}

@@ -73,7 +73,7 @@ export default function TourTabs() {
           <StyledTab
             key={item.id}
             onClick={() => handleClick(index, item)}
-            className="hover:bg-primary hover:bg-opacity-10 w-32 snap-center space-y-0 rounded-sm disabled:cursor-default sm:w-48"
+            className="w-32 snap-center space-y-0 disabled:cursor-default sm:w-48"
             disabled={
               item.status === TOUR_STATUS.notStarted ||
               item.status === TOUR_STATUS.notStartedTransfer ||
