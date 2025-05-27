@@ -13,7 +13,9 @@ export const systemLanguageSlice = createSlice({
       const { lang, cb } = action.payload
       if (lang === LANGUAGE.uz || lang === LANGUAGE.ru) {
         state.lang = lang
-        cb(lang)
+        if (cb) {
+          cb(lang)
+        }
       }
     },
   },

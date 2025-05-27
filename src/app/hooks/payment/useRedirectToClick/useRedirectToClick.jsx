@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import { useState, useCallback } from 'react'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { useTranslation } from 'react-i18next'
 import { useTransitionRouter } from 'next-view-transitions'
 export const useRedirectToClick = () => {
@@ -19,13 +19,13 @@ export const useRedirectToClick = () => {
 
       if (!userTable?.id) {
         setError('User not found')
-        toast.error('User not found', { theme: 'dark' })
+        toast.error('User not found')
         return
       }
 
       if (!amount) {
         setError('Amount is required')
-        toast.error('Amount is required', { theme: 'dark' })
+        toast.error('Amount is required')
         return
       }
 
@@ -50,8 +50,7 @@ export const useRedirectToClick = () => {
         toast.error(
           error instanceof Error
             ? error.message
-            : t('An unknown error occurred'),
-          { theme: 'dark' }
+            : t('An unknown error occurred')
         )
       } finally {
         setIsLoading(false)

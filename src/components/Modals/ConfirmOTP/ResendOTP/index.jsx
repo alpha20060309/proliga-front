@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
@@ -8,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { cn } from '@/lib/utils'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { RefreshCcw } from 'lucide-react'
 
 export default function ResendOTP() {
   const { sendOTP } = useSendOTP()
@@ -44,23 +44,19 @@ export default function ResendOTP() {
           'h-7 border bg-transparent px-2 text-xs',
           isResendEnabled
             ? 'text-primary hover:text-primary/70'
-            : 'text-neutral-300'
+            : 'text-foreground'
         )}
       >
-        <Image
-          src="./icons/resend.svg"
-          alt="swap"
-          height="20"
-          width="20"
+        <RefreshCcw
           className={cn(
             'mr-1.5 size-5',
-            isResendEnabled ? 'filter-primary' : 'filter-neutral-300'
+            isResendEnabled ? 'text-primary' : 'text-muted-foreground'
           )}
         />
         {t('Qayta jo‘natish')}
       </Button>
       {!isResendEnabled && (
-        <div className="text-sm text-neutral-200">{countdown}s</div>
+        <div className="text-secondary-foreground text-sm">{countdown}s</div>
       )}
     </div>
   )

@@ -1,12 +1,12 @@
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 
 export function validateTeamName(input, t) {
   if (input.length === 0) {
-    toast.warning(t('Input cannot be empty.'), { theme: 'dark' })
+    toast.warning(t('Input cannot be empty.'))
     return false
   }
   if (input.length > 20) {
-    toast.warning(t('Input must be 20 characters or less.'), { theme: 'dark' })
+    toast.warning(t('Input must be 20 characters or less.'))
     return false
   }
 
@@ -16,8 +16,7 @@ export function validateTeamName(input, t) {
 
   if (latinRegex.test(input) && cyrillicRegex.test(input)) {
     toast.warning(
-      t('Input must contain either Latin or Cyrillic characters, not both.'),
-      { theme: 'dark' }
+      t('Input must contain either Latin or Cyrillic characters, not both.')
     )
     return false
   }
@@ -36,8 +35,7 @@ export function validateTeamName(input, t) {
     toast.warning(
       t(
         'Input contains invalid characters. Only Latin, Cyrillic, numbers, and .-@_&$ are allowed.'
-      ),
-      { theme: 'dark' }
+      )
     )
     return false
   }

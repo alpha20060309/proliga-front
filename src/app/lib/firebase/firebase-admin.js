@@ -1,16 +1,16 @@
-import { initializeApp, cert, getApps } from "firebase-admin/app";
-import serviceAccount from '../../firebase.json';
+import { initializeApp, cert, getApps } from 'firebase-admin/app'
+import serviceAccount from '../../firebase.json'
 
 function initializeFirebaseAdmin() {
   if (!getApps().length) {
     try {
       initializeApp({
         credential: cert(serviceAccount),
-      });
+      })
     } catch (error) {
-      console.error("Failed to initialize Firebase Admin:", error);
+      console.error('Failed to initialize Firebase Admin:', error)
     }
   }
 }
 
-export { initializeFirebaseAdmin };
+export { initializeFirebaseAdmin }

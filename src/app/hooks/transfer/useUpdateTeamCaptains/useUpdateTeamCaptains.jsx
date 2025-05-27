@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { useDispatch } from 'react-redux'
 import { supabase } from '../../../lib/supabaseClient'
 import { fetchTeamPlayers } from 'app/lib/features/teamPlayer/teamPlayer.thunk'
@@ -42,8 +42,7 @@ export const useUpdateTeamCaptains = () => {
           toast.error(
             error instanceof Error
               ? error.message
-              : t('An unknown error occurred'),
-            { theme: 'dark' }
+              : t('An unknown error occurred')
           )
           return
         }
@@ -55,7 +54,7 @@ export const useUpdateTeamCaptains = () => {
               competition_id: currentCompetition.id,
             })
           )
-          toast.success(t('Kapitan yangilandi'), { theme: 'dark' })
+          toast.success(t('Kapitan yangilandi'))
         }
       } catch (error) {
         setError(
@@ -66,8 +65,7 @@ export const useUpdateTeamCaptains = () => {
         toast.error(
           error instanceof Error
             ? error.message
-            : t('An unknown error occurred'),
-          { theme: 'dark' }
+            : t('An unknown error occurred')
         )
       } finally {
         setIsLoading(false)

@@ -6,17 +6,15 @@ import { setUserTable } from '../lib/features/auth/auth.slice'
 import { usePathname } from 'next/navigation'
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { useLogOut } from 'app/hooks/auth/useLogOut/useLogOut'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { useTranslation } from 'react-i18next'
 import { useSession } from 'next-auth/react'
 import { useAuthStatus } from 'app/hooks/auth/useAuthStatus/useAuthStatus'
-import { useTransitionRouter } from 'next-view-transitions'
 
 const AuthProvider = ({ children }) => {
   const { t } = useTranslation()
-  const router = useTransitionRouter()
   const dispatch = useDispatch()
   const path = usePathname()
   const user = useSelector(selectUserTable)
@@ -51,15 +49,6 @@ const AuthProvider = ({ children }) => {
       }
     }
   }, [session, dispatch, setAuth])
-
-  useEffect(() => {
-    if (path.includes('/play') || path.includes('settings')) {
-      if (!isAuthenticated) {
-        router.push('/')
-        toast.info(t('Please login first'))
-      }
-    }
-  }, [isAuthenticated, path, performLogout, router, t])
 
   useEffect(() => {
     if (path.includes('auth') || path.includes('confirm-otp')) {

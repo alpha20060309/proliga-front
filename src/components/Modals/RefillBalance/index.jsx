@@ -9,7 +9,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { PAYMENT_OPTIONS } from 'app/utils/paymentOptions.util'
 import { useSelector } from 'react-redux'
 import { useRedirectToClick } from 'app/hooks/payment/useRedirectToClick/useRedirectToClick'
@@ -20,7 +20,9 @@ import { formatCurrency } from 'app/utils/formatCurrency'
 import { memo } from 'react'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { BALANCE_OPTIONS } from 'app/utils/paymentOptions.util'
-import PaymentOption from './PaymentOption'
+import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
+import Image from 'next/image'
 
 const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
   const { t } = useTranslation()
@@ -65,16 +67,16 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-      <DialogContent className="max-h-[80%] w-[98%] max-w-lg overflow-auto rounded-xl bg-neutral-900 p-4 xl:p-6">
+      <DialogContent className="text-foreground max-h-[80%] w-[98%] max-w-lg overflow-auto rounded-xl p-4 xl:p-6">
         <DialogTitle className="text-lg font-bold sm:text-xl">
           {t('Balansingizni toldiring')}
         </DialogTitle>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="w-full space-y-1">
-            <h3 className="text-sm font-medium text-neutral-300 sm:text-base">
+            <h3 className="text-muted-foreground text-sm font-medium sm:text-base">
               {t("To'lov usulini tanlang")}
             </h3>
-            <section className="flex flex-wrap justify-start gap-1 sm:flex-nowrap">
+            <section className="flex max-w-full flex-wrap justify-start gap-1 sm:flex-nowrap">
               {cabinet_click && (
                 <PaymentOption
                   onClick={() => setPaymentOption(BALANCE_OPTIONS.CLICKUP)}
@@ -96,19 +98,19 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
                 />
               )}
               {!cabinet_click && !cabinet_payme && (
-                <p className="flex h-10 w-full items-center justify-center rounded border border-red-400 bg-red-700/80 font-bold">
+                <p className="flex h-10 w-full items-center justify-center rounded-sm border border-red-400 bg-red-700/80 font-bold">
                   {t("Hozircha to'lovlar o'chirib qo'yilgan!")}
                 </p>
               )}
             </section>
           </div>
           <div className="w-full space-y-1">
-            <label
-              className="text-sm font-medium text-neutral-300 sm:text-base"
+            <Label
+              className="text-muted-foreground text-sm font-medium sm:text-base"
               htmlFor="money"
             >
               {t("To'lash summasini tering")}
-            </label>
+            </Label>
             <Input
               type="number"
               id="money"
@@ -120,15 +122,15 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               name="money"
-              className="flex h-10 w-full rounded-md border border-neutral-600 bg-neutral-900 px-3 py-2 text-sm text-neutral-200 file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus:border-none disabled:cursor-not-allowed disabled:opacity-50"
+              className="border-border bg-input text-foreground placeholder:text-muted-foreground flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus:border-none disabled:cursor-not-allowed disabled:opacity-50"
             />
           </div>
-          <button
+          <Button
             type="submit"
-            className="h-12 rounded border border-neutral-600 bg-primary/80 font-bold text-neutral-900 transition-all hover:bg-primary hover:text-black"
+            className="border-border bg-primary/80 text-foreground hover:bg-primary hover:text-accent-foreground h-12 rounded-sm border font-bold transition-all"
           >
             {t("To'lash")}
-          </button>
+          </Button>
         </form>
       </DialogContent>
       <DialogDescription className="hidden">
@@ -138,7 +140,25 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
   )
 }
 
-const ACTIVE = 'border-primary'
-const PASSIVE = 'border-neutral-600 hover:border-yellow-600'
+const PaymentOption = ({ onClick, style, img, alt }) => {
+  return (
+    <Button
+      onClick={onClick}
+      className={`xs:h-16 xs:w-36 bg-foreground/20 border-border flex h-14 w-32 items-center justify-center rounded border p-3 transition-all ${style}`}
+    >
+      <Image
+        src={img}
+        width={36}
+        draggable={false}
+        height={36}
+        className="h-full w-full self-center"
+        alt={alt}
+      />
+    </Button>
+  )
+}
+
+const ACTIVE = 'border-accent'
+const PASSIVE = 'border-accent hover:border-primary'
 
 export default memo(RefillBalance)

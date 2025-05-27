@@ -14,7 +14,7 @@ const PlayerPhoto = ({ currentPlayer, position }) => {
 
   return (
     <section className="flex gap-2">
-      <div className="size-24 flex-shrink-0 sm:size-32 lg:size-36">
+      <div className="size-24 shrink-0 sm:size-32 lg:size-36">
         <img
           src={getUrl(image) || ''}
           alt="player image"
@@ -27,7 +27,7 @@ const PlayerPhoto = ({ currentPlayer, position }) => {
       </div>
       <section className="flex flex-1 flex-col justify-between gap-2">
         <div>
-          <DialogTitle className="mb-1 truncate text-lg font-bold text-primary sm:text-xl md:text-2xl">
+          <DialogTitle className="text-accent mb-1 truncate text-lg font-bold sm:text-xl md:text-2xl">
             {getCorrectName({
               lang,
               uz: currentPlayer?.name,
@@ -43,17 +43,19 @@ const PlayerPhoto = ({ currentPlayer, position }) => {
               draggable={false}
               loading="lazy"
               onError={(e) => (e.currentTarget.src = '/icons/football.svg')}
-              className="size-5 rounded-full bg-neutral-700 md:size-6 lg:size-7"
+              className="bg-secondary size-5 rounded-full md:size-6 lg:size-7"
             />
-            <p className="text-sm font-medium text-neutral-200 md:text-base">
+            <p className="text-foreground text-sm font-medium md:text-base">
               {getCorrectName({
                 lang,
                 uz: currentPlayer?.club?.name,
                 ru: currentPlayer?.club?.name_ru,
               })}
             </p>
-            <span className="text-neutral-500">|</span>
-            <p className="text-sm text-neutral-300 md:text-base">{position}</p>
+            <span className="text-muted-foreground/80">|</span>
+            <p className="text-muted-foreground text-sm md:text-base">
+              {position}
+            </p>
           </div>
         </div>
         <div className="grid grid-cols-3 gap-1 sm:hidden">
@@ -96,21 +98,21 @@ const PlayerPhoto = ({ currentPlayer, position }) => {
 }
 
 const Stat = ({ icon, value, label }) => (
-  <div className="flex items-center gap-1.5 rounded-md bg-neutral-800 p-1.5 text-xs sm:p-2 sm:text-sm">
-    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-neutral-700 sm:h-7 sm:w-7">
+  <div className="bg-card flex items-center gap-1.5 rounded-md p-1.5 text-xs sm:p-2 sm:text-sm">
+    <div className="bg-secondary flex h-6 w-6 items-center justify-center rounded-full sm:h-7 sm:w-7">
       {icon}
     </div>
     <div>
-      <p className="font-semibold text-neutral-100">{value ?? 0}</p>
-      <p className="text-xs text-neutral-400">{label}</p>
+      <p className="text-foreground font-semibold">{value ?? 0}</p>
+      <p className="text-muted-foreground text-xs">{label}</p>
     </div>
   </div>
 )
 
 const SmallerStat = ({ value, label }) => (
-  <div className="flex items-center justify-between gap-1 rounded-md bg-neutral-800 px-2 py-1 text-xs xs:py-2">
-    <p className="text-[10px] leading-tight text-neutral-400">{label}</p>
-    <p className="font-semibold leading-tight text-neutral-100">{value ?? 0}</p>
+  <div className="bg-cardy-1 xs:py-2 flex items-center justify-between gap-1 rounded-md text-xs">
+    <p className="text-3xs text-muted-foreground leading-tight">{label}</p>
+    <p className="text-foreground leading-tight font-semibold">{value ?? 0}</p>
   </div>
 )
 

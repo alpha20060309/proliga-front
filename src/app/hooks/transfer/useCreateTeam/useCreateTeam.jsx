@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { useDispatch } from 'react-redux'
 import { supabase } from '../../../lib/supabaseClient'
 import { addGameToTeam } from 'app/lib/features/team/team.slice'
@@ -30,13 +30,13 @@ export const useCreateTeam = () => {
 
       if (!title) {
         setError('Ism bolishi shart')
-        toast.warning(t('Ism bolishi shart'), { theme: 'dark' })
+        toast.warning(t('Ism bolishi shart'))
         return
       }
 
       if (!formation) {
         setError('Taktika bolishi shart')
-        toast.warning(t('Taktika bolishi shart'), { theme: 'dark' })
+        toast.warning(t('Taktika bolishi shart'))
         return
       }
 
@@ -86,8 +86,7 @@ export const useCreateTeam = () => {
         toast.error(
           error instanceof Error
             ? error.message
-            : t('An unknown error occurred'),
-          { theme: 'dark' }
+            : t('An unknown error occurred')
         )
       } finally {
         setIsLoading(false)

@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { supabase } from '../../../lib/supabaseClient'
 import { useTranslation } from 'react-i18next'
 
@@ -31,8 +31,7 @@ export const useGenerateLanguage = () => {
         toast.error(
           error instanceof Error
             ? error.message
-            : t('An unknown error occurred'),
-          { theme: 'dark' }
+            : t('An unknown error occurred')
         )
         return
       }
@@ -60,8 +59,7 @@ export const useGenerateLanguage = () => {
         error instanceof Error ? error.message : t('An unknown error occurred')
       )
       toast.error(
-        error instanceof Error ? error.message : t('An unknown error occurred'),
-        { theme: 'dark' }
+        error instanceof Error ? error.message : t('An unknown error occurred')
       )
     } finally {
       setIsLoading(false)

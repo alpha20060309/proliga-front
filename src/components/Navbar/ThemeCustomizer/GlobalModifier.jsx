@@ -1,0 +1,148 @@
+'use client'
+
+import React from 'react'
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { useTheme } from 'next-themes'
+import { useSelector, useDispatch } from 'react-redux'
+import {
+  setDarkTheme,
+  setLightTheme,
+} from 'app/lib/features/systemConfig/systemConfig.slice'
+import { useTranslation } from 'react-i18next'
+
+const GlobalModifier = () => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const { theme } = useTheme()
+  const { darkTheme, lightTheme } = useSelector((store) => store.systemConfig)
+
+  const handleChange = (type, value, key) => {
+    theme === 'dark'
+      ? dispatch(
+          setDarkTheme({
+            type: 'global',
+            data: { ...darkTheme.global, [key]: value },
+          })
+        )
+      : dispatch(
+          setLightTheme({
+            type: 'global',
+            data: { ...lightTheme.global, [key]: value },
+          })
+        )
+    document.documentElement.style.setProperty(`--${type}`, `${value}rem`)
+  }
+
+  return (
+    <div className="flex w-full gap-4 space-y-4">
+      <Card className="w-full rounded-[4px] bg-[#232323]">
+        <CardHeader className="py-2">
+          <CardTitle className="text-base text-[#fff]">
+            {t('Global Style Modifiers')}
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="py-2">
+          <div className="mb-3">
+            <div className="mb-1.5 flex items-center justify-between">
+              <label
+                htmlFor="global-spacing-slider"
+                className="text-lg font-medium text-[#fff]"
+              >
+                {t('Spacing Size')}
+              </label>
+              <span className="text-xs text-[#999]">
+                {theme === 'dark'
+                  ? darkTheme.global.spacing
+                  : lightTheme.global.spacing}
+                rem
+              </span>
+            </div>
+            <input
+              type="range"
+              id="global-spacing-slider"
+              value={
+                theme === 'dark'
+                  ? darkTheme.global.spacing || 0.25
+                  : lightTheme.global.spacing || 0.25
+              }
+              min={0.15}
+              max={0.35}
+              step={0.001}
+              onChange={(e) =>
+                handleChange('spacing', e.target.value, 'spacing')
+              }
+              className="w-full py-1"
+            />
+          </div>
+
+          <div className="mb-3">
+            <div className="mb-1.5 flex items-center justify-between">
+              <label
+                htmlFor="global-letter-spacing-slider"
+                className="text-lg font-medium text-[#fff]"
+              >
+                {t('Letter Spacing')}
+              </label>
+              <span className="text-xs text-[#999]">
+                {theme === 'dark'
+                  ? darkTheme.global.letterSpacing
+                  : lightTheme.global.letterSpacing}
+                rem
+              </span>
+            </div>
+            <input
+              type="range"
+              id="global-letter-spacing-slider"
+              value={
+                theme === 'dark'
+                  ? darkTheme.global.letterSpacing || 0
+                  : lightTheme.global.letterSpacing || 0
+              }
+              min={-0.1}
+              max={0.5}
+              step={0.001}
+              onChange={(e) =>
+                handleChange('letter-spacing', e.target.value, 'letterSpacing')
+              }
+              className="w-full py-1"
+            />
+          </div>
+          <div className="mb-3">
+            <div className="mb-1.5 flex items-center justify-between">
+              <label
+                htmlFor="global-radius-slider"
+                className="text-lg font-medium text-[#fff]"
+              >
+                {t('Border Radius')}
+              </label>
+              <span className="text-xs text-[#999]">
+                {theme === 'dark'
+                  ? darkTheme.global.borderRadius || 0.5
+                  : lightTheme.global.borderRadius || 0.5}
+                rem
+              </span>
+            </div>
+            <input
+              type="range"
+              id="global-radius-slider"
+              value={
+                theme === 'dark'
+                  ? darkTheme.global.borderRadius || 0.5
+                  : lightTheme.global.borderRadius || 0.5
+              }
+              min={0}
+              max={5}
+              step={0.05}
+              onChange={(e) =>
+                handleChange('radius', e.target.value, 'borderRadius')
+              }
+              className="w-full py-1"
+            />
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
+
+export default GlobalModifier

@@ -3,7 +3,7 @@
 import { supabase } from 'app/lib/supabaseClient'
 import { useState, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { setUserTable } from 'app/lib/features/auth/auth.slice'
 import { setLanguage } from 'app/lib/features/systemLanguage/systemLanguage.slice'
 import { useTranslation } from 'react-i18next'
@@ -18,7 +18,6 @@ export const useUpdateUserLanguage = () => {
   const updateUserLanguage = useCallback(
     async ({ lang, userTable }) => {
       try {
-        // eslint-disable-next-line no-undef
         setIsLoading(true)
         setError('')
 
@@ -43,8 +42,7 @@ export const useUpdateUserLanguage = () => {
           toast.error(
             error instanceof Error
               ? error.message
-              : t('An unknown error occurred'),
-            { theme: 'dark' }
+              : t('An unknown error occurred')
           )
           return
         }
@@ -63,8 +61,7 @@ export const useUpdateUserLanguage = () => {
         toast.error(
           error instanceof Error
             ? error.message
-            : t('An unknown error occurred'),
-          { theme: 'dark' }
+            : t('An unknown error occurred')
         )
       } finally {
         setIsLoading(false)

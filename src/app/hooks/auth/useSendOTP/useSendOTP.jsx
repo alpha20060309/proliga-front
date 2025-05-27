@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 import { supabase } from 'app/lib/supabaseClient'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { useTranslation } from 'react-i18next'
 import { useTransitionRouter } from 'next-view-transitions'
 
@@ -22,7 +22,7 @@ export const useSendOTP = () => {
       setError(null)
 
       if (!phone) {
-        toast.error(t('Telefon raqam kiritilmagan'), { theme: 'dark' })
+        toast.error(t('Telefon raqam kiritilmagan'))
         setError(t('Telefon raqam kiritilmagan'))
         return
       }
@@ -44,19 +44,18 @@ export const useSendOTP = () => {
           toast.error(
             error instanceof Error
               ? error.message
-              : t('An unknown error occurred'),
-            { theme: 'dark' }
+              : t('An unknown error occurred')
           )
           return { error }
         }
         if (data?.status !== 200) {
           setError(data?.message)
-          toast.error(data?.message, { theme: 'dark' })
+          toast.error(data?.message)
           return { error }
         }
         if (data?.status === 200) {
           setData(data)
-          toast.success(t('SMS muvaffaqiyatli yuborildi'), { theme: 'dark' })
+          toast.success(t('SMS muvaffaqiyatli yuborildi'))
           if (shouldRedirect) {
             router.push(redirectTo)
           }
@@ -71,8 +70,7 @@ export const useSendOTP = () => {
         toast.error(
           error instanceof Error
             ? error.message
-            : t('An unknown error occurred'),
-          { theme: 'dark' }
+            : t('An unknown error occurred')
         )
       } finally {
         setIsLoading(false)

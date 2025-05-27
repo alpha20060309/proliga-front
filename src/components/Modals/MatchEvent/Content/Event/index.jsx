@@ -67,7 +67,7 @@ const MatchEvent = ({ event, index }) => {
       )}
     >
       {isTextOnly ? (
-        <div className="z-10 rounded bg-black px-3 py-1.5 text-center text-sm text-neutral-100 shadow shadow-neutral-700">
+        <div className="bg-background text-foreground shadow-border z-10 rounded-sm px-3 py-1.5 text-center text-sm shadow-sm">
           {renderHeader(event.event_type)}
         </div>
       ) : (
@@ -81,8 +81,8 @@ const MatchEvent = ({ event, index }) => {
             {hasName && (
               <div
                 className={cn(
-                  'text-sm text-neutral-50 md:text-base',
-                  event.event_type === MATCH_EVENTS.TRANSFER && 'text-green-600'
+                  'text-foreground text-sm md:text-base',
+                  event.event_type === MATCH_EVENTS.TRANSFER && 'text-success'
                 )}
               >
                 {getCorrectName({
@@ -95,8 +95,8 @@ const MatchEvent = ({ event, index }) => {
             {event?.second_player_id && hasSecondName && (
               <div
                 className={cn(
-                  'text-xs text-neutral-400 md:text-sm',
-                  event.event_type === MATCH_EVENTS.TRANSFER && 'text-red-600'
+                  'text-muted-foreground text-xs md:text-sm',
+                  event.event_type === MATCH_EVENTS.TRANSFER && 'text-error'
                 )}
               >
                 {getCorrectName({
@@ -108,7 +108,7 @@ const MatchEvent = ({ event, index }) => {
             )}
           </div>
           <div className="flex w-2/12 items-center justify-center">
-            <div className="z-10 flex size-10 items-center justify-center rounded-full bg-neutral-900 shadow shadow-neutral-700">
+            <div className="bg-background shadow-border z-10 flex size-10 items-center justify-center rounded-full shadow-sm">
               <MatchEventIcon type={event.event_type} />
             </div>
           </div>
@@ -118,7 +118,7 @@ const MatchEvent = ({ event, index }) => {
               isHome ? 'pl-4 text-left' : 'pr-4 text-right'
             )}
           >
-            <div className="text-sm text-white/70">{event.minute}`</div>
+            <div className="text-foreground/70 text-sm">{event.minute}`</div>
           </div>
         </>
       )}

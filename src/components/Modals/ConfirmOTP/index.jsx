@@ -18,7 +18,7 @@ import { useSelector } from 'react-redux'
 import ResendOTP from './ResendOTP'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
 import { Button } from '@/components/ui/button'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { useSession } from 'next-auth/react'
 
@@ -44,7 +44,7 @@ const ConfirmOTP = ({
     e.preventDefault()
 
     if (code.length !== 6) {
-      toast.warning('Kod 6 ta harf bolishi shart!', { theme: 'dark' })
+      toast.warning('Kod 6 ta harf bolishi shart!')
       return
     }
     if (defaultHook) {
@@ -79,7 +79,7 @@ const ConfirmOTP = ({
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setModalOpen}>
-      <DialogContent className="flex w-min min-w-80 flex-col items-center justify-between gap-2 rounded-xl bg-neutral-950 p-6 text-neutral-100 shadow shadow-neutral-500">
+      <DialogContent className="bg-background text-foreground shadow-border flex w-min min-w-80 flex-col items-center justify-between gap-2 rounded-xl p-6 shadow-sm">
         <form
           onSubmit={handleConfirm}
           className="flex flex-col items-start gap-6"
@@ -105,7 +105,7 @@ const ConfirmOTP = ({
           <Button
             type="submit"
             disabled={isLoading}
-            className="h-10 w-full rounded border border-primary bg-neutral-900 text-neutral-100 transition-all hover:bg-black"
+            className="border-primary text-foreground hover:bg-background bg-background h-10 w-full rounded-sm border transition-all"
           >
             {t('Tasdiqlash')}
           </Button>

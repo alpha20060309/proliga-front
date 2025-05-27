@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { useTranslation } from 'react-i18next'
 import {
   DialogContent,
@@ -9,13 +9,13 @@ import {
   Dialog,
   DialogDescription,
 } from '@/components/ui/dialog'
-import Image from 'next/image'
 import { PhoneInput } from 'components/PhoneInput'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
 import { useGetUserPhone } from 'app/hooks/user/useGetUserPhone/useGetUserPhone'
 import { memo } from 'react'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
+import { Loader } from 'lucide-react'
 
 const ForgotPassword = ({ isModalOpen, setModalOpen }) => {
   const { t } = useTranslation()
@@ -42,7 +42,7 @@ const ForgotPassword = ({ isModalOpen, setModalOpen }) => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setModalOpen}>
-      <DialogContent className="w-[98%] max-w-md rounded-xl bg-neutral-950 px-4 py-6 text-neutral-100 sm:p-6">
+      <DialogContent className="bg-background text-foreground w-[98%] max-w-md rounded-xl px-4 py-6 sm:p-6">
         <DialogTitle>{t('Parolingizni unutingizmi?')}</DialogTitle>
         <DialogDescription>
           {t(
@@ -57,7 +57,7 @@ const ForgotPassword = ({ isModalOpen, setModalOpen }) => {
               name="phone"
               placeholder={t('Telefon raqam')}
               defaultCountry="UZ"
-              className="h-10 bg-neutral-950 text-neutral-200 placeholder:text-neutral-500"
+              className="placeholder:text-muted-foreground h-10"
               value={phone}
               onChange={setPhone}
             />
@@ -65,16 +65,10 @@ const ForgotPassword = ({ isModalOpen, setModalOpen }) => {
           <Button
             type="submit"
             disabled={isLoading}
-            className="h-10 w-full rounded border border-primary bg-neutral-900 text-neutral-50 transition-all hover:bg-black"
+            className="border-primary hover:bg-background bg-background text-foreground h-10 w-full rounded-sm border transition-all"
           >
             {isLoading ? (
-              <Image
-                src="/icons/loading.svg"
-                width={24}
-                height={24}
-                alt="loading"
-                className="mx-auto size-5 animate-spin"
-              />
+              <Loader className="mx-auto size-5 animate-spin" />
             ) : (
               t('Parolni tiklash')
             )}

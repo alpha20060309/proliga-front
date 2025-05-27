@@ -4,7 +4,7 @@ const Body = ({ table, flexRender }) => {
   const styles = (id) => {
     switch (id) {
       case 'ochko':
-        return 'w-min px-1 bg-primary text-center text-black rounded bg-opacity-100'
+        return 'w-min px-1 bg-primary text-center text-foreground rounded-sm'
       case 'competitor':
         return 'w-min px-0.5 sm:min-w-5 max-w-14 xs:max-w-20 break-all text-center font-bold'
       default:
@@ -17,7 +17,7 @@ const Body = ({ table, flexRender }) => {
       {table.getRowModel().rows.map((row) => (
         <tr
           key={row.id}
-          className="mx-auto max-h-20 w-full border-b border-neutral-700 bg-neutral-800 even:bg-neutral-800 hover:bg-neutral-800"
+          className="bg-card even:bg-card/80 border-border mx-auto max-h-20 w-full border-b"
         >
           {row.getVisibleCells().map((cell) => (
             <td

@@ -8,6 +8,7 @@ let reader = null
 
 async function initializeReader() {
   if (!reader) {
+    // eslint-disable-next-line no-undef
     const dbPath = path.resolve(process.env.NEXT_PUBLIC_MAXMIND_DB_PATH || '')
     try {
       const stats = await fs.stat(dbPath)

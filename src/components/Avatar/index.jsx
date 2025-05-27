@@ -19,17 +19,14 @@ const Avatar = ({ className }) => {
           onError={(e) => {
             e.target.src = '/icons/user.svg'
           }}
-          className={cn(
-            'aspect-square size-8 select-none bg-neutral-100',
-            className
-          )}
+          className={cn('aspect-square size-8 bg-white select-none', className)}
         />
       )
     }
     return (
       <span
         className={cn(
-          'flex aspect-square size-8 select-none items-center justify-center bg-primary text-3xl font-bold uppercase text-black',
+          'bg-primary flex aspect-square size-8 items-center justify-center text-3xl font-bold text-black uppercase select-none',
           className
         )}
         key={user?.email}
@@ -43,7 +40,7 @@ const Avatar = ({ className }) => {
     return (
       <span
         className={cn(
-          'flex aspect-square size-8 select-none items-center justify-center bg-primary text-3xl font-bold uppercase text-black',
+          'bg-primary flex aspect-square size-8 items-center justify-center text-3xl font-bold text-black uppercase select-none',
           className
         )}
         key={user?.name}
@@ -56,7 +53,7 @@ const Avatar = ({ className }) => {
   return (
     <User
       className={cn(
-        'size-8 select-none bg-neutral-200 p-px text-neutral-950 lg:p-0.5',
+        'size-8 bg-white p-px text-black shadow-sm select-none lg:p-0.5',
         className
       )}
     />

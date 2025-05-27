@@ -13,7 +13,6 @@ import { Badge } from '@/components/ui/badge'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import NotificationModal from './Modal'
 import NotificationArticle from './NotificationArticle'
-import Image from 'next/image'
 import { selectNotifications } from 'app/lib/features/systemNotification/systemNotification.selector'
 import { supabase } from 'app/lib/supabaseClient'
 import {
@@ -22,6 +21,7 @@ import {
   deleteNotification,
 } from 'app/lib/features/systemNotification/systemNotification.slice'
 import { SUPABASE_EVENT_TYPE } from 'app/lib/supabaseClient'
+import { Bell } from 'lucide-react'
 
 const Notification = () => {
   const dispatch = useDispatch()
@@ -120,35 +120,30 @@ const Notification = () => {
 
   return (
     <Popover open={isNotificationsOpen} onOpenChange={handleOpen}>
-      <PopoverTrigger asChild>
-        <button aria-label={t('Open notifications')} className="relative">
-          <Image
-            src={'/icons/bell.svg'}
-            alt="bell"
-            draggable={false}
-            width={24}
-            height={24}
+      <PopoverTrigger
+        aria-label={t('Open notifications')}
+        className="hover:text-accent-foreground dark:hover:text-accent relative flex size-8 items-center justify-center bg-transparent p-0 hover:bg-transparent dark:hover:bg-transparent"
+      >
+        <Bell
+          className={`hover:text-accent text-foreground size-5 select-none`}
+        />
+        {unreadCount > 0 && (
+          <Badge
+            variant="destructive"
             className={cn(
-              `hover:filter-neutral-50 size-6 select-none`,
-              isNotificationsOpen ? 'filter-primary' : 'filter-neutral-200'
+              'text-3xs absolute -top-0.5 -right-0.5 flex size-3.5 animate-pulse items-center justify-center rounded-full p-1',
+              isNotificationsOpen ? 'bg-card' : 'bg-destructive'
             )}
-          />
-          {unreadCount > 0 && (
-            <Badge
-              variant="destructive"
-              className={cn(
-                'absolute -right-0.5 -top-0.5 flex size-3.5 items-center justify-center rounded-full p-1 text-[10px]',
-                isNotificationsOpen ? 'bg-neutral-800' : 'bg-red-700'
-              )}
-            >
-              {unreadCount}
-            </Badge>
-          )}
-        </button>
+          >
+            {unreadCount}
+          </Badge>
+        )}
       </PopoverTrigger>
-      <PopoverContent className="ml-2 mt-5 w-80 p-0" align="end">
+      <PopoverContent className="mt-5 ml-2 w-80 p-0" align="end">
         <div className="flex items-center justify-between border-b px-4 py-2">
-          <h3 className="text-sm font-semibold">{t('Xabarnomalar')}</h3>
+          <h3 className="text-foreground text-sm font-semibold">
+            {t('Xabarnomalar')}
+          </h3>
         </div>
         <ScrollArea className="dark h-80">
           {systemNotifications?.length === 0 ? (

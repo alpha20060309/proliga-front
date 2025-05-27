@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { supabase } from '../../../lib/supabaseClient'
 import { useTranslation } from 'react-i18next'
 import { useSendOTP } from '../useSendOTP/useSendOTP'
@@ -63,7 +63,6 @@ export const useAuthChangePhone = () => {
         if (checkData?.status !== 404) {
           return handleError('An unknown error occurred')
         }
-
 
         await signIn('credentials', {
           phone,

@@ -14,6 +14,8 @@ import NavbarUserMobile from './UserMobile'
 import ChangeLanguageDropdown from './Language'
 import Notification from './Notification'
 import Marquee from 'components/Marquee'
+import ThemeSwither from './ThemeSwitch'
+import ThemeCustomizer from './ThemeCustomizer'
 
 const Navbar = () => {
   const path = usePathname()
@@ -28,7 +30,7 @@ const Navbar = () => {
     <>
       <nav
         className={cn(
-          'fixed left-0 right-0 top-0 z-50 w-screen bg-black bg-opacity-80 backdrop-blur-md',
+          'bg-background/50 border-border fixed top-0 right-0 left-0 z-50 w-screen border-b backdrop-blur-md',
           NEXT_PUBLIC_TEST_NAV_SLIDER ? 'pb-3' : 'py-3'
         )}
       >
@@ -40,7 +42,7 @@ const Navbar = () => {
           />
         )}
         <Gutter>
-          <div className="flex w-full items-center justify-between text-white">
+          <div className="text-foreground flex w-full items-center justify-between">
             <Link
               href={
                 path.split('/').includes('championships')
@@ -55,13 +57,15 @@ const Navbar = () => {
                 width={180}
                 height={56}
                 draggable={false}
-                className="w-28 cursor-pointer xs:w-32 md:w-36"
+                className="xs:w-32 w-28 cursor-pointer md:w-36"
               />
             </Link>
             <PlayLinks />
             <div className="flex w-max items-center justify-center gap-4">
               <ChangeLanguageDropdown />
               <Notification />
+              <ThemeSwither />
+              <ThemeCustomizer />
               <NavbarUserMobile handleToggleModal={() => setModalOpen(true)} />
               <NavbarUserDesktop />
             </div>

@@ -1,27 +1,33 @@
 'use client'
 
+import '../../auth.config'
 import { memo } from 'react'
-import '../lib/i18n.config'
 import ReduxProvider from './Store.provider'
 import AuthProvider from './Auth.provider'
 import InitialStateProvider from './InitialState.provider'
 import SessionProvider from './Session.provider'
-import FirebaseProvider from './FirebaseProvider'
-import GeolocationProvider from './GeolocationProvider'
+import FirebaseProvider from './Firebase.provider'
+import GeolocationProvider from './Geolocation.provider'
+import ThemesProviders from './Theme.provider'
+import CustomThemeProvider from './CustomTheme.provider'
 
 const RootProvider = ({ children }) => {
   return (
-    <SessionProvider>
-      <ReduxProvider>
-        <AuthProvider>
-          <InitialStateProvider>
-            <GeolocationProvider>
-              <FirebaseProvider>{children}</FirebaseProvider>
-            </GeolocationProvider>
-          </InitialStateProvider>
-        </AuthProvider>
-      </ReduxProvider>
-    </SessionProvider>
+    <ThemesProviders>
+      <SessionProvider>
+        <ReduxProvider>
+          <AuthProvider>
+            <InitialStateProvider>
+              <GeolocationProvider>
+                <FirebaseProvider>
+                  <CustomThemeProvider>{children}</CustomThemeProvider>
+                </FirebaseProvider>
+              </GeolocationProvider>
+            </InitialStateProvider>
+          </AuthProvider>
+        </ReduxProvider>
+      </SessionProvider>
+    </ThemesProviders>
   )
 }
 

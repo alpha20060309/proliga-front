@@ -74,7 +74,7 @@ const LeftSideBanner = () => {
         banner?.type === BANNER_SERVICE_TYPE.CUSTOM && (
           <Link
             href={banner?.link ?? ''}
-            className="mb-auto hidden h-[560px] w-[160px] min-w-[160px] overflow-hidden rounded-sm lg:block"
+            className="mb-auto hidden h-[560px] w-40 min-w-40 overflow-hidden rounded-xs lg:block"
           >
             <img
               src={getUrl(banner?.content_url) ?? ''}
@@ -86,7 +86,7 @@ const LeftSideBanner = () => {
         )}
       {windowWidth >= NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH &&
         banner?.type === BANNER_SERVICE_TYPE.YANDEX && (
-          <div className="mb-auto hidden h-[560px] w-[160px] min-w-[160px] overflow-hidden rounded-sm lg:block">
+          <div className="mb-auto hidden h-[560px] w-40 min-w-40 overflow-hidden rounded-xs lg:block">
             <YandexAd blockId={banner?.service_id} />
           </div>
         )}

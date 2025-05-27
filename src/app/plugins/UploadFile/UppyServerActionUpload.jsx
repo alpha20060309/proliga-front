@@ -27,7 +27,6 @@ export default class UppyServerActionUpload extends BasePlugin {
     this.uppy.emit('upload-started', files)
     await this.action(formData)
     this.uppy.emit('upload-success', files)
-  // eslint-disable-next-line no-undef
     return Promise.resolve()
   }
   install() {

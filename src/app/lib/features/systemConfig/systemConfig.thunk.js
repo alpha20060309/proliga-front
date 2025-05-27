@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { supabase } from 'app/lib/supabaseClient'
 import { CONFIG_KEY } from 'app/utils/config.util'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 
 export const fetchSystemConfig = createAsyncThunk(
   'systemConfig/fetchSystemConfig',
@@ -18,5 +18,16 @@ export const fetchSystemConfig = createAsyncThunk(
     } catch (error) {
       toast.error(error.message)
     }
+  }
+)
+
+export const fetchThemes = createAsyncThunk(
+  'systemConfig/fetchThemes',
+  async () => {
+    const { data, error } = await supabase
+      .from('theme')
+      .select('*')
+      .eq('is_global', true)
+    return { data, error }
   }
 )

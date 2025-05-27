@@ -28,29 +28,31 @@ function NewsArticle() {
 
   return (
     <Dialog open={isModalOpen && currentNews?.id} onOpenChange={setModalOpen}>
-      <DialogContent className="w-[98%] max-w-4xl rounded-xl bg-black px-2 py-4 md:p-4 2xl:max-w-5xl">
-        <DialogTitle className="mr-7 text-xl font-normal leading-tight tracking-wide">
+      <DialogContent className="bg-background w-[98%] max-w-4xl rounded-xl px-2 py-4 md:p-4 2xl:max-w-5xl">
+        <DialogTitle className="mr-7 text-xl leading-tight font-normal tracking-wide">
           {getCorrectName({
             lang,
             uz: currentNews?.name,
             ru: currentNews?.name_ru,
           })}
         </DialogTitle>
-        <div className="text-muted-foreground flex items-center space-x-4 text-sm">
+        <div className="flex items-center space-x-4 text-sm">
           <div className="flex items-center">
-            <CalendarDays className="mr-1 size-5" />
-            <time dateTime={date}>{date}</time>
+            <CalendarDays className="text-muted-foreground mr-1 size-5" />
+            <time className="text-foreground/80" dateTime={date}>
+              {date}
+            </time>
           </div>
           <div className="flex items-center">
-            <Eye className="mr-1 size-5 text-neutral-200" />
-            <span>
+            <Eye className="text-muted-foreground mr-1 size-5" />
+            <span className="text-foreground/80">
               {currentNews?.view_count || 0} {t('views')}
             </span>
           </div>
         </div>
-        <ScrollArea className="h-[75vh] rounded bg-neutral-900">
+        <ScrollArea className="bg-card h-[75vh] rounded">
           <div
-            className="modal-news bg-transparent px-1 py-2 xs:px-2 xs:py-3 2xl:p-4"
+            className="modal-news xs:px-2 xs:py-3 bg-transparent px-1 py-2 2xl:p-4"
             dangerouslySetInnerHTML={{
               __html: getCorrectName({
                 lang,

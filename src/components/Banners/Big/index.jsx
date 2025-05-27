@@ -44,18 +44,18 @@ const BigBanner = () => {
       {banner?.type === BANNER_SERVICE_TYPE.CUSTOM && (
         <Link
           href={banner?.link ?? ''}
-          className="block h-[480px] w-[360px] overflow-hidden rounded"
+          className="block h-[480px] w-[360px] overflow-hidden rounded-sm"
         >
           <img
             src={getUrl(banner?.content_url) ?? ''}
             alt={banner?.name}
             loading="lazy"
-            className="h-full w-full rounded"
+            className="h-full w-full rounded-sm"
           />
         </Link>
       )}
       {banner?.type === BANNER_SERVICE_TYPE.YANDEX && (
-        <div className="block max-h-[700px] max-w-[360px] overflow-hidden rounded">
+        <div className="block max-h-[700px] max-w-[360px] overflow-hidden rounded-sm">
           <YandexAd blockId={banner?.service_id} />
         </div>
       )}

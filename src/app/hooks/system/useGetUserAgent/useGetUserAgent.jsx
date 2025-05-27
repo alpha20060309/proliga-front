@@ -1,4 +1,4 @@
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { useState, useCallback } from 'react'
 import { setAgent } from 'app/lib/features/auth/auth.slice'
 import { useDispatch } from 'react-redux'
@@ -53,8 +53,7 @@ export function useGetUserAgent() {
         error instanceof Error ? error.message : t('An unknown error occurred')
       )
       toast.error(
-        error instanceof Error ? error.message : t('An unknown error occurred'),
-        { theme: 'dark' }
+        error instanceof Error ? error.message : t('An unknown error occurred')
       )
     }
   }, [dispatch, t])

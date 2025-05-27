@@ -1,5 +1,5 @@
 import { fetchTeamPlayers } from './teamPlayer.thunk'
-import { PLAYER_POSITION} from 'app/utils/player.util'
+import { PLAYER_POSITION } from 'app/utils/player.util'
 
 export const teamPlayerExtraReducer = (builder) => {
   builder

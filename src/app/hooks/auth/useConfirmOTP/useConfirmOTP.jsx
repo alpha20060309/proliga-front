@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 import { supabase } from 'app/lib/supabaseClient'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { useTranslation } from 'react-i18next'
 import { useTransitionRouter } from 'next-view-transitions'
 import { useSession } from 'next-auth/react'
@@ -98,8 +98,7 @@ export const useConfirmOTP = () => {
         toast.error(
           error instanceof Error
             ? error.message
-            : t('An unknown error occurred'),
-          { theme: 'dark' }
+            : t('An unknown error occurred')
         )
       } finally {
         setIsLoading(false)

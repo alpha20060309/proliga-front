@@ -1,7 +1,7 @@
 import { supabase } from 'app/lib/supabaseClient'
 import { useState, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { setUserTable } from 'app/lib/features/auth/auth.slice'
 import { useTranslation } from 'react-i18next'
 
@@ -19,7 +19,7 @@ export const useUpdateUserPhoto = () => {
 
         if (!path) {
           setError(t('Rasmni tanlang'))
-          toast.warning(t('Rasmni tanlang'), { theme: 'dark' })
+          toast.warning(t('Rasmni tanlang'))
           return
         }
 
@@ -68,8 +68,7 @@ export const useUpdateUserPhoto = () => {
         toast.error(
           error instanceof Error
             ? error.message
-            : t('An unknown error occurred'),
-          { theme: 'dark' }
+            : t('An unknown error occurred')
         )
       } finally {
         setIsLoading(false)

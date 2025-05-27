@@ -2,7 +2,7 @@ import { setFingerprint } from 'app/lib/features/auth/auth.slice'
 import FingerprintJS from '@fingerprintjs/fingerprintjs'
 import { useDispatch } from 'react-redux'
 import { useState, useCallback } from 'react'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { useTranslation } from 'react-i18next'
 
 export function useGenerateFingerprint() {
@@ -20,8 +20,7 @@ export function useGenerateFingerprint() {
         error instanceof Error ? error.message : t('An unknown error occurred')
       )
       toast.error(
-        error instanceof Error ? error.message : t('An unknown error occurred'),
-        { theme: 'dark' }
+        error instanceof Error ? error.message : t('An unknown error occurred')
       )
     }
   }, [dispatch, t])

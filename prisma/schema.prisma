@@ -882,6 +882,9 @@ model user {
   location                                         String?
   ntf_token                                        String?
   ntf_token_created_at                             DateTime?             @db.Timestamptz(6)
+  light_theme                                      Json?
+  dark_theme                                       Json?
+  is_admin                                         Boolean?              @default(false)
   accounts                                         account[]
   banner_view                                      banner_view[]
   club_club_created_byTouser                       club[]                @relation("club_created_byTouser")
@@ -906,6 +909,7 @@ model user {
   system_notification                              system_notification[]
   team                                             team[]
   team_player                                      team_player[]
+  theme                                            theme[]
   tour_team                                        tour_team[]
   user_activity_user_activity_created_byTouser     user_activity[]       @relation("user_activity_created_byTouser")
   user_activity_user_activity_deleted_byTouser     user_activity[]       @relation("user_activity_deleted_byTouser")
@@ -990,6 +994,17 @@ model user_prize {
   @@index([season_id], map: "idx_user_prize_season_id")
   @@index([team_id], map: "idx_user_prize_team_id")
   @@index([user_id], map: "idx_user_prize_user_id")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model theme {
+  id          Int      @id @default(autoincrement())
+  user_id     Int
+  light_theme Json
+  dark_theme  Json
+  is_global   Boolean?
+  name        String?  @db.VarChar(64)
+  user        user     @relation(fields: [user_id], references: [id], onDelete: SetNull, onUpdate: SetNull)
 }
 
 enum System {

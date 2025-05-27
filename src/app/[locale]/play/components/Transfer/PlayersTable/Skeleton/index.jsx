@@ -1,0 +1,85 @@
+import { Skeleton } from '@/components/ui/skeleton'
+
+const PlayersTableSkeleton = () => {
+  return (
+    <div className="fade-in-fast border-primary border-opacity-50 bg-background text-secondary-foreground hover:border-opacity-100 xs:px-3 mx-auto h-min min-h-auto w-full max-w-160 border-collapse overflow-x-auto rounded-xl border px-2 py-4 shadow-md shadow-neutral-600 transition-all sm:px-4 md:text-sm lg:w-1/2 lg:max-w-md xl:max-w-136 2xl:max-w-xl">
+      <TeamOverviewSkeleton />
+      <TransferTableFiltersSkeleton />
+      <table className="w-full min-w-80 table-auto text-xs xl:text-sm">
+        <TransferTableHeadSkeleton />
+        <TransferTableBodySkeleton />
+      </table>
+      <TransferTablePaginationSkeleton />
+    </div>
+  )
+}
+
+const TeamOverviewSkeleton = () => {
+  return (
+    <div className="mb-4 flex flex-col gap-2">
+      <Skeleton className="h-6 w-3/4" />
+      <div className="flex justify-between">
+        <Skeleton className="h-4 w-1/4" />
+        <Skeleton className="h-4 w-1/4" />
+      </div>
+    </div>
+  )
+}
+
+const TransferTableBodySkeleton = () => {
+  return (
+    <tbody>
+      {[...Array(7)].map((_, rowIndex) => (
+        <tr
+          key={rowIndex}
+          className="border-border odd:bg-secondary w-full border-b"
+        >
+          {[...Array(5)].map((_, cellIndex) => (
+            <td key={cellIndex} className="p-1">
+              <Skeleton className="h-4 w-full min-w-8 2xl:min-w-10" />
+            </td>
+          ))}
+          <td className="p-2">
+            <Skeleton className="h-6 w-6 rounded-full" />
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  )
+}
+
+const TransferTableFiltersSkeleton = () => {
+  return (
+    <div className="xs:text-xs grid w-full grid-cols-4 grid-rows-2 gap-x-0.5 gap-y-2 text-sm sm:grid-rows-1 md:gap-1 lg:grid-rows-2 xl:grid-rows-1 xl:gap-y-1.5 2xl:text-sm">
+      {[...Array(5)].map((_, index) => (
+        <Skeleton key={index} className="h-8 w-full" />
+      ))}
+    </div>
+  )
+}
+
+const TransferTableHeadSkeleton = () => {
+  return (
+    <thead>
+      <tr>
+        {[...Array(5)].map((_, index) => (
+          <th key={index} className="p-2">
+            <Skeleton className="h-6 w-full" />
+          </th>
+        ))}
+      </tr>
+    </thead>
+  )
+}
+
+const TransferTablePaginationSkeleton = () => {
+  return (
+    <section className="mt-2 flex items-center justify-center gap-2 overflow-x-auto">
+      {[...Array(7)].map((_, index) => (
+        <Skeleton key={index} className="h-8 w-8 rounded-sm" />
+      ))}
+    </section>
+  )
+}
+
+export default PlayersTableSkeleton

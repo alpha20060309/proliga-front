@@ -8,20 +8,20 @@ const NotificationArticle = ({ notification, handleNotificationClick }) => {
 
   return (
     <div
-      className="hover:bg-accent flex items-start space-x-4 border-b border-neutral-400 px-4 py-2 transition-colors"
+      className="hover:bg-accent border-border flex items-start space-x-4 border-b px-4 py-2 transition-colors"
       role="button"
       onClick={() => handleNotificationClick(notification)}
       tabIndex={0}
     >
       <div className="flex-1 space-y-1">
-        <p className="text-sm font-medium leading-none text-neutral-100">
+        <p className="text-foreground text-sm leading-none font-medium">
           {getCorrectName({
             lang,
             uz: notification?.name,
             ru: notification?.name_ru,
           })}
         </p>
-        <p className="text-xs text-neutral-300">
+        <p className="text-muted-foreground text-xs">
           {formatDate(date, 'notifications')}
         </p>
       </div>

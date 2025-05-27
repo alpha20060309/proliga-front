@@ -1,0 +1,28 @@
+'use client'
+
+import dynamic from 'next/dynamic'
+import { SETTINGS_TABS } from '../../tabs'
+const SettingsNavigationTab = dynamic(() => import('./Tab'), {
+  ssr: false,
+})
+const SettingsSidebarLogOut = dynamic(() => import('./LogOut/LogOut'), {
+  ssr: false,
+})
+
+const SettingsNavigation = ({ setTab, currentTab }) => {
+  return (
+    <aside className="bg-card bg-opacity-90 fade-in flex h-auto w-full flex-row space-x-0.5 rounded-xl p-2 backdrop-blur-sm lg:w-64 lg:flex-col lg:p-4 xl:gap-1">
+      {SETTINGS_TABS.map((tab) => (
+        <SettingsNavigationTab
+          key={tab.key}
+          setTab={setTab}
+          tab={tab}
+          currentTab={currentTab}
+        />
+      ))}
+      <SettingsSidebarLogOut />
+    </aside>
+  )
+}
+
+export default SettingsNavigation

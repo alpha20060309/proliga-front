@@ -5,6 +5,7 @@ import {
   ChevronsLeft,
   ChevronsRight,
 } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 const TanStackPagination = ({ table, active, className, buttonClassName }) => {
   const currentPage = table.getState().pagination.pageIndex + 1
@@ -27,42 +28,43 @@ const TanStackPagination = ({ table, active, className, buttonClassName }) => {
         onClick={() => table.setPageIndex(0)}
         disabled={!table.getCanPreviousPage()}
         icon={'double-left'}
-        className={cn('size-7 rounded md:size-8', buttonClassName)}
+        className={cn(buttonClassName)}
       />
       <PaginationButton
         onClick={() => table.previousPage()}
         disabled={!table.getCanPreviousPage()}
         icon={'left'}
-        className={cn('size-7 rounded md:size-8', buttonClassName)}
+        className={cn(buttonClassName)}
       />
       {getPageRange().map((page) => (
-        <button
+        <Button
           key={page}
+          size={'sm'}
           onClick={() => table.setPageIndex(page - 1)}
           className={cn(
-            'block size-7 rounded border text-xs md:size-8 md:text-sm',
+            'bg-background border-muted text-foreground hover:bg-accent hover:text-accent-foreground size-7 border p-0 select-none md:size-8',
             buttonClassName,
             currentPage === page
-              ? cn('bg-neutral-300 text-black', active)
-              : 'bg-transparent hover:bg-neutral-800'
+              ? cn('bg-primary text-primary-foreground', active)
+              : ''
           )}
           aria-label={`Page ${page}`}
           aria-current={currentPage === page ? 'page' : undefined}
         >
           {page}
-        </button>
+        </Button>
       ))}
       <PaginationButton
         onClick={() => table.nextPage()}
         disabled={!table.getCanNextPage()}
         icon={'right'}
-        className={cn('size-7 rounded md:size-8', buttonClassName)}
+        className={cn(buttonClassName)}
       />
       <PaginationButton
         onClick={() => table.setPageIndex(table.getPageCount() - 1)}
         disabled={!table.getCanNextPage()}
         icon={'double-right'}
-        className={cn('size-7 rounded md:size-8', buttonClassName)}
+        className={cn(buttonClassName)}
       />
     </section>
   )
@@ -72,27 +74,31 @@ const PaginationButton = ({ onClick, disabled, icon, className }) => {
   const render = () => {
     switch (icon) {
       case 'left':
-        return <ChevronLeft className="h-full w-full" />
+        return <ChevronLeft className="text-muted-foreground h-full w-full" />
       case 'right':
-        return <ChevronRight className="h-full w-full" />
+        return <ChevronRight className="text-muted-foreground h-full w-full" />
       case 'double-left':
-        return <ChevronsLeft className="h-full w-full" />
+        return <ChevronsLeft className="text-muted-foreground h-full w-full" />
       case 'double-right':
-        return <ChevronsRight className="h-full w-full" />
+        return (
+          <ChevronsRight className="text-muted-foreground h-full w-full items-center justify-center" />
+        )
     }
   }
 
   return (
-    <button
+    <Button
       onClick={onClick}
       disabled={disabled}
+      variant={'outline'}
       className={cn(
-        'block rounded-sm border p-1 hover:bg-neutral-800 disabled:opacity-75 disabled:hover:bg-transparent',
+        'bg-background text-foreground hover:bg-accent hover:text-accent-foreground border-border size-7 p-0 md:size-8',
         className
       )}
+      size={'sm'}
     >
       {render()}
-    </button>
+    </Button>
   )
 }
 

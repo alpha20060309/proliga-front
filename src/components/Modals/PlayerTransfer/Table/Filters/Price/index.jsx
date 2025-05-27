@@ -18,13 +18,13 @@ const PriceFilter = ({ column, columnFilterValue }) => {
         }
         defaultValue={MIN[0]}
       >
-        <SelectTrigger className="h-8 w-full min-w-8 max-w-24 select-none rounded border border-neutral-500 bg-neutral-950 text-neutral-200 md:min-w-max">
+        <SelectTrigger className="bg-background text-foreground border-border w-full max-w-24 min-w-8 rounded-sm border select-none data-[size=default]:h-8 md:min-w-max">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
           {MIN.map((item, index) => (
             <SelectItem
-              className="bg-neutral-950 checked:bg-neutral-700"
+              className="bg-background checked:bg-secondary"
               key={index}
               value={item}
             >
@@ -42,13 +42,13 @@ const PriceFilter = ({ column, columnFilterValue }) => {
         }
         defaultValue={MAX[0]}
       >
-        <SelectTrigger className="h-8 w-full min-w-8 max-w-24 select-none rounded border border-neutral-500 bg-neutral-950 text-neutral-200 md:min-w-max">
+        <SelectTrigger className="bg-background text-foreground border-border w-full max-w-24 min-w-8 rounded-sm border select-none data-[size=default]:h-8 md:min-w-max">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
           {MAX.map((item, index) => (
             <SelectItem
-              className="bg-neutral-950 checked:bg-neutral-800"
+              className="bg-background checked:bg-card"
               key={index}
               value={item}
             >

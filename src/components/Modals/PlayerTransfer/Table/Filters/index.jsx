@@ -1,5 +1,4 @@
 import PriceFilter from './Price'
-import DefaultFilter from './Default'
 import PlayerNameFilter from './Name'
 import ClubsFilter from './Clubs'
 
@@ -13,9 +12,7 @@ function TransferTableFilters({ column }) {
     <ClubsFilter column={column} columnFilterValue={columnFilterValue} />
   ) : filterVariant === 'price' ? (
     <PriceFilter column={column} columnFilterValue={columnFilterValue} />
-  ) : (
-    <DefaultFilter />
-  )
+  ) : null
 }
 
 export default TransferTableFilters

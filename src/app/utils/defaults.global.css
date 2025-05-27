@@ -1,41 +1,36 @@
 .html-page {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, sans-serif;
-  color: #e0e0e0;
-  background-color: #121212;
+  font-family: var(--font-sans);
+  color: var(--foreground);
+  background-color: var(--card);
   line-height: 1.6;
   overflow-wrap: break-word;
   padding: 20px;
   max-width: 896px;
-  margin: 0 auto;
+  margin: 1rem auto;
 
   h1 {
     font-size: 2.2rem;
     line-height: 2.6rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
-    color: #ffffff;
   }
   h2 {
     font-size: 1.8rem;
     line-height: 2.2rem;
     font-weight: 600;
     margin-bottom: 1.2rem;
-    color: #f0f0f0;
   }
   h3 {
     font-size: 1.5rem;
     line-height: 1.9rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    color: #e8e8e8;
   }
   h4 {
     font-size: 1.3rem;
     line-height: 1.7rem;
     font-weight: 500;
     margin-bottom: 0.8rem;
-    color: #e0e0e0;
   }
   p {
     font-size: 1.1rem;
@@ -51,21 +46,21 @@
 
   table th,
   table td {
-    border: 1px solid #333333;
+    border: 1px solid var(--border);
     padding: 0.8rem;
     text-align: left;
   }
 
   table th {
-    background-color: #2a2a2a;
+    background-color: var(--card);
     font-weight: 600;
-    color: #ffffff;
+    color: var(--card-foreground);
   }
 
   .strong,
   b {
     font-weight: 600;
-    color: #ffffff;
+    color: var(--card-foreground);
   }
 
   ol,
@@ -78,7 +73,7 @@
   }
 
   a {
-    color: #4da6ff;
+    color: var(--accent);
     text-decoration: none;
   }
 
@@ -87,17 +82,17 @@
   }
 
   blockquote {
-    border-left: 4px solid #444444;
+    border-left: 4px solid var(--border);
     padding: 0.5rem 1rem;
     margin: 1.5rem 0;
     font-style: italic;
-    color: #b0b0b0;
-    background-color: #1e1e1e;
+    color: var(--muted-foreground);
+    background-color: var(--popover);
   }
 
   code {
-    font-family: 'Courier New', Courier, monospace;
-    background-color: #2a2a2a;
+    font-family: var(--font-mono);
+    background-color: var(--card);
     padding: 0.2rem 0.4rem;
     border-radius: 3px;
     font-size: 0.9em;
@@ -148,10 +143,9 @@
 }
 
 .modal-news {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, sans-serif;
-  color: #e0e0e0;
-  background-color: #1a1a1a;
+  font-family: var(--font-sans);
+  color: var(--foreground);
+  background-color: var(--card);
   line-height: 1.5;
   overflow-wrap: break-word;
   max-width: fit-content;
@@ -165,28 +159,28 @@
     line-height: 2.2rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    color: #ffffff;
+    color: var(--card-foreground);
   }
   h2 {
     font-size: 1.5rem;
     line-height: 1.9rem;
     font-weight: 600;
     margin-bottom: 0.8rem;
-    color: #f0f0f0;
+    color: var(--foreground);
   }
   h3 {
     font-size: 1.3rem;
     line-height: 1.7rem;
     font-weight: 600;
     margin-bottom: 0.6rem;
-    color: #e8e8e8;
+    color: var(--foreground);
   }
   h4 {
     font-size: 1.1rem;
     line-height: 1.5rem;
     font-weight: 500;
     margin-bottom: 0.5rem;
-    color: #e0e0e0;
+    color: var(--muted-foreground);
   }
   p {
     font-size: 1rem;
@@ -203,21 +197,21 @@
 
   table th,
   table td {
-    border: 1px solid #333333;
+    border: 1px solid var(--border);
     padding: 0.5rem;
     text-align: left;
   }
 
   table th {
-    background-color: #2a2a2a;
+    background-color: var(--popover);
     font-weight: 600;
-    color: #ffffff;
+    color: var(--card-foreground);
   }
 
   .strong,
   b {
     font-weight: 600;
-    color: #ffffff;
+    color: var(--card-foreground);
   }
 
   ol,
@@ -226,7 +220,7 @@
   }
 
   a {
-    color: #4da6ff;
+    color: var(--accent);
     text-decoration: none;
   }
 
@@ -235,11 +229,11 @@
   }
 
   blockquote {
-    border-left: 3px solid #444444;
+    border-left: 3px solid var(--border);
     padding-left: 1rem;
     margin: 1rem 0;
     font-style: italic;
-    color: #b0b0b0;
+    color: var(--muted-foreground);
   }
 
   @media screen and (max-width: 640px) {

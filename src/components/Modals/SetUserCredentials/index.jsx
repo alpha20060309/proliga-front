@@ -20,7 +20,7 @@ import {
   selectGeo,
   selectUserTable,
 } from 'app/lib/features/auth/auth.selector'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { Input } from '@/components/ui/input'
@@ -89,7 +89,7 @@ function SetUserCredentials() {
     <Dialog open={user?.id && phoneModal} onOpenChange={setModalOpen}>
       <DialogContent
         showCloseButton={false}
-        className="w-[98%] max-w-md rounded-xl bg-neutral-950 p-5 text-neutral-100 sm:p-6"
+        className="bg-background text-foreground w-[98%] max-w-md rounded-xl p-5 sm:p-6"
       >
         <DialogTitle>{t('Enter your credentials.')}</DialogTitle>
         <DialogDescription>
@@ -106,7 +106,7 @@ function SetUserCredentials() {
                 name="phone"
                 placeholder={'99-999-99-99'}
                 defaultCountry="UZ"
-                className="h-10 border-neutral-500 bg-neutral-950 text-neutral-200 placeholder:text-neutral-500"
+                className="bg-background text-foreground border-border placeholder:text-muted-foreground h-10"
                 value={phone}
                 onChange={setPhone}
               />
@@ -117,7 +117,7 @@ function SetUserCredentials() {
                 type="email"
                 name="email"
                 id="email"
-                className="h-10 rounded border-neutral-500 bg-neutral-950 pl-10 text-neutral-200 placeholder:text-neutral-500"
+                className="bg-background text-foreground border-border placeholder:text-muted-foreground h-10 rounded-sm pl-10"
                 placeholder="example@xyz.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -127,7 +127,7 @@ function SetUserCredentials() {
           </section>
           <Button
             type="submit"
-            className="h-10 w-full rounded border border-primary bg-neutral-900 text-neutral-50 transition-all hover:bg-black"
+            className="border-primary text-foreground hover:bg-background bg-background h-10 w-full rounded-sm border transition-all"
             disabled={isLoading}
           >
             {isLoading ? (
