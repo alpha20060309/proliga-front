@@ -74,7 +74,7 @@ export const DEFAULT_DARK_THEME = {
     'chart-1': '#990000',
     'chart-2': '#000099',
     'chart-3': '#998500',
-    'chart-4': '#8026d9',
+    // 'chart-4': '#8026d9',
     'chart-5': '#ff3333',
     sidebar: '#262626',
     'sidebar-foreground': '#f2f2f2',

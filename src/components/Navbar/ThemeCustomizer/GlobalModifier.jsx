@@ -60,8 +60,8 @@ const GlobalModifier = () => {
               id="global-spacing-slider"
               value={
                 theme === 'dark'
-                  ? darkTheme.global.spacing
-                  : lightTheme.global.spacing
+                  ? darkTheme.global.spacing || 0.25
+                  : lightTheme.global.spacing || 0.25
               }
               min={0.15}
               max={0.35}
@@ -93,8 +93,8 @@ const GlobalModifier = () => {
               id="global-letter-spacing-slider"
               value={
                 theme === 'dark'
-                  ? darkTheme.global.letterSpacing
-                  : lightTheme.global.letterSpacing
+                  ? darkTheme.global.letterSpacing || 0
+                  : lightTheme.global.letterSpacing || 0
               }
               min={-0.1}
               max={0.5}
@@ -115,8 +115,8 @@ const GlobalModifier = () => {
               </label>
               <span className="text-xs text-[#999]">
                 {theme === 'dark'
-                  ? darkTheme.global.radius
-                  : lightTheme.global.radius}
+                  ? darkTheme.global.borderRadius || 0.5
+                  : lightTheme.global.borderRadius || 0.5}
                 rem
               </span>
             </div>
@@ -125,13 +125,15 @@ const GlobalModifier = () => {
               id="global-radius-slider"
               value={
                 theme === 'dark'
-                  ? darkTheme.global.radius
-                  : lightTheme.global.radius
+                  ? darkTheme.global.borderRadius || 0.5
+                  : lightTheme.global.borderRadius || 0.5
               }
               min={0}
               max={5}
               step={0.05}
-              onChange={(e) => handleChange('radius', e.target.value, 'radius')}
+              onChange={(e) =>
+                handleChange('radius', e.target.value, 'borderRadius')
+              }
               className="w-full py-1"
             />
           </div>

@@ -24,7 +24,7 @@ export const colorKeys = {
     'input',
     'ring',
   ],
-  charts: ['chart-1', 'chart-2', 'chart-3', 'chart-4', 'chart-5'],
+  charts: ['chart-1', 'chart-2', 'chart-3'],
   sidebar: [
     'sidebar',
     'sidebar-foreground',
