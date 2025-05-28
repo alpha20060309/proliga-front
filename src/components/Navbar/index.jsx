@@ -14,8 +14,7 @@ import NavbarUserMobile from './UserMobile'
 import ChangeLanguageDropdown from './Language'
 import Notification from './Notification'
 import Marquee from 'components/Marquee'
-import ThemeSwither from './ThemeSwitch'
-
+import ThemeSwitcher from './ThemeSwitch'
 import ThemeCustomizer from './ThemeCustomizer'
 
 const Navbar = () => {
@@ -65,7 +64,7 @@ const Navbar = () => {
             <div className="flex w-max items-center justify-center gap-2 sm:gap-4">
               <ChangeLanguageDropdown />
               <Notification />
-              <ThemeSwither />
+              <ThemeSwitcher />
               <ThemeCustomizer />
               <NavbarUserMobile handleToggleModal={() => setModalOpen(true)} />
               <NavbarUserDesktop />
