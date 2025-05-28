@@ -53,7 +53,8 @@ function AuthListener({ children }) {
           setActive(false)
           toast.success(t('Tizimga muvaffaqiyatli kirdingiz'))
           localStorage.removeItem('sign-in-method')
-          return router.push('/championships')
+          router.push('/championships')
+          return
         }
       }
     }

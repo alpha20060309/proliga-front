@@ -90,7 +90,7 @@ const ThemeCustomizer = () => {
   return (
     <Sheet>
       <SheetTrigger className="relative flex size-8 items-center justify-center bg-transparent p-0 font-sans font-medium hover:bg-transparent">
-        <Palette className="text-foreground hover:text-primary size-5 select-none" />
+        <Palette className="text-foreground hover:text-accent size-5 select-none" />
       </SheetTrigger>
       <SheetContent
         className={

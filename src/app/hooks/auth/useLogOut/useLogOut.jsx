@@ -10,8 +10,10 @@ import {
 } from 'app/lib/features/currentTeam/currentTeam.slice'
 import { resetTeams } from 'app/lib/features/team/team.slice'
 import { signOut } from 'next-auth/react'
+import { useTransitionRouter } from 'next-view-transitions'
 
 export const useLogOut = () => {
+  const router = useTransitionRouter()
   const dispatch = useDispatch()
   const [error, setError] = useState(null)
   const { t } = useTranslation()
@@ -27,18 +29,17 @@ export const useLogOut = () => {
   const logOut = useCallback(
     async ({ showMessage = true, cb = () => {} } = {}) => {
       try {
+        await signOut({
+          redirect: false,
+        })
         clearState()
         localStorage.clear()
-
-        await signOut({
-          redirect: true,
-          callbackUrl: '/',
-        })
 
         if (showMessage) {
           toast.success(t('Tizimdan chiqdingiz'))
         }
         cb()
+        router.push('/')
       } catch (error) {
         setError(error)
         toast.error(
@@ -48,7 +49,7 @@ export const useLogOut = () => {
         )
       }
     },
-    [clearState, t]
+    [clearState, t, router]
   )
 
   return { logOut, error }
