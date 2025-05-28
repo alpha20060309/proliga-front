@@ -33,7 +33,7 @@ const MobileSidebar = ({ isModalOpen, setModalOpen }) => {
     <Sheet open={isModalOpen} onOpenChange={setModalOpen}>
       <SheetContent
         side="right"
-        className="xs:w-3/4 border-muted flex h-full w-4/5 min-w-80 flex-col rounded-s-xl rounded-e-none p-5 sm:w-2/3 sm:p-6"
+        className="xs:w-3/4 bg-sidebar border-sidebar-border text-sidebar-foreground flex h-full w-4/5 min-w-80 flex-col rounded-s-xl rounded-e-none p-5 sm:w-2/3 sm:p-6"
       >
         <SheetTitle className="hidden">Title</SheetTitle>
         <div className="xs:gap-7 flex flex-col items-start justify-center gap-6 py-12 sm:py-16">
@@ -107,7 +107,7 @@ const MobileSidebar = ({ isModalOpen, setModalOpen }) => {
             />
             <Link
               className={cn(
-                'group-hover:text-foreground transition-all',
+                'group-hover:text-sidebar-foreground transition-all',
                 path.includes('championships')
                   ? sidebarStyles.active
                   : sidebarStyles.passive
@@ -129,7 +129,7 @@ const MobileSidebar = ({ isModalOpen, setModalOpen }) => {
             />
             <Link
               className={cn(
-                'hover:text-foreground transition-all',
+                'hover:text-sidebar-foreground transition-all',
                 path.includes('prizes')
                   ? sidebarStyles.active
                   : sidebarStyles.passive
@@ -151,7 +151,7 @@ const MobileSidebar = ({ isModalOpen, setModalOpen }) => {
             />
             <Link
               className={cn(
-                'hover:text-foreground transition-all',
+                'hover:text-sidebar-foreground transition-all',
                 path.includes('regulation')
                   ? sidebarStyles.active
                   : sidebarStyles.passive
@@ -167,28 +167,28 @@ const MobileSidebar = ({ isModalOpen, setModalOpen }) => {
           {userTable?.id ? (
             <>
               <Link
-                className="hover:bg-secondary bg-card border-border flex h-full w-full gap-2 rounded-sm border p-2"
+                className="hover:bg-sidebar-accent bg-sidebar border-sidebar-border text-sidebar-foreground flex h-full w-full gap-2 rounded-sm border p-2"
                 onClick={() => setModalOpen(false)}
                 href="/settings"
               >
-                <Settings className="text-foreground h-6 w-6" />
+                <Settings className="h-6 w-6" />
                 <p>{t('Sozlamalar')}</p>
               </Link>
               <button
                 onClick={handleLogOut}
-                className="hover:bg-secondary bg-card border-border flex h-full w-full gap-2 rounded-sm border p-2"
+                className="hover:bg-sidebar-accent bg-sidebar border-sidebar-border text-sidebar-foreground flex h-full w-full gap-2 rounded-sm border p-2"
               >
-                <LogOut className="text-foreground h-6 w-6" />
+                <LogOut className="h-6 w-6" />
                 <p>{t('Tizimdan chiqish')}</p>
               </button>
             </>
           ) : (
             <Link
-              className="hover:bg-secondary bg-card border-border flex h-full w-full gap-2 rounded-sm border p-2"
+              className="hover:bg-sidebar-accent bg-sidebar border-sidebar-border text-sidebar-foreground flex h-full w-full gap-2 rounded-sm border p-2"
               onClick={() => setModalOpen(false)}
               href="/auth"
             >
-              <LogIn className="text-foreground h-6 w-6" />
+              <LogIn className="h-6 w-6" />
               <p>{t('Tizimga kirish_1')}</p>
             </Link>
           )}

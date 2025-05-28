@@ -15,6 +15,7 @@ import ChangeLanguageDropdown from './Language'
 import Notification from './Notification'
 import Marquee from 'components/Marquee'
 import ThemeSwither from './ThemeSwitch'
+
 import ThemeCustomizer from './ThemeCustomizer'
 
 const Navbar = () => {
@@ -61,7 +62,7 @@ const Navbar = () => {
               />
             </Link>
             <PlayLinks />
-            <div className="flex w-max items-center justify-center gap-4">
+            <div className="flex w-max items-center justify-center gap-2 sm:gap-4">
               <ChangeLanguageDropdown />
               <Notification />
               <ThemeSwither />

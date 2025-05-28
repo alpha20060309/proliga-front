@@ -10,6 +10,7 @@ import { TABS } from 'app/utils/tabs.util'
 import { usePathname } from 'next/navigation'
 import { tabStyling } from 'components/Navbar/tabStyling.util'
 import { TOUR_STATUS } from 'app/utils/tour.util'
+import { Button } from '@/components/ui/button'
 
 const SidebarTab = ({ title, tab, toggleModal }) => {
   const path = usePathname()
@@ -31,44 +32,54 @@ const SidebarTab = ({ title, tab, toggleModal }) => {
     window.location.hash = tab
     dispatch(setTab(tab))
     toggleModal()
-    return
   }
 
+  const currentStyleKey = tabStyling({
+    tab,
+    ACTIVE: 'active',
+    PASSIVE: 'passive',
+    DISABLED: 'disabled',
+    gameTab,
+    path,
+    currentTeam,
+    currentTour,
+  })
+
+  const indicatorClassName = cn(
+    'block h-6 w-2 rounded-md transition-colors',
+    {
+      [sidebarStyles.activeIndicator]: currentStyleKey === 'active',
+      [sidebarStyles.passiveIndicator]: currentStyleKey === 'passive',
+      [sidebarStyles.disabledIndicator]: currentStyleKey === 'disabled',
+    }
+  )
+
+  const buttonClassName = cn(
+    'h-auto w-full select-none justify-start px-2 py-1.5 text-base font-normal transition-colors rounded-sm',
+    {
+      [sidebarStyles.active]: currentStyleKey === 'active',
+      [sidebarStyles.passive]: currentStyleKey === 'passive',
+      [sidebarStyles.disabled]: currentStyleKey === 'disabled',
+    }
+  )
+
+  const isButtonDisabled = currentStyleKey === 'disabled'
+
   return (
-    <div className="group flex w-full gap-4">
+    <div className="group flex w-full items-center gap-4">
       <span
-        className={cn(
-          'block h-full w-2 rounded-md',
-          tabStyling({
-            tab,
-            ACTIVE: sidebarStyles.activeIndicator,
-            PASSIVE: sidebarStyles.passiveIndicator,
-            DISABLED: sidebarStyles.disabledIndicator,
-            gameTab,
-            path,
-            currentTeam,
-            currentTour,
-          })
-        )}
+        className={indicatorClassName}
+        aria-hidden="true"
       />
-      <button
-        className={cn(
-          'hover:text-foreground transition-all select-none',
-          tabStyling({
-            tab,
-            ACTIVE: sidebarStyles.active,
-            PASSIVE: sidebarStyles.passive,
-            DISABLED: sidebarStyles.disabled,
-            gameTab,
-            path,
-            currentTeam,
-            currentTour,
-          })
-        )}
+      <Button
+        className={buttonClassName}
         onClick={handleClick}
+        aria-label={title}
+        disabled={isButtonDisabled}
+        tabIndex={isButtonDisabled ? -1 : 0}
       >
         {title}
-      </button>
+      </Button>
     </div>
   )
 }

@@ -14,27 +14,43 @@ const FontModifier = () => {
   const { theme } = useTheme()
   const { darkTheme, lightTheme } = useSelector((store) => store.systemConfig)
 
+  const currentFont = theme === 'dark' ? darkTheme.font : lightTheme.font
+
   const handleFontChange = (font) => {
-    theme === 'dark'
-      ? dispatch(setDarkTheme({ type: 'font', data: font }))
-      : dispatch(setLightTheme({ type: 'font', data: font }))
+    if (theme === 'dark') {
+      dispatch(setDarkTheme({ type: 'font', data: font }))
+    } else {
+      dispatch(setLightTheme({ type: 'font', data: font }))
+    }
   }
 
   return (
-    <Card className="w-full rounded-[4px] bg-[#232323] text-[#fff]">
-      <CardHeader className="py-2">
-        <CardTitle className="text-base">{t('Font')}</CardTitle>
+    <Card className="w-full rounded-md border border-[#4A4A4A] bg-[#333333] text-[#E0E0E0]">
+      <CardHeader className="border-b border-[#4A4A4A] px-4 py-2.5">
+        <CardTitle className="text-sm font-medium">
+          {t('Font Family')}
+        </CardTitle>
       </CardHeader>
-      <CardContent className="py-2">
-        <div className="mb-3">
+      <CardContent className="p-4">
+        <div className="space-y-1.5">
+          <label
+            htmlFor="font-select"
+            className="text-xs font-medium text-[#B0B0B0]"
+          >
+            {t('Select Font')}
+          </label>
           <select
             id="font-select"
-            value={theme === 'dark' ? darkTheme.font : lightTheme.font}
+            value={currentFont || ''}
             onChange={(e) => handleFontChange(e.target.value)}
-            className="mt-2 w-full rounded-[4px] border border-[#333] bg-[#1a1a1a] px-3 py-2 text-sm text-[#fff] focus:border-[#666] focus:outline-none"
+            className="w-full rounded-md border border-[#4A4A4A] bg-[#2D2D2D] px-3 py-2 text-sm text-[#E0E0E0] focus:border-[#ffdd00] focus:ring-1 focus:ring-[#ffdd00] focus:outline-none"
           >
             {Object.keys(fonts).map((fontName) => (
-              <option key={fontName} value={fontName}>
+              <option
+                key={fontName}
+                value={fontName}
+                className="bg-[#2D2D2D] text-[#E0E0E0]"
+              >
                 {fontName}
               </option>
             ))}

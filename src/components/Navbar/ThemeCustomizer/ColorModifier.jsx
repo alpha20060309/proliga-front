@@ -48,32 +48,37 @@ const ColorModifier = () => {
         .join('')
         .replace('##', '#')
     }
-    return color
+    return color || '#000000' // Ensure a default valid color string
   }
 
   const renderColorPicker = (key) => (
-    <div key={key} className="mb-2 flex items-center space-x-2">
-      <label htmlFor={key} className="w-48 text-xs capitalize">
-        {key.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())}
+    <div
+      key={key}
+      className="mb-3 flex items-center justify-between space-x-2 rounded-md bg-[#2D2D2D] p-2.5"
+    >
+      <label htmlFor={key} className="flex-1 text-xs text-[#B0B0B0] capitalize">
+        {t(key.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()))}
       </label>
-      <input
-        type="color"
-        id={key}
-        value={formatColor(
-          resolvedTheme === 'dark'
-            ? darkTheme.colors[key] || '#000000'
-            : lightTheme.colors[key] || '#000000'
-        )}
-        onChange={(e) => handleChange(key, e.target.value)}
-        className="h-8 w-8 rounded border-none p-0"
-      />
-      <span className="w-20 font-mono text-xs">
-        {formatColor(
-          resolvedTheme === 'dark'
-            ? darkTheme.colors[key]
-            : lightTheme.colors[key]
-        )}
-      </span>
+      <div className="flex items-center space-x-2">
+        <input
+          type="color"
+          id={key}
+          value={formatColor(
+            resolvedTheme === 'dark'
+              ? darkTheme.colors[key]
+              : lightTheme.colors[key]
+          )}
+          onChange={(e) => handleChange(key, e.target.value)}
+          className="h-7 w-7 cursor-pointer appearance-none rounded-[4px] border-none bg-transparent p-0"
+        />
+        <span className="w-20 rounded-[4px] bg-[#353535] p-1 text-center font-mono text-xs text-[#A0A0A0] select-all">
+          {formatColor(
+            resolvedTheme === 'dark'
+              ? darkTheme.colors[key]
+              : lightTheme.colors[key]
+          )}
+        </span>
+      </div>
     </div>
   )
 
@@ -81,14 +86,20 @@ const ColorModifier = () => {
     <Accordion
       type="single"
       collapsible
-      className="w-full rounded-[4px] bg-[#232323] text-[#fff]"
+      className="w-full" // Removed bg and text color here, will be handled by items
     >
       {Object.entries(colorKeys).map(([category, keys]) => (
-        <AccordionItem value={category} key={category}>
-          <AccordionTrigger className="text-base">
+        <AccordionItem
+          value={category}
+          key={category}
+          className="mb-2 rounded-md border border-[#4A4A4A] bg-[#333333] last:mb-0"
+        >
+          <AccordionTrigger className="w-full rounded-t-md px-4 py-2.5 text-sm font-medium text-[#E0E0E0] hover:bg-[#3A3A3A] hover:no-underline data-[state=open]:rounded-b-none data-[state=open]:bg-[#3A3A3A]">
             {t(category.charAt(0).toUpperCase() + category.slice(1))}
           </AccordionTrigger>
-          <AccordionContent>{keys.map(renderColorPicker)}</AccordionContent>
+          <AccordionContent className="border-t border-[#4A4A4A] bg-[#2D2D2D] p-3 data-[state=closed]:animate-none data-[state=open]:animate-none">
+            {keys.map(renderColorPicker)}
+          </AccordionContent>
         </AccordionItem>
       ))}
     </Accordion>

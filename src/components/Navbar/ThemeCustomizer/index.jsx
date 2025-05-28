@@ -90,81 +90,88 @@ const ThemeCustomizer = () => {
   return (
     <Sheet>
       <SheetTrigger className="relative flex size-8 items-center justify-center bg-transparent p-0 font-sans font-medium hover:bg-transparent">
-        <Palette className="size-5 text-[#000] select-none hover:text-[#ffdd00] dark:text-[#fff] dark:hover:text-[#ffdd00]" />
+        <Palette className="text-foreground hover:text-primary size-5 select-none" />
       </SheetTrigger>
       <SheetContent
-        className={'overflow-y-auto'}
+        className={
+          'xs:min-w-96 min-w-full overflow-y-auto border-l border-[#4A4A4A]'
+        }
         style={{
           backgroundColor: '#232323',
           fontFamily: 'Inter, sans-serif',
-          fontWeight: 'medium',
+          fontWeight: '500',
           letterSpacing: '0.025em',
-          borderRadius: '4px',
+          borderRadius: '0px',
           padding: '16px',
-          color: '#fff',
+          color: '#E0E0E0',
           '--spacing': '0.25rem',
           '--letter-spacing': '0.025em',
           '--radius': '0.25rem',
+          '--shadow-color': '#000000',
+          '--shadow-opacity': '0.5',
+          '--shadow-blur': '10px',
+          '--shadow-offset-x': '0px',
+          '--shadow-offset-y': '0px',
         }}
       >
         <SheetHeader>
-          <SheetTitle className="text-[#fff] dark:text-[#fff]">
+          <SheetTitle className="text-[#E0E0E0]">
             {t('Theme Customizer')}
           </SheetTitle>
         </SheetHeader>
         <button
           onClick={handleReset}
-          className="group mb-4 flex w-full items-center justify-center gap-2 rounded-md bg-[#6b7280] px-4 py-2.5 text-sm font-medium text-[#ffffff] shadow-sm transition-colors hover:bg-[#4b5563] focus:ring-2 focus:ring-[#6b7280] focus:ring-offset-2 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+          className="group mb-4 flex w-full items-center justify-center gap-2 rounded-md bg-[#555555] px-4 py-2.5 text-sm font-medium text-[#E0E0E0] shadow-sm transition-colors hover:bg-[#656565] focus:ring-2 focus:ring-[#757575] focus:ring-offset-2 focus:ring-offset-[#232323] focus:outline-none disabled:pointer-events-none disabled:opacity-50"
           aria-label="Reset theme to default"
         >
           <RefreshCw className="size-4 transition-transform group-hover:rotate-180" />
           {t('Reset to Default')}
         </button>
         <SelectTheme />
-        <Tabs defaultValue="color">
-          <TabsList className="w-full rounded-[4px] bg-[#f5f5f5]">
+        <Tabs defaultValue="color" className="mt-4">
+          <TabsList className="w-full rounded-[6px] bg-[#333333] p-1">
             <TabsTrigger
               value="color"
-              className="rounded-[4px] text-[#1a1a1a] data-[state=active]:bg-[#ffdd00] data-[state=active]:text-[#1a1a1a] dark:text-[#1a1a1a] dark:data-[state=active]:bg-[#ffdd00] dark:data-[state=active]:text-[#1a1a1a]"
+              className="w-full rounded-[4px] px-3 py-1.5 text-sm font-medium text-[#A0A0A0] focus-visible:bg-[#fffbe6] focus-visible:text-[#1A1A1A] focus-visible:ring-2 focus-visible:ring-[#757575] focus-visible:ring-offset-2 focus-visible:ring-offset-[#333333] data-[state=active]:bg-[#4A4A4A] data-[state=active]:text-[#FFFFFF] data-[state=active]:shadow-sm"
             >
               {t('Color')}
             </TabsTrigger>
             <TabsTrigger
               value="font"
-              className="rounded-[4px] text-[#1a1a1a] data-[state=active]:bg-[#ffdd00] data-[state=active]:text-[#1a1a1a] dark:text-[#1a1a1a] dark:data-[state=active]:bg-[#ffdd00] dark:data-[state=active]:text-[#1a1a1a]"
+              className="w-full rounded-[4px] px-3 py-1.5 text-sm font-medium text-[#A0A0A0] focus-visible:bg-[#fffbe6] focus-visible:text-[#1A1A1A] focus-visible:ring-2 focus-visible:ring-[#757575] focus-visible:ring-offset-2 focus-visible:ring-offset-[#333333] data-[state=active]:bg-[#4A4A4A] data-[state=active]:text-[#FFFFFF] data-[state=active]:shadow-sm"
             >
               {t('Font')}
             </TabsTrigger>
             <TabsTrigger
               value="global"
-              className="rounded-[4px] text-[#1a1a1a] data-[state=active]:bg-[#ffdd00] data-[state=active]:text-[#1a1a1a] dark:text-[#1a1a1a] dark:data-[state=active]:bg-[#ffdd00] dark:data-[state=active]:text-[#1a1a1a]"
+              className="w-full rounded-[4px] px-3 py-1.5 text-sm font-medium text-[#A0A0A0] focus-visible:bg-[#fffbe6] focus-visible:text-[#1A1A1A] focus-visible:ring-2 focus-visible:ring-[#757575] focus-visible:ring-offset-2 focus-visible:ring-offset-[#333333] data-[state=active]:bg-[#4A4A4A] data-[state=active]:text-[#FFFFFF] data-[state=active]:shadow-sm"
             >
               {t('Global')}
             </TabsTrigger>
             <TabsTrigger
               value="shadow"
-              className="rounded-[4px] text-[#1a1a1a] data-[state=active]:bg-[#ffdd00] data-[state=active]:text-[#1a1a1a] dark:text-[#1a1a1a] dark:data-[state=active]:bg-[#ffdd00] dark:data-[state=active]:text-[#1a1a1a]"
+              className="w-full rounded-[4px] px-3 py-1.5 text-sm font-medium text-[#A0A0A0] focus-visible:bg-[#fffbe6] focus-visible:text-[#1A1A1A] focus-visible:ring-2 focus-visible:ring-[#757575] focus-visible:ring-offset-2 focus-visible:ring-offset-[#333333] data-[state=active]:bg-[#4A4A4A] data-[state=active]:text-[#FFFFFF] data-[state=active]:shadow-sm"
             >
               {t('Shadow')}
             </TabsTrigger>
           </TabsList>
-          <TabsContent value="color">
+          <TabsContent value="color" className="mt-4">
             <ColorModifier />
           </TabsContent>
-          <TabsContent value="font">
+          <TabsContent value="font" className="mt-4">
             <FontModifier />
           </TabsContent>
-          <TabsContent value="global">
+          <TabsContent value="global" className="mt-4">
             <GlobalModifier />
           </TabsContent>
-          <TabsContent value="shadow">
+          <TabsContent value="shadow" className="mt-4">
             <ShadowModifier />
           </TabsContent>
         </Tabs>
         <button
           disabled={isLoading}
           onClick={handleSave}
-          className="group mt-4 flex w-full items-center justify-center gap-2 rounded-md bg-[#ffdd00] px-4 py-2.5 text-sm font-medium text-black shadow-sm transition-colors focus:ring-2 focus:ring-[#ffdd00] focus:ring-offset-2 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+          className="group mt-6 flex w-full items-center justify-center gap-2 rounded-md bg-[#ffdd00] px-4 py-2.5 text-sm font-medium text-[#1A1A1A] shadow-sm transition-colors hover:bg-[#ebcb00] focus:ring-2 focus:ring-[#ffdd00] focus:ring-offset-2 focus:ring-offset-[#232323] focus:outline-none disabled:pointer-events-none disabled:opacity-50"
           aria-label="Save theme changes"
         >
           {isLoading ? (
@@ -172,26 +179,19 @@ const ThemeCustomizer = () => {
           ) : (
             <Save className="size-4 transition-transform group-hover:scale-110" />
           )}
-          {isLoading ? (
-            <Loader2 className="size-4 animate-spin" />
-          ) : (
-            t('Save Changes')
-          )}
+          {isLoading ? t('Saving...') : t('Save Changes')}
         </button>
         {user?.id && user?.is_admin && (
-          <div className="my-4 flex flex-col gap-2">
+          <div className="my-4 flex flex-col gap-3 rounded-md border border-[#4A4A4A] bg-[#333333] p-4">
             <div className="flex items-center gap-2">
               <input
                 type="checkbox"
                 id="save-preset"
                 name="save-preset"
-                className="h-4 w-4 rounded border-gray-300 text-[#ffdd00] focus:ring-[#ffdd00]"
+                className="h-4 w-4 rounded border-[#666666] bg-[#4A4A4A] text-[#ffdd00] accent-[#ffdd00] focus:ring-2 focus:ring-[#ffdd00] focus:ring-offset-1 focus:ring-offset-[#333333]"
                 onChange={(e) => setSavePreset(e.target.checked)}
               />
-              <label
-                htmlFor="save-preset"
-                className="text-sm text-gray-700 dark:text-gray-200"
-              >
+              <label htmlFor="save-preset" className="text-sm text-[#E0E0E0]">
                 {t('Save as a preset')}
               </label>
             </div>
@@ -199,9 +199,10 @@ const ThemeCustomizer = () => {
             <input
               type="text"
               placeholder={t('Enter preset name')}
-              className="focus:border-primary focus:ring-primary w-full rounded-md border border-gray-300 px-3 py-2 text-sm placeholder:text-gray-400 focus:ring-1 focus:outline-none"
+              className="w-full rounded-md border border-[#4A4A4A] bg-[#2D2D2D] px-3 py-2 text-sm text-[#E0E0E0] placeholder:text-[#757575] focus:border-[#ffdd00] focus:ring-1 focus:ring-[#ffdd00] focus:outline-none"
               value={presetName}
               onChange={(e) => setPresetName(e.target.value)}
+              disabled={!savePreset}
             />
           </div>
         )}

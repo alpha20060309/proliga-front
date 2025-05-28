@@ -69,11 +69,11 @@ const ChangeLanguageDropdown = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent
         aria-label="Language Options: RU, UZ"
-        className="text-foreground w-min rounded"
+        className="text-foreground min-w-24 w-min rounded"
         align="end"
       >
         <DropdownMenuItem onClick={() => handleChange(LANGUAGE.uz)}>
-          <div className="flex items-center justify-center md:gap-1 xl:gap-2">
+          <div className="flex items-center justify-center gap-2">
             <Image
               src="/icons/uzbekistan.svg"
               alt="uzbekistan"
@@ -81,11 +81,11 @@ const ChangeLanguageDropdown = () => {
               height={24}
               className="size-6"
             />
-            <p className="hidden md:block">UZ</p>
+            <p>UZ</p>
           </div>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => handleChange(LANGUAGE.ru)}>
-          <div className="flex items-center justify-center md:gap-1 xl:gap-2">
+          <div className="flex items-center justify-center gap-2">
             <Image
               src="/icons/russia.svg"
               alt="russia"
@@ -93,7 +93,7 @@ const ChangeLanguageDropdown = () => {
               className="size-6"
               height={24}
             />
-            <p className="hidden md:block">РУ</p>
+            <p>РУ</p>
           </div>
         </DropdownMenuItem>
       </DropdownMenuContent>
