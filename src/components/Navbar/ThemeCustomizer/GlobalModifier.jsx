@@ -146,7 +146,7 @@ const GlobalModifier = () => {
     <Card className="w-full rounded-md border border-[#4A4A4A] bg-[#333333] text-[#E0E0E0]">
       <CardHeader className="border-b border-[#4A4A4A] px-4 py-2.5">
         <CardTitle className="text-sm font-medium">
-          {t('Global Properties')}
+          {t('Global Style Modifiers')}
         </CardTitle>
       </CardHeader>
       <CardContent className="p-4">

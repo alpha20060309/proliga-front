@@ -25,13 +25,18 @@ const FontModifier = () => {
   }
 
   return (
-    <Card className="w-full rounded-md border border-[#4A4A4A] bg-[#333333] p-0 text-[#E0E0E0]">
+    <Card className="w-full rounded-md border border-[#4A4A4A] bg-[#333333] text-[#E0E0E0]">
       <CardHeader className="border-b border-[#4A4A4A] px-4 py-2.5">
-        <CardTitle className="text-sm font-medium">{t('Font Family')}</CardTitle>
+        <CardTitle className="text-sm font-medium">
+          {t('Font Family')}
+        </CardTitle>
       </CardHeader>
       <CardContent className="p-4">
         <div className="space-y-1.5">
-          <label htmlFor="font-select" className="text-xs font-medium text-[#B0B0B0]">
+          <label
+            htmlFor="font-select"
+            className="text-xs font-medium text-[#B0B0B0]"
+          >
             {t('Select Font')}
           </label>
           <select
@@ -41,7 +46,11 @@ const FontModifier = () => {
             className="w-full rounded-md border border-[#4A4A4A] bg-[#2D2D2D] px-3 py-2 text-sm text-[#E0E0E0] focus:border-[#ffdd00] focus:ring-1 focus:ring-[#ffdd00] focus:outline-none"
           >
             {Object.keys(fonts).map((fontName) => (
-              <option key={fontName} value={fontName} className="bg-[#2D2D2D] text-[#E0E0E0]">
+              <option
+                key={fontName}
+                value={fontName}
+                className="bg-[#2D2D2D] text-[#E0E0E0]"
+              >
                 {fontName}
               </option>
             ))}

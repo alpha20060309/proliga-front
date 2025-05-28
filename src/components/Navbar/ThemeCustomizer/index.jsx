@@ -132,25 +132,25 @@ const ThemeCustomizer = () => {
           <TabsList className="w-full rounded-[6px] bg-[#333333] p-1">
             <TabsTrigger
               value="color"
-              className="w-full rounded-[4px] px-3 py-1.5 text-sm font-medium text-[#A0A0A0] focus-visible:ring-2 focus-visible:ring-[#757575] focus-visible:ring-offset-2 focus-visible:ring-offset-[#333333] data-[state=active]:bg-[#4A4A4A] data-[state=active]:text-[#FFFFFF] data-[state=active]:shadow-sm"
+              className="w-full rounded-[4px] px-3 py-1.5 text-sm font-medium text-[#A0A0A0] focus-visible:bg-[#fffbe6] focus-visible:text-[#1A1A1A] focus-visible:ring-2 focus-visible:ring-[#757575] focus-visible:ring-offset-2 focus-visible:ring-offset-[#333333] data-[state=active]:bg-[#4A4A4A] data-[state=active]:text-[#FFFFFF] data-[state=active]:shadow-sm"
             >
               {t('Color')}
             </TabsTrigger>
             <TabsTrigger
               value="font"
-              className="w-full rounded-[4px] px-3 py-1.5 text-sm font-medium text-[#A0A0A0] focus-visible:ring-2 focus-visible:ring-[#757575] focus-visible:ring-offset-2 focus-visible:ring-offset-[#333333] data-[state=active]:bg-[#4A4A4A] data-[state=active]:text-[#FFFFFF] data-[state=active]:shadow-sm"
+              className="w-full rounded-[4px] px-3 py-1.5 text-sm font-medium text-[#A0A0A0] focus-visible:bg-[#fffbe6] focus-visible:text-[#1A1A1A] focus-visible:ring-2 focus-visible:ring-[#757575] focus-visible:ring-offset-2 focus-visible:ring-offset-[#333333] data-[state=active]:bg-[#4A4A4A] data-[state=active]:text-[#FFFFFF] data-[state=active]:shadow-sm"
             >
               {t('Font')}
             </TabsTrigger>
             <TabsTrigger
               value="global"
-              className="w-full rounded-[4px] px-3 py-1.5 text-sm font-medium text-[#A0A0A0] focus-visible:ring-2 focus-visible:ring-[#757575] focus-visible:ring-offset-2 focus-visible:ring-offset-[#333333] data-[state=active]:bg-[#4A4A4A] data-[state=active]:text-[#FFFFFF] data-[state=active]:shadow-sm"
+              className="w-full rounded-[4px] px-3 py-1.5 text-sm font-medium text-[#A0A0A0] focus-visible:bg-[#fffbe6] focus-visible:text-[#1A1A1A] focus-visible:ring-2 focus-visible:ring-[#757575] focus-visible:ring-offset-2 focus-visible:ring-offset-[#333333] data-[state=active]:bg-[#4A4A4A] data-[state=active]:text-[#FFFFFF] data-[state=active]:shadow-sm"
             >
               {t('Global')}
             </TabsTrigger>
             <TabsTrigger
               value="shadow"
-              className="w-full rounded-[4px] px-3 py-1.5 text-sm font-medium text-[#A0A0A0] focus-visible:ring-2 focus-visible:ring-[#757575] focus-visible:ring-offset-2 focus-visible:ring-offset-[#333333] data-[state=active]:bg-[#4A4A4A] data-[state=active]:text-[#FFFFFF] data-[state=active]:shadow-sm"
+              className="w-full rounded-[4px] px-3 py-1.5 text-sm font-medium text-[#A0A0A0] focus-visible:bg-[#fffbe6] focus-visible:text-[#1A1A1A] focus-visible:ring-2 focus-visible:ring-[#757575] focus-visible:ring-offset-2 focus-visible:ring-offset-[#333333] data-[state=active]:bg-[#4A4A4A] data-[state=active]:text-[#FFFFFF] data-[state=active]:shadow-sm"
             >
               {t('Shadow')}
             </TabsTrigger>

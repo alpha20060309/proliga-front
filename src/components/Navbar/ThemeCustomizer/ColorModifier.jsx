@@ -57,7 +57,7 @@ const ColorModifier = () => {
       className="mb-3 flex items-center justify-between space-x-2 rounded-md bg-[#2D2D2D] p-2.5"
     >
       <label htmlFor={key} className="flex-1 text-xs text-[#B0B0B0] capitalize">
-        {key.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())}
+        {t(key.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()))}
       </label>
       <div className="flex items-center space-x-2">
         <input
@@ -69,15 +69,9 @@ const ColorModifier = () => {
               : lightTheme.colors[key]
           )}
           onChange={(e) => handleChange(key, e.target.value)}
-          className="h-7 w-7 cursor-pointer appearance-none rounded border-none bg-transparent p-0"
-          style={
-            {
-              // For some browsers, direct styling of color input preview box might be needed
-              // Or ensure the wrapper/icon indicates it's a color picker
-            }
-          }
+          className="h-7 w-7 cursor-pointer appearance-none rounded-[4px] border-none bg-transparent p-0"
         />
-        <span className="w-20 rounded bg-[#353535] p-1 text-center font-mono text-xs text-[#A0A0A0] select-all">
+        <span className="w-20 rounded-[4px] bg-[#353535] p-1 text-center font-mono text-xs text-[#A0A0A0] select-all">
           {formatColor(
             resolvedTheme === 'dark'
               ? darkTheme.colors[key]

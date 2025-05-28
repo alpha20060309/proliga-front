@@ -15,6 +15,7 @@ import ChangeLanguageDropdown from './Language'
 import Notification from './Notification'
 import Marquee from 'components/Marquee'
 import ThemeSwither from './ThemeSwitch'
+
 import ThemeCustomizer from './ThemeCustomizer'
 
 const Navbar = () => {
