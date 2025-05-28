@@ -14,7 +14,6 @@ import {
   DEFAULT_LIGHT_THEME,
   DEFAULT_DARK_THEME,
 } from 'app/utils/default-theme.util'
-import { fonts } from 'app/utils/fonts.util'
 
 const CustomThemeProvider = ({ children }) => {
   const dispatch = useDispatch()
@@ -24,10 +23,9 @@ const CustomThemeProvider = ({ children }) => {
 
   // Load user themes into Redux store
   useEffect(() => {
-    const isAuthenticated = localStorage.getItem('isAuthenticated')
     const themeTypes = ['colors', 'shadows', 'global', 'font']
 
-    if (!isAuthenticated || !user?.id) {
+    if (!user?.id) {
       themeTypes.forEach((type) => {
         dispatch(setLightTheme({ type, data: DEFAULT_LIGHT_THEME[type] }))
         dispatch(setDarkTheme({ type, data: DEFAULT_DARK_THEME[type] }))
@@ -36,7 +34,7 @@ const CustomThemeProvider = ({ children }) => {
     }
     const { light_theme, dark_theme } = user
 
-    if (light_theme?.colors?.length > 0) {
+    if (light_theme?.font) {
       themeTypes.forEach((type) => {
         if (light_theme[type]) {
           dispatch(setLightTheme({ type, data: light_theme[type] }))
@@ -44,7 +42,7 @@ const CustomThemeProvider = ({ children }) => {
       })
     }
 
-    if (dark_theme?.colors?.length > 0) {
+    if (dark_theme?.font) {
       themeTypes.forEach((type) => {
         if (dark_theme[type]) {
           dispatch(setDarkTheme({ type, data: dark_theme[type] }))
@@ -84,14 +82,13 @@ const CustomThemeProvider = ({ children }) => {
 
   // Apply fonts from Redux store to DOM
   useEffect(() => {
-    const fontName = resolvedTheme === 'dark' ? darkTheme.font : lightTheme.font
-    const fontFamily = fontName && fonts[fontName] ? fonts[fontName] : ''
+    const font = resolvedTheme === 'dark' ? darkTheme.font : lightTheme.font
 
-    document.documentElement.style[fontFamily ? 'setProperty' : 'removeProperty'](
+    document.documentElement.style[font ? 'setProperty' : 'removeProperty'](
       '--font-sans',
-      fontFamily
+      font
     )
-    document.body.style.fontFamily = fontFamily || ''
+    document.body.style.fontFamily = font || ''
   }, [resolvedTheme, darkTheme.font, lightTheme.font])
 
   // Apply shadows from Redux store to DOM
