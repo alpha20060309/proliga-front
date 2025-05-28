@@ -5,6 +5,7 @@ const i18nConfig = {
   locales: ['uz', 'ru'],
   defaultLocale: 'uz',
   dir: 'ltr',
+  prefixDefault: true,
   resources: {
     uz: {
       translation: UZ,
@@ -13,7 +14,6 @@ const i18nConfig = {
       translation: RU,
     },
   },
-  fallbackLng: 'uz',
 }
 
 export default i18nConfig
