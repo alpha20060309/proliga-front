@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { useTranslation } from 'react-i18next'
+import ThemePreview from './ThemePreview'
 
 const SelectTheme = () => {
   const dispatch = useDispatch()
@@ -90,99 +91,6 @@ const SelectTheme = () => {
           </SelectGroup>
         </SelectContent>
       </Select>
-    </div>
-  )
-}
-
-const ThemePreview = ({ theme }) => {
-  const commonPreviewSize = 'h-6 w-6'
-  const commonPreviewDivStyle = `relative flex flex-col items-center justify-between overflow-hidden p-0.5`
-
-  return (
-    <div className="flex items-center gap-1.5">
-      <div
-        className={`${commonPreviewSize} ${commonPreviewDivStyle}`}
-        style={{
-          backgroundColor: theme.dark_theme?.colors?.card || '#1A1A1A', // fallback
-          fontFamily: theme.dark_theme?.font || 'sans-serif',
-          borderRadius:
-            theme.light_theme?.global?.radius !== undefined
-              ? `${theme.light_theme.global.radius / 2}rem`
-              : undefined,
-        }}
-        title={`Dark: ${theme.name} (Card: ${theme.dark_theme?.colors?.card})`}
-      >
-        <div
-          className="h-1 w-full shrink-0 rounded-t-xs"
-          style={{
-            backgroundColor: theme.dark_theme?.colors?.primary || '#333333',
-          }}
-        ></div>
-        <div
-          className="my-0.5 h-0.5 w-2.5 shrink-0 rounded-xs" // smaller accent
-          style={{
-            backgroundColor: theme.dark_theme?.colors?.accent || '#555555',
-          }}
-        ></div>
-        <div className="flex w-full shrink-0 flex-col items-start gap-0.5 px-0.5">
-          <div
-            className="h-0.5 w-4/5 rounded-full"
-            style={{
-              backgroundColor:
-                theme.dark_theme?.colors?.foreground || '#CCCCCC',
-            }}
-          ></div>
-          <div
-            className="h-0.5 w-3/5 rounded-full"
-            style={{
-              backgroundColor:
-                theme.dark_theme?.colors?.foreground || '#CCCCCC',
-            }}
-          ></div>
-        </div>
-      </div>
-
-      {/* Light Theme Mini-Website Preview */}
-      <div
-        className={`${commonPreviewSize} ${commonPreviewDivStyle} border border-[#505050]`} // Darker border for light preview on dark bg
-        style={{
-          backgroundColor: theme.light_theme?.colors?.card || '#F0F0F0', // fallback
-          borderRadius:
-            theme.light_theme?.global?.radius !== undefined
-              ? `${theme.light_theme.global.radius / 2}rem`
-              : undefined,
-        }}
-        title={`Light: ${theme.name} (Card: ${theme.light_theme?.colors?.card})`}
-      >
-        <div
-          className="h-1 w-full shrink-0 rounded-t-xs"
-          style={{
-            backgroundColor: theme.light_theme?.colors?.primary || '#DDDDDD',
-          }}
-        ></div>
-        <div
-          className="my-0.5 h-0.5 w-2.5 shrink-0 rounded-xs" // smaller accent
-          style={{
-            backgroundColor: theme.light_theme?.colors?.accent || '#CCCCCC',
-          }}
-        ></div>
-        <div className="flex w-full shrink-0 flex-col items-start gap-0.5 px-0.5">
-          <div
-            className="h-0.5 w-4/5 rounded-full"
-            style={{
-              backgroundColor:
-                theme.light_theme?.colors?.foreground || '#444444',
-            }}
-          ></div>
-          <div
-            className="h-0.5 w-3/5 rounded-full"
-            style={{
-              backgroundColor:
-                theme.light_theme?.colors?.foreground || '#444444',
-            }}
-          ></div>
-        </div>
-      </div>
     </div>
   )
 }
