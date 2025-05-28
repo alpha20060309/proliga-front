@@ -22,6 +22,9 @@ const ShadowModifier = () => {
   const { darkTheme, lightTheme } = useSelector((store) => store.systemConfig)
   const dispatch = useDispatch()
   const { t } = useTranslation()
+
+  const currentShadows = theme === 'dark' ? darkTheme.shadows : lightTheme.shadows
+
   const handleChange = (key, value) => {
     if (
       key in UNITS &&
@@ -30,78 +33,74 @@ const ShadowModifier = () => {
       !value.endsWith(UNITS[key])
     ) {
       value = `${value}${UNITS[key]}`
+    } else if (key === 'shadow-opacity' && value) {
+      value = parseFloat(value).toFixed(2).toString() // Ensure opacity is string like "0.50"
     }
+
     document.documentElement.style.setProperty(`--${key}`, value)
-    theme === 'dark'
-      ? dispatch(
-          setDarkTheme({
-            type: 'shadows',
-            data: { ...darkTheme.shadows, [key]: value },
-          })
-        )
-      : dispatch(
-          setLightTheme({
-            type: 'shadows',
-            data: { ...lightTheme.shadows, [key]: value },
-          })
-        )
-    updateShadows({ [key]: value })
+    const newShadowData = { ...(currentShadows || DEFAULT_SHADOWS), [key]: value }
+
+    if (theme === 'dark') {
+      dispatch(setDarkTheme({ type: 'shadows', data: newShadowData }))
+    } else {
+      dispatch(setLightTheme({ type: 'shadows', data: newShadowData }))
+    }
+    updateShadows({ [key]: value }) // This likely updates CSS variables for the main page
   }
 
   const renderInput = (key) => {
     const label = key.replace('shadow-', '').replace(/-/g, ' ')
-    const unit = key in UNITS ? UNITS[key] : ''
-    const value =
-      theme === 'dark'
-        ? darkTheme.shadows[key]
-        : lightTheme.shadows[key] || DEFAULT_SHADOWS[key] || ''
-    if (!value) return
+    const unit = UNITS[key] || ''
+    // Ensure currentShadows and DEFAULT_SHADOWS are properly providing fallbacks
+    const shadowSource = currentShadows || DEFAULT_SHADOWS
+    let value = shadowSource[key] || DEFAULT_SHADOWS[key] || ''
 
-    const numericValue =
-      typeof value === 'string' ? value.replace(/[^\d.-]/g, '') : ''
-
-    if (key === 'shadow-color') {
-      return (
-        <div key={key} className="mb-2 flex items-center space-x-2">
-          <label htmlFor={key} className="w-48 text-xs capitalize">
-            {t(label.charAt(0).toUpperCase() + label.slice(1))}
-          </label>
-          <input
-            type="color"
-            id={key}
-            value={hslStringToHex(value)}
-            onChange={(e) => handleChange(key, hexToHsl(e.target.value))}
-            className="h-8 w-8 rounded border-none p-0"
-          />
-          <span className="w-32 font-mono text-xs">{value}</span>
-        </div>
-      )
+    if (key === 'shadow-color' && !value) {
+      value = DEFAULT_SHADOWS['shadow-color'] // Ensure fallback for shadow-color
     }
 
+    const numericValue = typeof value === 'string' ? value.replace(unit, '').replace(/[^\d.-]/g, '') : ''
+    const inputBaseClass = "h-8 rounded-md border border-[#4A4A4A] bg-[#2D2D2D] text-xs text-[#E0E0E0] focus:border-[#ffdd00] focus:ring-1 focus:ring-[#ffdd00] focus:outline-none";
+    const rangeBaseClass = "w-full h-2 bg-[#4A4A4A] rounded-lg appearance-none cursor-pointer range-sm accent-[#ffdd00]";
+
     return (
-      <div key={key} className="mb-2 flex items-center space-x-2">
-        <label htmlFor={key} className="w-48 text-xs capitalize">
-          {t(label.charAt(0).toUpperCase() + label.slice(1))}
+      <div key={key} className="mb-3 flex flex-col space-y-1.5 rounded-md bg-[#2D2D2D] p-2.5">
+        <label htmlFor={key} className="text-xs capitalize text-[#B0B0B0]">
+          {t(label.charAt(0).toUpperCase() + label.slice(1))} {unit && `(${unit})`}
         </label>
-        {key === 'shadow-opacity' ? (
-          <div className="flex w-full items-center space-x-2">
+        {key === 'shadow-color' ? (
+          <div className="flex items-center space-x-2">
+            <input
+              type="color"
+              id={key}
+              value={hslStringToHex(value || 'hsl(0 0% 0%)')} // Provide fallback for hslStringToHex
+              onChange={(e) => handleChange(key, hexToHsl(e.target.value))}
+              className="h-7 w-7 cursor-pointer appearance-none rounded border-none bg-transparent p-0"
+            />
+            <span className="flex-1 select-all rounded bg-[#353535] p-1 text-center font-mono text-xs text-[#A0A0A0]">
+              {value || 'N/A'}
+            </span>
+          </div>
+        ) : key === 'shadow-opacity' ? (
+          <div className="flex items-center space-x-2">
             <input
               type="range"
-              value={[parseFloat(value) || 0]}
+              id={key}
+              value={parseFloat(value) || 0}
               min={0}
               max={1}
               step={0.01}
               onChange={(e) => handleChange(key, e.target.value)}
-              className="w-full"
+              className={rangeBaseClass}
             />
             <input
               type="number"
-              value={numericValue}
+              value={parseFloat(value).toFixed(2) || "0.00"}
               onChange={(e) => handleChange(key, e.target.value)}
               min={0}
               max={1}
               step={0.01}
-              className="h-8 w-20 border border-black px-2 text-xs"
+              className={`${inputBaseClass} w-20 px-2 text-center`}
             />
           </div>
         ) : (
@@ -109,41 +108,62 @@ const ShadowModifier = () => {
             <input
               type="range"
               id={key}
-              min={0}
-              max={10}
-              step={0.1}
+              min={UNITS_MIN_MAX[key]?.min || 0}
+              max={UNITS_MIN_MAX[key]?.max || 10}
+              step={UNITS_MIN_MAX[key]?.step ||0.1}
               value={numericValue}
               onChange={(e) => handleChange(key, e.target.value)}
-              className="h-8 w-24 border border-black px-2 text-xs"
+              className={rangeBaseClass}
             />
-            {unit && <span className="text-xs">{unit}</span>}
+            <input
+              type="number"
+              value={numericValue}
+              onChange={(e) => handleChange(key, e.target.value)}
+              min={UNITS_MIN_MAX[key]?.min || 0}
+              max={UNITS_MIN_MAX[key]?.max || 10}
+              step={UNITS_MIN_MAX[key]?.step ||0.1}
+              className={`${inputBaseClass} w-20 px-2 text-center`}
+            />
           </div>
-        )}
-        {key !== 'shadow-color' && key !== 'shadow-opacity' && (
-          <span className="w-20 font-mono text-xs">{value}</span>
         )}
       </div>
     )
   }
-  // Shadow preview elements
+
+  // Define min/max/step for range inputs based on typical shadow property values
+  const UNITS_MIN_MAX = {
+    'shadow-offset-x': { min: -20, max: 20, step: 1 },
+    'shadow-offset-y': { min: -20, max: 20, step: 1 },
+    'shadow-blur-radius': { min: 0, max: 50, step: 1 },
+    'shadow-spread-radius': { min: -20, max: 20, step: 1 },
+  }
+
   const previewShadows = (
-    <div className="mt-6 grid grid-cols-4 gap-4">
-      <div className="bg-card rounded p-3 text-xs shadow-xs">xs</div>
-      <div className="bg-card rounded p-3 text-xs shadow-sm">sm</div>
-      <div className="bg-card rounded p-3 text-xs shadow">md</div>
-      <div className="bg-card rounded p-3 text-xs shadow-md">big</div>
-      <div className="bg-card rounded p-3 text-xs shadow-lg">lg</div>
-      <div className="bg-card rounded p-3 text-xs shadow-xl">xl</div>
-      <div className="bg-card rounded p-3 text-xs shadow-2xl">2xl</div>
+    <div className="mt-4 space-y-3">
+      <h4 className="text-xs font-medium text-[#B0B0B0]">{t('Shadow Previews')}</h4>
+      <div className="grid grid-cols-3 gap-3 sm:grid-cols-4">
+        {['xs', 'sm', '', 'md', 'lg', 'xl', '2xl'].map(size => (
+          <div
+            key={size || 'base'}
+            className={`flex h-16 w-full items-center justify-center rounded-md border border-[#4A4A4A] bg-[#383838] p-2 text-xs text-[#E0E0E0] ${size ? `shadow-${size}` : 'shadow'}`}
+            style={{
+              // The shadow class will be applied based on the current theme variables
+              // This is intended, as it's a preview of the theme's shadows
+            }}
+          >
+            {size || 'base'}
+          </div>
+        ))}
+      </div>
     </div>
   )
 
   return (
-    <Card className="w-full rounded-[4px] bg-[#232323] text-[#fff]">
-      <CardHeader>
-        <CardTitle className="text-base">{t('Shadow Properties')}</CardTitle>
+    <Card className="w-full rounded-md border border-[#4A4A4A] bg-[#333333] text-[#E0E0E0]">
+      <CardHeader className="border-b border-[#4A4A4A] px-4 py-2.5">
+        <CardTitle className="text-sm font-medium">{t('Shadow Properties')}</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="p-4">
         {SHADOW_KEYS.map(renderInput)}
         {previewShadows}
       </CardContent>

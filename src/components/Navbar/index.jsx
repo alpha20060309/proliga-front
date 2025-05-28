@@ -61,7 +61,7 @@ const Navbar = () => {
               />
             </Link>
             <PlayLinks />
-            <div className="flex w-max items-center justify-center gap-4">
+            <div className="flex w-max items-center justify-center gap-2 sm:gap-4">
               <ChangeLanguageDropdown />
               <Notification />
               <ThemeSwither />
