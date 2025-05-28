@@ -18,13 +18,13 @@ import { useTheme } from 'next-themes'
 import { useTranslation } from 'react-i18next'
 
 const ShadowModifier = () => {
-  const { theme } = useTheme()
+  const { resolvedTheme } = useTheme()
   const { darkTheme, lightTheme } = useSelector((store) => store.systemConfig)
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
   const currentShadows =
-    theme === 'dark' ? darkTheme.shadows : lightTheme.shadows
+    resolvedTheme === 'dark' ? darkTheme.shadows : lightTheme.shadows
 
   const handleChange = (key, value) => {
     if (
@@ -44,7 +44,7 @@ const ShadowModifier = () => {
       [key]: value,
     }
 
-    if (theme === 'dark') {
+    if (resolvedTheme === 'dark') {
       dispatch(setDarkTheme({ type: 'shadows', data: newShadowData }))
     } else {
       dispatch(setLightTheme({ type: 'shadows', data: newShadowData }))

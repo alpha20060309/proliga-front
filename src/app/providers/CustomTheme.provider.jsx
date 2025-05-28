@@ -14,6 +14,7 @@ import {
   DEFAULT_LIGHT_THEME,
   DEFAULT_DARK_THEME,
 } from 'app/utils/default-theme.util'
+import { fonts } from 'app/utils/fonts.util'
 
 const CustomThemeProvider = ({ children }) => {
   const dispatch = useDispatch()
@@ -83,13 +84,14 @@ const CustomThemeProvider = ({ children }) => {
 
   // Apply fonts from Redux store to DOM
   useEffect(() => {
-    const font = resolvedTheme === 'dark' ? darkTheme.font : lightTheme.font
+    const fontName = resolvedTheme === 'dark' ? darkTheme.font : lightTheme.font
+    const fontFamily = fontName && fonts[fontName] ? fonts[fontName] : ''
 
-    document.documentElement.style[font ? 'setProperty' : 'removeProperty'](
+    document.documentElement.style[fontFamily ? 'setProperty' : 'removeProperty'](
       '--font-sans',
-      font
+      fontFamily
     )
-    document.body.style.fontFamily = font || ''
+    document.body.style.fontFamily = fontFamily || ''
   }, [resolvedTheme, darkTheme.font, lightTheme.font])
 
   // Apply shadows from Redux store to DOM
