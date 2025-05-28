@@ -103,16 +103,12 @@ const Footer = () => {
             </div>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-2">
-            <GradientButton
-              href="/prizes"
-              className={'w-full max-w-56'}
-              variant="solid"
-            >
+            <GradientButton href="/prizes" className={'w-64'} variant="solid">
               {t("Sovgalarni ko'rish")}
             </GradientButton>
 
             <GradientButton
-              className={'w-full'}
+              className={'w-64'}
               href="/championships"
               variant="gradient"
             >

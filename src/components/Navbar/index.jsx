@@ -10,12 +10,18 @@ import Gutter from '../Gutter'
 import PlayLinks from './Links'
 import MobileSidebar from './UserMobile/Sidebar'
 import NavbarUserDesktop from './UserDesktop'
-import NavbarUserMobile from './UserMobile'
 import ChangeLanguageDropdown from './Language'
 import Notification from './Notification'
 import Marquee from 'components/Marquee'
-import ThemeSwitcher from './ThemeSwitch'
 import ThemeCustomizer from './ThemeCustomizer'
+import dynamic from 'next/dynamic'
+import { ThemeSwitcherSkeleton } from './ThemeSwitch'
+import BottomNavigation from './MobileNavigation'
+
+const ThemeSwitcher = dynamic(() => import('./ThemeSwitch'), {
+  ssr: false,
+  loading: () => <ThemeSwitcherSkeleton />,
+})
 
 const Navbar = () => {
   const path = usePathname()
@@ -61,17 +67,18 @@ const Navbar = () => {
               />
             </Link>
             <PlayLinks />
-            <div className="flex w-max items-center justify-center gap-2 sm:gap-4">
+            <div className="flex w-max items-center justify-center gap-3 sm:gap-4">
               <ChangeLanguageDropdown />
               <Notification />
               <ThemeSwitcher />
               <ThemeCustomizer />
-              <NavbarUserMobile handleToggleModal={() => setModalOpen(true)} />
+              {/* <NavbarUserMobile handleToggleModal={() => setModalOpen(true)} /> */}
               <NavbarUserDesktop />
             </div>
           </div>
         </Gutter>
       </nav>
+      <BottomNavigation />
       <MobileSidebar isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
     </>
   )

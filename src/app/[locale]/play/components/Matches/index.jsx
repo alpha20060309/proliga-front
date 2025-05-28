@@ -26,11 +26,8 @@ const Matches = () => {
   const path = usePathname()
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { isLoading: toursLoading, currentTourIndex } = useSelector(
-    (state) => state.tour
-  )
+  const { currentTourIndex } = useSelector((state) => state.tour)
   const tours = useSelector(selectTours)
-  const { isLoading: teamLoading } = useSelector((store) => store.currentTeam)
   const { season } = useSelector((store) => store.season)
   const { isLoading, count } = useSelector((state) => state.match)
   const matches = useSelector(selectMatches)
@@ -72,7 +69,11 @@ const Matches = () => {
   }
 
   const refreshData = useCallback(() => {
+    console.log('season?.id', season?.id)
+    console.log('competition_id', competition_id)
+    console.log('currentTour?.id', currentTour?.id)
     if (season?.id && competition_id && currentTour?.id) {
+      console.log('refreshData')
       dispatch(
         fetchMatches({
           season_id: season?.id,
@@ -87,19 +88,17 @@ const Matches = () => {
 
   useEffect(() => {
     if (season?.id && competition_id && currentTour?.id) {
-      refreshData()
+      dispatch(
+        fetchMatches({
+          season_id: season?.id,
+          competition_id,
+          tour_id: currentTour?.id,
+          page,
+          perPage,
+        })
+      )
     }
-  }, [
-    season,
-    dispatch,
-    competition_id,
-    currentTour,
-    toursLoading,
-    page,
-    perPage,
-    teamLoading,
-    refreshData,
-  ])
+  }, [competition_id, currentTour?.id, season?.id, page, dispatch])
 
   return (
     <section className="bg-background border-border relative mx-auto flex h-min min-h-168 w-full max-w-lg flex-1 flex-col justify-between space-y-4 rounded-xl border px-4 py-6 lg:mx-0 lg:w-auto lg:min-w-72 xl:grow 2xl:max-w-lg">

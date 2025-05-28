@@ -26,7 +26,7 @@ export default auth((req) => {
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
 
   const isListedProtectedRoute = protectedRoutes.some((route) =>
-    nextUrl.pathname.startsWith(route)
+    nextUrl.pathname.includes(route)
   )
 
   if (isApiAuthRoute) {

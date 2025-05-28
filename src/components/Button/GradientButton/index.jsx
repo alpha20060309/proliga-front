@@ -42,7 +42,7 @@ export function GradientButton({
             className={cn(
               classes.gradient.background,
               'bg-clip-text text-transparent',
-              'w-full px-5 whitespace-nowrap',
+              'flex justify-center items-center min-w-40 w-64 whitespace-nowrap',
               classes.gradient.animate
             )}
           >

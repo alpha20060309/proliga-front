@@ -9,6 +9,7 @@ import { setPlayerInfoModal } from 'app/lib/features/teamPlayer/teamPlayer.slice
 import { setCurrentPlayer } from 'app/lib/features/player/player.slice'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { memo } from 'react'
+import { Info } from 'lucide-react'
 
 const Player = ({ player }) => {
   const dispatch = useDispatch()
@@ -87,24 +88,17 @@ const Player = ({ player }) => {
               />
             )}
           </div>
-          <p className="text-secondary-foreground text-shadow-black xs:text-2xs xs:text-xs text-3xs line-clamp-1 text-shadow-2xs md:text-sm">
+          <p className="text-secondary-foreground xs:text-2xs xs:text-xs text-3xs line-clamp-1 text-shadow-2xs text-shadow-black md:text-sm">
             {firstName} {lastName.slice(0, 1).toUpperCase()} {lastName && '.'}
           </p>
           <div className="flex items-center gap-0.5">
             <button
               onClick={handleInfoModal}
-              className="bg-background hover:bg-primary size-4 rounded-sm transition-all sm:size-5"
+              className="bg-background hover:bg-primary size-4 rounded-full transition-all sm:size-5"
             >
-              <Image
-                width={16}
-                height={16}
-                draggable={false}
-                src="/icons/info.svg"
-                alt="additional info"
-                className="h-full w-full"
-              />
+              <Info className="text-foreground hover:text-accent-foreground size-4 sm:size-5" />
             </button>
-            <div className="bg-primary border-border text-accent-foreground flex h-4 w-6 cursor-default items-center justify-center rounded-sm border text-center text-xs font-bold sm:h-5 sm:w-8 md:text-sm">
+            <div className="bg-primary border-primary-foreground text-primary-foreground flex h-4 w-6 cursor-default items-center justify-center rounded-sm border text-center text-xs font-bold sm:h-5 sm:w-8 md:text-sm">
               {player.is_captain
                 ? (currentPlayerPoint?.point ?? 0) * 2
                 : (currentPlayerPoint?.point ?? 0)}

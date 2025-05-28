@@ -14,6 +14,7 @@ import { useTranslation } from 'react-i18next'
 import { setCurrentPlayer } from 'app/lib/features/player/player.slice'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { memo } from 'react'
+import { ArrowUpDown, X } from 'lucide-react'
 
 const Player = ({ player }) => {
   const dispatch = useDispatch()
@@ -105,31 +106,18 @@ const Player = ({ player }) => {
             <div className="flex items-center gap-0.5 sm:gap-1">
               <button
                 onClick={handleTransfer}
-                className="hover:border-primary border-border size-4 overflow-hidden rounded-sm border transition-all sm:size-5"
+                className="hover:border-accent hover:bg-accent border-foreground/50 bg-background flex size-4 items-center justify-center overflow-hidden rounded-sm border p-0.5 transition-colors sm:size-5"
               >
-                <Image
-                  width={16}
-                  height={16}
-                  draggable={false}
-                  src="/icons/swap.svg"
-                  alt="additional info"
-                  className="h-full w-full"
-                />
+                <ArrowUpDown className="text-foreground hover:text-accent-foreground size-4 sm:size-5" />
               </button>
-              <div className="border-border bg-background text-foreground flex h-4 w-6 cursor-default items-center justify-center rounded-sm border text-center text-xs font-bold sm:h-5 sm:w-8 md:text-sm">
+              <div className="border-foreground bg-background text-foreground flex h-4 w-6 cursor-default items-center justify-center rounded-sm border text-center text-xs font-bold sm:h-5 sm:w-8 md:text-sm">
                 {player.price ?? '00'}
               </div>
               <button
                 onClick={toggleDeleteModal}
-                className="border-border hover:border-primary size-4 rounded-sm border transition-all sm:size-5"
+                className="border-foreground/50 bg-destructive hover:bg-accent hover:border-accent flex size-4 items-center justify-center rounded-sm border p-0.5 transition-colors sm:size-5"
               >
-                <Image
-                  width={16}
-                  height={16}
-                  src="/icons/close-red-circle.svg"
-                  alt="delete player"
-                  className="h-full w-full"
-                />
+                <X className="text-foreground hover:text-accent-foreground size-4 sm:size-5" />
               </button>
             </div>
           </>

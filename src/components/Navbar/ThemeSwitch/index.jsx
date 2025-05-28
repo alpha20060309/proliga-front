@@ -28,4 +28,18 @@ const ThemeSwitcher = () => {
   )
 }
 
+export function ThemeSwitcherSkeleton() {
+  return (
+    <button
+      className={cn(
+        'text-foreground relative flex size-8 items-center justify-center bg-transparent p-0 hover:bg-transparent hover:text-neutral-500 dark:hover:bg-transparent dark:hover:text-neutral-400'
+      )}
+      aria-label="Toggle theme"
+    >
+      <Sun className="block size-5 transition-all dark:hidden" />
+      <span className="sr-only">Toggle theme</span>
+    </button>
+  )
+}
+
 export default ThemeSwitcher

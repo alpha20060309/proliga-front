@@ -24,3 +24,4 @@ public/swe-worker*
 prisma/generated
 
 firebase.json
+/src/generated/prisma

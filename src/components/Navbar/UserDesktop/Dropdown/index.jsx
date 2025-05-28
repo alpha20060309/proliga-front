@@ -1,10 +1,10 @@
 import { Trophy, Settings, LogOut, LogIn } from 'lucide-react'
-import NavLink from './NavLink'
 import { useLogOut } from 'app/hooks/auth/useLogOut/useLogOut'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { PopoverContent } from '@/components/ui/popover'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { Link } from 'next-view-transitions'
 
 const Dropdown = () => {
   const { logOut } = useLogOut()
@@ -13,7 +13,7 @@ const Dropdown = () => {
 
   return (
     <PopoverContent
-      className="bg-sidebar border-sidebar-border mt-4 flex w-56 flex-col gap-1 rounded-lg p-3"
+      className="bg-sidebar border-sidebar-border mt-4 flex w-56 flex-col gap-2 rounded-lg p-3"
       align="end"
     >
       <NavLink href="/championships">
@@ -41,6 +41,17 @@ const Dropdown = () => {
         </NavLink>
       )}
     </PopoverContent>
+  )
+}
+
+const NavLink = ({ children, href }) => {
+  return (
+    <Link
+      href={href}
+      className="hover:bg-sidebar-accent flex h-full w-full gap-2 rounded px-1 py-1.5 transition-all"
+    >
+      {children}
+    </Link>
   )
 }
 
