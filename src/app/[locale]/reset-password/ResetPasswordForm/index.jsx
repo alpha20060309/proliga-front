@@ -45,7 +45,7 @@ const ResetPasswordForm = () => {
         return toast.error(t(res.error))
       }
       if (res?.success) {
-        toast.success('The pass has changed')
+        toast.success(t("Parolingiz muvaffaqiyatli o'zgartirildi"))
         router.push('/auth')
       }
     })

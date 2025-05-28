@@ -13,11 +13,11 @@ import { useTranslation } from 'react-i18next'
 const GlobalModifier = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const { theme } = useTheme()
+  const { resolvedTheme } = useTheme()
   const { darkTheme, lightTheme } = useSelector((store) => store.systemConfig)
 
   const currentGlobalConfig =
-    theme === 'dark' ? darkTheme.global : lightTheme.global
+    resolvedTheme === 'dark' ? darkTheme.global : lightTheme.global
 
   const handleChange = (cssVarName, value, configKey) => {
     const numericValue = parseFloat(value)
@@ -26,7 +26,7 @@ const GlobalModifier = () => {
     const updatedValue = numericValue // Store as number in Redux
     const cssValue = `${numericValue}rem` // Apply with 'rem' unit to CSS
 
-    if (theme === 'dark') {
+    if (resolvedTheme === 'dark') {
       dispatch(
         setDarkTheme({
           type: 'global',
@@ -41,9 +41,6 @@ const GlobalModifier = () => {
         })
       )
     }
-    // Important: Ensure the CSS variable name matches what your global styles expect.
-    // E.g., if your CSS uses --border-radius, then cssVarName should be 'border-radius'.
-    // The prompt used '--radius', '--spacing', '--letter-spacing'.
     document.documentElement.style.setProperty(`--${cssVarName}`, cssValue)
   }
 
@@ -61,7 +58,20 @@ const GlobalModifier = () => {
       currentGlobalConfig?.[configKey] !== undefined
         ? currentGlobalConfig[configKey]
         : (min + max) / 2
-    const displayValue = `${parseFloat(value).toFixed(configKey === 'letterSpacing' ? 3 : 2)}${unit}`
+
+    const getDisplayValue = () => {
+      if (configKey === 'spacing') {
+        return `${Math.round(value * 400)}%`
+      }
+      if (configKey === 'letterSpacing') {
+        return `${(value * 1000).toFixed(1)}%`
+      }
+      if (configKey === 'borderRadius') {
+        return `${Math.round(value * 100)}%`
+      }
+      return `${parseFloat(value).toFixed(configKey === 'letterSpacing' ? 3 : 2)}${unit}`
+    }
+
     const rangeBaseClass =
       'w-full h-2 bg-[#4A4A4A] rounded-lg appearance-none cursor-pointer range-sm accent-[#ffdd00]'
     const inputBaseClass =
@@ -77,7 +87,7 @@ const GlobalModifier = () => {
             {t(labelKey)}
           </label>
           <span className="rounded bg-[#353535] p-1 px-2 text-center font-mono text-xs text-[#A0A0A0] select-all">
-            {displayValue}
+            {getDisplayValue()}
           </span>
         </div>
         <div className="flex items-center space-x-2">
@@ -117,8 +127,8 @@ const GlobalModifier = () => {
       labelKey: 'Spacing Size',
       configKey: 'spacing',
       cssVarName: 'spacing',
-      min: 0.1,
-      max: 0.5,
+      min: 0.2,
+      max: 0.3,
       step: 0.01,
     },
     {

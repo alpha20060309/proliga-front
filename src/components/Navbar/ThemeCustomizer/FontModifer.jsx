@@ -11,13 +11,13 @@ import { useTranslation } from 'react-i18next'
 const FontModifier = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const { theme } = useTheme()
+  const { resolvedTheme } = useTheme()
   const { darkTheme, lightTheme } = useSelector((store) => store.systemConfig)
 
-  const currentFont = theme === 'dark' ? darkTheme.font : lightTheme.font
+  const currentFont = resolvedTheme === 'dark' ? darkTheme.font : lightTheme.font
 
   const handleFontChange = (font) => {
-    if (theme === 'dark') {
+    if (resolvedTheme === 'dark') {
       dispatch(setDarkTheme({ type: 'font', data: font }))
     } else {
       dispatch(setLightTheme({ type: 'font', data: font }))
