@@ -45,7 +45,7 @@ export const DEFAULT_LIGHT_THEME = {
   },
   font: 'DM Sans',
   global: {
-    radius: 0.5,
+    borderRadius: 0.5,
     spacing: 0.25,
     letterSpacing: 0,
   },
@@ -97,7 +97,7 @@ export const DEFAULT_DARK_THEME = {
   },
   font: 'DM Sans',
   global: {
-    radius: 0.5,
+    borderRadius: 0.5,
     spacing: 0.25,
     letterSpacing: 0,
   },

@@ -32,8 +32,11 @@ import { selectPackages } from 'app/lib/features/package/package.selector'
 import { selectBanners } from 'app/lib/features/banner/banner.selector'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { use } from 'react'
+import { useTransitionRouter } from 'next-view-transitions'
+import { toast } from 'sonner'
 
 const Play = (props) => {
+  const router = useTransitionRouter()
   const { league, id } = use(props.params)
   const dispatch = useDispatch()
   const userTable = useSelector(selectUserTable)
@@ -62,6 +65,15 @@ const Play = (props) => {
     () => [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000],
     []
   )
+
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem('isAuthenticated')
+
+    if (!isAuthenticated) {
+      router.push('/')
+      toast.error('Please login first')
+    }
+  }, [router])
 
   const isLoading = useMemo(
     () =>
