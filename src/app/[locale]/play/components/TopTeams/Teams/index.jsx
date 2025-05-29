@@ -44,10 +44,10 @@ const TeamPlace = ({ team, index }) => {
           {team?.team_point ?? '00'}
         </span>
       </div>
-      <h4 className="text-accent-foreground line-clamp-2 max-w-28 text-sm font-bold break-words">
+      <h4 className="text-card-foreground line-clamp-2 max-w-28 text-sm font-bold break-words">
         {team?.team_name ?? 'team'}
       </h4>
-      <p className="text-accent-foreground line-clamp-2 max-w-28 text-sm font-medium break-words">
+      <p className="text-card-foreground line-clamp-2 max-w-28 text-sm font-medium break-words">
         {team?.user_name}
       </p>
       <span className="bg-primary text-primary-foreground absolute right-0 bottom-0 flex size-6 items-center justify-center rounded-tl-lg rounded-br-lg text-sm font-extrabold">
