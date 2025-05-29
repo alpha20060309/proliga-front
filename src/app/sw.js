@@ -1,12 +1,14 @@
 import { Serwist, NetworkOnly, BackgroundSyncQueue } from 'serwist'
-import { defaultCache } from '@serwist/next/worker' // Temporarily comment out if not essential for basic install test
+import { defaultCache } from '@serwist/next/worker'
+
+const locale = 'uz'
 
 const serwist = new Serwist({
   precacheEntries: self.__SW_MANIFEST,
   precacheOptions: {
     cleanupOutdatedCaches: true,
   },
-  runtimeCaching: [ // Temporarily comment out
+  runtimeCaching: [
     ...defaultCache,
     {
       handler: new NetworkOnly(),
@@ -21,12 +23,12 @@ const serwist = new Serwist({
   ],
   skipWaiting: true,
   clientsClaim: true,
-  // offlineAnalyticsConfig: true, // Temporarily comment out for production troubleshooting
-  importScripts: ['/firebase-messaging-sw.js'], // Temporarily comment out
-  fallbacks: { // Temporarily comment out
+  offlineAnalyticsConfig: true,
+  importScripts: ['/firebase-messaging-sw.js'],
+  fallbacks: {
     entries: [
       {
-        url: '/offline',
+        url: `/${locale}/offline`,
         matcher({ request }) {
           return request.destination === 'document'
         },
@@ -35,18 +37,19 @@ const serwist = new Serwist({
   },
 })
 
-const queue = new BackgroundSyncQueue('sync-queue') // Temporarily comment out
-const backgroundSync = async (event) => { // Temporarily comment out
+const queue = new BackgroundSyncQueue('sync-queue')
+const backgroundSync = async (event) => {
   try {
     const response = await fetch(event.request.clone())
     return response
+    // eslint-disable-next-line no-unused-vars
   } catch (error) {
     await queue.pushRequest({ request: event.request })
     return Response.error()
   }
 }
 
-self.addEventListener('fetch', (event) => { // Temporarily comment out
+self.addEventListener('fetch', (event) => {
   if (event?.request?.method === 'POST' || event?.request?.method === 'PATCH') {
     event.respondWith(backgroundSync(event))
   }

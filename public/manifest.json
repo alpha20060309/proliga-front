@@ -1,11 +1,12 @@
 {
-  "name": "Proliga - Платформа Фэнтези-Футбола",
+  "name": "Proliga - Fantaziya Futbol Platformasi",
   "short_name": "Proliga",
-  "description": "Фэнтези-футбольная лига Узбекистана — виртуальная футбольная игра, основанная на настоящих игроках футбольных лиг",
+  "description": "O'zbekiston Fantaziya Futbol Ligasi - haqiqiy futbol ligalari o'yinchilariga asoslangan virtual futbol o'yini",
   "start_url": "/",
   "launch_handler": {
     "platform": "windows",
-    "url": "/"
+    "url": "/",
+    "client_mode": ["navigate-existing", "auto"]
   },
   "dir": "ltr",
   "display_override": ["window-controls-overlay"],

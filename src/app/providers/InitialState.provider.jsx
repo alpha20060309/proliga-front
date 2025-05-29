@@ -12,7 +12,6 @@ import {
   fetchBroadcastNotifications,
   fetchPersonalNotifications,
 } from 'app/lib/features/systemNotification/systemNotification.thunk'
-// import registerSW from 'app/lib/registerSw'
 import { fetchThemes } from 'app/lib/features/systemConfig/systemConfig.thunk'
 // import { useGenerateLanguage } from 'app/hooks/system/useGenerateLanguage/useGenerateLanguage'
 import dynamic from 'next/dynamic'
@@ -43,10 +42,9 @@ const InitialStateProvider = ({ children }) => {
     }
   }, [dispatch, user?.id, user?.phone, user?.phone_verified])
 
-  // useEffect(() => {
-  //   console.log('InitialStateProvider: Attempting to call registerSW() for URL:', window.location.href);
-  //   registerSW()
-  // }, [])
+  useEffect(() => {
+    registerSW()
+  }, [])
 
   // const { generate } = useGenerateLanguage()
 

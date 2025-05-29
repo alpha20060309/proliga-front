@@ -39,11 +39,11 @@ export default function OfflineClient() {
   return (
     <div className="mx-auto w-full max-w-md space-y-8 text-center">
       <div className="flex justify-center">
-        <div className={cn('rounded-full bg-yellow-950 p-6')}>
+        <div className={cn('bg-card rounded-full p-6')}>
           <WifiOff
             className={cn(
               'h-16 w-16',
-              isOnline ? 'text-gray-400' : 'text-yellow-500'
+              isOnline ? 'text-muted-foreground' : 'text-accent'
             )}
           />
         </div>
@@ -58,8 +58,8 @@ export default function OfflineClient() {
         <Button
           onClick={attemptReconnect}
           className={cn(
-            'rounded-lg bg-yellow-500 px-6 py-2 font-medium text-gray-900',
-            'capitalize transition-all hover:bg-yellow-600'
+            'bg-accent text-accent-foreground rounded-lg px-6 py-2 font-medium',
+            'hover:bg-accent/80 capitalize transition-all'
           )}
         >
           <RefreshCw className="mr-2 h-4 w-4" />
