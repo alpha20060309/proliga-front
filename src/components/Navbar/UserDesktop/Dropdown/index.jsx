@@ -28,7 +28,7 @@ const Dropdown = () => {
           </NavLink>
           <div
             onClick={async () => await logOut()}
-            className="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground bg-destructive/50 text-sidebar-foreground group flex h-full w-full cursor-pointer gap-2 rounded-sm p-1 transition-colors"
+            className="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground bg-destructive/50 text-sidebar-foreground group flex h-full w-full cursor-pointer gap-2 rounded  px-1 py-1.5 transition-colors"
           >
             <LogOut className="h-6 w-6" />
             <p>{t('Tizimdan chiqish')}</p>
