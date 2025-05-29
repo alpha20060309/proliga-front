@@ -157,7 +157,7 @@ function StatisticsTable() {
         </table>
         <TanStackPagination
           table={table}
-          active="bg-muted text-accent-foreground"
+          active="bg-muted text-muted-foreground"
           className={'mt-auto'}
         />
       </div>

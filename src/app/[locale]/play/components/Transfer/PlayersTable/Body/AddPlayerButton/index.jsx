@@ -63,7 +63,7 @@ const AddPlayerButton = ({
           className={cn(
             'bg-background size-5 rounded border p-1 shadow-sm select-none sm:size-6 dark:bg-transparent',
             condition
-              ? 'bg-primary text-foreground border-foreground dark:text-primary dark:border-primary'
+              ? 'bg-primary text-primary-foreground border-foreground dark:text-primary dark:border-primary'
               : 'text-muted-foreground border-muted-foreground'
           )}
         />

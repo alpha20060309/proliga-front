@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
 
 const PositionsFilter = ({ column, columnFilterValue }) => {
-  const active = 'bg-primary text-accent-foreground font-bold'
+  const active = 'bg-primary text-primary-foreground font-bold'
   const passive = 'bg-transparent text-muted-foreground font-base'
 
   const { t } = useTranslation()

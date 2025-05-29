@@ -5,7 +5,7 @@ const RulesSliderTitle = () => {
 
   return (
     <div className="bg-primary mb-4 w-3/4 max-w-[24rem] -skew-x-12 self-start rounded-xs md:mb-6 md:max-w-120">
-      <h3 className="carousel-header text-accent-foreground text-center font-bold capitalize">
+      <h3 className="carousel-header text-primary-foreground text-center font-bold capitalize">
         {t('Umumiy qoidalar')}
       </h3>
     </div>

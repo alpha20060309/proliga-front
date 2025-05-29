@@ -31,7 +31,7 @@ const RankingTeams = () => {
 
 const TeamPlace = ({ team, index }) => {
   return (
-    <div className="bg-white relative min-h-32 rounded-sm p-2">
+    <div className="bg-card relative min-h-32 rounded-sm p-2">
       <div className="flex items-center justify-between">
         <Image
           src={`/icons/${index + 1}-place.svg`}
@@ -40,7 +40,7 @@ const TeamPlace = ({ team, index }) => {
           height={24}
           className="size-6 md:size-8"
         />
-        <span className="bg-primary text-accent-foreground flex h-6 w-12 items-center justify-center rounded-full text-xs font-bold sm:text-sm">
+        <span className="bg-primary text-primary-foreground flex h-6 w-12 items-center justify-center rounded-full text-xs font-bold sm:text-sm">
           {team?.team_point ?? '00'}
         </span>
       </div>
@@ -50,7 +50,7 @@ const TeamPlace = ({ team, index }) => {
       <p className="text-accent-foreground line-clamp-2 max-w-28 text-sm font-medium break-words">
         {team?.user_name}
       </p>
-      <span className="bg-primary text-accent-foreground absolute right-0 bottom-0 flex size-6 items-center justify-center rounded-tl-lg rounded-br-lg text-sm font-extrabold">
+      <span className="bg-primary text-primary-foreground absolute right-0 bottom-0 flex size-6 items-center justify-center rounded-tl-lg rounded-br-lg text-sm font-extrabold">
         {index + 1}
       </span>
     </div>

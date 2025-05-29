@@ -41,7 +41,7 @@ export default function PhoneVerification({ phone, otp, setPhone, setOtp }) {
           type="button"
           variant="default"
           size="sm"
-          className="bg-card border-border text-foreground hover:bg-accent flex h-10 items-center gap-2 border"
+          className="bg-card border-border text-foreground hover:bg-accent hover:text-accent-foreground flex h-10 items-center gap-2 border"
         >
           <Send className="size-4" />
           {t('Send')}

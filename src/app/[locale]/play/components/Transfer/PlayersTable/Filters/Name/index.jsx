@@ -13,7 +13,7 @@ const PlayerNameFilter = ({ column, columnFilterValue }) => {
         type="text"
         value={columnFilterValue ?? ''}
       />
-      <Search className="text-muted-foreground xs:block absolute top-1 right-2 hidden size-5" />
+      <Search className="text-muted-foreground xs:block absolute top-[5px] right-[5px] hidden size-5" />
     </div>
   )
 }

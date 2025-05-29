@@ -127,7 +127,7 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
           </div>
           <Button
             type="submit"
-            className="border-border bg-primary/80 text-foreground hover:bg-primary hover:text-accent-foreground h-12 rounded-sm border font-bold transition-all"
+            className="border-border bg-primary/80 text-primary-foreground hover:bg-primary h-12 rounded-sm border font-bold transition-all"
           >
             {t("To'lash")}
           </Button>
