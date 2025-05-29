@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
@@ -8,7 +7,6 @@ import Image from 'next/image'
 import { Link } from 'next-view-transitions'
 import Gutter from '../Gutter'
 import PlayLinks from './Links'
-import MobileSidebar from './UserMobile/Sidebar'
 import NavbarUserDesktop from './UserDesktop'
 import ChangeLanguageDropdown from './Language'
 import Notification from './Notification'
@@ -25,7 +23,6 @@ const ThemeSwitcher = dynamic(() => import('./ThemeSwitch'), {
 
 const Navbar = () => {
   const path = usePathname()
-  const [isModalOpen, setModalOpen] = useState(false)
   const { t } = useTranslation()
   const NEXT_PUBLIC_TEST_NAV_SLIDER = Boolean(
     // eslint-disable-next-line no-undef
@@ -72,14 +69,12 @@ const Navbar = () => {
               <Notification />
               <ThemeSwitcher />
               <ThemeCustomizer />
-              {/* <NavbarUserMobile handleToggleModal={() => setModalOpen(true)} /> */}
               <NavbarUserDesktop />
             </div>
           </div>
         </Gutter>
       </nav>
       <BottomNavigation />
-      <MobileSidebar isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
     </>
   )
 }
