@@ -56,7 +56,6 @@ const NavLink = ({
   )
 }
 
-// New NavButton component (for button-only actions, if needed elsewhere)
 const NavButton = ({
   onClick,
   icon,
@@ -113,7 +112,7 @@ function BottomNavigation() {
   const getTabStyles = (tab) => {
     if (!path.includes('play')) {
       if (!lastVisitedTeam) {
-        return 'text-sidebar-foreground opacity-50'
+        return ''
       }
       return 'text-sidebar-foreground hover:text-sidebar-accent-foreground'
     }
@@ -175,7 +174,12 @@ function BottomNavigation() {
   ]
 
   return (
-    <nav className="border-sidebar-border bg-sidebar/50 text-sidebar-foreground fixed inset-x-0 bottom-0 z-50 mx-2 mb-2 flex h-16 items-center justify-between gap-0 rounded border-t shadow-lg backdrop-blur lg:hidden">
+    <nav
+      className={cn(
+        'border-sidebar-border bg-sidebar/50 text-sidebar-foreground fixed inset-x-0 bottom-0 z-50 mx-2 mb-2 flex h-16 items-center justify-between gap-0 rounded border-t shadow-lg backdrop-blur lg:hidden',
+        !lastVisitedTeam && 'hidden'
+      )}
+    >
       {navItems.map((item) =>
         isOnPlayRoute ? (
           <NavButton
