@@ -5,7 +5,7 @@
   "start_url": "/",
   "launch_handler": {
     "platform": "windows",
-    "url": "/uz/"
+    "url": "/"
   },
   "dir": "ltr",
   "display_override": ["window-controls-overlay"],
