@@ -1,5 +1,5 @@
-import UZ from '../../../static/locales/uz.json'
-import RU from '../../../static/locales/ru.json'
+import UZ from '../../../public/locales/uz.json'
+import RU from '../../../public/locales/ru.json'
 
 const i18nConfig = {
   locales: ['uz', 'ru'],
