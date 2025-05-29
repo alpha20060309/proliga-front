@@ -68,7 +68,7 @@ const SwapPlayerButton = ({ cell, handleSwapPlayer, teamBalance }) => {
           className={cn(
             'size-5 rounded border p-1 shadow-sm select-none sm:size-6',
             condition
-              ? 'bg-primary text-foreground border-foreground dark:text-primary dark:bg-background dark:border-primary'
+              ? 'bg-primary text-primary-foreground border-foreground dark:text-primary dark:bg-background dark:border-primary'
               : 'text-muted-foreground border-muted-foreground'
           )}
         />

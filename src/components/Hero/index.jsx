@@ -19,7 +19,7 @@ const Hero = async ({ params }) => {
           className="animate-in fade-in object-cover duration-500"
           quality={100}
         />
-        <div className="animate-in fade-in bg-accent-foreground/30 dark:bg-accent-foreground/60 absolute inset-0 duration-500" />
+        <div className="animate-in fade-in bg-black/30 dark:bg-black/60 absolute inset-0 duration-500" />
       </div>
       <div className="text-secondary-foreground mx-1 flex h-svh flex-col items-center justify-center gap-6 md:h-screen">
         <div className="xs:gap-1 flex flex-col gap-0 text-center uppercase antialiased md:gap-2">
@@ -35,7 +35,7 @@ const Hero = async ({ params }) => {
           <HeroLink />
           <Link
             href="/championships"
-            className="border-primary text-primary hover:bg-primary/50 text-shadow hover:text-accent-foreground text-shadow-accent-foreground/50 animate-fade-in flex h-16 w-full max-w-64 items-center justify-center rounded-sm border-2 bg-transparent font-bold uppercase transition-all duration-500 hover:text-shadow-none dark:text-shadow-none"
+            className="border-primary text-primary hover:bg-primary/50 text-shadow hover:text-primary-foreground text-shadow-accent-foreground/50 animate-fade-in flex h-16 w-full max-w-64 items-center justify-center rounded-sm border-2 bg-transparent font-bold uppercase transition-all duration-500 hover:text-shadow-none dark:text-shadow-none"
             style={{ transform: 'skewX(-15deg)' }}
           >
             {t("O'yinga kirish")}

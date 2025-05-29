@@ -189,7 +189,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
             />
           </section>
           <Button
-            className="bg-accent hover:bg-primary hover:bg-opacity-100 xs:max-w-48 border-accent-foreground text-accent-foreground h-10 w-full rounded-sm border text-sm font-semibold transition-all"
+            className="bg-accent hover:bg-primary hover:bg-opacity-100 xs:max-w-48 border-accent-foreground text-accent-foreground hover:text-primary-foreground hover:border-primary-foreground h-10 w-full rounded-sm border text-sm font-semibold transition-all"
             type="submit"
             disabled={isLoading}
           >
