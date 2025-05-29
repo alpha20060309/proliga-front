@@ -55,11 +55,11 @@ const AuthProvider = ({ children }) => {
       return
     }
 
-    if (logoutInProgress || !session?.user?.id || !isAuthenticated) {
+    if (logoutInProgress || !user?.id || !isAuthenticated) {
       return
     }
 
-    if (!session.user?.phone || !session.user?.email) {
+    if (!user?.phone || !user?.email) {
       performLogout(
         t(
           'Your registration was not successfully completed, so we are logging you out for security reasons.'
@@ -68,7 +68,7 @@ const AuthProvider = ({ children }) => {
       return
     }
 
-    if (session?.user?.id && !session?.user?.phone_verified) {
+    if (user?.id && !user?.phone_verified) {
       performLogout(
         t('Phone not verified. Please complete the verification process.')
       )
@@ -76,7 +76,10 @@ const AuthProvider = ({ children }) => {
     }
   }, [
     path,
-    session?.user,
+    user?.id,
+    user?.phone,
+    user?.phone_verified,
+    user?.email,
     t,
     logOut,
     logoutInProgress,

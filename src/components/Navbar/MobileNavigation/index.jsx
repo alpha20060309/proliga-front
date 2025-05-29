@@ -1,7 +1,6 @@
 'use client'
 
 import { Home, Repeat, Users, Notebook, BarChart2 } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import { useDispatch, useSelector } from 'react-redux'
 import { usePathname } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
@@ -65,12 +64,11 @@ const NavButton = ({
   isActive,
 }) => {
   return (
-    <Button
-      variant="ghost"
+    <button
       onClick={onClick}
       disabled={isDisabled}
       className={cn(
-        'flex h-16 flex-1 flex-col items-center justify-center rounded-md p-1',
+        'flex h-16 flex-1 flex-col items-center justify-center rounded-md',
         className,
         {
           'bg-sidebar-accent/20': isActive,
@@ -81,7 +79,7 @@ const NavButton = ({
     >
       {icon}
       <span className="mt-1 text-xs">{label}</span>
-    </Button>
+    </button>
   )
 }
 
@@ -143,31 +141,31 @@ function BottomNavigation() {
   const navItems = [
     {
       id: TABS.GameProfile,
-      icon: <Home className="size-5" />,
+      icon: <Home className="size-4.5" />,
       labelKey: 'Profil',
       tab: TABS.GameProfile,
     },
     {
       id: TABS.Transfer,
-      icon: <Repeat className="size-5" />,
+      icon: <Repeat className="size-4.5" />,
       labelKey: 'Transferlar',
       tab: TABS.Transfer,
     },
     {
       id: TABS.Tournament,
-      icon: <Users className="size-5" />,
+      icon: <Users className="size-4.5" />,
       labelKey: 'Turnir',
       tab: TABS.Tournament,
     },
     {
       id: TABS.Journal,
-      icon: <Notebook className="size-5" />,
+      icon: <Notebook className="size-4.5" />,
       labelKey: 'Jurnal',
       tab: TABS.Journal,
     },
     {
       id: TABS.Statistics,
-      icon: <BarChart2 className="size-5" />,
+      icon: <BarChart2 className="size-4.5" />,
       labelKey: 'Statistika',
       tab: TABS.Statistics,
     },
@@ -176,7 +174,7 @@ function BottomNavigation() {
   return (
     <nav
       className={cn(
-        'border-sidebar-border bg-sidebar/50 text-sidebar-foreground fixed inset-x-0 bottom-0 z-50 mx-2 mb-2 flex h-16 items-center justify-between gap-0 rounded border-t shadow-lg backdrop-blur lg:hidden',
+        'border-sidebar-border bg-sidebar/50 text-sidebar-foreground fixed inset-x-0 bottom-0 z-50 mx-4 mb-4 flex h-16 items-center justify-between gap-0 rounded border-t shadow backdrop-blur lg:hidden',
         !lastVisitedTeam && 'hidden'
       )}
     >
