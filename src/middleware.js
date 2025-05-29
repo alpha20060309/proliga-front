@@ -52,22 +52,5 @@ export default auth((req) => {
 })
 
 export const config = {
-  matcher: [
-    // '/((?!api|_next/static|_next/image|favicon.ico|sw.js|firebase-messaging-sw.js|manifest.json|sitemap\\.xml|ru\\.json|uz\\.json|.*\\.(?:jpg|jpeg|gif|png|svg|ico|webp)).*)',
-    '/',
-    '/uz',
-    '/ru',
-  ],
+  matcher: '/((?!api|static|.*\\..*|_next).*)'
 }
-
-// import { i18nRouter } from 'next-i18n-router';
-// import i18nConfig from './app/lib/i18n.config';
-
-// export function middleware(request) {
-//   return i18nRouter(request, i18nConfig);
-// }
-
-// // applies this middleware only to files in the app directory
-// export const config = {
-//   matcher: '/((?!api|static|.*\\..*|_next).*)'
-// };
