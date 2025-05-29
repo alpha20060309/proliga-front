@@ -11,7 +11,7 @@
   "display_override": ["window-controls-overlay"],
   "display": "standalone",
   "background_color": "#082A5A",
-  "theme_color": "#fff400",
+  "theme_color": "transparent",
   "orientation": "portrait",
   "icons": [
     {
