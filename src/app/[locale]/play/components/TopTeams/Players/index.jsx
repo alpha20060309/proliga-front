@@ -54,10 +54,10 @@ const PlayerPlace = ({ player, index }) => {
           {player?.point ?? 0}
         </span>
       </div>
-      <h4 className="text-accent-foreground line-clamp-2 max-w-28 text-sm font-bold break-words">
+      <h4 className="text-card-foreground line-clamp-2 max-w-28 text-sm font-bold break-words">
         {getCorrectName({ lang, uz: player?.name, ru: player?.name_ru })}
       </h4>
-      <p className="text-accent-foreground line-clamp-2 max-w-28 text-sm font-medium break-words">
+      <p className="text-card-foreground line-clamp-2 max-w-28 text-sm font-medium break-words">
         {getCorrectName({
           lang,
           uz: player?.club?.name,
