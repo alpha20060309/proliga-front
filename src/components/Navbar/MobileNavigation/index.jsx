@@ -1,7 +1,6 @@
 'use client'
 
 import { Home, Repeat, Users, Notebook, BarChart2 } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import { useDispatch, useSelector } from 'react-redux'
 import { usePathname } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
@@ -32,7 +31,7 @@ const NavLink = ({
         className,
         {
           'pointer-events-none': isDisabled,
-          'group-hover:bg-accent group-hover:text-accent-foreground':
+          'group-hover:bg-sidebar-accent/50 group-hover:text-sidebar-accent-foreground':
             !isDisabled,
         }
       )}
@@ -45,12 +44,12 @@ const NavLink = ({
           'flex h-16 w-full flex-col items-center justify-center rounded-md p-1',
           className,
           {
-            'bg-accent/10': isActive && !isDisabled,
+            'bg-sidebar-accent/50': isActive && !isDisabled,
           }
         )}
       >
         {icon}
-        <span className="mt-1 text-xs">{label}</span>
+        <span className="mt-0.5 text-xs">{label}</span>
       </div>
     </Link>
   )
@@ -65,23 +64,22 @@ const NavButton = ({
   isActive,
 }) => {
   return (
-    <Button
-      variant="ghost"
+    <button
       onClick={onClick}
       disabled={isDisabled}
       className={cn(
-        'flex h-16 flex-1 flex-col items-center justify-center rounded-md p-1',
+        'flex h-14 flex-1 flex-col items-center justify-center rounded-md',
         className,
         {
-          'bg-sidebar-accent/20': isActive,
+          'bg-sidebar-accent/50 text-sidebar-accent-foreground': isActive,
         }
       )}
       aria-label={label}
       tabIndex={isDisabled ? -1 : 0}
     >
       {icon}
-      <span className="mt-1 text-xs">{label}</span>
-    </Button>
+      <span className="mt-0.5 text-xs">{label}</span>
+    </button>
   )
 }
 
@@ -111,10 +109,7 @@ function BottomNavigation() {
 
   const getTabStyles = (tab) => {
     if (!path.includes('play')) {
-      if (!lastVisitedTeam) {
-        return ''
-      }
-      return 'text-sidebar-foreground hover:text-sidebar-accent-foreground'
+      return 'text-sidebar-foreground  hover:text-sidebar-accent-foreground'
     }
 
     if (!currentTeam?.is_team_created) {
@@ -143,31 +138,31 @@ function BottomNavigation() {
   const navItems = [
     {
       id: TABS.GameProfile,
-      icon: <Home className="size-5" />,
+      icon: <Home className="size-4.5" />,
       labelKey: 'Profil',
       tab: TABS.GameProfile,
     },
     {
       id: TABS.Transfer,
-      icon: <Repeat className="size-5" />,
+      icon: <Repeat className="size-4.5" />,
       labelKey: 'Transferlar',
       tab: TABS.Transfer,
     },
     {
       id: TABS.Tournament,
-      icon: <Users className="size-5" />,
+      icon: <Users className="size-4.5" />,
       labelKey: 'Turnir',
       tab: TABS.Tournament,
     },
     {
       id: TABS.Journal,
-      icon: <Notebook className="size-5" />,
+      icon: <Notebook className="size-4.5" />,
       labelKey: 'Jurnal',
       tab: TABS.Journal,
     },
     {
       id: TABS.Statistics,
-      icon: <BarChart2 className="size-5" />,
+      icon: <BarChart2 className="size-4.5" />,
       labelKey: 'Statistika',
       tab: TABS.Statistics,
     },
@@ -176,7 +171,7 @@ function BottomNavigation() {
   return (
     <nav
       className={cn(
-        'border-sidebar-border bg-sidebar/50 text-sidebar-foreground fixed inset-x-0 bottom-0 z-50 mx-2 mb-2 flex h-16 items-center justify-between gap-0 rounded border-t shadow-lg backdrop-blur lg:hidden',
+        'border-sidebar-border bg-sidebar/50 text-sidebar-foreground fixed inset-x-0 bottom-0 z-50 mx-4 mb-4 flex h-14 items-center justify-between gap-0 rounded border-t shadow backdrop-blur lg:hidden',
         !lastVisitedTeam && 'hidden'
       )}
     >
