@@ -179,7 +179,7 @@ const ThemeCustomizer = () => {
           ) : (
             <Save className="size-4 transition-transform group-hover:scale-110" />
           )}
-          {isLoading ? t('Saving...') : t('Save Changes')}
+          {t('Save Changes')}
         </button>
         {user?.id && user?.is_admin && (
           <div className="my-4 flex flex-col gap-3 rounded-md border border-[#4A4A4A] bg-[#333333] p-4">

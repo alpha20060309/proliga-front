@@ -17,6 +17,9 @@ const Toaster = ({ ...props }) => {
         '--normal-text': 'var(--popover-foreground)',
         '--normal-border': 'var(--border)',
       }}
+      dir="ltr"
+      richColors
+      closeButton
       {...props}
     />
   )
