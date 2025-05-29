@@ -129,6 +129,7 @@ const LoginForm = ({ setShouldRedirect }) => {
               className="text-foreground border-foreground/20 placeholder:text-muted h-10 rounded border"
               value={phone}
               onChange={setPhone}
+              autoComplete="tel"
             />
           </div>
           <div className="relative flex flex-col gap-1">
@@ -144,6 +145,7 @@ const LoginForm = ({ setShouldRedirect }) => {
                 className="bg-input/80 text-foreground border-foreground/20 rounded pl-9"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
               />
               <Lock className="text-muted-foreground absolute top-1/2 left-2 size-5 -translate-y-1/2" />
               <Button

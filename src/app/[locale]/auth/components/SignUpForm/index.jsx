@@ -138,6 +138,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
                 type="email"
                 name="email"
                 id="email"
+                autoComplete="email"
                 className="bg-input/80 text-foreground border-foreground/20 rounded pl-9"
                 placeholder="example@xyz.com"
                 value={email}
@@ -154,6 +155,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
               <Input
                 type={showPassword ? 'text' : 'password'}
                 name="confirmPassword"
+                autoComplete="new-password"
                 id="confirmPassword"
                 placeholder="********"
                 className="bg-input/80 text-foreground border-foreground/20 rounded pl-9"
@@ -186,6 +188,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
                 name="password"
                 id="password"
                 placeholder="********"
+                autoComplete="new-password"
                 className="bg-input/80 text-foreground border-foreground/20 rounded pl-9"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}

@@ -1,12 +1,12 @@
-import { Serwist, BackgroundSyncQueue, NetworkOnly } from 'serwist'
-import { defaultCache } from '@serwist/next/worker'
+import { Serwist, NetworkOnly, BackgroundSyncQueue } from 'serwist'
+import { defaultCache } from '@serwist/next/worker' // Temporarily comment out if not essential for basic install test
 
 const serwist = new Serwist({
   precacheEntries: self.__SW_MANIFEST,
   precacheOptions: {
     cleanupOutdatedCaches: true,
   },
-  runtimeCaching: [
+  runtimeCaching: [ // Temporarily comment out
     ...defaultCache,
     {
       handler: new NetworkOnly(),
@@ -21,10 +21,9 @@ const serwist = new Serwist({
   ],
   skipWaiting: true,
   clientsClaim: true,
-  disableDevLogs: true,
-  offlineAnalyticsConfig: true,
-  importScripts: ['/firebase-messaging-sw.js'],
-  fallbacks: {
+  // offlineAnalyticsConfig: true, // Temporarily comment out for production troubleshooting
+  importScripts: ['/firebase-messaging-sw.js'], // Temporarily comment out
+  fallbacks: { // Temporarily comment out
     entries: [
       {
         url: '/offline',
@@ -36,21 +35,19 @@ const serwist = new Serwist({
   },
 })
 
-const queue = new BackgroundSyncQueue('sync-queue')
-
-const backgroundSync = async (event) => {
+const queue = new BackgroundSyncQueue('sync-queue') // Temporarily comment out
+const backgroundSync = async (event) => { // Temporarily comment out
   try {
     const response = await fetch(event.request.clone())
     return response
-    // eslint-disable-next-line no-unused-vars
   } catch (error) {
     await queue.pushRequest({ request: event.request })
     return Response.error()
   }
 }
 
-self.addEventListener('fetch', (event) => {
-  if (event.request.method === 'POST' || event.request.method === 'PATCH') {
+self.addEventListener('fetch', (event) => { // Temporarily comment out
+  if (event?.request?.method === 'POST' || event?.request?.method === 'PATCH') {
     event.respondWith(backgroundSync(event))
   }
 })

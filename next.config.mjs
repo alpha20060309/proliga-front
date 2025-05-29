@@ -1,16 +1,13 @@
 import withSerwistInit from "@serwist/next";
 
 const withSerwist = withSerwistInit({
-  swSrc: "/src/sw.js",
+  swSrc: "src/app/sw.js",
   swDest: "public/sw.js",
   scope: "/",
-  // disable: process.env.NODE_ENV === 'development',
-  include: [
-    '/',
-    '/manifest.json',
-    '/favicon.ico',
-    '/offline',
-    '/**/*.{js,css,html,png,jpg,jpeg,gif,svg,ico,woff,woff2,ttf,eot}',
+  register: true,
+  exclude: [
+    "/ru.json",
+    "/uz.json",
   ],
 });
 
