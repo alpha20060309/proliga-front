@@ -1,6 +1,7 @@
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -29,6 +30,7 @@ import { setSelectedTheme } from 'app/lib/features/systemConfig/systemConfig.sli
 import { useState } from 'react'
 import { fetchThemes } from 'app/lib/features/systemConfig/systemConfig.thunk'
 import { useTranslation } from 'react-i18next'
+
 const ThemeCustomizer = () => {
   const dispatch = useDispatch()
   const [presetName, setPresetName] = useState('')
@@ -94,15 +96,16 @@ const ThemeCustomizer = () => {
       </SheetTrigger>
       <SheetContent
         className={
-          'xs:min-w-96 min-w-full overflow-y-auto border-l border-[#4A4A4A]'
+          'xs:min-w-md min-w-full gap-0 overflow-y-auto border-l border-[#4A4A4A] bg-transparent'
         }
         style={{
-          backgroundColor: '#232323',
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          backdropFilter: 'blur(10px)',
           fontFamily: 'Inter, sans-serif',
           fontWeight: '500',
           letterSpacing: '0.025em',
           borderRadius: '0px',
-          padding: '16px',
+          padding: '1rem 1.5rem',
           color: '#E0E0E0',
           '--spacing': '0.25rem',
           '--letter-spacing': '0.025em',
@@ -114,22 +117,14 @@ const ThemeCustomizer = () => {
           '--shadow-offset-y': '0px',
         }}
       >
-        <SheetHeader>
+        <SheetHeader className={'px-0 py-4'}>
           <SheetTitle className="text-[#E0E0E0]">
             {t('Theme Customizer')}
           </SheetTitle>
         </SheetHeader>
-        <button
-          onClick={handleReset}
-          className="group mb-4 flex w-full items-center justify-center gap-2 rounded-md bg-[#555555] px-4 py-2.5 text-sm font-medium text-[#E0E0E0] shadow-sm transition-colors hover:bg-[#656565] focus:ring-2 focus:ring-[#757575] focus:ring-offset-2 focus:ring-offset-[#232323] focus:outline-none disabled:pointer-events-none disabled:opacity-50"
-          aria-label="Reset theme to default"
-        >
-          <RefreshCw className="size-4 transition-transform group-hover:rotate-180" />
-          {t('Reset to Default')}
-        </button>
         <SelectTheme />
         <Tabs defaultValue="color" className="mt-4">
-          <TabsList className="w-full rounded-[6px] bg-[#333333] p-1">
+          <TabsList className="w-full rounded-[6px] bg-[#333333] p-1 dark:bg-[#212121]">
             <TabsTrigger
               value="color"
               className="w-full rounded-[4px] px-3 py-1.5 text-sm font-medium text-[#A0A0A0] focus-visible:bg-[#fffbe6] focus-visible:text-[#1A1A1A] focus-visible:ring-2 focus-visible:ring-[#757575] focus-visible:ring-offset-2 focus-visible:ring-offset-[#333333] data-[state=active]:bg-[#4A4A4A] data-[state=active]:text-[#FFFFFF] data-[state=active]:shadow-sm"
@@ -168,19 +163,29 @@ const ThemeCustomizer = () => {
             <ShadowModifier />
           </TabsContent>
         </Tabs>
-        <button
-          disabled={isLoading}
-          onClick={handleSave}
-          className="group mt-6 flex w-full items-center justify-center gap-2 rounded-md bg-[#ffdd00] px-4 py-2.5 text-sm font-medium text-[#1A1A1A] shadow-sm transition-colors hover:bg-[#ebcb00] focus:ring-2 focus:ring-[#ffdd00] focus:ring-offset-2 focus:ring-offset-[#232323] focus:outline-none disabled:pointer-events-none disabled:opacity-50"
-          aria-label="Save theme changes"
-        >
-          {isLoading ? (
-            <Loader2 className="size-4 animate-spin" />
-          ) : (
-            <Save className="size-4 transition-transform group-hover:scale-110" />
-          )}
-          {t('Save Changes')}
-        </button>
+        <section className="mt-2 flex items-center justify-center gap-2">
+          <button
+            disabled={isLoading}
+            onClick={handleSave}
+            className="group flex w-1/2 items-center justify-center gap-2 rounded-md bg-[#ffdd00] px-4 py-2.5 text-sm font-medium text-[#1A1A1A] shadow-sm transition-colors hover:bg-[#ebcb00] focus:ring-2 focus:ring-[#ffdd00] focus:ring-offset-2 focus:ring-offset-[#232323] focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+            aria-label="Save theme changes"
+          >
+            {isLoading ? (
+              <Loader2 className="size-4 animate-spin" />
+            ) : (
+              <Save className="size-4 transition-transform group-hover:scale-110" />
+            )}
+            {t('Saqlash')}
+          </button>
+          <button
+            onClick={handleReset}
+            className="group flex w-1/2 items-center justify-center gap-2 rounded-md bg-[#555555] px-4 py-2.5 text-sm font-medium text-[#E0E0E0] shadow-sm transition-colors hover:bg-[#656565] focus:ring-2 focus:ring-[#757575] focus:ring-offset-2 focus:ring-offset-[#232323] focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+            aria-label="Reset theme to default"
+          >
+            <RefreshCw className="size-4 transition-transform group-hover:rotate-180" />
+            {t('Tozalash')}
+          </button>
+        </section>
         {user?.id && user?.is_admin && (
           <div className="my-4 flex flex-col gap-3 rounded-md border border-[#4A4A4A] bg-[#333333] p-4">
             <div className="flex items-center gap-2">
@@ -206,6 +211,9 @@ const ThemeCustomizer = () => {
             />
           </div>
         )}
+        <SheetDescription className={'sr-only'}>
+          {t('Theme Customizer')}
+        </SheetDescription>
       </SheetContent>
     </Sheet>
   )

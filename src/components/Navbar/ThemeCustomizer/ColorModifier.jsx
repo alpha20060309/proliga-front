@@ -54,7 +54,7 @@ const ColorModifier = () => {
   const renderColorPicker = (key) => (
     <div
       key={key}
-      className="mb-3 flex items-center justify-between space-x-2 rounded-md bg-[#2D2D2D] p-2.5"
+      className="flex items-center justify-between space-x-2 rounded-md bg-[#2D2D2D] p-2.5"
     >
       <label htmlFor={key} className="flex-1 text-xs text-[#B0B0B0] capitalize">
         {t(key.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()))}

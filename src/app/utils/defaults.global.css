@@ -1,5 +1,4 @@
 .html-page {
-  font-family: var(--font-sans);
   color: var(--foreground);
   background-color: var(--card);
   line-height: 1.6;

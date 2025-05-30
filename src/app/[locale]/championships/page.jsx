@@ -9,7 +9,6 @@ const ChampionshipsTitle = dynamic(() => import('./components/Title'), {
   loading: () => <Skeleton className="mb-6 h-7 w-48" />,
 })
 import dynamic from 'next/dynamic'
-import { cn } from '@/lib/utils'
 import { useEffect, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchUserTeams } from 'app/lib/features/team/team.thunk'
@@ -61,12 +60,7 @@ const Championships = () => {
   )
 
   return (
-    <section
-      className={cn(
-        'border-border mt-8 mb-4 min-h-120 w-full rounded-lg border',
-        'bg-card/10 p-4 backdrop-blur-sm sm:p-5 md:mt-6 md:min-h-48'
-      )}
-    >
+    <>
       {isLoading ? (
         <Skeleton className="mb-6 h-7 w-48" />
       ) : (
@@ -85,7 +79,7 @@ const Championships = () => {
           ))}
         </section>
       )}
-    </section>
+    </>
   )
 }
 
