@@ -9,7 +9,7 @@ import SessionProvider from './Session.provider'
 import FirebaseProvider from './Firebase.provider'
 import GeolocationProvider from './Geolocation.provider'
 import ThemesProviders from './Theme.provider'
-import CustomThemeProvider from './CustomTheme.provider'
+import ThemeCustomizationProvider from './ThemeCustomization.provider'
 
 const RootProvider = ({ children }) => {
   return (
@@ -20,7 +20,9 @@ const RootProvider = ({ children }) => {
             <InitialStateProvider>
               <GeolocationProvider>
                 <FirebaseProvider>
-                  <CustomThemeProvider>{children}</CustomThemeProvider>
+                  <ThemeCustomizationProvider>
+                    {children}
+                  </ThemeCustomizationProvider>
                 </FirebaseProvider>
               </GeolocationProvider>
             </InitialStateProvider>

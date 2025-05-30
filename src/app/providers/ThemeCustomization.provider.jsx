@@ -17,31 +17,31 @@ const CustomThemeProvider = ({ children }) => {
   const user = useSelector(selectUserTable)
 
   useEffect(() => {
-    if (!user?.id) {
-      dispatch(setTheme({ type: 'light', data: DEFAULT_LIGHT_THEME }))
-      dispatch(setTheme({ type: 'dark', data: DEFAULT_DARK_THEME }))
-      return
-    }
+    // if (!user?.id) {
+    //   dispatch(setTheme({ type: 'light', data: DEFAULT_LIGHT_THEME }))
+    //   dispatch(setTheme({ type: 'dark', data: DEFAULT_DARK_THEME }))
+    //   return
+    // }
 
     const isAuthenticated = localStorage.getItem('isAuthenticated')
     const light_theme = localStorage.getItem('light_theme')
     const dark_theme = localStorage.getItem('dark_theme')
 
-    if (isAuthenticated) {
-      if (light_theme) {
-        dispatch(setTheme({ type: 'light', data: JSON.parse(light_theme) }))
-      } else if (user?.light_theme?.font) {
-        dispatch(setTheme({ type: 'light', data: user.light_theme }))
-      }
-    }
+    // if (isAuthenticated) {
+    //   if (light_theme) {
+    //     dispatch(setTheme({ type: 'light', data: JSON.parse(light_theme) }))
+    //   } else if (user?.light_theme?.font) {
+    //     dispatch(setTheme({ type: 'light', data: user.light_theme }))
+    //   }
+    // }
 
-    if (isAuthenticated) {
-      if (dark_theme) {
-        dispatch(setTheme({ type: 'dark', data: JSON.parse(dark_theme) }))
-      } else if (user?.dark_theme?.font) {
-        dispatch(setTheme({ type: 'dark', data: user.dark_theme }))
-      }
-    }
+    // if (isAuthenticated) {
+    //   if (dark_theme) {
+    //     dispatch(setTheme({ type: 'dark', data: JSON.parse(dark_theme) }))
+    //   } else if (user?.dark_theme?.font) {
+    //     dispatch(setTheme({ type: 'dark', data: user.dark_theme }))
+    //   }
+    // }
   }, [dispatch, user])
 
   // Apply colors from Redux store to DOM

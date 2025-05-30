@@ -3,12 +3,7 @@
 import { db } from 'lib/db'
 import { VerifySmsCodeSchema } from 'lib/schema'
 
-/**
- * Verifies an SMS code sent to a user's phone number
- * Replicates the functionality of the PostgreSQL function "verify__sms_code"
- */
 export async function verifySmsCode(values) {
-  // Validate input fields
   const validatedFields = VerifySmsCodeSchema.safeParse(values)
 
   if (!validatedFields.success) {
@@ -23,8 +18,19 @@ export async function verifySmsCode(values) {
   try {
     // Find the user based on phone number (either current or new phone)
     const user = is_update
-      ? await db.user.findFirst({ where: { phone_new: phone_number } })
-      : await db.user.findFirst({ where: { phone: phone_number } })
+      ? await db.user.findFirst({
+          where: { phone_new: phone_number },
+          select: {
+            id: true,
+            sms_code: true,
+            sms_created_at: true,
+            phone_new: true /* if needed by updateUserPhone logic */,
+          },
+        })
+      : await db.user.findFirst({
+          where: { phone: phone_number },
+          select: { id: true, sms_code: true, sms_created_at: true },
+        })
 
     if (!user) {
       return {

@@ -134,7 +134,7 @@ const CabinetSettingsTab = ({ setHomeTab }) => {
                   placeholder={t("Tug'ilgan kuni")}
                   value={
                     date instanceof Date
-                      ? date.toISOString().split('T')[0]
+                      ? date?.toISOString().split('T')[0]
                       : date
                   }
                   onChange={(e) => setDate(new Date(e.target.value))}
