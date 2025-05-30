@@ -26,7 +26,10 @@ const Matches = () => {
   const path = usePathname()
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { currentTourIndex } = useSelector((state) => state.tour)
+  const { currentTourIndex, isLoading: toursLoading } = useSelector(
+    (state) => state.tour
+  )
+  const { isLoading: teamLoading } = useSelector((store) => store.currentTeam)
   const tours = useSelector(selectTours)
   const { season } = useSelector((store) => store.season)
   const { isLoading, count } = useSelector((state) => state.match)
@@ -39,7 +42,7 @@ const Matches = () => {
   const [page, setPage] = useState(0)
   const perPage = 10
   const pages = useMemo(() => Math.ceil(count / perPage), [count, perPage])
-  const competition_id = +path.split('/')[2] || 0
+  const competition_id = +path.split('/')[3] || 0
 
   const handleChangeTour = (value) => {
     const newIndex = tours.findIndex((tour) => tour.id === value)
@@ -78,11 +81,20 @@ const Matches = () => {
   }, [dispatch, season?.id, competition_id, currentTour?.id, page, perPage])
 
   useEffect(() => {
-    console.log('season?.id', season?.id)
-    console.log('competition_id', competition_id)
-    console.log('currentTour?.id', currentTour?.id)
-    if (season?.id && competition_id && currentTour?.id) {
-      console.log('fetchMatches')
+    if (currentTourIndex > -1) {
+      setCurrentTour(tours[currentTourIndex])
+      setTourIndex(currentTourIndex)
+    }
+  }, [tours, currentTourIndex])
+
+  useEffect(() => {
+    if (
+      season?.id &&
+      competition_id &&
+      currentTour?.id &&
+      !toursLoading &&
+      !teamLoading
+    ) {
       dispatch(
         fetchMatches({
           season_id: season?.id,

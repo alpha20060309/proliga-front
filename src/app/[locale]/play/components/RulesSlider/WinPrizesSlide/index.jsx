@@ -11,7 +11,7 @@ const WinPrizesSlide = () => {
   const path = usePathname()
   const { t } = useTranslation()
   const prizes = useSelector(selectPrizes)
-  const competition_id = +path.split('/')[2] || 0
+  const competition_id = +path.split('/')[3] || 0
 
   return (
     <div className="flex h-auto flex-col space-y-4 md:space-y-6">

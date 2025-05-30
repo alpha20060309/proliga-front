@@ -21,7 +21,7 @@ function Journal() {
   const pages = useMemo(() => {
     return Math.ceil(count / perPage)
   }, [count, perPage])
-  const competition_id = +path.split('/')[2] || 0
+  const competition_id = +path.split('/')[3] || 0
 
   useEffect(() => {
     if (competition_id && season?.id && currentTeam?.id) {
