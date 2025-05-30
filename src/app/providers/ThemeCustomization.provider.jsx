@@ -59,6 +59,41 @@ const SHADOW_VARS = [
   'shadow-offset-x',
   'shadow-offset-y',
 ]
+
+const extractShadowValues = (shadowobj) => {
+  const shadowString = shadowobj['shadow']
+
+  if (!shadowString) return {}
+
+  // Match pattern: <offset-x> <offset-y> <blur> <spread> hsla(<hue>, <saturation>%, <lightness>%, <opacity>)
+  const regex =
+    /^([-\d.]+)px\s+([-\d.]+)px\s+([-\d.]+)px\s+([-\d.]+)px\s+hsla\((\d+),\s*(\d+)%,\s*(\d+)%,\s*([\d.]+)\)$/
+  const matches = shadowString.match(regex)
+
+  if (!matches) return {}
+
+  const [
+    ,
+    offsetX,
+    offsetY,
+    blur,
+    spread,
+    hue,
+    saturation,
+    lightness,
+    opacity,
+  ] = matches
+
+  return {
+    'shadow-color': `${hue}, ${saturation}%, ${lightness}%`,
+    'shadow-opacity': opacity,
+    'shadow-blur': `${blur}px`,
+    'shadow-spread': `${spread}px`,
+    'shadow-offset-x': `${offsetX}px`,
+    'shadow-offset-y': `${offsetY}px`,
+  }
+}
+
 const GLOBAL_VARS = ['--spacing', '--letter-spacing', '--radius']
 const FONT_VARS = ['--font-sans']
 
@@ -82,21 +117,16 @@ const CustomThemeProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    // if (!user?.id) {
-    //   dispatch(setTheme({ type: 'light', data: DEFAULT_LIGHT_THEME }))
-    //   dispatch(setTheme({ type: 'dark', data: DEFAULT_DARK_THEME }))
-    //   return
-    // }
+    // const colors = extractStylesFromRootCSS(COLOR_VARS)
+    // const shadows = extractStylesFromRootCSS(SHADOW_VARS)
+    // const global = extractStylesFromRootCSS(GLOBAL_VARS)
+    // const font = extractStylesFromRootCSS(FONT_VARS)
 
-    const colors = extractStylesFromRootCSS(COLOR_VARS)
-    const shadows = extractStylesFromRootCSS(SHADOW_VARS)
-    const global = extractStylesFromRootCSS(GLOBAL_VARS)
-    const font = extractStylesFromRootCSS(FONT_VARS)
-
-    console.log(colors)
-    console.log(shadows)
-    console.log(global)
-    console.log(font)
+    // console.log(colors)
+    // console.log('shadows', extractShadowValues(shadows))
+    // console.log("as",shadows)
+    // console.log(global)
+    // console.log(font)
 
     const isAuthenticated = localStorage.getItem('isAuthenticated')
     const light_theme = localStorage.getItem('light_theme')
