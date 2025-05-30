@@ -49,10 +49,17 @@ export const DEFAULT_LIGHT_THEME = {
     spacing: 0.25,
     letterSpacing: 0,
   },
-  shadows: DEFAULT_SHADOWS,
+  shadows: {
+    'shadow-color': '0, 0%, 30%',
+    'shadow-opacity': '0.08',
+    'shadow-blur': '3px',
+    'shadow-spread': '0px',
+    'shadow-offset-x': '0px',
+    'shadow-offset-y': '1px',
+  },
 }
 
-export const DEFAULT_DARK_THEME = 
+export const DEFAULT_DARK_THEME =
 {
   colors: {
     background: '#0d0d0d',

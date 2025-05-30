@@ -64,6 +64,8 @@ export const useUpdateUserThemes = () => {
             setError(error)
           }
         }
+        localStorage.setItem('light_theme', JSON.stringify(lightTheme))
+        localStorage.setItem('dark_theme', JSON.stringify(darkTheme))
 
         cb()
         await update()

@@ -3,8 +3,9 @@
 import { usePathname } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
-import Image from 'next/image'
 import { Link } from 'next-view-transitions'
+import { ThemeSwitcherSkeleton } from './ThemeSwitch'
+import Image from 'next/image'
 import Gutter from '../Gutter'
 import PlayLinks from './Links'
 import NavbarUserDesktop from './UserDesktop'
@@ -13,7 +14,6 @@ import Notification from './Notification'
 import Marquee from 'components/Marquee'
 import ThemeCustomizer from './ThemeCustomizer'
 import dynamic from 'next/dynamic'
-import { ThemeSwitcherSkeleton } from './ThemeSwitch'
 import BottomNavigation from './MobileNavigation'
 
 const ThemeSwitcher = dynamic(() => import('./ThemeSwitch'), {

@@ -157,7 +157,7 @@ const ShadowModifier = () => {
         {t('Shadow Previews')}
       </h4>
       <div className="grid grid-cols-3 gap-3 sm:grid-cols-4">
-        {['xs', 'sm', '', 'md', 'lg', 'xl', '2xl'].map((size) => (
+        {['xs', 'sm', '', 'md', 'lg', 'xl'].map((size) => (
           <div
             key={size || 'base'}
             className={`flex h-16 w-full items-center justify-center rounded-md border border-[#4A4A4A] bg-[#383838] p-2 text-xs text-[#E0E0E0] ${size ? `shadow-${size}` : 'shadow'}`}
