@@ -4,16 +4,11 @@ import { useEffect, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTheme } from 'next-themes'
 import { colorKeys, toVarName } from 'app/utils/colors.util'
-import {
-  setDarkTheme,
-  setLightTheme,
-} from 'app/lib/features/systemConfig/systemConfig.slice'
+import { setTheme } from 'app/lib/features/systemConfig/systemConfig.slice'
 import { SHADOW_KEYS, updateShadows } from 'app/utils/shadow.utils'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
-import {
-  DEFAULT_LIGHT_THEME,
-  DEFAULT_DARK_THEME,
-} from 'app/utils/default-theme.util'
+import DEFAULT_DARK_THEME from '../../../static/theme/default-dark-theme.json'
+import DEFAULT_LIGHT_THEME from '../../../static/theme/default-light-theme.json'
 
 const CustomThemeProvider = ({ children }) => {
   const dispatch = useDispatch()
@@ -21,40 +16,38 @@ const CustomThemeProvider = ({ children }) => {
   const { darkTheme, lightTheme } = useSelector((store) => store.systemConfig)
   const user = useSelector(selectUserTable)
 
-  // Load user themes into Redux store
   useEffect(() => {
-    const themeTypes = ['colors', 'shadows', 'global', 'font']
-
     if (!user?.id) {
-      themeTypes.forEach((type) => {
-        dispatch(setLightTheme({ type, data: DEFAULT_LIGHT_THEME[type] }))
-        dispatch(setDarkTheme({ type, data: DEFAULT_DARK_THEME[type] }))
-      })
+      dispatch(setTheme({ type: 'light', data: DEFAULT_LIGHT_THEME }))
+      dispatch(setTheme({ type: 'dark', data: DEFAULT_DARK_THEME }))
       return
     }
-    const { light_theme, dark_theme } = user
 
-    if (light_theme?.font) {
-      themeTypes.forEach((type) => {
-        if (light_theme[type]) {
-          dispatch(setLightTheme({ type, data: light_theme[type] }))
-        }
-      })
+    const isAuthenticated = localStorage.getItem('isAuthenticated')
+    const light_theme = localStorage.getItem('light_theme')
+    const dark_theme = localStorage.getItem('dark_theme')
+
+    if (isAuthenticated) {
+      if (light_theme) {
+        dispatch(setTheme({ type: 'light', data: JSON.parse(light_theme) }))
+      } else if (user?.light_theme?.font) {
+        dispatch(setTheme({ type: 'light', data: user.light_theme }))
+      }
     }
 
-    if (dark_theme?.font) {
-      themeTypes.forEach((type) => {
-        if (dark_theme[type]) {
-          dispatch(setDarkTheme({ type, data: dark_theme[type] }))
-        }
-      })
+    if (isAuthenticated) {
+      if (dark_theme) {
+        dispatch(setTheme({ type: 'dark', data: JSON.parse(dark_theme) }))
+      } else if (user?.dark_theme?.font) {
+        dispatch(setTheme({ type: 'dark', data: user.dark_theme }))
+      }
     }
   }, [dispatch, user])
 
   // Apply colors from Redux store to DOM
   useEffect(() => {
     const currentColors =
-      resolvedTheme === 'dark' ? darkTheme.colors : lightTheme.colors
+      resolvedTheme === 'dark' ? darkTheme?.colors : lightTheme?.colors
     const allColorVars = Object.values(colorKeys).flat().map(toVarName)
 
     if (!currentColors || !Object.keys(currentColors).length) {

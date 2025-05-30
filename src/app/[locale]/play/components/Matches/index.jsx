@@ -32,8 +32,10 @@ const Matches = () => {
   const { isLoading, count } = useSelector((state) => state.match)
   const matches = useSelector(selectMatches)
   const { lang } = useSelector((store) => store.systemLanguage)
-  const [tourIndex, setTourIndex] = useState(0)
-  const [currentTour, setCurrentTour] = useState(null)
+  const [tourIndex, setTourIndex] = useState(currentTourIndex || 0)
+  const [currentTour, setCurrentTour] = useState(
+    tours[currentTourIndex] || null
+  )
   const [page, setPage] = useState(0)
   const perPage = 10
   const pages = useMemo(() => Math.ceil(count / perPage), [count, perPage])
@@ -46,13 +48,6 @@ const Matches = () => {
       setCurrentTour(tours[newIndex])
     }
   }
-
-  useEffect(() => {
-    if (currentTourIndex > -1) {
-      setCurrentTour(tours[currentTourIndex])
-      setTourIndex(currentTourIndex)
-    }
-  }, [tours, currentTourIndex])
 
   const handleIncrementTourIndex = () => {
     if (tourIndex < tours.length - 1) {
@@ -69,11 +64,7 @@ const Matches = () => {
   }
 
   const refreshData = useCallback(() => {
-    console.log('season?.id', season?.id)
-    console.log('competition_id', competition_id)
-    console.log('currentTour?.id', currentTour?.id)
     if (season?.id && competition_id && currentTour?.id) {
-      console.log('refreshData')
       dispatch(
         fetchMatches({
           season_id: season?.id,
@@ -87,7 +78,11 @@ const Matches = () => {
   }, [dispatch, season?.id, competition_id, currentTour?.id, page, perPage])
 
   useEffect(() => {
+    console.log('season?.id', season?.id)
+    console.log('competition_id', competition_id)
+    console.log('currentTour?.id', currentTour?.id)
     if (season?.id && competition_id && currentTour?.id) {
+      console.log('fetchMatches')
       dispatch(
         fetchMatches({
           season_id: season?.id,

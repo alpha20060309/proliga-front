@@ -220,6 +220,7 @@ const Play = (props) => {
     }
   }, [dispatch, currentTeam?.is_team_created])
 
+
   if (isLoading) {
     return <Spinner />
   }

@@ -52,7 +52,8 @@ export const DEFAULT_LIGHT_THEME = {
   shadows: DEFAULT_SHADOWS,
 }
 
-export const DEFAULT_DARK_THEME = {
+export const DEFAULT_DARK_THEME = 
+{
   colors: {
     background: '#0d0d0d',
     foreground: '#f2f2f2',
@@ -75,7 +76,7 @@ export const DEFAULT_DARK_THEME = {
     'chart-1': '#990000',
     'chart-2': '#000099',
     'chart-3': '#998500',
-    // 'chart-4': '#8026d9',
+    'chart-4': '#8026d9',
     'chart-5': '#ff3333',
     sidebar: '#262626',
     'sidebar-foreground': '#f2f2f2',

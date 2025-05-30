@@ -27,7 +27,7 @@ export const fetchThemes = createAsyncThunk(
     const { data, error } = await supabase
       .from('theme')
       .select('*')
-      .eq('is_global', true)
+
     return { data, error }
   }
 )
