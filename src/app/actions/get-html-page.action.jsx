@@ -6,6 +6,7 @@ export const getHTMLPage = async (name) => {
   if (!name) {
     return { error: 'Name is required' }
   }
+  
   try {
     const page = await db.system_language
       .findUnique({

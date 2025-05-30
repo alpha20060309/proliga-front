@@ -74,6 +74,9 @@ export default async function RootLayout({ children, params }) {
   return (
     <ViewTransitions>
       <html lang={locale} dir={'ltr'} suppressHydrationWarning>
+        <head>
+          <link rel="stylesheet" href="https://proliga.uz/static/theme.css" />
+        </head>
         <body
           className={cn(
             'bg-background text-foreground min-h-svh scroll-smooth antialiased lg:min-h-screen',

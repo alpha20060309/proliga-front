@@ -765,7 +765,7 @@ model theme {
   user_id     Int
   light_theme Json
   dark_theme  Json
-  is_global   Boolean?
+  is_default  Boolean?
   name        String?  @db.VarChar(64)
   user        user     @relation(fields: [user_id], references: [id], onDelete: SetNull, onUpdate: SetNull)
 }

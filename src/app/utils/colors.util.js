@@ -36,4 +36,5 @@ export const colorKeys = {
     'sidebar-ring',
   ],
 }
+
 export const toVarName = (key) => `--${key}`

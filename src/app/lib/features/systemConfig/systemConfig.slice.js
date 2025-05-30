@@ -61,6 +61,18 @@ const systemConfigSlice = createSlice({
           break
       }
     },
+    setTheme: (state, action) => {
+      const { type, data } = action.payload
+
+      switch (type) {
+        case 'dark':
+          state.darkTheme = data
+          break
+        case 'light':
+          state.lightTheme = data
+          break
+      }
+    },
     setSelectedTheme: (state, action) => {
       state.selectedTheme = action.payload
     },
@@ -71,7 +83,7 @@ const systemConfigSlice = createSlice({
   extraReducers: systemConfigExtraReducer,
 })
 
-export const { setDarkTheme, setLightTheme, setSelectedTheme } =
+export const { setDarkTheme, setLightTheme, setSelectedTheme, setTheme } =
   systemConfigSlice.actions
 
 export default systemConfigSlice.reducer

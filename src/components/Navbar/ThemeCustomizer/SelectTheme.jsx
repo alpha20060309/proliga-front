@@ -57,12 +57,9 @@ const SelectTheme = () => {
       <Select value={selectedTheme || ''} onValueChange={handleThemeChange}>
         <SelectTrigger
           id="theme-select-trigger"
-          className="w-full truncate rounded-md border border-[#4A4A4A] bg-[#2D2D2D] px-3 py-2 text-sm text-[#E0E0E0] focus:border-[#ffdd00] focus:ring-1 focus:ring-[#ffdd00] focus:outline-none"
+          className="w-full truncate rounded-md border border-[#4A4A4A] bg-[#2D2D2D] px-3 py-2 text-sm text-[#E0E0E0] focus:border-[#ffdd00] focus:ring-1 focus:ring-[#ffdd00] focus:outline-none data-[placeholder]:text-[#a5a5a5]"
         >
-          <SelectValue
-            placeholder={t('Select a Preset')}
-            className="placeholder:text-[#757575]"
-          />
+          <SelectValue placeholder={t('Select a Preset')} />
         </SelectTrigger>
         <SelectContent className="rounded-md border border-[#4A4A4A] bg-[#2D2D2D] text-[#E0E0E0]">
           <SelectGroup>

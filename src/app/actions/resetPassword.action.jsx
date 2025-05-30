@@ -35,7 +35,11 @@ export const resetPassword = async (values) => {
 
     await db.user.update({
       where: { id: existingUser.id },
-      data: { password: hashedPassword },
+      data: {
+        password: hashedPassword,
+        sms_code: null, // Or some other invalidated state
+        sms_created_at: null, // Or update to reflect invalidation
+      },
     })
 
     return { success: true }
