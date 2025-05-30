@@ -29,6 +29,7 @@ import { setSelectedTheme } from 'app/lib/features/systemConfig/systemConfig.sli
 import { useState } from 'react'
 import { fetchThemes } from 'app/lib/features/systemConfig/systemConfig.thunk'
 import { useTranslation } from 'react-i18next'
+
 const ThemeCustomizer = () => {
   const dispatch = useDispatch()
   const [presetName, setPresetName] = useState('')
@@ -94,10 +95,11 @@ const ThemeCustomizer = () => {
       </SheetTrigger>
       <SheetContent
         className={
-          'xs:min-w-96 min-w-full overflow-y-auto border-l border-[#4A4A4A]'
+          'xs:min-w-md min-w-full gap-0 overflow-y-auto border-l border-[#4A4A4A] bg-transparent'
         }
         style={{
-          backgroundColor: '#232323',
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          backdropFilter: 'blur(10px)',
           fontFamily: 'Inter, sans-serif',
           fontWeight: '500',
           letterSpacing: '0.025em',
@@ -129,7 +131,7 @@ const ThemeCustomizer = () => {
         </button>
         <SelectTheme />
         <Tabs defaultValue="color" className="mt-4">
-          <TabsList className="w-full rounded-[6px] bg-[#333333] p-1">
+          <TabsList className="w-full rounded-[6px] bg-[#333333] p-1 dark:bg-[#212121]">
             <TabsTrigger
               value="color"
               className="w-full rounded-[4px] px-3 py-1.5 text-sm font-medium text-[#A0A0A0] focus-visible:bg-[#fffbe6] focus-visible:text-[#1A1A1A] focus-visible:ring-2 focus-visible:ring-[#757575] focus-visible:ring-offset-2 focus-visible:ring-offset-[#333333] data-[state=active]:bg-[#4A4A4A] data-[state=active]:text-[#FFFFFF] data-[state=active]:shadow-sm"

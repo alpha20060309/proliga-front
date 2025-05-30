@@ -21,170 +21,177 @@ import {
   Outfit,
   Lato,
   Barlow,
+  Fira_Mono,
+  Plus_Jakarta_Sans,
 } from 'next/font/google'
 
 // Load fonts with subsets
 export const inter = Inter({
-  subsets: ['latin'],
+  subsets: ['latin', "latin-ext", "cyrillic", "cyrillic-ext"],
   display: 'swap',
   variable: '--font-inter',
 })
 
 export const roboto = Roboto({
   weight: ['400', '500', '700'],
-  subsets: ['latin'],
+  subsets: ['latin', "latin-ext", "cyrillic", "cyrillic-ext"],
+
   display: 'swap',
   variable: '--font-roboto',
 })
 
 export const openSans = Open_Sans({
-  subsets: ['latin'],
+  subsets: ['latin', "latin-ext", "cyrillic", "cyrillic-ext"],
+
   display: 'swap',
   variable: '--font-open-sans',
 })
 
 export const poppins = Poppins({
   weight: ['400', '500', '600', '700'],
-  subsets: ['latin'],
+  subsets: ['latin', "latin-ext"],
+
   display: 'swap',
   variable: '--font-poppins',
 })
 
 export const montserrat = Montserrat({
-  subsets: ['latin'],
+  subsets: ['latin', "latin-ext", "cyrillic", "cyrillic-ext"],
+
   display: 'swap',
   variable: '--font-montserrat',
 })
 
 export const outfit = Outfit({
-  subsets: ['latin'],
+  subsets: ['latin', "latin-ext"],
   display: 'swap',
   variable: '--font-outfit',
 })
 
-export const plusJakartaSans = Poppins({
+export const plusJakartaSans = Plus_Jakarta_Sans({
   // Using Poppins as fallback
   weight: ['400', '500', '600', '700'],
-  subsets: ['latin'],
+  subsets: ['latin', "latin-ext", "cyrillic-ext"],
   display: 'swap',
   variable: '--font-plus-jakarta-sans',
 })
 
 export const dmSans = DM_Sans({
-  subsets: ['latin'],
+  subsets: ['latin', "latin-ext"],
   display: 'swap',
   variable: '--font-dm-sans',
 })
 
 export const ibmPlexSans = IBM_Plex_Sans({
   weight: ['400', '500', '600', '700'],
-  subsets: ['latin'],
+  subsets: ['latin', "latin-ext", "cyrillic", "cyrillic-ext"],
   display: 'swap',
   variable: '--font-ibm-plex-sans',
 })
 
 export const nunito = Nunito({
-  subsets: ['latin'],
+  subsets: ['latin', "latin-ext", "cyrillic", "cyrillic-ext"],
   display: 'swap',
   variable: '--font-nunito',
 })
 
 export const merriweather = Merriweather({
   weight: ['400', '700'],
-  subsets: ['latin'],
+  subsets: ['latin', "latin-ext", "cyrillic", "cyrillic-ext"],
   display: 'swap',
   variable: '--font-merriweather',
 })
 
 export const playfairDisplay = Playfair_Display({
-  subsets: ['latin'],
+  subsets: ['latin', "latin-ext"],
   display: 'swap',
   variable: '--font-playfair-display',
 })
 
 export const lora = Lora({
-  subsets: ['latin'],
+  subsets: ['latin', "latin-ext", "cyrillic", "cyrillic-ext"],
   display: 'swap',
   variable: '--font-lora',
 })
 
 export const sourceSerifPro = Source_Serif_4({
   weight: ['400', '600', '700'],
-  subsets: ['latin'],
+  subsets: ['latin', "latin-ext", "cyrillic", "cyrillic-ext"],
   display: 'swap',
   variable: '--font-source-serif-pro',
 })
 
 export const libreBaskerville = Libre_Baskerville({
   weight: ['400', '700'],
-  subsets: ['latin'],
+  subsets: ['latin', "latin-ext",],
   display: 'swap',
   variable: '--font-libre-baskerville',
 })
 
 export const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
+  subsets: ['latin', "latin-ext"],
   display: 'swap',
   variable: '--font-space-grotesk',
 })
 
 export const ptSerif = PT_Serif({
   weight: ['400', '700'],
-  subsets: ['latin'],
+  subsets: ['latin', "latin-ext", "cyrillic", "cyrillic-ext"],
   display: 'swap',
   variable: '--font-pt-serif',
 })
 
 export const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
+  subsets: ['latin', "latin-ext", "cyrillic", "cyrillic-ext"],
   display: 'swap',
   variable: '--font-jetbrains-mono',
 })
 
-export const firaMono = JetBrains_Mono({
+export const firaMono = Fira_Mono({
   // Using JetBrains as fallback
-  subsets: ['latin'],
+  subsets: ['latin', "latin-ext", "cyrillic", "cyrillic-ext"],
   display: 'swap',
+  weight: ['400', '500', '700'],
   variable: '--font-fira-code',
 })
 
 export const sourceCodePro = Source_Serif_4({
   weight: ['400', '600', '700'],
-  subsets: ['latin'],
+  subsets: ['latin', "latin-ext", "cyrillic", "cyrillic-ext"],
   display: 'swap',
   variable: '--font-source-code-pro',
 })
 
 export const ibmPlexMono = IBM_Plex_Mono({
   weight: ['400', '500', '600', '700'],
-  subsets: ['latin'],
+  subsets: ['latin', "latin-ext", "cyrillic", "cyrillic-ext"],
   display: 'swap',
   variable: '--font-ibm-plex-mono',
 })
 
 export const robotoMono = Roboto_Mono({
-  subsets: ['latin'],
+  subsets: ['latin', "latin-ext", "cyrillic", "cyrillic-ext"],
   display: 'swap',
   variable: '--font-roboto-mono',
 })
 
 export const spaceMono = Space_Mono({
   weight: ['400', '700'],
-  subsets: ['latin'],
+  subsets: ['latin', "latin-ext"],
   display: 'swap',
   variable: '--font-space-mono',
 })
 
 export const lato = Lato({
   weight: ['400', '700'],
-  subsets: ['latin'],
+  subsets: ['latin', "latin-ext"],
   display: 'swap',
   variable: '--font-lato',
 })
 
 export const barlow = Barlow({
   weight: ['400', '500', '600', '700'],
-  subsets: ['latin'],
+  subsets: ['latin', "latin-ext"],
   display: 'swap',
   variable: '--font-barlow',
 })

@@ -39,14 +39,16 @@ const PrizesSection = () => {
       ) : prizes?.length > 0 ? (
         <>
           <PrizesTitle />
-          <section className="flex flex-col gap-2 sm:grid sm:grid-cols-2 sm:grid-rows-2">
+          <section className="flex flex-col gap-2 justify-center items-center">
             {competition?.map((competition, index) => (
               <PrizeCompetition competition={competition} key={index} />
             ))}
           </section>
         </>
       ) : (
-        <h1 className="text-center text-2xl">{t('Hozircha yutuqlar yoq')}</h1>
+        <h1 className="text-foreground text-center text-2xl">
+          {t('Hozircha yutuqlar yoq')}
+        </h1>
       )}
     </>
   )

@@ -14,7 +14,7 @@ const Prize = ({ prize }) => {
       <p className="mb-1 text-sm md:mb-2 xl:text-base">
         {getCorrectName({ lang, uz: prize?.name, ru: prize?.name_ru })}
       </p>
-      <div className="bg-background flex aspect-square max-w-64 items-center justify-center overflow-hidden rounded-lg p-1 lg:p-2 2xl:max-w-80">
+      <div className="flex aspect-square items-center justify-center overflow-hidden rounded bg-white p-1 lg:p-2">
         <img
           src={getUrl(prize?.image)}
           loading="lazy"

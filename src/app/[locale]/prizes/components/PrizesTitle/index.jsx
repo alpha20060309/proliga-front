@@ -6,7 +6,7 @@ const PrizesTitle = () => {
   const { t } = useTranslation()
 
   return (
-    <h1 className="mb-4 text-2xl font-semibold md:text-3xl">{t('Yutuqlar')}</h1>
+    <h1 className="text-foreground mb-6 text-2xl font-bold">{t('Yutuqlar')}</h1>
   )
 }
 
