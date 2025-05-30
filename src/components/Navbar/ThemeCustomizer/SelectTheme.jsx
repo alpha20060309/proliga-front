@@ -2,9 +2,8 @@
 
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  setDarkTheme,
-  setLightTheme,
   setSelectedTheme,
+  setTheme,
 } from 'app/lib/features/systemConfig/systemConfig.slice'
 import {
   Select,
@@ -27,22 +26,8 @@ const SelectTheme = () => {
     const selectedThemeData = themes.find((t) => +t.id === +value)
 
     if (selectedThemeData) {
-      const themeTypes = ['colors', 'shadows', 'global', 'font']
-
-      themeTypes.forEach((type) => {
-        dispatch(
-          setDarkTheme({
-            type,
-            data: selectedThemeData.dark_theme[type],
-          })
-        )
-        dispatch(
-          setLightTheme({
-            type,
-            data: selectedThemeData.light_theme[type],
-          })
-        )
-      })
+      dispatch(setTheme({ type: 'dark', data: selectedThemeData.dark_theme }))
+      dispatch(setTheme({ type: 'light', data: selectedThemeData.light_theme }))
     }
   }
 

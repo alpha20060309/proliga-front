@@ -1,6 +1,7 @@
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -104,7 +105,7 @@ const ThemeCustomizer = () => {
           fontWeight: '500',
           letterSpacing: '0.025em',
           borderRadius: '0px',
-          padding: '16px',
+          padding: '1rem 1.5rem',
           color: '#E0E0E0',
           '--spacing': '0.25rem',
           '--letter-spacing': '0.025em',
@@ -116,19 +117,11 @@ const ThemeCustomizer = () => {
           '--shadow-offset-y': '0px',
         }}
       >
-        <SheetHeader>
+        <SheetHeader className={'px-0 py-4'}>
           <SheetTitle className="text-[#E0E0E0]">
             {t('Theme Customizer')}
           </SheetTitle>
         </SheetHeader>
-        <button
-          onClick={handleReset}
-          className="group mb-4 flex w-full items-center justify-center gap-2 rounded-md bg-[#555555] px-4 py-2.5 text-sm font-medium text-[#E0E0E0] shadow-sm transition-colors hover:bg-[#656565] focus:ring-2 focus:ring-[#757575] focus:ring-offset-2 focus:ring-offset-[#232323] focus:outline-none disabled:pointer-events-none disabled:opacity-50"
-          aria-label="Reset theme to default"
-        >
-          <RefreshCw className="size-4 transition-transform group-hover:rotate-180" />
-          {t('Reset to Default')}
-        </button>
         <SelectTheme />
         <Tabs defaultValue="color" className="mt-4">
           <TabsList className="w-full rounded-[6px] bg-[#333333] p-1 dark:bg-[#212121]">
@@ -170,19 +163,29 @@ const ThemeCustomizer = () => {
             <ShadowModifier />
           </TabsContent>
         </Tabs>
-        <button
-          disabled={isLoading}
-          onClick={handleSave}
-          className="group mt-6 flex w-full items-center justify-center gap-2 rounded-md bg-[#ffdd00] px-4 py-2.5 text-sm font-medium text-[#1A1A1A] shadow-sm transition-colors hover:bg-[#ebcb00] focus:ring-2 focus:ring-[#ffdd00] focus:ring-offset-2 focus:ring-offset-[#232323] focus:outline-none disabled:pointer-events-none disabled:opacity-50"
-          aria-label="Save theme changes"
-        >
-          {isLoading ? (
-            <Loader2 className="size-4 animate-spin" />
-          ) : (
-            <Save className="size-4 transition-transform group-hover:scale-110" />
-          )}
-          {t('Save Changes')}
-        </button>
+        <section className="mt-2 flex items-center justify-center gap-2">
+          <button
+            disabled={isLoading}
+            onClick={handleSave}
+            className="group flex w-1/2 items-center justify-center gap-2 rounded-md bg-[#ffdd00] px-4 py-2.5 text-sm font-medium text-[#1A1A1A] shadow-sm transition-colors hover:bg-[#ebcb00] focus:ring-2 focus:ring-[#ffdd00] focus:ring-offset-2 focus:ring-offset-[#232323] focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+            aria-label="Save theme changes"
+          >
+            {isLoading ? (
+              <Loader2 className="size-4 animate-spin" />
+            ) : (
+              <Save className="size-4 transition-transform group-hover:scale-110" />
+            )}
+            {t('Saqlash')}
+          </button>
+          <button
+            onClick={handleReset}
+            className="group flex w-1/2 items-center justify-center gap-2 rounded-md bg-[#555555] px-4 py-2.5 text-sm font-medium text-[#E0E0E0] shadow-sm transition-colors hover:bg-[#656565] focus:ring-2 focus:ring-[#757575] focus:ring-offset-2 focus:ring-offset-[#232323] focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+            aria-label="Reset theme to default"
+          >
+            <RefreshCw className="size-4 transition-transform group-hover:rotate-180" />
+            {t('Tozalash')}
+          </button>
+        </section>
         {user?.id && user?.is_admin && (
           <div className="my-4 flex flex-col gap-3 rounded-md border border-[#4A4A4A] bg-[#333333] p-4">
             <div className="flex items-center gap-2">
@@ -208,6 +211,9 @@ const ThemeCustomizer = () => {
             />
           </div>
         )}
+        <SheetDescription className={'sr-only'}>
+          {t('Theme Customizer')}
+        </SheetDescription>
       </SheetContent>
     </Sheet>
   )

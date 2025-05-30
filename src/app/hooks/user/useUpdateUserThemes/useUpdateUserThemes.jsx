@@ -27,16 +27,7 @@ export const useUpdateUserThemes = () => {
       try {
         setIsLoading(true)
         setError('')
-
-        const { data, error } = await supabase
-          .from('user')
-          .update({
-            dark_theme: darkTheme,
-            light_theme: lightTheme,
-          })
-          .eq('id', userTable?.id)
-          .is('deleted_at', null)
-          .single()
+        const error = null
 
         if (error) {
           setError(
@@ -49,21 +40,21 @@ export const useUpdateUserThemes = () => {
               ? error.message
               : t('An unknown error occurred')
           )
-          return { error, data }
+          return { error }
         }
 
-        if (savePreset) {
-          const { error } = await supabase.from('theme').insert({
-            name: presetName,
-            user_id: userTable?.id,
-            dark_theme: darkTheme,
-            light_theme: lightTheme,
-          })
+        // if (savePreset) {
+        //   const { error } = await supabase.from('theme').insert({
+        //     name: presetName,
+        //     user_id: userTable?.id,
+        //     dark_theme: darkTheme,
+        //     light_theme: lightTheme,
+        //   })
 
-          if (error) {
-            setError(error)
-          }
-        }
+        //   if (error) {
+        //     setError(error)
+        //   }
+        // }
 
         cb()
         await update()

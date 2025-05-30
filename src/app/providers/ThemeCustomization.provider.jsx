@@ -14,15 +14,15 @@ const CustomThemeProvider = ({ children }) => {
   const { darkTheme, lightTheme } = useSelector((store) => store.systemConfig)
   const user = useSelector(selectUserTable)
 
-  useEffect(() => {
-    if (user?.light_theme?.font) {
-      dispatch(setTheme({ type: 'light', data: user.light_theme }))
-    }
+  // useEffect(() => {
+  //   if (user?.light_theme?.font) {
+  //     dispatch(setTheme({ type: 'light', data: user.light_theme }))
+  //   }
 
-    if (user?.dark_theme?.font) {
-      dispatch(setTheme({ type: 'dark', data: user.dark_theme }))
-    }
-  }, [dispatch, user])
+  //   if (user?.dark_theme?.font) {
+  //     dispatch(setTheme({ type: 'dark', data: user.dark_theme }))
+  //   }
+  // }, [dispatch, user])
 
   // Apply colors from Redux store to DOM
   useEffect(() => {
