@@ -8,94 +8,94 @@ import { setTheme } from 'app/lib/features/systemConfig/systemConfig.slice'
 import { SHADOW_KEYS, updateShadows } from 'app/utils/shadow.utils'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 
-const COLOR_VARS = [
-  '--background',
-  '--foreground',
-  '--card',
-  '--card-foreground',
-  '--popover',
-  '--popover-foreground',
-  '--primary',
-  '--primary-foreground',
-  '--secondary',
-  '--secondary-foreground',
-  '--muted',
-  '--muted-foreground',
-  '--accent',
-  '--accent-foreground',
-  '--destructive',
-  '--border',
-  '--input',
-  '--ring',
-  '--chart-1',
-  '--chart-2',
-  '--chart-3',
-  '--chart-4',
-  '--chart-5',
-  '--sidebar',
-  '--sidebar-foreground',
-  '--sidebar-primary',
-  '--sidebar-primary-foreground',
-  '--sidebar-accent',
-  '--sidebar-accent-foreground',
-  '--sidebar-border',
-  '--sidebar-ring',
-  '--destructive-foreground',
-  '--success',
-  '--success-foreground',
-  '--warning',
-  '--warning-foreground',
-  '--error',
-  '--error-foreground',
-  '--info',
-  '--info-foreground',
-]
-const SHADOW_VARS = [
-  '--shadow',
-  'shadow-color',
-  'shadow-opacity',
-  'shadow-blur',
-  'shadow-spread',
-  'shadow-offset-x',
-  'shadow-offset-y',
-]
+// const COLOR_VARS = [
+//   '--background',
+//   '--foreground',
+//   '--card',
+//   '--card-foreground',
+//   '--popover',
+//   '--popover-foreground',
+//   '--primary',
+//   '--primary-foreground',
+//   '--secondary',
+//   '--secondary-foreground',
+//   '--muted',
+//   '--muted-foreground',
+//   '--accent',
+//   '--accent-foreground',
+//   '--destructive',
+//   '--border',
+//   '--input',
+//   '--ring',
+//   '--chart-1',
+//   '--chart-2',
+//   '--chart-3',
+//   '--chart-4',
+//   '--chart-5',
+//   '--sidebar',
+//   '--sidebar-foreground',
+//   '--sidebar-primary',
+//   '--sidebar-primary-foreground',
+//   '--sidebar-accent',
+//   '--sidebar-accent-foreground',
+//   '--sidebar-border',
+//   '--sidebar-ring',
+//   '--destructive-foreground',
+//   '--success',
+//   '--success-foreground',
+//   '--warning',
+//   '--warning-foreground',
+//   '--error',
+//   '--error-foreground',
+//   '--info',
+//   '--info-foreground',
+// ]
+// const SHADOW_VARS = [
+//   '--shadow',
+//   'shadow-color',
+//   'shadow-opacity',
+//   'shadow-blur',
+//   'shadow-spread',
+//   'shadow-offset-x',
+//   'shadow-offset-y',
+// ]
 
-const extractShadowValues = (shadowobj) => {
-  const shadowString = shadowobj['shadow']
+// const extractShadowValues = (shadowobj) => {
+//   const shadowString = shadowobj['shadow']
 
-  if (!shadowString) return {}
+//   if (!shadowString) return {}
 
-  // Match pattern: <offset-x> <offset-y> <blur> <spread> hsla(<hue>, <saturation>%, <lightness>%, <opacity>)
-  const regex =
-    /^([-\d.]+)px\s+([-\d.]+)px\s+([-\d.]+)px\s+([-\d.]+)px\s+hsla\((\d+),\s*(\d+)%,\s*(\d+)%,\s*([\d.]+)\)$/
-  const matches = shadowString.match(regex)
+//   // Match pattern: <offset-x> <offset-y> <blur> <spread> hsla(<hue>, <saturation>%, <lightness>%, <opacity>)
+//   const regex =
+//     /^([-\d.]+)px\s+([-\d.]+)px\s+([-\d.]+)px\s+([-\d.]+)px\s+hsla\((\d+),\s*(\d+)%,\s*(\d+)%,\s*([\d.]+)\)$/
+//   const matches = shadowString.match(regex)
 
-  if (!matches) return {}
+//   if (!matches) return {}
 
-  const [
-    ,
-    offsetX,
-    offsetY,
-    blur,
-    spread,
-    hue,
-    saturation,
-    lightness,
-    opacity,
-  ] = matches
+//   const [
+//     ,
+//     offsetX,
+//     offsetY,
+//     blur,
+//     spread,
+//     hue,
+//     saturation,
+//     lightness,
+//     opacity,
+//   ] = matches
 
-  return {
-    'shadow-color': `${hue}, ${saturation}%, ${lightness}%`,
-    'shadow-opacity': opacity,
-    'shadow-blur': `${blur}px`,
-    'shadow-spread': `${spread}px`,
-    'shadow-offset-x': `${offsetX}px`,
-    'shadow-offset-y': `${offsetY}px`,
-  }
-}
+//   return {
+//     'shadow-color': `${hue}, ${saturation}%, ${lightness}%`,
+//     'shadow-opacity': opacity,
+//     'shadow-blur': `${blur}px`,
+//     'shadow-spread': `${spread}px`,
+//     'shadow-offset-x': `${offsetX}px`,
+//     'shadow-offset-y': `${offsetY}px`,
+//   }
+// }
 
-const GLOBAL_VARS = ['--spacing', '--letter-spacing', '--radius']
-const FONT_VARS = ['--font-sans']
+// const GLOBAL_VARS = ['--spacing', '--letter-spacing', '--radius']
+// const FONT_VARS = ['--font-sans']
 
 const CustomThemeProvider = ({ children }) => {
   const dispatch = useDispatch()
@@ -103,54 +103,26 @@ const CustomThemeProvider = ({ children }) => {
   const { darkTheme, lightTheme } = useSelector((store) => store.systemConfig)
   const user = useSelector(selectUserTable)
 
-  const extractStylesFromRootCSS = (variableNames) => {
-    if (typeof window === 'undefined') return {} // Guard for SSR environments
-    const computedStyles = getComputedStyle(document.documentElement)
-    const styles = {}
-    variableNames.forEach((varName) => {
-      const value = computedStyles.getPropertyValue(varName.trim()).trim()
-      if (value) {
-        styles[varName] = value // Remove '--' prefix for the key
-      }
-    })
-    return styles
-  }
+  // const extractStylesFromRootCSS = (variableNames) => {
+  //   if (typeof window === 'undefined') return {} // Guard for SSR environments
+  //   const computedStyles = getComputedStyle(document.documentElement)
+  //   const styles = {}
+  //   variableNames.forEach((varName) => {
+  //     const value = computedStyles.getPropertyValue(varName.trim()).trim()
+  //     if (value) {
+  //       styles[varName] = value // Remove '--' prefix for the key
+  //     }
+  //   })
+  //   return styles
+  // }
 
   useEffect(() => {
-    // const colors = extractStylesFromRootCSS(COLOR_VARS)
-    // const shadows = extractStylesFromRootCSS(SHADOW_VARS)
-    // const global = extractStylesFromRootCSS(GLOBAL_VARS)
-    // const font = extractStylesFromRootCSS(FONT_VARS)
-
-    // console.log(colors)
-    // console.log('shadows', extractShadowValues(shadows))
-    // console.log("as",shadows)
-    // console.log(global)
-    // console.log(font)
-
-    const isAuthenticated = localStorage.getItem('isAuthenticated')
-    const light_theme = localStorage.getItem('light_theme')
-    const dark_theme = localStorage.getItem('dark_theme')
-
-    if (isAuthenticated) {
-      if (light_theme) {
-        dispatch(setTheme({ type: 'light', data: JSON.parse(light_theme) }))
-      }
-
-      if (dark_theme) {
-        dispatch(setTheme({ type: 'dark', data: JSON.parse(dark_theme) }))
-      }
-      return
-    }
-
     if (user?.light_theme?.font) {
       dispatch(setTheme({ type: 'light', data: user.light_theme }))
-      localStorage.setItem('light_theme', JSON.stringify(user.light_theme))
     }
 
     if (user?.dark_theme?.font) {
       dispatch(setTheme({ type: 'dark', data: user.dark_theme }))
-      localStorage.setItem('dark_theme', JSON.stringify(user.dark_theme))
     }
   }, [dispatch, user])
 
