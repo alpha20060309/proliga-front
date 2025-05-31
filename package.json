@@ -13,11 +13,7 @@
     "db:pull:prod": "dotenv -e .env.production -- npx prisma db pull",
     "db:push:prod": "dotenv -e .env.production -- npx prisma db push",
     "db:seed:prod": "dotenv -e .env.production -- npx prisma db seed",
-    "db:generate": "npx prisma generate",
-    "pm2:start": "pm2 start npm --name \"proliga\" -- start",
-    "pm2:restart": "pm2 restart proliga",
-    "pm2:stop": "pm2 stop proliga",
-    "pm2:delete": "pm2 delete proliga"
+    "db:generate": "npx prisma generate"
   },
   "prisma": {
     "seed": "node prisma/seed.js"

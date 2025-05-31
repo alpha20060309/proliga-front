@@ -69,7 +69,7 @@ export default async function RootLayout({ children, params }) {
     <ViewTransitions>
       <html lang={locale} dir={'ltr'} suppressHydrationWarning>
         <head>
-          <link rel="stylesheet" href="https://proliga.uz/static/theme.css" />
+          <link rel="stylesheet" href="https://proliga.uz/static/theme/ALL.css" />
         </head>
         <body
           className={cn(
