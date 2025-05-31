@@ -1,4 +1,4 @@
-import Gutter from 'components/Gutter'
+import Gutter from 'shared/Gutter'
 
 export default function PrizesLayout({ children }) {
   return (

@@ -1,6 +1,5 @@
 'use client'
 
-import './globals.css'
 import { Link, useTransitionRouter } from 'next-view-transitions'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -44,32 +43,34 @@ export default function Error({ reset }) {
   }, [router])
 
   return (
-    <div className="bg-background flex min-h-screen items-center justify-center p-4">
-      <Card className="bg-card border-error w-full max-w-md border-4">
+    <div className="flex min-h-screen items-center justify-center p-4 dark:bg-neutral-900">
+      <Card className="w-full max-w-md border-4 dark:border-red-500 dark:bg-neutral-800">
         <div className="p-6 text-center">
-          <h1 className="text-error mb-4 text-6xl font-bold">500</h1>
+          <h1 className="mb-4 text-6xl font-bold dark:text-red-500">500</h1>
           <div className="relative mx-auto mb-6 h-24 w-24">
-            <div className="bg-error absolute inset-0 rounded-full"></div>
-            <div className="bg-background absolute inset-2 rounded-full"></div>
+            <div className="absolute inset-0 rounded-full dark:bg-red-500"></div>
+            <div className="absolute inset-2 rounded-full dark:bg-gray-800"></div>
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-error text-2xl font-bold">STOP</span>
+              <span className="text-2xl font-bold dark:text-red-500">STOP</span>
             </div>
           </div>
-          <h2 className="text-error mb-4 text-2xl font-semibold">
+          <h2 className="mb-4 text-2xl font-semibold dark:text-red-400">
             O&apos;yinda texnik to&apos;xtash!
           </h2>
-          <p className="text-muted-foreground mb-6">
+          <p className="mb-6 text-neutral-300">
             Afsuski, serverda xatolik yuz berdi. Jamoamiz bu muammoni hal qilish
             ustida ishlamoqda.
           </p>
           <div className="space-y-2">
             <Button
               onClick={reset}
-              className="bg-error text-foreground hover:bg-error/80 w-full"
+              className="w-full dark:bg-red-500 dark:text-neutral-900 dark:hover:bg-red-600"
             >
               Qayta urinish
             </Button>
-            <Link href="/">Asosiy maydonga qaytish</Link>
+            <Button asChild variant="outline" className="w-full">
+              <Link href="/">Asosiy maydonga qaytish</Link>
+            </Button>
           </div>
         </div>
       </Card>

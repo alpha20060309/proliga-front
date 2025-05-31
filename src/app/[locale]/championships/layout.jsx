@@ -1,6 +1,6 @@
 'use client'
 
-import Gutter from 'components/Gutter'
+import Gutter from 'shared/Gutter'
 
 const ChampionshipsLayout = ({ children }) => {
   return (

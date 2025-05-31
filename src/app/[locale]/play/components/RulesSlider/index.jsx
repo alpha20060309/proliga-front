@@ -6,7 +6,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel'
-import Gutter from 'components/Gutter'
+import Gutter from 'shared/Gutter'
 import CreateTeamSlide from './CreateTeamSlide'
 import GatherPointsSlide from './GatherPointsSlide'
 import MakeTransfersSlide from './MakeTransfersSlide'

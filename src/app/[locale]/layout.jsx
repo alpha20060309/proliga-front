@@ -1,20 +1,14 @@
 import '../globals.css'
 import 'react-phone-number-input/style.css'
-import Navbar from 'components/Navbar'
-import { DM_Sans } from 'next/font/google'
+import Navbar from 'shared/Navbar'
 import { cn } from '@/lib/utils'
 import { ViewTransitions } from 'next-view-transitions'
 import { Toaster } from '@/components/ui/sonner'
-import Footer from 'components/Footer'
+import Footer from 'shared/Footer'
 import { fontVariables } from '../fonts'
 import RootProvider from 'app/providers/Root.provider'
 import initTranslations from 'app/lib/i18n'
 import TranslationsProvider from 'app/providers/Translations.provider'
-
-const dmSans = DM_Sans({
-  subsets: ['latin', 'latin-ext'],
-  weight: ['400', '700'],
-})
 
 export const metadata = {
   title:
@@ -75,12 +69,11 @@ export default async function RootLayout({ children, params }) {
     <ViewTransitions>
       <html lang={locale} dir={'ltr'} suppressHydrationWarning>
         <head>
-          <link rel="stylesheet" href="https://proliga.uz/static/theme.css" />
+          <link rel="stylesheet" href="https://proliga.uz/static/theme/ALL.css" />
         </head>
         <body
           className={cn(
             'bg-background text-foreground min-h-svh scroll-smooth font-sans antialiased lg:min-h-screen',
-            dmSans.className,
             fontVariables
           )}
         >

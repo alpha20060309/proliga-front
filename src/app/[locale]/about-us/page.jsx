@@ -1,4 +1,4 @@
-import Gutter from 'components/Gutter'
+import Gutter from 'shared/Gutter'
 import { getHTMLPage } from 'app/actions/get-html-page.action'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 

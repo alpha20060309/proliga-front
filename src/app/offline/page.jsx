@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils'
 import OfflineClient from './components/OfflineClient'
+import '../globals.css'
 
 const OfflinePage = () => {
   return (

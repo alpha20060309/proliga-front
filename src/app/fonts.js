@@ -148,7 +148,6 @@ export const jetbrainsMono = JetBrains_Mono({
 })
 
 export const firaMono = Fira_Mono({
-  // Using JetBrains as fallback
   subsets: ['latin', "latin-ext", "cyrillic", "cyrillic-ext"],
   display: 'swap',
   weight: ['400', '500', '700'],

@@ -94,9 +94,9 @@ const Player = ({ player }) => {
           <div className="flex items-center gap-0.5">
             <button
               onClick={handleInfoModal}
-              className="bg-background hover:bg-primary size-4 rounded-full transition-all sm:size-5"
+              className="bg-background group hover:bg-primary size-4 rounded-full transition-all sm:size-5"
             >
-              <Info className="text-foreground hover:text-accent-foreground size-4 sm:size-5" />
+              <Info className="text-foreground group-hover:text-accent-foreground size-4 sm:size-5" />
             </button>
             <div className="bg-primary border-primary-foreground text-primary-foreground flex h-4 w-6 cursor-default items-center justify-center rounded-sm border text-center text-xs font-bold sm:h-5 sm:w-8 md:text-sm">
               {player.is_captain

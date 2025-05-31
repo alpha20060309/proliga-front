@@ -1,8 +1,6 @@
 import Image from 'next/image'
-import { useTranslation } from 'react-i18next'
 
-const PromotionMakeTransfers = () => {
-  const { t } = useTranslation()
+const PromotionMakeTransfers = ({ t }) => {
   return (
     <div className="bg-custom-image align-center flex flex-col bg-cover">
       <h2 className="promotion-header xs:justify-start xs:text-start self-center text-center font-bold uppercase">

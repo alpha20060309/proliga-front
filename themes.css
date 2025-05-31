@@ -1,0 +1,113 @@
+:root {
+  --radius: 0.75rem;
+
+  /* Base colors */
+  --background: #ffffff;
+  --foreground: #2d3748;
+  --card: #f7fafc;
+  --card-foreground: #2d3748;
+  --popover: #ffffff;
+  --popover-foreground: #1a202c;
+
+  /* Brand colors */
+  --primary: #4c51bf;
+  --primary-foreground: #ffffff;
+  --secondary: #edf2f7;
+  --secondary-foreground: #2d3748;
+
+  /* Status colors */
+  --success: #48bb78;
+  --success-foreground: #ffffff;
+  --warning: #ecc94b;
+  --warning-foreground: #2d3748;
+  --error: #f56565;
+  --error-foreground: #ffffff;
+  --info: #4299e1;
+  --info-foreground: #ffffff;
+
+  /* UI colors */
+  --muted: #e2e8f0;
+  --muted-foreground: #718096;
+  --accent: #667eea;
+  --accent-foreground: #ffffff;
+  --destructive: #e53e3e;
+  --border: #e2e8f0;
+  --input: #edf2f7;
+  --ring: #667eea;
+
+  /* Chart colors */
+  --chart-1: #e53e3e;
+  --chart-2: #4299e1;
+  --chart-3: #48bb78;
+  --chart-4: #9f7aea;
+  --chart-5: #ed64a6;
+
+  /* Sidebar colors */
+  --sidebar: #f7fafc;
+  --sidebar-foreground: #2d3748;
+  --sidebar-primary: #4c51bf;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #667eea;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #e2e8f0;
+  --sidebar-ring: #a0aec0;
+  --destructive-foreground: #ffffff;
+
+  /* Typography */
+  --letter-spacing: 0em;
+  --spacing: 0.25rem;
+}
+
+:root.dark {
+  /* Base colors */
+  --background: #1a202c;
+  --foreground: #f7fafc;
+  --card: #2d3748;
+  --card-foreground: #f7fafc;
+  --popover: #2d3748;
+  --popover-foreground: #f7fafc;
+
+  /* Brand colors */
+  --primary: #7f9cf5;
+  --primary-foreground: #1a202c;
+  --secondary: #4a5568;
+  --secondary-foreground: #f7fafc;
+
+  /* Status colors */
+  --success: #68d391;
+  --success-foreground: #1a202c;
+  --warning: #f6e05e;
+  --warning-foreground: #1a202c;
+  --error: #fc8181;
+  --error-foreground: #1a202c;
+  --info: #63b3ed;
+  --info-foreground: #1a202c;
+
+  /* UI colors */
+  --muted: #4a5568;
+  --muted-foreground: #a0aec0;
+  --accent: #7f9cf5;
+  --accent-foreground: #1a202c;
+  --destructive: #fc8181;
+  --border: #4a5568;
+  --input: #2d3748;
+  --ring: #7f9cf5;
+
+  /* Chart colors */
+  --chart-1: #fc8181;
+  --chart-2: #63b3ed;
+  --chart-3: #68d391;
+  --chart-4: #b794f4;
+  --chart-5: #f687b3;
+
+  /* Sidebar colors */
+  --sidebar: #2d3748;
+  --sidebar-foreground: #f7fafc;
+  --sidebar-primary: #7f9cf5;
+  --sidebar-primary-foreground: #1a202c;
+  --sidebar-accent: #7f9cf5;
+  --sidebar-accent-foreground: #1a202c;
+  --sidebar-border: #4a5568;
+  --sidebar-ring: #718096;
+  --destructive-foreground: #1a202c;
+}

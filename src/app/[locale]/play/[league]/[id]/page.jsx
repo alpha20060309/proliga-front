@@ -3,7 +3,7 @@
 import GameNavigation from '../../components/GameNavigation'
 import CurrentTab from '../../components/CurrentTab'
 import Spinner from 'components/Spinner'
-import Gutter from 'components/Gutter'
+import Gutter from 'shared/Gutter'
 import { cn } from '@/lib/utils'
 import { useEffect, useMemo } from 'react'
 import { TABS } from 'app/utils/tabs.util'

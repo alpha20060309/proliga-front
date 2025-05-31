@@ -1,4 +1,4 @@
-import Gutter from 'components/Gutter'
+import Gutter from 'shared/Gutter'
 import { Skeleton } from '@/components/ui/skeleton'
 
 export default function SettingsSkeleton() {

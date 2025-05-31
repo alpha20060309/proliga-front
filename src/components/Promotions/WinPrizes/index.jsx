@@ -1,11 +1,15 @@
+'use client'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { selectPrizes } from 'app/lib/features/prize/prize.selector'
 import Image from 'next/image'
+
 const PromotionWinPrizes = () => {
   const { t } = useTranslation()
   const prizes = useSelector(selectPrizes)
+
+  if (prizes?.length === 0) return null
 
   return (
     <div className="space-y-6">
@@ -34,7 +38,7 @@ const Prize = ({ prize }) => {
       <p className="text-foreground mb-1 text-lg md:mb-2 xl:text-xl">
         {getCorrectName({ lang, uz: prize?.name, ru: prize?.name_ru })}
       </p>
-      <div className="bg-background flex aspect-square items-center justify-center overflow-hidden rounded-xl p-1 lg:p-2">
+      <div className="flex aspect-square items-center justify-center overflow-hidden rounded-xl bg-white p-1 lg:p-2">
         <Image
           src={prize?.image}
           alt={prize?.name}

@@ -1,7 +1,5 @@
-import { Serwist, NetworkOnly, BackgroundSyncQueue } from 'serwist'
+import { Serwist, NetworkFirst, BackgroundSyncQueue } from 'serwist'
 import { defaultCache } from '@serwist/next/worker'
-
-const locale = 'uz'
 
 const serwist = new Serwist({
   precacheEntries: self.__SW_MANIFEST,
@@ -11,12 +9,12 @@ const serwist = new Serwist({
   runtimeCaching: [
     ...defaultCache,
     {
-      handler: new NetworkOnly(),
+      handler: new NetworkFirst(),
       method: 'POST',
       matcher: ({ request }) => request.method === 'POST',
     },
     {
-      handler: new NetworkOnly(),
+      handler: new NetworkFirst(),
       method: 'PATCH',
       matcher: ({ request }) => request.method === 'PATCH',
     },
@@ -29,7 +27,7 @@ const serwist = new Serwist({
   fallbacks: {
     entries: [
       {
-        url: `/${locale}/offline`,
+        url: '/offline',
         matcher({ request }) {
           return request.destination === 'document'
         },

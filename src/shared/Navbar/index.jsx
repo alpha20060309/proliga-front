@@ -4,19 +4,19 @@ import { usePathname } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
 import { Link } from 'next-view-transitions'
-import { ThemeSwitcherSkeleton } from './ThemeSwitch'
+import { ThemeSwitcherSkeleton } from '../SwitcherTheme'
 import Image from 'next/image'
 import Gutter from '../Gutter'
 import PlayLinks from './Links'
 import NavbarUserDesktop from './UserDesktop'
-import ChangeLanguageDropdown from './Language'
-import Notification from './Notification'
-import Marquee from 'components/Marquee'
-import ThemeCustomizer from './ThemeCustomizer'
+import ChangeLanguageDropdown from '../SwitcherLanguage'
+import Notification from '../Notification'
+import Marquee from '../Marquee'
+import ThemeCustomizer from '../ThemeCustomizer'
 import dynamic from 'next/dynamic'
 import BottomNavigation from './MobileNavigation'
 
-const ThemeSwitcher = dynamic(() => import('./ThemeSwitch'), {
+const ThemeSwitcher = dynamic(() => import('../SwitcherTheme'), {
   ssr: false,
   loading: () => <ThemeSwitcherSkeleton />,
 })

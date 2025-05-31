@@ -106,18 +106,18 @@ const Player = ({ player }) => {
             <div className="flex items-center gap-0.5 sm:gap-1">
               <button
                 onClick={handleTransfer}
-                className="hover:border-accent hover:bg-accent border-foreground/50 bg-background flex size-4 items-center justify-center overflow-hidden rounded-sm border p-0.5 transition-colors sm:size-5"
+                className="hover:border-accent hover:bg-accent border-foreground/50 bg-background group flex size-4 items-center justify-center overflow-hidden rounded-sm border p-0.5 transition-colors sm:size-5"
               >
-                <ArrowUpDown className="text-foreground hover:text-accent-foreground size-4 sm:size-5" />
+                <ArrowUpDown className="text-foreground group-hover:text-accent-foreground size-4 sm:size-5" />
               </button>
               <div className="border-foreground bg-background text-foreground flex h-4 w-6 cursor-default items-center justify-center rounded-sm border text-center text-xs font-bold sm:h-5 sm:w-8 md:text-sm">
                 {player.price ?? '00'}
               </div>
               <button
                 onClick={toggleDeleteModal}
-                className="border-foreground/50 bg-destructive hover:bg-accent hover:border-accent flex size-4 items-center justify-center rounded-sm border p-0.5 transition-colors sm:size-5"
+                className="border-foreground/50 bg-destructive group hover:bg-accent group-hover:border-accent flex size-4 items-center justify-center rounded-sm border p-0.5 transition-colors sm:size-5"
               >
-                <X className="text-foreground hover:text-accent-foreground size-4 sm:size-5" />
+                <X className="text-foreground group-hover:text-accent-foreground size-4 sm:size-5" />
               </button>
             </div>
           </>
