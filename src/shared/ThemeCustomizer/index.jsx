@@ -18,13 +18,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useUpdateUserThemes } from 'app/hooks/user/useUpdateUserThemes/useUpdateUserThemes'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { toast } from 'sonner'
-import {
-  setTheme,
-} from 'app/lib/features/systemConfig/systemConfig.slice'
-import {
-  DEFAULT_DARK_THEME,
-  DEFAULT_LIGHT_THEME,
-} from 'app/utils/default-theme.util'
+import { setTheme } from 'app/lib/features/systemConfig/systemConfig.slice'
 import { setSelectedTheme } from 'app/lib/features/systemConfig/systemConfig.slice'
 import { useState } from 'react'
 import { fetchThemes } from 'app/lib/features/systemConfig/systemConfig.thunk'
@@ -56,6 +50,7 @@ const ThemeCustomizer = () => {
           dispatch(fetchThemes())
           setSavePreset(false)
           setPresetName('')
+          dispatch(setSelectedTheme(''))
         },
       })
       toast.success(t('Theme saved successfully'))
