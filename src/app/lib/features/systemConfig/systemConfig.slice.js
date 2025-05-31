@@ -28,6 +28,7 @@ const systemConfigSlice = createSlice({
     setDarkTheme: (state, action) => {
       const { type, data } = action.payload
 
+      state.selectedTheme = ''
       switch (type) {
         case 'colors':
           state.darkTheme.colors = data
@@ -46,6 +47,7 @@ const systemConfigSlice = createSlice({
     setLightTheme: (state, action) => {
       const { type, data } = action.payload
 
+      state.selectedTheme = ''
       switch (type) {
         case 'colors':
           state.lightTheme.colors = data

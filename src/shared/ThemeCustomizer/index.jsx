@@ -19,8 +19,7 @@ import { useUpdateUserThemes } from 'app/hooks/user/useUpdateUserThemes/useUpdat
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { toast } from 'sonner'
 import {
-  setDarkTheme,
-  setLightTheme,
+  setTheme,
 } from 'app/lib/features/systemConfig/systemConfig.slice'
 import {
   DEFAULT_DARK_THEME,
@@ -78,13 +77,8 @@ const ThemeCustomizer = () => {
         toast.error(error)
       }
     }
-    const themeTypes = ['colors', 'shadows', 'global', 'font']
-
-    themeTypes.forEach((type) => {
-      dispatch(setLightTheme({ type, data: DEFAULT_LIGHT_THEME[type] }))
-      dispatch(setDarkTheme({ type, data: DEFAULT_DARK_THEME[type] }))
-    })
-
+    dispatch(setTheme({ type: 'light', data: {} }))
+    dispatch(setTheme({ type: 'dark', data: {} }))
     dispatch(setSelectedTheme(''))
 
     !user?.id && toast.success(t('Theme is reset to default'))
