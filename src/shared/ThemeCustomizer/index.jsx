@@ -8,16 +8,16 @@ import {
 } from '@/components/ui/sheet'
 import { Palette } from 'lucide-react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import ColorModifier from './ColorModifier'
-import FontModifier from './FontModifer'
-import GlobalModifier from './GlobalModifier'
-import ShadowModifier from './ShadowsModifier'
+import ColorModifier from './components/ColorModifier'
+import FontModifier from './components/FontModifer'
+import GlobalModifier from './components/GlobalModifier'
+import ShadowModifier from './components/ShadowsModifier'
+import SelectTheme from './components/SelectTheme'
 import { Save, Loader2, RefreshCw } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useUpdateUserThemes } from 'app/hooks/user/useUpdateUserThemes/useUpdateUserThemes'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { toast } from 'sonner'
-import SelectTheme from './SelectTheme'
 import {
   setDarkTheme,
   setLightTheme,
@@ -30,6 +30,7 @@ import { setSelectedTheme } from 'app/lib/features/systemConfig/systemConfig.sli
 import { useState } from 'react'
 import { fetchThemes } from 'app/lib/features/systemConfig/systemConfig.thunk'
 import { useTranslation } from 'react-i18next'
+import { Switch } from '@/components/ui/switch'
 
 const ThemeCustomizer = () => {
   const dispatch = useDispatch()
@@ -187,28 +188,11 @@ const ThemeCustomizer = () => {
           </button>
         </section>
         {user?.id && user?.is_admin && (
-          <div className="my-4 flex flex-col gap-3 rounded-md border border-[#4A4A4A] bg-[#333333] p-4">
-            <div className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                id="save-preset"
-                name="save-preset"
-                className="h-4 w-4 rounded border-[#666666] bg-[#4A4A4A] text-[#ffdd00] accent-[#ffdd00] focus:ring-2 focus:ring-[#ffdd00] focus:ring-offset-1 focus:ring-offset-[#333333]"
-                onChange={(e) => setSavePreset(e.target.checked)}
-              />
-              <label htmlFor="save-preset" className="text-sm text-[#E0E0E0]">
-                {t('Save as a preset')}
-              </label>
-            </div>
-
-            <input
-              type="text"
-              placeholder={t('Enter preset name')}
-              className="w-full rounded-md border border-[#4A4A4A] bg-[#2D2D2D] px-3 py-2 text-sm text-[#E0E0E0] placeholder:text-[#757575] focus:border-[#ffdd00] focus:ring-1 focus:ring-[#ffdd00] focus:outline-none"
-              value={presetName}
-              onChange={(e) => setPresetName(e.target.value)}
-              disabled={!savePreset}
-            />
+          <div className="my-4 flex flex-col gap-3 rounded-md border border-[#4A4A4A] bg-[#1A1A1A] p-4">
+            <Switch aria-readonly />
+            <label htmlFor="theme-switch">default</label>
+            <Switch aria-readonly />
+            <label htmlFor="theme-switch">global</label>
           </div>
         )}
         <SheetDescription className={'sr-only'}>

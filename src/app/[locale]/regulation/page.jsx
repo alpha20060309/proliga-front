@@ -1,6 +1,6 @@
 'use client'
 
-import Gutter from 'components/Gutter'
+import Gutter from 'shared/Gutter'
 import PageSkeleton from 'components/PageSkeleton'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'

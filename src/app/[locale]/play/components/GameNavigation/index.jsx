@@ -1,4 +1,4 @@
-import Gutter from '../../../../../components/Gutter'
+import Gutter from 'shared/Gutter'
 import Tabs from './Tabs'
 import { useSelector } from 'react-redux'
 import { TABS } from '../../../../utils/tabs.util'

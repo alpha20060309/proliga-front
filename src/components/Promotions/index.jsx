@@ -3,7 +3,7 @@ import PromotionCreateTeam from './CreateTeam'
 import PromotionGatherPoints from './GatherPoints'
 import PromotionMakeTransfers from './MakeTransfers'
 import PromotionWinPrizes from './WinPrizes'
-import Gutter from 'components/Gutter'
+import Gutter from 'shared/Gutter'
 import { cn } from '@/lib/utils'
 import initTranslations from 'app/lib/i18n'
 

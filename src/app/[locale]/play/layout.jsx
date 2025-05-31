@@ -1,5 +1,5 @@
 import RulesSlider from './components/RulesSlider'
-import Gutter from 'components/Gutter'
+import Gutter from 'shared/Gutter'
 import Matches from './components/Matches'
 import BigBanner from 'components/Banners/Big'
 import MiniBanner from 'components/Banners/Mini'
