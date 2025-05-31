@@ -1,37 +1,33 @@
-'use client'
-
 import PromotionCompete from './Compete'
 import PromotionCreateTeam from './CreateTeam'
 import PromotionGatherPoints from './GatherPoints'
 import PromotionMakeTransfers from './MakeTransfers'
 import PromotionWinPrizes from './WinPrizes'
-import { useSelector } from 'react-redux'
-import { selectPrizes } from 'app/lib/features/prize/prize.selector'
 import Gutter from 'components/Gutter'
 import { cn } from '@/lib/utils'
+import initTranslations from 'app/lib/i18n'
 
-const Promotions = () => {
-  const prizes = useSelector(selectPrizes)
+const Promotions = async ({ params }) => {
+  const { locale } = await params
+  const { t } = await initTranslations(locale)
 
   return (
     <>
       <Wrapper className="bg-card-foreground/10">
-        <PromotionCreateTeam />
+        <PromotionCreateTeam t={t} />
       </Wrapper>
       <Wrapper className={'bg-card-foreground/30'}>
-        <PromotionGatherPoints />
+        <PromotionGatherPoints t={t} />
       </Wrapper>
       <Wrapper className={'bg-card-foreground/10'}>
-        <PromotionMakeTransfers />
+        <PromotionMakeTransfers t={t} />
       </Wrapper>
       <Wrapper className={'bg-card-foreground/30'}>
-        <PromotionCompete />
+        <PromotionCompete t={t} />
       </Wrapper>
-      {prizes?.length > 0 && (
-        <Wrapper className={'bg-card-foreground/10'}>
-          <PromotionWinPrizes />
-        </Wrapper>
-      )}
+      <Wrapper className={'bg-card-foreground/10'}>
+        <PromotionWinPrizes />
+      </Wrapper>
     </>
   )
 }

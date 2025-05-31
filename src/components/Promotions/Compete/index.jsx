@@ -1,10 +1,6 @@
-'use client'
-
 import Image from 'next/image'
-import { useTranslation } from 'react-i18next'
 
-const PromotionCompete = () => {
-  const { t } = useTranslation()
+const PromotionCompete = ({ t }) => {
   return (
     <div className="flex w-full flex-col-reverse justify-start gap-6 md:flex-row md:items-center md:justify-between md:gap-4 lg:gap-8">
       <div className="w-full flex-1 items-center self-center">

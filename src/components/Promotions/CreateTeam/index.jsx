@@ -1,8 +1,6 @@
 import Image from 'next/image'
-import { useTranslation } from 'react-i18next'
 
-const PromotionCreateTeam = () => {
-  const { t } = useTranslation()
+const PromotionCreateTeam = ({ t }) => {
   return (
     <div className="flex w-full flex-col items-center justify-between gap-8 md:flex-row md:gap-4 lg:gap-0">
       <div className="flex flex-1 flex-col flex-wrap">
