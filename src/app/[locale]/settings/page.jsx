@@ -1,7 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { SETTINGS_TAB } from './tabs'
+import { useState } from 'react'
 import TransactionsHistory from './components/Transactions'
 import ChangePassword from './components/Security'
 import SettingsTab from './components/Settings'
@@ -19,12 +18,12 @@ const Navigation = dynamic(() => import('./components/Navigation'), {
 function Settings() {
   const [tab, setTab] = useState(SETTINGS_TAB.PROFILE)
 
-  useEffect(() => {
-    const hash = window.location.hash.slice(1)
-    if (hash && Object.values(SETTINGS_TAB).includes(hash)) {
-      setTab(hash)
-    }
-  }, [])
+  // useEffect(() => {
+  //   const hash = window.location.hash.slice(1)
+  //   if (hash && Object.values(SETTINGS_TAB).includes(hash)) {
+  //     setTab(hash)
+  //   }
+  // }, [])
 
   const renderSection = () => {
     switch (tab) {
@@ -47,6 +46,13 @@ function Settings() {
       {renderSection()}
     </main>
   )
+}
+
+export const SETTINGS_TAB = {
+  PROFILE: 'profile',
+  SETTINGS: 'settings',
+  HISTORY: 'history',
+  SECURITY: 'security',
 }
 
 export default Settings

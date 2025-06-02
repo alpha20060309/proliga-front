@@ -60,13 +60,13 @@ function ChangePasswordForm() {
         onSubmit={handleSubmit}
         className="flex flex-col gap-4 px-1 sm:max-w-96"
       >
-        <div className="relative space-y-1 sm:max-w-96">
+        <div className="relative space-y-2 sm:max-w-96">
           <Label htmlFor="newPassword">{t('Yangi parol')}</Label>
-          <div className="relative">
+          <div className="relative space-y-1">
             <Input
               id="newPassword"
               name="newPassword"
-              className="border-border bg-input h-10 pr-10"
+              className="h-10 pr-10"
               type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -86,7 +86,7 @@ function ChangePasswordForm() {
             </Button>
           </div>
         </div>
-        <div className="relative space-y-1 sm:max-w-96">
+        <div className="relative space-y-2 sm:max-w-96">
           <Label htmlFor="confirmPassword">
             {t('Yangi parolni qayta kiriting')}
           </Label>
@@ -94,7 +94,7 @@ function ChangePasswordForm() {
             <Input
               id="confirmPassword"
               name="confirmPassword"
-              className="border-border bg-input h-10 pr-10"
+              className="h-10 pr-10"
               type={showConfirmPassword ? 'text' : 'password'}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
@@ -115,7 +115,9 @@ function ChangePasswordForm() {
           </div>
         </div>
         <Button
-          className="border-accent/75 text-foreground hover:text-accent-foreground hover:border-foreground/50 xs:max-w-40 bg-secondary h-10 w-full rounded-sm border text-sm font-semibold transition-all"
+          className="hover:bg-accent/80 max-w-40"
+          size="lg"
+          variant={'outline'}
           type="submit"
           disabled={isLoading}
         >

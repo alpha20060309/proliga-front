@@ -86,17 +86,18 @@ export const useSetUserCredentials = () => {
 
         // Step 3: Update user table
         const { error: fullUserError } = await supabase
+        const obj = {
+          email,
+          phone,
+          geo: JSON.stringify(geo) || null,
+          agent: JSON.stringify(agent) || null,
+          visitor: fingerprint || '',
+          visited_at: new Date(),
+          isOAuth: true,
+        }
 
           .from('user')
-          .update({
-            email,
-            phone,
-            geo: JSON.stringify(geo) || null,
-            agent: JSON.stringify(agent) || null,
-            visitor: fingerprint || '',
-            visited_at: new Date(),
-            isOAuth: true,
-          })
+          .update(obj)
           .eq('id', user?.id)
           .is('deleted_at', null)
           .single()
@@ -110,7 +111,7 @@ export const useSetUserCredentials = () => {
         }
 
         // Step 4: Send OTP and redirect to confirmation page
-        await update()
+        await update(obj)
         setData(user)
         toast.info(t('Please confirm your phone number to complete sign up!'))
         await sendOTP({

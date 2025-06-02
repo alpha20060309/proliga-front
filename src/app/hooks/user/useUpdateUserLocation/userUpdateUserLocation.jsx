@@ -49,7 +49,7 @@ export const useUpdateUserLocation = () => {
         }
 
         cb()
-        await update()
+        await update({ location })
       } catch (error) {
         setError(
           error instanceof Error

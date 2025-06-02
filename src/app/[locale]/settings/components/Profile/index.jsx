@@ -74,7 +74,7 @@ const SettingsProfile = () => {
             {t('Foydalanuvchi ID-si')}
           </p>
           <div
-            className="bg-accent hover:bg-accent text-accent-foreground flex cursor-pointer items-center justify-center gap-1 rounded-md px-3 py-1.5 text-base font-medium transition-all"
+            className="bg-accent hover:bg-primary text-accent-foreground flex cursor-pointer items-center justify-center gap-1 rounded-md px-3 py-1.5 text-base font-medium transition-all"
             onClick={() => handleClick(user?.id)}
           >
             <Copy className="text-accent-foreground size-4" />

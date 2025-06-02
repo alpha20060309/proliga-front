@@ -1,13 +1,13 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { SETTINGS_TABS } from '../../tabs'
 const SettingsNavigationTab = dynamic(() => import('./Tab'), {
   ssr: false,
 })
 const SettingsSidebarLogOut = dynamic(() => import('./LogOut/LogOut'), {
   ssr: false,
 })
+import { SETTINGS_TAB } from '../../page'
 
 const SettingsNavigation = ({ setTab, currentTab }) => {
   return (
@@ -24,5 +24,28 @@ const SettingsNavigation = ({ setTab, currentTab }) => {
     </aside>
   )
 }
+
+const SETTINGS_TABS = [
+  {
+    key: SETTINGS_TAB.PROFILE,
+    title: 'Profil',
+    icon: 'User',
+  },
+  {
+    key: SETTINGS_TAB.SETTINGS,
+    title: 'Sozlamalar',
+    icon: 'Cog',
+  },
+  {
+    key: SETTINGS_TAB.HISTORY,
+    title: 'Xarajatlar',
+    icon: 'History',
+  },
+  {
+    key: SETTINGS_TAB.SECURITY,
+    title: 'Security',
+    icon: 'Shield',
+  },
+]
 
 export default SettingsNavigation

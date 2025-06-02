@@ -70,7 +70,7 @@ export default function ChangePhoneForm() {
         onSubmit={handleSubmit}
         className="flex flex-col gap-4 px-1 sm:max-w-96"
       >
-        <div className="relative space-y-1">
+        <div className="relative space-y-2">
           <Label htmlFor="phone">{t('New Phone Number')}:</Label>
           <PhoneInput
             id="phone"
@@ -82,13 +82,13 @@ export default function ChangePhoneForm() {
             onChange={setPhone}
           />
         </div>
-        <div className="relative space-y-1 sm:max-w-96">
+        <div className="relative space-y-2 sm:max-w-96">
           <Label htmlFor="oldPassword">{t('Parol')}</Label>
           <div className="relative">
             <Input
               id="oldPassword"
               name="oldPassword"
-              className="border-border bg-input h-10 pr-10"
+              className="h-10 pr-10"
               type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -109,7 +109,9 @@ export default function ChangePhoneForm() {
           </div>
         </div>
         <Button
-          className="border-accent/75 text-foreground hover:text-accent-foreground hover:border-foreground/50 xs:max-w-40 bg-secondary h-10 w-full rounded-sm border text-sm font-semibold transition-all"
+          className="hover:bg-accent/80 max-w-40"
+          size="lg"
+          variant={'outline'}
           type="submit"
           disabled={isLoading}
         >

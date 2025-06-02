@@ -27,9 +27,9 @@ const serwist = new Serwist({
   fallbacks: {
     entries: [
       {
-        url: '/offline',
+        url: "/~offline",
         matcher({ request }) {
-          return request.destination === 'document'
+          return request.destination === "document";
         },
       },
     ],
@@ -53,5 +53,17 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(backgroundSync(event))
   }
 })
+
+const urlsToPrecache = ["/~offline"];
+
+self.addEventListener("install", (event) => {
+  const requestPromises = Promise.all(
+    urlsToPrecache.map((entry) => {
+      return serwist.handleRequest({ request: new Request(entry), event });
+    }),
+  );
+
+  event.waitUntil(requestPromises);
+});
 
 serwist.addEventListeners()

@@ -9,14 +9,17 @@ import { fontVariables } from '../fonts'
 import RootProvider from 'app/providers/Root.provider'
 import initTranslations from 'app/lib/i18n'
 import TranslationsProvider from 'app/providers/Translations.provider'
+import { auth } from 'app/api/auth/[...nextauth]/route'
+
+const APP_NAME = 'Proliga - Fantaziya Futbol Platformasi'
+const APP_DESCRIPTION =
+  "O'zbekiston Fantaziya Futbol Ligasi - haqiqiy futbol ligalari o'yinchilariga asoslangan virtual futbol o'yini"
 
 export const metadata = {
-  title:
-    "Futbol fantasy: O'zbekiston, Angliya, Ispaniya, Italiya va Chempionlar ligasi turnirlari proliga.uz saytida",
-  description:
-    "O'zbekiston Fantasy Futbol Ligasi rasmiy veb-sayti. Chempionatlar, o'yinlar, natijalar va futbol yangiliklari.",
+  title: APP_NAME,
+  description: APP_DESCRIPTION,
   keywords:
-    "proliga, o'zbekiston futboli, professional liga, futbol, superliga, pro liga, proliga.uz, Proliga.uz, fantasy futbol, fantasy futbol uz",
+    "proliga, O'zbekiston futboli, professional liga, futbol, superliga, pro liga, proliga.uz, Proliga.uz, fantasy futbol, fantasy futbol uz",
   authors: [{ name: 'Proliga' }],
   creator: 'Proliga',
   publisher: 'Proliga',
@@ -26,19 +29,23 @@ export const metadata = {
       { url: '/favicon.ico' },
       { url: '/favicon.svg' },
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-16x16.jpg', sizes: '16x16', type: 'image/jpeg' },
     ],
     apple: [{ url: '/favicon.png', sizes: '180x180', type: 'image/png' }],
   },
   manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: APP_NAME,
+    themeColor: '#000000',
+  },
   openGraph: {
     type: 'website',
     locale: 'uz_UZ',
     url: 'https://proliga.uz',
-    title:
-      "Futbol fantasy: O'zbekiston, Angliya, Ispaniya, Italiya va Chempionlar ligasi turnirlari proliga.uz saytida",
-    description:
-      "O'zbekiston Fantasy Futbol Ligasi rasmiy veb-sayti. Chempionatlar, o'yinlar, natijalar va futbol yangiliklari.",
+    title: APP_NAME,
+    description: APP_DESCRIPTION,
     siteName: 'Proliga',
     images: [
       {
@@ -53,23 +60,35 @@ export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_URL),
   twitter: {
     card: 'summary_large_image',
-    title:
-      "Futbol fantasy: O'zbekiston, Angliya, Ispaniya, Italiya va Chempionlar ligasi turnirlari proliga.uz saytida",
-    description:
-      "O'zbekiston Fantasy Futbol Ligasi rasmiy veb-sayti. Chempionatlar, o'yinlar, natijalar va futbol yangiliklari.",
+    title: APP_DESCRIPTION,
+    description: APP_DESCRIPTION,
     images: ['/Screenshot.png'],
   },
 }
 
 export default async function RootLayout({ children, params }) {
+  const session = await auth()
   const { locale } = await params
   const { resources } = await initTranslations(locale)
+  const userId = session?.user?.id
+  let themeURL = ''
+
+  if (session?.user_theme_id) {
+    console.log('user_theme_id', session.user_theme_id)
+    themeURL = `/static/user/${userId}/user.css`
+  } else if (session?.theme_id) {
+    console.log('theme_id', session.theme_id)
+    themeURL = `/static/theme/${session.theme_id}.css`
+  } else {
+    console.log('ALL')
+    themeURL = `/static/theme/ALL.css`
+  }
 
   return (
     <ViewTransitions>
       <html lang={locale} dir={'ltr'} suppressHydrationWarning>
         <head>
-          <link rel="stylesheet" href="https://proliga.uz/static/theme/ALL.css" />
+          <link rel="stylesheet" href={themeURL} />
         </head>
         <body
           className={cn(

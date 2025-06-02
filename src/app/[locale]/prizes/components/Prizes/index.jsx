@@ -1,9 +1,13 @@
 'use client'
-import { Skeleton } from '@/components/ui/skeleton'
-import dynamic from 'next/dynamic'
-import { CompetitionSkeleton } from '../PrizesSkeleton'
-import { PrizesSkeleton } from '../PrizesSkeleton'
 
+import dynamic from 'next/dynamic'
+import { Skeleton } from '@/components/ui/skeleton'
+import { CompetitionSkeleton, PrizesSkeleton } from '../PrizesSkeleton'
+import { useSelector } from 'react-redux'
+import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { selectCompetition } from 'app/lib/features/competition/competition.selector'
+import { selectPrizes } from 'app/lib/features/prize/prize.selector'
 const PrizesTitle = dynamic(() => import('../PrizesTitle'), {
   ssr: false,
   loading: () => <Skeleton className="bg-muted mb-4 h-12 w-48" />,
@@ -12,11 +16,6 @@ const PrizeCompetition = dynamic(() => import('../Competition'), {
   ssr: false,
   loading: () => <CompetitionSkeleton />,
 })
-import { useSelector } from 'react-redux'
-import { useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
-import { selectCompetition } from 'app/lib/features/competition/competition.selector'
-import { selectPrizes } from 'app/lib/features/prize/prize.selector'
 
 const PrizesSection = () => {
   const { t } = useTranslation()
@@ -39,7 +38,7 @@ const PrizesSection = () => {
       ) : prizes?.length > 0 ? (
         <>
           <PrizesTitle />
-          <section className="flex flex-col gap-2 justify-center items-center">
+          <section className="flex flex-col items-center justify-center gap-2">
             {competition?.map((competition, index) => (
               <PrizeCompetition competition={competition} key={index} />
             ))}

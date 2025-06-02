@@ -10,6 +10,7 @@ export const {
   auth,
   signIn,
   signOut,
+  unstable_update,
 } = NextAuth({
   ...authConfig,
   callbacks: {
@@ -18,33 +19,90 @@ export const {
       if (!user?.id) return false
       return true
     },
+    async jwt({ token, user, account, trigger, session }) {
+
+      if (user?.id && account) {
+        token.sub = String(user.id)
+        token.id = user.id
+
+        token.email = user.email || null
+        token.name = user.name || null
+        token.image = user.image || null
+        token.isOAuth = account.provider !== 'credentials'
+        token.phone = null
+        token.birth_date = null
+        token.last_name = null
+        token.middle_name = null
+        token.gender = null
+        token.bio = null
+        token.balance = null
+        token.deleted_at = null
+        token.language = LANGUAGE.uz
+        token.phone_verified = false
+        token.location = null
+        token.theme_id = null
+        token.user_theme_id = null
+        token.is_admin = false
+
+        const dbUser = await getUserById(user.id)
+        if (dbUser) {
+          token.email = dbUser.email
+          token.phone = dbUser.phone
+          token.isOAuth = dbUser.isOAuth
+          token.birth_date = dbUser.birth_date
+          token.name = dbUser.name
+          token.last_name = dbUser.last_name
+          token.middle_name = dbUser.middle_name
+          token.gender = dbUser.gender
+          token.bio = dbUser.bio
+          token.balance = dbUser.balance
+          token.image = dbUser.image
+          token.deleted_at = dbUser.deleted_at
+          token.language = dbUser.language || LANGUAGE.uz
+          token.phone_verified = dbUser.phone_verified
+          token.location = dbUser.location
+          token.theme_id = dbUser.theme_id
+          token.user_theme_id = dbUser.user_theme_id
+          token.is_admin = dbUser.is_admin
+        }
+      }
+
+      if (trigger === 'update' && session) {
+        const allowedUpdates = [
+          'name', 'last_name', 'middle_name', 'gender', 'bio', 'image',
+          'language', 'location', 'theme_id', 'user_theme_id', 'birth_date', 'phone',
+        ]
+        for (const key of allowedUpdates) {
+          if (Object.hasOwn(session, key)) {
+            token[key] = session[key]
+          }
+        }
+      }
+      return token
+    },
     async session({ token, session }) {
       if (token.sub && session.user) {
-        session.user.id = +token.sub
+        session.user.id = token.id ? Number(token.id) : Number(token.sub)
       }
-      if (session.user) {
-        const user = await getUserById(session.user.id)
-        session.user.email = token.email || user.email
-        session.user.phone = user?.phone || null
-        session.user.isOAuth = user?.isOAuth || false
-        session.user.birth_date = user?.birth_date || null
-        session.user.name = user?.name || null
-        session.user.last_name = user?.last_name || null
-        session.user.middle_name = user?.middle_name || null
-        session.user.gender = user?.gender || null
-        session.user.bio = user?.bio || null
-        session.user.balance = user?.balance || null
-        session.user.image = user?.image || null
-        session.user.deleted_at = user?.deleted_at || null
-        session.user.language = user?.language || LANGUAGE.uz
-        session.user.phone_verified = user?.phone_verified || false
-        session.user.location = user?.location || null
-        session.user.ntf_token = user?.ntf_token || null
-        session.user.ntf_topics = user?.ntf_topics || null
-        session.user.ntf_enabled = user?.ntf_enabled || false
-        session.user.ntf_token_created_at = user?.ntf_token_created_at || null
-        session.user.theme_id = user?.theme_id || null
-        session.user.is_admin = user?.is_admin || false
+      if (session.user && token) {
+        session.user.email = token.email
+        session.user.phone = token.phone
+        session.user.isOAuth = token.isOAuth
+        session.user.birth_date = token.birth_date
+        session.user.name = token.name
+        session.user.last_name = token.last_name
+        session.user.middle_name = token.middle_name
+        session.user.gender = token.gender
+        session.user.bio = token.bio
+        session.user.balance = token.balance
+        session.user.image = token.image
+        session.user.deleted_at = token.deleted_at
+        session.user.language = token.language
+        session.user.phone_verified = token.phone_verified
+        session.user.location = token.location
+        session.user.theme_id = token.theme_id
+        session.user.user_theme_id = token.user_theme_id
+        session.user.is_admin = token.is_admin
       }
       return session
     },

@@ -760,16 +760,23 @@ model team_player {
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model theme {
-  id                        Int      @id @default(autoincrement())
-  user_id                   Int
-  light_theme               Json
-  dark_theme                Json
-  is_default                Boolean?
-  name                      String?
-  name_ru                   String?
-  is_global                 Boolean?
-  user                      user     @relation(fields: [user_id], references: [id], onDelete: SetNull, onUpdate: SetNull)
-  user_user_theme_idTotheme user[]   @relation("user_theme_idTotheme")
+  id                             Int       @id @default(autoincrement())
+  user_id                        Int?
+  light_theme                    Json
+  dark_theme                     Json
+  is_default                     Boolean   @default(false)
+  name                           String
+  name_ru                        String
+  is_global                      Boolean   @default(false)
+  created_at                     DateTime? @db.Timestamptz(6)
+  updated_at                     DateTime? @db.Timestamptz(6)
+  deleted_at                     DateTime? @db.Timestamptz(6)
+  created_by                     Int?
+  updated_by                     Int?
+  deleted_by                     Int?
+  user                           user?     @relation(fields: [user_id], references: [id], onUpdate: SetNull)
+  user_user_theme_idTotheme      user[]    @relation("user_theme_idTotheme")
+  user_user_user_theme_idTotheme user[]    @relation("user_user_theme_idTotheme")
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -890,6 +897,7 @@ model user {
   ntf_token_created_at                             DateTime?             @db.Timestamptz(6)
   is_admin                                         Boolean?              @default(false)
   theme_id                                         Int?
+  user_theme_id                                    Int?
   account                                          account[]
   banner_view                                      banner_view[]
   club_club_created_byTouser                       club[]                @relation("club_created_byTouser")
@@ -917,6 +925,7 @@ model user {
   theme                                            theme[]
   tour_team                                        tour_team[]
   theme_user_theme_idTotheme                       theme?                @relation("user_theme_idTotheme", fields: [theme_id], references: [id], onUpdate: SetNull, map: "theme_id_fkey")
+  theme_user_user_theme_idTotheme                  theme?                @relation("user_user_theme_idTotheme", fields: [user_theme_id], references: [id], onUpdate: SetNull, map: "theme_id_fkey2")
   user_activity_user_activity_created_byTouser     user_activity[]       @relation("user_activity_created_byTouser")
   user_activity_user_activity_deleted_byTouser     user_activity[]       @relation("user_activity_deleted_byTouser")
   user_activity_user_activity_updated_byTouser     user_activity[]       @relation("user_activity_updated_byTouser")
