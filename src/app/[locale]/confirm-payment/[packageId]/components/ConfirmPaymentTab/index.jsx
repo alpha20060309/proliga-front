@@ -52,7 +52,7 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
       buyPackageWithClick({ userTable, currentPackage, currentTeam })
     }
     await update({
-      balance_updated_at: new Date(),
+      updated_at: new Date(),
     })
   }
 
