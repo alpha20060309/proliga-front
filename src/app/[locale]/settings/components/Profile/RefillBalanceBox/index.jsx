@@ -40,7 +40,8 @@ const ProfessionalRefillBalanceBox = () => {
         </div>
         <Button
           onClick={() => setModalOpen(true)}
-          className="bg-accent text-accent-foreground hover:bg-accent w-full shadow transition-all"
+          size="lg"
+          className="w-full hover:bg-accent border border-border"
         >
           <ArrowUpCircle className="mr-2 h-4 w-4" />
           {t('Balansni toldirish')}

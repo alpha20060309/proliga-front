@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next'
 import { SettingsContainer } from '../Container'
 import ChangePasswordForm from './ChangePasswordForm'
 import ChangePhoneForm from './ChangePhoneForm'
+import { Separator } from '@/components/ui/separator'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 export default function SettingsPage() {
   const { t } = useTranslation()
@@ -16,16 +18,25 @@ export default function SettingsPage() {
       </h2>
       <section className="flex flex-col gap-4 lg:flex-row">
         <FormContainer>
-          <h3 className={cn('mb-2 text-lg font-bold')}>
-            {t('Parol Yangilash')}
-          </h3>
-          <ChangePasswordForm />
+          <CardHeader>
+            <CardTitle className={cn('mb-2 text-lg font-bold')}>
+              {t('Parol Yangilash')}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ChangePasswordForm />
+          </CardContent>
         </FormContainer>
+        <Separator className="my-4 lg:hidden" />
         <FormContainer>
-          <h3 className={cn('mb-2 text-lg font-bold')}>
-            {t('Update Phone Number')}
-          </h3>
-          <ChangePhoneForm />
+          <CardHeader>
+            <CardTitle className={cn('mb-2 text-lg font-bold')}>
+              {t('Update Phone Number')}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ChangePhoneForm />
+          </CardContent>
         </FormContainer>
       </section>
     </SettingsContainer>
@@ -33,9 +44,5 @@ export default function SettingsPage() {
 }
 
 const FormContainer = ({ children }) => {
-  return (
-    <div className="border-border bg-background w-full rounded-lg border p-2 py-6 lg:px-4">
-      {children}
-    </div>
-  )
+  return <Card className={'w-full p-2 py-6 lg:px-4'}>{children}</Card>
 }

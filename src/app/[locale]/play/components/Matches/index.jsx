@@ -105,7 +105,15 @@ const Matches = () => {
         })
       )
     }
-  }, [competition_id, currentTour?.id, season?.id, page, dispatch])
+  }, [
+    competition_id,
+    currentTour?.id,
+    season?.id,
+    page,
+    dispatch,
+    teamLoading,
+    toursLoading,
+  ])
 
   return (
     <section className="bg-background border-border relative mx-auto flex h-min min-h-168 w-full max-w-lg flex-1 flex-col justify-between space-y-4 rounded-xl border px-4 py-6 lg:mx-0 lg:w-auto lg:min-w-72 xl:grow 2xl:max-w-lg">

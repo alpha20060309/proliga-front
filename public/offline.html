@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Siz Offlaynsiz</title>
+    <style>
+      :root {
+        --bg-white: #fff;
+        --bg-neutral-900: #171717;
+        --text-neutral-900: #171717;
+        --text-neutral-50: #fafafa;
+        --yellow-500: #eab308;
+        --yellow-400: #facc15;
+        --neutral-400: #a3a3a3;
+      }
+
+      body {
+        background-color: var(--bg-white);
+        color: var(--text-neutral-900);
+        transition:
+          background-color 0.2s,
+          color 0.2s;
+        margin: 0;
+      }
+
+      body.dark {
+        background-color: var(--bg-neutral-900);
+        color: var(--text-neutral-50);
+      }
+
+      .container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+
+      .content {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 28rem;
+        text-align: center;
+      }
+
+      .content > * + * {
+        margin-top: 2rem;
+      }
+
+      .icon-wrapper {
+        display: flex;
+        justify-content: center;
+      }
+
+      .icon-bg {
+        background-color: #f5f5f5;
+        border-radius: 9999px;
+        padding: 1.5rem;
+        transition: background-color 0.2s;
+      }
+
+      .dark .icon-bg {
+        background-color: #262626;
+      }
+
+      .wifi-icon {
+        width: 64px;
+        height: 64px;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+        transition: color 0.2s;
+      }
+
+      .wifi-icon.online {
+        color: var(--neutral-400);
+      }
+
+      .wifi-icon.offline {
+        color: var(--yellow-500);
+      }
+
+      .title {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+        font-weight: 700;
+      }
+
+      .description {
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+        opacity: 0.8;
+      }
+
+      .button-wrapper {
+        padding-top: 1rem;
+      }
+
+      .retry-button {
+        display: inline-flex;
+        align-items: center;
+        background-color: var(--yellow-500);
+        padding: 0.5rem 1.5rem;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        color: var(--text-neutral-900);
+        text-transform: capitalize;
+        transition: all 0.2s;
+        border: none;
+        cursor: pointer;
+      }
+
+      .retry-button:hover {
+        background-color: var(--yellow-400);
+      }
+
+      .retry-icon {
+        width: 16px;
+        height: 16px;
+        margin-right: 0.5rem;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg-white: #171717;
+          --bg-neutral-900: #fff;
+          --text-neutral-900: #fff;
+          --text-neutral-50: #171717;
+          --yellow-500: #eab308;
+          --yellow-400: #facc15;
+          --neutral-400: #a3a3a3;
+        }
+      }
+    </style>
+    <script>
+      function updateOnlineStatus() {
+        const isOnline = navigator.onLine
+        const wifiIcon = document.getElementById('wifi-icon')
+        const tryAgainBtn = document.getElementById('try-again-btn')
+
+        wifiIcon.className = isOnline ? 'wifi-icon online' : 'wifi-icon offline'
+
+        if (isOnline) {
+          window.location.reload()
+        }
+      }
+
+      window.addEventListener('online', updateOnlineStatus)
+      window.addEventListener('offline', updateOnlineStatus)
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="content">
+        <div class="icon-wrapper">
+          <div class="icon-bg">
+            <svg
+              id="wifi-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              class="wifi-icon offline"
+            >
+              <line x1="1" y1="1" x2="23" y2="23"></line>
+              <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path>
+              <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path>
+              <path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path>
+              <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path>
+              <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+              <line x1="12" y1="20" x2="12.01" y2="20"></line>
+            </svg>
+          </div>
+        </div>
+        <h1 class="title">Siz Offlaynsiz</h1>
+        <p class="description">
+          Internet aloqasi yo'qolganga o'xshaydi. Tarmoq sozlamalaringizni
+          tekshiring va qayta urinib ko'ring.
+        </p>
+        <div class="button-wrapper">
+          <button
+            id="try-again-btn"
+            onclick="window.location.reload()"
+            class="retry-button"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="retry-icon"
+            >
+              <path
+                d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"
+              ></path>
+            </svg>
+            Qayta Urinish
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
