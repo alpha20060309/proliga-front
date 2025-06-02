@@ -4,6 +4,7 @@ import { supabase } from '../../../lib/supabaseClient'
 import { useTranslation } from 'react-i18next'
 import { useSendOTP } from '../useSendOTP/useSendOTP'
 import { signIn } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 
 export const useAuthChangePhone = () => {
   const [error, setError] = useState(null)
@@ -11,6 +12,7 @@ export const useAuthChangePhone = () => {
   const [data, setData] = useState(null)
   const { sendOTP } = useSendOTP()
   const { t } = useTranslation()
+  const { update } = useSession()
 
   const handleError = useCallback(
     (errorMessage) => {
@@ -70,15 +72,16 @@ export const useAuthChangePhone = () => {
         })
 
         // Step 3 Set new phone to new_phone col
+        const obj = {
+          visitor: fingerprint,
+          visited_at: new Date(),
+          geo: JSON.stringify(geo),
+          agent: JSON.stringify(agent),
+          phone_new,
+        }
         const { error: fullUserError } = await supabase
           .from('user')
-          .update({
-            visitor: fingerprint,
-            visited_at: new Date(),
-            geo: JSON.stringify(geo),
-            agent: JSON.stringify(agent),
-            phone_new,
-          })
+          .update(obj)
           .eq('id', id)
           .is('deleted_at', null)
           .single()
@@ -97,6 +100,7 @@ export const useAuthChangePhone = () => {
           return handleError(status.error.message)
         }
 
+        await update(obj)
         cb()
         return true
       } catch (error) {
@@ -107,7 +111,7 @@ export const useAuthChangePhone = () => {
         setIsLoading(false)
       }
     },
-    [handleError, sendOTP]
+    [handleError, sendOTP, update]
   )
 
   return { updatePhone, isLoading, error, data }

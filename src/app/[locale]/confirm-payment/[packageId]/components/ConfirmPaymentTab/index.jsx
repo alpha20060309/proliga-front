@@ -51,7 +51,9 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
     if (paymentOption === PAYMENT_OPTIONS.CLICKUP) {
       buyPackageWithClick({ userTable, currentPackage, currentTeam })
     }
-    await update()
+    await update({
+      balance_updated_at: new Date(),
+    })
   }
 
   return (

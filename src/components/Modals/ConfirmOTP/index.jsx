@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   InputOTP,
@@ -20,7 +20,6 @@ import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
-import { useSession } from 'next-auth/react'
 
 const ConfirmOTP = ({
   isModalOpen,
@@ -33,10 +32,9 @@ const ConfirmOTP = ({
 }) => {
   const [code, setCode] = useState('')
   const { t } = useTranslation()
-  const { confirmOTP, isLoading: confirmLoading, error, data } = useConfirmOTP()
+  const { confirmOTP, isLoading: confirmLoading } = useConfirmOTP()
   const { isLoading: sendLoading } = useSendOTP()
   const userTable = useSelector(selectUserTable)
-  const { update } = useSession()
 
   const isLoading = confirmLoading || sendLoading
 
@@ -48,34 +46,22 @@ const ConfirmOTP = ({
       return
     }
     if (defaultHook) {
-      await confirmOTP({ code, guid: userTable?.guid, phone, is_update })
+      await confirmOTP({
+        code,
+        guid: userTable?.guid,
+        phone,
+        is_update,
+        cb: () => {
+          setCode('')
+          setModalOpen(false)
+          cb(true)
+          refreshUser && fetch()
+        },
+      })
     } else {
       cb(code)
     }
   }
-
-  useEffect(() => {
-    if (!confirmLoading && !error && data?.status === 200 && defaultHook) {
-      const fetch = async () => {
-        await update()
-      }
-
-      setCode('')
-      setModalOpen(false)
-      cb(true)
-      refreshUser && fetch()
-    }
-  }, [
-    confirmLoading,
-    error,
-    data,
-    userTable,
-    setModalOpen,
-    cb,
-    refreshUser,
-    update,
-    defaultHook,
-  ])
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setModalOpen}>

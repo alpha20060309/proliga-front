@@ -20,6 +20,7 @@ export const useConfirmOTP = () => {
       shouldRedirect = false,
       redirectTo = '',
       is_update = false,
+      cb = () => {},
     }) => {
       setIsLoading(false)
       setError(null)
@@ -84,7 +85,9 @@ export const useConfirmOTP = () => {
         if (data?.status === 200) {
           setData(data)
           toast.success(t('SMS muvaffaqiyatli tasdiqlandi'))
-          await update()
+          
+          await update({ phone_verified: true })
+          cb()
           if (shouldRedirect) {
             router.push(redirectTo)
           }

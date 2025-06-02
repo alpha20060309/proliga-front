@@ -27,18 +27,18 @@ const InitialStateProvider = ({ children }) => {
     Promise.all([
       dispatch(fetchGeo()),
       dispatch(fetchPrizes()),
-      dispatch(fetchBroadcastNotifications()),
       dispatch(fetchSystemConfig()),
       dispatch(fetchThemes()),
-      generateFingerprint(),
       getUserAgent(),
+      generateFingerprint(),
     ])
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
     if (user?.id && user?.phone && user?.phone_verified) {
-      dispatch(fetchPersonalNotifications({ user_id: user?.id }))
+      dispatch(fetchBroadcastNotifications()),
+        dispatch(fetchPersonalNotifications({ user_id: user?.id }))
     }
   }, [dispatch, user?.id, user?.phone, user?.phone_verified])
 

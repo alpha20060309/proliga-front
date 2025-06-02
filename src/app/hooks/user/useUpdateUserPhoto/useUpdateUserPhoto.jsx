@@ -4,8 +4,10 @@ import { useDispatch } from 'react-redux'
 import { toast } from 'sonner'
 import { setUserTable } from 'app/lib/features/auth/auth.slice'
 import { useTranslation } from 'react-i18next'
+import { useSession } from 'next-auth/react'
 
 export const useUpdateUserPhoto = () => {
+  const { update } = useSession()
   const dispatch = useDispatch()
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -57,6 +59,7 @@ export const useUpdateUserPhoto = () => {
         if (data) {
           dispatch(setUserTable(data))
           toast.success(t('Rasm muvofaqiyatli yuklandi'))
+          await update({ image: path })
           cb()
         }
       } catch (error) {
@@ -74,7 +77,7 @@ export const useUpdateUserPhoto = () => {
         setIsLoading(false)
       }
     },
-    [dispatch, t]
+    [dispatch, t, update]
   )
   return { updateUserPhoto, isLoading, error }
 }

@@ -73,7 +73,7 @@ export const useUpdateUserData = () => {
         }
 
         cb()
-        await update()
+        await update(obj)
       } catch (error) {
         setError(
           error instanceof Error

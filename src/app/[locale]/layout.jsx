@@ -67,21 +67,28 @@ export const metadata = {
 }
 
 export default async function RootLayout({ children, params }) {
+  const session = await auth()
   const { locale } = await params
   const { resources } = await initTranslations(locale)
-
-  const session = await auth()
   const userId = session?.user?.id
-  console.log('session', session)
+  let themeURL = ''
+
+  if (session?.user_theme_id) {
+    console.log('user_theme_id', session.user_theme_id)
+    themeURL = `/static/user/${userId}/user.css`
+  } else if (session?.theme_id) {
+    console.log('theme_id', session.theme_id)
+    themeURL = `/static/theme/${session.theme_id}.css`
+  } else {
+    console.log('ALL')
+    themeURL = `/static/theme/ALL.css`
+  }
 
   return (
     <ViewTransitions>
       <html lang={locale} dir={'ltr'} suppressHydrationWarning>
         <head>
-          <link
-            rel="stylesheet"
-            href="https://proliga.uz/static/theme/ALL.css"
-          />
+          <link rel="stylesheet" href={themeURL} />
         </head>
         <body
           className={cn(

@@ -87,7 +87,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
         const { phone_verified, success } = res
 
         if (success) {
-          await update()
+          await update({ phone_verified })
           localStorage.setItem('app_version', app_version)
 
           if (!phone_verified && res?.phone) {
