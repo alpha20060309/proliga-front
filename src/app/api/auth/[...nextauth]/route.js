@@ -19,8 +19,7 @@ export const {
       if (!user?.id) return false
       return true
     },
-    async jwt({ token, user, account, trigger, session: newSessionDataFromUpdate }) {
-      console.log('JWT Callback invoked. Trigger:', trigger); // General log for all invocations
+    async jwt({ token, user, account, trigger, session }) {
 
       if (user?.id && account) {
         token.sub = String(user.id)
@@ -68,15 +67,14 @@ export const {
         }
       }
 
-      if (trigger === 'update' && newSessionDataFromUpdate) {
-        console.log('JWT Callback: Update trigger detected. Data:', newSessionDataFromUpdate); // Log specifically for updates
+      if (trigger === 'update' && session) {
         const allowedUpdates = [
           'name', 'last_name', 'middle_name', 'gender', 'bio', 'image',
           'language', 'location', 'theme_id', 'user_theme_id', 'birth_date', 'phone',
         ]
         for (const key of allowedUpdates) {
-          if (Object.hasOwn(newSessionDataFromUpdate, key)) {
-            token[key] = newSessionDataFromUpdate[key]
+          if (Object.hasOwn(session, key)) {
+            token[key] = session[key]
           }
         }
       }
@@ -87,28 +85,24 @@ export const {
         session.user.id = token.id ? Number(token.id) : Number(token.sub)
       }
       if (session.user && token) {
-        session.user = {
-          ...session.user,
-          ...token,
-        }
-        // session.user.email = token.email
-        // session.user.phone = token.phone
-        // session.user.isOAuth = token.isOAuth
-        // session.user.birth_date = token.birth_date
-        // session.user.name = token.name
-        // session.user.last_name = token.last_name
-        // session.user.middle_name = token.middle_name
-        // session.user.gender = token.gender
-        // session.user.bio = token.bio
-        // session.user.balance = token.balance
-        // session.user.image = token.image
-        // session.user.deleted_at = token.deleted_at
-        // session.user.language = token.language
-        // session.user.phone_verified = token.phone_verified
-        // session.user.location = token.location
-        // session.user.theme_id = token.theme_id
-        // session.user.user_theme_id = token.user_theme_id
-        // session.user.is_admin = token.is_admin
+        session.user.email = token.email
+        session.user.phone = token.phone
+        session.user.isOAuth = token.isOAuth
+        session.user.birth_date = token.birth_date
+        session.user.name = token.name
+        session.user.last_name = token.last_name
+        session.user.middle_name = token.middle_name
+        session.user.gender = token.gender
+        session.user.bio = token.bio
+        session.user.balance = token.balance
+        session.user.image = token.image
+        session.user.deleted_at = token.deleted_at
+        session.user.language = token.language
+        session.user.phone_verified = token.phone_verified
+        session.user.location = token.location
+        session.user.theme_id = token.theme_id
+        session.user.user_theme_id = token.user_theme_id
+        session.user.is_admin = token.is_admin
       }
       return session
     },
