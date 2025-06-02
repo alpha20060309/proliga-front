@@ -7,7 +7,7 @@ export const themeExtraReducer = (builder) => {
     })
     .addCase(fetchThemes.fulfilled, (state, action) => {
       state.themes = action.payload?.data || []
-
+      state.isModified = false
       const defaultTheme = action.payload?.data.find((i) => i.is_default)
       state.selectedTheme = String(defaultTheme?.id)
       state.darkTheme = defaultTheme?.dark_theme || {}
@@ -23,6 +23,10 @@ export const themeExtraReducer = (builder) => {
     })
     .addCase(fetchUserTheme.fulfilled, (state, action) => {
       state.themes = [...state.themes, ...action.payload?.data || {}]
+      state.selectedTheme = String(action.payload?.data?.id)
+      state.isModified = false
+      state.darkTheme = action.payload?.data?.dark_theme || {}
+      state.lightTheme = action.payload?.data?.light_theme || {}
       state.isLoading = false
     })
     .addCase(fetchUserTheme.rejected, (state, action) => {

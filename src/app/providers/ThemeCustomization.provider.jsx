@@ -4,13 +4,13 @@ import { useEffect, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTheme } from 'next-themes'
 import { colorKeys, toVarName } from 'app/utils/colors.util'
-import { setTheme } from 'app/lib/features/theme/theme.slice'
 import { SHADOW_KEYS, updateShadows } from 'app/utils/shadow.utils'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import {
   selectDarkTheme,
   selectLightTheme,
 } from 'app/lib/features/theme/theme.selector'
+import { fetchUserTheme } from 'app/lib/features/theme/theme.thunk'
 
 const CustomThemeProvider = ({ children }) => {
   const dispatch = useDispatch()
@@ -19,15 +19,11 @@ const CustomThemeProvider = ({ children }) => {
   const lightTheme = useSelector(selectLightTheme)
   const user = useSelector(selectUserTable)
 
-  // useEffect(() => {
-  //   if (user?.light_theme?.font) {
-  //     dispatch(setTheme({ type: 'light', data: user.light_theme }))
-  //   }
-
-  //   if (user?.dark_theme?.font) {
-  //     dispatch(setTheme({ type: 'dark', data: user.dark_theme }))
-  //   }
-  // }, [dispatch, user])
+  useEffect(() => {
+    if (user?.user_theme_id) {
+      dispatch(fetchUserTheme(user?.user_theme_id))
+    }
+  }, [dispatch, user])
 
   // Apply colors from Redux store to DOM
   useEffect(() => {

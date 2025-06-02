@@ -13,73 +13,36 @@ import FontModifier from './components/FontModifer'
 import GlobalModifier from './components/GlobalModifier'
 import ShadowModifier from './components/ShadowsModifier'
 import SelectTheme from './components/SelectTheme'
-import { Save, Loader2, RefreshCw } from 'lucide-react'
+import { RefreshCw } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useUpdateUserThemes } from 'app/hooks/user/useUpdateUserThemes/useUpdateUserThemes'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { toast } from 'sonner'
-import { setTheme } from 'app/lib/features/systemConfig/systemConfig.slice'
-import { setSelectedTheme } from 'app/lib/features/systemConfig/systemConfig.slice'
+import { setDefaultTheme } from 'app/lib/features/theme/theme.slice'
 import { useState } from 'react'
-import { fetchThemes } from 'app/lib/features/theme/theme.thunk'
 import { useTranslation } from 'react-i18next'
 import { Switch } from '@/components/ui/switch'
-import {
-  selectDarkTheme,
-  selectLightTheme,
-} from 'app/lib/features/theme/theme.selector'
+import CreateThemeModal from './components/CreateThemeModal'
 
 const ThemeCustomizer = () => {
   const dispatch = useDispatch()
-  const [presetName, setPresetName] = useState('')
-  const [savePreset, setSavePreset] = useState(false)
-  const darkTheme = useSelector(selectDarkTheme)
-  const lightTheme = useSelector(selectLightTheme)
+  const [open, setOpen] = useState(false)
   const user = useSelector(selectUserTable)
-  const { updateUserThemes, isLoading } = useUpdateUserThemes()
   const { t } = useTranslation()
 
-  const handleSave = async () => {
-    try {
-      if (!user?.id) {
-        toast.error(t('Please Login to save your theme'))
-        return
-      }
-      await updateUserThemes({
-        darkTheme,
-        lightTheme,
-        userTable: user,
-        savePreset,
-        presetName,
-        cb: () => {
-          dispatch(fetchThemes())
-          setSavePreset(false)
-          setPresetName('')
-          dispatch(setSelectedTheme(''))
-        },
-      })
-      toast.success(t('Theme saved successfully'))
-    } catch (error) {
-      toast.error(error)
-    }
-  }
-
   const handleReset = async () => {
-    if (user?.id) {
-      try {
-        await updateUserThemes({
-          darkTheme: null,
-          lightTheme: null,
-          userTable: user,
-        })
-        toast.success(t('Successfully saved the default theme'))
-      } catch (error) {
-        toast.error(error)
-      }
-    }
-    dispatch(setTheme({ type: 'light', data: {} }))
-    dispatch(setTheme({ type: 'dark', data: {} }))
-    dispatch(setSelectedTheme(''))
+    // if (user?.id) {
+    //   try {
+    //     await updateUserThemes({
+    //       darkTheme: null,
+    //       lightTheme: null,
+    //       userTable: user,
+    //     })
+    //     toast.success(t('Successfully saved the default theme'))
+    //   } catch (error) {
+    //     toast.error(error)
+    //   }
+    // }
+    dispatch(setDefaultTheme())
 
     !user?.id && toast.success(t('Theme is reset to default'))
   }
@@ -159,19 +122,8 @@ const ThemeCustomizer = () => {
           </TabsContent>
         </Tabs>
         <section className="mt-2 flex items-center justify-center gap-2">
-          <button
-            disabled={isLoading}
-            onClick={handleSave}
-            className="group flex w-1/2 items-center justify-center gap-2 rounded-md bg-[#ffdd00] px-4 py-2.5 text-sm font-medium text-[#1A1A1A] shadow-sm transition-colors hover:bg-[#ebcb00] focus:ring-2 focus:ring-[#ffdd00] focus:ring-offset-2 focus:ring-offset-[#232323] focus:outline-none disabled:pointer-events-none disabled:opacity-50"
-            aria-label="Save theme changes"
-          >
-            {isLoading ? (
-              <Loader2 className="size-4 animate-spin" />
-            ) : (
-              <Save className="size-4 transition-transform group-hover:scale-110" />
-            )}
-            {t('Saqlash')}
-          </button>
+          <CreateThemeModal open={open} setOpen={setOpen} />
+
           <button
             onClick={handleReset}
             className="group flex w-1/2 items-center justify-center gap-2 rounded-md bg-[#555555] px-4 py-2.5 text-sm font-medium text-[#E0E0E0] shadow-sm transition-colors hover:bg-[#656565] focus:ring-2 focus:ring-[#757575] focus:ring-offset-2 focus:ring-offset-[#232323] focus:outline-none disabled:pointer-events-none disabled:opacity-50"

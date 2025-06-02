@@ -14,11 +14,13 @@ import { useTranslation } from 'react-i18next'
 import ThemePreview from './ThemePreview'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { selectThemes } from 'app/lib/features/theme/theme.selector'
+import { getCorrectName } from 'app/utils/getCorrectName.util'
 
 const SelectTheme = () => {
   const dispatch = useDispatch()
   const themes = useSelector(selectThemes)
   const { selectedTheme } = useSelector((store) => store.theme)
+  const { lang } = useSelector((store) => store.systemLanguage)
   const { t } = useTranslation()
   const user = useSelector(selectUserTable)
 
@@ -76,7 +78,13 @@ const SelectTheme = () => {
               >
                 <div className="flex items-center gap-2">
                   <ThemePreview theme={theme} />
-                  <span>{theme.name}</span>
+                  <span>
+                    {getCorrectName({
+                      uz: theme.name,
+                      ru: theme.name_ru,
+                      lang,
+                    })}
+                  </span>
                 </div>
               </SelectItem>
             ))}

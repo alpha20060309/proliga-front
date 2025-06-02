@@ -80,14 +80,18 @@ const themeSlice = createSlice({
     setSelectedTheme: (state, action) => {
       state.selectedTheme = action.payload
     },
-    setThemes: (state, action) => {
-      state.themes = action.payload
+    setDefaultTheme: (state) => {
+      state.isModified = false
+      const defaultTheme = state.themes?.find((i) => i.is_default)
+      state.selectedTheme = String(defaultTheme?.id)
+      state.darkTheme = defaultTheme?.dark_theme || {}
+      state.lightTheme = defaultTheme?.light_theme || {}
     },
   },
   extraReducers: themeExtraReducer,
 })
 
-export const { setDarkTheme, setLightTheme, setSelectedTheme, setTheme } =
+export const { setDarkTheme, setLightTheme, setSelectedTheme, setDefaultTheme, setTheme } =
   themeSlice.actions
 
 export default themeSlice.reducer
