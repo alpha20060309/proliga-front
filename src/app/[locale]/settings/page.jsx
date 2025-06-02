@@ -1,7 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { SETTINGS_TAB } from './tabs'
+import { useState } from 'react'
 import TransactionsHistory from './components/Transactions'
 import ChangePassword from './components/Security'
 import SettingsTab from './components/Settings'
@@ -47,6 +46,13 @@ function Settings() {
       {renderSection()}
     </main>
   )
+}
+
+export const SETTINGS_TAB = {
+  PROFILE: 'profile',
+  SETTINGS: 'settings',
+  HISTORY: 'history',
+  SECURITY: 'security',
 }
 
 export default Settings
