@@ -26,6 +26,7 @@ export const systemConfigExtraReducer = (builder) => {
     })
     .addCase(fetchThemes.fulfilled, (state, action) => {
       state.themes = action.payload?.data || []
+      state.defaultTheme = action.payload?.data.find((i) => i.is_default)
       state.isLoading = false
     })
     .addCase(fetchThemes.rejected, (state, action) => {

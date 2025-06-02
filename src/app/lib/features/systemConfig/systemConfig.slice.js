@@ -17,6 +17,7 @@ const initialState = {
     shadows: {},
   },
   selectedTheme: '',
+  defaultTheme: '',
   isLoading: false,
   error: null,
 }
