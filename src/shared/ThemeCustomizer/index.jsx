@@ -13,7 +13,7 @@ import FontModifier from './components/FontModifer'
 import GlobalModifier from './components/GlobalModifier'
 import ShadowModifier from './components/ShadowsModifier'
 import SelectTheme from './components/SelectTheme'
-import { RefreshCw } from 'lucide-react'
+import { RefreshCw, Loader2 } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { toast } from 'sonner'
@@ -22,29 +22,33 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Switch } from '@/components/ui/switch'
 import CreateThemeModal from './components/CreateThemeModal'
+import { useResetUserThemes } from 'app/hooks/theme/useResetUserThemes/useResetUserThemes'
 
 const ThemeCustomizer = () => {
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
   const user = useSelector(selectUserTable)
   const { t } = useTranslation()
+  const [isDefault, setIsDefault] = useState(false)
+  const [isGlobal, setIsGlobal] = useState(false)
+  const { resetUserThemes, isLoading } = useResetUserThemes()
 
   const handleReset = async () => {
-    // if (user?.id) {
-    //   try {
-    //     await updateUserThemes({
-    //       darkTheme: null,
-    //       lightTheme: null,
-    //       userTable: user,
-    //     })
-    //     toast.success(t('Successfully saved the default theme'))
-    //   } catch (error) {
-    //     toast.error(error)
-    //   }
-    // }
-    dispatch(setDefaultTheme())
-
-    !user?.id && toast.success(t('Theme is reset to default'))
+    if (user?.id) {
+      try {
+        await resetUserThemes({
+          user_id: user.id,
+          cb: () => {
+            toast.success(t('Successfully saved the default theme'))
+          },
+        })
+      } catch (error) {
+        toast.error(error)
+      }
+    } else {
+      dispatch(setDefaultTheme())
+      toast.success(t('Theme is reset to default'))
+    }
   }
 
   return (
@@ -126,19 +130,32 @@ const ThemeCustomizer = () => {
 
           <button
             onClick={handleReset}
+            disabled={isLoading}
             className="group flex w-1/2 items-center justify-center gap-2 rounded-md bg-[#555555] px-4 py-2.5 text-sm font-medium text-[#E0E0E0] shadow-sm transition-colors hover:bg-[#656565] focus:ring-2 focus:ring-[#757575] focus:ring-offset-2 focus:ring-offset-[#232323] focus:outline-none disabled:pointer-events-none disabled:opacity-50"
             aria-label="Reset theme to default"
           >
-            <RefreshCw className="size-4 transition-transform group-hover:rotate-180" />
+            {isLoading ? (
+              <Loader2 className="size-4 animate-spin" />
+            ) : (
+              <RefreshCw className="size-4 transition-transform group-hover:rotate-180" />
+            )}
             {t('Tozalash')}
           </button>
         </section>
         {user?.id && user?.is_admin && (
           <div className="my-4 flex flex-col gap-3 rounded-md border border-[#4A4A4A] bg-[#1A1A1A] p-4">
-            <Switch aria-readonly />
-            <label htmlFor="theme-switch">default</label>
-            <Switch aria-readonly />
-            <label htmlFor="theme-switch">global</label>
+            <Switch
+              aria-readonly
+              checked={isDefault}
+              onCheckedChange={setIsDefault}
+            />
+            <label htmlFor="theme-switch">Tema asosiy qilish</label>
+            <Switch
+              aria-readonly
+              checked={isGlobal || isDefault}
+              onCheckedChange={setIsGlobal}
+            />
+            <label htmlFor="theme-switch">Temani global qilish</label>
           </div>
         )}
         <SheetDescription className={'sr-only'}>

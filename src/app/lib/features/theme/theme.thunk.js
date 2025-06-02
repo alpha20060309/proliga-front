@@ -7,7 +7,7 @@ export const fetchThemes = createAsyncThunk(
   async () => {
     const { data, error } = await supabase
       .from('theme')
-      .select('id, name, name_ru, dark_theme, light_theme, is_default')
+      .select('*')
       .eq('is_global', true)
       .is('deleted_at', null)
 
@@ -20,7 +20,7 @@ export const fetchUserTheme = createAsyncThunk(
   async (user_id) => {
     const { data, error } = await supabase
       .from('theme')
-      .select('id, name, name_ru, dark_theme, light_theme, user_id')
+      .select('*')
       .eq('is_global', false)
       .eq('user_id', user_id)
       .is('deleted_at', null)

@@ -30,6 +30,7 @@ const CreateThemeModal = ({ open, setOpen }) => {
   const { createTheme, isLoading } = useCreateUserTheme()
   const darkTheme = useSelector(selectDarkTheme)
   const lightTheme = useSelector(selectLightTheme)
+  const { isModified } = useSelector((store) => store.theme)
 
   const handleSave = async (e) => {
     try {
@@ -50,28 +51,18 @@ const CreateThemeModal = ({ open, setOpen }) => {
         user_id: user.id,
         dark_theme: darkTheme,
         light_theme: lightTheme,
-        cb: () => dispatch(fetchThemes()),
+        cb: () => {
+          dispatch(fetchThemes())
+          toast.success(t('Theme saved successfully'))
+        },
       })
-      // await updateUserThemes({
-      //   darkTheme,
-      //   lightTheme,
-      //   userTable: user,
-      //   savePreset,
-      //   presetNames,
-      //   cb: () => {
-      //     dispatch(fetchThemes())
-      //     setSavePreset(false)
-      //     dispatch(setDefaultTheme())
-      //   },
-      // })
-      toast.success(t('Theme saved successfully'))
     } catch (error) {
       toast.error(error)
     }
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={isModified ? setOpen : undefined}>
       <DialogTrigger
         className="group flex w-1/2 items-center justify-center gap-2 rounded-md bg-[#ffdd00] px-4 py-2.5 text-sm font-medium text-[#1A1A1A] shadow-sm transition-colors hover:bg-[#ebcb00] focus:ring-2 focus:ring-[#ffdd00] focus:ring-offset-2 focus:ring-offset-[#232323] focus:outline-none disabled:pointer-events-none disabled:opacity-50"
         aria-label="Save theme changes"

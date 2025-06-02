@@ -76,9 +76,22 @@ export const useCreateUserTheme = () => {
           return
         }
 
+        const { error: userError } = await supabase
+          .from('user')
+          .update({
+            user_theme_id: data?.id,
+          })
+          .eq('id', user_id)
+
+        if (userError) {
+          setError(userError.message)
+          toast.error(userError.message)
+          return
+        }
+
         cb()
         await update({
-          theme_user_id: data?.id,
+          user_theme_id: data?.id,
         })
       } catch (error) {
         setError(
