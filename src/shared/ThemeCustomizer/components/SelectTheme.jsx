@@ -1,10 +1,7 @@
 'use client'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  setSelectedTheme,
-  setTheme,
-} from 'app/lib/features/systemConfig/systemConfig.slice'
+import { setSelectedTheme, setTheme } from 'app/lib/features/theme/theme.slice'
 import {
   Select,
   SelectContent,
@@ -16,12 +13,12 @@ import {
 import { useTranslation } from 'react-i18next'
 import ThemePreview from './ThemePreview'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { selectThemes } from 'app/lib/features/theme/theme.selector'
 
 const SelectTheme = () => {
   const dispatch = useDispatch()
-  const { selectedTheme, themes, defaultTheme } = useSelector(
-    (store) => store.systemConfig
-  )
+  const themes = useSelector(selectThemes)
+  const { selectedTheme } = useSelector((store) => store.theme)
   const { t } = useTranslation()
   const user = useSelector(selectUserTable)
 
@@ -31,7 +28,7 @@ const SelectTheme = () => {
     } else if (user?.theme_id) {
       dispatch(setSelectedTheme(user?.theme_id))
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch])
 
   const handleThemeChange = (value) => {
@@ -43,7 +40,6 @@ const SelectTheme = () => {
       dispatch(setTheme({ type: 'light', data: selectedThemeData.light_theme }))
     }
   }
-  console.log(selectedTheme || defaultTheme?.id || '')
 
   return (
     <div className="w-full space-y-1.5 pb-4">
@@ -53,10 +49,7 @@ const SelectTheme = () => {
       >
         {t('Select Theme Preset')}
       </label>
-      <Select
-        value={String(selectedTheme) || String(defaultTheme?.id) || ''}
-        onValueChange={handleThemeChange}
-      >
+      <Select value={selectedTheme || ''} onValueChange={handleThemeChange}>
         <SelectTrigger
           id="theme-select-trigger"
           className="w-full truncate rounded-md border border-[#4A4A4A] bg-[#2D2D2D] px-3 py-2 text-sm text-[#E0E0E0] focus:border-[#ffdd00] focus:ring-1 focus:ring-[#ffdd00] focus:outline-none data-[placeholder]:text-[#a5a5a5]"

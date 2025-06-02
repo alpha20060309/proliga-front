@@ -21,8 +21,9 @@ import PayBalanceSlice from './features/payBalance/payBalance.slice.js'
 import PayExpenseSlice from './features/payExpense/payExpense.slice.js'
 import PrizeSlice from './features/prize/prize.slice.js'
 import BannerSlice from './features/banner/banner.slice.js'
-import systemConfigSlice from './features/systemConfig/systemConfig.slice.js'
+import SystemConfigSlice from './features/systemConfig/systemConfig.slice.js'
 import MatchEventSlice from './features/matchEvent/matchEvent.slice.js'
+import ThemeSlice from './features/theme/theme.slice.js'
 
 export const combinedReducer = combineReducers({
   auth: AuthSlice,
@@ -44,10 +45,11 @@ export const combinedReducer = combineReducers({
   payBalance: PayBalanceSlice,
   payExpense: PayExpenseSlice,
   systemLanguage: SystemLanguageSlice,
-  systemConfig: systemConfigSlice,
+  systemConfig: SystemConfigSlice,
   systemNotifications: SystemNotificationSlice,
   prize: PrizeSlice,
   banner: BannerSlice,
+  theme: ThemeSlice,
 })
 
 export const rootReducer = (state, action) => {

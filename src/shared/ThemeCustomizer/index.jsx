@@ -21,15 +21,20 @@ import { toast } from 'sonner'
 import { setTheme } from 'app/lib/features/systemConfig/systemConfig.slice'
 import { setSelectedTheme } from 'app/lib/features/systemConfig/systemConfig.slice'
 import { useState } from 'react'
-import { fetchThemes } from 'app/lib/features/systemConfig/systemConfig.thunk'
+import { fetchThemes } from 'app/lib/features/theme/theme.thunk'
 import { useTranslation } from 'react-i18next'
 import { Switch } from '@/components/ui/switch'
+import {
+  selectDarkTheme,
+  selectLightTheme,
+} from 'app/lib/features/theme/theme.selector'
 
 const ThemeCustomizer = () => {
   const dispatch = useDispatch()
   const [presetName, setPresetName] = useState('')
   const [savePreset, setSavePreset] = useState(false)
-  const { darkTheme, lightTheme } = useSelector((state) => state.systemConfig)
+  const darkTheme = useSelector(selectDarkTheme)
+  const lightTheme = useSelector(selectLightTheme)
   const user = useSelector(selectUserTable)
   const { updateUserThemes, isLoading } = useUpdateUserThemes()
   const { t } = useTranslation()

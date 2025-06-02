@@ -5,16 +5,22 @@ import { useTheme } from 'next-themes'
 import {
   setDarkTheme,
   setLightTheme,
-} from 'app/lib/features/systemConfig/systemConfig.slice'
+} from 'app/lib/features/theme/theme.slice'
 import { useTranslation } from 'react-i18next'
+import {
+  selectDarkTheme,
+  selectLightTheme,
+} from 'app/lib/features/theme/theme.selector'
 
 const FontModifier = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const { resolvedTheme } = useTheme()
-  const { darkTheme, lightTheme } = useSelector((store) => store.systemConfig)
+  const darkTheme = useSelector(selectDarkTheme)
+  const lightTheme = useSelector(selectLightTheme)
 
-  const currentFont = resolvedTheme === 'dark' ? darkTheme.font : lightTheme.font
+  const currentFont =
+    resolvedTheme === 'dark' ? darkTheme.font : lightTheme.font
 
   const handleFontChange = (font) => {
     if (resolvedTheme === 'dark') {
