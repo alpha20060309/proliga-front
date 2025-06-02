@@ -9,6 +9,7 @@ import { fontVariables } from '../fonts'
 import RootProvider from 'app/providers/Root.provider'
 import initTranslations from 'app/lib/i18n'
 import TranslationsProvider from 'app/providers/Translations.provider'
+import { auth } from 'app/api/auth/[...nextauth]/route'
 
 const APP_NAME = 'Proliga - Fantaziya Futbol Platformasi'
 const APP_DESCRIPTION =
@@ -68,6 +69,10 @@ export const metadata = {
 export default async function RootLayout({ children, params }) {
   const { locale } = await params
   const { resources } = await initTranslations(locale)
+
+  const session = await auth()
+  const userId = session?.user?.id
+  console.log('session', session)
 
   return (
     <ViewTransitions>

@@ -33,7 +33,7 @@ export async function POST(request) {
     }
 
     // eslint-disable-next-line no-undef
-    const themeCssPath = path.join(process.cwd(), 'static', 'user', userId, `user.css`);
+    const themeCssPath = path.join(process.cwd(), 'static', 'user', String(userId), `user.css`);
     await writeFile(themeCssPath, combinedCss, { flag: 'w' });
 
     return new Response(combinedCss, {
