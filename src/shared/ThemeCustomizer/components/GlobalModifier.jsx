@@ -4,17 +4,19 @@ import React from 'react'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { useTheme } from 'next-themes'
 import { useSelector, useDispatch } from 'react-redux'
-import {
-  setDarkTheme,
-  setLightTheme,
-} from 'app/lib/features/systemConfig/systemConfig.slice'
+import { setDarkTheme, setLightTheme } from 'app/lib/features/theme/theme.slice'
 import { useTranslation } from 'react-i18next'
+import {
+  selectDarkTheme,
+  selectLightTheme,
+} from 'app/lib/features/theme/theme.selector'
 
 const GlobalModifier = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const { resolvedTheme } = useTheme()
-  const { darkTheme, lightTheme } = useSelector((store) => store.systemConfig)
+  const darkTheme = useSelector(selectDarkTheme)
+  const lightTheme = useSelector(selectLightTheme)
 
   const currentGlobalConfig =
     resolvedTheme === 'dark' ? darkTheme.global : lightTheme.global

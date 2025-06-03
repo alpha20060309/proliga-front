@@ -12,8 +12,8 @@ import {
   fetchBroadcastNotifications,
   fetchPersonalNotifications,
 } from 'app/lib/features/systemNotification/systemNotification.thunk'
-import { fetchThemes } from 'app/lib/features/systemConfig/systemConfig.thunk'
-import { useGenerateLanguage } from 'app/hooks/system/useGenerateLanguage/useGenerateLanguage'
+import { fetchThemes } from 'app/lib/features/theme/theme.thunk'
+// import { useGenerateLanguage } from 'app/hooks/system/useGenerateLanguage/useGenerateLanguage'
 import dynamic from 'next/dynamic'
 const registerSW = dynamic(() => import('app/lib/registerSw'), { ssr: false })
 
@@ -28,7 +28,6 @@ const InitialStateProvider = ({ children }) => {
       dispatch(fetchGeo()),
       dispatch(fetchPrizes()),
       dispatch(fetchSystemConfig()),
-      dispatch(fetchThemes()),
       getUserAgent(),
       generateFingerprint(),
     ])
@@ -36,9 +35,13 @@ const InitialStateProvider = ({ children }) => {
   }, [])
 
   useEffect(() => {
+    dispatch(fetchThemes(!user?.theme_id && !user?.user_theme_id))
+  }, [dispatch, user?.theme_id, user?.user_theme_id])
+
+  useEffect(() => {
     if (user?.id && user?.phone && user?.phone_verified) {
-      dispatch(fetchBroadcastNotifications()),
-        dispatch(fetchPersonalNotifications({ user_id: user?.id }))
+      dispatch(fetchBroadcastNotifications())
+      dispatch(fetchPersonalNotifications({ user_id: user?.id }))
     }
   }, [dispatch, user?.id, user?.phone, user?.phone_verified])
 
@@ -46,12 +49,12 @@ const InitialStateProvider = ({ children }) => {
     registerSW()
   }, [])
 
-  const { generate } = useGenerateLanguage()
+  // const { generate } = useGenerateLanguage()
 
-  useEffect(() => {
-    const fetch = async () => await generate()
-    fetch()
-  }, [generate])
+  // useEffect(() => {
+  //   const fetch = async () => await generate()
+  //   fetch()
+  // }, [generate])
 
   return children
 }

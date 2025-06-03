@@ -1,4 +1,4 @@
-import { fetchSystemConfig, fetchThemes } from './systemConfig.thunk'
+import { fetchSystemConfig } from './systemConfig.thunk'
 
 export const systemConfigExtraReducer = (builder) => {
   builder
@@ -20,16 +20,5 @@ export const systemConfigExtraReducer = (builder) => {
     .addCase(fetchSystemConfig.rejected, (state, action) => {
       state.isLoading = false
       state.error = action?.error?.message
-    })
-    .addCase(fetchThemes.pending, (state) => {
-      state.isLoading = true
-    })
-    .addCase(fetchThemes.fulfilled, (state, action) => {
-      state.themes = action.payload?.data || []
-      state.isLoading = false
-    })
-    .addCase(fetchThemes.rejected, (state, action) => {
-      state.error = action?.error?.message
-      state.isLoading = false
     })
 }

@@ -1,10 +1,6 @@
 'use client'
-
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  setSelectedTheme,
-  setTheme,
-} from 'app/lib/features/systemConfig/systemConfig.slice'
+import { setSelectedTheme, setTheme } from 'app/lib/features/theme/theme.slice'
 import {
   Select,
   SelectContent,
@@ -15,10 +11,14 @@ import {
 } from '@/components/ui/select'
 import { useTranslation } from 'react-i18next'
 import ThemePreview from './ThemePreview'
+import { selectThemes } from 'app/lib/features/theme/theme.selector'
+import { getCorrectName } from 'app/utils/getCorrectName.util'
 
 const SelectTheme = () => {
   const dispatch = useDispatch()
-  const { selectedTheme, themes } = useSelector((store) => store.systemConfig)
+  const themes = useSelector(selectThemes)
+  const { selectedTheme } = useSelector((store) => store.theme)
+  const { lang } = useSelector((store) => store.systemLanguage)
   const { t } = useTranslation()
 
   const handleThemeChange = (value) => {
@@ -66,7 +66,13 @@ const SelectTheme = () => {
               >
                 <div className="flex items-center gap-2">
                   <ThemePreview theme={theme} />
-                  <span>{theme.name}</span>
+                  <span>
+                    {getCorrectName({
+                      uz: theme.name,
+                      ru: theme.name_ru,
+                      lang,
+                    })}
+                  </span>
                 </div>
               </SelectItem>
             ))}

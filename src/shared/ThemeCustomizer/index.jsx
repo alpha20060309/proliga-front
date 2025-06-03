@@ -13,71 +13,45 @@ import FontModifier from './components/FontModifer'
 import GlobalModifier from './components/GlobalModifier'
 import ShadowModifier from './components/ShadowsModifier'
 import SelectTheme from './components/SelectTheme'
-import { Save, Loader2, RefreshCw } from 'lucide-react'
+import { RefreshCw, Loader2 } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useUpdateUserThemes } from 'app/hooks/user/useUpdateUserThemes/useUpdateUserThemes'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { toast } from 'sonner'
-import { setTheme } from 'app/lib/features/systemConfig/systemConfig.slice'
-import { setSelectedTheme } from 'app/lib/features/systemConfig/systemConfig.slice'
+import { setDefaultTheme } from 'app/lib/features/theme/theme.slice'
 import { useState } from 'react'
-import { fetchThemes } from 'app/lib/features/systemConfig/systemConfig.thunk'
 import { useTranslation } from 'react-i18next'
 import { Switch } from '@/components/ui/switch'
+import CreateThemeModal from './components/CreateThemeModal'
+import { useResetUserThemes } from 'app/hooks/theme/useResetUserThemes/useResetUserThemes'
 
 const ThemeCustomizer = () => {
   const dispatch = useDispatch()
-  const [presetName, setPresetName] = useState('')
-  const [savePreset, setSavePreset] = useState(false)
-  const { darkTheme, lightTheme } = useSelector((state) => state.systemConfig)
+  const [open, setOpen] = useState(false)
   const user = useSelector(selectUserTable)
-  const { updateUserThemes, isLoading } = useUpdateUserThemes()
   const { t } = useTranslation()
+  const [isDefault, setIsDefault] = useState(false)
+  const [isGlobal, setIsGlobal] = useState(false)
+  const { resetUserThemes, isLoading } = useResetUserThemes()
 
-  const handleSave = async () => {
-    try {
-      if (!user?.id) {
-        toast.error(t('Please Login to save your theme'))
-        return
-      }
-      await updateUserThemes({
-        darkTheme,
-        lightTheme,
-        userTable: user,
-        savePreset,
-        presetName,
-        cb: () => {
-          dispatch(fetchThemes())
-          setSavePreset(false)
-          setPresetName('')
-          dispatch(setSelectedTheme(''))
-        },
-      })
-      toast.success(t('Theme saved successfully'))
-    } catch (error) {
-      toast.error(error)
-    }
-  }
 
   const handleReset = async () => {
     if (user?.id) {
       try {
-        await updateUserThemes({
-          darkTheme: null,
-          lightTheme: null,
-          userTable: user,
+        await resetUserThemes({
+          user_id: user.id,
+          cb: () => {
+            toast.success(t('Successfully saved the default theme'))
+          },
         })
-        toast.success(t('Successfully saved the default theme'))
       } catch (error) {
         toast.error(error)
       }
+    } else {
+      dispatch(setDefaultTheme())
+      toast.success(t('Theme is reset to default'))
     }
-    dispatch(setTheme({ type: 'light', data: {} }))
-    dispatch(setTheme({ type: 'dark', data: {} }))
-    dispatch(setSelectedTheme(''))
-
-    !user?.id && toast.success(t('Theme is reset to default'))
   }
+
 
   return (
     <Sheet>
@@ -154,34 +128,36 @@ const ThemeCustomizer = () => {
           </TabsContent>
         </Tabs>
         <section className="mt-2 flex items-center justify-center gap-2">
+          <CreateThemeModal open={open} setOpen={setOpen} />
+
           <button
+            onClick={handleReset}
             disabled={isLoading}
-            onClick={handleSave}
-            className="group flex w-1/2 items-center justify-center gap-2 rounded-md bg-[#ffdd00] px-4 py-2.5 text-sm font-medium text-[#1A1A1A] shadow-sm transition-colors hover:bg-[#ebcb00] focus:ring-2 focus:ring-[#ffdd00] focus:ring-offset-2 focus:ring-offset-[#232323] focus:outline-none disabled:pointer-events-none disabled:opacity-50"
-            aria-label="Save theme changes"
+            className="group flex w-1/2 items-center justify-center gap-2 rounded-md bg-[#555555] px-4 py-2.5 text-sm font-medium text-[#E0E0E0] shadow-sm transition-colors hover:bg-[#656565] focus:ring-2 focus:ring-[#757575] focus:ring-offset-2 focus:ring-offset-[#232323] focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+            aria-label="Reset theme to default"
           >
             {isLoading ? (
               <Loader2 className="size-4 animate-spin" />
             ) : (
-              <Save className="size-4 transition-transform group-hover:scale-110" />
+              <RefreshCw className="size-4 transition-transform group-hover:rotate-180" />
             )}
-            {t('Saqlash')}
-          </button>
-          <button
-            onClick={handleReset}
-            className="group flex w-1/2 items-center justify-center gap-2 rounded-md bg-[#555555] px-4 py-2.5 text-sm font-medium text-[#E0E0E0] shadow-sm transition-colors hover:bg-[#656565] focus:ring-2 focus:ring-[#757575] focus:ring-offset-2 focus:ring-offset-[#232323] focus:outline-none disabled:pointer-events-none disabled:opacity-50"
-            aria-label="Reset theme to default"
-          >
-            <RefreshCw className="size-4 transition-transform group-hover:rotate-180" />
             {t('Tozalash')}
           </button>
         </section>
         {user?.id && user?.is_admin && (
           <div className="my-4 flex flex-col gap-3 rounded-md border border-[#4A4A4A] bg-[#1A1A1A] p-4">
-            <Switch aria-readonly />
-            <label htmlFor="theme-switch">default</label>
-            <Switch aria-readonly />
-            <label htmlFor="theme-switch">global</label>
+            <Switch
+              aria-readonly
+              checked={isDefault}
+              onCheckedChange={setIsDefault}
+            />
+            <label htmlFor="theme-switch">Tema asosiy qilish</label>
+            <Switch
+              aria-readonly
+              checked={isGlobal || isDefault}
+              onCheckedChange={setIsGlobal}
+            />
+            <label htmlFor="theme-switch">Temani global qilish</label>
           </div>
         )}
         <SheetDescription className={'sr-only'}>

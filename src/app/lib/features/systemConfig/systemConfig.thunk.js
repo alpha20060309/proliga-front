@@ -20,14 +20,3 @@ export const fetchSystemConfig = createAsyncThunk(
     }
   }
 )
-
-export const fetchThemes = createAsyncThunk(
-  'systemConfig/fetchThemes',
-  async () => {
-    const { data, error } = await supabase
-      .from('theme')
-      .select('*')
-
-    return { data, error }
-  }
-)

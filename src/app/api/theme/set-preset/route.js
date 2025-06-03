@@ -1,7 +1,7 @@
 import path from 'path'
 import { NextResponse } from "next/server";
 import { isEmpty } from "lodash";
-import { writeFile } from 'fs/promises'
+import { writeFile, mkdir } from 'fs/promises'
 import { generateThemeCssVariables } from "../utils";
 
 export async function POST(request) {
@@ -34,6 +34,10 @@ export async function POST(request) {
 
     // eslint-disable-next-line no-undef
     const themeCssPath = path.join(process.cwd(), 'static', 'theme', `${presetId}.css`);
+    const themeDir = path.dirname(themeCssPath);
+
+    await mkdir(themeDir, { recursive: true });
+
     await writeFile(themeCssPath, combinedCss, { flag: 'w' });
 
     return new Response(combinedCss, {
