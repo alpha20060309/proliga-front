@@ -7,7 +7,6 @@ import { usePathname } from 'next/navigation'
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { useLogOut } from 'app/hooks/auth/useLogOut/useLogOut'
 import { toast } from 'sonner'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { useTranslation } from 'react-i18next'
 import { useSession } from 'next-auth/react'
@@ -17,7 +16,6 @@ const AuthProvider = ({ children }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const path = usePathname()
-  const user = useSelector(selectUserTable)
   const config = useSelector(selectSystemConfig)
   const app_version = config[CONFIG_KEY.app_version]?.value ?? ''
   const { logOut } = useLogOut()
@@ -51,7 +49,6 @@ const AuthProvider = ({ children }) => {
   }, [session, dispatch, setAuth])
 
   useEffect(() => {
-    console.log(session?.user)
     if (path.includes('auth') || path.includes('confirm-otp')) {
       return
     }

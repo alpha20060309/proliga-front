@@ -703,5 +703,13 @@
   "Sidebar Ring": "Yon panel chizig‘i",
   "Parolingiz muvaffaqiyatli o'zgartirildi": "Parolingiz muvaffaqiyatli o'zgartirildi",
   "No presets available": "Oldindan sozlamalar mavjud emas",
-  "Tozalash": "Tozalash"
+  "Tozalash": "Tozalash",
+  "Please enter a name": "Iltimos, ismingizni kiriting",
+  "Theme preset saved successfully": "Mavzu sozlamasi muvaffaqiyatli saqlandi",
+  "Name in Uzbek": "O'zbekcha ism",
+  "Name in Russian": "Rus tilida ism",
+  "New default theme is set": "Yangi standart mavzu o‘rnatildi",
+  "You are not authorized": "Sizga ruxsat berilmagan",
+  "Please select a theme": "Iltimos, mavzuni tanlang",
+  "Theme not found": "Mavzu topilmadi"
 }

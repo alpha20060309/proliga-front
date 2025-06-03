@@ -95,8 +95,8 @@ const LoginForm = ({ setShouldRedirect }) => {
           }
           toast.success(t('Tizimga muvaffaqiyatli kirdingiz'))
         }
+      // eslint-disable-next-line no-unused-vars
       } catch (error) {
-        console.log(error)
         toast.error(t('An unknown error occurred'))
       }
     })

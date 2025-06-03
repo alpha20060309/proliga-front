@@ -45,7 +45,6 @@ export const login = async (values) => {
     }
   } catch (error) {
     if (error) {
-      console.log(error)
       switch (error.type) {
         case 'CredentialsSignin':
           return { error: 'Login yoki parol xato' }
