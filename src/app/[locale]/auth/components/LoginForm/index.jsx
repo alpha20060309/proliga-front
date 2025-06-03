@@ -54,6 +54,9 @@ const LoginForm = ({ setShouldRedirect }) => {
 
     startTransition(async () => {
       try {
+        setShouldRedirect(false)
+        localStorage.removeItem('sign-in-method')
+
         const res = await login({
           phone,
           password,
@@ -73,21 +76,27 @@ const LoginForm = ({ setShouldRedirect }) => {
 
         if (success) {
           await update({
-            phone_verified,
+            phone_verified: res.phone_verified,
+            phone: res.phone,
           })
+
           localStorage.setItem('app_version', app_version)
 
+          console.log(
+            !phone_verified && res?.phone,
+            !phone_verified,
+            res?.phone
+          )
+
           if (!phone_verified && res?.phone) {
-            toast.info(
-              t('We are redirecting you to an sms confirmation page!'),
-              {
-                theme: 'dark',
-              }
-            )
             await sendOTP({
               phone,
               shouldRedirect: true,
               redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(res.phone)}`,
+              cb: () =>
+                toast.info(
+                  t('We are redirecting you to an sms confirmation page!')
+                ),
             })
             return
           }

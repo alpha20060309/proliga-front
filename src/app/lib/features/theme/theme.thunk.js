@@ -4,14 +4,14 @@ import { supabase } from 'app/lib/supabaseClient'
 
 export const fetchThemes = createAsyncThunk(
   'theme/fetchThemes',
-  async (set_default = true) => {
+  async () => {
     const { data, error } = await supabase
       .from('theme')
       .select('*')
       .eq('is_global', true)
       .is('deleted_at', null)
 
-    return { data, error, set_default }
+    return { data, error }
   }
 )
 

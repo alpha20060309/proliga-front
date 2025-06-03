@@ -17,6 +17,7 @@ export const useSendOTP = () => {
       shouldRedirect = false,
       redirectTo = '',
       is_update = false,
+      cb = () => {},
     }) => {
       setIsLoading(false)
       setError(null)
@@ -59,6 +60,7 @@ export const useSendOTP = () => {
           if (shouldRedirect) {
             router.push(redirectTo)
           }
+          cb()
           return
         }
       } catch (error) {
