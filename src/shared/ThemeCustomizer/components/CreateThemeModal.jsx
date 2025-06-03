@@ -1,6 +1,5 @@
 import {
   Dialog,
-  DialogTrigger,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -20,23 +19,16 @@ import {
   selectDarkTheme,
   selectLightTheme,
 } from 'app/lib/features/theme/theme.selector'
-import { useSaveTheme } from 'app/hooks/theme/useSaveTheme/useSaveTheme'
-import { selectThemes } from 'app/lib/features/theme/theme.selector'
 
-const CreateThemeModal = ({ open, setOpen }) => {
+const CreateThemeModal = ({ isGlobal, open, setOpen }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { selectedTheme } = useSelector((store) => store.theme)
-
   const [name, setName] = useState('')
   const [nameRu, setNameRu] = useState('')
   const user = useSelector(selectUserTable)
   const { createUserTheme, isLoading } = useCreateUserTheme()
   const darkTheme = useSelector(selectDarkTheme)
   const lightTheme = useSelector(selectLightTheme)
-  const { isModified } = useSelector((store) => store.theme)
-  const { saveTheme, saveUserTheme } = useSaveTheme()
-  const themes = useSelector(selectThemes)
 
   const handleSave = async (e) => {
     try {
@@ -51,58 +43,26 @@ const CreateThemeModal = ({ open, setOpen }) => {
         return
       }
 
-      await createUserTheme({
-        name,
-        name_ru: nameRu,
-        user_id: user.id,
-        dark_theme: darkTheme,
-        light_theme: lightTheme,
-        cb: () => {
-          dispatch(fetchThemes())
-          toast.success(t('Theme saved successfully'))
-        },
-      })
+      if (!isGlobal) {
+        await createUserTheme({
+          name,
+          name_ru: nameRu,
+          user_id: user.id,
+          dark_theme: darkTheme,
+          light_theme: lightTheme,
+          cb: () => {
+            dispatch(fetchThemes())
+            toast.success(t('Theme saved successfully'))
+          },
+        })
+      }
     } catch (error) {
       toast.error(error.message)
     }
   }
 
-  const handleSavePreset = () => {
-    const theme = themes.find((theme) => +theme.id === +selectedTheme)
-    if (!theme?.id) return toast.error(t('Theme not found'))
-
-    if (theme?.is_global) {
-      saveTheme({
-        theme,
-        user_id: user?.id,
-        cb: () => {
-          toast.success(t('Theme saved successfully'))
-        },
-      })
-    } else {
-      saveUserTheme({
-        theme,
-        user_id: user?.id,
-        cb: () => {
-          toast.success(t('Theme saved successfully'))
-        },
-      })
-    }
-  }
-
   return (
-    <Dialog open={open} onOpenChange={isModified ? setOpen : handleSavePreset}>
-      <DialogTrigger
-        className="group flex w-1/2 items-center justify-center gap-2 rounded-md bg-[#ffdd00] px-4 py-2.5 text-sm font-medium text-[#1A1A1A] shadow-sm transition-colors hover:bg-[#ebcb00] focus:ring-2 focus:ring-[#ffdd00] focus:ring-offset-2 focus:ring-offset-[#232323] focus:outline-none disabled:pointer-events-none disabled:opacity-50"
-        aria-label="Save theme changes"
-      >
-        {isLoading ? (
-          <Loader2 className="size-4 animate-spin" />
-        ) : (
-          <Save className="size-4 transition-transform group-hover:scale-110" />
-        )}
-        {t('Saqlash')}
-      </DialogTrigger>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent>
         <DialogHeader className={'mb-4'}>
           <DialogTitle>{t('Create Theme')}</DialogTitle>

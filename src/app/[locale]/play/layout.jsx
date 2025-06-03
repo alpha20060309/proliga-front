@@ -7,10 +7,10 @@ import News from './components/News'
 
 const PlayLayout = ({ children }) => {
   return (
-    <main className="from-secondary to-background min-h-screen bg-linear-to-tr">
+    <main className="bg-background min-h-screen">
       {children}
       <Gutter>
-        <section className="mb-2 flex min-h-160 flex-col justify-between gap-2 py-4 lg:flex-row">
+        <section className="flex min-h-160 flex-col justify-between gap-2 py-4 lg:flex-row">
           <Matches />
           <section className="relative mx-auto h-min flex-col items-center justify-between overflow-hidden md:flex lg:mx-0">
             <MiniBanner />
@@ -19,7 +19,9 @@ const PlayLayout = ({ children }) => {
           <News />
         </section>
       </Gutter>
-      <RulesSlider />
+      <Gutter className={'bg-card rounded-xl mb-4 pt-4 '}>
+        <RulesSlider />
+      </Gutter>
     </main>
   )
 }

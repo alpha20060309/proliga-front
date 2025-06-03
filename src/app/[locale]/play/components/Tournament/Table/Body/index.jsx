@@ -29,7 +29,7 @@ const TournamentTableBody = ({ table, flexRender, showUserTourTeam }) => {
         <tr
           key={row.id}
           className={cn(
-            'hover:bg-card mx-auto border-b border-border bg-background text-center odd:bg-secondary md:text-start',
+            'hover:bg-background border-border bg-card odd:bg-secondary mx-auto border-b text-center md:text-start',
             condition(row?.original?.team?.order, row?.original?.team?.id)
           )}
         >

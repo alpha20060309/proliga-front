@@ -8,12 +8,7 @@ import {
 } from '@/components/ui/sheet'
 import { Palette } from 'lucide-react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import ColorModifier from './components/ColorModifier'
-import FontModifier from './components/FontModifer'
-import GlobalModifier from './components/GlobalModifier'
-import ShadowModifier from './components/ShadowsModifier'
-import SelectTheme from './components/SelectTheme'
-import { RefreshCw, Loader2 } from 'lucide-react'
+import { RefreshCw, Loader2, Save } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { toast } from 'sonner'
@@ -23,16 +18,33 @@ import { useTranslation } from 'react-i18next'
 import { Switch } from '@/components/ui/switch'
 import CreateThemeModal from './components/CreateThemeModal'
 import { useResetUserThemes } from 'app/hooks/theme/useResetUserThemes/useResetUserThemes'
+import ColorModifier from './components/ColorModifier'
+import FontModifier from './components/FontModifer'
+import GlobalModifier from './components/GlobalModifier'
+import ShadowModifier from './components/ShadowsModifier'
+import SelectTheme from './components/SelectTheme'
+import { selectThemes } from 'app/lib/features/theme/theme.selector'
+import { useSaveTheme } from 'app/hooks/theme/useSaveTheme/useSaveTheme'
+import { useSetThemeDefault } from 'app/hooks/theme/useSetThemeDefault/useSetThemeDefault'
+import {
+  selectDarkTheme,
+  selectLightTheme,
+} from 'app/lib/features/theme/theme.selector'
 
 const ThemeCustomizer = () => {
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
   const user = useSelector(selectUserTable)
+  const { selectedTheme, isModified } = useSelector((store) => store.theme)
+  const themes = useSelector(selectThemes)
   const { t } = useTranslation()
   const [isDefault, setIsDefault] = useState(false)
   const [isGlobal, setIsGlobal] = useState(false)
   const { resetUserThemes, isLoading } = useResetUserThemes()
-
+  const { saveTheme, saveUserTheme } = useSaveTheme()
+  const { setThemeDefault } = useSetThemeDefault()
+  const darkTheme = useSelector(selectDarkTheme)
+  const lightTheme = useSelector(selectLightTheme)
 
   const handleReset = async () => {
     if (user?.id) {
@@ -52,7 +64,66 @@ const ThemeCustomizer = () => {
     }
   }
 
+  const handleSavePreset = () => {
+    const theme = themes.find((theme) => +theme.id === +selectedTheme)
+    if (!theme?.id) return toast.error(t('Theme not found'))
 
+    if (theme?.is_global) {
+      saveTheme({
+        theme,
+        user_id: user?.id,
+        cb: () => {
+          toast.success(t('Theme saved successfully'))
+        },
+      })
+    } else {
+      saveUserTheme({
+        theme,
+        user_id: user?.id,
+        cb: () => {
+          toast.success(t('Theme saved successfully'))
+        },
+      })
+    }
+  }
+
+  const handleSetDefault = async () => {
+    try {
+      if (!selectedTheme) return toast.error(t('Please select a theme'))
+      if (!user?.is_admin) return toast.error(t('You are not authorized'))
+
+      await setThemeDefault({
+        theme_id: selectedTheme,
+        dark_theme: darkTheme,
+        light_theme: lightTheme,
+        cb: () => {
+          toast.success(t('New default theme is set'))
+        },
+      })
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
+
+  // 1. if is global is true then set default theme  (admin only)
+  // 2. if is modified & isGlobal is true then open dialog & save theme as preset (admin only)
+  // 3. if is modified is true then open dialog & save user theme
+  // 4. if isGlobal is true but not modified then save theme to user
+  // 5. if not modified save theme to user
+
+  const handleClick = () => {
+    if (isDefault) {
+      return handleSetDefault()
+    }
+
+    if (isModified) {
+      return setOpen(true)
+    }
+
+    return handleSavePreset()
+  }
+
+  // #353535 #A0A0A0 #2D2D2D #B0B0B0
   return (
     <Sheet>
       <SheetTrigger className="relative flex size-8 items-center justify-center bg-transparent p-0 font-sans font-medium hover:bg-transparent">
@@ -88,28 +159,28 @@ const ThemeCustomizer = () => {
         </SheetHeader>
         <SelectTheme />
         <Tabs defaultValue="color" className="mt-4">
-          <TabsList className="w-full rounded-[6px] bg-[#333333] p-1 dark:bg-[#212121]">
+          <TabsList className="w-full rounded-[6px] bg-[#2D2D2D] p-1">
             <TabsTrigger
               value="color"
-              className="w-full rounded-[4px] px-3 py-1.5 text-sm font-medium text-[#A0A0A0] focus-visible:bg-[#fffbe6] focus-visible:text-[#1A1A1A] focus-visible:ring-2 focus-visible:ring-[#757575] focus-visible:ring-offset-2 focus-visible:ring-offset-[#333333] data-[state=active]:bg-[#4A4A4A] data-[state=active]:text-[#FFFFFF] data-[state=active]:shadow-sm"
+              className="w-full rounded-[4px] px-3 py-1.5 text-sm font-medium text-[#B0B0B0] focus-visible:bg-[#353535] focus-visible:text-[#A0A0A0] focus-visible:ring-2 focus-visible:ring-[#353535] focus-visible:ring-offset-2 focus-visible:ring-offset-[#2D2D2D] data-[state=active]:bg-[#353535] data-[state=active]:text-[#A0A0A0] data-[state=active]:shadow-sm"
             >
               {t('Color')}
             </TabsTrigger>
             <TabsTrigger
               value="font"
-              className="w-full rounded-[4px] px-3 py-1.5 text-sm font-medium text-[#A0A0A0] focus-visible:bg-[#fffbe6] focus-visible:text-[#1A1A1A] focus-visible:ring-2 focus-visible:ring-[#757575] focus-visible:ring-offset-2 focus-visible:ring-offset-[#333333] data-[state=active]:bg-[#4A4A4A] data-[state=active]:text-[#FFFFFF] data-[state=active]:shadow-sm"
+              className="w-full rounded-[4px] px-3 py-1.5 text-sm font-medium text-[#B0B0B0] focus-visible:bg-[#353535] focus-visible:text-[#A0A0A0] focus-visible:ring-2 focus-visible:ring-[#353535] focus-visible:ring-offset-2 focus-visible:ring-offset-[#2D2D2D] data-[state=active]:bg-[#353535] data-[state=active]:text-[#A0A0A0] data-[state=active]:shadow-sm"
             >
               {t('Font')}
             </TabsTrigger>
             <TabsTrigger
               value="global"
-              className="w-full rounded-[4px] px-3 py-1.5 text-sm font-medium text-[#A0A0A0] focus-visible:bg-[#fffbe6] focus-visible:text-[#1A1A1A] focus-visible:ring-2 focus-visible:ring-[#757575] focus-visible:ring-offset-2 focus-visible:ring-offset-[#333333] data-[state=active]:bg-[#4A4A4A] data-[state=active]:text-[#FFFFFF] data-[state=active]:shadow-sm"
+              className="w-full rounded-[4px] px-3 py-1.5 text-sm font-medium text-[#B0B0B0] focus-visible:bg-[#353535] focus-visible:text-[#A0A0A0] focus-visible:ring-2 focus-visible:ring-[#353535] focus-visible:ring-offset-2 focus-visible:ring-offset-[#2D2D2D] data-[state=active]:bg-[#353535] data-[state=active]:text-[#A0A0A0] data-[state=active]:shadow-sm"
             >
               {t('Global')}
             </TabsTrigger>
             <TabsTrigger
               value="shadow"
-              className="w-full rounded-[4px] px-3 py-1.5 text-sm font-medium text-[#A0A0A0] focus-visible:bg-[#fffbe6] focus-visible:text-[#1A1A1A] focus-visible:ring-2 focus-visible:ring-[#757575] focus-visible:ring-offset-2 focus-visible:ring-offset-[#333333] data-[state=active]:bg-[#4A4A4A] data-[state=active]:text-[#FFFFFF] data-[state=active]:shadow-sm"
+              className="w-full rounded-[4px] px-3 py-1.5 text-sm font-medium text-[#B0B0B0] focus-visible:bg-[#353535] focus-visible:text-[#A0A0A0] focus-visible:ring-2 focus-visible:ring-[#353535] focus-visible:ring-offset-2 focus-visible:ring-offset-[#2D2D2D] data-[state=active]:bg-[#353535] data-[state=active]:text-[#A0A0A0] data-[state=active]:shadow-sm"
             >
               {t('Shadow')}
             </TabsTrigger>
@@ -128,12 +199,28 @@ const ThemeCustomizer = () => {
           </TabsContent>
         </Tabs>
         <section className="mt-2 flex items-center justify-center gap-2">
-          <CreateThemeModal open={open} setOpen={setOpen} />
-
+          <CreateThemeModal
+            isDefault={isDefault}
+            isGlobal={isGlobal}
+            open={open}
+            setOpen={setOpen}
+          />
+          <button
+            className="group flex w-1/2 items-center justify-center gap-2 rounded-md bg-[#ffdd00] px-4 py-2.5 text-sm font-medium text-[#1A1A1A] shadow-sm transition-colors hover:bg-[#ebcb00] focus:ring-2 focus:ring-[#ffdd00] focus:ring-offset-2 focus:ring-offset-[#232323] focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+            aria-label="Save theme changes"
+            onClick={handleClick}
+          >
+            {isLoading ? (
+              <Loader2 className="size-4 animate-spin" />
+            ) : (
+              <Save className="size-4 transition-transform group-hover:scale-110" />
+            )}
+            {t('Saqlash')}
+          </button>
           <button
             onClick={handleReset}
             disabled={isLoading}
-            className="group flex w-1/2 items-center justify-center gap-2 rounded-md bg-[#555555] px-4 py-2.5 text-sm font-medium text-[#E0E0E0] shadow-sm transition-colors hover:bg-[#656565] focus:ring-2 focus:ring-[#757575] focus:ring-offset-2 focus:ring-offset-[#232323] focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+            className="group flex w-1/2 items-center justify-center gap-2 rounded-md border border-[#4A4A4A] bg-[#353535] px-4 py-2.5 text-sm font-medium text-[#E0E0E0] shadow-sm transition-colors hover:bg-[#656565] focus:ring-2 focus:ring-[#757575] focus:ring-offset-2 focus:ring-offset-[#232323] focus:outline-none disabled:pointer-events-none disabled:opacity-50"
             aria-label="Reset theme to default"
           >
             {isLoading ? (
@@ -145,19 +232,19 @@ const ThemeCustomizer = () => {
           </button>
         </section>
         {user?.id && user?.is_admin && (
-          <div className="my-4 flex flex-col gap-3 rounded-md border border-[#4A4A4A] bg-[#1A1A1A] p-4">
+          <div className="my-4 flex flex-col gap-3 rounded-md border border-[#4A4A4A] bg-[#353535] p-4">
             <Switch
               aria-readonly
               checked={isDefault}
               onCheckedChange={setIsDefault}
             />
-            <label htmlFor="theme-switch">Tema asosiy qilish</label>
+            <label htmlFor="theme-switch">{t('Temani asosiy qilish')}</label>
             <Switch
               aria-readonly
               checked={isGlobal || isDefault}
               onCheckedChange={setIsGlobal}
             />
-            <label htmlFor="theme-switch">Temani global qilish</label>
+            <label htmlFor="theme-switch">{t('Temani global qilish')}</label>
           </div>
         )}
         <SheetDescription className={'sr-only'}>
