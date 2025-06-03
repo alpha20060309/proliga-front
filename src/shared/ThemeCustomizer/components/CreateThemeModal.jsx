@@ -19,6 +19,7 @@ import {
   selectDarkTheme,
   selectLightTheme,
 } from 'app/lib/features/theme/theme.selector'
+import { useCreatePresetTheme } from 'app/hooks/theme/useCreatePresetTheme/useCreatePresetTheme'
 
 const CreateThemeModal = ({ isGlobal, open, setOpen }) => {
   const dispatch = useDispatch()
@@ -26,7 +27,10 @@ const CreateThemeModal = ({ isGlobal, open, setOpen }) => {
   const [name, setName] = useState('')
   const [nameRu, setNameRu] = useState('')
   const user = useSelector(selectUserTable)
-  const { createUserTheme, isLoading } = useCreateUserTheme()
+  const { createUserTheme, isLoading: isUserLoading } = useCreateUserTheme()
+  const { createPresetTheme, isLoading: isPresetLoading } =
+    useCreatePresetTheme()
+  const isLoading = isUserLoading || isPresetLoading
   const darkTheme = useSelector(selectDarkTheme)
   const lightTheme = useSelector(selectLightTheme)
 
@@ -43,7 +47,19 @@ const CreateThemeModal = ({ isGlobal, open, setOpen }) => {
         return
       }
 
-      if (!isGlobal) {
+      if (isGlobal) {
+        await createPresetTheme({
+          user_id: user.id,
+          name,
+          name_ru: nameRu,
+          dark_theme: darkTheme,
+          light_theme: lightTheme,
+          cb: () => {
+            dispatch(fetchThemes())
+            toast.success(t('Theme preset saved successfully'))
+          },
+        })
+      } else {
         await createUserTheme({
           name,
           name_ru: nameRu,
@@ -56,6 +72,7 @@ const CreateThemeModal = ({ isGlobal, open, setOpen }) => {
           },
         })
       }
+      setOpen(false)
     } catch (error) {
       toast.error(error.message)
     }
