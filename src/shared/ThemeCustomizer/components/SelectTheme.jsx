@@ -1,6 +1,6 @@
 'use client'
 import { useDispatch, useSelector } from 'react-redux'
-import { setSelectedTheme, setTheme } from 'app/lib/features/theme/theme.slice'
+import { setSelectedTheme, setThemeVariant } from 'app/lib/features/theme/theme.slice'
 import {
   Select,
   SelectContent,
@@ -26,8 +26,8 @@ const SelectTheme = () => {
     const selectedThemeData = themes.find((t) => +t.id === +value)
 
     if (selectedThemeData) {
-      dispatch(setTheme({ type: 'dark', data: selectedThemeData.dark_theme }))
-      dispatch(setTheme({ type: 'light', data: selectedThemeData.light_theme }))
+      dispatch(setThemeVariant({ type: 'dark', data: selectedThemeData.dark_theme }))
+      dispatch(setThemeVariant({ type: 'light', data: selectedThemeData.light_theme }))
     }
   }
 

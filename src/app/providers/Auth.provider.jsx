@@ -51,15 +51,15 @@ const AuthProvider = ({ children }) => {
   }, [session, dispatch, setAuth])
 
   useEffect(() => {
+    console.log(session?.user)
     if (path.includes('auth') || path.includes('confirm-otp')) {
       return
     }
 
-    if (logoutInProgress || !user?.id || !isAuthenticated) {
+    if (logoutInProgress || !session?.user?.id || !isAuthenticated) {
       return
     }
-
-    if (!user?.phone || !user?.email) {
+    if (!session?.user?.phone || !session?.user?.email) {
       performLogout(
         t(
           'Your registration was not successfully completed, so we are logging you out for security reasons.'
@@ -68,7 +68,7 @@ const AuthProvider = ({ children }) => {
       return
     }
 
-    if (user?.id && !user?.phone_verified) {
+    if (session?.user?.id && !session?.user?.phone_verified) {
       performLogout(
         t('Phone not verified. Please complete the verification process.')
       )
@@ -76,10 +76,10 @@ const AuthProvider = ({ children }) => {
     }
   }, [
     path,
-    user?.id,
-    user?.phone,
-    user?.phone_verified,
-    user?.email,
+    session?.user?.id,
+    session?.user?.phone,
+    session?.user?.phone_verified,
+    session?.user?.email,
     t,
     logOut,
     logoutInProgress,
@@ -91,7 +91,7 @@ const AuthProvider = ({ children }) => {
     const existing_app_version = localStorage.getItem('app_version') || null
 
     if (
-      user?.id &&
+      session?.user?.id &&
       app_version &&
       existing_app_version &&
       existing_app_version !== 'null' &&
@@ -118,7 +118,7 @@ const AuthProvider = ({ children }) => {
 
       performLogout()
     }
-  }, [app_version, user?.id, logOut, t, logoutInProgress])
+  }, [app_version, session?.user?.id, logOut, t, logoutInProgress])
 
   return <>{children}</>
 }

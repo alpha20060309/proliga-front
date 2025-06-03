@@ -17,6 +17,7 @@ export const useSendOTP = () => {
       shouldRedirect = false,
       redirectTo = '',
       is_update = false,
+      cb = () => {},
     }) => {
       setIsLoading(false)
       setError(null)
@@ -34,7 +35,6 @@ export const useSendOTP = () => {
           phone_number: phone,
           is_update,
         })
-
         if (error) {
           setError(
             error instanceof Error
@@ -59,6 +59,7 @@ export const useSendOTP = () => {
           if (shouldRedirect) {
             router.push(redirectTo)
           }
+          cb()
           return
         }
       } catch (error) {
@@ -68,10 +69,13 @@ export const useSendOTP = () => {
             : t('An unknown error occurred')
         )
         toast.error(
-          error instanceof Error
-            ? error.message
-            : t('An unknown error occurred')
+          t('Currenty SMS sending is not available, please try again later')
         )
+        // toast.error(
+        //   error instanceof Error
+        //     ? error.message
+        //     : t('An unknown error occurred')
+        // )
       } finally {
         setIsLoading(false)
       }

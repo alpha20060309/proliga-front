@@ -11,6 +11,8 @@ import { Button } from '@/components/ui/button'
 import { Lock, Loader2 } from 'lucide-react'
 import { resetPassword } from 'app/actions/resetPassword.action'
 import { useTransition } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Label } from '@/components/ui/label'
 
 const ResetPasswordForm = () => {
   const router = useTransitionRouter()
@@ -58,85 +60,77 @@ const ResetPasswordForm = () => {
   }, [phone, code, router])
 
   return (
-    <div className="bg-background border-border shadow-muted mx-auto w-full max-w-md space-y-8 rounded-lg border p-6 shadow-sm">
-      <div className="flex items-center gap-2">
-        <Lock className="text-primary h-8 w-8" />
-        <h1 className="text-2xl font-bold">{t('Parol Yangilash')}</h1>
-      </div>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-        <div className="space-y-1">
-          <label
-            htmlFor="newPassword"
-            className="text-muted-foreground text-sm font-medium"
-          >
-            {t('Yangi parol')}
-          </label>
-          <div className="relative">
-            <Input
-              id="newPassword"
-              type={showPassword ? 'text' : 'password'}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="pr-10"
-            />
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              className="absolute top-0 right-0 hover:bg-transparent"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? (
-                <EyeOff className="text-secondary-foreground size-6" />
-              ) : (
-                <Eye className="text-secondary-foreground size-6" />
-              )}
-            </Button>
+    <Card className="mx-auto w-full max-w-md px-2 py-8">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <Lock className="text-primary h-8 w-8" />
+          <h1 className="text-2xl font-bold">{t('Parol Yangilash')}</h1>
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <div className="space-y-2">
+            <Label htmlFor="newPassword">{t('Yangi parol')}</Label>
+            <div className="relative">
+              <Input
+                id="newPassword"
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="pr-10"
+              />
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="absolute top-0 right-0 hover:bg-transparent"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <EyeOff className="text-secondary-foreground size-6" />
+                ) : (
+                  <Eye className="text-secondary-foreground size-6" />
+                )}
+              </Button>
+            </div>
           </div>
-        </div>
-        <div className="space-y-1">
-          <label
-            htmlFor="confirmPassword"
-            className="text-muted-foreground text-sm font-medium"
-          >
-            {t('Yangi parolni qayta kiriting')}
-          </label>
-          <div className="relative">
-            <Input
-              id="confirmPassword"
-              type={showConfirmPassword ? 'text' : 'password'}
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              className="pr-10"
-            />
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              className="absolute inset-y-0 right-0 hover:bg-transparent"
-              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-            >
-              {showConfirmPassword ? (
-                <EyeOff className="text-secondary-foreground size-6" />
-              ) : (
-                <Eye className="text-secondary-foreground size-6" />
-              )}
-            </Button>
+          <div className="space-y-2">
+            <Label htmlFor="confirmPassword">
+              {t('Yangi parolni qayta kiriting')}
+            </Label>
+            <div className="relative">
+              <Input
+                id="confirmPassword"
+                type={showConfirmPassword ? 'text' : 'password'}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="pr-10"
+              />
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="absolute inset-y-0 right-0 hover:bg-transparent"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              >
+                {showConfirmPassword ? (
+                  <EyeOff className="text-secondary-foreground size-6" />
+                ) : (
+                  <Eye className="text-secondary-foreground size-6" />
+                )}
+              </Button>
+            </div>
           </div>
-        </div>
-        <Button
-          type="submit"
-          className="text-foreground border-accent bg-background hover:bg-accent hover:text-foreground mt-4 h-12 w-full rounded-sm border font-bold transition-all duration-300"
-          disabled={isPending}
-        >
-          {isPending ? (
-            <Loader2 className="text-foreground size-8 animate-spin" />
-          ) : (
-            t('Parol Yangilash')
-          )}
-        </Button>
-      </form>
-    </div>
+          <Button type="submit" size={'lg'} disabled={isPending}>
+            {isPending ? (
+              <Loader2 className="text-primary-foreground size-8 animate-spin" />
+            ) : (
+              t('Parol Yangilash')
+            )}
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
   )
 }
 

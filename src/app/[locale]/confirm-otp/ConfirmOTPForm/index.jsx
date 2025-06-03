@@ -12,6 +12,9 @@ import { useConfirmOTP } from 'app/hooks/auth/useConfirmOTP/useConfirmOTP'
 import { Button } from '@/components/ui/button'
 import { Loader2, ShieldCheck } from 'lucide-react'
 import { toast } from 'sonner'
+import { Label } from '@/components/ui/label'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
 
 const ConfirmOTPForm = ({ redirect, phone }) => {
   const { t } = useTranslation()
@@ -36,63 +39,54 @@ const ConfirmOTPForm = ({ redirect, phone }) => {
   }
 
   return (
-    <div className="bg-background mx-auto w-full max-w-md space-y-8 rounded-lg border border-border p-6 shadow-sm">
-      <div className="flex items-center gap-2">
-        <ShieldCheck className="text-primary h-8 w-8" />
-        <h1 className="text-2xl font-bold">{t('SMS Kod Tasdiqlash')}</h1>
-      </div>
-      <form onSubmit={handleConfirm} className="flex flex-col gap-2">
-        <div className="space-y-1">
-          <label
-            htmlFor="phone"
-            className="text-muted-foreground text-sm font-medium"
-          >
-            {t('Telefon raqam')}:
-          </label>
-          <div
-            id="phone"
-            className="bg-muted text-foreground rounded-md border px-3 py-2"
-          >
-            {phone}
+    <Card className="mx-auto w-full max-w-md px-2 py-8">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <ShieldCheck className="text-primary h-8 w-8" />
+          <h1 className="text-2xl font-bold">{t('SMS Kod Tasdiqlash')}</h1>
+        </CardTitle>
+      </CardHeader>
+      <CardContent className={'p-4'}>
+        <form onSubmit={handleConfirm} className="flex flex-col gap-3">
+          <div className="space-y-2">
+            <Label htmlFor="phone">{t('Telefon raqam')}:</Label>
+            <Input
+              id="phone"
+              className="h-10"
+              value={phone}
+              disabled
+              readOnly
+            />
           </div>
-        </div>
-        <div className="space-y-1">
-          <label
-            htmlFor="otp"
-            className="text-muted-foreground text-sm font-medium"
-          >
-            {t('Tasdiqlash kodini kiriting.')}
-          </label>
-          <InputOTP
-            maxLength={6}
-            value={code}
-            onChange={(value) => setCode(value)}
-            id="otp"
-          >
-            <InputOTPGroup className="w-full justify-between">
-              <InputOTPSlot index={0} className="rounded-lg" />
-              <InputOTPSlot index={1} className="rounded-lg" />
-              <InputOTPSlot index={2} className="rounded-lg" />
-              <InputOTPSlot index={3} className="rounded-lg" />
-              <InputOTPSlot index={4} className="rounded-lg" />
-              <InputOTPSlot index={5} className="rounded-lg" />
-            </InputOTPGroup>
-          </InputOTP>
-        </div>
-        <ResendOTPBox phone={phone} className={'my-2'} />
-        <Button
-          type="submit"
-          className="text-foreground h-12 w-full rounded-sm border border-accent bg-bak font-bold transition-all duration-300 hover:bg-yellow-400 hover:text-neutral-900"
-          disabled={isLoading}
-        >
-          {isLoading ? (
-            <Loader2 className="text-foreground size-8 animate-spin" />
-          ) : (
-            t('Tasdiqlash')
-          )}
-        </Button>
-      </form>
-    </div>
+          <div className="space-y-2">
+            <Label htmlFor="otp">{t('Tasdiqlash kodini kiriting.')}</Label>
+            <InputOTP
+              maxLength={6}
+              value={code}
+              onChange={(value) => setCode(value)}
+              id="otp"
+            >
+              <InputOTPGroup className="w-full justify-between">
+                <InputOTPSlot index={0} className="size-10 rounded-md" />
+                <InputOTPSlot index={1} className="size-10 rounded-md" />
+                <InputOTPSlot index={2} className="size-10 rounded-md" />
+                <InputOTPSlot index={3} className="size-10 rounded-md" />
+                <InputOTPSlot index={4} className="size-10 rounded-md" />
+                <InputOTPSlot index={5} className="size-10 rounded-md" />
+              </InputOTPGroup>
+            </InputOTP>
+          </div>
+          <ResendOTPBox phone={phone} />
+          <Button type="submit" size={'lg'} disabled={isLoading}>
+            {isLoading ? (
+              <Loader2 className="text-primary-foreground size-8 animate-spin" />
+            ) : (
+              t('Tasdiqlash')
+            )}
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
   )
 }
 

@@ -69,8 +69,10 @@ export const {
 
       if (trigger === 'update' && session) {
         const allowedUpdates = [
-          'name', 'last_name', 'middle_name', 'gender', 'bio', 'image',
+          'name', 'last_name', 'middle_name', 'gender', 'bio', 'image', 'phone_verified',
           'language', 'location', 'theme_id', 'user_theme_id', 'birth_date', 'phone',
+          'is_admin', 'phone_new', 'phones_old', 'emailVerified', 'isOAuth', "email",
+          'phone_verified', 'visitor', 'visited_at', 'geo', 'agent',
         ]
         for (const key of allowedUpdates) {
           if (Object.hasOwn(session, key)) {

@@ -12,8 +12,6 @@ import {
   fetchBroadcastNotifications,
   fetchPersonalNotifications,
 } from 'app/lib/features/systemNotification/systemNotification.thunk'
-import { fetchThemes } from 'app/lib/features/theme/theme.thunk'
-// import { useGenerateLanguage } from 'app/hooks/system/useGenerateLanguage/useGenerateLanguage'
 import dynamic from 'next/dynamic'
 const registerSW = dynamic(() => import('app/lib/registerSw'), { ssr: false })
 
@@ -33,10 +31,6 @@ const InitialStateProvider = ({ children }) => {
     ])
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  useEffect(() => {
-    dispatch(fetchThemes(!user?.theme_id && !user?.user_theme_id))
-  }, [dispatch, user?.theme_id, user?.user_theme_id])
 
   useEffect(() => {
     if (user?.id && user?.phone && user?.phone_verified) {

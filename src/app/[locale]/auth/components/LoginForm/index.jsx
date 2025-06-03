@@ -54,6 +54,9 @@ const LoginForm = ({ setShouldRedirect }) => {
 
     startTransition(async () => {
       try {
+        setShouldRedirect(false)
+        localStorage.removeItem('sign-in-method')
+
         const res = await login({
           phone,
           password,
@@ -69,32 +72,31 @@ const LoginForm = ({ setShouldRedirect }) => {
           return
         }
 
-        const { phone_verified, success } = res
+        const { phone_verified, success, user, phone: phone_number } = res
 
         if (success) {
           await update({
-            phone_verified,
+            ...user,
           })
+
           localStorage.setItem('app_version', app_version)
 
-          if (!phone_verified && res?.phone) {
-            toast.info(
-              t('We are redirecting you to an sms confirmation page!'),
-              {
-                theme: 'dark',
-              }
-            )
+          if (!phone_verified && !!phone_number) {
             await sendOTP({
               phone,
               shouldRedirect: true,
-              redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(res.phone)}`,
+              redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(phone_number)}`,
+              cb: () =>
+                toast.info(
+                  t('We are redirecting you to an sms confirmation page!')
+                ),
             })
             return
           }
           toast.success(t('Tizimga muvaffaqiyatli kirdingiz'))
         }
-        // eslint-disable-next-line no-unused-vars
       } catch (error) {
+        console.log(error)
         toast.error(t('An unknown error occurred'))
       }
     })

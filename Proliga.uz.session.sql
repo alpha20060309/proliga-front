@@ -2,4 +2,4 @@
 
 SELECT * FROM "theme" ;
 
-select user_theme_id, theme_id from "user" where id = 44736;
+select * from "user" where id = 44736;

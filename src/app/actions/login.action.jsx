@@ -39,6 +39,7 @@ export const login = async (values) => {
 
     return {
       success: true,
+      user: existingUser,
       phone: existingUser?.phone,
       phone_verified: existingUser?.phone_verified,
     }

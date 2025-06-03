@@ -10,7 +10,12 @@ import {
   selectDarkTheme,
   selectLightTheme,
 } from 'app/lib/features/theme/theme.selector'
-import { fetchUserThemes } from 'app/lib/features/theme/theme.thunk'
+import {
+  fetchUserThemes,
+  fetchThemes,
+} from 'app/lib/features/theme/theme.thunk'
+import { selectThemes } from 'app/lib/features/theme/theme.selector'
+import { setTheme, setDefaultTheme } from 'app/lib/features/theme/theme.slice'
 
 const CustomThemeProvider = ({ children }) => {
   const dispatch = useDispatch()
@@ -18,12 +23,40 @@ const CustomThemeProvider = ({ children }) => {
   const darkTheme = useSelector(selectDarkTheme)
   const lightTheme = useSelector(selectLightTheme)
   const user = useSelector(selectUserTable)
+  const themes = useSelector(selectThemes)
+
+  // 1. the user is not logged in set default
+  // 2. the user is logged in but there is no theme_id or user_theme_id set default
+  // 3. the user is logged in and there is a theme_id set the theme_id
+  // 4. the user is logged in and there is a user_theme_id set the user_theme_id
+  // 5. the user is logged in and there is a theme_id and user_theme_id set the user_theme_id
 
   useEffect(() => {
-    if (user?.user_theme_id) {
+    dispatch(fetchThemes())
+    if (user?.id) {
       dispatch(fetchUserThemes(user?.id))
+      return
     }
-  }, [dispatch, user])
+  }, [dispatch, user?.id])
+
+  useEffect(() => {
+    if (!themes?.length) return
+
+    const handleThemeSelection = () => {
+      if (!user?.id || (!user?.theme_id && !user?.user_theme_id)) {
+        dispatch(setDefaultTheme())
+        return
+      }
+
+      const themeId = user.user_theme_id || user.theme_id
+      if (themeId) {
+        dispatch(setTheme(themeId))
+        return
+      }
+    }
+
+    handleThemeSelection()
+  }, [dispatch, user?.id, themes?.length, user?.theme_id, user?.user_theme_id])
 
   // Apply colors from Redux store to DOM
   useEffect(() => {
