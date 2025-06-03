@@ -98,7 +98,7 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
                 />
               )}
               {!cabinet_click && !cabinet_payme && (
-                <p className="flex h-10 w-full items-center justify-center rounded-sm border border-red-400 bg-red-700/80 font-bold">
+                <p className="text-foreground border-destructive/50 bg-red-destructive flex h-10 w-full items-center justify-center rounded-sm border font-bold">
                   {t("Hozircha to'lovlar o'chirib qo'yilgan!")}
                 </p>
               )}

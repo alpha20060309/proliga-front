@@ -8,11 +8,6 @@ import {
 } from '@/components/ui/sheet'
 import { Palette } from 'lucide-react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import ColorModifier from './components/ColorModifier'
-import FontModifier from './components/FontModifer'
-import GlobalModifier from './components/GlobalModifier'
-import ShadowModifier from './components/ShadowsModifier'
-import SelectTheme from './components/SelectTheme'
 import { RefreshCw, Loader2 } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
@@ -23,6 +18,11 @@ import { useTranslation } from 'react-i18next'
 import { Switch } from '@/components/ui/switch'
 import CreateThemeModal from './components/CreateThemeModal'
 import { useResetUserThemes } from 'app/hooks/theme/useResetUserThemes/useResetUserThemes'
+import ColorModifier from './components/ColorModifier'
+import FontModifier from './components/FontModifer'
+import GlobalModifier from './components/GlobalModifier'
+import ShadowModifier from './components/ShadowsModifier'
+import SelectTheme from './components/SelectTheme'
 
 const ThemeCustomizer = () => {
   const dispatch = useDispatch()
@@ -32,7 +32,6 @@ const ThemeCustomizer = () => {
   const [isDefault, setIsDefault] = useState(false)
   const [isGlobal, setIsGlobal] = useState(false)
   const { resetUserThemes, isLoading } = useResetUserThemes()
-
 
   const handleReset = async () => {
     if (user?.id) {
@@ -51,7 +50,6 @@ const ThemeCustomizer = () => {
       toast.success(t('Theme is reset to default'))
     }
   }
-
 
   return (
     <Sheet>
@@ -128,8 +126,12 @@ const ThemeCustomizer = () => {
           </TabsContent>
         </Tabs>
         <section className="mt-2 flex items-center justify-center gap-2">
-          <CreateThemeModal open={open} setOpen={setOpen} />
-
+          <CreateThemeModal
+            isDefault={isDefault}
+            isGlobal={isGlobal}
+            open={open}
+            setOpen={setOpen}
+          />
           <button
             onClick={handleReset}
             disabled={isLoading}
@@ -151,13 +153,13 @@ const ThemeCustomizer = () => {
               checked={isDefault}
               onCheckedChange={setIsDefault}
             />
-            <label htmlFor="theme-switch">Tema asosiy qilish</label>
+            <label htmlFor="theme-switch">{t('Tema asosiy qilish')}</label>
             <Switch
               aria-readonly
               checked={isGlobal || isDefault}
               onCheckedChange={setIsGlobal}
             />
-            <label htmlFor="theme-switch">Temani global qilish</label>
+            <label htmlFor="theme-switch">{t('Temani global qilish')}</label>
           </div>
         )}
         <SheetDescription className={'sr-only'}>
