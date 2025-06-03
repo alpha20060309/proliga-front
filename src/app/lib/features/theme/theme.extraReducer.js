@@ -1,4 +1,4 @@
-import { fetchThemes, fetchUserTheme } from './theme.thunk'
+import { fetchThemes, fetchUserThemes } from './theme.thunk'
 
 export const themeExtraReducer = (builder) => {
   builder
@@ -8,28 +8,33 @@ export const themeExtraReducer = (builder) => {
     .addCase(fetchThemes.fulfilled, (state, action) => {
       state.themes = action.payload?.data || []
       state.isModified = false
-      const defaultTheme = action.payload?.data.find((i) => i.is_default)
-      state.selectedTheme = String(defaultTheme?.id)
-      state.darkTheme = defaultTheme?.dark_theme || {}
-      state.lightTheme = defaultTheme?.light_theme || {}
+      if (action.payload?.set_default) {
+        const defaultTheme = action.payload?.data.find((i) => i.is_default)
+        state.selectedTheme = String(defaultTheme?.id)
+        state.darkTheme = defaultTheme?.dark_theme || {}
+        state.lightTheme = defaultTheme?.light_theme || {}
+      }
       state.isLoading = false
     })
     .addCase(fetchThemes.rejected, (state, action) => {
       state.error = action?.error?.message
       state.isLoading = false
     })
-    .addCase(fetchUserTheme.pending, (state) => {
+    .addCase(fetchUserThemes.pending, (state) => {
       state.isLoading = true
     })
-    .addCase(fetchUserTheme.fulfilled, (state, action) => {
-      state.themes = [...state.themes, ...action.payload?.data || {}]
-      state.selectedTheme = String(action.payload?.data?.id)
+    .addCase(fetchUserThemes.fulfilled, (state, action) => {
+      state.themes = [...state.themes, ...action.payload?.data || []]
+      const theme = action.payload?.data[0]
       state.isModified = false
-      state.darkTheme = action.payload?.data?.dark_theme || {}
-      state.lightTheme = action.payload?.data?.light_theme || {}
+      if (theme?.user_id) {
+        state.selectedTheme = String(theme?.id)
+        state.darkTheme = theme.dark_theme || {}
+        state.lightTheme = theme.light_theme || {}
+      }
       state.isLoading = false
     })
-    .addCase(fetchUserTheme.rejected, (state, action) => {
+    .addCase(fetchUserThemes.rejected, (state, action) => {
       state.error = action?.error?.message
       state.isLoading = false
     })

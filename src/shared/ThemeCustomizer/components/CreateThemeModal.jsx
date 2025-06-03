@@ -31,12 +31,13 @@ const CreateThemeModal = ({ open, setOpen }) => {
   const [name, setName] = useState('')
   const [nameRu, setNameRu] = useState('')
   const user = useSelector(selectUserTable)
-  const { createTheme, isLoading } = useCreateUserTheme()
+  const { createUserTheme, isLoading } = useCreateUserTheme()
   const darkTheme = useSelector(selectDarkTheme)
   const lightTheme = useSelector(selectLightTheme)
   const { isModified } = useSelector((store) => store.theme)
   const { saveTheme, saveUserTheme } = useSaveTheme()
   const themes = useSelector(selectThemes)
+
   const handleSave = async (e) => {
     try {
       e.preventDefault()
@@ -50,7 +51,7 @@ const CreateThemeModal = ({ open, setOpen }) => {
         return
       }
 
-      await createTheme({
+      await createUserTheme({
         name,
         name_ru: nameRu,
         user_id: user.id,
@@ -62,7 +63,7 @@ const CreateThemeModal = ({ open, setOpen }) => {
         },
       })
     } catch (error) {
-      toast.error(error)
+      toast.error(error.message)
     }
   }
 

@@ -10,10 +10,7 @@ import {
 } from '@/components/ui/accordion'
 import { colorKeys, toVarName } from 'app/utils/colors.util'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  setLightTheme,
-  setDarkTheme,
-} from 'app/lib/features/theme/theme.slice'
+import { setLightTheme, setDarkTheme } from 'app/lib/features/theme/theme.slice'
 import { useTranslation } from 'react-i18next'
 import {
   selectDarkTheme,
@@ -65,24 +62,33 @@ const ColorModifier = () => {
         {t(key.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()))}
       </label>
       <div className="flex items-center space-x-2">
-        <input
-          type="color"
-          id={key}
-          value={formatColor(
-            resolvedTheme === 'dark'
-              ? darkTheme.colors[key]
-              : lightTheme.colors[key]
-          )}
-          onChange={(e) => handleChange(key, e.target.value)}
-          className="h-7 w-7 cursor-pointer appearance-none rounded-[4px] border-none bg-transparent p-0"
-        />
-        <span className="w-20 rounded-[4px] bg-[#353535] p-1 text-center font-mono text-xs text-[#A0A0A0] select-all">
-          {formatColor(
-            resolvedTheme === 'dark'
-              ? darkTheme.colors[key]
-              : lightTheme.colors[key]
-          )}
-        </span>
+        {darkTheme?.colors && Object.keys(darkTheme?.colors).length > 0 ||
+        lightTheme?.colors && Object.keys(lightTheme?.colors).length > 0 ? (
+          <>
+            <input
+              type="color"
+              id={key}
+              value={formatColor(
+                resolvedTheme === 'dark'
+                  ? darkTheme?.colors[key] || '#000000'
+                  : lightTheme?.colors[key] || '#000000'
+              )}
+              onChange={(e) => handleChange(key, e.target.value)}
+              className="h-7 w-7 cursor-pointer appearance-none rounded-[4px] border-none bg-transparent p-0"
+            />
+            <span className="w-20 rounded-[4px] bg-[#353535] p-1 text-center font-mono text-xs text-[#A0A0A0] select-all">
+              {formatColor(
+                resolvedTheme === 'dark'
+                  ? darkTheme?.colors[key] || '#000000'
+                  : lightTheme?.colors[key] || '#000000'
+              )}
+            </span>
+          </>
+        ) : (
+          <span className="w-20 rounded-[4px] bg-[#353535] p-1 text-center font-mono text-xs text-[#A0A0A0] select-all">
+            {t('No color found')}
+          </span>
+        )}
       </div>
     </div>
   )

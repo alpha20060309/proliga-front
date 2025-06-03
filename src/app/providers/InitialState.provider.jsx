@@ -28,7 +28,6 @@ const InitialStateProvider = ({ children }) => {
       dispatch(fetchGeo()),
       dispatch(fetchPrizes()),
       dispatch(fetchSystemConfig()),
-      dispatch(fetchThemes()),
       getUserAgent(),
       generateFingerprint(),
     ])
@@ -36,9 +35,13 @@ const InitialStateProvider = ({ children }) => {
   }, [])
 
   useEffect(() => {
+    dispatch(fetchThemes(!user?.theme_id && !user?.user_theme_id))
+  }, [dispatch, user?.theme_id, user?.user_theme_id])
+
+  useEffect(() => {
     if (user?.id && user?.phone && user?.phone_verified) {
-      dispatch(fetchBroadcastNotifications()),
-        dispatch(fetchPersonalNotifications({ user_id: user?.id }))
+      dispatch(fetchBroadcastNotifications())
+      dispatch(fetchPersonalNotifications({ user_id: user?.id }))
     }
   }, [dispatch, user?.id, user?.phone, user?.phone_verified])
 
