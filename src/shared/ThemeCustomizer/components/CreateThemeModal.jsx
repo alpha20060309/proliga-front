@@ -1,6 +1,5 @@
 import {
   Dialog,
-  DialogTrigger,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -20,25 +19,16 @@ import {
   selectDarkTheme,
   selectLightTheme,
 } from 'app/lib/features/theme/theme.selector'
-import { useSaveTheme } from 'app/hooks/theme/useSaveTheme/useSaveTheme'
-import { selectThemes } from 'app/lib/features/theme/theme.selector'
-import { useSetThemeDefault } from 'app/hooks/theme/useSetThemeDefault/useSetThemeDefault'
 
-const CreateThemeModal = ({ isDefault, isGlobal, open, setOpen }) => {
+const CreateThemeModal = ({ isGlobal, open, setOpen }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { selectedTheme } = useSelector((store) => store.theme)
-
   const [name, setName] = useState('')
   const [nameRu, setNameRu] = useState('')
   const user = useSelector(selectUserTable)
   const { createUserTheme, isLoading } = useCreateUserTheme()
   const darkTheme = useSelector(selectDarkTheme)
   const lightTheme = useSelector(selectLightTheme)
-  const { isModified } = useSelector((store) => store.theme)
-  const { saveTheme, saveUserTheme } = useSaveTheme()
-  const themes = useSelector(selectThemes)
-  const { setThemeDefault } = useSetThemeDefault()
 
   const handleSave = async (e) => {
     try {
@@ -71,78 +61,8 @@ const CreateThemeModal = ({ isDefault, isGlobal, open, setOpen }) => {
     }
   }
 
-  const handleSavePreset = () => {
-    const theme = themes.find((theme) => +theme.id === +selectedTheme)
-    if (!theme?.id) return toast.error(t('Theme not found'))
-
-    if (theme?.is_global) {
-      saveTheme({
-        theme,
-        user_id: user?.id,
-        cb: () => {
-          toast.success(t('Theme saved successfully'))
-        },
-      })
-    } else {
-      saveUserTheme({
-        theme,
-        user_id: user?.id,
-        cb: () => {
-          toast.success(t('Theme saved successfully'))
-        },
-      })
-    }
-  }
-
-  const handleSetDefault = async () => {
-    try {
-      if (!selectedTheme) return toast.error(t('Please select a theme'))
-      if (!user?.is_admin) return toast.error(t('You are not authorized'))
-
-      await setThemeDefault({
-        theme_id: selectedTheme,
-        dark_theme: darkTheme,
-        light_theme: lightTheme,
-        cb: () => {
-          toast.success(t('Theme saved successfully'))
-        },
-      })
-    } catch (error) {
-      toast.error(error.message)
-    }
-  }
-
-  // 1. if is global is true then set default theme  (admin only)
-  // 2. if is modified & isGlobal is true then open dialog & save theme as preset (admin only)
-  // 3. if is modified is true then open dialog & save user theme
-  // 4. if isGlobal is true but not modified then save theme to user
-  // 5. if not modified save theme to user
-
-  const handleClick = () => {
-    if (isDefault) {
-      return handleSetDefault
-    }
-
-    if (isModified) {
-      return setOpen
-    }
-
-    return handleSavePreset
-  }
-
   return (
-    <Dialog open={open} onOpenChange={handleClick}>
-      <DialogTrigger
-        className="group flex w-1/2 items-center justify-center gap-2 rounded-md bg-[#ffdd00] px-4 py-2.5 text-sm font-medium text-[#1A1A1A] shadow-sm transition-colors hover:bg-[#ebcb00] focus:ring-2 focus:ring-[#ffdd00] focus:ring-offset-2 focus:ring-offset-[#232323] focus:outline-none disabled:pointer-events-none disabled:opacity-50"
-        aria-label="Save theme changes"
-      >
-        {isLoading ? (
-          <Loader2 className="size-4 animate-spin" />
-        ) : (
-          <Save className="size-4 transition-transform group-hover:scale-110" />
-        )}
-        {t('Saqlash')}
-      </DialogTrigger>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent>
         <DialogHeader className={'mb-4'}>
           <DialogTitle>{t('Create Theme')}</DialogTitle>

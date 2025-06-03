@@ -1,6 +1,9 @@
 'use client'
 import { useDispatch, useSelector } from 'react-redux'
-import { setSelectedTheme, setThemeVariant } from 'app/lib/features/theme/theme.slice'
+import {
+  setSelectedTheme,
+  setThemeVariant,
+} from 'app/lib/features/theme/theme.slice'
 import {
   Select,
   SelectContent,
@@ -13,10 +16,12 @@ import { useTranslation } from 'react-i18next'
 import ThemePreview from './ThemePreview'
 import { selectThemes } from 'app/lib/features/theme/theme.selector'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { useTheme } from 'next-themes'
 
 const SelectTheme = () => {
   const dispatch = useDispatch()
   const themes = useSelector(selectThemes)
+  const { resolvedTheme } = useTheme()
   const { selectedTheme } = useSelector((store) => store.theme)
   const { lang } = useSelector((store) => store.systemLanguage)
   const { t } = useTranslation()
@@ -26,8 +31,12 @@ const SelectTheme = () => {
     const selectedThemeData = themes.find((t) => +t.id === +value)
 
     if (selectedThemeData) {
-      dispatch(setThemeVariant({ type: 'dark', data: selectedThemeData.dark_theme }))
-      dispatch(setThemeVariant({ type: 'light', data: selectedThemeData.light_theme }))
+      dispatch(
+        setThemeVariant({ type: 'dark', data: selectedThemeData.dark_theme })
+      )
+      dispatch(
+        setThemeVariant({ type: 'light', data: selectedThemeData.light_theme })
+      )
     }
   }
 
@@ -46,7 +55,7 @@ const SelectTheme = () => {
         >
           <SelectValue placeholder={t('Select a Preset')} />
         </SelectTrigger>
-        <SelectContent className="rounded-md border border-[#4A4A4A] bg-[#2D2D2D] text-[#E0E0E0]">
+        <SelectContent className="max-h-[60vh] rounded-md border border-[#4A4A4A] bg-[#2D2D2D] text-[#E0E0E0]">
           <SelectGroup>
             {themes.length === 0 && (
               <SelectItem
@@ -66,7 +75,14 @@ const SelectTheme = () => {
               >
                 <div className="flex items-center gap-2">
                   <ThemePreview theme={theme} />
-                  <span>
+                  <span
+                    style={{
+                      fontFamily:
+                        resolvedTheme === 'dark'
+                          ? theme.light_theme?.font
+                          : theme.dark_theme?.font,
+                    }}
+                  >
                     {getCorrectName({
                       uz: theme.name,
                       ru: theme.name_ru,
