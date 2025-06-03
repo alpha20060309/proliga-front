@@ -72,16 +72,19 @@ export default async function RootLayout({ children, params }) {
   const { resources } = await initTranslations(locale)
   const userId = session?.user?.id
   let themeURL = ''
-
-  if (session?.user_theme_id) {
-    console.log('user_theme_id', session.user_theme_id)
-    themeURL = `/static/user/${userId}/user.css`
-  } else if (session?.theme_id) {
-    console.log('theme_id', session.theme_id)
-    themeURL = `/static/theme/${session.theme_id}.css`
+  console.log('session', session)
+  if (session?.user?.user_theme_id) {
+    console.log('user_theme_id', session.user.user_theme_id)
+    // eslint-disable-next-line no-undef
+    themeURL = `${process.env.NEXT_PUBLIC_STATIC_URL}/user/${userId}/user.css`
+  } else if (session?.user?.theme_id) {
+    console.log('theme_id', session.user.theme_id)
+    // eslint-disable-next-line no-undef
+    themeURL = `${process.env.NEXT_PUBLIC_STATIC_URL}/theme/${session.user.theme_id}.css`
   } else {
     console.log('ALL')
-    themeURL = `/static/theme/ALL.css`
+    // eslint-disable-next-line no-undef
+    themeURL = `${process.env.NEXT_PUBLIC_STATIC_URL}/theme/ALL.css`
   }
 
   return (

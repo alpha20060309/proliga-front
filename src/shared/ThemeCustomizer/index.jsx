@@ -33,6 +33,7 @@ const ThemeCustomizer = () => {
   const [isGlobal, setIsGlobal] = useState(false)
   const { resetUserThemes, isLoading } = useResetUserThemes()
 
+
   const handleReset = async () => {
     if (user?.id) {
       try {
@@ -50,6 +51,7 @@ const ThemeCustomizer = () => {
       toast.success(t('Theme is reset to default'))
     }
   }
+
 
   return (
     <Sheet>

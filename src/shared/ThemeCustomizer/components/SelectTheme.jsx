@@ -1,5 +1,4 @@
 'use client'
-import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSelectedTheme, setTheme } from 'app/lib/features/theme/theme.slice'
 import {
@@ -12,7 +11,6 @@ import {
 } from '@/components/ui/select'
 import { useTranslation } from 'react-i18next'
 import ThemePreview from './ThemePreview'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { selectThemes } from 'app/lib/features/theme/theme.selector'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 
@@ -22,16 +20,6 @@ const SelectTheme = () => {
   const { selectedTheme } = useSelector((store) => store.theme)
   const { lang } = useSelector((store) => store.systemLanguage)
   const { t } = useTranslation()
-  const user = useSelector(selectUserTable)
-
-  useEffect(() => {
-    if (user?.user_theme_id) {
-      dispatch(setSelectedTheme(user?.user_theme_id))
-    } else if (user?.theme_id) {
-      dispatch(setSelectedTheme(user?.theme_id))
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch])
 
   const handleThemeChange = (value) => {
     dispatch(setSelectedTheme(value))

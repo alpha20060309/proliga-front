@@ -11,6 +11,8 @@ import {
   selectLightTheme,
 } from 'app/lib/features/theme/theme.selector'
 import { fetchUserTheme } from 'app/lib/features/theme/theme.thunk'
+import { selectThemes } from 'app/lib/features/theme/theme.selector'
+import { setSelectedTheme, setTheme } from 'app/lib/features/theme/theme.slice'
 
 const CustomThemeProvider = ({ children }) => {
   const dispatch = useDispatch()
@@ -18,12 +20,27 @@ const CustomThemeProvider = ({ children }) => {
   const darkTheme = useSelector(selectDarkTheme)
   const lightTheme = useSelector(selectLightTheme)
   const user = useSelector(selectUserTable)
-
+  const themes = useSelector(selectThemes)
   useEffect(() => {
     if (user?.user_theme_id) {
       dispatch(fetchUserTheme(user?.user_theme_id))
     }
   }, [dispatch, user])
+
+  useEffect(() => {
+    let theme
+    if (user?.user_theme_id) {
+      dispatch(setSelectedTheme(String(user?.user_theme_id)))
+      theme = themes.find((t) => +t.id === +user?.user_theme_id)
+      dispatch(setTheme({ type: 'dark', data: theme?.dark_theme }))
+      dispatch(setTheme({ type: 'light', data: theme?.light_theme }))
+    } else if (user?.theme_id) {
+      dispatch(setSelectedTheme(String(user?.theme_id)))
+      theme = themes.find((t) => +t.id === +user?.theme_id)
+      dispatch(setTheme({ type: 'dark', data: theme?.dark_theme }))
+      dispatch(setTheme({ type: 'light', data: theme?.light_theme }))
+    }
+  }, [dispatch, user?.theme_id, user?.user_theme_id, themes])
 
   // Apply colors from Redux store to DOM
   useEffect(() => {
@@ -52,23 +69,23 @@ const CustomThemeProvider = ({ children }) => {
         document.documentElement.style.removeProperty(varName)
       }
     })
-  }, [resolvedTheme, darkTheme.colors, lightTheme.colors])
+  }, [resolvedTheme, darkTheme?.colors, lightTheme?.colors])
 
   // Apply fonts from Redux store to DOM
   useEffect(() => {
-    const font = resolvedTheme === 'dark' ? darkTheme.font : lightTheme.font
+    const font = resolvedTheme === 'dark' ? darkTheme?.font : lightTheme?.font
 
     document.documentElement.style[font ? 'setProperty' : 'removeProperty'](
       '--font-sans',
       font
     )
     document.body.style.fontFamily = font || ''
-  }, [resolvedTheme, darkTheme.font, lightTheme.font])
+  }, [resolvedTheme, darkTheme?.font, lightTheme?.font])
 
   // Apply shadows from Redux store to DOM
   useEffect(() => {
     const currentShadows =
-      resolvedTheme === 'dark' ? darkTheme.shadows : lightTheme.shadows
+      resolvedTheme === 'dark' ? darkTheme?.shadows : lightTheme?.shadows
     const shadowVars = SHADOW_KEYS.map((key) => `--${key}`)
 
     if (!currentShadows || !Object.keys(currentShadows).length) {
@@ -91,12 +108,12 @@ const CustomThemeProvider = ({ children }) => {
     })
 
     updateShadows(currentShadows)
-  }, [resolvedTheme, darkTheme.shadows, lightTheme.shadows])
+  }, [resolvedTheme, darkTheme?.shadows, lightTheme?.shadows])
 
   // Apply global styles from Redux store to DOM
   useEffect(() => {
     const globalStyles =
-      resolvedTheme === 'dark' ? darkTheme.global : lightTheme.global
+      resolvedTheme === 'dark' ? darkTheme?.global : lightTheme?.global
     const vars = {
       spacing: { var: '--spacing', unit: 'rem' },
       letterSpacing: { var: '--letter-spacing', unit: 'em' },
@@ -118,7 +135,7 @@ const CustomThemeProvider = ({ children }) => {
         document.documentElement.style.removeProperty(varName)
       }
     })
-  }, [resolvedTheme, darkTheme.global, lightTheme.global])
+  }, [resolvedTheme, darkTheme?.global, lightTheme?.global])
 
   return children
 }
