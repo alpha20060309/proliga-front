@@ -105,12 +105,6 @@ const ThemeCustomizer = () => {
     }
   }
 
-  // 1. if is global is true then set default theme  (admin only)
-  // 2. if is modified & isGlobal is true then open dialog & save theme as preset (admin only)
-  // 3. if is modified is true then open dialog & save user theme
-  // 4. if isGlobal is true but not modified then save theme to user
-  // 5. if not modified save theme to user
-
   const handleClick = () => {
     if (isDefault) {
       return handleSetDefault()
@@ -123,7 +117,6 @@ const ThemeCustomizer = () => {
     return handleSavePreset()
   }
 
-  // #353535 #A0A0A0 #2D2D2D #B0B0B0
   return (
     <Sheet>
       <SheetTrigger className="relative flex size-8 items-center justify-center bg-transparent p-0 font-sans font-medium hover:bg-transparent">

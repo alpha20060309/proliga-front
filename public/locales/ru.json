@@ -703,5 +703,13 @@
   "Sidebar Ring": "Обводка боковой панели",
   "Parolingiz muvaffaqiyatli o'zgartirildi": "Ваш пароль успешно изменён.",
   "No presets available": "Предустановки недоступны",
-  "Tozalash": "Сброс"
+  "Tozalash": "Сброс",
+  "Please enter a name": "Пожалуйста, введите имя",
+  "Theme preset saved successfully": "Предустановка темы успешно сохранена",
+  "Name in Uzbek": "Имя на узбекском языке",
+  "Name in Russian": "Имя на русском языке",
+  "New default theme is set": "Новая тема по умолчанию установлена",
+  "You are not authorized": "У вас нет доступа",
+  "Please select a theme": "Пожалуйста, выберите тему",
+  "Theme not found": "Тема не найдена"
 }

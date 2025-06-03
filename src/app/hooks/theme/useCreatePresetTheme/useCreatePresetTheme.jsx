@@ -63,7 +63,6 @@ export const useCreatePresetTheme = () => {
         )
 
         if (!res.ok) {
-          console.log(res)
           setError(
             res.error instanceof Error
               ? res.error.message

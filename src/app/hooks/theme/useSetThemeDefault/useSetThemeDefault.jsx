@@ -27,7 +27,6 @@ export const useSetThemeDefault = () => {
         )
 
         if (!res.ok) {
-          console.log(res)
           setError(
             res.error instanceof Error
               ? res.error.message
