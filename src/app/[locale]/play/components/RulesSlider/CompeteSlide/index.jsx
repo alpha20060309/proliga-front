@@ -12,7 +12,7 @@ const CompeteSlide = () => {
           alt="competition"
           width={400}
           height={400}
-          className="xs:size-80 bg-accent-foreground mx-auto size-72 rounded p-2 md:mx-0 md:size-88 xl:size-112"
+          className="xs:size-80 bg-black/50 mx-auto size-72 rounded p-2 md:mx-0 md:size-88 xl:size-112"
           unoptimized
         />
       </div>
