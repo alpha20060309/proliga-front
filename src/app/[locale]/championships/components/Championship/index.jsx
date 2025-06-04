@@ -111,7 +111,7 @@ const renderGameStatus = (game, currentGame, t) => {
     return (
       <div className="text-secondary-foreground flex gap-1 text-xs select-none sm:text-sm">
         <p>{t('Deadline')}: </p>
-        <span className="text-accent font-semibold">
+        <span className="text-primary font-semibold">
           {formatDate(game?.deadline)}
         </span>
       </div>

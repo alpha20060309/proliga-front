@@ -39,7 +39,7 @@ const CreateThemeModal = ({ isGlobal, open, setOpen }) => {
       e.preventDefault()
 
       if (!user?.id) {
-        toast.error(t('Please Login first'))
+        toast.error(t('Please login first'))
         return
       }
       if (!name || !nameRu) {

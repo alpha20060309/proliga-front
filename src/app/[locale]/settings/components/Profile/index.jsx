@@ -41,7 +41,7 @@ const SettingsProfile = () => {
         <Avatar
           src={getUrl(user?.image)}
           className={
-            'text-foreground size-24 rounded-xl object-cover object-top transition-all duration-1000 ease-in-out hover:object-bottom'
+            'size-24 rounded-xl object-cover object-top transition-all duration-1000 ease-in-out hover:object-bottom'
           }
         />
         <div className="flex flex-col justify-center">

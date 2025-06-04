@@ -24,6 +24,7 @@ export const useSaveTheme = () => {
           .from('user')
           .update({
             theme_id: theme.id,
+            user_theme_id: null,
           })
           .eq('id', user_id)
           .select()
@@ -36,6 +37,7 @@ export const useSaveTheme = () => {
         }
         await update({
           theme_id: theme.id,
+          user_theme_id: null,
         })
         cb()
       } catch (error) {

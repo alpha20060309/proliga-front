@@ -5,7 +5,7 @@ const ChampionshipsTitle = () => {
 
   return (
     <h2 className="mb-6 text-2xl font-bold text-white">
-      <span className="text-accent mr-2">{t('Available')}</span>
+      <span className="text-primary mr-2">{t('Available')}</span>
       {t('Ligalar')}
     </h2>
   )

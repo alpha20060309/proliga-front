@@ -64,7 +64,7 @@ const TeamMaxTransfersModal = () => {
                     >
                       <Button
                         variant="ghost"
-                        className="border-primary text-foreground hover:bg-primary/10 relative h-full w-full justify-start rounded-none border-l-4 px-4 py-2 text-left"
+                        className="border-primary hover:bg-primary/10 relative h-full w-full justify-start rounded-none border-l-4 px-4 py-2 text-left"
                       >
                         <div>
                           <Badge
@@ -74,7 +74,7 @@ const TeamMaxTransfersModal = () => {
                             +{transfer.amount - defaultTransfers}{' '}
                             {t('Transfers')}
                           </Badge>
-                          <h3 className="text-lg font-semibold">
+                          <h3 className="text-foreground text-lg font-semibold">
                             {t('Expand your options')}
                           </h3>
                           <p className="text-muted-foreground text-sm">
