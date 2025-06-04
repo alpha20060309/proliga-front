@@ -18,7 +18,6 @@ const Toaster = ({ ...props }) => {
         '--normal-border': 'var(--border)',
       }}
       dir="ltr"
-      richColors
       closeButton
       {...props}
     />

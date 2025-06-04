@@ -106,6 +106,8 @@ const ThemeCustomizer = () => {
   }
 
   const handleClick = () => {
+    if (!user?.id) return toast.warning(t('Please login first'))
+
     if (isDefault) {
       return handleSetDefault()
     }
@@ -124,7 +126,7 @@ const ThemeCustomizer = () => {
       </SheetTrigger>
       <SheetContent
         className={
-          'sm:min-w-md min-w-full gap-0 overflow-y-auto border-l border-[#4A4A4A] bg-transparent'
+          'min-w-full gap-0 overflow-y-auto border-l border-[#4A4A4A] bg-transparent sm:min-w-md'
         }
         style={{
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
