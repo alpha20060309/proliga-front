@@ -4,8 +4,10 @@ import { SUPABASE_PROVIDERS } from 'app/lib/supabaseClient'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { useSelector } from 'react-redux'
 import { FaYandex } from 'react-icons/fa'
+import { useTranslation } from 'react-i18next'
 
 const YandexSignIn = () => {
+  const { t } = useTranslation()
   const userTable = useSelector(selectUserTable)
 
   const handleYandexSignIn = async () => {
@@ -26,7 +28,7 @@ const YandexSignIn = () => {
       className="text-foreground dark:hover:text-accent w-1/2 p-0"
     >
       <FaYandex className="mr-2 size-4 text-[#FC3F1D]" />
-      Yandex
+      {t('Yandex')}
     </Button>
   )
 }

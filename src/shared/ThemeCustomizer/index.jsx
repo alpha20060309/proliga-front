@@ -231,13 +231,13 @@ const ThemeCustomizer = () => {
               checked={isDefault}
               onCheckedChange={setIsDefault}
             />
-            <label htmlFor="theme-switch">{t('Temani asosiy qilish')}</label>
+            <label htmlFor="theme-switch">{t('Set theme as default')}</label>
             <Switch
               aria-readonly
               checked={isGlobal || isDefault}
               onCheckedChange={setIsGlobal}
             />
-            <label htmlFor="theme-switch">{t('Temani global qilish')}</label>
+            <label htmlFor="theme-switch">{t('Save theme as preset')}</label>
           </div>
         )}
         <SheetDescription className={'sr-only'}>
