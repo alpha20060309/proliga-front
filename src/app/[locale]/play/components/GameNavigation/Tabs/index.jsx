@@ -54,6 +54,7 @@ export default function TourTabs() {
         width: '100%',
         bgcolor: 'var(--background)',
         color: 'var(--foreground)',
+        height: 'auto',
         borderRadius: 'var(--radius)',
         minHeight: '64px',
       }}
@@ -64,7 +65,7 @@ export default function TourTabs() {
         variant="scrollable"
         scrollButtons
         allowScrollButtonsMobile
-        className="fade-in animate-in text-foreground disabled:text-muted-foreground snap-x snap-center rounded duration-500"
+        className="fade-in animate-in text-foreground m-0 disabled:text-muted-foreground snap-x snap-center rounded duration-500"
         aria-label="tour tabs"
         sx={{
           [`& .${tabsClasses.scrollButtons}`]: {
@@ -76,7 +77,7 @@ export default function TourTabs() {
           <StyledTab
             key={item.id}
             onClick={() => handleClick(index)}
-            className="w-32 space-y-0 disabled:cursor-default sm:w-40"
+            className="w-32 space-y-0 m-0 disabled:cursor-default sm:w-40"
             disabled={
               currentTeam?.is_team_created
                 ? item.status === TOUR_STATUS.notStarted ||
@@ -84,11 +85,11 @@ export default function TourTabs() {
                 : item.status !== TOUR_STATUS.notStartedTransfer
             }
             label={
-              <div className="flex h-12 flex-col items-center justify-start gap-1 sm:h-15">
-                <p className="text-foreground text-start text-xs font-medium md:text-sm xl:text-base">
+              <div className="tour-tab-container">
+                <p className="tour-tab-title">
                   {getCorrectName({ lang, uz: item?.name, ru: item?.name_ru })}
                 </p>
-                <p className="text-foreground text-3xs max-w-28 capitalize sm:text-xs">
+                <p className="tour-tab-description">
                   {getTourName(item.status, t)}
                 </p>
               </div>
