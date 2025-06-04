@@ -95,7 +95,7 @@ const LoginForm = ({ setShouldRedirect }) => {
           }
           toast.success(t('Tizimga muvaffaqiyatli kirdingiz'))
         }
-      // eslint-disable-next-line no-unused-vars
+        // eslint-disable-next-line no-unused-vars
       } catch (error) {
         toast.error(t('An unknown error occurred'))
       }
@@ -186,7 +186,7 @@ const LoginForm = ({ setShouldRedirect }) => {
             )}
           >
             {isPending ? (
-              <Loader2 className="mx-auto size-6 animate-spin" />
+              <Loader2 className="mx-auto size-6 text-primary-foreground animate-spin" />
             ) : (
               t('Tizimga kirish_2')
             )}

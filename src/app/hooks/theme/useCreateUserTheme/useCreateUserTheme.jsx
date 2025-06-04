@@ -80,6 +80,7 @@ export const useCreateUserTheme = () => {
           .from('user')
           .update({
             user_theme_id: data?.id,
+            theme_id: null,
           })
           .eq('id', user_id)
 
@@ -92,6 +93,7 @@ export const useCreateUserTheme = () => {
         cb()
         await update({
           user_theme_id: data?.id,
+          theme_id: null,
         })
       } catch (error) {
         setError(

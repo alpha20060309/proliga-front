@@ -67,7 +67,7 @@ const TeamMaxClubMembersModal = () => {
                     >
                       <Button
                         variant="ghost"
-                        className="border-accent text-foreground hover:bg-accent/10 relative h-full w-full justify-start rounded-none border-l-4 px-4 py-2 text-left"
+                        className="border-accent text-foreground hover:bg-primary/10 relative h-full w-full justify-start rounded-none border-l-4 px-4 py-2 text-left"
                       >
                         <div>
                           <Badge
