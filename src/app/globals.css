@@ -214,7 +214,7 @@
 }
 
 @utility tour-tab-container {
-  @apply flex min-h-16 flex-col items-center justify-start pt-2 sm:min-h-18 xl:pt-1;
+  @apply flex min-h-16 flex-col items-center justify-start pt-2 gap-0.5 sm:min-h-18 xl:pt-1;
 }
 
 @utility tour-tab-title {

@@ -178,7 +178,7 @@ const GameBrief = () => {
               </Content>
             </Item>
             <Item>
-              <Title className="text-foreground">{t("Ligadagi o'rin")}</Title>
+              <Title className="">{t("Ligadagi o'rin")}</Title>
               <Content className="space-x-1">
                 {currentTeam?.order ?? '0'} /{' '}
                 {currentCompetition?.team_count ?? '0'}

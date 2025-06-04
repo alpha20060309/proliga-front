@@ -18,8 +18,8 @@ const PlayLayout = ({ children }) => {
           </section>
           <News />
         </section>
-      {/* </Gutter>
-      <Gutter className={'bg-card rounded-xl mb-4 pt-4 '}> */}
+      </Gutter>
+      <Gutter className={'bg-card rounded-xl mb-4 pt-4 '}>
         <RulesSlider />
       </Gutter>
     </main>

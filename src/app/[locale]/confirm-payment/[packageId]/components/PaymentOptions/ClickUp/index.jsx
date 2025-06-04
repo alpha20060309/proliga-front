@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { PAYMENT_OPTIONS } from 'app/utils/paymentOptions.util'
 import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
+import { useTheme } from 'next-themes'
 
 const ClickUpPaymentOption = ({
   setPaymentOption,
@@ -10,6 +11,7 @@ const ClickUpPaymentOption = ({
   passive,
 }) => {
   const { t } = useTranslation()
+  const { theme } = useTheme()
 
   return (
     <div
@@ -20,7 +22,7 @@ const ClickUpPaymentOption = ({
       )}
     >
       <Image
-        src="/icons/click-up.svg"
+        src={theme === 'dark' ? '/icons/click-up.svg' : '/icons/click-up-dark.svg'}
         width={36}
         draggable={false}
         height={36}

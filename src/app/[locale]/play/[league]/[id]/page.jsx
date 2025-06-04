@@ -230,8 +230,8 @@ const Play = (props) => {
         'flex flex-col gap-4 overflow-hidden bg-linear-to-tr',
         'from-chart-1 to-chart-2 text-foreground',
         gameTab === TABS.GameProfile || gameTab === TABS.Transfer
-          ? 'pt-18 pb-4'
-          : 'pt-16 pb-7'
+          ? 'pt-20 pb-4'
+          : 'pt-15 pb-7'
       )}
     >
       <GameNavigation currentTab={gameTab} />

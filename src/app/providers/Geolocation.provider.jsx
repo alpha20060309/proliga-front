@@ -1,4 +1,5 @@
 'use client'
+
 import { memo, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useUpdateUserLocation } from 'app/hooks/user/useUpdateUserLocation/userUpdateUserLocation'
@@ -47,7 +48,7 @@ const GeolocationProvider = ({ children }) => {
           }
         },
         (error) => {
-          console.error('Error requesting geolocation permission:', error)
+          console.log('Error requesting geolocation permission:', error)
         },
         {
           enableHighAccuracy: true,
@@ -63,7 +64,7 @@ const GeolocationProvider = ({ children }) => {
         setIsUpdated(true)
       }
     } catch (error) {
-      console.error('Error requesting geolocation permission:', error)
+      console.log('Error requesting geolocation permission:', error)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.id, isUpdated, updateLocation])

@@ -59,9 +59,7 @@ const PackageContainer = ({ packageType }) => {
                 </div>
                 <Button
                   asChild
-                  variant="outline"
                   size="sm"
-                  className="hover:bg-primary bg-accent text-foreground/80 hover:text-foreground transition-all"
                 >
                   <Link href={`/confirm-payment/${item.id}`}>
                     {t('Tanlash')}
