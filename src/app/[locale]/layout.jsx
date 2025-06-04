@@ -71,17 +71,19 @@ export default async function RootLayout({ children, params }) {
   const { locale } = await params
   const { resources } = await initTranslations(locale)
   const userId = session?.user?.id
-  let themeURL = ''
-  if (session?.user?.user_theme_id) {
-    // eslint-disable-next-line no-undef
-    themeURL = `${process.env.NEXT_PUBLIC_STATIC_URL}/user/${userId}/user.css`
+  
+  // eslint-disable-next-line no-undef
+  const staticBaseUrl = process.env.NEXT_PUBLIC_STATIC_URL;
+  let themePath;
+
+  if (session?.user?.user_theme_id && userId) {
+    themePath = `/user/${userId}/user.css`;
   } else if (session?.user?.theme_id) {
-    // eslint-disable-next-line no-undef
-    themeURL = `${process.env.NEXT_PUBLIC_STATIC_URL}/theme/${session.user.theme_id}.css`
+    themePath = `/theme/${session.user.theme_id}.css`;
   } else {
-    // eslint-disable-next-line no-undef
-    themeURL = `${process.env.NEXT_PUBLIC_STATIC_URL}/theme/ALL.css`
+    themePath = `/theme/ALL.css`;
   }
+  const themeURL = `${staticBaseUrl}${themePath}`;
 
   return (
     <ViewTransitions>

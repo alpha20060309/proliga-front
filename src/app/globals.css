@@ -213,6 +213,18 @@
   @apply xs:text-lg text-foreground text-base md:text-xl xl:text-2xl 2xl:text-3xl;
 }
 
+@utility tour-tab-container {
+  @apply flex min-h-16 flex-col items-center justify-start pt-2 gap-0.5 sm:min-h-18 xl:pt-1;
+}
+
+@utility tour-tab-title {
+  @apply text-foreground text-start text-xs font-medium md:text-sm xl:text-base;
+}
+
+@utility tour-tab-description {
+  @apply text-muted-foreground text-3xs md:text-2xs max-w-28 capitalize xl:text-xs;
+}
+
 @utility loader {
   border: 16px solid var(--color-background);
   border-top: 16px solid var(--color-accent);

@@ -53,7 +53,8 @@ export default function TourTabs() {
         bgcolor: 'var(--background)',
         color: 'var(--foreground)',
         borderRadius: 'var(--radius)',
-        minHeight: '64px',
+        minHeight: '72px',
+        height: '100%',
       }}
       width={'100%'}
     >
@@ -80,11 +81,11 @@ export default function TourTabs() {
               item.order < registeredTour?.order
             }
             label={
-              <div className="flex h-12 flex-col items-center justify-start gap-1 sm:h-16">
-                <h3 className="text-foreground text-start text-xs font-medium md:text-sm xl:text-base">
+              <div className="tour-tab-container">
+                <h3 className="tour-tab-title">
                   {getCorrectName({ lang, uz: item?.name, ru: item?.name_ru })}
                 </h3>
-                <p className="text-muted-foreground text-3xs max-w-28 capitalize sm:text-xs">
+                <p className="tour-tab-description">
                   {getTourName(item.status, t)}
                 </p>
               </div>

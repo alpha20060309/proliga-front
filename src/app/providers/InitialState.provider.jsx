@@ -14,7 +14,7 @@ import {
 } from 'app/lib/features/systemNotification/systemNotification.thunk'
 import dynamic from 'next/dynamic'
 const registerSW = dynamic(() => import('app/lib/registerSw'), { ssr: false })
-import { useGenerateLanguage } from 'app/hooks/system/useGenerateLanguage/useGenerateLanguage'
+// import { useGenerateLanguage } from 'app/hooks/system/useGenerateLanguage/useGenerateLanguage'
 
 const InitialStateProvider = ({ children }) => {
   const dispatch = useDispatch()
@@ -44,12 +44,12 @@ const InitialStateProvider = ({ children }) => {
     registerSW()
   }, [])
 
-  const { generate } = useGenerateLanguage()
+  // const { generate } = useGenerateLanguage()
 
-  useEffect(() => {
-    const fetch = async () => await generate()
-    fetch()
-  }, [generate])
+  // useEffect(() => {
+  //   const fetch = async () => await generate()
+  //   fetch()
+  // }, [generate])
 
   return children
 }

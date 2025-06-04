@@ -220,7 +220,6 @@ const Play = (props) => {
     }
   }, [dispatch, currentTeam?.is_team_created])
 
-
   if (isLoading) {
     return <Spinner />
   }
@@ -232,7 +231,7 @@ const Play = (props) => {
         'from-chart-1 to-chart-2 text-foreground',
         gameTab === TABS.GameProfile || gameTab === TABS.Transfer
           ? 'pt-20 pb-4'
-          : 'pt-16 pb-7'
+          : 'pt-15 pb-7'
       )}
     >
       <GameNavigation currentTab={gameTab} />

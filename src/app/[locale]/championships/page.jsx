@@ -66,19 +66,17 @@ const Championships = () => {
       ) : (
         <ChampionshipsTitle />
       )}
-      {isLoading ? (
-        <section className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-          {[...Array(4)].map((_, index) => (
+      <section className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+        {isLoading ? (
+          [...Array(4)].map((_, index) => (
             <ChampionshipSkeleton key={index} />
-          ))}
-        </section>
-      ) : (
-        <section className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-          {competitions.map((game, index) => (
+          ))
+        ) : (
+          competitions.map((game, index) => (
             <Championship key={index} game={game} />
-          ))}
-        </section>
-      )}
+          ))
+        )}
+      </section>
     </>
   )
 }

@@ -34,8 +34,13 @@ function RulesSlider() {
           <WinPrizesSlide />
         </CarouselItem>
       </CarouselContent>
-      <CarouselPrevious className="-left-9 xl:-left-11 2xl:-left-14" />
-      <CarouselNext className="-right-9 xl:-right-11 2xl:-right-14" />
+      <CarouselPrevious
+      className="-left-8 xl:-left-11 2xl:-left-14 hover:bg-accent dark:hover:bg-accent/50"
+      />
+      <CarouselNext
+
+      className="-right-8 xl:-right-11 2xl:-right-14 hover:bg-accent dark:hover:bg-accent/50"
+      />
     </Carousel>
   )
 }

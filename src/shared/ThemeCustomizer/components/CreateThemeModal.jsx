@@ -82,7 +82,7 @@ const CreateThemeModal = ({ isGlobal, open, setOpen }) => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent>
         <DialogHeader className={'mb-4'}>
-          <DialogTitle>{t('Create Theme')}</DialogTitle>
+          <DialogTitle>{t('Create a Theme')}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSave} className={'flex flex-col gap-4'}>
           <div className="space-y-2">

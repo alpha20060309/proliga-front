@@ -144,6 +144,7 @@ const PaymentOption = ({ onClick, style, img, alt }) => {
   return (
     <Button
       onClick={onClick}
+      type="button"
       className={`xs:h-16 xs:w-36 bg-foreground/20 border-border flex h-14 w-32 items-center justify-center rounded border p-3 transition-all ${style}`}
     >
       <Image

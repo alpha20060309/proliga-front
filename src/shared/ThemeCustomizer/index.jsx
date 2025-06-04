@@ -124,7 +124,7 @@ const ThemeCustomizer = () => {
       </SheetTrigger>
       <SheetContent
         className={
-          'xs:min-w-md min-w-full gap-0 overflow-y-auto border-l border-[#4A4A4A] bg-transparent'
+          'sm:min-w-md min-w-full gap-0 overflow-y-auto border-l border-[#4A4A4A] bg-transparent'
         }
         style={{
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -231,13 +231,13 @@ const ThemeCustomizer = () => {
               checked={isDefault}
               onCheckedChange={setIsDefault}
             />
-            <label htmlFor="theme-switch">{t('Temani asosiy qilish')}</label>
+            <label htmlFor="theme-switch">{t('Set theme as default')}</label>
             <Switch
               aria-readonly
               checked={isGlobal || isDefault}
               onCheckedChange={setIsGlobal}
             />
-            <label htmlFor="theme-switch">{t('Temani global qilish')}</label>
+            <label htmlFor="theme-switch">{t('Save as a preset')}</label>
           </div>
         )}
         <SheetDescription className={'sr-only'}>

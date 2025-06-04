@@ -11,8 +11,8 @@ import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.s
 const PaymentOptions = ({ paymentOption, setPaymentOption }) => {
   const { t } = useTranslation()
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const active = 'border-accent'
-  const passive = 'border-accent hover:border-primary/80'
+  const active = 'border-accent bg-background'
+  const passive = 'border-muted-foreground hover:border-accent/80'
   const config = useSelector(selectSystemConfig)
 
   const checkout_payme =

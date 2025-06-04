@@ -175,7 +175,7 @@ function PlayersTable() {
       <TanStackPagination
         table={table}
         active="bg-primary text-primary-foreground"
-        className={'mt-auto px-0 pt-1 pb-0'}
+        className={'mt-auto px-0 pt-2 sm:pt-1 pb-0'}
       />
     </section>
   )

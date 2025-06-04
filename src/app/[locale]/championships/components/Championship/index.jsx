@@ -77,10 +77,10 @@ const Championship = ({ game }) => {
             loading="lazy"
           />
           <div>
-            <CardTitle className="text-foreground text-base font-bold capitalize select-none md:text-lg xl:text-xl">
+            <CardTitle className="text-foreground text-base font-bold capitalize select-none md:text-lg">
               {getCorrectName({ lang, uz: game?.name, ru: game?.name_ru })}
             </CardTitle>
-            <div className="p-0">{renderGameStatus(game, currentGame, t)}</div>
+            <div>{renderGameStatus(game, currentGame, t)}</div>
           </div>
         </CardContent>
       </Card>
