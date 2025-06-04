@@ -30,7 +30,7 @@ import {
   selectDarkTheme,
   selectLightTheme,
 } from 'app/lib/features/theme/theme.selector'
-import { fetchTheme, fetchUserThemes } from 'app/lib/features/theme/theme.slice'
+import { fetchThemes, fetchUserThemes } from 'app/lib/features/theme/theme.thunk'
 
 const ThemeCustomizer = () => {
   const dispatch = useDispatch()
@@ -54,8 +54,6 @@ const ThemeCustomizer = () => {
         await resetUserThemes({
           user_id: user.id,
           cb: () => {
-            dispatch(fetchUserThemes(user.id))
-            dispatch(fetchTheme())
             toast.success(t('Successfully saved the default theme'))
           },
         })
@@ -78,7 +76,7 @@ const ThemeCustomizer = () => {
         user_id: user?.id,
         cb: () => {
           dispatch(fetchUserThemes(user.id))
-          dispatch(fetchTheme())
+          dispatch(fetchThemes())
           toast.success(t('Theme saved successfully'))
         },
       })

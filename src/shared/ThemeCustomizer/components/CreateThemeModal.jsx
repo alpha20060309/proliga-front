@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { useCreateUserTheme } from 'app/hooks/theme/useCreateUserTheme/useCreateUserTheme'
 import { Loader2, Save } from 'lucide-react'
-import { fetchThemes } from 'app/lib/features/theme/theme.thunk'
+import { fetchThemes, fetchUserThemes } from 'app/lib/features/theme/theme.thunk'
 import {
   selectDarkTheme,
   selectLightTheme,
@@ -56,6 +56,7 @@ const CreateThemeModal = ({ isGlobal, open, setOpen }) => {
           light_theme: lightTheme,
           cb: () => {
             dispatch(fetchThemes())
+            dispatch(fetchUserThemes(user.id))
             toast.success(t('Theme preset saved successfully'))
           },
         })
@@ -68,6 +69,7 @@ const CreateThemeModal = ({ isGlobal, open, setOpen }) => {
           light_theme: lightTheme,
           cb: () => {
             dispatch(fetchThemes())
+            dispatch(fetchUserThemes(user.id))
             toast.success(t('Theme saved successfully'))
           },
         })
