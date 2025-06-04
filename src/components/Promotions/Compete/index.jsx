@@ -7,7 +7,7 @@ const PromotionCompete = ({ t }) => {
         <Image
           src="/images/promotion-stats.png"
           alt="competition"
-          className="xs:w-3/4 bg-accent-foreground mx-auto w-full rounded-sm p-2 md:mx-0 md:size-80 xl:size-96"
+          className="xs:w-3/4 bg-black/50 mx-auto w-full rounded-sm p-2 md:mx-0 md:size-80 xl:size-96"
           width={400}
           height={400}
           draggable={false}
