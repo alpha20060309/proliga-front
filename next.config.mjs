@@ -9,6 +9,7 @@ const withSerwist = withSerwistInit({
     "/ru.json",
     "/uz.json",
   ],
+  cacheOnNavigation: true,
 });
 
 /** @type {import('next').NextConfig} */

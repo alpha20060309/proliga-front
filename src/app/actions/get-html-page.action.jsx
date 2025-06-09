@@ -1,12 +1,13 @@
 'use server'
 
 import { db } from 'lib/db'
+import { cache } from 'react'
 
 export const getHTMLPage = async (name) => {
   if (!name) {
     return { error: 'Name is required' }
   }
-  
+
   try {
     const page = await db.system_language
       .findUnique({
@@ -33,3 +34,7 @@ export const getHTMLPage = async (name) => {
     }
   }
 }
+
+export const getPage = cache(async (name) => {
+  return await getHTMLPage(name)
+})

@@ -88,7 +88,6 @@ const ConfirmPayment = ({ params }) => {
   }, [])
 
   if (!currentPackage?.id) return null
-  console.log(paymentOption)
   return (
     <Gutter>
       {isLoading ? (
