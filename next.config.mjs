@@ -5,6 +5,8 @@ const withSerwist = withSerwistInit({
   swDest: "public/sw.js",
   scope: "/",
   register: true,
+  cacheOnNavigation: true,
+  additionalPrecacheEntries: [{ url: "/~offline", revision: "1" }],
   exclude: [
     "/ru.json",
     "/uz.json",
