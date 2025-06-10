@@ -54,7 +54,6 @@ function PlayersTable() {
   const { isLoading } = useSelector((state) => state.player)
   const players = useSelector(selectPlayers)
   const [windowWidth, setWindowWidth] = useState(0)
-  const [data, setData] = useState(players || [])
   const dispatch = useDispatch()
   const totalPlayersCount = useSelector(selectTotalPlayersCount)
   const teamConcat = useSelector(selectTeamConcat)
@@ -104,12 +103,6 @@ function PlayersTable() {
       window.removeEventListener('resize', handleResize)
     }
   }, [])
-
-  useEffect(() => {
-    if (lang) {
-      setData([...players])
-    }
-  }, [lang, players])
 
   useEffect(() => {
     setWindowWidth(window.innerWidth)
@@ -192,7 +185,7 @@ function PlayersTable() {
 
   const table = useReactTable({
     columns,
-    data,
+    data: players || [],
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),

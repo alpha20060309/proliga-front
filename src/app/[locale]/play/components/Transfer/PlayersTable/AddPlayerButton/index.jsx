@@ -47,7 +47,7 @@ const AddPlayerButton = ({
         className="flex h-full w-full cursor-pointer items-center justify-center md:w-auto"
         key={player.id}
       >
-        <Check className="border-foreground text-foreground dark:bg-background size-5 rounded border bg-green-500 p-1 shadow-sm select-none sm:size-6 dark:border-green-500 dark:text-green-500" />
+        <Check className="border-foreground dark:border-success dark:bg-background dark:text-success bg-success text-foreground size-5 rounded border p-1 shadow-sm select-none sm:size-6" />
       </button>
     )
   } else if (!isPlayerInTeam && totalPlayersCount < 11) {

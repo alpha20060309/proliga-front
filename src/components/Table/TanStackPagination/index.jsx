@@ -74,15 +74,13 @@ const PaginationButton = ({ onClick, disabled, icon, className }) => {
   const render = () => {
     switch (icon) {
       case 'left':
-        return <ChevronLeft className="text-muted-foreground h-full w-full" />
+        return <ChevronLeft className="h-full w-full" />
       case 'right':
-        return <ChevronRight className="text-muted-foreground h-full w-full" />
+        return <ChevronRight className="h-full w-full" />
       case 'double-left':
-        return <ChevronsLeft className="text-muted-foreground h-full w-full" />
+        return <ChevronsLeft className="h-full w-full" />
       case 'double-right':
-        return (
-          <ChevronsRight className="text-muted-foreground h-full w-full items-center justify-center" />
-        )
+        return <ChevronsRight className="h-full w-full" />
     }
   }
 
@@ -92,7 +90,7 @@ const PaginationButton = ({ onClick, disabled, icon, className }) => {
       disabled={disabled}
       variant={'outline'}
       className={cn(
-        'bg-background text-foreground hover:bg-accent hover:text-accent-foreground border-border size-7 p-0 md:size-8',
+        'bg-background text-foreground hover:text-foreground hover:bg-secondary dark:hover:bg-secondary border-border size-7 cursor-pointer p-0 md:size-8',
         className
       )}
       size={'sm'}
