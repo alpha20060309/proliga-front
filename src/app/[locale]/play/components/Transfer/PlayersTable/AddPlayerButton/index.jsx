@@ -11,7 +11,7 @@ import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.s
 import { Plus, Check, X } from 'lucide-react'
 
 const AddPlayerButton = ({
-  cell,
+  player,
   handleAddPlayer,
   teamBalance,
   teamConcat,
@@ -19,10 +19,8 @@ const AddPlayerButton = ({
 }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const condition = teamBalance >= cell.row.original.price
-  const isPlayerInTeam = teamConcat.find(
-    (p) => p.player_id == +cell?.row?.original?.id
-  )
+  const condition = teamBalance >= player.price
+  const isPlayerInTeam = teamConcat.find((p) => p.player_id == +player?.id)
   const currentTeam = useSelector(selectCurrentTeam)
   const config = useSelector(selectSystemConfig)
 
@@ -32,7 +30,7 @@ const AddPlayerButton = ({
 
   const handleClick = () => {
     if (condition) {
-      handleAddPlayer(cell.row.original)
+      handleAddPlayer(player)
     } else {
       if (currentTeam?.balance === max_balance) {
         toast.info(t('Max balance has been reached!'))
@@ -45,18 +43,18 @@ const AddPlayerButton = ({
 
   if (isPlayerInTeam) {
     return (
-      <td
-        className="xs:p-1 flex h-full w-full cursor-pointer items-center justify-center p-0.5 md:w-auto"
-        key={cell.column.id}
+      <button
+        className="flex h-full w-full cursor-pointer items-center justify-center md:w-auto"
+        key={player.id}
       >
-        <Check className="border-foreground text-foreground size-5 rounded border bg-green-500 p-1 shadow-sm select-none sm:size-6 dark:border-green-500 dark:bg-background dark:text-green-500" />
-      </td>
+        <Check className="border-foreground text-foreground dark:bg-background size-5 rounded border bg-green-500 p-1 shadow-sm select-none sm:size-6 dark:border-green-500 dark:text-green-500" />
+      </button>
     )
   } else if (!isPlayerInTeam && totalPlayersCount < 11) {
     return (
-      <td
-        className="xs:p-1 flex h-full w-full cursor-pointer items-center justify-center p-0.5 md:w-auto"
-        key={cell.column.id}
+      <button
+        className="flex h-full w-full cursor-pointer items-center justify-center md:w-auto"
+        key={player.id}
         onClick={handleClick}
       >
         <Plus
@@ -67,16 +65,16 @@ const AddPlayerButton = ({
               : 'text-muted-foreground border-muted-foreground'
           )}
         />
-      </td>
+      </button>
     )
   } else if (!isPlayerInTeam && totalPlayersCount >= 11) {
     return (
-      <td
-        className="xs:p-1 flex h-full w-full cursor-pointer items-center justify-center p-0.5 md:w-auto"
-        key={cell.column.id}
+      <button
+        className="flex h-full w-full cursor-pointer items-center justify-center md:w-auto"
+        key={player.id}
       >
         <X className="border-muted-foreground text-muted-foreground size-5 rounded border p-1 shadow-sm select-none sm:size-6" />
-      </td>
+      </button>
     )
   }
 }

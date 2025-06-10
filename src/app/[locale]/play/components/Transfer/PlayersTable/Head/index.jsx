@@ -42,15 +42,16 @@ const TransferTableHead = ({ table }) => {
                       className="xs:size-4 hidden sm:inline-block lg:hidden xl:inline-block"
                     />
                   ),
-                }[header.column.getIsSorted()] ?? (
-                  <Image
-                    src="/icons/arrow-inactive.svg"
-                    alt="triangle arrow"
-                    width={12}
-                    height={12}
-                    className="xs:size-4 hidden rotate-180 sm:inline-block lg:hidden xl:inline-block"
-                  />
-                )}
+                }[header.column.getIsSorted()] ??
+                  (header.column.getCanSort() && (
+                    <Image
+                      src="/icons/arrow-inactive.svg"
+                      alt="triangle arrow"
+                      width={12}
+                      height={12}
+                      className="xs:size-4 hidden rotate-180 sm:inline-block lg:hidden xl:inline-block"
+                    />
+                  ))}
               </th>
             )
           })}

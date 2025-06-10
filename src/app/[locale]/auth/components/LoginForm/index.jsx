@@ -186,7 +186,7 @@ const LoginForm = ({ setShouldRedirect }) => {
             )}
           >
             {isPending ? (
-              <Loader2 className="mx-auto size-6 text-primary-foreground animate-spin" />
+              <Loader2 className="mx-auto size-6 text-foreground  animate-spin" />
             ) : (
               t('Tizimga kirish_2')
             )}
