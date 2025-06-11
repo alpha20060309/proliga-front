@@ -4,19 +4,16 @@ const withSerwist = withSerwistInit({
   swSrc: "src/app/sw.js",
   swDest: "public/sw.js",
   scope: "/",
-  register: true,
   exclude: [
     "/ru.json",
     "/uz.json",
   ],
+  cacheOnNavigation: true,
 });
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   images: {
     remotePatterns: [
       {

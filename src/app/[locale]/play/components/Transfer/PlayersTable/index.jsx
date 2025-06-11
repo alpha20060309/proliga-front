@@ -22,6 +22,19 @@ import PlayersTableSkeleton from './Skeleton'
 import TanStackPagination from 'components/Table/TanStackPagination'
 import { cn } from '@/lib/utils'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
+import AddPlayerButton from './AddPlayerButton'
+import { useDispatch } from 'react-redux'
+import {
+  addTeamPlayer,
+  updateTeamPlayer,
+} from 'app/lib/features/teamPlayer/teamPlayer.slice'
+import { CONFIG_KEY } from 'app/utils/config.util'
+import {
+  selectTotalPlayersCount,
+  selectTeamConcat,
+} from 'app/lib/features/teamPlayer/teamPlayer.selector'
+import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
+import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 
 const columnHelper = createColumnHelper()
 
@@ -41,7 +54,43 @@ function PlayersTable() {
   const { isLoading } = useSelector((state) => state.player)
   const players = useSelector(selectPlayers)
   const [windowWidth, setWindowWidth] = useState(0)
-  const [data, setData] = useState(players || [])
+  const dispatch = useDispatch()
+  const totalPlayersCount = useSelector(selectTotalPlayersCount)
+  const teamConcat = useSelector(selectTeamConcat)
+  const currentTeam = useSelector(selectCurrentTeam)
+  const config = useSelector(selectSystemConfig)
+  const { teamPrice } = useSelector((store) => store.teamPlayer)
+  const max_same_team_players = +config[CONFIG_KEY.max_same_team_players]?.value
+  const transfer_show_modals =
+    config[CONFIG_KEY.transfer_show_modals]?.value?.toLowerCase() === 'true'
+
+  const teamBalance = +(currentTeam?.balance || 0) - +(teamPrice || 0)
+
+  const handleAddPlayer = (player) => {
+    if (currentTeam?.is_team_created) {
+      dispatch(
+        addTeamPlayer({
+          player,
+          team: currentTeam,
+          teamConcat,
+          t,
+          max_same_team_players,
+          transfer_show_modals,
+        })
+      )
+    } else {
+      dispatch(
+        updateTeamPlayer({
+          player,
+          team: currentTeam,
+          teamConcat,
+          t,
+          max_same_team_players,
+          transfer_show_modals,
+        })
+      )
+    }
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -113,11 +162,30 @@ function PlayersTable() {
         filterVariant: 'position',
       },
     }),
+    columnHelper.display({
+      id: 'action',
+      header: '',
+      enableSorting: false,
+      cell: ({ row }) => {
+        const rowId = row.original.id
+        const rowData = row.original
+        return (
+          <AddPlayerButton
+            teamBalance={teamBalance}
+            key={rowId}
+            player={rowData}
+            teamConcat={teamConcat}
+            handleAddPlayer={handleAddPlayer}
+            totalPlayersCount={totalPlayersCount}
+          />
+        )
+      },
+    }),
   ]
 
   const table = useReactTable({
     columns,
-    data,
+    data: players || [],
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -129,12 +197,6 @@ function PlayersTable() {
       sorting,
     },
   })
-
-  useEffect(() => {
-    if (lang) {
-      setData([...players])
-    }
-  }, [lang, players])
 
   useEffect(() => {
     if (windowWidth >= 1024 && windowWidth <= 1280) {
@@ -175,7 +237,7 @@ function PlayersTable() {
       <TanStackPagination
         table={table}
         active="bg-primary text-primary-foreground"
-        className={'mt-auto px-0 pt-2 sm:pt-1 pb-0'}
+        className={'mt-auto px-0 pt-2 pb-0 sm:pt-1'}
       />
     </section>
   )

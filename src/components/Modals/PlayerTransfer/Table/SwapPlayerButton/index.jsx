@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { ArrowUpDown, Check } from 'lucide-react'
 
-const SwapPlayerButton = ({ cell, handleSwapPlayer, teamBalance }) => {
+const SwapPlayerButton = ({ player, handleSwapPlayer, teamBalance }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const teamConcat = useSelector(selectTeamConcat)
@@ -23,7 +23,7 @@ const SwapPlayerButton = ({ cell, handleSwapPlayer, teamBalance }) => {
   const transfer_show_modals =
     config[CONFIG_KEY.transfer_show_modals]?.value?.toLowerCase() === 'true'
 
-  const condition = teamBalance + currentPlayer.price >= cell.row.original.price
+  const condition = teamBalance + currentPlayer.price >= player.price
 
   const toggleModal = () => {
     dispatch(setPlayerTransferModal(false))
@@ -31,7 +31,7 @@ const SwapPlayerButton = ({ cell, handleSwapPlayer, teamBalance }) => {
 
   const handleClick = () => {
     if (condition) {
-      handleSwapPlayer(cell.row.original)
+      handleSwapPlayer(player)
     } else {
       if (currentTeam?.balance === max_balance) {
         toggleModal()
@@ -44,24 +44,22 @@ const SwapPlayerButton = ({ cell, handleSwapPlayer, teamBalance }) => {
     }
   }
 
-  const isPlayerInTeam = teamConcat.find(
-    (p) => p.player_id == +cell?.row?.original?.id
-  )
+  const isPlayerInTeam = teamConcat.find((p) => p.player_id == +player?.id)
 
   if (isPlayerInTeam) {
     return (
-      <td
-        className="fade-in-fast flex h-full w-full cursor-pointer items-center justify-center p-1 md:w-auto"
-        key={cell.column.id}
+      <button
+        className="fade-in animate-in flex w-full cursor-pointer items-center justify-center duration-300"
+        key={player.id}
       >
-        <Check className="border-foreground text-foreground dark:bg-background size-5 rounded border bg-green-500 p-1 shadow-sm select-none sm:size-6 dark:border-green-500 dark:text-green-500" />
-      </td>
+        <Check className="border-foreground dark:border-success dark:bg-background dark:text-success bg-success text-foreground size-5 rounded border p-1 shadow-sm select-none sm:size-6" />
+      </button>
     )
   } else {
     return (
-      <td
-        className="fade-in-fast flex size-4 h-full w-full cursor-pointer items-center justify-center p-1 md:w-auto"
-        key={cell.column.id}
+      <button
+        className="fade-in animate-in flex h-full w-full cursor-pointer items-center justify-center duration-300"
+        key={player.id}
         onClick={handleClick}
       >
         <ArrowUpDown
@@ -72,7 +70,7 @@ const SwapPlayerButton = ({ cell, handleSwapPlayer, teamBalance }) => {
               : 'text-muted-foreground border-muted-foreground'
           )}
         />
-      </td>
+      </button>
     )
   }
 }
