@@ -1,15 +1,16 @@
 'use client'
 
 import { Separator } from '@/components/ui/separator'
+import { Button } from '@/components/ui/button'
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { useTranslation } from 'react-i18next'
 import { usePathname } from 'next/navigation'
 import { useSelector } from 'react-redux'
 import { Link } from 'next-view-transitions'
-import GradientButton from 'components/Button/GradientButton'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { FaTelegram, FaInstagram } from 'react-icons/fa'
 import { Mail } from 'lucide-react'
+import AnimatedGradientText from '@/components/ui/animated-gradient-text'
 
 const Footer = () => {
   const path = usePathname()
@@ -41,7 +42,7 @@ const Footer = () => {
 
   return (
     <footer className="border-border bg-background text-foreground w-full border-t">
-      <div className="container mx-auto px-6 py-10">
+      <div className="container mx-auto py-8">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-4">
             <h3 className="text-xl font-semibold">{t('Navigatsiya')}</h3>
@@ -102,18 +103,30 @@ const Footer = () => {
               </Link>
             </div>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            <GradientButton href="/prizes" className={'w-64'} variant="solid">
-              {t("Sovgalarni ko'rish")}
-            </GradientButton>
-
-            <GradientButton
-              className={'w-64'}
-              href="/championships"
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-1">
+            <Button
+              className={'h-12 w-full max-w-64 font-bold hover:scale-105'}
               variant="gradient"
+              style={{
+                '--bg-size': `100%`,
+              }}
             >
-              {t("Chempionatlarga o'tish")}
-            </GradientButton>
+              <Link href="/prizes">{t("Sovgalarni ko'rish")}</Link>
+            </Button>
+            <Button
+              variant="outline"
+              className="h-12 w-full max-w-64 bg-clip-text font-bold text-transparent hover:scale-105"
+            >
+              <Link href="/championships">
+                <AnimatedGradientText
+                  colorFrom="var(--color-chart-2)"
+                  colorVia="var(--color-chart-1)"
+                  colorTo="var(--color-chart-3)"
+                >
+                  {t("Chempionatlarga o'tish")}
+                </AnimatedGradientText>
+              </Link>
+            </Button>
           </div>
         </div>
         <Separator className="my-8" />
