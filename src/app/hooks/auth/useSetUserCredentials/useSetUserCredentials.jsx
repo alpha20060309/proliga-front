@@ -85,7 +85,6 @@ export const useSetUserCredentials = () => {
         }
 
         // Step 3: Update user table
-        const { error: fullUserError } = await supabase
         const obj = {
           email,
           phone,
@@ -96,6 +95,7 @@ export const useSetUserCredentials = () => {
           isOAuth: true,
         }
 
+        const { error: fullUserError } = await supabase
           .from('user')
           .update(obj)
           .eq('id', user?.id)
@@ -121,6 +121,7 @@ export const useSetUserCredentials = () => {
         })
         cb()
       } catch (error) {
+        console.log(error)
         handleError(
           error instanceof Error
             ? error.message

@@ -1,6 +1,6 @@
 import Gutter from 'shared/Gutter'
 
-export default function AboutUsLayout({ children }) {
+export default function RenderedPageLayout({ children }) {
   return (
     <Gutter>
       <main className="min-h-screen pt-16">{children}</main>
