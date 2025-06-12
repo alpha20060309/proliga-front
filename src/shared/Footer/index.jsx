@@ -103,7 +103,7 @@ const Footer = () => {
               </Link>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-1">
+          <div className="space-y-2">
             <Button
               className={'h-12 w-full max-w-64 font-bold hover:scale-105'}
               variant="gradient"
