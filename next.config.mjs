@@ -4,10 +4,7 @@ const withSerwist = withSerwistInit({
   swSrc: "src/app/sw.js",
   swDest: "public/sw.js",
   scope: "/",
-  exclude: [
-    "/ru.json",
-    "/uz.json",
-  ],
+  register: true,
   cacheOnNavigation: true,
 });
 

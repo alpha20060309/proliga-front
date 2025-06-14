@@ -39,17 +39,23 @@ export default function OfflineClient() {
   return (
     <div className="mx-auto w-full max-w-md space-y-8 text-center">
       <div className="flex justify-center">
-        <div className={cn('bg-card rounded-full p-6')}>
+        <div
+          className={cn('rounded-full bg-neutral-200 p-6 dark:bg-neutral-800')}
+        >
           <WifiOff
             className={cn(
               'h-16 w-16',
-              isOnline ? 'text-muted-foreground' : 'text-accent'
+              isOnline
+                ? 'text-gray-400 dark:text-gray-600'
+                : 'text-red-500 dark:text-red-400'
             )}
           />
         </div>
       </div>
-      <h1 className="text-3xl font-bold">{t("You're Offline")}</h1>
-      <p className="text-lg opacity-80">
+      <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+        {t("You're Offline")}
+      </h1>
+      <p className="text-lg text-gray-600 dark:text-gray-300">
         {t(
           "It seems you've lost your internet connection. Check your network and try again."
         )}
@@ -58,8 +64,8 @@ export default function OfflineClient() {
         <Button
           onClick={attemptReconnect}
           className={cn(
-            'bg-accent text-accent-foreground rounded-lg px-6 py-2 font-medium',
-            'hover:bg-accent/80 capitalize transition-all'
+            'rounded-lg bg-red-500 px-6 py-2 font-medium text-white',
+            'capitalize transition-all hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700'
           )}
         >
           <RefreshCw className="mr-2 h-4 w-4" />

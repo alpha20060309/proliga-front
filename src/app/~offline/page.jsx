@@ -11,7 +11,7 @@ const OfflinePage = () => {
     <div
       className={cn(
         'flex min-h-screen flex-col items-center justify-center p-4',
-        'from-card to-background text-foreground bg-linear-to-b transition-colors duration-200'
+        'bg-gradient-to-b from-white to-gray-100 text-gray-900 transition-colors duration-200 dark:from-neutral-900 dark:to-neutral-950 dark:text-white'
       )}
     >
       <OfflineClient />

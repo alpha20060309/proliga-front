@@ -103,7 +103,7 @@ const Footer = () => {
               </Link>
             </div>
           </div>
-          <div className="space-y-2">
+          <div className="flex flex-col gap-2 justify-center sm:justify-start">
             <Button
               className={'h-12 w-full max-w-64 font-bold hover:scale-105'}
               variant="gradient"
