@@ -197,8 +197,8 @@
   @apply border-primary bg-card text-foreground placeholder:text-muted-foreground h-10 w-full rounded-sm border px-2 py-1 text-sm md:text-base;
 }
 
-@utility text-shadow {
-  text-shadow: 2px 1px 1px var(--color-foreground);
+@utility text-shadow-player {
+  text-shadow: 0 0 1.75px #000;
 }
 
 @utility promotion-text {
@@ -234,6 +234,20 @@
   animation: spin 2s linear infinite;
 }
 
+@utility border-gradient {
+  background:
+    linear-gradient(var(--color-background), var(--color-background))
+      padding-box,
+    linear-gradient(
+        to right,
+        var(--color-chart-2),
+        var(--color-chart-1),
+        var(--color-chart-3)
+      )
+      border-box;
+  border-color: transparent;
+}
+
 :root {
   --scrollbar-width: 20px;
   --scrollbar-width-sm: 5px;
@@ -247,18 +261,4 @@
 :root.dark {
   --scrollbar-thumb-bg: #565656;
   --scrollbar-thumb-hover-bg: #696969;
-}
-
-.border-gradient {
-  background:
-    linear-gradient(var(--color-background), var(--color-background))
-      padding-box,
-    linear-gradient(
-        to right,
-        var(--color-chart-2),
-        var(--color-chart-1),
-        var(--color-chart-3)
-      )
-      border-box;
-  border-color: transparent;
 }
