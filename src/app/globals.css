@@ -248,3 +248,17 @@
   --scrollbar-thumb-bg: #565656;
   --scrollbar-thumb-hover-bg: #696969;
 }
+
+.border-gradient {
+  background:
+    linear-gradient(var(--color-background), var(--color-background))
+      padding-box,
+    linear-gradient(
+        to right,
+        var(--color-chart-2),
+        var(--color-chart-1),
+        var(--color-chart-3)
+      )
+      border-box;
+  border-color: transparent;
+}
