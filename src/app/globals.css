@@ -206,7 +206,7 @@
 }
 
 @utility promotion-header {
-  @apply xs:text-xl text-foreground text-lg uppercase md:text-2xl xl:text-3xl 2xl:text-4xl;
+  @apply xs:text-xl text-foreground text-lg uppercase md:text-2xl xl:text-3xl;
 }
 
 @utility carousel-header {
