@@ -34,7 +34,7 @@ const PromotionCreateTeam = ({ t }) => {
             height={400}
             width={400}
             draggable={false}
-            className="mx-auto lg:ml-auto h-full w-full max-w-[32rem] object-contain"
+            className="mx-auto lg:mr-0 lg:ml-auto h-full w-full max-w-[32rem] object-contain"
             alt="interactive stadium"
           />
         </div>

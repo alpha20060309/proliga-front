@@ -1,7 +1,9 @@
 import Image from 'next/image'
 import { Card, CardContent } from '@/components/ui/card'
+import { useTranslation } from 'react-i18next'
 
-const MakeTransfersSlide = ({ t }) => {
+const MakeTransfersSlide = () => {
+  const { t } = useTranslation()
   return (
     <Card>
       <CardContent className="align-center flex flex-col">

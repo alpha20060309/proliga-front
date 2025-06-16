@@ -21,6 +21,7 @@ import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { selectMatches } from 'app/lib/features/match/match.selector'
 import { selectTours } from 'app/lib/features/tour/tour.selector'
 import { usePathname } from 'next/navigation'
+import { Card, CardContent, CardHeader, CardFooter } from '@/components/ui/card'
 
 const Matches = () => {
   const path = usePathname()
@@ -116,8 +117,8 @@ const Matches = () => {
   ])
 
   return (
-    <section className="bg-background border-border relative mx-auto flex h-min min-h-168 w-full max-w-lg flex-1 flex-col justify-between space-y-4 rounded-xl border px-4 py-6 lg:mx-0 lg:w-auto lg:min-w-72 xl:grow 2xl:max-w-lg">
-      <div className="flex w-full items-center justify-center">
+    <Card className="border-border relative mx-auto h-172  max-w-lg justify-between lg:mx-0 lg:min-w-72 w-full 2xl:max-w-lg">
+      <CardHeader className="flex w-full items-center justify-center">
         <div className="mx-auto ml-9 flex flex-1 items-center justify-center gap-2">
           <Button
             variant="outline"
@@ -170,33 +171,36 @@ const Matches = () => {
         >
           <RefreshCcw className="text-foreground size-5" />
         </Button>
-      </div>
-      <div className="flex-1 space-y-1">
+      </CardHeader>
+      <CardContent
+        className="flex-1 space-y-1"
+      >
         {isLoading ? (
           Array.from({ length: 10 }).map((_, index) => (
             <MatchSkeleton key={index} />
           ))
         ) : (
-          <>
-            {matches?.length === 0 ? (
-              <p className="text-muted-foreground text-center">
-                {t('Matchlar topilmadi!')}
-              </p>
-            ) : (
-              matches?.map((match, index) => (
-                <Match key={index} match={match} />
-              ))
-            )}
-          </>
+          matches?.length === 0 ? (
+            <p className="text-muted-foreground text-center">
+              {t('Matchlar topilmadi!')}
+            </p>
+          ) : (
+            matches?.map((match, index) => (
+              <Match key={index} match={match} />
+            ))
+          )
         )}
-      </div>
-      <Pagination
-        onPageChange={setPage}
-        currentPage={page}
-        totalPages={pages}
-      />
+      </CardContent>
+      <CardFooter>
+        <Pagination
+          onPageChange={setPage}
+          currentPage={page}
+          totalPages={pages}
+          className={'w-full'}
+        />
+      </CardFooter>
       <MatchEvent />
-    </section>
+    </Card>
   )
 }
 

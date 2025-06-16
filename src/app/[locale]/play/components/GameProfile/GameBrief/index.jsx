@@ -2,7 +2,6 @@
 
 import { formatDate } from 'app/utils/formatDate.util'
 import { useEffect, useState, useMemo } from 'react'
-import { Coins, PercentCircle } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { TOUR_STATUS } from 'app/utils/tour.util'
 import { useSelector } from 'react-redux'
@@ -21,6 +20,8 @@ import {
   selectTourTeams,
 } from 'app/lib/features/tourTeam/tourTeam.selector'
 import { Copy } from 'lucide-react'
+import { Card, CardContent } from '@/components/ui/card'
+
 
 const GameBrief = () => {
   const [nextTour, setNextTour] = useState(null)
@@ -65,145 +66,142 @@ const GameBrief = () => {
   }
 
   return (
-    <section
-      className={cn(
-        'lg:mx-0 lg:w-1/2 lg:max-w-[24rem] lg:gap-4 lg:px-6 xl:h-min xl:max-w-136',
-        'fade-in-fast mx-auto flex h-min min-h-96 w-full max-w-lg flex-col',
-        'border-primary border-opacity-50 bg-background gap-3 rounded-xl border',
-        'hover:border-opacity-100 px-4 py-4 transition-all',
-        isLoading ? 'justify-center' : 'justify-between'
-      )}
-    >
-      {isLoading ? (
-        <GameBriefSkeleton />
-      ) : (
-        <>
-          <Container className="border-border border-b">
-            <Item>
-              <Title>{t('Team id')}</Title>
-              <Content
-                className={
-                  'flex cursor-pointer items-center justify-center gap-0.5 hover:underline'
-                }
-                onClick={() => handleClick(currentTeam?.id)}
-              >
-                <Copy className="size-5" />
-                {currentTeam?.id}
-              </Content>
-            </Item>
-            <Item>
-              <Title>{t('Nomi')}</Title>
-              <Content className={'normal-case'}>{currentTeam?.name}</Content>
-            </Item>
-          </Container>
-          <Container className="border-border border-b">
-            <Item>
-              <Title> {t('Keyingi Tur')}</Title>
-              {currentTour?.status !== TOUR_STATUS.notStartedTransfer ? (
-                <Content className="text-sm uppercase md:text-base">
+    <Card className={'border-border relative mx-auto lg:mx-0 lg:w-1/2 w-full max-w-lg lg:max-w-[24rem] lg:gap-4 xl:h-min xl:max-w-136'}>
+      <CardContent
+        className={cn(
+          'w-full flex flex-col gap-4 justify-between h-full animate-in fade-in  duration-300',
+          isLoading ? 'justify-center' : 'justify-between'
+        )}
+      >
+        {isLoading ? (
+          <GameBriefSkeleton />
+        ) : (
+          <>
+            <Container className="border-border border-b">
+              <Item>
+                <Title>{t('Team id')}</Title>
+                <Content
+                  className={
+                    'flex cursor-pointer items-center justify-center gap-0.5 hover:underline'
+                  }
+                  onClick={() => handleClick(currentTeam?.id)}
+                >
+                  <Copy className="size-5" />
+                  {currentTeam?.id}
+                </Content>
+              </Item>
+              <Item>
+                <Title>{t('Nomi')}</Title>
+                <Content className={'normal-case'}>{currentTeam?.name}</Content>
+              </Item>
+            </Container>
+            <Container className="border-border border-b">
+              <Item>
+                <Title> {t('Keyingi Tur')}</Title>
+                {currentTour?.status !== TOUR_STATUS.notStartedTransfer ? (
+                  <Content className="text-sm uppercase md:text-base">
+                    {getCorrectName({
+                      lang,
+                      uz: nextTour?.name,
+                      ru: nextTour?.name_ru,
+                    })}
+                  </Content>
+                ) : (
+                  <Content>
+                    {getCorrectName({
+                      lang,
+                      uz: currentTour?.name,
+                      ru: currentTour?.name_ru,
+                    })}
+                  </Content>
+                )}
+              </Item>
+              <Item>
+                <Title>{t('Deadline')}</Title>
+                {currentTour?.status !== TOUR_STATUS.notStartedTransfer ? (
+                  <Content>{date}</Content>
+                ) : (
+                  <Content>{transferDate}</Content>
+                )}
+              </Item>
+            </Container>
+            <Container className="border-border border-b">
+              <Item>
+                <Title>{t('Tur')}</Title>
+                {currentTour?.status !== TOUR_STATUS.notStartedTransfer ? (
+                  <Content>
+                    {getCorrectName({
+                      lang,
+                      uz: currentTour?.name,
+                      ru: currentTour?.name_ru,
+                    }) ?? ''}
+                  </Content>
+                ) : (
+                  <Content>
+                    {getCorrectName({
+                      lang,
+                      uz: prevTour?.name,
+                      ru: prevTour?.name_ru,
+                    })}
+                  </Content>
+                )}
+              </Item>
+              <Item>
+                <Title>{t('Turdagi ochkolar')}</Title>
+                {currentTour?.status !== TOUR_STATUS.notStartedTransfer ? (
+                  <Content>{currentTourTeam?.point ?? '0'}</Content>
+                ) : (
+                  <Content>{prevTourTeam?.point ?? '0'}</Content>
+                )}
+              </Item>
+            </Container>
+            <Container className="border-border border-b">
+              <Item>
+                <Title>{t('Turnirdagi ochkolar')}</Title>
+                <Content>{currentTeam?.point ?? '0'}</Content>
+              </Item>
+              <Item>
+                <Title>{t("Turnirdagi o'rtacha ochkolar")}</Title>
+                <Content>{currentCompetition?.average_team_point ?? '0'}</Content>
+              </Item>
+            </Container>
+            <Container className="border-border border-b">
+              <Item>
+                <Title>{t('Chempionat')}</Title>
+                <Content className="capitalize">
                   {getCorrectName({
                     lang,
-                    uz: nextTour?.name,
-                    ru: nextTour?.name_ru,
+                    uz: currentTeam?.competition_id?.name,
+                    ru: currentTeam?.competition_id?.name_ru,
                   })}
                 </Content>
-              ) : (
-                <Content>
-                  {getCorrectName({
-                    lang,
-                    uz: currentTour?.name,
-                    ru: currentTour?.name_ru,
-                  })}
+              </Item>
+              <Item>
+                <Title className="">{t("Ligadagi o'rin")}</Title>
+                <Content className="space-x-1">
+                  {currentTeam?.order ?? '0'} /{' '}
+                  {currentCompetition?.team_count ?? '0'}
                 </Content>
-              )}
-            </Item>
-            <Item>
-              <Title>{t('Deadline')}</Title>
-              {currentTour?.status !== TOUR_STATUS.notStartedTransfer ? (
-                <Content>{date}</Content>
-              ) : (
-                <Content>{transferDate}</Content>
-              )}
-            </Item>
-          </Container>
-          <Container className="border-border border-b">
-            <Item>
-              <Title>{t('Tur')}</Title>
-              {currentTour?.status !== TOUR_STATUS.notStartedTransfer ? (
-                <Content>
-                  {getCorrectName({
-                    lang,
-                    uz: currentTour?.name,
-                    ru: currentTour?.name_ru,
-                  }) ?? ''}
+              </Item>
+            </Container>
+            <Container>
+              <Item>
+                <Title>{t('Jamoa narxi')}</Title>
+                <Content className={'flex items-center gap-1'}>
+                  {teamPrice ?? 0}
                 </Content>
-              ) : (
-                <Content>
-                  {getCorrectName({
-                    lang,
-                    uz: prevTour?.name,
-                    ru: prevTour?.name_ru,
-                  })}
+              </Item>
+              <Item>
+                <Title>{t('Balans')}</Title>
+                <Content className={'flex items-center gap-1'}>
+                  {teamBalance ?? 0}
                 </Content>
-              )}
-            </Item>
-            <Item>
-              <Title>{t('Turdagi ochkolar')}</Title>
-              {currentTour?.status !== TOUR_STATUS.notStartedTransfer ? (
-                <Content>{currentTourTeam?.point ?? '0'}</Content>
-              ) : (
-                <Content>{prevTourTeam?.point ?? '0'}</Content>
-              )}
-            </Item>
-          </Container>
-          <Container className="border-border border-b">
-            <Item>
-              <Title>{t('Turnirdagi ochkolar')}</Title>
-              <Content>{currentTeam?.point ?? '0'}</Content>
-            </Item>
-            <Item>
-              <Title>{t("Turnirdagi o'rtacha ochkolar")}</Title>
-              <Content>{currentCompetition?.average_team_point ?? '0'}</Content>
-            </Item>
-          </Container>
-          <Container className="border-border border-b">
-            <Item>
-              <Title>{t('Chempionat')}</Title>
-              <Content className="capitalize">
-                {getCorrectName({
-                  lang,
-                  uz: currentTeam?.competition_id?.name,
-                  ru: currentTeam?.competition_id?.name_ru,
-                })}
-              </Content>
-            </Item>
-            <Item>
-              <Title className="">{t("Ligadagi o'rin")}</Title>
-              <Content className="space-x-1">
-                {currentTeam?.order ?? '0'} /{' '}
-                {currentCompetition?.team_count ?? '0'}
-              </Content>
-            </Item>
-          </Container>
-          <Container>
-            <Item>
-              <Title>{t('Jamoa narxi')}</Title>
-              <Content className={'flex items-center gap-1'}>
-                <PercentCircle className="text-accent size-5" />
-                {teamPrice ?? 0}
-              </Content>
-            </Item>
-            <Item>
-              <Title>{t('Balans')}</Title>
-              <Content className={'flex items-center gap-1'}>
-                <Coins className="text-accent size-5" />
-                {teamBalance ?? 0}
-              </Content>
-            </Item>
-          </Container>
-        </>
-      )}
-    </section>
+              </Item>
+            </Container>
+          </>
+        )}
+      </CardContent>
+    </Card>
   )
 }
 
