@@ -12,7 +12,7 @@ const Promotions = async ({ params }) => {
 
   return (
     <>
-      <Gutter className={'bg-background my-2 max-h-[44rem]'}>
+      <Gutter className={'bg-background my-2 max-h-[46rem]'}>
         <PromotionCreateTeam t={t} />
       </Gutter>
       <Gutter className={'bg-background my-2 max-h-[44rem]'}>

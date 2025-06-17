@@ -40,16 +40,6 @@ const serwist = new Serwist({
   offlineAnalyticsConfig: true,
   disableDevLogs: true,
   importScripts: ['/firebase-messaging-sw.js'],
-  fallbacks: {
-    entries: [
-      {
-        url: "/~offline",
-        matcher({ request }) {
-          return request.destination === "document";
-        },
-      },
-    ],
-  },
 })
 
 const queue = new BackgroundSyncQueue('sync-queue')
@@ -70,7 +60,7 @@ self.addEventListener('fetch', (event) => {
   }
 })
 
-const urlsToPrecache = ["/", '/uz', '/ru', "/~offline"];
+const urlsToPrecache = ["/", '/uz', '/ru', "/uz/~offline", '/ru/~offline'];
 
 self.addEventListener("install", (event) => {
   const requestPromises = Promise.all(
@@ -98,7 +88,7 @@ addEventListener('fetch', (event) => {
     } catch (err) {
       // If this was a navigation, show the offline page:
       if (request.mode === 'navigate') {
-        return caches.match('/~offline');
+        return caches.match('/uz/~offline');
       }
 
       // Otherwise throw

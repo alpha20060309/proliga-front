@@ -82,9 +82,9 @@ export default function TourTabs() {
             }
             label={
               <div className="tour-tab-container">
-                <h3 className="tour-tab-title">
+                <p className="tour-tab-title">
                   {getCorrectName({ lang, uz: item?.name, ru: item?.name_ru })}
-                </h3>
+                </p>
                 <p className="tour-tab-description">
                   {getTourName(item.status, t)}
                 </p>
