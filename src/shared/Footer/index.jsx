@@ -11,6 +11,7 @@ import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.s
 import { FaTelegram, FaInstagram } from 'react-icons/fa'
 import { Mail } from 'lucide-react'
 import AnimatedGradientText from '@/components/ui/animated-gradient-text'
+import Gutter from 'shared/Gutter'
 
 const Footer = () => {
   const path = usePathname()
@@ -42,7 +43,7 @@ const Footer = () => {
 
   return (
     <footer className="border-border bg-background text-foreground w-full border-t">
-      <div className="container mx-auto py-8">
+      <Gutter className={'py-8'}>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-4">
             <h3 className="text-xl font-semibold">{t('Navigatsiya')}</h3>
@@ -103,7 +104,7 @@ const Footer = () => {
               </Link>
             </div>
           </div>
-          <div className="flex flex-col justify-center gap-2 sm:justify-start">
+          <div className="flex flex-col items-center gap-2 sm:items-start justify-center">
             <Button
               className={'h-12 w-full max-w-64 font-bold hover:scale-105'}
               variant="gradient"
@@ -133,7 +134,7 @@ const Footer = () => {
         <div className="text-muted-foreground text-center text-sm">
           © {new Date().getFullYear()} {t('Barcha huquqlar himoyalangan')}
         </div>
-      </div>
+      </Gutter>
     </footer>
   )
 }
