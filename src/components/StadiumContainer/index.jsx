@@ -40,7 +40,7 @@ const StadiumContainer = ({ children, hideShareButton = false }) => {
           onClick={handleShare}
           variant={'ghost'}
           className={cn(
-            'border-primary xs:bottom-4 xs:right-5 rounded-sm absolute right-4 bottom-3 z-20 size-6 cursor-pointer border bg-transparent p-0 sm:right-7 sm:bottom-5 md:size-7'
+            'border-primary xs:bottom-4 xs:right-5 absolute right-4 bottom-3 z-20 size-6 cursor-pointer rounded-sm border bg-transparent p-0 sm:right-7 sm:bottom-5 md:size-7'
           )}
           aria-label="Share"
         >

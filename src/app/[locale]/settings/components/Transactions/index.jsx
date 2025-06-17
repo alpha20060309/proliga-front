@@ -57,7 +57,7 @@ const CabinetTransactionsHistory = () => {
             size="sm"
             className="text-secondary-foreground hover:text-foreground flex size-8 justify-center p-0 md:hidden"
           >
-            <RefreshCcw className="size-4 text-foreground" />
+            <RefreshCcw className="text-foreground size-4" />
           </Button>
         </h3>
         <div className="bg-card flex w-full overflow-hidden rounded-lg shadow sm:w-96">
@@ -90,7 +90,7 @@ const CabinetTransactionsHistory = () => {
           size="sm"
           className="text-foreground/80 hover:text-foreground hidden h-9 w-32 items-center justify-center gap-1 self-end p-0 text-sm md:flex"
         >
-          <RefreshCcw className="size-4 text-foreground" />
+          <RefreshCcw className="text-foreground size-4" />
           {t('Refresh')}
         </Button>
       </div>

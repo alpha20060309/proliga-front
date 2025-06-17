@@ -5,13 +5,13 @@ const initialState = {
   themes: [],
   lightTheme: {
     colors: {},
-    font: "",
+    font: '',
     global: {},
     shadows: {},
   },
   darkTheme: {
     colors: {},
-    font: "",
+    font: '',
     global: {},
     shadows: {},
   },
@@ -93,12 +93,18 @@ const themeSlice = createSlice({
       state.darkTheme = theme?.dark_theme || {}
       state.lightTheme = theme?.light_theme || {}
       state.isModified = false
-    }
+    },
   },
   extraReducers: themeExtraReducer,
 })
 
-export const { setDarkTheme, setLightTheme, setSelectedTheme, setDefaultTheme, setThemeVariant, setTheme } =
-  themeSlice.actions
+export const {
+  setDarkTheme,
+  setLightTheme,
+  setSelectedTheme,
+  setDefaultTheme,
+  setThemeVariant,
+  setTheme,
+} = themeSlice.actions
 
 export default themeSlice.reducer

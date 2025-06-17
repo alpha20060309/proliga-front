@@ -57,7 +57,7 @@ function TournamentTable({ showUserTourTeam }) {
   })
 
   return (
-    <table className="h-auto w-full min-w-72 text-foreground table-auto text-xs sm:text-sm">
+    <table className="text-foreground h-auto w-full min-w-72 table-auto text-xs sm:text-sm">
       <Head table={table} />
       <Body
         table={table}

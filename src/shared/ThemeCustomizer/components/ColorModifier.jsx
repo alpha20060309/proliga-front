@@ -62,8 +62,8 @@ const ColorModifier = () => {
         {t(key.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()))}
       </label>
       <div className="flex items-center space-x-2">
-        {darkTheme?.colors && Object.keys(darkTheme?.colors).length > 0 ||
-        lightTheme?.colors && Object.keys(lightTheme?.colors).length > 0 ? (
+        {(darkTheme?.colors && Object.keys(darkTheme?.colors).length > 0) ||
+        (lightTheme?.colors && Object.keys(lightTheme?.colors).length > 0) ? (
           <>
             <input
               type="color"

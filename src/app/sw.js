@@ -1,8 +1,14 @@
-import { Serwist, NetworkOnly, BackgroundSyncQueue, ExpirationPlugin, StaleWhileRevalidate, CacheableResponsePlugin } from 'serwist'
+import {
+  Serwist,
+  NetworkOnly,
+  BackgroundSyncQueue,
+  ExpirationPlugin,
+  StaleWhileRevalidate,
+  CacheableResponsePlugin,
+} from 'serwist'
 import { defaultCache } from '@serwist/next/worker'
 
-
-const urlsToPrecache = ["/", '/uz', '/ru', "/uz/~offline", '/ru/~offline'];
+const urlsToPrecache = ['/', '/uz', '/ru', '/uz/~offline', '/ru/~offline']
 const serwist = new Serwist({
   precacheEntries: self.__SW_MANIFEST,
   precacheOptions: {
@@ -67,26 +73,25 @@ const backgroundSync = async (event) => {
   }
 }
 
-
-self.addEventListener("install", (event) => {
+self.addEventListener('install', (event) => {
   const requestPromises = Promise.all(
     urlsToPrecache.map((entry) => {
-      return serwist.handleRequest({ request: new Request(entry), event });
-    }),
-  );
+      return serwist.handleRequest({ request: new Request(entry), event })
+    })
+  )
 
-  event.waitUntil(requestPromises);
-});
+  event.waitUntil(requestPromises)
+})
 
 self.addEventListener('fetch', (event) => {
-  const { request } = event;
+  const { request } = event
 
   // 1. Range requests → bypass
-  if (request.headers.has('range')) return;
+  if (request.headers.has('range')) return
 
   // 2. Background sync for POST/PATCH
   if (request.method === 'POST' || request.method === 'PATCH') {
-    return event.respondWith(backgroundSync(event));
+    return event.respondWith(backgroundSync(event))
   }
 
   // 3. Attempt normal Serwist/Workbox handling
@@ -94,31 +99,35 @@ self.addEventListener('fetch', (event) => {
     (async () => {
       try {
         // Attempt normal Serwist logic (runtimeCaching, precache, etc.)
-        const response = await serwist.handleRequest({ request, event });
+        const response = await serwist.handleRequest({ request, event })
 
         // 4. Log redirects (for debug)
         if (response?.status >= 300 && response.status < 400) {
-          console.warn('[SW] Intercepted a redirect:', request.url, response.status);
+          console.warn(
+            '[SW] Intercepted a redirect:',
+            request.url,
+            response.status
+          )
         }
 
-        if (response) return response;
+        if (response) return response
       } catch (err) {
-        console.error('[SW] Error handling request via Serwist:', err);
+        console.error('[SW] Error handling request via Serwist:', err)
       }
 
       // 5. Fallback: try network
       try {
-        return await fetch(request);
+        return await fetch(request)
       } catch (err) {
         // 6. If it's a navigation, show offline fallback
         if (request.mode === 'navigate') {
-          return caches.match('/uz/~offline');
+          return caches.match('/uz/~offline')
         }
-        throw err;
+        throw err
       }
     })()
-  );
-});
+  )
+})
 
 // addEventListener('fetch', (event) => {
 //   const { request } = event;
@@ -145,18 +154,18 @@ self.addEventListener('fetch', (event) => {
 //   }());
 // });
 
-self.addEventListener('activate', event => {
+self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then(names =>
+    caches.keys().then((names) =>
       Promise.all(
-        names.map(cacheName =>
-          caches.open(cacheName).then(cache =>
-            cache.keys().then(requests =>
+        names.map((cacheName) =>
+          caches.open(cacheName).then((cache) =>
+            cache.keys().then((requests) =>
               Promise.all(
-                requests.map(req =>
-                  cache.match(req).then(res => {
+                requests.map((req) =>
+                  cache.match(req).then((res) => {
                     if (res && res.status >= 300 && res.status < 400) {
-                      return cache.delete(req);
+                      return cache.delete(req)
                     }
                   })
                 )
@@ -166,7 +175,7 @@ self.addEventListener('activate', event => {
         )
       )
     )
-  );
-});
+  )
+})
 
 serwist.addEventListeners()

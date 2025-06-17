@@ -22,7 +22,9 @@ const ClickUpPaymentOption = ({
       )}
     >
       <Image
-        src={theme === 'dark' ? '/icons/click-up.svg' : '/icons/click-up-dark.svg'}
+        src={
+          theme === 'dark' ? '/icons/click-up.svg' : '/icons/click-up-dark.svg'
+        }
         width={36}
         draggable={false}
         height={36}

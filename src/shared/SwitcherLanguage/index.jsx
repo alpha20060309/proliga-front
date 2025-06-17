@@ -69,7 +69,7 @@ const ChangeLanguageDropdown = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent
         aria-label="Language Options: RU, UZ"
-        className="text-foreground min-w-24 w-min rounded"
+        className="text-foreground w-min min-w-24 rounded"
         align="end"
       >
         <DropdownMenuItem onClick={() => handleChange(LANGUAGE.uz)}>

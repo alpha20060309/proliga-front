@@ -30,7 +30,10 @@ import {
   selectDarkTheme,
   selectLightTheme,
 } from 'app/lib/features/theme/theme.selector'
-import { fetchThemes, fetchUserThemes } from 'app/lib/features/theme/theme.thunk'
+import {
+  fetchThemes,
+  fetchUserThemes,
+} from 'app/lib/features/theme/theme.thunk'
 
 const ThemeCustomizer = () => {
   const dispatch = useDispatch()
@@ -46,7 +49,6 @@ const ThemeCustomizer = () => {
   const { setThemeDefault } = useSetThemeDefault()
   const darkTheme = useSelector(selectDarkTheme)
   const lightTheme = useSelector(selectLightTheme)
-  
 
   const handleReset = async () => {
     if (user?.id) {

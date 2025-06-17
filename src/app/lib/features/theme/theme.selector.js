@@ -14,4 +14,3 @@ export const selectLightTheme = createDraftSafeSelector(
   (state) => state.theme,
   (theme) => theme.lightTheme
 )
-

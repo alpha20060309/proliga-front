@@ -227,7 +227,7 @@ const Play = (props) => {
   return (
     <main
       className={cn(
-        'flex flex-col gap-4 overflow-hidden text-foreground bg-background',
+        'text-foreground bg-background flex flex-col gap-4 overflow-hidden',
         gameTab === TABS.GameProfile || gameTab === TABS.Transfer
           ? 'pt-20 pb-4'
           : 'pt-15 pb-7'

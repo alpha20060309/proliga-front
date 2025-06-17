@@ -65,7 +65,7 @@ export default function TourTabs() {
         variant="scrollable"
         scrollButtons
         allowScrollButtonsMobile
-        className="fade-in animate-in text-foreground m-0 disabled:text-muted-foreground snap-x snap-center rounded duration-500"
+        className="fade-in animate-in text-foreground disabled:text-muted-foreground m-0 snap-x snap-center rounded duration-500"
         aria-label="tour tabs"
         sx={{
           [`& .${tabsClasses.scrollButtons}`]: {
@@ -77,11 +77,11 @@ export default function TourTabs() {
           <StyledTab
             key={item.id}
             onClick={() => handleClick(index)}
-            className="w-32 space-y-0 m-0 disabled:cursor-default sm:w-40"
+            className="m-0 w-32 space-y-0 disabled:cursor-default sm:w-40"
             disabled={
               currentTeam?.is_team_created
                 ? item.status === TOUR_STATUS.notStarted ||
-                item.order < registeredTour?.order
+                  item.order < registeredTour?.order
                 : item.status !== TOUR_STATUS.notStartedTransfer
             }
             label={
