@@ -32,8 +32,8 @@ export async function POST(request) {
       )
     }
 
-    // eslint-disable-next-line no-undef
     const themeCssPath = path.join(
+      // eslint-disable-next-line no-undef
       process.cwd(),
       'static',
       'theme',
