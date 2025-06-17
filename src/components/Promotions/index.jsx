@@ -11,23 +11,20 @@ const Promotions = async ({ params }) => {
   const { t } = await initTranslations(locale)
 
   return (
-    <>
-      <Gutter className={'bg-background my-2 max-h-[46rem]'}>
+    <section className="bg-card">
+      <Gutter className={'border-border'}>
         <PromotionCreateTeam t={t} />
-      </Gutter>
-      <Gutter className={'bg-background my-2 max-h-[44rem]'}>
         <PromotionGatherPoints t={t} />
-      </Gutter>
-      <Gutter className={'bg-background my-2 max-h-[44rem]'}>
         <PromotionMakeTransfers t={t} />
-      </Gutter>
-      <Gutter className={'bg-background my-2 max-h-[44rem]'}>
         <PromotionCompete t={t} />
-      </Gutter>
-      <Gutter className={'bg-background my-2'}>
         <PromotionWinPrizes />
       </Gutter>
-    </>
+      {/* <Gutter className={'bg-background my-2 max-h-[46rem]'}></Gutter>
+      <Gutter className={'bg-background my-2 max-h-[44rem]'}></Gutter>
+      <Gutter className={'bg-background my-2 max-h-[44rem]'}></Gutter>
+      <Gutter className={'bg-background my-2 max-h-[44rem]'}></Gutter>
+      <Gutter className={'bg-background my-2'}></Gutter> */}
+    </section>
   )
 }
 
