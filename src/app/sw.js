@@ -40,16 +40,6 @@ const serwist = new Serwist({
   offlineAnalyticsConfig: true,
   disableDevLogs: true,
   importScripts: ['/firebase-messaging-sw.js'],
-  fallbacks: {
-    entries: [
-      {
-        url: "/~offline",
-        matcher({ request }) {
-          return request.destination === "document";
-        },
-      },
-    ],
-  },
 })
 
 const queue = new BackgroundSyncQueue('sync-queue')
