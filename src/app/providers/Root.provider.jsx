@@ -7,7 +7,6 @@ import AuthProvider from './Auth.provider'
 import InitialStateProvider from './InitialState.provider'
 import SessionProvider from './Session.provider'
 import FirebaseProvider from './Firebase.provider'
-import GeolocationProvider from './Geolocation.provider'
 import ThemesProviders from './Theme.provider'
 import ThemeCustomizationProvider from './ThemeCustomization.provider'
 
@@ -18,13 +17,11 @@ const RootProvider = ({ children }) => {
         <ReduxProvider>
           <AuthProvider>
             <InitialStateProvider>
-              <GeolocationProvider>
-                <FirebaseProvider>
-                  <ThemeCustomizationProvider>
-                    {children}
-                  </ThemeCustomizationProvider>
-                </FirebaseProvider>
-              </GeolocationProvider>
+              <FirebaseProvider>
+                <ThemeCustomizationProvider>
+                  {children}
+                </ThemeCustomizationProvider>
+              </FirebaseProvider>
             </InitialStateProvider>
           </AuthProvider>
         </ReduxProvider>

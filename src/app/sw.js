@@ -1,4 +1,4 @@
-import { Serwist, NetworkFirst, BackgroundSyncQueue, ExpirationPlugin } from 'serwist'
+import { Serwist, NetworkOnly, BackgroundSyncQueue, ExpirationPlugin } from 'serwist'
 import { defaultCache } from '@serwist/next/worker'
 
 
@@ -11,7 +11,7 @@ const serwist = new Serwist({
   runtimeCaching: [
     ...defaultCache,
     {
-      handler: new NetworkFirst({
+      handler: new NetworkOnly({
         plugins: [
           new ExpirationPlugin({
             maxEntries: 32,
@@ -23,7 +23,7 @@ const serwist = new Serwist({
       matcher: ({ request }) => request.method === 'POST',
     },
     {
-      handler: new NetworkFirst({
+      handler: new NetworkOnly({
         plugins: [
           new ExpirationPlugin({
             maxEntries: 32,
