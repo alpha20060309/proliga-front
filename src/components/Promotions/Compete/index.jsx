@@ -8,8 +8,8 @@ import {
 
 const PromotionCompete = ({ t }) => {
   return (
-    <Card className="relative h-full flex-1 rounded-none border-t-0 border-x-0 border-inherit shadow-none">
-      <CardContent className="flex w-full px-0 flex-col-reverse justify-start gap-6 md:flex-row md:items-center md:justify-between md:gap-4 lg:gap-8">
+    <Card className="relative h-full flex-1 rounded-none border-x-0 border-t-0 border-inherit shadow-none">
+      <CardContent className="flex w-full flex-col-reverse justify-start gap-6 px-0 md:flex-row md:items-center md:justify-between md:gap-4 lg:gap-8">
         <div className="w-full flex-1 items-center self-center">
           <Image
             src="/images/promotion-stats.png"

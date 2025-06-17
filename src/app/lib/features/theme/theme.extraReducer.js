@@ -18,7 +18,7 @@ export const themeExtraReducer = (builder) => {
       state.isLoading = true
     })
     .addCase(fetchUserThemes.fulfilled, (state, action) => {
-      state.themes = [...state.themes, ...action.payload?.data || []]
+      state.themes = [...state.themes, ...(action.payload?.data || [])]
       state.isModified = false
       state.isLoading = false
     })

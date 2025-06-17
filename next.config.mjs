@@ -1,12 +1,12 @@
-import withSerwistInit from "@serwist/next";
+import withSerwistInit from '@serwist/next'
 
 const withSerwist = withSerwistInit({
-  swSrc: "src/app/sw.js",
-  swDest: "public/sw.js",
-  scope: "/",
+  swSrc: 'src/app/sw.js',
+  swDest: 'public/sw.js',
+  scope: '/',
   register: true,
   cacheOnNavigation: true,
-});
+})
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -21,4 +21,4 @@ const nextConfig = {
   },
 }
 
-export default withSerwist(nextConfig);
+export default withSerwist(nextConfig)

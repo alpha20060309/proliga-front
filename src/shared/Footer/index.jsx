@@ -104,7 +104,7 @@ const Footer = () => {
               </Link>
             </div>
           </div>
-          <div className="flex flex-col items-center gap-2 sm:items-start justify-center">
+          <div className="flex flex-col items-center justify-center gap-2 sm:items-start">
             <Button
               className={'h-12 w-full max-w-64 font-bold hover:scale-105'}
               variant="gradient"

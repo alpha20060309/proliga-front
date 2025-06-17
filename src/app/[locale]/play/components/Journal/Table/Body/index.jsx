@@ -6,7 +6,7 @@ const JournalTableBody = ({ table, flexRender }) => {
       {table.getRowModel().rows.map((row) => (
         <tr
           key={row.id}
-          className="hover:bg-background bg-card odd:bg-secondary hover:text-foreground text-card-foreground w-full border-b border-border"
+          className="hover:bg-background bg-card odd:bg-secondary hover:text-foreground text-card-foreground border-border w-full border-b"
         >
           {row.getVisibleCells().map((cell) => (
             <td

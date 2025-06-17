@@ -2,15 +2,15 @@
 
 // Make sure this URL is your actual production domain
 // eslint-disable-next-line no-undef
-const URL = process.env.NEXT_PUBLIC_URL || ""; // Fallback just in case
+const URL = process.env.NEXT_PUBLIC_URL || '' // Fallback just in case
 
 export default async function sitemap() {
-  const locales = ['uz']; // Add other locales like 'en', 'ru' if you have them
+  const locales = ['uz'] // Add other locales like 'en', 'ru' if you have them
 
   // Base static pages - assuming your default locale (e.g., if NEXT_PUBLIC_URL is just proliga.uz without locale)
   // might be handled by Next.js i18n routing without a prefix, or it might be one of the locales.
   // For this example, let's list common pages.
-  // If your default locale (e.g. 'uz') is served from the root path ('/'), 
+  // If your default locale (e.g. 'uz') is served from the root path ('/'),
   // ensure you don't double-add it when iterating locales.
   const staticPagePaths = [
     '/', // Root page
@@ -23,19 +23,19 @@ export default async function sitemap() {
     '/auth',
     '/offline', // If you have a dedicated offline page
     // Add any other important static pages
-  ];
+  ]
 
-  const sitemapEntries = [];
+  const sitemapEntries = []
 
   // Add non-localized versions first (or your default locale if it has no prefix)
-  staticPagePaths.forEach(path => {
+  staticPagePaths.forEach((path) => {
     sitemapEntries.push({
       url: `${URL}${path}`,
       lastModified: new Date().toISOString(),
       changeFrequency: path === '/' ? 'daily' : 'monthly', // Example frequencies
       priority: path === '/' ? 1.0 : 0.8, // Example priorities
-    });
-  });
+    })
+  })
 
   // Add localized versions for all specified locales
   locales.forEach((locale) => {
@@ -47,29 +47,31 @@ export default async function sitemap() {
       // If 'uz' is also your default locale and you don't want a prefix for it, Next.js handles this.
       // We are assuming here '/' is distinct or a general fallback, and '/uz/*' are specific.
 
-      const localizedPath = path === '/' ? `/${locale}` : `/${locale}${path}`;
-      
+      const localizedPath = path === '/' ? `/${locale}` : `/${locale}${path}`
+
       // Simple check to prevent adding /uz if / was already added and meant to be uz.
       // This depends heavily on your i18n strategy.
       // A safer bet for distinct entries:
-      if (path === '/') { // Only add the locale root
-         sitemapEntries.push({
+      if (path === '/') {
+        // Only add the locale root
+        sitemapEntries.push({
           url: `${URL}/${locale}`,
           lastModified: new Date().toISOString(),
           changeFrequency: 'daily',
           priority: 1.0,
-        });
-      } else { // Add other localized pages
+        })
+      } else {
+        // Add other localized pages
         sitemapEntries.push({
           url: `${URL}${localizedPath}`,
           lastModified: new Date().toISOString(),
           changeFrequency: 'monthly',
           priority: 0.8,
-        });
+        })
       }
-    });
-  });
-  
+    })
+  })
+
   // Example for dynamic routes (e.g., championship details)
   // You would fetch these IDs from your database or API
   // const exampleChampionshipIds = ['champ1', 'champ2', 'champ3'];
@@ -89,7 +91,9 @@ export default async function sitemap() {
   // });
 
   // Ensure unique URLs, as the logic above might create duplicates depending on i18n setup for default locale
-  const uniqueEntries = Array.from(new Map(sitemapEntries.map(entry => [entry.url, entry])).values());
+  const uniqueEntries = Array.from(
+    new Map(sitemapEntries.map((entry) => [entry.url, entry])).values()
+  )
 
-  return uniqueEntries;
-} 
+  return uniqueEntries
+}

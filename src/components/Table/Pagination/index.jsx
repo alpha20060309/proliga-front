@@ -132,14 +132,14 @@ export const PaginationSkeleton = ({ count = 5, className }) => {
       <Button
         variant="outline"
         disabled
-        className="bg-muted text-muted-foreground border-border size-7 animate-pulse p-0 md:size-8 cursor-pointer"
+        className="bg-muted text-muted-foreground border-border size-7 animate-pulse cursor-pointer p-0 md:size-8"
       >
         <ChevronsLeft className="text-muted-foreground size-5" />
       </Button>
       <Button
         variant="outline"
         disabled
-        className="bg-muted text-muted-foreground border-border size-7 animate-pulse p-0 md:size-8 cursor-pointer"
+        className="bg-muted text-muted-foreground border-border size-7 animate-pulse cursor-pointer p-0 md:size-8"
       >
         <ChevronLeft className="text-muted-foreground size-5" />
       </Button>
@@ -149,14 +149,14 @@ export const PaginationSkeleton = ({ count = 5, className }) => {
       <Button
         variant="outline"
         disabled
-        className="bg-muted text-muted-foreground border-border size-7 animate-pulse p-0 md:size-8 cursor-pointer"
+        className="bg-muted text-muted-foreground border-border size-7 animate-pulse cursor-pointer p-0 md:size-8"
       >
         <ChevronRight className="text-muted-foreground size-5" />
       </Button>
       <Button
         variant="outline"
         disabled
-        className="bg-muted text-muted-foreground border-border size-7 animate-pulse p-0 md:size-8 cursor-pointer"
+        className="bg-muted text-muted-foreground border-border size-7 animate-pulse cursor-pointer p-0 md:size-8"
       >
         <ChevronsRight className="text-muted-foreground size-5" />
       </Button>

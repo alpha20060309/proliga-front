@@ -20,7 +20,7 @@ const PromotionWinPrizes = () => {
 
   return (
     <Card className="relative h-full flex-1 rounded-none border-none border-inherit shadow-none">
-      <CardContent className="flex flex-col gap-2 md:gap-4 px-0">
+      <CardContent className="flex flex-col gap-2 px-0 md:gap-4">
         <CardTitle className="xs:text-xl text-lg font-bold uppercase md:text-2xl xl:text-3xl">
           {t('Sovrinlarni yutib oling')}
         </CardTitle>
@@ -56,7 +56,7 @@ const Prize = ({ prize }) => {
           loading="lazy"
           draggable={false}
           // className="xs:size-80 sm:size-72 aspect-auto size-64 bg-cover select-none lg:size-64 2xl:size-80"
-          className='w-full h-full max-w-72 '
+          className="h-full w-full max-w-72"
         />
       </div>
     </div>

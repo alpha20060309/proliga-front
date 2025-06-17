@@ -111,7 +111,7 @@ const ScoreBoard = () => {
         <div
           className={cn(
             'flex w-full items-center justify-center gap-1 rounded-full px-2 py-1 text-xs sm:w-auto sm:text-sm',
-            'bg-green-500/20 text-green-400' 
+            'bg-green-500/20 text-green-400'
           )}
         >
           <Timer className="h-4 w-4" />

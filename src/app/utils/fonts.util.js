@@ -13,7 +13,7 @@ export const fonts = {
   Lora: 'Lora, serif',
   'PT Serif': 'PT Serif, serif',
   Commissioner: 'Commissioner, sans-serif',
-  
+
   // Monospace fonts
   'JetBrains Mono': 'JetBrains Mono, monospace',
   'IBM Plex Mono': 'IBM Plex Mono, monospace',

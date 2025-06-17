@@ -68,7 +68,7 @@ const NavButton = ({
       onClick={onClick}
       disabled={isDisabled}
       className={cn(
-        'flex h-14 flex-1 hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground flex-col items-center justify-center rounded-md',
+        'hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground flex h-14 flex-1 flex-col items-center justify-center rounded-md',
         className,
         {
           'bg-sidebar-accent text-sidebar-accent-foreground': isActive,
@@ -171,7 +171,7 @@ function BottomNavigation() {
   return (
     <nav
       className={cn(
-        'border-sidebar-border bg-sidebar/50 text-sidebar-foreground fixed inset-x-0 bottom-0 z-50 mx-4 mb-4 flex h-14 items-center justify-between gap-0 overflow-hidden shadow rounded-md border-t  backdrop-blur lg:hidden',
+        'border-sidebar-border bg-sidebar/50 text-sidebar-foreground fixed inset-x-0 bottom-0 z-50 mx-4 mb-4 flex h-14 items-center justify-between gap-0 overflow-hidden rounded-md border-t shadow backdrop-blur lg:hidden',
         !lastVisitedTeam && 'hidden'
       )}
     >

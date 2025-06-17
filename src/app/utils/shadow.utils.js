@@ -34,16 +34,15 @@ export const SHADOW_VARIANTS = [
   { name: '2xl', multiplier: 3 },
 ]
 
-
 export const hexToHsl = (hex) => {
   const [r, g, b] =
     hex.length === 4
       ? [hex[1] + hex[1], hex[2] + hex[2], hex[3] + hex[3]].map(
-        (x) => parseInt(x, 16) / 255
-      )
+          (x) => parseInt(x, 16) / 255
+        )
       : [hex.slice(1, 3), hex.slice(3, 5), hex.slice(5, 7)].map(
-        (x) => parseInt(x, 16) / 255
-      )
+          (x) => parseInt(x, 16) / 255
+        )
   const max = Math.max(r, g, b),
     min = Math.min(r, g, b)
   const l = (max + min) / 2
@@ -116,7 +115,6 @@ export const updateShadows = (values) => {
     const finalBlur = `${roundToTwo(blurNum * multiplier)}px`
     const finalSpread = `${roundToTwo(spreadNum * multiplier)}px`
     const finalOpacity = Math.max(0, Math.min(1, opacityNum * multiplier))
-
 
     const base = `${finalX} ${finalY} ${finalBlur} ${finalSpread}`
 

@@ -8,8 +8,8 @@ import {
 
 const PromotionGatherPoints = ({ t }) => {
   return (
-    <Card className="relative h-full flex-1 rounded-none border-t-0 border-x-0 border-inherit shadow-none">
-      <CardContent className="flex w-full flex-col px-0 justify-between gap-4 md:flex-row lg:gap-0">
+    <Card className="relative h-full flex-1 rounded-none border-x-0 border-t-0 border-inherit shadow-none">
+      <CardContent className="flex w-full flex-col justify-between gap-4 px-0 md:flex-row lg:gap-0">
         <div className="my-auto flex flex-col gap-2 sm:gap-4 md:gap-8">
           <CardTitle className="xs:text-xl text-lg font-bold uppercase md:text-2xl xl:text-3xl">
             {t('Ochkolar yiging')}

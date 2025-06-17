@@ -22,7 +22,6 @@ import {
 import { Copy } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 
-
 const GameBrief = () => {
   const [nextTour, setNextTour] = useState(null)
   const [prevTour, setPrevTour] = useState(null)
@@ -66,10 +65,14 @@ const GameBrief = () => {
   }
 
   return (
-    <Card className={'border-border relative mx-auto lg:mx-0 lg:w-1/2 w-full max-w-lg lg:max-w-[24rem] lg:gap-4 xl:h-min xl:max-w-136'}>
+    <Card
+      className={
+        'border-border relative mx-auto w-full max-w-lg lg:mx-0 lg:w-1/2 lg:max-w-[24rem] lg:gap-4 xl:h-min xl:max-w-136'
+      }
+    >
       <CardContent
         className={cn(
-          'w-full flex flex-col gap-4 justify-between h-full animate-in fade-in  duration-300',
+          'animate-in fade-in flex h-full w-full flex-col justify-between gap-4 duration-300',
           isLoading ? 'justify-center' : 'justify-between'
         )}
       >
@@ -162,7 +165,9 @@ const GameBrief = () => {
               </Item>
               <Item>
                 <Title>{t("Turnirdagi o'rtacha ochkolar")}</Title>
-                <Content>{currentCompetition?.average_team_point ?? '0'}</Content>
+                <Content>
+                  {currentCompetition?.average_team_point ?? '0'}
+                </Content>
               </Item>
             </Container>
             <Container className="border-border border-b">
