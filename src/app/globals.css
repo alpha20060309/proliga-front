@@ -234,7 +234,7 @@
   animation: spin 2s linear infinite;
 }
 
-@utility border-gradient {
+.border-gradient {
   background:
     linear-gradient(var(--color-background), var(--color-background))
       padding-box,
