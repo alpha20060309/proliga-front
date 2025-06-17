@@ -1,6 +1,5 @@
 import { cn } from '@/lib/utils'
 import OfflineClient from './components/OfflineClient'
-import '../globals.css'
 
 export const metadata = {
   title: 'Offline',
