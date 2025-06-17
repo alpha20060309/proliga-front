@@ -1,27 +1,33 @@
 import Image from 'next/image'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from '@/components/ui/card'
 
 const PromotionCreateTeam = ({ t }) => {
   return (
     <Card className="border-border relative h-full flex-1">
       <CardHeader className="bg-primary ml-6 w-full max-w-72 -skew-x-12 self-start rounded-xs sm:max-w-[24rem] md:max-w-lg">
-        <CardTitle className="promotion-header text-primary-foreground text-center font-bold capitalize">
+        <h2 className="xs:text-xl text-primary-foreground text-center text-lg font-bold capitalize md:text-2xl xl:text-3xl">
           {t('Umumiy qoidalar')}
-        </CardTitle>
+        </h2>
       </CardHeader>
-      <CardContent className="flex h-full max-h-[40rem] w-full flex-col gap-4 p-6 lg:grid lg:grid-cols-2 lg:grid-rows-1">
-        <div className="flex h-full flex-col space-y-4">
-          <h2 className="promotion-header font-bold uppercase">
+      <CardContent className="flex h-full max-h-[42rem] w-full flex-col gap-4 lg:gap-0 lg:grid lg:grid-cols-2 lg:grid-rows-1">
+        <div className="flex h-full flex-col gap-2 sm:gap-4 md:gap-8">
+          <CardTitle className="xs:text-xl text-lg font-bold uppercase md:text-2xl xl:text-3xl">
             {t("jamoa yig'ing")}
-          </h2>
-          <p className="text-muted-foreground xs:text-base max-w-xl text-sm lg:text-lg xl:text-xl">
+          </CardTitle>
+          <CardDescription className="xs:text-base text-sm md:text-lg lg:text-lg xl:text-xl">
             {t('promotion_text')}
-          </p>
+          </CardDescription>
           <Image
             width={200}
             height={200}
             alt="footballers images"
-            className="hidden h-full w-full max-w-[420px] object-contain lg:block"
+            className="hidden h-full w-full max-w-[440px] object-contain lg:block"
             src="/images/footballers-tile.png"
             draggable={false}
             unoptimized
@@ -34,7 +40,7 @@ const PromotionCreateTeam = ({ t }) => {
             height={400}
             width={400}
             draggable={false}
-            className="mx-auto lg:mr-0 lg:ml-auto h-full w-full max-w-[32rem] object-contain"
+            className="mx-auto h-full w-full max-w-[32rem] object-contain lg:mr-0 lg:ml-auto"
             alt="interactive stadium"
           />
         </div>
