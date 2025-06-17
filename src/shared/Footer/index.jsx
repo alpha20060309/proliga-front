@@ -103,7 +103,7 @@ const Footer = () => {
               </Link>
             </div>
           </div>
-          <div className="space-y-2">
+          <div className="flex flex-col justify-center gap-2 sm:justify-start">
             <Button
               className={'h-12 w-full max-w-64 font-bold hover:scale-105'}
               variant="gradient"
@@ -115,7 +115,7 @@ const Footer = () => {
             </Button>
             <Button
               variant="outline"
-              className="h-12 w-full max-w-64 bg-clip-text font-bold text-transparent hover:scale-105"
+              className="gradient-x border-gradient h-12 w-full max-w-64 overflow-hidden border-2 font-bold text-transparent hover:scale-105"
             >
               <Link href="/championships">
                 <AnimatedGradientText

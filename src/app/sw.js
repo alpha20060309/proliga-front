@@ -1,9 +1,5 @@
 import { Serwist, NetworkFirst, BackgroundSyncQueue, ExpirationPlugin } from 'serwist'
-import { defaultCache, PAGES_CACHE_NAME } from '@serwist/next/worker'
-
-const matchOptions = {
-  ignoreSearch: true,
-}
+import { defaultCache } from '@serwist/next/worker'
 
 
 const serwist = new Serwist({
@@ -13,55 +9,28 @@ const serwist = new Serwist({
     concurrency: 30,
   },
   runtimeCaching: [
-    {
-      matcher: ({ request, url: { pathname }, sameOrigin }) =>
-        request.headers.get("RSC") === "1" && request.headers.get("Next-Router-Prefetch") === "1" && sameOrigin && !pathname.startsWith("/api/"),
-      handler: new NetworkFirst({
-        cacheName: PAGES_CACHE_NAME.rscPrefetch,
-        plugins: [
-          new ExpirationPlugin({
-            maxEntries: 32,
-            maxAgeSeconds: 24 * 60 * 60, // 24 hours
-          }),
-        ],
-        matchOptions,
-      }),
-    },
-    {
-      matcher: ({ request, url: { pathname }, sameOrigin }) => request.headers.get("RSC") === "1" && sameOrigin && !pathname.startsWith("/api/"),
-      handler: new NetworkFirst({
-        cacheName: PAGES_CACHE_NAME.rsc,
-        plugins: [
-          new ExpirationPlugin({
-            maxEntries: 32,
-            maxAgeSeconds: 24 * 60 * 60, // 24 hours
-          }),
-        ],
-        matchOptions,
-      }),
-    },
-    {
-      matcher: ({ request, url: { pathname }, sameOrigin }) =>
-        request.headers.get("Content-Type")?.includes("text/html") && sameOrigin && !pathname.startsWith("/api/"),
-      handler: new NetworkFirst({
-        cacheName: PAGES_CACHE_NAME.html,
-        plugins: [
-          new ExpirationPlugin({
-            maxEntries: 32,
-            maxAgeSeconds: 24 * 60 * 60, // 24 hours
-          }),
-        ],
-        matchOptions,
-      }),
-    },
     ...defaultCache,
     {
-      handler: new NetworkFirst(),
+      handler: new NetworkFirst({
+        plugins: [
+          new ExpirationPlugin({
+            maxEntries: 32,
+            maxAgeSeconds: 60 * 60, // 1 hour
+          }),
+        ],
+      }),
       method: 'POST',
       matcher: ({ request }) => request.method === 'POST',
     },
     {
-      handler: new NetworkFirst(),
+      handler: new NetworkFirst({
+        plugins: [
+          new ExpirationPlugin({
+            maxEntries: 32,
+            maxAgeSeconds: 60 * 60, // 1 hour
+          }),
+        ],
+      }),
       method: 'PATCH',
       matcher: ({ request }) => request.method === 'PATCH',
     },
@@ -112,18 +81,31 @@ self.addEventListener("install", (event) => {
 
   event.waitUntil(requestPromises);
 });
-// self.addEventListener("install", (event) => {
-//   event.waitUntil(
-//       Promise.all(
-//           urlsToCache.map((entry) => {
-//               const request = serwist.handleRequest({
-//                   request: new Request(entry),
-//                   event,
-//               })
-//               return request
-//           }),
-//       ),
-//   )
-// })
+
+addEventListener('fetch', (event) => {
+  const { request } = event;
+
+  // Always bypass for range requests, due to browser bugs
+  if (request.headers.has('range')) return;
+  event.respondWith(async function () {
+    // Try to get from the cache:
+    const cachedResponse = await caches.match(request);
+    if (cachedResponse) return cachedResponse;
+
+    try {
+      // Otherwise, get from the network
+      return await fetch(request);
+    } catch (err) {
+      // If this was a navigation, show the offline page:
+      if (request.mode === 'navigate') {
+        return caches.match('/~offline');
+      }
+
+      // Otherwise throw
+      throw err;
+    }
+  }());
+});
+
 
 serwist.addEventListeners()

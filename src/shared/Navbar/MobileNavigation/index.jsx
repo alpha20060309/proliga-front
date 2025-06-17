@@ -31,7 +31,7 @@ const NavLink = ({
         className,
         {
           'pointer-events-none': isDisabled,
-          'group-hover:bg-sidebar-accent/50 group-hover:text-sidebar-accent-foreground':
+          'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground':
             !isDisabled,
         }
       )}
@@ -44,7 +44,7 @@ const NavLink = ({
           'flex h-16 w-full flex-col items-center justify-center rounded-md p-1',
           className,
           {
-            'bg-sidebar-accent/50': isActive && !isDisabled,
+            'bg-sidebar-accent': isActive && !isDisabled,
           }
         )}
       >
@@ -68,10 +68,10 @@ const NavButton = ({
       onClick={onClick}
       disabled={isDisabled}
       className={cn(
-        'flex h-14 flex-1 flex-col items-center justify-center rounded-md',
+        'flex h-14 flex-1 hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground flex-col items-center justify-center rounded-md',
         className,
         {
-          'bg-sidebar-accent/50 text-sidebar-accent-foreground': isActive,
+          'bg-sidebar-accent text-sidebar-accent-foreground': isActive,
         }
       )}
       aria-label={label}
@@ -171,7 +171,7 @@ function BottomNavigation() {
   return (
     <nav
       className={cn(
-        'border-sidebar-border bg-sidebar/50 text-sidebar-foreground fixed inset-x-0 bottom-0 z-50 mx-4 mb-4 flex h-14 items-center justify-between gap-0 rounded border-t shadow backdrop-blur lg:hidden',
+        'border-sidebar-border bg-sidebar/50 text-sidebar-foreground fixed inset-x-0 bottom-0 z-50 mx-4 mb-4 flex h-14 items-center justify-between gap-0 overflow-hidden shadow rounded-md border-t  backdrop-blur lg:hidden',
         !lastVisitedTeam && 'hidden'
       )}
     >

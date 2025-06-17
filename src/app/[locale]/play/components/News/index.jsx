@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button'
 import { RefreshCcw, Newspaper } from 'lucide-react'
 import Article from './Article'
 import NewsArticle from 'components/Modals/NewsArticle'
+import { Card, CardContent, CardHeader, CardFooter, CardTitle } from '@/components/ui/card'
 
 const News = () => {
   const dispatch = useDispatch()
@@ -37,29 +38,27 @@ const News = () => {
   }
 
   return (
-    <div
-      className={cn(
-        'relative mx-auto flex h-min min-h-168 w-full max-w-lg flex-col',
-        'bg-background items-stretch justify-between rounded-xl p-4 md:p-6 lg:mx-0 lg:w-auto',
-        'border-border gap-2 border lg:min-w-72 lg:flex-1'
-      )}
+    <Card className={cn(
+      'relative mx-auto flex h-172 w-full max-w-lg',
+      'lg:mx-0',
+      'border-border lg:min-w-72 lg:flex-1'
+    )}
     >
-      <div className="flex items-center justify-between">
-        <h3 className="text-foreground flex items-center gap-2 text-xl font-semibold">
+      <CardHeader className="flex items-center justify-between">
+        <CardTitle className=" flex items-center gap-2 text-xl font-semibold">
           <Newspaper className="size-6" />
           {t('Yangiliklar')}
-        </h3>
+        </CardTitle>
         <Button
           onClick={refreshData}
           variant="outline"
-          size="sm"
-          className="text-foreground hover:text-foreground h-8 py-0 text-sm"
+          size="icon"
+          className="border-muted size-9"
         >
-          <RefreshCcw className="mr-2 size-4" />
-          {t('Refresh')}
+          <RefreshCcw className="text-foreground size-5" />
         </Button>
-      </div>
-      <div className="flex h-full w-full flex-1 flex-col gap-2">
+      </CardHeader>
+      <CardContent className="flex h-full w-full flex-1 flex-col gap-2">
         {news?.map((item) => (
           <Article key={item.id} item={item} />
         ))}
@@ -68,14 +67,17 @@ const News = () => {
             {t('Yangiliklar mavjud emas!')}
           </p>
         )}
-      </div>
-      <Pagination
-        onPageChange={setPage}
-        currentPage={page}
-        totalPages={pages}
-      />
+      </CardContent>
+      <CardFooter>
+        <Pagination
+          onPageChange={setPage}
+          currentPage={page}
+          totalPages={pages}
+          className={'w-full '}
+        />
+      </CardFooter>
       <NewsArticle />
-    </div>
+    </Card>
   )
 }
 

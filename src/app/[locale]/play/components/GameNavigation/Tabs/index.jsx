@@ -52,8 +52,8 @@ export default function TourTabs() {
     <Box
       sx={{
         width: '100%',
-        bgcolor: 'var(--background)',
-        color: 'var(--foreground)',
+        bgcolor: 'var(--card)',
+        color: 'var(--card-foreground)',
         height: 'auto',
         borderRadius: 'var(--radius)',
         minHeight: '64px',
@@ -81,7 +81,7 @@ export default function TourTabs() {
             disabled={
               currentTeam?.is_team_created
                 ? item.status === TOUR_STATUS.notStarted ||
-                  item.order < registeredTour?.order
+                item.order < registeredTour?.order
                 : item.status !== TOUR_STATUS.notStartedTransfer
             }
             label={

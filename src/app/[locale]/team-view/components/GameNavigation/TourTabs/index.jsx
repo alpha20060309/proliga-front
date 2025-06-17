@@ -50,8 +50,8 @@ export default function TourTabs() {
     <Box
       sx={{
         width: '100%',
-        bgcolor: 'var(--background)',
-        color: 'var(--foreground)',
+        bgcolor: 'var(--card)',
+        color: 'var(--card-foreground)',
         borderRadius: 'var(--radius)',
         minHeight: '72px',
         height: '100%',

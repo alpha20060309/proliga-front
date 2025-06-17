@@ -35,7 +35,7 @@ const Hero = async ({ params }) => {
           <HeroLink />
           <Link
             href="/championships"
-            className="border-primary text-primary hover:bg-primary/50 text-shadow hover:text-primary-foreground text-shadow-accent-foreground/50 animate-fade-in flex h-16 w-full max-w-64 items-center justify-center rounded-sm border-2 bg-transparent font-bold uppercase transition-all duration-500 hover:text-shadow-none dark:text-shadow-none"
+            className="border-primary text-primary hover:bg-primary/50 text-shadow-sm hover:text-primary-foreground text-shadow-accent-foreground/50 animate-fade-in flex h-16 w-full max-w-64 items-center justify-center rounded-sm border-2 bg-transparent font-bold uppercase transition-all duration-500 hover:text-shadow-none dark:text-shadow-none"
             style={{ transform: 'skewX(-15deg)' }}
           >
             {t("O'yinga kirish")}

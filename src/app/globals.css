@@ -197,8 +197,8 @@
   @apply border-primary bg-card text-foreground placeholder:text-muted-foreground h-10 w-full rounded-sm border px-2 py-1 text-sm md:text-base;
 }
 
-@utility text-shadow {
-  text-shadow: 2px 1px 1px var(--color-foreground);
+@utility text-shadow-player {
+  text-shadow: 0 0 1.75px #000;
 }
 
 @utility promotion-text {
@@ -206,7 +206,7 @@
 }
 
 @utility promotion-header {
-  @apply xs:text-xl text-foreground text-lg uppercase md:text-2xl xl:text-3xl 2xl:text-4xl;
+  @apply xs:text-xl text-foreground text-lg uppercase md:text-2xl xl:text-3xl;
 }
 
 @utility carousel-header {
@@ -232,6 +232,20 @@
   width: 120px;
   height: 120px;
   animation: spin 2s linear infinite;
+}
+
+@utility border-gradient {
+  background:
+    linear-gradient(var(--color-background), var(--color-background))
+      padding-box,
+    linear-gradient(
+        to right,
+        var(--color-chart-2),
+        var(--color-chart-1),
+        var(--color-chart-3)
+      )
+      border-box;
+  border-color: transparent;
 }
 
 :root {
