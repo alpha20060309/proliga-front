@@ -44,9 +44,9 @@ const Championship = ({ game }) => {
   const cardVariants = useMemo(() => {
     if (!game?.is_active) return 'border-muted-foreground/40 cursor-default'
     if (currentGame)
-      return 'border-primary/70 hover:border-primary cursor-pointer hover:bg-card/10'
+      return 'border-primary/70 hover:border-primary cursor-pointers'
     return game.can_register
-      ? 'border-accent/50 hover:border-primary cursor-pointer hover:bg-card/10'
+      ? 'border-accent/50 hover:border-primary cursor-pointer '
       : 'border-muted-foreground/40 cursor-default'
   }, [currentGame, game?.can_register, game?.is_active])
 
@@ -54,7 +54,7 @@ const Championship = ({ game }) => {
     <>
       <Card
         className={cn(
-          'bg-card/10 relative flex h-32 items-start overflow-hidden rounded-lg border shadow',
+          'bg-card relative flex h-32 items-start overflow-hidden rounded-lg border shadow',
           'justify-center px-3 transition-all',
           cardVariants
         )}
@@ -111,7 +111,7 @@ const renderGameStatus = (game, currentGame, t) => {
     return (
       <div className="text-secondary-foreground flex gap-1 text-xs select-none sm:text-sm">
         <p>{t('Deadline')}: </p>
-        <span className="text-primary font-semibold">
+        <span className="text-foreground font-semibold">
           {formatDate(game?.deadline)}
         </span>
       </div>

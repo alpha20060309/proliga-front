@@ -98,7 +98,7 @@ export default async function RootLayout({ children, params }) {
           )}
         >
           <TranslationsProvider locale={locale} resources={resources}>
-            <Toaster className="text-foreground" />
+            <Toaster />
             <RootProvider>
               <Navbar />
               {children}

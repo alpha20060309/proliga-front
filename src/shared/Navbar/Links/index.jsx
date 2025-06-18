@@ -1,15 +1,15 @@
 'use client'
 
 import { Link } from 'next-view-transitions'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { TABS } from 'app/utils/tabs.util'
-import { setTab } from 'app/lib/features/tour/tour.slice'
 import { usePathname } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
 import { TOUR_STATUS } from 'app/utils/tour.util'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
 import { cn } from '@/lib/utils'
+import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
 
 const PlayLinks = () => {
   const path = usePathname()
@@ -19,39 +19,32 @@ const PlayLinks = () => {
   const { gameTab } = useSelector((state) => state.tour)
   const { lastVisitedTeam } = useSelector((store) => store.currentTeam)
 
-  const styling = (tab) => {
-    if (!currentTeam?.is_team_created) {
-      if (gameTab === tab && gameTab === TABS.Transfer) {
-        return path.includes('play') ? ACTIVE : PASSIVE
-      }
-      return DISABLED
-    }
+  // const styling = (tab) => {
+  //   if (!currentTeam?.is_team_created) {
+  //     // if (gameTab === tab && gameTab === TABS.Transfer) {
+  //     //   return path.includes('play') ? ACTIVE : PASSIVE
+  //     // }
+  //     return DISABLED
+  //   }
 
-    if (currentTour?.status !== TOUR_STATUS.notStartedTransfer) {
-      if (tab === TABS.Transfer) {
-        return DISABLED
-      }
-    }
+  //   if (currentTour?.status !== TOUR_STATUS.notStartedTransfer) {
+  //     if (tab === TABS.Transfer) {
+  //       return DISABLED
+  //     }
+  //   }
 
-    return gameTab === tab
-      ? path.includes('play')
-        ? ACTIVE
-        : PASSIVE
-      : PASSIVE
-  }
+  //   return gameTab === tab
+  //     ? path.includes('play')
+  //       ? ACTIVE
+  //       : PASSIVE
+  //     : PASSIVE
+  // }
+
+  const styling = () => {}
 
   return (
     <section className="text-foreground bold hidden items-center gap-2 sm:text-sm lg:flex xl:gap-4 xl:text-base 2xl:gap-6">
-      {path.includes('play') && (
-        <>
-          <Tab title={'Profil'} styling={styling} tab={TABS.GameProfile} />
-          <Tab title={'Transferlar'} styling={styling} tab={TABS.Transfer} />
-          <Tab title={'Turnir'} styling={styling} tab={TABS.Tournament} />
-          <Tab title={'Jurnal'} styling={styling} tab={TABS.Journal} />
-          <Tab title={'Statistika'} styling={styling} tab={TABS.Statistics} />
-        </>
-      )}
-      {!path.includes('play') && lastVisitedTeam && (
+      {lastVisitedTeam && (
         <>
           <TabLink title={'Profil'} styling={styling} tab={TABS.GameProfile} />
           <TabLink
@@ -102,45 +95,10 @@ const PlayLinks = () => {
   )
 }
 
-const Tab = ({ title, tab, styling }) => {
-  const dispatch = useDispatch()
-  const currentTour = useSelector(selectCurrentTour)
-  const currentTeam = useSelector(selectCurrentTeam)
-  const { t } = useTranslation()
-
-  const handleClick = () => {
-    if (!currentTeam?.is_team_created) {
-      return
-    }
-    if (
-      currentTour?.status !== TOUR_STATUS.notStartedTransfer &&
-      tab === TABS.Transfer
-    ) {
-      return
-    }
-    window.location.hash = tab
-    return dispatch(setTab(tab))
-  }
-
-  return (
-    <button
-      className={cn(
-        'relative transition-all before:absolute before:-bottom-4 before:hidden before:h-1',
-        'before:bg-accent hover:text-foreground before:w-full before:rounded-md',
-        styling(tab)
-      )}
-      onClick={handleClick}
-    >
-      {t(title)}
-    </button>
-  )
-}
-
 const TabLink = ({ title, tab, styling }) => {
-  const dispatch = useDispatch()
+  const currentCompetition = useSelector(selectCurrentCompetition)
   const currentTour = useSelector(selectCurrentTour)
   const currentTeam = useSelector(selectCurrentTeam)
-  const { lastVisitedTeam } = useSelector((store) => store.currentTeam)
   const { t } = useTranslation()
 
   const handleClick = () => {
@@ -154,8 +112,10 @@ const TabLink = ({ title, tab, styling }) => {
       return
     }
 
-    return dispatch(setTab(tab))
+    return
   }
+
+  const correctTab = tab !== TABS.GameProfile ? tab : ''
 
   return (
     <Link
@@ -165,7 +125,7 @@ const TabLink = ({ title, tab, styling }) => {
         styling(tab)
       )}
       onClick={handleClick}
-      href={'/play/' + lastVisitedTeam}
+      href={`/play/${currentCompetition?.id}/${currentTeam?.id}/${correctTab}`}
     >
       {t(title)}
     </Link>

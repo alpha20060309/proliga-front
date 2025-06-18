@@ -171,48 +171,20 @@ function BottomNavigation() {
   return (
     <nav
       className={cn(
-        'border-sidebar-border bg-sidebar/50 text-sidebar-foreground fixed inset-x-0 bottom-0 z-50 mx-4 mb-4 flex h-14 items-center justify-between gap-0 overflow-hidden rounded-md border-t shadow backdrop-blur lg:hidden',
+        'border-sidebar-border bg-sidebar text-sidebar-foreground fixed inset-x-0 bottom-0 z-50 mx-4 mb-4 flex h-14 items-center justify-between gap-0 overflow-hidden rounded-md border-t shadow backdrop-blur lg:hidden',
         !lastVisitedTeam && 'hidden'
       )}
     >
-      {navItems.map((item) =>
-        isOnPlayRoute ? (
-          <NavButton
-            key={item.id}
-            icon={item.icon}
-            label={t(item.labelKey)}
-            onClick={() => {
-              const proceed = handleTabClick(item.tab)
-              if (proceed) {
-                window.location.hash = item.tab
-              }
-            }}
-            className={getTabStyles(item.tab)}
-            isDisabled={
-              (!currentTeam?.is_team_created &&
-                item.tab !== TABS.GameProfile &&
-                item.tab !== TABS.Transfer) ||
-              (currentTour?.status !== TOUR_STATUS.notStartedTransfer &&
-                item.tab === TABS.Transfer &&
-                path.includes('play'))
-            }
-            isActive={gameTab === item.tab && path.includes('play')}
-          />
-        ) : (
-          <NavLink
-            key={item.id}
-            icon={item.icon}
-            label={t(item.labelKey)}
-            onClick={() => handleTabClick(item.tab)}
-            className={getTabStyles(item.tab)}
-            href={
-              lastVisitedTeam ? `/play/${lastVisitedTeam}#${item.tab}` : '#'
-            }
-            isDisabled={!lastVisitedTeam}
-            isActive={false}
-          />
-        )
-      )}
+      {/* <NavLink
+        key={item.id}
+        icon={item.icon}
+        label={t(item.labelKey)}
+        onClick={() => handleTabClick(item.tab)}
+        className={getTabStyles(item.tab)}
+        href={lastVisitedTeam ? `/play/${lastVisitedTeam}#${item.tab}` : '#'}
+        isDisabled={!lastVisitedTeam}
+        isActive={false}
+      /> */}
     </nav>
   )
 }

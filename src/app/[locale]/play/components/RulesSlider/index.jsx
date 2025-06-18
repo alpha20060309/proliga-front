@@ -15,9 +15,9 @@ import WinPrizesSlide from './WinPrizesSlide'
 
 function RulesSlider() {
   return (
-    <Carousel opts={{ loop: true }} className="mx-7 xl:mx-8">
+    <Carousel opts={{ loop: true }} className="bg-card rounded-xl px-6 py-4 ">
       <RulesSliderTitle />
-      <CarouselContent className="mb-6">
+      <CarouselContent className="mb-4">
         <CarouselItem className="min-h-96 rounded md:min-h-104 xl:min-h-136">
           <CreateTeamSlide />
         </CarouselItem>
@@ -34,8 +34,8 @@ function RulesSlider() {
           <WinPrizesSlide />
         </CarouselItem>
       </CarouselContent>
-      <CarouselPrevious className="hover:bg-accent dark:hover:bg-accent/50 -left-8 xl:-left-11 2xl:-left-8" />
-      <CarouselNext className="hover:bg-accent dark:hover:bg-accent/50 -right-8 xl:-right-11 2xl:-right-8" />
+      <CarouselPrevious className="hover:bg-accent dark:hover:bg-accent/50 left-4" />
+      <CarouselNext className="hover:bg-accent dark:hover:bg-accent/50 right-4" />
     </Carousel>
   )
 }
