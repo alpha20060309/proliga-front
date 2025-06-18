@@ -1,8 +1,8 @@
 'use client'
 
-import GameProfile from 'app/[locale]/play/components/GameProfile'
 import Gutter from 'shared/Gutter'
 import BannerTemplate from 'app/[locale]/play/components/BannerTemplate'
+import GameProfile from './components/GameProfile'
 
 export default function ProfilePage() {
   // useEffect(() => {

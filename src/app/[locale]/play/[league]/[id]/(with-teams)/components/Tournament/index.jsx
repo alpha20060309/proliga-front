@@ -1,3 +1,5 @@
+'use client'
+
 import { useSelector } from 'react-redux'
 import { useState, useEffect, useMemo } from 'react'
 import { fetchAllTeams } from 'app/lib/features/team/team.thunk'

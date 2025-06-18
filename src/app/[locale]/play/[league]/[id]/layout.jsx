@@ -13,12 +13,22 @@ import Image from 'next/image'
 import ModalBanner from 'components/Banners/Modal'
 import { fetchTopPlayers } from 'app/lib/features/player/player.thunk'
 import { fetchAdditionalPlayers } from 'app/lib/features/player/player.thunk'
-import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
+import {
+  selectCompetition,
+  selectCurrentCompetition,
+} from 'app/lib/features/competition/competition.selector'
 import { fetchTopTeams } from 'app/lib/features/team/team.thunk'
+import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { fetchCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.thunk'
+import { setLastVisitedTeam } from 'app/lib/features/currentTeam/currentTeam.slice'
+import { setCurrentCompetition } from 'app/lib/features/competition/competition.slice'
+import { fetchTours } from 'app/lib/features/tour/tour.thunk'
+import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 
 export default function PlayLayout({ children }) {
   const [isModalOpen, setModalOpen] = useState(false)
-  const { league } = useParams()
+  const { league, id } = useParams()
+  const user = useSelector(selectUserTable)
   const dispatch = useDispatch()
   const { count: playersCount } = useSelector((store) => store.player)
   const countOfPlayers = useMemo(
@@ -26,6 +36,9 @@ export default function PlayLayout({ children }) {
     []
   )
   const currentCompetition = useSelector(selectCurrentCompetition)
+  const competitions = useSelector(selectCompetition)
+  const currentTeam = useSelector(selectCurrentTeam)
+
   useEffect(() => {
     dispatch(fetchCompetition())
     dispatch(fetchSeason())
@@ -76,8 +89,32 @@ export default function PlayLayout({ children }) {
     }
   }, [currentCompetition?.id, dispatch])
 
+  useEffect(() => {
+    if (user?.id && id && league) {
+      dispatch(fetchCurrentTeam({ id, user_id: user?.id }))
+      dispatch(setLastVisitedTeam(`${league}/${id}`))
+    }
+  }, [id, league, dispatch, user?.id])
+
+  useEffect(() => {
+    if (competitions?.length > 0 && league) {
+      dispatch(setCurrentCompetition(league))
+    }
+  }, [dispatch, league, competitions?.length])
+
+  useEffect(() => {
+    if (league && currentTeam?.registered_tour_id) {
+      dispatch(
+        fetchTours({
+          competition_id: league,
+          registered_tour_id: currentTeam?.registered_tour_id,
+        })
+      )
+    }
+  }, [league, dispatch, currentTeam?.registered_tour_id])
+
   return (
-    <main className="text-foreground bg-background relative flex min-h-[75vh] flex-col gap-4 overflow-hidden pt-10">
+    <main className="text-foreground bg-background relative flex min-h-[75vh] flex-col gap-4 overflow-hidden pt-14 pb-4">
       <div aria-hidden="true" className="absolute inset-0 z-0 h-full w-full">
         <Image
           src="/images/Hero.png"

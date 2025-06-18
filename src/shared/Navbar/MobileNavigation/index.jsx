@@ -1,11 +1,10 @@
 'use client'
 
 import { Home, Repeat, Users, Notebook, BarChart2 } from 'lucide-react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { usePathname } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
 import { TABS } from 'app/utils/tabs.util'
-import { setTab } from 'app/lib/features/tour/tour.slice'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
 import { TOUR_STATUS } from 'app/utils/tour.util'
@@ -55,38 +54,9 @@ const NavLink = ({
   )
 }
 
-const NavButton = ({
-  onClick,
-  icon,
-  label,
-  className,
-  isDisabled,
-  isActive,
-}) => {
-  return (
-    <button
-      onClick={onClick}
-      disabled={isDisabled}
-      className={cn(
-        'hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground flex h-14 flex-1 flex-col items-center justify-center rounded-md',
-        className,
-        {
-          'bg-sidebar-accent text-sidebar-accent-foreground': isActive,
-        }
-      )}
-      aria-label={label}
-      tabIndex={isDisabled ? -1 : 0}
-    >
-      {icon}
-      <span className="mt-0.5 text-xs">{label}</span>
-    </button>
-  )
-}
-
 function BottomNavigation() {
   const path = usePathname()
   const { t } = useTranslation()
-  const dispatch = useDispatch()
   const currentTeam = useSelector(selectCurrentTeam)
   const currentTour = useSelector(selectCurrentTour)
   const { gameTab } = useSelector((state) => state.tour)
@@ -103,7 +73,6 @@ function BottomNavigation() {
     ) {
       return false
     }
-    dispatch(setTab(tab))
     return true
   }
 
@@ -132,8 +101,6 @@ function BottomNavigation() {
       ? 'text-sidebar-primary-foreground'
       : 'text-sidebar-foreground hover:text-sidebar-accent-foreground'
   }
-
-  const isOnPlayRoute = path.includes('/play')
 
   const navItems = [
     {
@@ -175,16 +142,18 @@ function BottomNavigation() {
         !lastVisitedTeam && 'hidden'
       )}
     >
-      {/* <NavLink
-        key={item.id}
-        icon={item.icon}
-        label={t(item.labelKey)}
-        onClick={() => handleTabClick(item.tab)}
-        className={getTabStyles(item.tab)}
-        href={lastVisitedTeam ? `/play/${lastVisitedTeam}#${item.tab}` : '#'}
-        isDisabled={!lastVisitedTeam}
-        isActive={false}
-      /> */}
+      {navItems.map((item) => (
+        <NavLink
+          key={item.id}
+          icon={item.icon}
+          label={t(item.labelKey)}
+          onClick={() => handleTabClick(item.tab)}
+          className={getTabStyles(item.tab)}
+          href={lastVisitedTeam ? `/play/${lastVisitedTeam}#${item.tab}` : '#'}
+          isDisabled={!lastVisitedTeam}
+          isActive={false}
+        />
+      ))}
     </nav>
   )
 }

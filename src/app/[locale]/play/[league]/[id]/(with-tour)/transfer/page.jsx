@@ -2,7 +2,7 @@
 
 import BannerTemplate from 'app/[locale]/play/components/BannerTemplate'
 import Gutter from 'shared/Gutter'
-import Transfer from 'app/[locale]/play/components/Transfer'
+import Transfer from '../components/Transfer'
 
 export default function TransferPage() {
   return (
