@@ -3,7 +3,7 @@ import Gutter from 'shared/Gutter'
 import TopTeams from './components/TopTeams'
 import { Card, CardContent } from '@/components/ui/card'
 
-export default function SidePagesTemplate({ children }) {
+export default function TeamPagesLayout({ children }) {
   return (
     <Gutter>
       <section className="flex w-full flex-col gap-2 lg:flex-row">
