@@ -43,7 +43,7 @@ function Journal() {
     return <JournalSkeleton paginationCount={pages < 5 ? pages : 5} />
 
   return (
-    <section className='bg-background'>
+    <>
       <JournalTable />
       <Pagination
         onPageChange={setPage}
@@ -51,7 +51,7 @@ function Journal() {
         totalPages={pages}
         className={'mt-auto pt-1'}
       />
-    </section>
+    </>
   )
 }
 
