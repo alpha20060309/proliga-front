@@ -49,6 +49,16 @@ const serwist = new Serwist({
   offlineAnalyticsConfig: true,
   disableDevLogs: true,
   importScripts: ['/firebase-messaging-sw.js'],
+  fallbacks: {
+    entries: [
+      {
+        url: "/~offline",
+        matcher({ request }) {
+          return request.destination === "document";
+        },
+      }
+    ],
+  },
 })
 
 const queue = new BackgroundSyncQueue('sync-queue')
@@ -76,26 +86,29 @@ self.addEventListener('install', (event) => {
 self.addEventListener('fetch', (event) => {
   const { request } = event
 
-  // 1. Range requests → bypass
   if (request.headers.has('range')) return
 
-  // 2. Background sync for POST/PATCH
   if (request.method === 'POST' || request.method === 'PATCH') {
     return event.respondWith(backgroundSync(event))
   }
 
-  // 3. Attempt normal Serwist/Workbox handling
-  event.respondWith(
-    serwist.handleRequest({ request, event }).catch(async () => {
+  event.respondWith(async function () {
+    const cachedResponse = await caches.match(request);
+    if (cachedResponse) return cachedResponse;
+
+    try {
+      return await fetch(request);
+    } catch (err) {
       if (request.mode === 'navigate') {
         const url = new URL(request.url)
         const locale = url.pathname.split('/')[1]
         const fallback = await caches.match(`/${locale}/~offline`)
         return fallback || caches.match('/uz/~offline')
       }
-      return Response.error()
-    })
-  )
+
+      throw err;
+    }
+  }());
 })
 
 self.addEventListener('activate', (event) => {
