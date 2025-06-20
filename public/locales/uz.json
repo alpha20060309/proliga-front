@@ -632,7 +632,7 @@
   "Your registration was not successfully completed, so we are logging you out for security reasons.": "Ro‘yxatdan o‘tish muvaffaqiyatli yakunlanmadi, shuning uchun xavfsizlik nuqtai nazaridan sizni tizimdan chiqaramiz.",
   "An email with this email has been opened, please try a different account": "Bu email allaqachon ishlatilgan. Boshqa hisobni tanlang.",
   "Phone not verified. Please complete the verification process.": "Telefon tasdiqlanmagan. Iltimos, tekshirish jarayonini yakunlang.",
-  "You're Offline": "Siz oflaysiz.",
+  "You're Offline": "Siz oflaynsiz.",
   "It seems you've lost your internet connection. Check your network and try again.": "Ko‘rinishidan, internetga ulanishingiz uzildi. Tarmog‘ingizni tekshiring va qayta urinib ko‘ring.",
   "try again": "qayta urinib ko'ring",
   "Enter your credentials.": "Ma'lumotlaringizni kiriting.",
