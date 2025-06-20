@@ -4,7 +4,7 @@
 
 ![Desktop Home Page](./public/Screenshot.png)
 
-Proliga is a cutting-edge fantasy football platform that empowers users to create and manage virtual teams using real-life players and leagues. Built with Next.js 14, it delivers a premium experience for football enthusiasts.
+Proliga is a cutting-edge fantasy football platform that empowers users to create and manage virtual teams using real-life players and leagues. Built with Next.js 15, it delivers a premium experience for football enthusiasts.
 
 ## ⭐ Key Features
 
@@ -18,7 +18,7 @@ Proliga is a cutting-edge fantasy football platform that empowers users to creat
 
 | Category    | Technologies                                                |
 | ----------- | ----------------------------------------------------------- |
-| 🔧 Core     | • Next.js 14.2 & React 18<br>• Supabase<br>• Redux Toolkit  |
+| 🔧 Core     | • Next.js & React<br>• Supabase<br>• Redux Toolkit  |
 | 🎨 UI/UX    | • Radix UI & Material-UI<br>• Tailwind CSS<br>• Uppy        |
 | 🌐 Features | • Supabase Auth<br>• i18next<br>• Click & Payme Integration |
 
