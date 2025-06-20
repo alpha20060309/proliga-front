@@ -2,10 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { fonts } from 'app/utils/fonts.util'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTheme } from 'next-themes'
-import {
-  setDarkTheme,
-  setLightTheme,
-} from 'app/lib/features/theme/theme.slice'
+import { setDarkTheme, setLightTheme } from 'app/lib/features/theme/theme.slice'
 import { useTranslation } from 'react-i18next'
 import {
   selectDarkTheme,

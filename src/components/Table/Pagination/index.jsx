@@ -71,9 +71,7 @@ export function Pagination({
         onClick={() => onPageChange(0)}
         disabled={currentPage === 0 || disabled || totalPages === 0}
       >
-        <ChevronsLeft
-          className={cn('text-muted-foreground size-5', iconClassName)}
-        />
+        <ChevronsLeft className={cn('text-muted-foreground', iconClassName)} />
       </Button>
       <Button
         variant="outline"
@@ -85,9 +83,7 @@ export function Pagination({
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 0 || disabled || totalPages === 0}
       >
-        <ChevronLeft
-          className={cn('text-muted-foreground size-5', iconClassName)}
-        />
+        <ChevronLeft className={cn('text-muted-foreground', iconClassName)} />
       </Button>
       {renderPageNumbers()}
       <Button
@@ -102,9 +98,7 @@ export function Pagination({
           currentPage === totalPages - 1 || disabled || totalPages === 0
         }
       >
-        <ChevronRight
-          className={cn('text-muted-foreground size-5', iconClassName)}
-        />
+        <ChevronRight className={cn('text-muted-foreground', iconClassName)} />
       </Button>
       <Button
         variant="outline"
@@ -118,9 +112,7 @@ export function Pagination({
           currentPage === totalPages - 1 || disabled || totalPages === 0
         }
       >
-        <ChevronsRight
-          className={cn('text-muted-foreground size-5', iconClassName)}
-        />
+        <ChevronsRight className={cn('text-muted-foreground', iconClassName)} />
       </Button>
     </section>
   )
@@ -132,16 +124,16 @@ export const PaginationSkeleton = ({ count = 5, className }) => {
       <Button
         variant="outline"
         disabled
-        className="bg-muted text-muted-foreground border-border size-7 animate-pulse p-0 md:size-8 cursor-pointer"
+        className="bg-muted text-muted-foreground border-border size-7 animate-pulse cursor-pointer p-0 md:size-8"
       >
-        <ChevronsLeft className="text-muted-foreground size-5" />
+        <ChevronsLeft className="text-muted-foreground" />
       </Button>
       <Button
         variant="outline"
         disabled
-        className="bg-muted text-muted-foreground border-border size-7 animate-pulse p-0 md:size-8 cursor-pointer"
+        className="bg-muted text-muted-foreground border-border size-7 animate-pulse cursor-pointer p-0 md:size-8"
       >
-        <ChevronLeft className="text-muted-foreground size-5" />
+        <ChevronLeft className="text-muted-foreground" />
       </Button>
       {Array.from({ length: count }).map((_, index) => (
         <Skeleton key={index} className="bg-muted size-7 md:size-8" />
@@ -149,16 +141,16 @@ export const PaginationSkeleton = ({ count = 5, className }) => {
       <Button
         variant="outline"
         disabled
-        className="bg-muted text-muted-foreground border-border size-7 animate-pulse p-0 md:size-8 cursor-pointer"
+        className="bg-muted text-muted-foreground border-border size-7 animate-pulse cursor-pointer p-0 md:size-8"
       >
-        <ChevronRight className="text-muted-foreground size-5" />
+        <ChevronRight className="text-muted-foreground" />
       </Button>
       <Button
         variant="outline"
         disabled
-        className="bg-muted text-muted-foreground border-border size-7 animate-pulse p-0 md:size-8 cursor-pointer"
+        className="bg-muted text-muted-foreground border-border size-7 animate-pulse cursor-pointer p-0 md:size-8"
       >
-        <ChevronsRight className="text-muted-foreground size-5" />
+        <ChevronsRight className="text-muted-foreground" />
       </Button>
     </div>
   )

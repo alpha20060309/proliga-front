@@ -1,0 +1,24 @@
+import Gutter from 'shared/Gutter'
+import RulesSlider from '../RulesSlider'
+import Matches from '../Matches'
+import News from '../News'
+import MiniBanner from 'components/Banners/Mini'
+import BigBanner from 'components/Banners/Big'
+
+const PlayFooter = () => {
+  return (
+    <Gutter>
+      <section className="flex min-h-160 flex-col justify-between gap-2 py-4 lg:flex-row">
+        <Matches />
+        <section className="relative mx-auto h-min flex-col items-center justify-between overflow-hidden md:flex lg:mx-0">
+          <MiniBanner />
+          <BigBanner />
+        </section>
+        <News />
+      </section>
+      <RulesSlider />
+    </Gutter>
+  )
+}
+
+export default PlayFooter

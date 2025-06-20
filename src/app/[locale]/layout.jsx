@@ -71,19 +71,19 @@ export default async function RootLayout({ children, params }) {
   const { locale } = await params
   const { resources } = await initTranslations(locale)
   const userId = session?.user?.id
-  
+
   // eslint-disable-next-line no-undef
-  const staticBaseUrl = process.env.NEXT_PUBLIC_STATIC_URL;
-  let themePath;
+  const staticBaseUrl = process.env.NEXT_PUBLIC_STATIC_URL
+  let themePath
 
   if (session?.user?.user_theme_id && userId) {
-    themePath = `/user/${userId}/user.css`;
+    themePath = `/user/${userId}/user.css`
   } else if (session?.user?.theme_id) {
-    themePath = `/theme/${session.user.theme_id}.css`;
+    themePath = `/theme/${session.user.theme_id}.css`
   } else {
-    themePath = `/theme/ALL.css`;
+    themePath = `/theme/ALL.css`
   }
-  const themeURL = `${staticBaseUrl}${themePath}`;
+  const themeURL = `${staticBaseUrl}${themePath}`
 
   return (
     <ViewTransitions>
@@ -98,7 +98,7 @@ export default async function RootLayout({ children, params }) {
           )}
         >
           <TranslationsProvider locale={locale} resources={resources}>
-            <Toaster className="text-foreground" />
+            <Toaster />
             <RootProvider>
               <Navbar />
               {children}

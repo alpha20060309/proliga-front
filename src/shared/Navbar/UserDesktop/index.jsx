@@ -11,7 +11,7 @@ const NavbarUserDesktop = () => {
 
   return (
     <Popover open={isDropdownOpen} onOpenChange={setDropdownOpen}>
-      <PopoverTrigger className="cursor-pointer items-center justify-center gap-2 flex">
+      <PopoverTrigger className="flex cursor-pointer items-center justify-center gap-2">
         <Avatar src={user?.image} className="rounded-full text-base" />
       </PopoverTrigger>
       <Dropdown />

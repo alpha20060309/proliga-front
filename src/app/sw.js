@@ -1,38 +1,47 @@
-import { Serwist, NetworkFirst, BackgroundSyncQueue, ExpirationPlugin } from 'serwist'
+import {
+  Serwist,
+  NetworkOnly,
+  BackgroundSyncQueue,
+  ExpirationPlugin,
+  StaleWhileRevalidate,
+  CacheableResponsePlugin,
+} from 'serwist'
 import { defaultCache } from '@serwist/next/worker'
 
-
+const urlsToPrecache = ['/', '/uz', '/ru', '/uz/~offline', '/ru/~offline']
 const serwist = new Serwist({
   precacheEntries: self.__SW_MANIFEST,
   precacheOptions: {
     cleanupOutdatedCaches: true,
     concurrency: 30,
+    matchOptions: {
+      ignoreSearch: true
+    }
   },
+
   runtimeCaching: [
     ...defaultCache,
     {
-      handler: new NetworkFirst({
-        plugins: [
-          new ExpirationPlugin({
-            maxEntries: 32,
-            maxAgeSeconds: 60 * 60, // 1 hour
-          }),
-        ],
-      }),
+      handler: new NetworkOnly(),
       method: 'POST',
       matcher: ({ request }) => request.method === 'POST',
     },
     {
-      handler: new NetworkFirst({
+      handler: new NetworkOnly(),
+      method: 'PATCH',
+      matcher: ({ request }) => request.method === 'PATCH',
+    },
+    {
+      matcher: ({ request }) => request.destination === 'document',
+      handler: new StaleWhileRevalidate({
         plugins: [
+          new CacheableResponsePlugin({ statuses: [200] }),
           new ExpirationPlugin({
-            maxEntries: 32,
-            maxAgeSeconds: 60 * 60, // 1 hour
+            maxEntries: 50,
+            maxAgeSeconds: 24 * 60 * 60, // 10 day
           }),
         ],
       }),
-      method: 'PATCH',
-      matcher: ({ request }) => request.method === 'PATCH',
     },
   ],
   skipWaiting: true,
@@ -40,16 +49,6 @@ const serwist = new Serwist({
   offlineAnalyticsConfig: true,
   disableDevLogs: true,
   importScripts: ['/firebase-messaging-sw.js'],
-  fallbacks: {
-    entries: [
-      {
-        url: "/~offline",
-        matcher({ request }) {
-          return request.destination === "document";
-        },
-      },
-    ],
-  },
 })
 
 const queue = new BackgroundSyncQueue('sync-queue')
@@ -64,48 +63,43 @@ const backgroundSync = async (event) => {
   }
 }
 
-self.addEventListener('fetch', (event) => {
-  if (event?.request?.method === 'POST' || event?.request?.method === 'PATCH') {
-    event.respondWith(backgroundSync(event))
-  }
-})
-
-const urlsToPrecache = ["/", '/uz', '/ru', "/~offline"];
-
-self.addEventListener("install", (event) => {
+self.addEventListener('install', (event) => {
   const requestPromises = Promise.all(
     urlsToPrecache.map((entry) => {
-      return serwist.handleRequest({ request: new Request(entry), event });
-    }),
-  );
+      return serwist.handleRequest({ request: new Request(entry), event })
+    })
+  )
 
-  event.waitUntil(requestPromises);
-});
+  event.waitUntil(requestPromises)
+})
 
-addEventListener('fetch', (event) => {
-  const { request } = event;
+self.addEventListener('fetch', (event) => {
+  const { request } = event
 
-  // Always bypass for range requests, due to browser bugs
-  if (request.headers.has('range')) return;
-  event.respondWith(async function () {
-    // Try to get from the cache:
-    const cachedResponse = await caches.match(request);
-    if (cachedResponse) return cachedResponse;
+  // 1. Range requests → bypass
+  if (request.headers.has('range')) return
 
-    try {
-      // Otherwise, get from the network
-      return await fetch(request);
-    } catch (err) {
-      // If this was a navigation, show the offline page:
+  // 2. Background sync for POST/PATCH
+  if (request.method === 'POST' || request.method === 'PATCH') {
+    return event.respondWith(backgroundSync(event))
+  }
+
+  // 3. Attempt normal Serwist/Workbox handling
+  event.respondWith(
+    serwist.handleRequest({ request, event }).catch(async () => {
       if (request.mode === 'navigate') {
-        return caches.match('/~offline');
+        const url = new URL(request.url)
+        const locale = url.pathname.split('/')[1]
+        const fallback = await caches.match(`/${locale}/~offline`)
+        return fallback || caches.match('/uz/~offline')
       }
+      return Response.error()
+    })
+  )
+})
 
-      // Otherwise throw
-      throw err;
-    }
-  }());
+self.addEventListener('activate', (event) => {
+  event.waitUntil(self.registration.navigationPreload?.enable());
 });
-
 
 serwist.addEventListeners()

@@ -31,7 +31,10 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
   const handleConfirmPayment = async () => {
     if (!currentPackage?.id) return toast.error(t('Joriy paket yo‘q!'))
     if (!paymentOption) return toast.error(t('To‘lov varianti topilmadi!'))
-    if (paymentOption === PAYMENT_OPTIONS.WALLET && userTable.balance < currentPackage?.price) {
+    if (
+      paymentOption === PAYMENT_OPTIONS.WALLET &&
+      userTable.balance < currentPackage?.price
+    ) {
       return toast.error(t('Mablag‘ yetarli emas!'))
     }
     if (paymentOption === PAYMENT_OPTIONS.WALLET) {

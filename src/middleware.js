@@ -1,5 +1,4 @@
-import NextAuth from 'next-auth'
-import { authConfig } from './auth.config'
+import { auth as middleware } from 'app/api/auth/[...nextauth]/route'
 import { NextResponse } from 'next/server'
 
 import { i18nRouter } from 'next-i18n-router'
@@ -10,9 +9,8 @@ const apiAuthPrefix = '/api/auth'
 
 export const DEFAULT_LOGIN_REDIRECT = '/auth'
 
-const { auth } = NextAuth(authConfig)
 
-export default auth((req) => {
+export default middleware((req) => {
   const i18nResponse = i18nRouter(req, i18nConfig)
 
   if (i18nResponse instanceof NextResponse) {
@@ -52,5 +50,5 @@ export default auth((req) => {
 })
 
 export const config = {
-  matcher: '/((?!api|static|.*\\..*|_next|offline|offline.html|~offline).*)'
+  matcher: '/((?!api|static|.*\\..*|_next|offline|offline.html|~offline).*)',
 }

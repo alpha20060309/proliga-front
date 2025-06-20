@@ -4,7 +4,7 @@ const RulesSliderTitle = () => {
   const { t } = useTranslation()
 
   return (
-    <div className="bg-primary mb-4 w-3/4 max-w-[24rem] -skew-x-12 self-start rounded-xs md:mb-6 md:max-w-120">
+    <div className="bg-primary mb-4 w-full max-w-64 -skew-x-12 self-start rounded-xs md:mb-6 md:max-w-96">
       <h3 className="carousel-header text-primary-foreground text-center font-bold capitalize">
         {t('Umumiy qoidalar')}
       </h3>

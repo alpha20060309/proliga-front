@@ -1,19 +1,15 @@
-
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { supabase } from 'app/lib/supabaseClient'
 
-export const fetchThemes = createAsyncThunk(
-  'theme/fetchThemes',
-  async () => {
-    const { data, error } = await supabase
-      .from('theme')
-      .select('*')
-      .eq('is_global', true)
-      .is('deleted_at', null)
+export const fetchThemes = createAsyncThunk('theme/fetchThemes', async () => {
+  const { data, error } = await supabase
+    .from('theme')
+    .select('*')
+    .eq('is_global', true)
+    .is('deleted_at', null)
 
-    return { data, error }
-  }
-)
+  return { data, error }
+})
 
 export const fetchUserThemes = createAsyncThunk(
   'theme/fetchUserThemes',
@@ -28,4 +24,3 @@ export const fetchUserThemes = createAsyncThunk(
     return { data, error }
   }
 )
-

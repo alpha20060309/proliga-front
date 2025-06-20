@@ -237,7 +237,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
             )}
           >
             {isPending ? (
-              <Loader2 className="mx-auto size-6 text-foreground animate-spin" />
+              <Loader2 className="text-foreground mx-auto size-6 animate-spin" />
             ) : (
               t('Akkaunt Ochish')
             )}

@@ -67,15 +67,13 @@ const Championships = () => {
         <ChampionshipsTitle />
       )}
       <section className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-        {isLoading ? (
-          [...Array(4)].map((_, index) => (
-            <ChampionshipSkeleton key={index} />
-          ))
-        ) : (
-          competitions.map((game, index) => (
-            <Championship key={index} game={game} />
-          ))
-        )}
+        {isLoading
+          ? [...Array(4)].map((_, index) => (
+              <ChampionshipSkeleton key={index} />
+            ))
+          : competitions.map((game, index) => (
+              <Championship key={index} game={game} />
+            ))}
       </section>
     </>
   )

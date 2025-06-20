@@ -59,8 +59,7 @@ export const DEFAULT_LIGHT_THEME = {
   },
 }
 
-export const DEFAULT_DARK_THEME =
-{
+export const DEFAULT_DARK_THEME = {
   colors: {
     background: '#0d0d0d',
     foreground: '#f2f2f2',
@@ -111,7 +110,6 @@ export const DEFAULT_DARK_THEME =
   },
   shadows: DEFAULT_SHADOWS,
 }
-
 
 // const COLOR_VARS = [
 //   '--background',

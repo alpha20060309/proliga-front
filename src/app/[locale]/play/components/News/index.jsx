@@ -12,7 +12,13 @@ import { Button } from '@/components/ui/button'
 import { RefreshCcw, Newspaper } from 'lucide-react'
 import Article from './Article'
 import NewsArticle from 'components/Modals/NewsArticle'
-import { Card, CardContent, CardHeader, CardFooter, CardTitle } from '@/components/ui/card'
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+} from '@/components/ui/card'
 
 const News = () => {
   const dispatch = useDispatch()
@@ -38,14 +44,15 @@ const News = () => {
   }
 
   return (
-    <Card className={cn(
-      'relative mx-auto flex h-172 w-full max-w-lg',
-      'lg:mx-0',
-      'border-border lg:min-w-72 lg:flex-1'
-    )}
+    <Card
+      className={cn(
+        'relative mx-auto flex h-172 w-full max-w-lg',
+        'lg:mx-0',
+        'border-border lg:min-w-72 lg:flex-1'
+      )}
     >
       <CardHeader className="flex items-center justify-between">
-        <CardTitle className=" flex items-center gap-2 text-xl font-semibold">
+        <CardTitle className="flex items-center gap-2 text-xl font-semibold">
           <Newspaper className="size-6" />
           {t('Yangiliklar')}
         </CardTitle>
@@ -73,7 +80,7 @@ const News = () => {
           onPageChange={setPage}
           currentPage={page}
           totalPages={pages}
-          className={'w-full '}
+          className={'w-full'}
         />
       </CardFooter>
       <NewsArticle />

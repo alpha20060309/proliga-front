@@ -57,10 +57,7 @@ const PackageContainer = ({ packageType }) => {
                     {t('ga oshirish')}
                   </span>
                 </div>
-                <Button
-                  asChild
-                  size="sm"
-                >
+                <Button asChild size="sm">
                   <Link href={`/confirm-payment/${item.id}`}>
                     {t('Tanlash')}
                   </Link>

@@ -117,7 +117,7 @@ const Matches = () => {
   ])
 
   return (
-    <Card className="border-border relative mx-auto h-172  max-w-lg justify-between lg:mx-0 lg:min-w-72 w-full 2xl:max-w-lg">
+    <Card className="border-border relative mx-auto h-172 w-full max-w-lg justify-between lg:mx-0 lg:min-w-72 2xl:max-w-lg">
       <CardHeader className="flex w-full items-center justify-center">
         <div className="mx-auto ml-9 flex flex-1 items-center justify-center gap-2">
           <Button
@@ -172,23 +172,17 @@ const Matches = () => {
           <RefreshCcw className="text-foreground size-5" />
         </Button>
       </CardHeader>
-      <CardContent
-        className="flex-1 space-y-1"
-      >
+      <CardContent className="flex-1 space-y-1">
         {isLoading ? (
           Array.from({ length: 10 }).map((_, index) => (
             <MatchSkeleton key={index} />
           ))
+        ) : matches?.length === 0 ? (
+          <p className="text-muted-foreground text-center">
+            {t('Matchlar topilmadi!')}
+          </p>
         ) : (
-          matches?.length === 0 ? (
-            <p className="text-muted-foreground text-center">
-              {t('Matchlar topilmadi!')}
-            </p>
-          ) : (
-            matches?.map((match, index) => (
-              <Match key={index} match={match} />
-            ))
-          )
+          matches?.map((match, index) => <Match key={index} match={match} />)
         )}
       </CardContent>
       <CardFooter>
