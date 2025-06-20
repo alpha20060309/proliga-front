@@ -16,7 +16,7 @@ import { selectCurrentCompetition } from 'app/lib/features/competition/competiti
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { selectCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.selector'
 import { formatDate } from 'app/utils/formatDate.util'
-import GameBriefSkeleton from 'app/[locale]/play/components/GameProfile/GameBrief/Skeleton'
+import GameBriefSkeleton from 'app/[locale]/play/[league]/[id]/(with-tour)/components/GameProfile/GameBrief/Skeleton'
 import { Copy } from 'lucide-react'
 
 const GameBrief = () => {

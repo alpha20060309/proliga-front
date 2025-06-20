@@ -1,6 +1,6 @@
 import ProfilePlayersStructure from './PlayersStructure'
 import dynamic from 'next/dynamic'
-import { GameBriefContainerSkeleton } from 'app/[locale]/play/components/GameProfile/GameBrief/Skeleton'
+import { GameBriefContainerSkeleton } from 'app/[locale]/play/[league]/[id]/(with-tour)/components/GameProfile/GameBrief/Skeleton'
 const GameBrief = dynamic(() => import('./GameBrief'), {
   ssr: false,
   loading: () => <GameBriefContainerSkeleton />,
