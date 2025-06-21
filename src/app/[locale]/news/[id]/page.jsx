@@ -10,7 +10,7 @@ export async function generateStaticParams() {
       select: {
         id: true,
       },
-      take: 10
+      take: 10,
     })
 
     if (!newsItems) return []
@@ -29,11 +29,11 @@ export async function generateStaticParams() {
   }
 }
 
+export const revalidate = 60
+
 const getNews = cache(async (id) => {
-  // Validate id: must be a string or number that can be converted to a valid integer
   const parsedId = Number(id)
   if (!id || isNaN(parsedId) || !Number.isInteger(parsedId) || parsedId <= 0) {
-    // Return null data and a validation error
     return { data: null, error: new Error('Invalid news id') }
   }
   try {
@@ -69,7 +69,6 @@ export async function generateMetadata({ params }) {
     title,
   }
 
-
   return metadata
 }
 
@@ -95,9 +94,9 @@ export default async function NewsPage({ params }) {
   return (
     <Card className="border-border my-4">
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
+        <CardTitle className={'border-b pb-8 text-3xl'}>{title}</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className={''}>
         <div
           dangerouslySetInnerHTML={{
             __html: content,
