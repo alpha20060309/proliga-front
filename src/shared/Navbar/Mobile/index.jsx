@@ -54,7 +54,7 @@ const NavLink = ({
   )
 }
 
-function BottomNavigation() {
+function MobileNavigation() {
   const path = usePathname()
   const { t } = useTranslation()
   const currentTeam = useSelector(selectCurrentTeam)
@@ -138,7 +138,7 @@ function BottomNavigation() {
   return (
     <nav
       className={cn(
-        'border-sidebar-border bg-sidebar text-sidebar-foreground fixed inset-x-0 bottom-0 z-50 mx-4 mb-4 flex h-14 items-center justify-between gap-0 overflow-hidden rounded-md border-t shadow backdrop-blur lg:hidden',
+        'border-sidebar-border bg-sidebar text-sidebar-foreground fixed inset-x-0 bottom-0 z-50 flex h-16 items-center justify-between gap-0 overflow-hidden rounded-tl-lg rounded-tr-lg border-t shadow backdrop-blur lg:hidden',
         !lastVisitedTeam && 'hidden'
       )}
     >
@@ -158,4 +158,4 @@ function BottomNavigation() {
   )
 }
 
-export default memo(BottomNavigation)
+export default memo(MobileNavigation)

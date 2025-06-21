@@ -1,9 +1,12 @@
+import { Popover, PopoverTrigger } from '@/components/ui/popover'
+import { useState } from 'react'
+import Avatar from 'components/Avatar'
+import { useSelector } from 'react-redux'
+import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { Trophy, Settings, LogOut, LogIn } from 'lucide-react'
 import { useLogOut } from 'app/hooks/auth/useLogOut/useLogOut'
-import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { PopoverContent } from '@/components/ui/popover'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { Link } from 'next-view-transitions'
 
 const Dropdown = () => {
@@ -55,4 +58,18 @@ const NavLink = ({ children, href }) => {
   )
 }
 
-export default Dropdown
+const NavigationDropdown = () => {
+  const [isDropdownOpen, setDropdownOpen] = useState(false)
+  const user = useSelector(selectUserTable)
+
+  return (
+    <Popover open={isDropdownOpen} onOpenChange={setDropdownOpen}>
+      <PopoverTrigger className="flex cursor-pointer items-center justify-center gap-2">
+        <Avatar src={user?.image} className="rounded-full text-base" />
+      </PopoverTrigger>
+      <Dropdown />
+    </Popover>
+  )
+}
+
+export default NavigationDropdown

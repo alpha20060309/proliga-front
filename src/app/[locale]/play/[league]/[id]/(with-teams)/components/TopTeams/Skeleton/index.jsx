@@ -1,5 +1,5 @@
 import { Skeleton } from '@/components/ui/skeleton'
-import { Card } from '@/components/ui/card'
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
 
 const TopTeamsSkeleton = () => {
   return (
@@ -12,20 +12,22 @@ const TopTeamsSkeleton = () => {
 
 const TopTeams = () => {
   return (
-    <Card className="bg-background text-foreground w-full rounded-xl p-5">
-      <Skeleton className="bg-muted h-7 w-3/4" />
-      <div className="xs:grid-cols-3 mt-4 grid h-auto min-h-32 grid-cols-2 gap-2">
+    <Card className="border-border w-full py-4">
+      <CardHeader className="flex flex-row items-center justify-between px-4">
+        <Skeleton className="bg-muted h-7 w-3/4" />
+      </CardHeader>
+      <CardContent className="xs:grid-cols-3 mt-4 grid h-auto min-h-32 grid-cols-2 gap-2">
         {[1, 2, 3].map((index) => (
           <TeamPlaceSkeleton key={index} />
         ))}
-      </div>
+      </CardContent>
     </Card>
   )
 }
 
 const TeamPlaceSkeleton = () => {
   return (
-    <div className="bg-background/80 relative min-h-32 w-full rounded-sm p-2">
+    <div className="bg-secondary relative min-h-32 w-full rounded-sm p-2">
       <div className="flex items-center justify-between">
         <Skeleton className="size-8" />
         <Skeleton className="bg-accent h-5 w-3/5 rounded-full" />
@@ -41,20 +43,22 @@ const TeamPlaceSkeleton = () => {
 
 const TopPlayers = () => {
   return (
-    <Card className="bg-background text-foreground w-full rounded-xl p-5">
-      <Skeleton className="bg-muted h-7 w-3/4" />
-      <div className="xs:grid-cols-3 mt-4 grid grid-cols-2 gap-2">
+    <Card className="border-border w-full py-4">
+      <CardHeader className="flex flex-row items-center justify-between px-4">
+        <Skeleton className="bg-muted h-7 w-3/4" />
+      </CardHeader>
+      <CardContent className="xs:grid-cols-3 mt-4 grid grid-cols-2 gap-2">
         {[1, 2, 3].map((index) => (
           <PlayerPlaceSkeleton key={index} />
         ))}
-      </div>
+      </CardContent>
     </Card>
   )
 }
 
 const PlayerPlaceSkeleton = () => {
   return (
-    <div className="bg-background/80 relative min-h-32 rounded-sm p-2">
+    <div className="bg-secondary relative min-h-32 rounded-sm p-2">
       <div className="flex items-center justify-between">
         <Skeleton className="size-8 rounded-full" />
         <Skeleton className="bg-accent h-5 w-3/5 rounded-full" />

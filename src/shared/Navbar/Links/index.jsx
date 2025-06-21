@@ -17,12 +17,12 @@ const PlayLinks = () => {
   const { t } = useTranslation()
   const currentTour = useSelector(selectCurrentTour)
   const currentTeam = useSelector(selectCurrentTeam)
-  const [gameTab, setGameTab] = useState("")
-  const isPlayRoute = path.includes('play')
   const { lastVisitedTeam } = useSelector((store) => store.currentTeam)
+  const [gameTab, setGameTab] = useState('')
+  const isPlayRoute = path.includes('play')
 
   useEffect(() => {
-    const pathLength = path.split("/").length
+    const pathLength = path.split('/').length
 
     if (path.includes('play') && pathLength === 6) {
       Object.keys(TABS).forEach((tab) => {
@@ -35,28 +35,49 @@ const PlayLinks = () => {
     }
   }, [path])
 
-
   return (
     <section className="text-foreground bold hidden items-center gap-2 sm:text-sm lg:flex xl:gap-4 xl:text-base 2xl:gap-6">
       {lastVisitedTeam && (
         <>
           <TabLink
             title={'Profil'}
-            styling={isPlayRoute ? gameTab === TABS.GameProfile ? ACTIVE : PASSIVE : PASSIVE}
+            styling={
+              isPlayRoute
+                ? gameTab === TABS.GameProfile
+                  ? ACTIVE
+                  : PASSIVE
+                : PASSIVE
+            }
             disabled={!currentTeam?.is_team_created}
             tab={TABS.GameProfile}
-            setTab={setGameTab} />
+            setTab={setGameTab}
+          />
           <TabLink
             title={'Transferlar'}
             tab={TABS.Transfer}
-            disabled={currentTour?.status !== TOUR_STATUS.notStartedTransfer || !currentTeam?.is_team_created}
-            styling={isPlayRoute ? gameTab === TABS.Transfer ? ACTIVE : PASSIVE : PASSIVE}
+            disabled={
+              currentTour?.status !== TOUR_STATUS.notStartedTransfer ||
+              !currentTeam?.is_team_created
+            }
+            styling={
+              isPlayRoute
+                ? gameTab === TABS.Transfer
+                  ? ACTIVE
+                  : PASSIVE
+                : PASSIVE
+            }
             setTab={setGameTab}
           />
           <TabLink
             title={'Turnir'}
             disabled={!currentTeam?.is_team_created}
-            styling={isPlayRoute ? gameTab === TABS.Tournament ? ACTIVE : PASSIVE : PASSIVE}
+            styling={
+              isPlayRoute
+                ? gameTab === TABS.Tournament
+                  ? ACTIVE
+                  : PASSIVE
+                : PASSIVE
+            }
             tab={TABS.Tournament}
             setTab={setGameTab}
           />
@@ -64,13 +85,25 @@ const PlayLinks = () => {
             title={'Jurnal'}
             disabled={!currentTeam?.is_team_created}
             tab={TABS.Journal}
-            styling={isPlayRoute ? gameTab === TABS.Journal ? ACTIVE : PASSIVE : PASSIVE}
+            styling={
+              isPlayRoute
+                ? gameTab === TABS.Journal
+                  ? ACTIVE
+                  : PASSIVE
+                : PASSIVE
+            }
             setTab={setGameTab}
           />
           <TabLink
             title={'Statistika'}
             tab={TABS.Statistics}
-            styling={isPlayRoute ? gameTab === TABS.Statistics ? ACTIVE : PASSIVE : PASSIVE}
+            styling={
+              isPlayRoute
+                ? gameTab === TABS.Statistics
+                  ? ACTIVE
+                  : PASSIVE
+                : PASSIVE
+            }
             disabled={!currentTeam?.is_team_created}
             setTab={setGameTab}
           />

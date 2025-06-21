@@ -26,7 +26,7 @@ import {
 
 const GameNavigation = () => {
   return (
-    <Gutter>
+    <Gutter mobileFriendly>
       <Tabs />
     </Gutter>
   )

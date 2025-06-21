@@ -9,6 +9,7 @@ import { fetchPlayerPoint } from 'app/lib/features/playerPoint/playerPoint.thunk
 import { selectPrevTeam } from 'app/lib/features/teamPlayer/teamPlayer.selector'
 import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
 import { use } from 'react'
+import Gutter from 'shared/Gutter'
 
 const PlayLayout = ({ children, params }) => {
   const { league, id } = use(params)
@@ -50,7 +51,7 @@ const PlayLayout = ({ children, params }) => {
   return (
     <div className="flex w-full flex-col gap-4">
       <GameNavigation />
-      {children}
+      <Gutter mobileFriendly>{children}</Gutter>
     </div>
   )
 }

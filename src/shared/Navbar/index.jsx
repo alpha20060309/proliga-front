@@ -8,13 +8,13 @@ import { ThemeSwitcherSkeleton } from '../SwitcherTheme'
 import Image from 'next/image'
 import Gutter from '../Gutter'
 import PlayLinks from './Links'
-import NavbarUserDesktop from './UserDesktop'
+import NavigationDropdown from './Dropdown'
 import ChangeLanguageDropdown from '../SwitcherLanguage'
 import Notification from '../Notification'
 import Marquee from '../Marquee'
 import ThemeCustomizer from '../ThemeCustomizer'
 import dynamic from 'next/dynamic'
-import BottomNavigation from './MobileNavigation'
+import MobileNavigation from './Mobile'
 
 const ThemeSwitcher = dynamic(() => import('../SwitcherTheme'), {
   ssr: false,
@@ -66,11 +66,11 @@ const Navbar = () => {
             <Notification />
             <ThemeSwitcher />
             <ThemeCustomizer />
-            <NavbarUserDesktop />
+            <NavigationDropdown />
           </div>
         </div>
       </Gutter>
-      <BottomNavigation />
+      <MobileNavigation />
     </nav>
   )
 }

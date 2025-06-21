@@ -5,17 +5,20 @@ import { staticPath } from 'app/utils/static.util'
 import { selectTopPlayers } from 'app/lib/features/player/player.selector'
 import { getUrl } from 'app/utils/static.util'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 const RankingPlayers = () => {
   const { t } = useTranslation()
   const topPlayers = useSelector(selectTopPlayers)
 
   return (
-    <div className="bg-background text-foreground w-full rounded-xl p-5">
-      <h3 className="text-xl font-bold">
-        {t('Eng kuchli top 3 - futbolchilar')}
-      </h3>
-      <div className="xs:grid-cols-3 mt-4 grid grid-cols-2 gap-2">
+    <Card className="border-border w-full py-4">
+      <CardHeader className="flex flex-row items-center justify-between px-4">
+        <CardTitle className="text-xl font-bold">
+          {t('Eng kuchli top 3 - futbolchilar')}
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="xs:grid-cols-3 mt-4 grid grid-cols-2 gap-2">
         {topPlayers?.length > 0 ? (
           topPlayers?.map((player, index) => (
             <PlayerPlace
@@ -27,8 +30,8 @@ const RankingPlayers = () => {
         ) : (
           <div>{t('Oyinchilar yoq')}</div>
         )}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   )
 }
 
@@ -40,7 +43,7 @@ const PlayerPlace = ({ player, index }) => {
   )
 
   return (
-    <div className="bg-card relative min-h-32 rounded-sm p-2">
+    <div className="bg-secondary relative min-h-32 rounded-sm p-2">
       <div className="flex items-center justify-between">
         <img
           src={getUrl(image)}
