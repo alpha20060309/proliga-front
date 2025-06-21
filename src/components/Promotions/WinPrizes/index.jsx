@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { selectPrizes } from 'app/lib/features/prize/prize.selector'
-import Image from 'next/image'
 import {
   Card,
   CardContent,
@@ -48,14 +47,13 @@ const Prize = ({ prize }) => {
         {getCorrectName({ lang, uz: prize?.name, ru: prize?.name_ru })}
       </h4>
       <div className="flex aspect-square items-center justify-center overflow-hidden rounded-xl bg-white p-1 lg:p-2">
-        <Image
+        <img
           src={prize?.image}
           alt={prize?.name}
           width={300}
           height={300}
           loading="lazy"
           draggable={false}
-          // className="xs:size-80 sm:size-72 aspect-auto size-64 bg-cover select-none lg:size-64 2xl:size-80"
           className="h-full w-full max-w-72"
         />
       </div>

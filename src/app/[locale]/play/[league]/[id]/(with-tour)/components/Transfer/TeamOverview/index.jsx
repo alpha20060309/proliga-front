@@ -2,15 +2,16 @@ import TeamMaxTransfers from './TeamMaxTransfers'
 import TeamPrice from './TeamPrice'
 import TeamBalance from './TeamBalance'
 import TeamMaxClubMembers from './TeamMaxClubMembers'
+import { CardHeader } from '@/components/ui/card'
 
 const TeamOverview = () => {
   return (
-    <section className="hover:border-opacity-100 text-foreground flex flex-wrap justify-evenly gap-y-0.5 px-2 pb-1 transition-all sm:justify-between sm:px-0 md:gap-0">
+    <CardHeader className="text-foreground flex justify-between">
       <TeamPrice />
       <TeamBalance />
       <TeamMaxTransfers />
       <TeamMaxClubMembers />
-    </section>
+    </CardHeader>
   )
 }
 

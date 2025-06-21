@@ -20,7 +20,6 @@ import TeamOverview from '../TeamOverview'
 import TransferTableFilters from './Filters'
 import PlayersTableSkeleton from './Skeleton'
 import TanStackPagination from 'components/Table/TanStackPagination'
-import { cn } from '@/lib/utils'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import AddPlayerButton from './AddPlayerButton'
 import { useDispatch } from 'react-redux'
@@ -35,6 +34,7 @@ import {
 } from 'app/lib/features/teamPlayer/teamPlayer.selector'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
+import { Card, CardContent, CardFooter } from '@/components/ui/card'
 
 const columnHelper = createColumnHelper()
 
@@ -211,35 +211,35 @@ function PlayersTable() {
   }
 
   return (
-    <section
-      className={cn(
-        'bg-background mx-auto flex w-full max-w-lg border-collapse flex-col gap-0',
-        'border-primary border-opacity-50 overflow-x-auto rounded-xl border',
-        'text-secondary-foreground hover:border-opacity-100 shadow transition-all 2xl:max-w-xl',
-        'xs:p-3 p-2 md:text-sm lg:w-1/2 lg:max-w-md xl:max-w-lg xl:p-4',
-        'fade-in animate-in shadow-lg duration-500'
-      )}
+    <Card
+      className={
+        'border-border mx-auto w-full max-w-lg gap-2 py-4 lg:w-1/2 lg:max-w-md 2xl:max-w-xl'
+      }
     >
       <TeamOverview />
-      <div className="xs:text-xs grid w-full grid-cols-4 grid-rows-2 gap-x-1 gap-y-2 text-sm sm:grid-rows-1 lg:grid-rows-2 lg:gap-y-1 xl:grid-rows-1 xl:gap-y-2 2xl:text-sm">
-        {table
-          .getHeaderGroups()
-          .map((headerGroup) =>
-            headerGroup.headers.map((header) => (
-              <TransferTableFilters key={header.id} column={header.column} />
-            ))
-          )}
-      </div>
-      <table className="w-full min-w-80 table-auto text-xs xl:text-sm">
-        <TransferTableHead table={table} />
-        <TransferTableBody table={table} flexRender={flexRender} />
-      </table>
-      <TanStackPagination
-        table={table}
-        active="bg-primary text-primary-foreground"
-        className={'mt-auto px-0 pt-2 pb-0 sm:pt-1'}
-      />
-    </section>
+      <CardContent className="space-y-2 px-4">
+        <div className="xs:text-xs grid w-full grid-cols-4 grid-rows-2 gap-x-1 gap-y-2 text-sm sm:grid-rows-1 lg:grid-rows-2 lg:gap-y-1 xl:grid-rows-1 xl:gap-y-2 2xl:text-sm">
+          {table
+            .getHeaderGroups()
+            .map((headerGroup) =>
+              headerGroup.headers.map((header) => (
+                <TransferTableFilters key={header.id} column={header.column} />
+              ))
+            )}
+        </div>
+        <table className="w-full min-w-80 table-auto text-xs xl:text-sm">
+          <TransferTableHead table={table} />
+          <TransferTableBody table={table} flexRender={flexRender} />
+        </table>
+      </CardContent>
+      <CardFooter>
+        <TanStackPagination
+          table={table}
+          active="bg-primary text-primary-foreground"
+          className={'w-full'}
+        />
+      </CardFooter>
+    </Card>
   )
 }
 
