@@ -1,7 +1,7 @@
 'use server'
 
 import bcrypt from 'bcryptjs'
-import { db } from 'lib/db'
+import prisma from 'lib/prisma'
 import { getUserByPhone } from 'lib/utils/auth.util'
 import { ResetPasswordSchema } from 'lib/schema'
 
@@ -33,7 +33,7 @@ export const resetPassword = async (values) => {
 
     const hashedPassword = await bcrypt.hash(password, 10)
 
-    await db.user.update({
+    await prisma.user.update({
       where: { id: existingUser.id },
       data: {
         password: hashedPassword,

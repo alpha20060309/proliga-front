@@ -1,6 +1,6 @@
 'use server'
 
-import { db } from 'lib/db'
+import prisma from 'lib/prisma'
 import { cache } from 'react'
 
 export const getHTMLPage = async (name) => {
@@ -9,7 +9,7 @@ export const getHTMLPage = async (name) => {
   }
 
   try {
-    const page = await db.system_language
+    const page = await prisma.system_language
       .findUnique({
         where: {
           name,

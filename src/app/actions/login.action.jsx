@@ -3,7 +3,7 @@
 import { LoginSchema } from 'lib/schema'
 import { signIn } from 'app/api/auth/[...nextauth]/route'
 import { getUserByPhone } from 'lib/utils/auth.util'
-import { db } from 'lib/db'
+import prisma from 'lib/prisma'
 
 export const login = async (values) => {
   const validatedFields = LoginSchema.safeParse(values)
@@ -27,7 +27,7 @@ export const login = async (values) => {
       redirect: false,
     })
 
-    await db.user.update({
+    await prisma.user.update({
       where: { id: existingUser.id },
       data: {
         geo: JSON.stringify(data?.geo),

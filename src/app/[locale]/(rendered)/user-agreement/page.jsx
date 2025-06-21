@@ -1,5 +1,5 @@
 import { getCorrectName } from 'app/utils/getCorrectName.util'
-import { getPage } from 'app/actions/get-html-page.action'
+import { getPage } from 'app/actions/getHTMLPage.action'
 
 const UserAgreement = async ({ params }) => {
   const { locale } = await params
