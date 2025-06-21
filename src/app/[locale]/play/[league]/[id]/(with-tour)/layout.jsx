@@ -50,7 +50,9 @@ const PlayLayout = ({ children, params }) => {
 
   return (
     <div className="flex w-full flex-col gap-4">
-      <GameNavigation />
+      <Gutter mobileFriendly>
+        <GameNavigation />
+      </Gutter> 
       <Gutter mobileFriendly>{children}</Gutter>
     </div>
   )

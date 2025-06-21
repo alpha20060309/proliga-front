@@ -36,6 +36,7 @@ import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { Loader2 } from 'lucide-react'
 import { Undo2, Compass } from 'lucide-react'
+import { TOUR_STATUS } from 'app/utils/tour.util'
 
 const TransferStadiumForm = () => {
   const { t } = useTranslation()
@@ -200,6 +201,10 @@ const TransferStadiumForm = () => {
       return false
     }
     return true
+  }
+
+  if (currentTour?.status !== TOUR_STATUS.notStartedTransfer) {
+    return null
   }
 
   return (

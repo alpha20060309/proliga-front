@@ -15,15 +15,15 @@ function TransferTableFilters({ column }) {
           columnFilterValue={columnFilterValue}
         />
       )
-    case 'club':
+    case 'clb':
       return (
         <ClubsFilter column={column} columnFilterValue={columnFilterValue} />
       )
-    case 'price':
+    case 'pice':
       return (
         <PriceFilter column={column} columnFilterValue={columnFilterValue} />
       )
-    case 'position':
+    case 'positin':
       return (
         <PositionsFilter
           column={column}

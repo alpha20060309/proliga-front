@@ -8,7 +8,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { useEffect, useState, memo } from 'react'
+import { useState, memo } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { createColumnHelper } from '@tanstack/react-table'
@@ -49,11 +49,11 @@ function PlayersTable() {
   const { lang } = useSelector((state) => state.systemLanguage)
   const [pagination, setPagination] = useState({
     pageIndex: 0,
-    pageSize: 10,
+    pageSize: 12,
   })
   const { isLoading } = useSelector((state) => state.player)
   const players = useSelector(selectPlayers)
-  const [windowWidth, setWindowWidth] = useState(0)
+  // const [windowWidth, setWindowWidth] = useState(0)
   const dispatch = useDispatch()
   const totalPlayersCount = useSelector(selectTotalPlayersCount)
   const teamConcat = useSelector(selectTeamConcat)
@@ -91,22 +91,6 @@ function PlayersTable() {
       )
     }
   }
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth)
-    }
-
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
-
-  useEffect(() => {
-    setWindowWidth(window.innerWidth)
-  }, [])
 
   const columns = [
     columnHelper.accessor('name', {
@@ -198,14 +182,6 @@ function PlayersTable() {
     },
   })
 
-  useEffect(() => {
-    if (windowWidth >= 1024 && windowWidth <= 1280) {
-      table.setPageSize(9)
-    } else {
-      table.setPageSize(10)
-    }
-  }, [windowWidth, table])
-
   if (isLoading) {
     return <PlayersTableSkeleton />
   }
@@ -213,7 +189,7 @@ function PlayersTable() {
   return (
     <Card
       className={
-        'border-border mx-auto w-full max-w-lg gap-2 py-4 lg:w-1/2 lg:max-w-md 2xl:max-w-xl'
+        'border-border mx-auto w-full max-w-xl py-4 gap-2 lg:w-1/2 xl:gap-0 2xl:max-w-xl 2xl:gap-2'
       }
     >
       <TeamOverview />

@@ -110,28 +110,4 @@ self.addEventListener('fetch', (event) => {
   }());
 })
 
-// self.addEventListener('activate', (event) => {
-//   event.waitUntil(
-//     caches.keys().then((names) =>
-//       Promise.all(
-//         names.map((cacheName) =>
-//           caches.open(cacheName).then((cache) =>
-//             cache.keys().then((requests) =>
-//               Promise.all(
-//                 requests.map((req) =>
-//                   cache.match(req).then((res) => {
-//                     if (res && res.status >= 300 && res.status < 400) {
-//                       return cache.delete(req)
-//                     }
-//                   })
-//                 )
-//               )
-//             )
-//           )
-//         )
-//       )
-//     )
-//   )
-// });
-
 serwist.addEventListeners()
