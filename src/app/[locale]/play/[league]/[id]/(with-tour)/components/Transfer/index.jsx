@@ -9,7 +9,7 @@ const Transfer = () => {
   return (
     <>
       <main className="flex w-full flex-col justify-between gap-1 lg:flex-row">
-        <div className="mt-0.5 flex h-auto grow flex-col lg:w-1/2 xl:grow-0">
+        <div className="mt-0.5 flex h-auto grow flex-col lg:w-1/2 xl:grow-0 2xl:max-w-lg">
           <StadiumContainer hideShareButton>
             <PlayersStructure />
           </StadiumContainer>
