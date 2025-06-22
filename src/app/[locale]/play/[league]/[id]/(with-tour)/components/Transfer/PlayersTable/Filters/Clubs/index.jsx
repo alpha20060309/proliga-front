@@ -1,38 +1,66 @@
+'use client'
+
+import * as React from 'react'
 import { useSelector } from 'react-redux'
 import { selectClubs } from 'app/lib/features/club/club.selector'
 import { useTranslation } from 'react-i18next'
+import { Button } from '@/components/ui/button'
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 
 const ClubsFilter = ({ column }) => {
   const selectedClubs = useSelector(selectClubs)
   const { t } = useTranslation()
   const { lang } = useSelector((store) => store.systemLanguage)
+  // Get current filter value from column
+  const selectedClubIds = column.getFilterValue() || []
+
+  const handleCheckedChange = (clubId) => {
+    let newIds
+    if (selectedClubIds.includes(clubId)) {
+      newIds = selectedClubIds.filter((id) => id !== clubId)
+    } else {
+      newIds = [...selectedClubIds, clubId]
+    }
+    column.setFilterValue(newIds.length ? newIds : undefined)
+  }
 
   return (
-    <Select onValueChange={(value) => column.setFilterValue(value)}>
-      <SelectTrigger className="bg-background text-foreground border-border col-span-2 w-full max-w-64 truncate rounded-sm border px-2 shadow-sm data-[size=default]:h-8 sm:col-span-1 sm:max-w-40 md:max-w-48 lg:col-span-2 lg:max-w-full xl:col-span-1 xl:max-w-64">
-        <SelectValue />
-      </SelectTrigger>
-      <SelectContent className={'bg-background'}>
-        <SelectItem defaultChecked>{t('Hamma_Clublar')}</SelectItem>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant="outline"
+          className="hover:text-foreground h-8 w-full justify-start truncate border-dashed"
+        >
+          {selectedClubIds.length
+            ? `${selectedClubIds.length} ${t('selected')}`
+            : t('Hamma_Clublar')}
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="bg-background w-56">
+        <DropdownMenuLabel className={'text-foreground'}>
+          {t('Hamma_Clublar')}
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
         {selectedClubs?.map((club) => (
-          <SelectItem
+          <DropdownMenuCheckboxItem
             key={club.id}
-            value={getCorrectName({ lang, uz: club?.name, ru: club?.name_ru })}
-            className="text-foreground checked:bg-card capitalize"
+            checked={selectedClubIds.includes(club.id)}
+            onCheckedChange={() => handleCheckedChange(club.id)}
+            className="text-foreground capitalize"
           >
             {getCorrectName({ lang, uz: club?.name, ru: club?.name_ru })}
-          </SelectItem>
+          </DropdownMenuCheckboxItem>
         ))}
-      </SelectContent>
-    </Select>
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
 

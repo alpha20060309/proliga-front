@@ -107,6 +107,18 @@ function PlayersTable() {
       accessorFn: (row) =>
         getCorrectName({ lang, uz: row?.club?.name, ru: row?.club?.name_ru }),
       header: t('Klub'),
+      filterFn: (row, filterValue) => {
+        // Early return: show all if no filter or empty array
+        if (
+          !filterValue ||
+          !Array.isArray(filterValue) ||
+          filterValue.length === 0
+        )
+          return true
+        // Compare by club id
+        const clubId = row.original?.club?.id
+        return filterValue.includes(clubId)
+      },
       meta: {
         filterVariant: 'club',
       },

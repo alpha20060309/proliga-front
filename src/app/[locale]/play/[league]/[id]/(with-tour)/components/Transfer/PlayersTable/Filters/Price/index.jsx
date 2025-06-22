@@ -3,7 +3,6 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import {
   Popover,
   PopoverContent,
@@ -18,7 +17,6 @@ const PriceFilter = ({ column, columnFilterValue, title = 'Narx' }) => {
   const { t } = useTranslation()
   const id = React.useId()
 
-  // Helper to validate and fallback range
   const getValidRange = React.useCallback(
     (value, fallback) =>
       Array.isArray(value) &&
@@ -32,7 +30,6 @@ const PriceFilter = ({ column, columnFilterValue, title = 'Narx' }) => {
   const defaultRange = column?.columnDef?.meta?.range
   const unit = column?.columnDef?.meta?.unit
 
-  // Calculate min, max, step
   const { min, max, step } = React.useMemo(() => {
     let minValue = 5,
       maxValue = 16
@@ -57,13 +54,11 @@ const PriceFilter = ({ column, columnFilterValue, title = 'Narx' }) => {
     }
   }, [column, defaultRange, getValidRange])
 
-  // Current range value
   const range = getValidRange(columnFilterValue, [min, max])
 
   const formatValue = (v) =>
     v.toLocaleString(undefined, { maximumFractionDigits: 0 })
 
-  // Unified input change handler
   const handleInputChange = (idx) => (e) => {
     const val = Number(e.target.value)
     if (Number.isNaN(val)) return
@@ -73,12 +68,10 @@ const PriceFilter = ({ column, columnFilterValue, title = 'Narx' }) => {
     column.setFilterValue(next)
   }
 
-  // Slider change handler
   const handleSliderChange = (value) => {
     if (getValidRange(value)) column.setFilterValue(value)
   }
 
-  // Reset handler
   const handleReset = (e) => {
     if (e?.target instanceof HTMLDivElement) e.stopPropagation()
     column.setFilterValue(undefined)
@@ -90,7 +83,7 @@ const PriceFilter = ({ column, columnFilterValue, title = 'Narx' }) => {
         <Button
           variant="outline"
           size="sm"
-          className="hover:text-foreground flex items-center gap-2 border-dashed"
+          className="hover:text-foreground justify-start border-dashed"
           aria-label={
             columnFilterValue
               ? `Clear ${t(title)} filter`
@@ -111,9 +104,7 @@ const PriceFilter = ({ column, columnFilterValue, title = 'Narx' }) => {
             >
               <XCircle className="h-4 w-4" />
             </div>
-          ) : (
-            <PlusCircle className="h-4 w-4" />
-          )}
+          ) : null}
           <span>{t(title)}</span>
           {columnFilterValue && (
             <>
@@ -128,9 +119,6 @@ const PriceFilter = ({ column, columnFilterValue, title = 'Narx' }) => {
         <div className="flex flex-col gap-3">
           <p className="text-foreground leading-none font-medium">{t(title)}</p>
           <div className="flex items-center gap-4">
-            <Label htmlFor={`${id}-from`} className="sr-only">
-              From
-            </Label>
             <div className="relative">
               <Input
                 id={`${id}-from`}
@@ -154,9 +142,6 @@ const PriceFilter = ({ column, columnFilterValue, title = 'Narx' }) => {
                 </span>
               )}
             </div>
-            <Label htmlFor={`${id}-to`} className="sr-only">
-              To
-            </Label>
             <div className="relative">
               <Input
                 id={`${id}-to`}
@@ -181,9 +166,6 @@ const PriceFilter = ({ column, columnFilterValue, title = 'Narx' }) => {
               )}
             </div>
           </div>
-          <Label htmlFor={`${id}-slider`} className="sr-only">
-            {t(title)} slider
-          </Label>
           <Slider
             id={`${id}-slider`}
             min={min}

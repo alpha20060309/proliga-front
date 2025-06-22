@@ -15,7 +15,7 @@ function TransferTableFilters({ column }) {
           columnFilterValue={columnFilterValue}
         />
       )
-    case 'clb':
+    case 'club':
       return (
         <ClubsFilter column={column} columnFilterValue={columnFilterValue} />
       )
