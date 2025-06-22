@@ -10,6 +10,12 @@ import { setCurrentPlayer } from 'app/lib/features/player/player.slice'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { memo } from 'react'
 import { Info } from 'lucide-react'
+import {
+  PlayerContainer,
+  PlayerImage,
+  PlayerName,
+  PlayerPoint,
+} from 'shared/PlayersStructure'
 
 const Player = ({ player }) => {
   const dispatch = useDispatch()
@@ -51,7 +57,7 @@ const Player = ({ player }) => {
   const lastName = name?.split(' ')[1] ?? ''
 
   return (
-    <div className="text-muted-foreground flex h-min flex-col items-center justify-center text-sm select-none sm:text-base">
+    <PlayerContainer>
       {!player.name && (
         <>
           <Image
@@ -66,31 +72,15 @@ const Player = ({ player }) => {
       )}
       {player.name && (
         <>
-          <div className="xs:size-8 relative size-6 md:size-10 lg:size-8 xl:size-10">
-            <Image
-              src={tShirt}
-              alt="player tshirt"
-              width={48}
-              onClick={handleInfoModal}
-              height={48}
-              onError={imageErr}
-              draggable={false}
-              className="h-full w-full"
-            />
-            {player.is_captain && (
-              <Image
-                src="/icons/captain-badge.svg"
-                alt="captain"
-                width={16}
-                height={16}
-                draggable={false}
-                className="absolute -right-1 bottom-0 size-3 md:size-4 2xl:size-5"
-              />
-            )}
-          </div>
-          <p className="xs:text-2xs xs:text-xs text-3xs text-shadow-player line-clamp-1 text-white md:text-sm">
+          <PlayerImage
+            tShirt={tShirt}
+            handleInfoModal={handleInfoModal}
+            imageErr={imageErr}
+            player={player}
+          />
+          <PlayerName>
             {firstName} {lastName.slice(0, 1).toUpperCase()} {lastName && '.'}
-          </p>
+          </PlayerName>
           <div className="flex items-center gap-0.5">
             <button
               onClick={handleInfoModal}
@@ -98,15 +88,15 @@ const Player = ({ player }) => {
             >
               <Info className="text-foreground group-hover:text-accent-foreground size-4 sm:size-5" />
             </button>
-            <div className="bg-primary border-primary-foreground text-primary-foreground flex h-4 w-6 cursor-default items-center justify-center rounded-sm border text-center text-xs font-bold sm:h-5 sm:w-8 md:text-sm">
+            <PlayerPoint>
               {player.is_captain
                 ? (currentPlayerPoint?.point ?? 0) * 2
                 : (currentPlayerPoint?.point ?? 0)}
-            </div>
+            </PlayerPoint>
           </div>
         </>
       )}
-    </div>
+    </PlayerContainer>
   )
 }
 

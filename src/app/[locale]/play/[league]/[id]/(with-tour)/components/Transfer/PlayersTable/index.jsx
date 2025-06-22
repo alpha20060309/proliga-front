@@ -8,7 +8,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { useState, memo } from 'react'
+import { useState, memo, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { createColumnHelper } from '@tanstack/react-table'
@@ -53,7 +53,8 @@ function PlayersTable() {
   })
   const { isLoading } = useSelector((state) => state.player)
   const players = useSelector(selectPlayers)
-  // const [windowWidth, setWindowWidth] = useState(0)
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+
   const dispatch = useDispatch()
   const totalPlayersCount = useSelector(selectTotalPlayersCount)
   const teamConcat = useSelector(selectTeamConcat)
@@ -91,6 +92,42 @@ function PlayersTable() {
       )
     }
   }
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (windowWidth <= 1024) {
+      setPagination({
+        pageIndex: 0,
+        pageSize: 12,
+      })
+    } else if (windowWidth > 1024 && windowWidth <= 1280) {
+      setPagination({
+        pageIndex: 0,
+        pageSize: 10,
+      })
+    } else if (windowWidth > 1280 && windowWidth <= 1536) {
+      setPagination({
+        pageIndex: 0,
+        pageSize: 12,
+      })
+    } else {
+      setPagination({
+        pageIndex: 0,
+        pageSize: 14,
+      })
+    }
+  }, [windowWidth])
 
   const columns = [
     columnHelper.accessor('name', {
@@ -209,12 +246,12 @@ function PlayersTable() {
   return (
     <Card
       className={
-        'border-border mx-auto w-full max-w-lg lg:max-w-2xl gap-2 py-4 lg:w-[55%] xl:gap-0 2xl:gap-2'
+        'border-border mx-auto h-min w-full max-w-lg gap-2 py-4 lg:w-[55%] lg:max-w-2xl xl:gap-1 2xl:gap-2'
       }
     >
       <TeamOverview />
       <CardContent className="space-y-2 px-4">
-        <div className="grid grid-cols-2 grid-rows-2 lg:grid-rows-1 lg:grid-cols-4 gap-1">
+        <div className="grid grid-cols-2 grid-rows-2 gap-1 lg:grid-cols-4 lg:grid-rows-1">
           {table
             .getHeaderGroups()
             .map((headerGroup) =>

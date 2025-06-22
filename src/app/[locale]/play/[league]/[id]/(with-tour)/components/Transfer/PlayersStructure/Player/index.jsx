@@ -15,6 +15,11 @@ import { setCurrentPlayer } from 'app/lib/features/player/player.slice'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { memo } from 'react'
 import { ArrowUpDown, X } from 'lucide-react'
+import {
+  PlayerContainer,
+  PlayerImage,
+  PlayerName,
+} from 'shared/PlayersStructure'
 
 const Player = ({ player }) => {
   const dispatch = useDispatch()
@@ -63,7 +68,7 @@ const Player = ({ player }) => {
 
   return (
     <>
-      <div className="fade-in-fast text-muted-foreground relative z-30 flex h-min flex-col items-center justify-center text-sm select-none sm:text-base">
+      <PlayerContainer>
         {!player.name && (
           <>
             <Image
@@ -78,31 +83,15 @@ const Player = ({ player }) => {
         )}
         {player.name && (
           <>
-            <div className="xs:size-8 relative size-7 md:size-10 lg:size-8 xl:size-10">
-              <Image
-                src={tShirt || ''}
-                alt="player tshirt"
-                width={48}
-                height={48}
-                onClick={handleTransfer}
-                onError={imageErr}
-                draggable={false}
-                className="h-full w-full"
-              />
-              {player.is_captain && (
-                <Image
-                  src="/icons/captain-badge.svg"
-                  alt="captain"
-                  width={16}
-                  height={16}
-                  draggable={false}
-                  className="absolute -right-1 bottom-0 size-3 md:size-4 2xl:size-5"
-                />
-              )}
-            </div>
-            <p className="text-3xs xs:text-2xs xs:text-xs text-shadow-player line-clamp-1 text-white md:text-sm">
+            <PlayerImage
+              tShirt={tShirt}
+              handleInfoModal={handleTransfer}
+              imageErr={imageErr}
+              player={player}
+            />
+            <PlayerName>
               {firstName} {lastName.slice(0, 1).toUpperCase()} {lastName && '.'}
-            </p>
+            </PlayerName>
             <div className="flex items-center gap-0.5 sm:gap-1">
               <button
                 onClick={handleTransfer}
@@ -122,7 +111,7 @@ const Player = ({ player }) => {
             </div>
           </>
         )}
-      </div>
+      </PlayerContainer>
       <Confirmation
         onConfirm={handleDeletePlayer}
         onCancel={toggleDeleteModal}

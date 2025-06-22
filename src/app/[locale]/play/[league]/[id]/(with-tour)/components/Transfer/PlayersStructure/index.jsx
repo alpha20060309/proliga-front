@@ -24,7 +24,7 @@ const TransferPlayersStructure = () => {
   }
 
   return (
-    <section className="fade-in-fast xs:py-3 absolute top-0 right-0 bottom-0 left-0 z-10 grid grid-rows-4 py-2 sm:py-4">
+    <section className="animate-in fade-in duration-300 xs:py-3 absolute top-0 right-0 bottom-0 left-0 z-10 grid grid-rows-4 py-2 sm:py-4">
       {isLoading ? (
         <StadiumSpinner />
       ) : (
@@ -34,17 +34,17 @@ const TransferPlayersStructure = () => {
               <Player key={player.id} player={player} />
             ))}
           </div>
-          <div className="flex items-start justify-evenly gap-0.5 px-6 sm:gap-1 md:gap-4 md:px-8 xl:gap-0 xl:px-10">
+          <div className="flex items-start justify-evenly ">
             {DEF.map((player) => (
               <Player key={player.id} player={player} />
             ))}
           </div>
-          <div className="flex items-start justify-evenly gap-0.5 px-6 sm:gap-1 md:gap-4 md:px-8 xl:gap-0 xl:px-10">
+          <div className="flex items-start justify-evenly">
             {MID.map((player) => (
               <Player key={player.id} player={player} />
             ))}
           </div>
-          <div className="flex items-start justify-evenly gap-0.5">
+          <div className="flex items-start justify-evenly">
             {STR.map((player) => (
               <Player key={player.id} player={player} />
             ))}

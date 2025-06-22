@@ -1,18 +1,12 @@
 'use client'
 
-import dynamic from 'next/dynamic'
 import ProfileStadiumForm from './ProfileStadiumForm'
 import ProfilePlayersStructure from './PlayersStructure'
-import { GameBriefContainerSkeleton } from './GameBrief/Skeleton'
-const GameBrief = dynamic(() => import('./GameBrief'), {
-  ssr: false,
-  loading: () => <GameBriefContainerSkeleton />,
-})
+import GameBrief from './GameBrief'
 import PlayerInfo from 'components/Modals/PlayerInfo'
 import { memo } from 'react'
 import StadiumContainer from 'shared/StadiumContainer'
-import GameWrapper from 'shared/GameWrapper'
-import StadiumSectionWrapper from 'shared/StadiumSectionWrapper'
+import { GameWrapper, StadiumSectionWrapper } from 'shared/GameWrapper'
 
 const GameProfile = () => {
   return (

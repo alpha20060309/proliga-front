@@ -7,6 +7,13 @@ import {
   selectMID,
   selectSTR,
 } from 'app/lib/features/teamPlayer/teamPlayer.selector'
+import {
+  PlayersStructureContainer,
+  GOAContainer,
+  DEFContainer,
+  MIDContainer,
+  STRContainer,
+} from 'shared/PlayersStructure'
 
 const ProfilePlayersStructure = () => {
   const { isLoading } = useSelector((state) => state.teamPlayer)
@@ -16,34 +23,34 @@ const ProfilePlayersStructure = () => {
   const STR = useSelector(selectSTR)
 
   return (
-    <section className="fade-in-fast xs:py-3 absolute top-0 right-0 bottom-0 left-0 z-10 grid grid-rows-4 py-2 sm:py-4">
+    <PlayersStructureContainer>
       {isLoading ? (
         <StadiumSpinner />
       ) : (
         <>
-          <div className="flex w-full items-start justify-center">
+          <GOAContainer>
             {GOA.map((player) => (
               <Player key={player.id} player={player} />
             ))}
-          </div>
-          <div className="flex items-start justify-evenly gap-0.5 px-6 sm:gap-1 md:gap-4 md:px-8 xl:gap-0 xl:px-10">
+          </GOAContainer>
+          <DEFContainer>
             {DEF.map((player) => (
               <Player key={player.id} player={player} />
             ))}
-          </div>
-          <div className="flex items-start justify-evenly gap-0.5 px-6 sm:gap-1 md:gap-4 md:px-8 xl:gap-0 xl:px-10">
+          </DEFContainer>
+          <MIDContainer>
             {MID.map((player) => (
               <Player key={player.id} player={player} />
             ))}
-          </div>
-          <div className="flex items-start justify-evenly gap-0.5">
+          </MIDContainer>
+          <STRContainer>
             {STR.map((player) => (
               <Player key={player.id} player={player} />
             ))}
-          </div>
+          </STRContainer>
         </>
       )}
-    </section>
+    </PlayersStructureContainer>
   )
 }
 

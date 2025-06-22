@@ -11,6 +11,7 @@ import { fetchClubs } from 'app/lib/features/club/club.thunk'
 import { fetchPlayers } from 'app/lib/features/player/player.thunk'
 import Image from 'next/image'
 import ModalBanner from 'components/Banners/Modal'
+import Spinner from 'components/Spinner'
 import { fetchTopPlayers } from 'app/lib/features/player/player.thunk'
 import { fetchAdditionalPlayers } from 'app/lib/features/player/player.thunk'
 import {
@@ -24,14 +25,15 @@ import { setLastVisitedTeam } from 'app/lib/features/currentTeam/currentTeam.sli
 import { setCurrentCompetition } from 'app/lib/features/competition/competition.slice'
 import { fetchTours } from 'app/lib/features/tour/tour.thunk'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
-import Spinner from 'components/Spinner'
 
 export default function PlayLayout({ children }) {
   const [isModalOpen, setModalOpen] = useState(false)
   const { league, id } = useParams()
   const user = useSelector(selectUserTable)
   const dispatch = useDispatch()
-  const { count: playersCount } = useSelector((store) => store.player)
+  const { count: playersCount, isLoading: isLoadingPlayer } = useSelector(
+    (store) => store.player
+  )
   const countOfPlayers = useMemo(
     () => [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000],
     []
@@ -39,10 +41,23 @@ export default function PlayLayout({ children }) {
   const currentCompetition = useSelector(selectCurrentCompetition)
   const competitions = useSelector(selectCompetition)
   const currentTeam = useSelector(selectCurrentTeam)
-  const { isLoading: isLoadingPlayer } = useSelector((state) => state.player)
   const { isLoading: isLoadingTeam } = useSelector((state) => state.team)
   const { isLoading: isLoadingTour } = useSelector((state) => state.tour)
-  const isLoading = isLoadingPlayer || isLoadingTeam || isLoadingTour
+  const { isLoading: isLoadingPackages } = useSelector((state) => state.package)
+  const { isLoading: isLoadingBanners } = useSelector((state) => state.banner)
+  const { isLoading: isLoadingSeason } = useSelector((state) => state.season)
+  const { isLoading: isLoadingCompetition } = useSelector(
+    (state) => state.competition
+  )
+
+  const isLoading =
+    isLoadingPlayer ||
+    isLoadingTeam ||
+    isLoadingTour ||
+    isLoadingPackages ||
+    isLoadingBanners ||
+    isLoadingSeason ||
+    isLoadingCompetition
 
   useEffect(() => {
     dispatch(fetchCompetition())
@@ -122,7 +137,7 @@ export default function PlayLayout({ children }) {
     return <Spinner />
   }
   return (
-    <main className="text-foreground bg-background relative flex min-h-[75vh] flex-col gap-4 overflow-hidden pt-14 pb-4">
+    <main className="text-foreground bg-background relative flex min-h-[75vh] flex-col gap-4 overflow-hidden pt-14 pb-2">
       <div aria-hidden="true" className="absolute inset-0 z-0 h-full w-full">
         <Image
           src="/images/Hero.png"

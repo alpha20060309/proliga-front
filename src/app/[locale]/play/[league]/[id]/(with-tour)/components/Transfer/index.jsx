@@ -4,8 +4,7 @@ import TransferStadiumForm from './TransferStadiumForm'
 import PlayerTransfer from 'components/Modals/PlayerTransfer'
 import StadiumContainer from 'shared/StadiumContainer'
 import { memo } from 'react'
-import GameWrapper from 'shared/GameWrapper'
-import StadiumSectionWrapper from 'shared/StadiumSectionWrapper'
+import { GameWrapper, StadiumSectionWrapper } from 'shared/GameWrapper'
 
 const Transfer = () => {
   return (
