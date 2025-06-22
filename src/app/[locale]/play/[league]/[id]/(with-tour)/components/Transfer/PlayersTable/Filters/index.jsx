@@ -19,7 +19,7 @@ function TransferTableFilters({ column }) {
       return (
         <ClubsFilter column={column} columnFilterValue={columnFilterValue} />
       )
-    case 'pice':
+    case 'price':
       return (
         <PriceFilter column={column} columnFilterValue={columnFilterValue} />
       )

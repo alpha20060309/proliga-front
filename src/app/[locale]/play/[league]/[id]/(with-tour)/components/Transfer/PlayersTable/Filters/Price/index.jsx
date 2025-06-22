@@ -1,67 +1,213 @@
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
+'use client'
 
-const PriceFilter = ({ column, columnFilterValue }) => {
+import React from 'react'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
+import { Separator } from '@/components/ui/separator'
+import { Slider } from '@/components/ui/slider'
+import { PlusCircle, XCircle } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
+
+const PriceFilter = ({ column, columnFilterValue, title = 'Narx' }) => {
+  const { t } = useTranslation()
+  const id = React.useId()
+
+  // Helper to validate and fallback range
+  const getValidRange = React.useCallback(
+    (value, fallback) =>
+      Array.isArray(value) &&
+      value.length === 2 &&
+      value.every((v) => typeof v === 'number')
+        ? value
+        : fallback,
+    []
+  )
+
+  const defaultRange = column?.columnDef?.meta?.range
+  const unit = column?.columnDef?.meta?.unit
+
+  // Calculate min, max, step
+  const { min, max, step } = React.useMemo(() => {
+    let minValue = 5,
+      maxValue = 16
+    if (getValidRange(defaultRange)) {
+      ;[minValue, maxValue] = defaultRange
+    } else {
+      const values = column?.getFacetedMinMaxValues?.()
+      if (getValidRange(values)) {
+        ;[minValue, maxValue] = values
+      }
+    }
+    const rangeSize = maxValue - minValue
+    return {
+      min: minValue,
+      max: maxValue,
+      step:
+        rangeSize <= 20
+          ? 1
+          : rangeSize <= 100
+            ? Math.ceil(rangeSize / 20)
+            : Math.ceil(rangeSize / 50),
+    }
+  }, [column, defaultRange, getValidRange])
+
+  // Current range value
+  const range = getValidRange(columnFilterValue, [min, max])
+
+  const formatValue = (v) =>
+    v.toLocaleString(undefined, { maximumFractionDigits: 0 })
+
+  // Unified input change handler
+  const handleInputChange = (idx) => (e) => {
+    const val = Number(e.target.value)
+    if (Number.isNaN(val)) return
+    const next = [...range]
+    next[idx] = val
+    if (next[0] > next[1] || next[0] < min || next[1] > max) return
+    column.setFilterValue(next)
+  }
+
+  // Slider change handler
+  const handleSliderChange = (value) => {
+    if (getValidRange(value)) column.setFilterValue(value)
+  }
+
+  // Reset handler
+  const handleReset = (e) => {
+    if (e?.target instanceof HTMLDivElement) e.stopPropagation()
+    column.setFilterValue(undefined)
+  }
+
   return (
-    <div className="col-span-2 flex w-full items-center justify-between gap-1 text-sm sm:col-span-1 md:text-base lg:col-span-2 xl:col-span-1">
-      <Select
-        onValueChange={(value) =>
-          column.setFilterValue(() => ({
-            min: value,
-            max: columnFilterValue?.max ?? MAX[0],
-          }))
-        }
-        defaultValue={MIN[0]}
-      >
-        <SelectTrigger className="border-border bg-background text-foreground w-full min-w-10 rounded-sm border px-2 data-[size=default]:h-8 sm:max-w-28 md:min-w-max">
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          {MIN.map((item, index) => (
-            <SelectItem
-              className="bg-background checked:bg-secondary"
-              key={index}
-              value={item}
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          size="sm"
+          className="hover:text-foreground flex items-center gap-2 border-dashed"
+          aria-label={
+            columnFilterValue
+              ? `Clear ${t(title)} filter`
+              : `Set ${t(title)} filter`
+          }
+          tabIndex={0}
+        >
+          {columnFilterValue ? (
+            <div
+              role="button"
+              aria-label={`Clear ${t(title)} filter`}
+              tabIndex={0}
+              className="focus-visible:ring-ring rounded-sm opacity-70 transition-opacity hover:opacity-100 focus-visible:ring-1 focus-visible:outline-none"
+              onClick={handleReset}
+              onKeyDown={(e) =>
+                (e.key === 'Enter' || e.key === ' ') && handleReset(e)
+              }
             >
-              {item}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-      <Select
-        onValueChange={(value) =>
-          column.setFilterValue(() => ({
-            min: columnFilterValue?.min ?? MIN[0],
-            max: value,
-          }))
-        }
-        defaultValue={MAX[0]}
-      >
-        <SelectTrigger className="border-border bg-background text-foreground w-full min-w-10 rounded-sm border data-[size=default]:h-8 sm:max-w-28 md:min-w-max">
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          {MAX.map((item, index) => (
-            <SelectItem
-              className="bg-background checked:bg-card"
-              key={index}
-              value={item}
-            >
-              {item}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-    </div>
+              <XCircle className="h-4 w-4" />
+            </div>
+          ) : (
+            <PlusCircle className="h-4 w-4" />
+          )}
+          <span>{t(title)}</span>
+          {columnFilterValue && (
+            <>
+              <Separator orientation="vertical" className="mx-0.5 h-4" />
+              {formatValue(range[0])} - {formatValue(range[1])}
+              {unit ? ` ${unit}` : ''}
+            </>
+          )}
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent align="start" className="flex w-auto flex-col gap-4">
+        <div className="flex flex-col gap-3">
+          <p className="text-foreground leading-none font-medium">{t(title)}</p>
+          <div className="flex items-center gap-4">
+            <Label htmlFor={`${id}-from`} className="sr-only">
+              From
+            </Label>
+            <div className="relative">
+              <Input
+                id={`${id}-from`}
+                type="number"
+                aria-valuemin={min}
+                aria-valuemax={max}
+                inputMode="numeric"
+                pattern="[0-9]*"
+                placeholder={min.toString()}
+                min={min}
+                max={max}
+                value={range[0]}
+                onChange={handleInputChange(0)}
+                className={`h-8 w-24${unit ? 'pr-8' : ''} text-foreground`}
+                aria-label={`Minimum ${t(title)}`}
+                tabIndex={0}
+              />
+              {unit && (
+                <span className="bg-accent text-muted-foreground absolute top-0 right-0 bottom-0 flex items-center rounded-r-md px-2 text-sm">
+                  {unit}
+                </span>
+              )}
+            </div>
+            <Label htmlFor={`${id}-to`} className="sr-only">
+              To
+            </Label>
+            <div className="relative">
+              <Input
+                id={`${id}-to`}
+                type="number"
+                aria-valuemin={min}
+                aria-valuemax={max}
+                inputMode="numeric"
+                pattern="[0-9]*"
+                placeholder={max.toString()}
+                min={min}
+                max={max}
+                value={range[1]}
+                onChange={handleInputChange(1)}
+                className={`h-8 w-24${unit ? 'pr-8' : ''} text-foreground`}
+                aria-label={`Maximum ${t(title)}`}
+                tabIndex={0}
+              />
+              {unit && (
+                <span className="bg-accent text-muted-foreground absolute top-0 right-0 bottom-0 flex items-center rounded-r-md px-2 text-sm">
+                  {unit}
+                </span>
+              )}
+            </div>
+          </div>
+          <Label htmlFor={`${id}-slider`} className="sr-only">
+            {t(title)} slider
+          </Label>
+          <Slider
+            id={`${id}-slider`}
+            min={min}
+            max={max}
+            step={step}
+            value={range}
+            onValueChange={handleSliderChange}
+            aria-label={`${t(title)} range slider`}
+            tabIndex={0}
+          />
+        </div>
+        <Button
+          aria-label={`Clear ${t(title)} filter`}
+          variant="outline"
+          size="sm"
+          className="text-foreground hover:text-foreground"
+          onClick={handleReset}
+          tabIndex={0}
+        >
+          {t('Tozalash')}
+        </Button>
+      </PopoverContent>
+    </Popover>
   )
 }
-
-const MIN = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
-const MAX = [16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5]
 
 export default PriceFilter

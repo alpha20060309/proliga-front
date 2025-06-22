@@ -115,16 +115,24 @@ function PlayersTable() {
       accessorKey: 'price',
       header: t('Narx'),
       cell: (info) => info.renderValue(),
-      filterFn: (row, id, filterValues) => {
-        const price = row.getValue(id)
-        const { min, max } = filterValues
+      filterFn: (row, id, filterValue) => {
+        // Early return if filterValue is not a valid range array
+        if (
+          !Array.isArray(filterValue) ||
+          filterValue.length !== 2 ||
+          typeof filterValue[0] !== 'number' ||
+          typeof filterValue[1] !== 'number'
+        ) {
+          return true
+        }
 
-        if (min !== undefined && price < min) {
-          return false
-        }
-        if (max !== undefined && price > max) {
-          return false
-        }
+        const [min, max] = filterValue
+        const price = row.getValue(id)
+
+        if (typeof price !== 'number') return false
+        if (min !== undefined && price < min) return false
+        if (max !== undefined && price > max) return false
+
         return true
       },
       meta: {
@@ -189,7 +197,7 @@ function PlayersTable() {
   return (
     <Card
       className={
-        'border-border mx-auto w-full max-w-xl gap-2 py-4 lg:w-1/2 xl:gap-0 2xl:gap-2'
+        'border-border mx-auto w-full max-w-2xl gap-2 py-4 lg:w-[55%] xl:gap-0 2xl:gap-2'
       }
     >
       <TeamOverview />

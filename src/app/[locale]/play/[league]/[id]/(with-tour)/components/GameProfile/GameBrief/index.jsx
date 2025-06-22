@@ -67,7 +67,7 @@ const GameBrief = () => {
   return (
     <Card
       className={
-        'border-border relative mx-auto w-full lg:w-1/2 gap-0 lg:mx-0 max-w-xl xl:h-min'
+        'border-border relative mx-auto w-full lg:w-[55%] gap-0 lg:mx-0 max-w-2xl py-7.5 xl:h-min'
       }
     >
       <CardContent
