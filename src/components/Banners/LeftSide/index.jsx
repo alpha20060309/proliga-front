@@ -1,3 +1,5 @@
+'use client'
+
 import YandexAd from '../YandexAd'
 import { Link } from 'next-view-transitions'
 import { useSelector } from 'react-redux'

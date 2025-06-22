@@ -3,7 +3,7 @@ import RightSideBanner from 'components/Banners/RightSide'
 
 export default function BannerTemplate({ children }) {
   return (
-    <div className="flex gap-1">
+    <div className="flex gap-4">
       <LeftSideBanner />
       {children}
       <RightSideBanner />

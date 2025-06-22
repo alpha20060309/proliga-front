@@ -8,19 +8,21 @@ const GameBrief = dynamic(() => import('./GameBrief'), {
 import LeftSideBanner from 'components/Banners/LeftSide'
 import RightSideBanner from 'components/Banners/RightSide'
 import StadiumContainer from 'components/StadiumContainer'
+import GameWrapper from 'shared/GameWrapper'
+import StadiumSectionWrapper from 'shared/StadiumSectionWrapper'
 
 const TeamProfile = () => {
   return (
-    <main className="flex w-full flex-col justify-between gap-1.5 lg:flex-row">
+    <GameWrapper>
       <LeftSideBanner />
-      <div className="mt-0.5 h-full w-full lg:w-1/2">
+      <StadiumSectionWrapper>
         <StadiumContainer hideShareButton>
           <ProfilePlayersStructure />
         </StadiumContainer>
-      </div>
+      </StadiumSectionWrapper>
       <GameBrief />
       <RightSideBanner />
-    </main>
+    </GameWrapper>
   )
 }
 

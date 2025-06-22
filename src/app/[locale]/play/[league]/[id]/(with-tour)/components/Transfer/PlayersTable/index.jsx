@@ -189,7 +189,7 @@ function PlayersTable() {
   return (
     <Card
       className={
-        'border-border mx-auto w-full max-w-xl py-4 gap-2 lg:w-1/2 xl:gap-0 2xl:max-w-xl 2xl:gap-2'
+        'border-border mx-auto w-full max-w-xl gap-2 py-4 lg:w-1/2 xl:gap-0 2xl:gap-2'
       }
     >
       <TeamOverview />

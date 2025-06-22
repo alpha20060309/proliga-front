@@ -67,12 +67,12 @@ const GameBrief = () => {
   return (
     <Card
       className={
-        'border-border relative mx-auto w-full max-w-lg lg:mx-0 lg:w-1/2 lg:max-w-[24rem] lg:gap-4 xl:h-min xl:max-w-136'
+        'border-border relative mx-auto w-full lg:w-1/2 gap-0 lg:mx-0 max-w-xl xl:h-min'
       }
     >
       <CardContent
         className={cn(
-          'animate-in fade-in flex h-full w-full flex-col justify-between gap-4 duration-300',
+          'animate-in fade-in flex h-full w-full flex-col justify-between gap-4 xl:gap-6 duration-300',
           isLoading ? 'justify-center' : 'justify-between'
         )}
       >

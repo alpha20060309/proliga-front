@@ -25,7 +25,7 @@ const StadiumContainer = ({ children, hideShareButton = false }) => {
   }
 
   return (
-    <section className="relative h-auto w-full lg:w-full max-w-lg">
+    <section className="relative h-auto w-full">
       <Image
         src="/icons/stadium.svg"
         alt="stadium"
@@ -33,7 +33,7 @@ const StadiumContainer = ({ children, hideShareButton = false }) => {
         height={600}
         draggable={false}
         priority
-        className="w-full rounded-lg select-none " 
+        className="w-full rounded-xl select-none " 
       />
       {!hideShareButton && (
         <Button

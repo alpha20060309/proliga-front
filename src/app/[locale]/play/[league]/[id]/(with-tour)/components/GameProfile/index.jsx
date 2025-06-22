@@ -1,3 +1,5 @@
+'use client'
+
 import dynamic from 'next/dynamic'
 import ProfileStadiumForm from './ProfileStadiumForm'
 import ProfilePlayersStructure from './PlayersStructure'
@@ -8,20 +10,24 @@ const GameBrief = dynamic(() => import('./GameBrief'), {
 })
 import PlayerInfo from 'components/Modals/PlayerInfo'
 import { memo } from 'react'
-import StadiumContainer from 'components/StadiumContainer'
+import StadiumContainer from 'shared/StadiumContainer'
+import GameWrapper from 'shared/GameWrapper'
+import StadiumSectionWrapper from 'shared/StadiumSectionWrapper'
 
 const GameProfile = () => {
   return (
-    <main className="flex w-full flex-col justify-between gap-2 lg:flex-row">
-      <div className="mt-0.5 h-auto w-full grow lg:w-1/2 xl:grow-0 max-w-lg">
-        <StadiumContainer>
-          <ProfilePlayersStructure />
-        </StadiumContainer>
-        <ProfileStadiumForm />
-      </div>
-      <GameBrief />
+    <>
+      <GameWrapper>
+        <StadiumSectionWrapper>
+          <StadiumContainer>
+            <ProfilePlayersStructure />
+          </StadiumContainer>
+          <ProfileStadiumForm />
+        </StadiumSectionWrapper>
+        <GameBrief />
+      </GameWrapper>
       <PlayerInfo />
-    </main>
+    </>
   )
 }
 

@@ -2,21 +2,23 @@ import PlayersStructure from './PlayersStructure'
 import PlayersTable from './PlayersTable'
 import TransferStadiumForm from './TransferStadiumForm'
 import PlayerTransfer from 'components/Modals/PlayerTransfer'
-import StadiumContainer from 'components/StadiumContainer'
+import StadiumContainer from 'shared/StadiumContainer'
 import { memo } from 'react'
+import GameWrapper from 'shared/GameWrapper'
+import StadiumSectionWrapper from 'shared/StadiumSectionWrapper'
 
 const Transfer = () => {
   return (
     <>
-      <main className="flex w-full flex-col justify-between gap-1 lg:flex-row">
-        <div className="mt-0.5 flex h-auto grow flex-col lg:w-1/2 xl:grow-0 2xl:max-w-lg">
+      <GameWrapper>
+        <StadiumSectionWrapper>
           <StadiumContainer hideShareButton>
             <PlayersStructure />
           </StadiumContainer>
           <TransferStadiumForm />
-        </div>
+        </StadiumSectionWrapper>
         <PlayersTable />
-      </main>
+      </GameWrapper>
       <PlayerTransfer />
     </>
   )
