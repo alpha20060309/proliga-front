@@ -23,7 +23,7 @@ function TransferTableFilters({ column }) {
       return (
         <PriceFilter column={column} columnFilterValue={columnFilterValue} />
       )
-    case 'positin':
+    case 'position':
       return (
         <PositionsFilter
           column={column}

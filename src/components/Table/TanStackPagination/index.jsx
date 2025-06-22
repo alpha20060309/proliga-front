@@ -20,7 +20,7 @@ const TanStackPagination = ({ table, active, className, buttonClassName }) => {
   return (
     <section
       className={cn(
-        'mt-2 flex items-center justify-center gap-2 overflow-x-auto py-0.5',
+        'flex items-center justify-center gap-2 overflow-x-auto py-0.5',
         className
       )}
     >

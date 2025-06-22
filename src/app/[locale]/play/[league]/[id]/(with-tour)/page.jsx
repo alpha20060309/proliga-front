@@ -4,7 +4,7 @@ import GameProfile from './components/GameProfile'
 
 export default function ProfilePage() {
   return (
-    <Gutter>
+    <Gutter mobileFriendly>
       <BannerTemplate>
         <GameProfile />
       </BannerTemplate>

@@ -2,7 +2,7 @@
 
 import Box from '@mui/material/Box'
 import { StyledTab, StyledTabs } from 'components/StyledTabs'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { TOUR_STATUS } from 'app/utils/tour.util'
 import { setCurrentTourIndex } from 'app/lib/features/tour/tour.slice'
@@ -22,8 +22,11 @@ import {
 import GameTab from 'shared/GameTab'
 import { useTransitionRouter } from 'next-view-transitions'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
+import { TABS } from 'app/utils/tabs.util'
+import { usePathname } from 'next/navigation'
 
 export default function TourTabs() {
+  const path = usePathname()
   const dispatch = useDispatch()
   const router = useTransitionRouter()
   const selectedTours = useSelector(selectTours)
@@ -34,6 +37,21 @@ export default function TourTabs() {
   const tourTeams = useSelector(selectTourTeams)
   const currentTourTeam = useSelector(selectCurrentTourTeam)
   const currentTeam = useSelector(selectCurrentTeam)
+  const [gameTab, setGameTab] = useState('')
+
+  useEffect(() => {
+    const pathLength = path.split('/').length
+
+    if (path.includes('play') && pathLength === 6) {
+      Object.keys(TABS).forEach((tab) => {
+        if (path.includes(TABS[tab])) {
+          setGameTab(TABS[tab])
+        }
+      })
+    } else {
+      setGameTab(TABS.GameProfile)
+    }
+  }, [path])
 
   useEffect(() => {
     if (selectTours?.length > 0 && tourTeams?.length > 0) {
@@ -47,8 +65,10 @@ export default function TourTabs() {
     if (currentTourIndex !== index) {
       dispatch(emptyTeamPlayers())
     }
-    console.log(item)
-    if (item.status === TOUR_STATUS.notStarted) {
+    if (
+      gameTab === TABS.Transfer &&
+      item.status !== TOUR_STATUS.notStartedTransfer
+    ) {
       router.push(`/play/${currentCompetition?.id}/${currentTeam?.id}`)
     }
     dispatch(setCurrentTourTeam(index))

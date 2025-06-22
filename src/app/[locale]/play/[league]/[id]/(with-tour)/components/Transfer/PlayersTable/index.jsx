@@ -49,7 +49,7 @@ function PlayersTable() {
   const { lang } = useSelector((state) => state.systemLanguage)
   const [pagination, setPagination] = useState({
     pageIndex: 0,
-    pageSize: 12,
+    pageSize: 13,
   })
   const { isLoading } = useSelector((state) => state.player)
   const players = useSelector(selectPlayers)
@@ -107,7 +107,7 @@ function PlayersTable() {
       accessorFn: (row) =>
         getCorrectName({ lang, uz: row?.club?.name, ru: row?.club?.name_ru }),
       header: t('Klub'),
-      filterFn: (row, filterValue) => {
+      filterFn: (row, columnId, filterValue) => {
         // Early return: show all if no filter or empty array
         if (
           !filterValue ||
@@ -115,8 +115,8 @@ function PlayersTable() {
           filterValue.length === 0
         )
           return true
-        // Compare by club id
-        const clubId = row.original?.club?.id
+        // Compare by club id as string for robustness
+        const clubId = String(row.original?.club?.id)
         return filterValue.includes(clubId)
       },
       meta: {
@@ -209,12 +209,12 @@ function PlayersTable() {
   return (
     <Card
       className={
-        'border-border mx-auto w-full max-w-2xl gap-2 py-4 lg:w-[55%] xl:gap-0 2xl:gap-2'
+        'border-border mx-auto w-full max-w-lg lg:max-w-2xl gap-2 py-4 lg:w-[55%] xl:gap-0 2xl:gap-2'
       }
     >
       <TeamOverview />
       <CardContent className="space-y-2 px-4">
-        <div className="xs:text-xs grid w-full grid-cols-4 grid-rows-2 gap-x-1 gap-y-2 text-sm sm:grid-rows-1 lg:grid-rows-2 lg:gap-y-1 xl:grid-rows-1 xl:gap-y-2 2xl:text-sm">
+        <div className="grid grid-cols-2 grid-rows-2 lg:grid-rows-1 lg:grid-cols-4 gap-1">
           {table
             .getHeaderGroups()
             .map((headerGroup) =>

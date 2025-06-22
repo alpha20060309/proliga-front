@@ -25,7 +25,7 @@ const StadiumContainer = ({ children, hideShareButton = false }) => {
   }
 
   return (
-    <section className="relative h-auto w-full">
+    <section className="relative h-auto w-full ">
       <Image
         src="/icons/stadium.svg"
         alt="stadium"

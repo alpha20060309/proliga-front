@@ -3,7 +3,7 @@ import { Loader } from 'lucide-react'
 
 const StadiumSpinner = () => {
   return (
-    <div className="xs:pb-16 absolute right-0 bottom-0 left-0 mx-auto flex h-full items-center justify-center self-center rounded-md pb-12">
+    <div className="absolute right-0 bottom-0 left-0 mx-auto flex h-full items-center justify-center self-center rounded-md">
       <Loader className="mx-auto size-10 animate-spin sm:size-12" />
     </div>
   )

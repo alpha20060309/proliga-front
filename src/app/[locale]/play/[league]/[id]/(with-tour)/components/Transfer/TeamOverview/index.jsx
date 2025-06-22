@@ -6,7 +6,7 @@ import { CardHeader } from '@/components/ui/card'
 
 const TeamOverview = () => {
   return (
-    <CardHeader className="text-foreground flex justify-between">
+    <CardHeader className="text-foreground h-auto grid-cols-2 grid-rows-2 gap-1 lg:flex lg:justify-between">
       <TeamPrice />
       <TeamBalance />
       <TeamMaxTransfers />

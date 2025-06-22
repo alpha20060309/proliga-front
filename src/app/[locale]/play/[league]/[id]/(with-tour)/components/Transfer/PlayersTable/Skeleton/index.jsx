@@ -38,7 +38,7 @@ const TeamOverviewSkeleton = () => {
 const TransferTableBodySkeleton = () => {
   return (
     <tbody>
-      {[...Array(7)].map((_, rowIndex) => (
+      {[...Array(10)].map((_, rowIndex) => (
         <tr
           key={rowIndex}
           className="border-border odd:bg-secondary w-full border-b"
@@ -60,7 +60,7 @@ const TransferTableBodySkeleton = () => {
 const TransferTableFiltersSkeleton = () => {
   return (
     <div className="xs:text-xs grid w-full grid-cols-4 grid-rows-2 gap-x-1 gap-y-2 text-sm sm:grid-rows-1 lg:grid-rows-2 lg:gap-y-1 xl:grid-rows-1 xl:gap-y-2 2xl:text-sm">
-      {[...Array(5)].map((_, index) => (
+      {[...Array(4)].map((_, index) => (
         <Skeleton key={index} className="h-8 w-full" />
       ))}
     </div>

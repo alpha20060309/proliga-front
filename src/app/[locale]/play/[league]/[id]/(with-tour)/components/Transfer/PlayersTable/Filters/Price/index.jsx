@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/popover'
 import { Separator } from '@/components/ui/separator'
 import { Slider } from '@/components/ui/slider'
-import { PlusCircle, XCircle } from 'lucide-react'
+import {  XCircle } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 const PriceFilter = ({ column, columnFilterValue, title = 'Narx' }) => {

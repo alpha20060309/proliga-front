@@ -23,11 +23,12 @@ const ClubsFilter = ({ column }) => {
   const selectedClubIds = column.getFilterValue() || []
 
   const handleCheckedChange = (clubId) => {
+    const clubIdStr = String(clubId)
     let newIds
-    if (selectedClubIds.includes(clubId)) {
-      newIds = selectedClubIds.filter((id) => id !== clubId)
+    if (selectedClubIds.map(String).includes(clubIdStr)) {
+      newIds = selectedClubIds.filter((id) => String(id) !== clubIdStr)
     } else {
-      newIds = [...selectedClubIds, clubId]
+      newIds = [...selectedClubIds.map(String), clubIdStr]
     }
     column.setFilterValue(newIds.length ? newIds : undefined)
   }
@@ -52,7 +53,7 @@ const ClubsFilter = ({ column }) => {
         {selectedClubs?.map((club) => (
           <DropdownMenuCheckboxItem
             key={club.id}
-            checked={selectedClubIds.includes(club.id)}
+            checked={selectedClubIds.map(String).includes(String(club.id))}
             onCheckedChange={() => handleCheckedChange(club.id)}
             className="text-foreground capitalize"
           >

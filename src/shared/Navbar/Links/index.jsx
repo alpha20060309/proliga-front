@@ -18,8 +18,8 @@ const PlayLinks = () => {
   const currentTour = useSelector(selectCurrentTour)
   const currentTeam = useSelector(selectCurrentTeam)
   const { lastVisitedTeam } = useSelector((store) => store.currentTeam)
-  const [gameTab, setGameTab] = useState('')
   const isPlayRoute = path.includes('play')
+  const [gameTab, setGameTab] = useState('')
 
   useEffect(() => {
     const pathLength = path.split('/').length
