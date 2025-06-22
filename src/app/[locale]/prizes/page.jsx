@@ -1,27 +1,47 @@
-'use client'
+import initTranslations from 'app/lib/i18n'
+import prisma from 'lib/prisma'
+import { cache } from 'react'
 
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
-import { fetchCompetition } from 'app/lib/features/competition/competition.thunk'
-import dynamic from 'next/dynamic'
-const PrizesSection = dynamic(() => import('./components/Prizes'), {
-  ssr: false,
-  loading: () => <PrizesSkeleton />,
+const fetchPrizes = cache(async () => {
+  try {
+    const prizes = await prisma.prize.findMany({
+      where: {
+        is_active: true,
+      },
+    })
+    return { data: prizes }
+  } catch (error) {
+    return { error: error.message }
+  }
 })
-import { PrizesSkeleton } from './components/PrizesSkeleton'
-import { selectCompetition } from 'app/lib/features/competition/competition.selector'
 
-const Prizes = () => {
-  const dispatch = useDispatch()
-  const competitions = useSelector(selectCompetition)
+const Prizes = async ({ params }) => {
+  const { locale } = await params
+  const { t } = await initTranslations(locale)
+  const { data: prizes, error } = await fetchPrizes()
 
-  useEffect(() => {
-    if (competitions?.length === 0) {
-      dispatch(fetchCompetition())
-    }
-  }, [dispatch, competitions?.length])
+  if (error || prizes.length === 0) {
+    return (
+      <h1 className="text-foreground text-center text-2xl">
+        {t('Hozircha yutuqlar yoq')}
+      </h1>
+    )
+  }
 
-  return <PrizesSection />
+  return (
+    <>
+      <h1 className="text-foreground mb-6 text-2xl font-bold">
+        {t('Yutuqlar')}
+      </h1>
+
+      {JSON.stringify(prizes)}
+      {/* <section className="flex flex-col items-center justify-center gap-2">
+        {competition?.map((competition, index) => (
+          <PrizeCompetition competition={competition} key={index} />
+        ))}
+      </section> */}
+    </>
+  )
 }
 
 export default Prizes
