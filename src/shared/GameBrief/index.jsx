@@ -11,7 +11,7 @@ export const GameBriefContainer = ({ children, isLoading }) => {
     >
       <CardContent
         className={cn(
-          'animate-in fade-in flex h-full w-full flex-col justify-between gap-4 duration-300 xl:gap-6',
+          'animate-in fade-in flex h-full w-full flex-col justify-between gap-4 duration-300 xl:gap-6 2xl:gap-8',
           isLoading ? 'justify-center' : 'justify-between'
         )}
       >
