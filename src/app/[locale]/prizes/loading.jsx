@@ -1,4 +1,9 @@
 import { Skeleton } from '@/components/ui/skeleton'
+import {
+  Card,
+  CardContent,
+  CardHeader,
+} from '@/components/ui/card'
 
 export function PrizesSkeleton({ count = 4 }) {
   return (
@@ -25,17 +30,17 @@ export function PrizeSkeleton() {
 
 export function CompetitionSkeleton() {
   return (
-    <article className="group bg-background/25 hover:bg-background/40 border-border hover:border-card flex w-full flex-1 flex-col rounded-xl border p-2 backdrop-blur-xs transition-all md:p-4">
-      <div className="group-hover:border-primary border-border mb-2 flex items-center gap-2 border-b pb-2 transition-all">
+    <Card className="w-full border-border">
+      <CardHeader className="mb-4 flex items-center gap-2 border-b border-border">
         <Skeleton className="bg-muted h-10 w-10 rounded-full" />
         <Skeleton className="bg-muted h-6 w-32" />
-      </div>
-      <div className="flex flex-col gap-2 lg:flex-row">
+      </CardHeader>
+      <CardContent className="grid grid-cols-1 gap-2 lg:grid-cols-3">
         <PrizeSkeleton />
         <PrizeSkeleton />
         <PrizeSkeleton />
-      </div>
-    </article>
+      </CardContent>
+    </Card>
   )
 }
 

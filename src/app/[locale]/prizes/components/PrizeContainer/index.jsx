@@ -14,6 +14,9 @@ const fetchPrizesByCompetition = cache(async (competitionId) => {
         competition_id: competitionId,
         deleted_at: null,
       },
+      orderBy: {
+        order: 'asc',
+      },
     })
     return { data: prizes }
   } catch (error) {
@@ -26,9 +29,11 @@ const PrizeContainer = async ({ competition, locale, t }) => {
   if (error || prizes.length === 0) return <></>
   console.log(prizes)
 
+  const orderedPrizes = [prizes[1], prizes[0], prizes[2]]
+
   return (
-    <Card className="w-full">
-      <CardHeader className=" flex [.border-b]:pb-2 mb-4 items-center gap-2 border-b ">
+    <Card className="w-full border-border">
+      <CardHeader className="flex border-border  mb-4 items-center gap-2 border-b">
         <img
           src={getUrl(competition.flag)}
           loading="lazy"
@@ -36,7 +41,7 @@ const PrizeContainer = async ({ competition, locale, t }) => {
           className="bg-white z-10 size-10 rounded-full p-1 select-none"
           draggable={false}
         />
-        <CardTitle className="text-lg pb-0 xl:text-xl">
+        <CardTitle>
           {getCorrectName({
             lang: locale,
             uz: competition?.name,
@@ -44,11 +49,19 @@ const PrizeContainer = async ({ competition, locale, t }) => {
           })}
         </CardTitle>
       </CardHeader>
-      <CardContent className="grid grid-cols-1 grid-rows-3 lg:grid-rows-1 gap-2 lg:grid-cols-3">
-        {prizes.map(
-          (prize) =>
-            <Prize prize={prize} key={prize.id} locale={locale} t={t} />
-        )}
+      <CardContent>
+        <div className='lg:grid grid-cols-1 grid-rows-3 lg:grid-rows-1 gap-2 lg:grid-cols-3 hidden'>
+          {orderedPrizes.map(
+            (prize) =>
+              <Prize prize={prize} key={prize.id} locale={locale} t={t} />
+          )}
+        </div>
+        <div className='lg:hidden grid-cols-1 grid-rows-3 lg:grid-rows-1 gap-2 lg:grid-cols-3 grid'>
+          {prizes.map(
+            (prize) =>
+              <Prize prize={prize} key={prize.id} locale={locale} t={t} />
+          )}
+        </div>
       </CardContent>
     </Card>
   )
