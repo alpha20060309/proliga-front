@@ -9,7 +9,6 @@ import { MoveUp } from 'lucide-react'
 
 const TeamMaxTransfers = () => {
   const dispatch = useDispatch()
-  const { transferModal } = useSelector((store) => store.currentTeam)
   const currentTeam = useSelector(selectCurrentTeam)
   const currentTourTeam = useSelector(selectCurrentTourTeam)
   const { t } = useTranslation()
@@ -23,7 +22,7 @@ const TeamMaxTransfers = () => {
   return (
     <div
       className="group w-full lg:w-auto cursor-pointer capitalize"
-      onClick={() => dispatch(setTransferModal(!transferModal))}
+      onClick={() => dispatch(setTransferModal(true))}
     >
       <header className="text-muted-foreground group-hover:text-foreground flex cursor-pointer transition-all group-hover:underline">
         <h3
