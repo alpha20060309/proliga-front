@@ -16,7 +16,7 @@ import {
 } from 'app/lib/features/player/player.selector'
 import { createColumnHelper } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
-import TransferTableHead from './Head'
+// import TransferTableHead from './Head'
 import TransferTableBody from './Body'
 import TransferTableFilters from './Filters'
 import TanStackPagination from 'components/Table/TanStackPagination'
@@ -28,7 +28,7 @@ import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.s
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { swapTeamPlayer } from 'app/lib/features/teamPlayer/teamPlayer.slice'
 import SwapPlayerButton from './SwapPlayerButton'
-
+import TableHead from 'components/Table/Head'
 const columnHelper = createColumnHelper()
 
 function PlayerTable() {
@@ -81,9 +81,22 @@ function PlayerTable() {
       },
     }),
     columnHelper.accessor('club.name', {
-      header: t('Klub'),
+      id: 'club',
       accessorFn: (row) =>
         getCorrectName({ lang, uz: row?.club?.name, ru: row?.club?.name_ru }),
+      header: t('Klub'),
+      filterFn: (row, columnId, filterValue) => {
+        // Early return: show all if no filter or empty array
+        if (
+          !filterValue ||
+          !Array.isArray(filterValue) ||
+          filterValue.length === 0
+        )
+          return true
+        // Compare by club id as string for robustness
+        const clubId = String(row.original?.club?.id)
+        return filterValue.includes(clubId)
+      },
       meta: {
         filterVariant: 'club',
       },
@@ -92,16 +105,24 @@ function PlayerTable() {
       accessorKey: 'price',
       header: t('Narx'),
       cell: (info) => info.renderValue(),
-      filterFn: (row, id, filterValues) => {
-        const price = row.getValue(id)
-        const { min, max } = filterValues
+      filterFn: (row, id, filterValue) => {
+        // Early return if filterValue is not a valid range array
+        if (
+          !Array.isArray(filterValue) ||
+          filterValue.length !== 2 ||
+          typeof filterValue[0] !== 'number' ||
+          typeof filterValue[1] !== 'number'
+        ) {
+          return true
+        }
 
-        if (min !== undefined && price < min) {
-          return false
-        }
-        if (max !== undefined && price > max) {
-          return false
-        }
+        const [min, max] = filterValue
+        const price = row.getValue(id)
+
+        if (typeof price !== 'number') return false
+        if (min !== undefined && price < min) return false
+        if (max !== undefined && price > max) return false
+
         return true
       },
       meta: {
@@ -173,7 +194,7 @@ function PlayerTable() {
           )}
       </div>
       <table className="text-foreground mt-2 w-full min-w-80 table-auto text-sm">
-        <TransferTableHead table={table} />
+        <TableHead table={table} />
         <TransferTableBody table={table} flexRender={flexRender} />
       </table>
       <TanStackPagination

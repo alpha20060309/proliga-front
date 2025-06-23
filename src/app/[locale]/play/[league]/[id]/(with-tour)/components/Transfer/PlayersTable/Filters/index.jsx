@@ -1,7 +1,7 @@
-import PriceFilter from './Price'
 import PositionsFilter from './Positions'
-import PlayerNameFilter from './Name'
-import ClubsFilter from './Clubs'
+import NameFilter from 'components/Table/NameFilter'
+import ClubsFilter from 'components/Table/ClubsFilter'
+import PriceFilter from 'components/Table/PriceFilter'
 
 function TransferTableFilters({ column }) {
   const { filterVariant } = column.columnDef.meta ?? {}
@@ -10,7 +10,7 @@ function TransferTableFilters({ column }) {
   switch (filterVariant) {
     case 'name':
       return (
-        <PlayerNameFilter
+        <NameFilter
           column={column}
           columnFilterValue={columnFilterValue}
         />

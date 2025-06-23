@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next'
 import { createColumnHelper } from '@tanstack/react-table'
 import { selectPlayers } from 'app/lib/features/player/player.selector'
 import { getCorrentPlayerPosition } from 'app/utils/getCorrectPlayerPosition.utils'
-import TransferTableHead from './Head'
+import TableHead from 'components/Table/Head'
 import TransferTableBody from './Body'
 import TeamOverview from '../TeamOverview'
 import TransferTableFilters from './Filters'
@@ -262,7 +262,7 @@ function PlayersTable() {
             )}
         </div>
         <table className="w-full min-w-80 table-auto text-xs xl:text-sm">
-          <TransferTableHead table={table} />
+          <TableHead table={table} />
           <TransferTableBody table={table} flexRender={flexRender} />
         </table>
       </CardContent>

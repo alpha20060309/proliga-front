@@ -1,5 +1,5 @@
-import PlayerNameFilter from './Name'
-import ClubsFilter from './Clubs'
+import NameFilter from "components/Table/NameFilter"
+import ClubsFilter from "components/Table/ClubsFilter"
 
 function StatisticsTableFilters({ column }) {
   const { filterVariant } = column.columnDef.meta ?? {}
@@ -8,7 +8,7 @@ function StatisticsTableFilters({ column }) {
   switch (filterVariant) {
     case 'name':
       return (
-        <PlayerNameFilter
+        <NameFilter
           column={column}
           columnFilterValue={columnFilterValue}
         />

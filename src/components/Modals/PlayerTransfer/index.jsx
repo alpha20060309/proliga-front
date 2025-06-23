@@ -34,7 +34,7 @@ const PlayerTransfer = () => {
       >
         <DialogTitle>{t('Transfer Amalga Oshirish')}</DialogTitle>
         <PlayerTable />
-        <DialogDescription className="hidden">
+        <DialogDescription className="sr-only">
           This is a players transfer table
         </DialogDescription>
       </DialogContent>
