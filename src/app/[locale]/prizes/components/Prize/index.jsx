@@ -1,25 +1,19 @@
-'use client'
-
-import { useSelector } from 'react-redux'
-import { useTranslation } from 'react-i18next'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { getUrl } from 'app/utils/static.util'
 
-const Prize = ({ prize }) => {
-  const { lang } = useSelector((store) => store.systemLanguage)
-  const { t } = useTranslation()
-
+const Prize = ({ prize, locale, t }) => {
+  console.log('prize', prize)
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center transition-all hover:scale-[1.025]">
-      <p className="mb-1 text-sm md:mb-2 xl:text-base">
-        {getCorrectName({ lang, uz: prize?.name, ru: prize?.name_ru })}
+    <div className="flex flex-col items-center justify-center transition-all hover:scale-[1.025]">
+      <p className="text-sm md:mb-2 xl:text-base">
+        {getCorrectName({ lang: locale, uz: prize?.name, ru: prize?.name_ru })}
       </p>
       <div className="flex aspect-square items-center justify-center overflow-hidden rounded bg-white p-1 lg:p-2">
         <img
           src={getUrl(prize?.image)}
           loading="lazy"
           alt={prize?.name}
-          className="aspect-auto h-auto w-auto bg-cover"
+          className="aspect-auto h-full w-full bg-cover"
         />
       </div>
       <p className="text-lg">

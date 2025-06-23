@@ -10,6 +10,9 @@ export async function generateStaticParams() {
       select: {
         id: true,
       },
+      where: {
+        deleted_at: null,
+      },
       take: 10,
     })
 

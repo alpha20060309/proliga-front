@@ -28,7 +28,7 @@ export const login = async (values) => {
     })
 
     await prisma.user.update({
-      where: { id: existingUser.id },
+      where: { id: existingUser.id, deleted_at: null },
       data: {
         geo: JSON.stringify(data?.geo),
         agent: JSON.stringify(data?.agent),

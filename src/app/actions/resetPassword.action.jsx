@@ -34,7 +34,7 @@ export const resetPassword = async (values) => {
     const hashedPassword = await bcrypt.hash(password, 10)
 
     await prisma.user.update({
-      where: { id: existingUser.id },
+      where: { id: existingUser.id, deleted_at: null },
       data: {
         password: hashedPassword,
         sms_code: null, // Or some other invalidated state

@@ -13,6 +13,7 @@ export const getHTMLPage = async (name) => {
       .findUnique({
         where: {
           name,
+          deleted_at: null,
         },
         select: {
           id: true,
