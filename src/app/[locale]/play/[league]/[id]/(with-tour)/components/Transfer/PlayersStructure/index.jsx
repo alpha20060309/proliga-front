@@ -9,6 +9,7 @@ import {
 } from 'app/lib/features/teamPlayer/teamPlayer.selector'
 import { TOUR_STATUS } from 'app/utils/tour.util'
 import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
+import { PlayersStructureContainer, MIDContainer, DEFContainer, STRContainer, GOAContainer } from 'shared/PlayersStructure'
 
 const TransferPlayersStructure = () => {
   const currentTour = useSelector(selectCurrentTour)
@@ -24,34 +25,34 @@ const TransferPlayersStructure = () => {
   }
 
   return (
-    <section className="animate-in fade-in duration-300 xs:py-3 absolute top-0 right-0 bottom-0 left-0 z-10 grid grid-rows-4 py-2 sm:py-4">
+    <PlayersStructureContainer>
       {isLoading ? (
         <StadiumSpinner />
       ) : (
         <>
-          <div className="flex w-full items-start justify-center">
+          <GOAContainer>
             {GOA.map((player) => (
               <Player key={player.id} player={player} />
             ))}
-          </div>
-          <div className="flex items-start justify-evenly ">
+          </GOAContainer>
+          <DEFContainer>
             {DEF.map((player) => (
               <Player key={player.id} player={player} />
             ))}
-          </div>
-          <div className="flex items-start justify-evenly">
+          </DEFContainer>
+          <MIDContainer>
             {MID.map((player) => (
               <Player key={player.id} player={player} />
             ))}
-          </div>
-          <div className="flex items-start justify-evenly">
+          </MIDContainer>
+          <STRContainer>
             {STR.map((player) => (
               <Player key={player.id} player={player} />
             ))}
-          </div>
+          </STRContainer>
         </>
       )}
-    </section>
+    </PlayersStructureContainer>
   )
 }
 

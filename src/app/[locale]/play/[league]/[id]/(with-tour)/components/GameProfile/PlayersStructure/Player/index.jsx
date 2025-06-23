@@ -14,6 +14,8 @@ import {
   PlayerContainer,
   PlayerImage,
   PlayerName,
+  PlayerButtonsContainer,
+  PlayerButton,
   PlayerPoint,
 } from 'shared/PlayersStructure'
 
@@ -53,7 +55,6 @@ const Player = ({ player }) => {
     [player]
   )
   const tShirt = staticPath + '/club-svg/' + clubPath + '/app.svg'
-  const firstName = player.name ? name?.split(' ')[0] : ''
   const lastName = name?.split(' ')[1] ?? ''
 
   return (
@@ -79,21 +80,18 @@ const Player = ({ player }) => {
             player={player}
           />
           <PlayerName>
-            {firstName} {lastName.slice(0, 1).toUpperCase()} {lastName && '.'}
+            {lastName}
           </PlayerName>
-          <div className="flex items-center gap-0.5">
-            <button
-              onClick={handleInfoModal}
-              className="bg-background group hover:bg-primary size-4 rounded-full transition-all sm:size-5"
-            >
+          <PlayerButtonsContainer>
+            <PlayerButton onClick={handleInfoModal} className={'p-0 rounded-full'}>
               <Info className="text-foreground group-hover:text-accent-foreground size-4 sm:size-5" />
-            </button>
+            </PlayerButton>
             <PlayerPoint>
               {player.is_captain
                 ? (currentPlayerPoint?.point ?? 0) * 2
                 : (currentPlayerPoint?.point ?? 0)}
             </PlayerPoint>
-          </div>
+          </PlayerButtonsContainer>
         </>
       )}
     </PlayerContainer>

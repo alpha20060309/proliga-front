@@ -43,7 +43,6 @@ const Player = ({ player }) => {
     ru: player?.player?.name_ru,
   })
 
-  const firstName = player.name ? name?.split(' ')[0] : ''
   const lastName = name?.split(' ')[1] ?? ''
   const tShirt = staticPath + '/club-svg/' + clubPath + '/app.svg'
 
@@ -65,7 +64,7 @@ const Player = ({ player }) => {
         <>
           <PlayerImage
             tShirt={tShirt}
-            handleInfoModal={() => {}}
+            handleInfoModal={() => { }}
             imageErr={imageErr}
             player={player}
           />
@@ -91,7 +90,7 @@ const Player = ({ player }) => {
             )}
           </div>
           <PlayerName>
-            {firstName} {lastName.slice(0, 1).toUpperCase()} {lastName && '.'}
+            {lastName}
           </PlayerName>
           <PlayerPoint>
             {player.is_captain

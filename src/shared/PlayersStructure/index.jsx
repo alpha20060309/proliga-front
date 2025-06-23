@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { cn } from '@/lib/utils'
 
 export const PlayersStructureContainer = ({ children }) => {
   return (
@@ -18,7 +19,7 @@ export const MIDContainer = ({ children }) => {
 }
 
 export const STRContainer = ({ children }) => {
-  return <div className="flex items-start justify-evenly">{children}</div>
+  return <div className="flex items-start pt-2 justify-evenly">{children}</div>
 }
 
 export const GOAContainer = ({ children }) => {
@@ -29,14 +30,14 @@ export const GOAContainer = ({ children }) => {
 
 export const PlayerContainer = ({ children }) => {
   return (
-    <div className="text-muted-foreground flex h-min flex-col items-center justify-center text-sm select-none sm:text-base">
+    <div className="text-muted-foreground flex h-min flex-col items-center justify-center text-sm select-none sm:text-base lg:text-sm xl:text-base">
       {children}
     </div>
   )
 }
 export const PlayerName = ({ children }) => {
   return (
-    <p className="text-3xs xs:text-2xs xs:text-xs text-shadow-player line-clamp-1 text-white md:text-sm">
+    <p className="text-3xs xs:text-2xs xs:text-xs text-shadow-player line-clamp-1 text-white md:text-sm lg:text-xs xl:text-sm">
       {children}
     </p>
   )
@@ -77,4 +78,17 @@ export const PlayerPoint = ({ children }) => {
   )
 }
 
-// fade-in-fast text-muted-foreground relative z-30 flex h-min flex-col items-center justify-center text-sm select-none sm:text-base
+export const PlayerButtonsContainer = ({ children }) => {
+  return (
+    <div className="flex items-center gap-0.5 sm:gap-1 lg:gap-0.5 xl:gap-1">{children}</div>
+  )
+}
+
+export const PlayerButton = ({ children, onClick, className }) => {
+  return (
+    <button onClick={onClick} className={cn("hover:border-accent hover:bg-accent border-foreground/50 bg-background group flex size-4 items-center justify-center overflow-hidden rounded-sm border p-0.5 transition-colors sm:size-5 lg:size-4.5 xl:size-5", className)}>
+      {children}
+    </button>
+  )
+}
+

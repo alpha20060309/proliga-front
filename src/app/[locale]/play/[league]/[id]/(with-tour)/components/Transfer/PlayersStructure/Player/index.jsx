@@ -19,6 +19,8 @@ import {
   PlayerContainer,
   PlayerImage,
   PlayerName,
+  PlayerButtonsContainer,
+  PlayerButton,
 } from 'shared/PlayersStructure'
 
 const Player = ({ player }) => {
@@ -39,7 +41,6 @@ const Player = ({ player }) => {
   })
 
   const tShirt = staticPath + '/club-svg/' + clubPath + '/app.svg'
-  const firstName = player.name ? name?.split(' ')[0] : ''
   const lastName = name?.split(' ')[1] ?? ''
 
   const imageErr = (e) => {
@@ -90,25 +91,22 @@ const Player = ({ player }) => {
               player={player}
             />
             <PlayerName>
-              {firstName} {lastName.slice(0, 1).toUpperCase()} {lastName && '.'}
+              {lastName}
             </PlayerName>
-            <div className="flex items-center gap-0.5 sm:gap-1">
-              <button
-                onClick={handleTransfer}
-                className="hover:border-accent hover:bg-accent border-foreground/50 bg-background group flex size-4 items-center justify-center overflow-hidden rounded-sm border p-0.5 transition-colors sm:size-5"
-              >
+            <PlayerButtonsContainer>
+              <PlayerButton onClick={handleTransfer}>
                 <ArrowUpDown className="text-foreground group-hover:text-accent-foreground size-4 sm:size-5" />
-              </button>
+              </PlayerButton>
               <div className="border-foreground bg-background text-foreground flex h-4 w-6 cursor-default items-center justify-center rounded-sm border text-center text-xs font-bold sm:h-5 sm:w-8 md:text-sm">
                 {player.price ?? '00'}
               </div>
-              <button
+              <PlayerButton
                 onClick={toggleDeleteModal}
-                className="border-foreground/50 bg-destructive group hover:bg-accent group-hover:border-accent flex size-4 items-center justify-center rounded-sm border p-0.5 transition-colors sm:size-5"
+                className={'bg-destructive'}
               >
                 <X className="text-foreground group-hover:text-accent-foreground size-4 sm:size-5" />
-              </button>
-            </div>
+              </PlayerButton>
+            </PlayerButtonsContainer>
           </>
         )}
       </PlayerContainer>
