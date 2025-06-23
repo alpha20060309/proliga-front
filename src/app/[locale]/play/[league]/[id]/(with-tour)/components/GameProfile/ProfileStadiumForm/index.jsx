@@ -7,10 +7,8 @@ import {
   Select,
   SelectContent,
   SelectItem,
-  SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Button } from '@/components/ui/button'
 import { getCorrentPlayerPosition } from 'app/utils/getCorrectPlayerPosition.utils'
 import { useUpdateTeamCaptains } from 'app/hooks/transfer/useUpdateTeamCaptains/useUpdateTeamCaptains'
 import { selectTeamConcat } from 'app/lib/features/teamPlayer/teamPlayer.selector'
@@ -20,6 +18,7 @@ import { selectCurrentCompetition } from 'app/lib/features/competition/competiti
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { TOUR_STATUS } from 'app/utils/tour.util'
 import { Loader2 } from 'lucide-react'
+import { StadiumSelectTrigger, StadiumSaveButton } from 'shared/GameWrapper'
 
 const ProfileStadiumForm = () => {
   const { t } = useTranslation()
@@ -118,9 +117,9 @@ const ProfileStadiumForm = () => {
         value={teamConcat.find((player) => player.is_captain)?.player_id ?? ''}
         onValueChange={(value) => dispatch(setCaptain(value))}
       >
-        <SelectTrigger className="xs:px-2 text-foreground bg-background border-foreground/50 dark:bg-background hover:border-primary w-36 rounded-sm px-1.5 text-xs data-[size=default]:h-10 sm:w-40 sm:text-sm md:w-48">
+        <StadiumSelectTrigger>
           <SelectValue placeholder={t('Kapitan tanlang')} />
-        </SelectTrigger>
+        </StadiumSelectTrigger>
         <SelectContent>
           {teamConcat.map(
             (player) =>
@@ -140,17 +139,16 @@ const ProfileStadiumForm = () => {
           )}
         </SelectContent>
       </Select>
-      <Button
+      <StadiumSaveButton
         type="submit"
         disabled={isLoading}
-        className="bg-background text-foreground 2xs:min-w-28 xs:min-w-28 border-accent hover:border-border hover:bg-accent hover:text-accent-foreground h-10 min-w-24 rounded-sm border text-sm font-medium transition-all sm:min-w-32"
       >
         {isLoading ? (
           <Loader2 className="mx-auto size-6 animate-spin" />
         ) : (
           t('Saqlash')
         )}
-      </Button>
+      </StadiumSaveButton>
     </form>
   )
 }

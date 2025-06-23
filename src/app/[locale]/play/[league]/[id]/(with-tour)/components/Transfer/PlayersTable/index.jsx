@@ -53,7 +53,7 @@ function PlayersTable() {
   })
   const { isLoading } = useSelector((state) => state.player)
   const players = useSelector(selectPlayers)
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  const [windowWidth, setWindowWidth] = useState(0)
 
   const dispatch = useDispatch()
   const totalPlayersCount = useSelector(selectTotalPlayersCount)
@@ -94,6 +94,7 @@ function PlayersTable() {
   }
 
   useEffect(() => {
+    setWindowWidth(window.innerWidth)
     const handleResize = () => {
       setWindowWidth(window.innerWidth)
     }
@@ -246,7 +247,7 @@ function PlayersTable() {
   return (
     <Card
       className={
-        'border-border mx-auto h-min w-full max-w-lg gap-2 py-4 lg:w-[55%] lg:max-w-2xl xl:gap-1 2xl:gap-2'
+        'border-border mx-auto h-min w-full max-w-lg gap-2 py-4 lg:w-[55%] lg:max-w-2xl xl:gap-1'
       }
     >
       <TeamOverview />

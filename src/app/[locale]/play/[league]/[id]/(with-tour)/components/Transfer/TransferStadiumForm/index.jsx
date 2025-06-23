@@ -15,7 +15,6 @@ import {
   Select,
   SelectContent,
   SelectItem,
-  SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
@@ -34,9 +33,9 @@ import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { selectPlayers } from 'app/lib/features/player/player.selector'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
-import { Loader2 } from 'lucide-react'
-import { Undo2, Compass } from 'lucide-react'
+import { Loader2, Undo2, Compass } from 'lucide-react'
 import { TOUR_STATUS } from 'app/utils/tour.util'
+import { StadiumSelectTrigger, StadiumSaveButton } from 'shared/GameWrapper'
 
 const TransferStadiumForm = () => {
   const { t } = useTranslation()
@@ -218,9 +217,9 @@ const TransferStadiumForm = () => {
         value={teamConcat.find((player) => player.is_captain)?.player_id ?? ''}
         onValueChange={(value) => dispatch(setCaptain(value))}
       >
-        <SelectTrigger className="bg-background dark:bg-background border-foreground/50 xs:px-2 text-foreground hover:border-primary w-36 rounded-sm px-1.5 text-xs data-[size=default]:h-10 sm:w-40 sm:text-sm md:w-48">
+        <StadiumSelectTrigger>
           <SelectValue placeholder={t('Kapitan tanlang')} />
-        </SelectTrigger>
+        </StadiumSelectTrigger>
         <SelectContent>
           {teamConcat.map(
             (player) =>
@@ -247,7 +246,7 @@ const TransferStadiumForm = () => {
             type="button"
             variant="default"
             title="Avto jamoa yigish"
-            className="bg-background text-foreground hover:border-primary border-border flex size-10 items-center justify-center gap-1 rounded-sm border transition-all"
+            className="bg-card text-foreground hover:border-primary border-border flex size-10 items-center justify-center gap-1 rounded-sm border transition-all"
           >
             <Compass className="size-6" />
           </Button>
@@ -258,22 +257,21 @@ const TransferStadiumForm = () => {
           size="icon"
           onClick={() => dispatch(revertTeamPlayers())}
           title={t('orqaga qaytish')}
-          className="bg-background text-foreground hover:border-primary border-border hover:text-accent-foreground flex size-10 items-center justify-center gap-1 rounded-sm border transition-all"
+          className="bg-card  text-foreground hover:border-primary border-border border hover:text-accent-foreground flex size-10 items-center justify-center gap-1 transition-all"
         >
           <Undo2 className="size-6" />
         </Button>
       </div>
-      <Button
+      <StadiumSaveButton
         type="submit"
         disabled={isLoading}
-        className="bg-background text-foreground 2xs:min-w-28 xs:min-w-28 border-accent hover:border-accent-foreground hover:bg-accent hover:text-accent-foreground h-10 min-w-24 rounded-sm border text-sm font-medium transition-all sm:min-w-32"
       >
         {isLoading ? (
           <Loader2 className="text-foreground mx-auto size-6 animate-spin" />
         ) : (
           t('Saqlash')
         )}
-      </Button>
+      </StadiumSaveButton>
     </form>
   )
 }

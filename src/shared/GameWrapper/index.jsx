@@ -1,3 +1,6 @@
+import { SelectTrigger } from '@/components/ui/select'
+import { Button } from '@/components/ui/button'
+
 export function GameWrapper({ children }) {
   return (
     <main className="flex w-full flex-col justify-between gap-2 lg:flex-row">
@@ -13,3 +16,22 @@ export function StadiumSectionWrapper({ children }) {
     </div>
   )
 }
+
+export function StadiumSelectTrigger({ children, ...props }) {
+  return (
+    <SelectTrigger
+      className=" border-border bg-card dark:bg-card dark:hover:bg-card text-foreground hover:border-primary w-36 data-[size=default]:h-10 sm:w-40 md:w-48"
+      {...props}
+    >
+      {children}
+    </SelectTrigger>
+  )
+}
+
+export function StadiumSaveButton({ children, ...props }) {
+  return (
+    <Button className="bg-card text-foreground 2xs:min-w-28 hover:border-accent-foreground border-border hover:bg-accent hover:text-accent-foreground h-10 min-w-24 border text-sm font-bold transition-all sm:min-w-32" {...props}>{children}</Button>
+  )
+}
+
+
