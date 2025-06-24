@@ -1,5 +1,5 @@
 import { Skeleton } from '@/components/ui/skeleton'
-import { PaginationSkeleton } from 'components/Table/Pagination'
+import { PaginationSkeleton } from 'components/Table/Pagination/Server'
 
 function TableSkeleton({ rows = 13 }) {
   return (

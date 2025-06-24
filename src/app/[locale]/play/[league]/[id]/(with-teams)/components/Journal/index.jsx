@@ -7,7 +7,7 @@ import { fetchUserActivity } from 'app/lib/features/userActivity/userActivity.th
 import { useState, useEffect, useMemo } from 'react'
 import { usePathname } from 'next/navigation'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
-import { Pagination } from 'components/Table/Pagination'
+import { Pagination } from 'components/Table/Pagination/Server'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { memo } from 'react'
 

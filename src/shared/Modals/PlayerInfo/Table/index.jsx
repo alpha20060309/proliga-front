@@ -13,7 +13,7 @@ import {
 } from '@tanstack/react-table'
 import Head from './Head'
 import Body from './Body'
-import TanStackPagination from 'components/Table/TanStackPagination'
+import TanStackPagination from 'components/Table/Pagination/Client'
 import { createColumnHelper } from '@tanstack/react-table'
 import { selectClubs } from 'app/lib/features/club/club.selector'
 import { selectCurrentPlayer } from 'app/lib/features/player/player.selector'

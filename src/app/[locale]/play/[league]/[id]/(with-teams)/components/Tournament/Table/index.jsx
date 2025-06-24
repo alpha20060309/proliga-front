@@ -7,19 +7,28 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import TableHead from 'components/Table/Head'
-import Body from './Body'
+import Head from 'components/Table/Head'
+
 import { useSelector } from 'react-redux'
 import { createColumnHelper } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
 import { selectAllTeams } from 'app/lib/features/team/team.selector'
 import { capitalize } from 'lodash'
-
+import { Table } from '@/components/ui/table'
+import Body from 'components/Table/Body'
+import Link from 'next/link'
 const columnHelper = createColumnHelper()
+import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
+import { selectCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.selector'
 
 function TournamentTable({ showUserTourTeam }) {
   const { t } = useTranslation()
+
   const allTeams = useSelector(selectAllTeams)
+
+  const currentCompetition = useSelector(selectCurrentCompetition)
+  const currentTourTeam = useSelector(selectCurrentTourTeam)
+  console.log(currentTourTeam)
 
   const columns = [
     columnHelper.accessor('', {
@@ -29,7 +38,11 @@ function TournamentTable({ showUserTourTeam }) {
     }),
     columnHelper.accessor('name', {
       accessorFn: (row) => row?.team?.name ?? '',
-      cell: (info) => info.getValue(),
+      cell: (info) => (
+        <Link href={`/team-view/${currentCompetition?.id}/${currentTourTeam.team?.id ?? 0}`}>
+          {info.getValue()}
+        </Link>
+      ),
       header: t('Jamoa'),
     }),
     columnHelper.accessor('user', {
@@ -58,14 +71,14 @@ function TournamentTable({ showUserTourTeam }) {
   })
 
   return (
-    <table className="text-foreground h-auto w-full min-w-72 table-auto text-xs sm:text-sm">
-      <TableHead table={table} />
+    <Table className="text-foreground h-auto w-full min-w-72 table-auto text-xs sm:text-sm">
+      <Head table={table} />
       <Body
         table={table}
         flexRender={flexRender}
         showUserTourTeam={showUserTourTeam}
       />
-    </table>
+    </Table>
   )
 }
 

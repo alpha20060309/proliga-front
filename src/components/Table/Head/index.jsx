@@ -1,15 +1,16 @@
 import { flexRender } from '@tanstack/react-table'
 import { ChevronsUpDown, ChevronsDown, ChevronsUp } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { TableHeader, TableHead, TableRow } from '@/components/ui/table'
 
-const TableHead = ({ table, className }) => {
+const Head = ({ table, className }) => {
     return (
-        <thead>
+        <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-                <tr key={headerGroup.id}>
+                <TableRow key={headerGroup.id}>
                     {headerGroup.headers.map((header) => {
                         return (
-                            <th
+                            <TableHead
                                 key={header.id}
                                 colSpan={header.colSpan}
                                 {...{
@@ -43,13 +44,13 @@ const TableHead = ({ table, className }) => {
                                             <ChevronsUpDown className="hidden size-4 sm:inline-block" />
                                         ))
                                     )}
-                            </th>
+                            </TableHead>
                         )
                     })}
-                </tr>
+                </TableRow>
             ))}
-        </thead>
+        </TableHeader>
     )
 }
 
-export default TableHead
+export default Head

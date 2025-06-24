@@ -1,6 +1,6 @@
 import { Skeleton } from '@/components/ui/skeleton'
 import { CalendarDays, Eye } from 'lucide-react'
-import { PaginationSkeleton } from 'components/Table/Pagination'
+import { PaginationSkeleton } from 'components/Table/Pagination/Server'
 import { cn } from '@/lib/utils'
 
 function ArticleSkeleton() {

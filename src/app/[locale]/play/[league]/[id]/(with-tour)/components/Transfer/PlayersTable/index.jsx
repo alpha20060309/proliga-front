@@ -15,11 +15,10 @@ import { createColumnHelper } from '@tanstack/react-table'
 import { selectPlayers } from 'app/lib/features/player/player.selector'
 import { getCorrentPlayerPosition } from 'app/utils/getCorrectPlayerPosition.utils'
 import TableHead from 'components/Table/Head'
-import TransferTableBody from './Body'
 import TeamOverview from '../TeamOverview'
 import TransferTableFilters from './Filters'
 import PlayersTableSkeleton from './Skeleton'
-import TanStackPagination from 'components/Table/TanStackPagination'
+import TanStackPagination from 'components/Table/Pagination/Client'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import AddPlayerButton from './AddPlayerButton'
 import { useDispatch } from 'react-redux'
@@ -35,6 +34,8 @@ import {
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
+import { Table } from '@/components/ui/table'
+import Body from 'components/Table/Body'
 
 const columnHelper = createColumnHelper()
 
@@ -110,22 +111,22 @@ function PlayersTable() {
     if (windowWidth <= 1024) {
       setPagination({
         pageIndex: 0,
-        pageSize: 12,
+        pageSize: 10,
       })
     } else if (windowWidth > 1024 && windowWidth <= 1280) {
       setPagination({
         pageIndex: 0,
-        pageSize: 10,
+        pageSize: 8,
       })
     } else if (windowWidth > 1280 && windowWidth <= 1536) {
       setPagination({
         pageIndex: 0,
-        pageSize: 12,
+        pageSize: 10,
       })
     } else {
       setPagination({
         pageIndex: 0,
-        pageSize: 14,
+        pageSize: 11,
       })
     }
   }, [windowWidth])
@@ -261,10 +262,10 @@ function PlayersTable() {
               ))
             )}
         </div>
-        <table className="w-full min-w-80 table-auto text-xs xl:text-sm">
+        <Table className="w-full min-w-80 table-auto text-xs xl:text-sm">
           <TableHead table={table} />
-          <TransferTableBody table={table} flexRender={flexRender} />
-        </table>
+          <Body table={table} flexRender={flexRender} />
+        </Table>
       </CardContent>
       <CardFooter>
         <TanStackPagination

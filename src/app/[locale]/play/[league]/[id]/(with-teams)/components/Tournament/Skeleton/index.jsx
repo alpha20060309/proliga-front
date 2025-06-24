@@ -1,6 +1,6 @@
 import { Skeleton } from '@/components/ui/skeleton'
 import TopTeams from '../../TopTeams'
-import { PaginationSkeleton } from 'components/Table/Pagination'
+import { PaginationSkeleton } from 'components/Table/Pagination/Server'
 
 const TournamentSkeleton = ({ paginationCount, rows, cols }) => {
   return (

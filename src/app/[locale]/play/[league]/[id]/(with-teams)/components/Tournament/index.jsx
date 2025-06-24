@@ -5,7 +5,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { fetchAllTeams } from 'app/lib/features/team/team.thunk'
 import { useDispatch } from 'react-redux'
 import { TournamentTableSkeleton } from './Skeleton'
-import { Pagination } from 'components/Table/Pagination'
+import { Pagination } from 'components/Table/Pagination/Server'
 import {
   selectCurrentTour,
   selectTours,
@@ -128,9 +128,7 @@ const Tournament = () => {
         />
       ) : (
         <>
-          <section className="flex-1">
-            <TournamentTable showUserTourTeam={showUserTourTeam} />
-          </section>
+          <TournamentTable showUserTourTeam={showUserTourTeam} />
           <Pagination
             onPageChange={setPage}
             currentPage={page}

@@ -17,7 +17,7 @@ import { getCorrentPlayerPosition } from 'app/utils/getCorrectPlayerPosition.uti
 import TableHead from 'components/Table/Head'
 import Body from './Body'
 import StatisticsTableFilters from './Filters'
-import TanStackPagination from 'components/Table/TanStackPagination'
+import TanStackPagination from 'components/Table/Pagination/Client'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 
 const columnHelper = createColumnHelper()

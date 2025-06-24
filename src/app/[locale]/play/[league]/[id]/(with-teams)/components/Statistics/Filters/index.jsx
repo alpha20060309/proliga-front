@@ -1,5 +1,5 @@
-import NameFilter from "components/Table/NameFilter"
-import ClubsFilter from "components/Table/ClubsFilter"
+import NameFilter from "components/Table/Filters/Name"
+import ClubsFilter from "components/Table/Filters/Clubs"
 
 function StatisticsTableFilters({ column }) {
   const { filterVariant } = column.columnDef.meta ?? {}

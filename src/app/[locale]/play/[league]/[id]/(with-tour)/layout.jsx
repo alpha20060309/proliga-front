@@ -1,21 +1,27 @@
 'use client'
 
-import GameNavigation from './components/GameNavigation'
-import { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { fetchTeamPlayers } from 'app/lib/features/teamPlayer/teamPlayer.thunk'
-import { fetchTourTeams } from 'app/lib/features/tourTeam/tourTeam.thunk'
-import { fetchPlayerPoint } from 'app/lib/features/playerPoint/playerPoint.thunk'
-import { selectPrevTeam } from 'app/lib/features/teamPlayer/teamPlayer.selector'
-import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
-import { use } from 'react'
 import Gutter from 'components/Gutter'
+import GameNavigation from './components/GameNavigation'
+import { useEffect, use } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchTourTeams } from 'app/lib/features/tourTeam/tourTeam.thunk'
+import { fetchTeamPlayers } from 'app/lib/features/teamPlayer/teamPlayer.thunk'
+import { fetchPlayerPoint } from 'app/lib/features/playerPoint/playerPoint.thunk'
+import { selectCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.selector'
+import { selectPrevTeam } from 'app/lib/features/teamPlayer/teamPlayer.selector'
+import { selectTourTeams } from 'app/lib/features/tourTeam/tourTeam.selector'
+import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
+import { selectedTours } from 'app/lib/features/tour/tour.selector'
+import { setCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.slice'
 
 const PlayLayout = ({ children, params }) => {
   const { league, id } = use(params)
   const dispatch = useDispatch()
   const currentTour = useSelector(selectCurrentTour)
   const prevTeam = useSelector(selectPrevTeam)
+  const tourTeams = useSelector(selectTourTeams)
+  const currentTourTeam = useSelector(selectCurrentTourTeam)
+  const selectTours = useSelector(selectedTours)
 
   useEffect(() => {
     if (id && currentTour?.id) {
@@ -48,11 +54,19 @@ const PlayLayout = ({ children, params }) => {
     }
   }, [dispatch, currentTour?.id, league, prevTeam])
 
+  useEffect(() => {
+    if (selectTours?.length > 0 && tourTeams?.length > 0) {
+      if (currentTour?.id !== currentTourTeam?.tour_id) {
+        dispatch(setCurrentTourTeam(currentTour))
+      }
+    }
+  }, [dispatch, selectTours?.length, currentTourTeam, tourTeams?.length, currentTour])
+
   return (
     <div className="flex w-full flex-col gap-4">
       <Gutter mobileFriendly>
         <GameNavigation />
-      </Gutter> 
+      </Gutter>
       <Gutter mobileFriendly>{children}</Gutter>
     </div>
   )

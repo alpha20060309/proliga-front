@@ -15,7 +15,7 @@ import { createColumnHelper } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
-import TanStackPagination from 'components/Table/TanStackPagination'
+import TanStackPagination from 'components/Table/Pagination/Client'
 import { formatDate } from 'app/utils/formatDate.util'
 import { selectBalances } from 'app/lib/features/payBalance/payBalance.selector'
 import {

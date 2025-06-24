@@ -1,7 +1,7 @@
 import PositionsFilter from './Positions'
-import NameFilter from 'components/Table/NameFilter'
-import ClubsFilter from 'components/Table/ClubsFilter'
-import PriceFilter from 'components/Table/PriceFilter'
+import NameFilter from 'components/Table/Filters/Name'
+import ClubsFilter from 'components/Table/Filters/Clubs'
+import PriceFilter from 'components/Table/Filters/Price'
 
 function TransferTableFilters({ column }) {
   const { filterVariant } = column.columnDef.meta ?? {}

@@ -16,10 +16,9 @@ import {
 } from 'app/lib/features/player/player.selector'
 import { createColumnHelper } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
-// import TransferTableHead from './Head'
-import TransferTableBody from './Body'
+import Body from 'components/Table/Body'
 import TransferTableFilters from './Filters'
-import TanStackPagination from 'components/Table/TanStackPagination'
+import TanStackPagination from 'components/Table/Pagination/Client'
 import { getCorrentPlayerPosition } from 'app/utils/getCorrectPlayerPosition.utils'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { useDispatch } from 'react-redux'
@@ -28,7 +27,8 @@ import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.s
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { swapTeamPlayer } from 'app/lib/features/teamPlayer/teamPlayer.slice'
 import SwapPlayerButton from './SwapPlayerButton'
-import TableHead from 'components/Table/Head'
+import Head from 'components/Table/Head'
+import { Table } from '@/components/ui/table'
 const columnHelper = createColumnHelper()
 
 function PlayerTable() {
@@ -183,7 +183,7 @@ function PlayerTable() {
   })
 
   return (
-    <main className="text-foreground flex flex-1 flex-col md:text-sm">
+    <main className="text-foreground flex gap-2 flex-1 flex-col md:text-sm">
       <div className="xs:text-xs grid grid-cols-2 grid-rows-2 gap-x-1 gap-y-2 text-sm sm:grid-cols-4 sm:grid-rows-1 md:gap-1 md:text-sm lg:text-base">
         {table
           .getHeaderGroups()
@@ -193,10 +193,10 @@ function PlayerTable() {
             ))
           )}
       </div>
-      <table className="text-foreground mt-2 w-full min-w-80 table-auto text-sm">
-        <TableHead table={table} />
-        <TransferTableBody table={table} flexRender={flexRender} />
-      </table>
+      <Table className="text-foreground w-full min-w-80 table-auto text-sm">
+        <Head table={table} />
+        <Body table={table} flexRender={flexRender} />
+      </Table>
       <TanStackPagination
         table={table}
         active="bg-primary text-primary-foreground"

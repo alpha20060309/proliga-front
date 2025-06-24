@@ -8,17 +8,12 @@ import { TOUR_STATUS } from 'app/utils/tour.util'
 import { setCurrentTourIndex } from 'app/lib/features/tour/tour.slice'
 import { setCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.slice'
 import {
-  selectCurrentTour,
   selectRegisteredTour,
   selectTours,
 } from 'app/lib/features/tour/tour.selector'
 import { emptyTeamPlayers } from 'app/lib/features/teamPlayer/teamPlayer.slice'
 import { tabsClasses } from '@mui/material'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
-import {
-  selectCurrentTourTeam,
-  selectTourTeams,
-} from 'app/lib/features/tourTeam/tourTeam.selector'
 import GameTab from 'components/Game/TourTab'
 import { useTransitionRouter } from 'next-view-transitions'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
@@ -32,10 +27,7 @@ export default function TourTabs() {
   const selectedTours = useSelector(selectTours)
   const currentCompetition = useSelector(selectCurrentCompetition)
   const { currentTourIndex } = useSelector((state) => state.tour)
-  const currentTour = useSelector(selectCurrentTour)
   const registeredTour = useSelector(selectRegisteredTour)
-  const tourTeams = useSelector(selectTourTeams)
-  const currentTourTeam = useSelector(selectCurrentTourTeam)
   const currentTeam = useSelector(selectCurrentTeam)
   const [gameTab, setGameTab] = useState('')
 
@@ -52,14 +44,6 @@ export default function TourTabs() {
       setGameTab(TABS.GameProfile)
     }
   }, [path])
-
-  useEffect(() => {
-    if (selectTours?.length > 0 && tourTeams?.length > 0) {
-      if (currentTour?.id !== currentTourTeam?.tour_id) {
-        dispatch(setCurrentTourTeam(currentTour))
-      }
-    }
-  }, [dispatch, currentTourIndex, currentTourTeam, tourTeams, currentTour])
 
   const handleClick = (index, item) => {
     if (currentTourIndex !== index) {
@@ -85,7 +69,6 @@ export default function TourTabs() {
         borderRadius: 'var(--radius)',
         minHeight: '64px',
       }}
-      width={'100%'}
     >
       <StyledTabs
         value={currentTourIndex}
