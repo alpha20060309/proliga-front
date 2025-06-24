@@ -115,7 +115,7 @@ function ChangePasswordForm() {
           </div>
         </div>
         <Button
-          className="hover:bg-accent/80 max-w-40"
+          className="hover:dark:bg-accent max-w-40"
           size="lg"
           variant={'outline'}
           type="submit"
