@@ -1,16 +1,16 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'sonner'
 import { useEffect, useMemo } from 'react'
-import { useUpdateTeamPlayers } from 'app/hooks/transfer/useUpdateTeamPlayers/useUpdateTeamPlayers'
+import { useUpdateTeamPlayers } from 'app/hooks/transfer/useUpdateTeamPlayers'
 import { setCaptain } from 'app/lib/features/teamPlayer/teamPlayer.slice'
 import { useState } from 'react'
-import { useUpdateTeam } from 'app/hooks/transfer/useUpdateTeam/useUpdateTeam'
+import { useUpdateTeam } from 'app/hooks/transfer/useUpdateTeam'
 import { setTab } from 'app/lib/features/tour/tour.slice'
 import { TABS } from 'app/utils/tabs.util'
 import { revertTeamPlayers } from 'app/lib/features/teamPlayer/teamPlayer.slice'
 import { useTranslation } from 'react-i18next'
-import { useUpdateTourTeam } from 'app/hooks/transfer/useUpdateTourTeam/useUpdateTourTeam.index'
-import { useAutoGenerateTeamPlayers } from 'app/hooks/transfer/useAutoGenerateTeamPlayers/useAutoGenerateTeamPlayers'
+import { useUpdateTourTeam } from 'app/hooks/transfer/useUpdateTourTeam'
+import { useAutoGenerateTeamPlayers } from 'app/hooks/transfer/useAutoGenerateTeamPlayers'
 import {
   Select,
   SelectContent,

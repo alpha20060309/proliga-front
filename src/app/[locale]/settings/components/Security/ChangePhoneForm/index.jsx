@@ -13,7 +13,7 @@ import {
   selectUserTable,
 } from 'app/lib/features/auth/auth.selector'
 import { PhoneInput } from 'components/PhoneInput'
-import { useAuthChangePhone } from 'app/hooks/auth/useAuthChangePhone/useAuthChangePhone'
+import { useAuthChangePhone } from 'app/hooks/auth/useAuthChangePhone'
 import ConfirmOTP from 'shared/Modals/ConfirmOTP'
 import { toast } from 'sonner'
 

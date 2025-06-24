@@ -24,7 +24,7 @@ import { toast } from 'sonner'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { Input } from '@/components/ui/input'
-import { useSetUserCredentials } from 'app/hooks/auth/useSetUserCredentials/useSetUserCredentials'
+import { useSetUserCredentials } from 'app/hooks/auth/useSetUserCredentials'
 import { useSession } from 'next-auth/react'
 
 function SetUserCredentials() {

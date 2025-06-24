@@ -2,7 +2,7 @@
 
 import { memo, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useUpdateUserLocation } from 'app/hooks/user/useUpdateUserLocation/userUpdateUserLocation'
+import { useUpdateUserLocation } from 'app/hooks/user/useUpdateUserLocation'
 
 const GeolocationProvider = ({ children }) => {
   const { user } = useSelector((state) => state.auth)

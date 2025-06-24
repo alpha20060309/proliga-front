@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux'
 import { useState, useMemo, useEffect } from 'react'
 import { saveFile } from 'app/actions/saveFile.action'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
-import { useUpdateUserPhoto } from 'app/hooks/user/useUpdateUserPhoto/useUpdateUserPhoto'
+import { useUpdateUserPhoto } from 'app/hooks/user/useUpdateUserPhoto'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 
 export const UppyUploader = ({ closeModal }) => {
