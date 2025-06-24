@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
-import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
+import { useSendOTP } from 'app/hooks/auth/useSendOTP'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { cn } from '@/lib/utils'

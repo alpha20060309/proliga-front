@@ -4,7 +4,7 @@ import { Link } from 'next-view-transitions'
 import { useSelector } from 'react-redux'
 import { BANNER, BANNER_SERVICE_TYPE } from 'app/utils/banner.util'
 import { useMemo, useState, useEffect, memo } from 'react'
-import { useCreateBannerView } from 'app/hooks/system/useCreateBannerView/useCreateBannerView'
+import { useCreateBannerView } from 'app/hooks/system/useCreateBannerView'
 import YandexAd from '../YandexAd'
 import {
   selectGeo,

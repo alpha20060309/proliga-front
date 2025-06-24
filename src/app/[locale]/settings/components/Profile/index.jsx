@@ -8,7 +8,7 @@ import { formatDate } from 'app/utils/formatDate.util'
 import { Phone, CalendarDays, UsersRound } from 'lucide-react'
 import { SettingsContainer } from '../Container'
 import RefillBalanceBox from './RefillBalanceBox'
-import Avatar from 'components/Avatar'
+import Avatar from 'shared/Avatar'
 import { getUrl } from 'app/utils/static.util'
 import { Copy } from 'lucide-react'
 

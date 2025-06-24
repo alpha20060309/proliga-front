@@ -1,7 +1,7 @@
 'use client'
 
 import Box from '@mui/material/Box'
-import { StyledTab, StyledTabs } from 'components/StyledTabs'
+import { StyledTab, StyledTabs, GameTab } from 'components/StyledTabs'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { TOUR_STATUS } from 'app/utils/tour.util'
@@ -14,7 +14,6 @@ import {
 import { emptyTeamPlayers } from 'app/lib/features/teamPlayer/teamPlayer.slice'
 import { tabsClasses } from '@mui/material'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
-import GameTab from 'components/Game/TourTab'
 import { useTransitionRouter } from 'next-view-transitions'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
 import { TABS } from 'app/utils/tabs.util'

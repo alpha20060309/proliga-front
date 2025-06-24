@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 import { Camera, Loader } from 'lucide-react'
-import { useUpdateUserData } from 'app/hooks/user/useUpdateUserData/useUpdateUserData'
+import { useUpdateUserData } from 'app/hooks/user/useUpdateUserData'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import UploadFile from 'shared/Modals/UploadFile'
 import { SettingsContainer } from '../Container'
@@ -20,7 +20,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Label } from '@/components/ui/label'
-import Avatar from 'components/Avatar'
+import Avatar from 'shared/Avatar'
 
 const GENDERS = {
   UNSET: 'unset',

@@ -97,111 +97,111 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |   +---hooks
 |   |   +---auth
 |   |   |   +---useAuthChangePhone
-|   |   |   |       useAuthChangePhone.jsx
+|   |   |   |       index.jsx
 |   |   |   |       
 |   |   |   +---useAuthStatus
-|   |   |   |       useAuthStatus.js
+|   |   |   |       index.jsx
 |   |   |   |       
 |   |   |   +---useConfirmOTP
-|   |   |   |       useConfirmOTP.jsx
+|   |   |   |       index.jsx
 |   |   |   |       
 |   |   |   +---useLogOut
-|   |   |   |       useLogOut.jsx
+|   |   |   |       index.jsx
 |   |   |   |       
 |   |   |   +---useSendOTP
-|   |   |   |       useSendOTP.jsx
+|   |   |   |       index.jsx
 |   |   |   |       
 |   |   |   \---useSetUserCredentials
-|   |   |           useSetUserCredentials.jsx
+|   |   |           index.jsx
 |   |   |           
 |   |   +---payment
 |   |   |   +---useBuyPackageWithClick
-|   |   |   |       useBuyPackageWithClick.jsx
+|   |   |   |       index.jsx
 |   |   |   |       
 |   |   |   +---useBuyPackageWithPayme
-|   |   |   |       useBuyPackageWithPayme.jsx
+|   |   |   |       index.jsx
 |   |   |   |       
 |   |   |   +---useBuyPackageWithWallet
-|   |   |   |       useBuyPackageWithWallet.jsx
+|   |   |   |       index.jsx
 |   |   |   |       
 |   |   |   +---useRedirectToClick
-|   |   |   |       useRedirectToClick.jsx
+|   |   |   |       index.jsx
 |   |   |   |       
 |   |   |   \---useRedirectToPayme
-|   |   |           useRedirectToPayme.jsx
+|   |   |           index.jsx
 |   |   |           
 |   |   +---system
 |   |   |   +---useCreateBannerView
-|   |   |   |       useCreateBannerView.jsx
+|   |   |   |       index.jsx
 |   |   |   |       
 |   |   |   +---useGenerateFingerprint
-|   |   |   |       useGenerateFingerprint.jsx
+|   |   |   |       index.jsx
 |   |   |   |       
 |   |   |   +---useGetPage
-|   |   |   |       useGetPage.jsx
+|   |   |   |       index.jsx
 |   |   |   |       
 |   |   |   +---useGetUserAgent
-|   |   |   |       useGetUserAgent.jsx
+|   |   |   |       index.jsx
 |   |   |   |       
 |   |   |   +---useUpdateNewsView
-|   |   |   |       useUpdateNewsView.jsx
+|   |   |   |       index.jsx
 |   |   |   |       
 |   |   |   \---useUpdateSearchParams
-|   |   |           useUpdateSearchParams.jsx
+|   |   |           index.jsx
 |   |   |           
 |   |   +---theme
 |   |   |   +---useCreatePresetTheme
-|   |   |   |       useCreatePresetTheme.jsx
+|   |   |   |       index.jsx
 |   |   |   |       
 |   |   |   +---useCreateUserTheme
-|   |   |   |       useCreateUserTheme.jsx
+|   |   |   |       index.jsx
 |   |   |   |       
 |   |   |   +---useResetUserThemes
-|   |   |   |       useResetUserThemes.jsx
+|   |   |   |       index.jsx
 |   |   |   |       
 |   |   |   +---useSaveTheme
-|   |   |   |       useSaveTheme.jsx
+|   |   |   |       index.jsx
 |   |   |   |       
 |   |   |   \---useSetThemeDefault
-|   |   |           useSetThemeDefault.jsx
+|   |   |           index.jsx
 |   |   |           
 |   |   +---transfer
 |   |   |   +---useAutoGenerateTeamPlayers
-|   |   |   |       useAutoGenerateTeamPlayers.jsx
+|   |   |   |       index.jsx
 |   |   |   |       
 |   |   |   +---useCreateTeam
-|   |   |   |       useCreateTeam.jsx
+|   |   |   |       index.jsx
 |   |   |   |       
 |   |   |   +---useUpdateTeam
-|   |   |   |       useUpdateTeam.jsx
+|   |   |   |       index.jsx
 |   |   |   |       
 |   |   |   +---useUpdateTeamCaptains
-|   |   |   |       useUpdateTeamCaptains.jsx
+|   |   |   |       index.jsx
 |   |   |   |       
 |   |   |   +---useUpdateTeamPlayers
-|   |   |   |       useUpdateTeamPlayers.jsx
+|   |   |   |       index.jsx
 |   |   |   |       
 |   |   |   \---useUpdateTourTeam
-|   |   |           useUpdateTourTeam.index.jsx
+|   |   |           index.jsx
 |   |   |           
 |   |   \---user
 |   |       +---useGetUserPhone
-|   |       |       useGetUserPhone.jsx
+|   |       |       index.jsx
 |   |       |       
 |   |       +---useUpdateUserData
-|   |       |       useUpdateUserData.jsx
+|   |       |       index.jsx
 |   |       |       
 |   |       +---useUpdateUserLanguage
-|   |       |       useUpdateUserLanguage.jsx
+|   |       |       index.jsx
 |   |       |       
 |   |       +---useUpdateUserLocation
-|   |       |       userUpdateUserLocation.jsx
+|   |       |       index.jsx
 |   |       |       
 |   |       +---useUpdateUserNotificationInfo
-|   |       |       useUpdateUserNotificationInfo.jsx
+|   |       |       index.jsx
 |   |       |       
 |   |       \---useUpdateUserPhoto
-|   |               useUpdateUserPhoto.jsx
+|   |               index.jsx
 |   |               
 |   +---lib
 |   |   |   i18n.config.js
@@ -601,84 +601,48 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |       |           |   |   layout.jsx
 |       |           |   |   
 |       |           |   +---components
-|       |           |   |   +---Journal
-|       |           |   |   |   |   index.jsx
-|       |           |   |   |   |   
-|       |           |   |   |   +---Skeleton
-|       |           |   |   |   |       index.jsx
-|       |           |   |   |   |       
-|       |           |   |   |   \---Table
-|       |           |   |   |       |   index.jsx
-|       |           |   |   |       |   
-|       |           |   |   |       +---Body
-|       |           |   |   |       |       index.jsx
-|       |           |   |   |       |       
-|       |           |   |   |       \---Head
-|       |           |   |   |               index.jsx
-|       |           |   |   |               
-|       |           |   |   +---Statistics
-|       |           |   |   |   |   index.jsx
-|       |           |   |   |   |   
-|       |           |   |   |   +---Body
-|       |           |   |   |   |       index.jsx
-|       |           |   |   |   |       
-|       |           |   |   |   +---Filters
-|       |           |   |   |   |   |   index.jsx
-|       |           |   |   |   |   |   
-|       |           |   |   |   |   +---Clubs
-|       |           |   |   |   |   |       index.jsx
-|       |           |   |   |   |   |       
-|       |           |   |   |   |   \---Name
-|       |           |   |   |   |           index.jsx
-|       |           |   |   |   |           
-|       |           |   |   |   \---Skeleton
-|       |           |   |   |           index.jsx
-|       |           |   |   |           
-|       |           |   |   +---TopTeams
-|       |           |   |   |   |   index.jsx
-|       |           |   |   |   |   
-|       |           |   |   |   +---Players
-|       |           |   |   |   |       index.jsx
-|       |           |   |   |   |       
-|       |           |   |   |   +---Skeleton
-|       |           |   |   |   |       index.jsx
-|       |           |   |   |   |       
-|       |           |   |   |   \---Teams
-|       |           |   |   |           index.jsx
-|       |           |   |   |           
-|       |           |   |   \---Tournament
+|       |           |   |   \---TopTeams
 |       |           |   |       |   index.jsx
 |       |           |   |       |   
-|       |           |   |       +---Filters
+|       |           |   |       +---Players
 |       |           |   |       |       index.jsx
 |       |           |   |       |       
 |       |           |   |       +---Skeleton
 |       |           |   |       |       index.jsx
 |       |           |   |       |       
-|       |           |   |       +---Table
-|       |           |   |       |   |   index.jsx
-|       |           |   |       |   |   
-|       |           |   |       |   +---Body
-|       |           |   |       |   |   |   index.jsx
-|       |           |   |       |   |   |   
-|       |           |   |       |   |   \---CurrentTeamRow
-|       |           |   |       |   |           index.jsx
-|       |           |   |       |   |           
-|       |           |   |       |   \---Head
-|       |           |   |       |           index.jsx
-|       |           |   |       |           
-|       |           |   |       \---TeamSearch
+|       |           |   |       \---Teams
 |       |           |   |               index.jsx
 |       |           |   |               
 |       |           |   +---journal
-|       |           |   |       page.jsx
-|       |           |   |       
+|       |           |   |   |   loading.jsx
+|       |           |   |   |   page.jsx
+|       |           |   |   |   
+|       |           |   |   \---components
+|       |           |   |       \---Table
+|       |           |   |               index.jsx
+|       |           |   |               
 |       |           |   +---statistics
-|       |           |   |       page.jsx
-|       |           |   |       
+|       |           |   |   |   page.jsx
+|       |           |   |   |   
+|       |           |   |   \---components
+|       |           |   |       \---Filters
+|       |           |   |               index.jsx
+|       |           |   |               
 |       |           |   \---tournament
-|       |           |           page.jsx
-|       |           |           
+|       |           |       |   loading.jsx
+|       |           |       |   page.jsx
+|       |           |       |   
+|       |           |       \---components
+|       |           |           +---Filters
+|       |           |           |   +---Team
+|       |           |           |   |       index.jsx
+|       |           |           |   |       
+|       |           |           |   \---Tour
+|       |           |           |           index.jsx
+|       |           |           |           
+|       |           |           \---Table
+|       |           |                   index.jsx
+|       |           |                   
 |       |           \---(with-tour)
 |       |               |   layout.jsx
 |       |               |   page.jsx
@@ -702,9 +666,6 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |       |               |   |   \---ProfileStadiumForm
 |       |               |   |           index.jsx
 |       |               |   |           
-|       |               |   +---StadiumSpinner
-|       |               |   |       index.jsx
-|       |               |   |       
 |       |               |   \---Transfer
 |       |               |       |   index.jsx
 |       |               |       |   
@@ -718,9 +679,6 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |       |               |       |   |   index.jsx
 |       |               |       |   |   
 |       |               |       |   +---AddPlayerButton
-|       |               |       |   |       index.jsx
-|       |               |       |   |       
-|       |               |       |   +---Body
 |       |               |       |   |       index.jsx
 |       |               |       |   |       
 |       |               |       |   +---Filters
@@ -821,23 +779,11 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |       |           |   index.jsx
 |       |           |   
 |       |           +---BalanceTable
-|       |           |   |   index.jsx
-|       |           |   |   
-|       |           |   +---Body
-|       |           |   |       index.jsx
-|       |           |   |       
-|       |           |   \---Head
-|       |           |           index.jsx
-|       |           |           
+|       |           |       index.jsx
+|       |           |       
 |       |           +---PackagesTable
-|       |           |   |   index.jsx
-|       |           |   |   
-|       |           |   +---Body
-|       |           |   |       index.jsx
-|       |           |   |       
-|       |           |   \---Head
-|       |           |           index.jsx
-|       |           |           
+|       |           |       index.jsx
+|       |           |       
 |       |           \---Skeleton
 |       |                   index.jsx
 |       |                   
@@ -880,29 +826,23 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |                   OfflineClient.jsx
 |                   
 +---components
-|   +---Avatar
+|   +---DatePicker
 |   |       index.jsx
 |   |       
-|   +---Banners
-|   |   +---Big
+|   +---Game
+|   |   +---Player
 |   |   |       index.jsx
 |   |   |       
-|   |   +---LeftSide
+|   |   +---Stadium
 |   |   |       index.jsx
 |   |   |       
-|   |   +---Mini
+|   |   +---StadiumSpinner
 |   |   |       index.jsx
 |   |   |       
-|   |   +---Modal
-|   |   |       index.jsx
-|   |   |       
-|   |   +---RightSide
-|   |   |       index.jsx
-|   |   |       
-|   |   \---YandexAd
+|   |   \---Wrapper
 |   |           index.jsx
 |   |           
-|   +---DatePicker
+|   +---Gutter
 |   |       index.jsx
 |   |       
 |   +---Hero
@@ -911,86 +851,9 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |   |   \---Link
 |   |           index.jsx
 |   |           
-|   +---Modals
-|   |   +---Confirmation
-|   |   |       index.jsx
-|   |   |       
-|   |   +---ConfirmOTP
-|   |   |   |   index.jsx
-|   |   |   |   
-|   |   |   \---ResendOTP
-|   |   |           index.jsx
-|   |   |           
-|   |   +---ForgotPassword
-|   |   |       index.jsx
-|   |   |       
-|   |   +---MatchEvent
-|   |   |   |   animations.styles.js
-|   |   |   |   index.jsx
-|   |   |   |   
-|   |   |   +---Content
-|   |   |   |   |   index.jsx
-|   |   |   |   |   
-|   |   |   |   +---Event
-|   |   |   |   |   |   index.jsx
-|   |   |   |   |   |   
-|   |   |   |   |   \---Icon
-|   |   |   |   |           index.jsx
-|   |   |   |   |           
-|   |   |   |   \---Skeleton
-|   |   |   |           index.jsx
-|   |   |   |           
-|   |   |   +---Header
-|   |   |   |       index.jsx
-|   |   |   |       
-|   |   |   \---Score
-|   |   |           index.jsx
-|   |   |           
-|   |   +---NewsArticle
-|   |   |       index.jsx
-|   |   |       
-|   |   +---PlayerInfo
-|   |   |   |   index.jsx
-|   |   |   |   
-|   |   |   +---PlayerPhoto
-|   |   |   |       index.jsx
-|   |   |   |       
-|   |   |   \---Table
-|   |   |       |   index.jsx
-|   |   |       |   
-|   |   |       +---Body
-|   |   |       |       index.jsx
-|   |   |       |       
-|   |   |       \---Head
-|   |   |               index.jsx
-|   |   |               
-|   |   +---PlayerTransfer
-|   |   |   |   index.jsx
-|   |   |   |   
-|   |   |   \---Table
-|   |   |       |   index.jsx
-|   |   |       |   
-|   |   |       +---Body
-|   |   |       |       index.jsx
-|   |   |       |       
-|   |   |       +---Filters
-|   |   |       |       index.jsx
-|   |   |       |       
-|   |   |       \---SwapPlayerButton
-|   |   |               index.jsx
-|   |   |               
-|   |   +---RefillBalance
-|   |   |       index.jsx
-|   |   |       
-|   |   +---SetUserCredentials
-|   |   |       index.jsx
-|   |   |       
-|   |   \---UploadFile
-|   |       |   index.jsx
-|   |       |   
-|   |       \---Uploader
-|   |               index.jsx
-|   |               
+|   +---Marquee
+|   |       index.jsx
+|   |       
 |   +---MotionNumber
 |   |       index.jsx
 |   |       
@@ -1025,24 +888,29 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |   |       index.jsx
 |   |       
 |   \---Table
-|       +---ClubsFilter
+|       +---Body
 |       |       index.jsx
 |       |       
+|       +---Filters
+|       |   +---Clubs
+|       |   |       index.jsx
+|       |   |       
+|       |   +---Name
+|       |   |       index.jsx
+|       |   |       
+|       |   \---Price
+|       |           index.jsx
+|       |           
 |       +---Head
 |       |       index.jsx
 |       |       
-|       +---NameFilter
-|       |       index.jsx
-|       |       
-|       +---Pagination
-|       |       index.jsx
-|       |       
-|       +---PriceFilter
-|       |       index.jsx
-|       |       
-|       \---TanStackPagination
-|               index.jsx
-|               
+|       \---Pagination
+|           +---Client
+|           |       index.jsx
+|           |       
+|           \---Server
+|                   index.jsx
+|                   
 +---lib
 |   +---prisma
 |   |       index.js
@@ -1054,24 +922,105 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |           auth.util.js
 |           
 \---shared
+    +---Avatar
+    |       index.jsx
+    |       
+    +---Banners
+    |   +---Big
+    |   |       index.jsx
+    |   |       
+    |   +---LeftSide
+    |   |       index.jsx
+    |   |       
+    |   +---Mini
+    |   |       index.jsx
+    |   |       
+    |   +---Modal
+    |   |       index.jsx
+    |   |       
+    |   +---RightSide
+    |   |       index.jsx
+    |   |       
+    |   \---YandexAd
+    |           index.jsx
+    |           
     +---Footer
     |       index.jsx
     |       
     +---GameBrief
     |       index.jsx
     |       
-    +---GameTab
-    |       index.jsx
-    |       
-    +---GameWrapper
-    |       index.jsx
-    |       
-    +---Gutter
-    |       index.jsx
-    |       
-    +---Marquee
-    |       index.jsx
-    |       
+    +---Modals
+    |   +---Confirmation
+    |   |       index.jsx
+    |   |       
+    |   +---ConfirmOTP
+    |   |   |   index.jsx
+    |   |   |   
+    |   |   \---ResendOTP
+    |   |           index.jsx
+    |   |           
+    |   +---ForgotPassword
+    |   |       index.jsx
+    |   |       
+    |   +---MatchEvent
+    |   |   |   animations.styles.js
+    |   |   |   index.jsx
+    |   |   |   
+    |   |   +---Content
+    |   |   |   |   index.jsx
+    |   |   |   |   
+    |   |   |   +---Event
+    |   |   |   |   |   index.jsx
+    |   |   |   |   |   
+    |   |   |   |   \---Icon
+    |   |   |   |           index.jsx
+    |   |   |   |           
+    |   |   |   \---Skeleton
+    |   |   |           index.jsx
+    |   |   |           
+    |   |   +---Header
+    |   |   |       index.jsx
+    |   |   |       
+    |   |   \---Score
+    |   |           index.jsx
+    |   |           
+    |   +---NewsArticle
+    |   |       index.jsx
+    |   |       
+    |   +---PlayerInfo
+    |   |   |   index.jsx
+    |   |   |   
+    |   |   +---PlayerPhoto
+    |   |   |       index.jsx
+    |   |   |       
+    |   |   \---Table
+    |   |           index.jsx
+    |   |           
+    |   +---PlayerTransfer
+    |   |   |   index.jsx
+    |   |   |   
+    |   |   \---Table
+    |   |       |   index.jsx
+    |   |       |   
+    |   |       +---Filters
+    |   |       |       index.jsx
+    |   |       |       
+    |   |       \---SwapPlayerButton
+    |   |               index.jsx
+    |   |               
+    |   +---RefillBalance
+    |   |       index.jsx
+    |   |       
+    |   +---SetUserCredentials
+    |   |       index.jsx
+    |   |       
+    |   \---UploadFile
+    |       |   index.jsx
+    |       |   
+    |       \---Uploader
+    |               index.jsx
+    |               
     +---Navbar
     |   |   index.jsx
     |   |   
@@ -1093,12 +1042,6 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
     |   \---NotificationArticle
     |           index.jsx
     |           
-    +---PlayersStructure
-    |       index.jsx
-    |       
-    +---StadiumContainer
-    |       index.jsx
-    |       
     +---SwitcherLanguage
     |       index.jsx
     |       

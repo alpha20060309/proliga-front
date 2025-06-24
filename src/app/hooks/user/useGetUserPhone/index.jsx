@@ -2,8 +2,8 @@ import { useState, useCallback } from 'react'
 import { toast } from 'sonner'
 import { supabase } from '../../../lib/supabaseClient'
 import { useTranslation } from 'react-i18next'
-import { useUpdateSearchParams } from 'app/hooks/system/useUpdateSearchParams/useUpdateSearchParams'
-import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
+import { useUpdateSearchParams } from 'app/hooks/system/useUpdateSearchParams'
+import { useSendOTP } from 'app/hooks/auth/useSendOTP'
 
 export const useGetUserPhone = () => {
   const { t } = useTranslation()

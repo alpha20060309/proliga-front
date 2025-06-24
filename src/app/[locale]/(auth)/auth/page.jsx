@@ -9,7 +9,7 @@ import { useTransitionRouter } from 'next-view-transitions'
 import { useSelector } from 'react-redux'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { useTranslation } from 'react-i18next'
-import { useAuthStatus } from 'app/hooks/auth/useAuthStatus/useAuthStatus'
+import { useAuthStatus } from 'app/hooks/auth/useAuthStatus'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 const SignUpForm = dynamic(() => import('./components/SignUpForm'), {
   ssr: false,

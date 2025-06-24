@@ -13,10 +13,10 @@ import {
   Dialog,
   DialogDescription,
 } from '@/components/ui/dialog'
-import { useConfirmOTP } from 'app/hooks/auth/useConfirmOTP/useConfirmOTP'
+import { useConfirmOTP } from 'app/hooks/auth/useConfirmOTP'
 import { useSelector } from 'react-redux'
 import ResendOTP from './ResendOTP'
-import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
+import { useSendOTP } from 'app/hooks/auth/useSendOTP'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'

@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react'
 import { toast } from 'sonner'
 import { supabase } from '../../../lib/supabaseClient'
 import { useTranslation } from 'react-i18next'
-import { useSendOTP } from '../useSendOTP/useSendOTP'
+import { useSendOTP } from '../useSendOTP'
 import { useSession } from 'next-auth/react'
 
 export const useSetUserCredentials = () => {

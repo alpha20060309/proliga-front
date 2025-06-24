@@ -17,7 +17,7 @@ import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.s
 import { selectAgent, selectGeo } from 'app/lib/features/auth/auth.selector'
 import { login } from 'app/actions/login.action'
 import { useSession } from 'next-auth/react'
-import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
+import { useSendOTP } from 'app/hooks/auth/useSendOTP'
 import { Loader2 } from 'lucide-react'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 

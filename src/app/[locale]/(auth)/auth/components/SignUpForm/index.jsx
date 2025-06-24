@@ -17,7 +17,7 @@ import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.s
 import SocialLogin from '../SocialLogin'
 import { Input } from '@/components/ui/input'
 import { useSession } from 'next-auth/react'
-import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
+import { useSendOTP } from 'app/hooks/auth/useSendOTP'
 import { register } from 'app/actions/register.action'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'

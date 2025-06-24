@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/input-otp'
 import ResendOTPBox from '../ResendOTPBox'
 import { useTranslation } from 'react-i18next'
-import { useConfirmOTP } from 'app/hooks/auth/useConfirmOTP/useConfirmOTP'
+import { useConfirmOTP } from 'app/hooks/auth/useConfirmOTP'
 import { Button } from '@/components/ui/button'
 import { Loader2, ShieldCheck } from 'lucide-react'
 import { toast } from 'sonner'
