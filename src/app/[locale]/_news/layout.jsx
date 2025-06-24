@@ -1,4 +1,4 @@
-import Gutter from 'shared/Gutter'
+import Gutter from 'components/Gutter'
 
 export default function NewsLayout({ children }) {
     return (

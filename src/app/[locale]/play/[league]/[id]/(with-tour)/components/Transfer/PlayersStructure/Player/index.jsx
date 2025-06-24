@@ -1,6 +1,6 @@
 'use client'
 
-import Confirmation from 'components/Modals/Confirmation'
+import Confirmation from 'shared/Modals/Confirmation'
 import Image from 'next/image'
 import { useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -21,7 +21,7 @@ import {
   PlayerName,
   PlayerButtonsContainer,
   PlayerButton,
-} from 'shared/PlayersStructure'
+} from 'components/Game/Player'
 
 const Player = ({ player }) => {
   const dispatch = useDispatch()

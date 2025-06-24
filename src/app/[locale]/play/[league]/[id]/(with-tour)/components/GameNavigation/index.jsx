@@ -19,7 +19,7 @@ import {
   selectCurrentTourTeam,
   selectTourTeams,
 } from 'app/lib/features/tourTeam/tourTeam.selector'
-import GameTab from 'shared/GameTab'
+import GameTab from 'components/Game/TourTab'
 import { useTransitionRouter } from 'next-view-transitions'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
 import { TABS } from 'app/utils/tabs.util'
@@ -108,7 +108,7 @@ export default function TourTabs() {
             disabled={
               currentTeam?.is_team_created
                 ? item.status === TOUR_STATUS.notStarted ||
-                  item.order < registeredTour?.order
+                item.order < registeredTour?.order
                 : item.status !== TOUR_STATUS.notStartedTransfer
             }
             label={<GameTab item={item} />}

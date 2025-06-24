@@ -15,7 +15,7 @@ import {
 import { fetchMatches } from 'app/lib/features/match/match.thunk'
 import Match from './Match'
 import MatchSkeleton from './Match/Skeleton'
-import MatchEvent from 'components/Modals/MatchEvent'
+import MatchEvent from 'shared/Modals/MatchEvent'
 import { Pagination } from 'components/Table/Pagination'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { selectMatches } from 'app/lib/features/match/match.selector'

@@ -39,7 +39,7 @@ const SETTINGS_TABS = [
   {
     key: SETTINGS_TAB.HISTORY,
     title: 'Xarajatlar',
-    icon: 'History',
+    icon: 'Banknote',
   },
   {
     key: SETTINGS_TAB.SECURITY,

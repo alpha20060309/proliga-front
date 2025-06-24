@@ -9,7 +9,7 @@ import { fetchPlayerPoint } from 'app/lib/features/playerPoint/playerPoint.thunk
 import { selectPrevTeam } from 'app/lib/features/teamPlayer/teamPlayer.selector'
 import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
 import { use } from 'react'
-import Gutter from 'shared/Gutter'
+import Gutter from 'components/Gutter'
 
 const PlayLayout = ({ children, params }) => {
   const { league, id } = use(params)

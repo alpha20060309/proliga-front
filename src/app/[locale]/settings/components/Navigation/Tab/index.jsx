@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
-import { Shield, User, Cog, History } from 'lucide-react'
+import { Shield, User, Cog, Banknote } from 'lucide-react'
 
 const SettingsNavigationTab = ({ tab, currentTab, setTab }) => {
   const { t } = useTranslation()
@@ -16,8 +16,8 @@ const SettingsNavigationTab = ({ tab, currentTab, setTab }) => {
         return <User className={cn('size-6', isActive ? active : passive)} />
       case 'Cog':
         return <Cog className={cn('size-6', isActive ? active : passive)} />
-      case 'History':
-        return <History className={cn('size-6', isActive ? active : passive)} />
+      case 'Banknote':
+        return <Banknote className={cn('size-6', isActive ? active : passive)} />
       case 'Shield':
         return <Shield className={cn('size-6', isActive ? active : passive)} />
       default:

@@ -1,6 +1,5 @@
 import Player from './Player'
 import { useSelector } from 'react-redux'
-import StadiumSpinner from '../../StadiumSpinner'
 import { memo } from 'react'
 import {
   selectDEF,
@@ -14,7 +13,8 @@ import {
   DEFContainer,
   MIDContainer,
   STRContainer,
-} from 'shared/PlayersStructure'
+} from 'components/Game/Player'
+import { StadiumSpinner } from 'components/Game/Stadium'
 
 const ProfilePlayersStructure = () => {
   const { isLoading } = useSelector((state) => state.teamPlayer)

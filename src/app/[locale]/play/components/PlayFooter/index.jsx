@@ -1,9 +1,9 @@
-import Gutter from 'shared/Gutter'
+import Gutter from 'components/Gutter'
 import RulesSlider from '../RulesSlider'
 import Matches from '../Matches'
 import News from '../News'
-import MiniBanner from 'components/Banners/Mini'
-import BigBanner from 'components/Banners/Big'
+import MiniBanner from 'shared/Banners/Mini'
+import BigBanner from 'shared/Banners/Big'
 
 const PlayFooter = () => {
   return (

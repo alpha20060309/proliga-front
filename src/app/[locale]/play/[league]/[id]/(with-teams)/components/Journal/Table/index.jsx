@@ -7,8 +7,8 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import TransferTableHead from './Head'
-import TransferTableBody from './Body'
+import JournalTableBody from './Body'
+import TableHead from 'components/Table/Head'
 import { useSelector } from 'react-redux'
 import { createColumnHelper } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
@@ -32,7 +32,7 @@ function JournalTable() {
     columnHelper.accessor('name', {
       accessorKey: 'name',
       cell: (info) => info.getValue(),
-      header: t('Oyinchi ismi'),
+      header: t('Message'),
       id: 'name',
       accessorFn: (row) =>
         getCorrectName({ lang, uz: row?.name_uz, ru: row?.name_ru }),
@@ -49,8 +49,8 @@ function JournalTable() {
 
   return (
     <table className="text-foreground h-auto w-full text-xs md:text-sm">
-      <TransferTableHead table={table} />
-      <TransferTableBody table={table} flexRender={flexRender} />
+      <TableHead table={table} />
+      <JournalTableBody table={table} flexRender={flexRender} />
     </table>
   )
 }

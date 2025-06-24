@@ -1,4 +1,4 @@
-import Gutter from 'shared/Gutter'
+import Gutter from 'components/Gutter'
 import Image from 'next/image'
 
 const ChampionshipsLayout = ({ children }) => {

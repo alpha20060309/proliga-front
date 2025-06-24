@@ -12,7 +12,7 @@ import {
   PlayerImage,
   PlayerName,
   PlayerPoint,
-} from 'shared/PlayersStructure'
+} from 'components/Game/Player'
 
 const Player = ({ player }) => {
   const { lang } = useSelector((store) => store.systemLanguage)

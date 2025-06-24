@@ -1,4 +1,4 @@
-import Gutter from 'shared/Gutter'
+import Gutter from 'components/Gutter'
 import BannerTemplate from 'app/[locale]/play/components/BannerTemplate'
 import GameProfile from './components/GameProfile'
 

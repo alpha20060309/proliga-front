@@ -1,10 +1,10 @@
 import PlayersStructure from './PlayersStructure'
 import PlayersTable from './PlayersTable'
 import TransferStadiumForm from './TransferStadiumForm'
-import PlayerTransfer from 'components/Modals/PlayerTransfer'
-import StadiumContainer from 'shared/StadiumContainer'
+import PlayerTransfer from 'shared/Modals/PlayerTransfer'
 import { memo } from 'react'
-import { GameWrapper, StadiumSectionWrapper } from 'shared/GameWrapper'
+import { GameWrapper } from 'components/Game/Wrapper'
+import { StadiumContainer, StadiumSectionWrapper } from 'components/Game/Stadium'
 
 const Transfer = () => {
   return (

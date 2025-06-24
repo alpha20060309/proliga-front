@@ -1,9 +1,9 @@
 import ProfilePlayersStructure from './PlayersStructure'
 import GameBrief from './GameBrief'
-import LeftSideBanner from 'components/Banners/LeftSide'
-import RightSideBanner from 'components/Banners/RightSide'
-import StadiumContainer from 'shared/StadiumContainer'
-import { GameWrapper, StadiumSectionWrapper } from 'shared/GameWrapper'
+import LeftSideBanner from 'shared/Banners/LeftSide'
+import RightSideBanner from 'shared/Banners/RightSide'
+import { StadiumContainer, StadiumSectionWrapper } from 'components/Game/Stadium'
+import { GameWrapper } from 'components/Game/Wrapper'
 
 const TeamProfile = () => {
   return (

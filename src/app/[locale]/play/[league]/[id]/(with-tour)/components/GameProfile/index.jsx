@@ -3,10 +3,10 @@
 import ProfileStadiumForm from './ProfileStadiumForm'
 import ProfilePlayersStructure from './PlayersStructure'
 import GameBrief from './GameBrief'
-import PlayerInfo from 'components/Modals/PlayerInfo'
+import PlayerInfo from 'shared/Modals/PlayerInfo'
 import { memo } from 'react'
-import StadiumContainer from 'shared/StadiumContainer'
-import { GameWrapper, StadiumSectionWrapper } from 'shared/GameWrapper'
+import { GameWrapper } from 'components/Game/Wrapper'
+import { StadiumContainer, StadiumSectionWrapper } from 'components/Game/Stadium'
 
 const GameProfile = () => {
   return (

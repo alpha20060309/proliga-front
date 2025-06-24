@@ -8,7 +8,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { createColumnHelper } from '@tanstack/react-table'
@@ -30,7 +30,6 @@ function StatisticsTable() {
     pageIndex: 0,
     pageSize: 15,
   })
-  const [data, setData] = useState(players || [])
 
   const columns = [
     columnHelper.accessor('player_id.position', {
@@ -132,7 +131,7 @@ function StatisticsTable() {
 
   const table = useReactTable({
     columns,
-    data,
+    data: players || [],
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -142,12 +141,6 @@ function StatisticsTable() {
       pagination,
     },
   })
-
-  useEffect(() => {
-    if (lang) {
-      setData([...players])
-    }
-  }, [lang, players])
 
   return (
     <section className="flex h-full flex-col gap-2">

@@ -3,7 +3,7 @@ import PromotionCreateTeam from './CreateTeam'
 import PromotionGatherPoints from './GatherPoints'
 import PromotionMakeTransfers from './MakeTransfers'
 import PromotionWinPrizes from './WinPrizes'
-import Gutter from 'shared/Gutter'
+import Gutter from 'components/Gutter'
 import initTranslations from 'app/lib/i18n'
 
 const Promotions = async ({ params }) => {
@@ -19,11 +19,6 @@ const Promotions = async ({ params }) => {
         <PromotionCompete t={t} />
         <PromotionWinPrizes />
       </Gutter>
-      {/* <Gutter className={'bg-background my-2 max-h-[46rem]'}></Gutter>
-      <Gutter className={'bg-background my-2 max-h-[44rem]'}></Gutter>
-      <Gutter className={'bg-background my-2 max-h-[44rem]'}></Gutter>
-      <Gutter className={'bg-background my-2 max-h-[44rem]'}></Gutter>
-      <Gutter className={'bg-background my-2'}></Gutter> */}
     </section>
   )
 }

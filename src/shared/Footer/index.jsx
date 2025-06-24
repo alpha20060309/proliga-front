@@ -11,7 +11,7 @@ import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.s
 import { FaTelegram, FaInstagram } from 'react-icons/fa'
 import { Mail } from 'lucide-react'
 import AnimatedGradientText from '@/components/ui/animated-gradient-text'
-import Gutter from 'shared/Gutter'
+import Gutter from 'components/Gutter'
 
 const Footer = () => {
   const path = usePathname()

@@ -7,12 +7,13 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import Head from './Head'
+import TableHead from 'components/Table/Head'
 import Body from './Body'
 import { useSelector } from 'react-redux'
 import { createColumnHelper } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
 import { selectAllTeams } from 'app/lib/features/team/team.selector'
+import { capitalize } from 'lodash'
 
 const columnHelper = createColumnHelper()
 
@@ -23,7 +24,7 @@ function TournamentTable({ showUserTourTeam }) {
   const columns = [
     columnHelper.accessor('', {
       accessorFn: (row) => row?.team?.order ?? '',
-      header: t("O'RIN").toLocaleLowerCase(),
+      header: capitalize(t("O'RIN")),
       id: 'Id',
     }),
     columnHelper.accessor('name', {
@@ -58,7 +59,7 @@ function TournamentTable({ showUserTourTeam }) {
 
   return (
     <table className="text-foreground h-auto w-full min-w-72 table-auto text-xs sm:text-sm">
-      <Head table={table} />
+      <TableHead table={table} />
       <Body
         table={table}
         flexRender={flexRender}

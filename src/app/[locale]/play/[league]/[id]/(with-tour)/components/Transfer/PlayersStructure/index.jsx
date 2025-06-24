@@ -1,5 +1,5 @@
 import Player from './Player'
-import StadiumSpinner from '../../StadiumSpinner'
+import { StadiumSpinner } from 'components/Game/Stadium'
 import { useSelector } from 'react-redux'
 import {
   selectDEF,
@@ -9,7 +9,8 @@ import {
 } from 'app/lib/features/teamPlayer/teamPlayer.selector'
 import { TOUR_STATUS } from 'app/utils/tour.util'
 import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
-import { PlayersStructureContainer, MIDContainer, DEFContainer, STRContainer, GOAContainer } from 'shared/PlayersStructure'
+// import { PlayersStructureContainer, MIDContainer, DEFContainer, STRContainer, GOAContainer } from 'components/Game/Player'
+import { PlayersStructureContainer, MIDContainer, DEFContainer, STRContainer, GOAContainer } from 'components/Game/Player'
 
 const TransferPlayersStructure = () => {
   const currentTour = useSelector(selectCurrentTour)

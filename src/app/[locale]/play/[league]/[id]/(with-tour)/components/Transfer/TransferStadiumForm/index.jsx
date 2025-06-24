@@ -35,7 +35,7 @@ import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { Loader2, Undo2, Compass } from 'lucide-react'
 import { TOUR_STATUS } from 'app/utils/tour.util'
-import { StadiumSelectTrigger, StadiumSaveButton } from 'shared/GameWrapper'
+import { StadiumSelectTrigger, StadiumSaveButton } from 'components/Game/Stadium'
 
 const TransferStadiumForm = () => {
   const { t } = useTranslation()

@@ -17,7 +17,7 @@ import {
   PlayerButtonsContainer,
   PlayerButton,
   PlayerPoint,
-} from 'shared/PlayersStructure'
+} from 'components/Game/Player'
 
 const Player = ({ player }) => {
   const dispatch = useDispatch()

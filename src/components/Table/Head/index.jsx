@@ -1,8 +1,8 @@
-'use client'
 import { flexRender } from '@tanstack/react-table'
 import { ChevronsUpDown, ChevronsDown, ChevronsUp } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
-const TableHead = ({ table }) => {
+const TableHead = ({ table, className }) => {
     return (
         <thead>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -13,9 +13,13 @@ const TableHead = ({ table }) => {
                                 key={header.id}
                                 colSpan={header.colSpan}
                                 {...{
-                                    className: header.column.getCanSort()
-                                        ? 'cursor-pointer text-center select-none px-0.5 py-1 text-xs xs:text-sm lg:text-base font-medium md:p-1 md:text-start min-w-6 sm:min-w-max'
-                                        : ' px-0.5 md:p-1 text-start ',
+                                    className: cn(
+                                        ' text-center select-none px-0.5 py-1 text-xs xs:text-sm md:p-1 md:text-start min-w-6',
+                                        className,
+                                        header.column.getCanSort()
+                                            ? 'cursor-pointer'
+                                            : ''
+                                    ),
                                     onClick: header.column.getToggleSortingHandler(),
                                 }}
                             >

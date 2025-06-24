@@ -1,5 +1,5 @@
-import LeftSideBanner from 'components/Banners/LeftSide'
-import RightSideBanner from 'components/Banners/RightSide'
+import LeftSideBanner from 'shared/Banners/LeftSide'
+import RightSideBanner from 'shared/Banners/RightSide'
 
 export default function BannerTemplate({ children }) {
   return (
