@@ -1,6 +1,6 @@
 import { Skeleton } from '@/components/ui/skeleton'
 import { PaginationSkeleton } from 'components/Table/Pagination/Server'
-
+import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table'
 const TournamentTableSkeleton = ({
     rows = 14,
     cols = 5,
@@ -8,37 +8,37 @@ const TournamentTableSkeleton = ({
 }) => {
     return (
         <>
-            <table className="h-auto w-full min-w-72 table-auto text-xs sm:text-sm">
-                <thead>
-                    <tr>
+            <Table className="h-auto w-full min-w-72 table-auto text-xs sm:text-sm">
+                <TableHeader>
+                    <TableRow>
                         {[...Array(cols)].map((_, index) => (
-                            <th
+                            <TableHead
                                 key={index}
                                 className="p-0.5 text-center sm:min-w-16 md:p-1 md:text-start"
                             >
                                 <Skeleton className="h-6 w-full" />
-                            </th>
+                            </TableHead>
                         ))}
-                    </tr>
-                </thead>
-                <tbody>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
                     {[...Array(rows)].map((_, rowIndex) => (
-                        <tr
+                        <TableRow
                             key={rowIndex}
                             className="hover:bg-card border-border bg-background text-foreground odd:bg-secondary mx-auto border-b text-center md:text-start"
                         >
                             {[...Array(cols)].map((_, cellIndex) => (
-                                <td
+                                <TableCell
                                     key={cellIndex}
                                     className="h-8 w-min px-0.5 capitalize md:w-auto"
                                 >
                                     <Skeleton className="h-4 w-full" />
-                                </td>
+                                </TableCell>
                             ))}
-                        </tr>
+                        </TableRow>
                     ))}
-                </tbody>
-            </table>
+                </TableBody>
+            </Table>
             <PaginationSkeleton
                 count={paginationCount}
                 className={'h-full items-end'}

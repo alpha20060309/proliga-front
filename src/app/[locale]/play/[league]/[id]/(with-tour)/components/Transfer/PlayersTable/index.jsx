@@ -40,14 +40,16 @@ import Body from 'components/Table/Body'
 const columnHelper = createColumnHelper()
 
 function PlayersTable() {
+  const dispatch = useDispatch()
+  const { lang } = useSelector((state) => state.systemLanguage)
+  const { t } = useTranslation()
+
   const [sorting, setSorting] = useState([
     {
       id: 'price',
       desc: true,
     },
   ])
-  const { t } = useTranslation()
-  const { lang } = useSelector((state) => state.systemLanguage)
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: 13,
@@ -56,7 +58,6 @@ function PlayersTable() {
   const players = useSelector(selectPlayers)
   const [windowWidth, setWindowWidth] = useState(0)
 
-  const dispatch = useDispatch()
   const totalPlayersCount = useSelector(selectTotalPlayersCount)
   const teamConcat = useSelector(selectTeamConcat)
   const currentTeam = useSelector(selectCurrentTeam)
@@ -248,7 +249,7 @@ function PlayersTable() {
   return (
     <Card
       className={
-        'border-border mx-auto h-min w-full max-w-lg gap-2 py-4 lg:w-[55%] lg:max-w-2xl xl:gap-1'
+        'border-border mx-auto h-min w-full max-w-lg gap-2 py-4 lg:w-[55%] lg:max-w-2xl xl:gap-0.5'
       }
     >
       <TeamOverview />

@@ -1,20 +1,21 @@
 import { Skeleton } from '@/components/ui/skeleton'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
+import { Table, TableBody, TableHead, TableHeader, TableRow, TableCell } from '@/components/ui/table'
 
 const PlayersTableSkeleton = () => {
   return (
     <Card
       className={
-        'border-border mx-auto w-full max-w-2xl gap-2 py-4 lg:w-[55%] xl:gap-0 2xl:gap-2'
+        'border-border mx-auto h-min w-full max-w-lg gap-2 py-4 lg:w-[55%] lg:max-w-2xl xl:gap-0.5'
       }
     >
       <TeamOverviewSkeleton />
       <CardContent className="space-y-2 px-4">
         <TransferTableFiltersSkeleton />
-        <table className="w-full min-w-80 table-auto text-xs xl:text-sm">
+        <Table>
           <TransferTableHeadSkeleton />
           <TransferTableBodySkeleton />
-        </table>
+        </Table>
       </CardContent>
       <CardFooter>
         <TransferTablePaginationSkeleton />
@@ -37,29 +38,29 @@ const TeamOverviewSkeleton = () => {
 
 const TransferTableBodySkeleton = () => {
   return (
-    <tbody>
+    <TableBody>
       {[...Array(10)].map((_, rowIndex) => (
-        <tr
+        <TableRow
           key={rowIndex}
           className="border-border odd:bg-secondary w-full border-b"
         >
           {[...Array(5)].map((_, cellIndex) => (
-            <td key={cellIndex} className="p-1">
+            <TableCell key={cellIndex} className="p-1">
               <Skeleton className="h-4 w-full min-w-8 2xl:min-w-10" />
-            </td>
+            </TableCell>
           ))}
-          <td className="p-2">
+          <TableCell className="p-2">
             <Skeleton className="h-6 w-6 rounded-full" />
-          </td>
-        </tr>
+          </TableCell>
+        </TableRow>
       ))}
-    </tbody>
+    </TableBody>
   )
 }
 
 const TransferTableFiltersSkeleton = () => {
   return (
-    <div className="xs:text-xs grid w-full grid-cols-4 grid-rows-2 gap-x-1 gap-y-2 text-sm sm:grid-rows-1 lg:grid-rows-2 lg:gap-y-1 xl:grid-rows-1 xl:gap-y-2 2xl:text-sm">
+    <div className="grid grid-cols-2 grid-rows-2 gap-1 lg:grid-cols-4 lg:grid-rows-1">
       {[...Array(4)].map((_, index) => (
         <Skeleton key={index} className="h-8 w-full" />
       ))}
@@ -69,21 +70,21 @@ const TransferTableFiltersSkeleton = () => {
 
 const TransferTableHeadSkeleton = () => {
   return (
-    <thead>
-      <tr>
-        {[...Array(5)].map((_, index) => (
-          <th key={index} className="p-2">
+    <TableHeader>
+      <TableRow>
+        {[...Array(6)].map((_, index) => (
+          <TableHead key={index} className="p-2">
             <Skeleton className="h-6 w-full" />
-          </th>
+          </TableHead>
         ))}
-      </tr>
-    </thead>
+      </TableRow>
+    </TableHeader>
   )
 }
 
 const TransferTablePaginationSkeleton = () => {
   return (
-    <div className="flex w-full items-center justify-center gap-2 overflow-x-auto">
+    <div className="flex w-full items-center justify-center gap-2 overflow-x-auto px-4">
       {[...Array(7)].map((_, index) => (
         <Skeleton key={index} className="h-8 w-8 rounded-sm" />
       ))}

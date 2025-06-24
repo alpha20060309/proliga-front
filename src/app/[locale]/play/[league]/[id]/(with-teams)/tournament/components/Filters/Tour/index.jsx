@@ -15,17 +15,13 @@ const TourFilter = memo(({ tour, setTour }) => {
   const { teamsLoading } = useSelector((state) => state.team)
   const { lang } = useSelector((store) => store.systemLanguage)
 
-  const handleSelectTour = (value) => {
-    setTour(value)
-  }
-
   return (
     <Select
       disabled={teamsLoading}
       value={tour}
-      onValueChange={handleSelectTour}
+      onValueChange={(value) => setTour(value)}
     >
-      <SelectTrigger className="bg-background text-muted-foreground border-border w-1/3 max-w-36 truncate rounded-sm px-2 shadow-sm data-[size=default]:h-8">
+      <SelectTrigger className="border-border w-1/3 max-w-36 truncate rounded-sm px-2 shadow-sm data-[size=default]:h-8">
         <SelectValue />
       </SelectTrigger>
       <SelectContent>

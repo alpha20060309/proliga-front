@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux'
 import { useState, useEffect, useMemo } from 'react'
 import { fetchAllTeams } from 'app/lib/features/team/team.thunk'
 import { useDispatch } from 'react-redux'
-import { TournamentTableSkeleton } from './components/Skeleton'
 import { Pagination } from 'components/Table/Pagination/Server'
 import {
   selectCurrentTour,
@@ -18,6 +17,7 @@ import TeamFilter from './components/Filters/Team'
 import TourFilter from './components/Filters/Tour'
 import { searchAllTeams } from 'app/lib/features/team/team.thunk'
 import { memo } from 'react'
+import TournamentTableSkeleton from './loading'
 
 const Tournament = () => {
   const dispatch = useDispatch()

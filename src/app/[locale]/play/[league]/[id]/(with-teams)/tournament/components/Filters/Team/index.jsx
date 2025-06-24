@@ -93,14 +93,14 @@ const TeamFilter = memo(({
   }, [dispatch])
 
   return (
-    <div className="relative w-2/3 max-w-80">
+    <div className="relative w-full max-w-64">
       <Input
         aria-label="team search"
         id="team-search"
         placeholder={t('Enter team name...')}
         value={localSearchTerm}
         onChange={handleSearchChange}
-        className="bg-background text-foreground border-border h-8 w-full rounded pr-7 pl-2 text-sm"
+        className=" border-border h-8 w-full rounded pr-7 pl-2 text-sm"
         disabled={teamsLoading}
       />
       <Search className="xs:block text-muted-foreground absolute top-1/2 right-2 hidden size-5 -translate-y-1/2" />

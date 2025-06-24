@@ -10,26 +10,63 @@ import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
 import { TOUR_STATUS } from 'app/utils/tour.util'
 import { cn } from '@/lib/utils'
 import { Link } from 'next-view-transitions'
-import { memo } from 'react'
+import { memo, useEffect, useState } from 'react'
+import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
 
+// Simpler icon selection: just use a switch statement in NavLink
 const NavLink = ({
   href,
-  icon,
+  iconName,
   label,
   className,
-  onClick,
   isDisabled,
   isActive,
 }) => {
+  let IconComponent
+  switch (iconName) {
+    case TABS.GameProfile:
+      IconComponent = Home
+      break
+    case TABS.Transfer:
+      IconComponent = Repeat
+      break
+    case TABS.Tournament:
+      IconComponent = Users
+      break
+    case TABS.Journal:
+      IconComponent = Notebook
+      break
+    case TABS.Statistics:
+      IconComponent = BarChart2
+      break
+    default:
+      IconComponent = Home
+  }
+
+  let iconClass = 'size-4.5'
+  if (isDisabled) {
+    iconClass += ' text-muted-foreground'
+  } else if (isActive) {
+    iconClass += ' text-sidebar-accent-foreground'
+  } else {
+    iconClass += ' text-sidebar-foreground'
+  }
+
   return (
     <Link
       href={isDisabled ? '#' : href}
-      onClick={isDisabled ? (e) => e.preventDefault() : onClick}
+      onClick={
+        isDisabled
+          ? (e) => {
+              e.preventDefault()
+            }
+          : undefined
+      }
       className={cn(
         'group flex-1 cursor-pointer p-0 text-center no-underline',
         className,
         {
-          'pointer-events-none': isDisabled,
+          'pointer-events-none opacity-50': isDisabled,
           'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground':
             !isDisabled,
         }
@@ -40,14 +77,14 @@ const NavLink = ({
     >
       <div
         className={cn(
-          'flex h-16 w-full flex-col items-center justify-center rounded-md p-1',
+          'flex h-16 w-full flex-col items-center justify-center rounded-md p-1 text-sidebar-foreground',
           className,
           {
-            'bg-sidebar-accent': isActive && !isDisabled,
+            'bg-sidebar-accent text-sidebar-accent-foreground': isActive && !isDisabled,
           }
         )}
       >
-        {icon}
+        <IconComponent className={iconClass} />
         <span className="mt-0.5 text-xs">{label}</span>
       </div>
     </Link>
@@ -59,77 +96,52 @@ function MobileNavigation() {
   const { t } = useTranslation()
   const currentTeam = useSelector(selectCurrentTeam)
   const currentTour = useSelector(selectCurrentTour)
-  const { gameTab } = useSelector((state) => state.tour)
+  const currentCompetition = useSelector(selectCurrentCompetition)
   const { lastVisitedTeam } = useSelector((store) => store.currentTeam)
+  const [gameTab, setGameTab] = useState('')
 
-  const handleTabClick = (tab) => {
-    if (!currentTeam?.is_team_created && path.includes('play')) {
-      return false
-    }
-    if (
-      currentTour?.status !== TOUR_STATUS.notStartedTransfer &&
-      tab === TABS.Transfer &&
-      path.includes('play')
-    ) {
-      return false
-    }
-    return true
-  }
+  useEffect(() => {
+    const pathLength = path.split('/').length
 
-  const getTabStyles = (tab) => {
-    if (!path.includes('play')) {
-      return 'text-sidebar-foreground  hover:text-sidebar-accent-foreground'
+    if (path.includes('play') && pathLength === 6) {
+      Object.keys(TABS).forEach((tab) => {
+        if (path.includes(TABS[tab])) {
+          setGameTab(TABS[tab])
+        }
+      })
+    } else {
+      setGameTab(TABS.GameProfile)
     }
-
-    if (!currentTeam?.is_team_created) {
-      if (gameTab === tab && gameTab === TABS.Transfer) {
-        return path.includes('play')
-          ? 'text-sidebar-primary-foreground'
-          : 'text-sidebar-foreground'
-      }
-      return 'text-sidebar-foreground opacity-50'
-    }
-
-    if (
-      currentTour?.status !== TOUR_STATUS.notStartedTransfer &&
-      tab === TABS.Transfer
-    ) {
-      return 'text-sidebar-foreground opacity-50'
-    }
-
-    return gameTab === tab && path.includes('play')
-      ? 'text-sidebar-primary-foreground'
-      : 'text-sidebar-foreground hover:text-sidebar-accent-foreground'
-  }
+  }, [path])
 
   const navItems = [
     {
       id: TABS.GameProfile,
-      icon: <Home className="size-4.5" />,
+      iconName: TABS.GameProfile,
       labelKey: 'Profil',
       tab: TABS.GameProfile,
     },
     {
       id: TABS.Transfer,
-      icon: <Repeat className="size-4.5" />,
+      iconName: TABS.Transfer,
       labelKey: 'Transferlar',
       tab: TABS.Transfer,
     },
     {
       id: TABS.Tournament,
-      icon: <Users className="size-4.5" />,
+      iconName: TABS.Tournament,
       labelKey: 'Turnir',
       tab: TABS.Tournament,
     },
     {
       id: TABS.Journal,
-      icon: <Notebook className="size-4.5" />,
+      iconName: TABS.Journal,
       labelKey: 'Jurnal',
       tab: TABS.Journal,
     },
     {
       id: TABS.Statistics,
-      icon: <BarChart2 className="size-4.5" />,
+      iconName: TABS.Statistics,
       labelKey: 'Statistika',
       tab: TABS.Statistics,
     },
@@ -142,18 +154,29 @@ function MobileNavigation() {
         !lastVisitedTeam && 'hidden'
       )}
     >
-      {navItems.map((item) => (
-        <NavLink
-          key={item.id}
-          icon={item.icon}
-          label={t(item.labelKey)}
-          onClick={() => handleTabClick(item.tab)}
-          className={getTabStyles(item.tab)}
-          href={lastVisitedTeam ? `/play/${lastVisitedTeam}#${item.tab}` : '#'}
-          isDisabled={!lastVisitedTeam}
-          isActive={false}
-        />
-      ))}
+      {navItems.map((item) => {
+        const correctTab = item.tab !== TABS.GameProfile ? item.tab : ''
+        const href = lastVisitedTeam
+          ? `/play/${currentCompetition?.id}/${currentTeam?.id}/${correctTab}`
+          : '#'
+
+        const isTransferTab = item.tab === TABS.Transfer
+        const isDisabled = isTransferTab
+          ? currentTour?.status !== TOUR_STATUS.notStartedTransfer ||
+            !currentTeam?.is_team_created
+          : !currentTeam?.is_team_created
+
+        return (
+          <NavLink
+            key={item.id}
+            iconName={item.iconName}
+            label={t(item.labelKey)}
+            href={href}
+            isDisabled={isDisabled}
+            isActive={gameTab === item.tab}
+          />
+        )
+      })}
     </nav>
   )
 }

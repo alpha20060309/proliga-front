@@ -11,8 +11,11 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import Head from './Head'
-import Body from './Body'
+import { Table } from '@/components/ui/table'
+// import Head from './Head'
+// import Body from './Body'
+import Head from 'components/Table/Head'
+import Body from 'components/Table/Body'
 import TanStackPagination from 'components/Table/Pagination/Client'
 import { createColumnHelper } from '@tanstack/react-table'
 import { selectClubs } from 'app/lib/features/club/club.selector'
@@ -155,13 +158,13 @@ function PlayerStatisticsTable({ matches }) {
   })
 
   return (
-    <section className="h-auto">
-      <table className="text-3xs 2xs:text-2xs text-foreground h-full w-full min-w-80 table-auto md:text-xs xl:text-sm">
-        <Head table={table} />
+    <>
+      <Table className="text-3xs xs:text-3xs text-foreground h-full w-full min-w-80 table-auto md:text-xs xl:text-sm">
+        <Head table={table} className={'text-3xs sm:text-2xs lg:text-xs xl:text-sm'} />
         <Body table={table} flexRender={flexRender} />
-      </table>
+      </Table>
       {matches?.length > 9 && <TanStackPagination table={table} />}
-    </section>
+    </>
   )
 }
 
