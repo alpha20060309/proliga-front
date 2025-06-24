@@ -27,7 +27,6 @@ const fetchPrizesByCompetition = cache(async (competitionId) => {
 const PrizeContainer = async ({ competition, locale, t }) => {
   const { data: prizes, error } = await fetchPrizesByCompetition(competition.id)
   if (error || prizes.length === 0) return <></>
-  console.log(prizes)
 
   const orderedPrizes = [prizes[1], prizes[0], prizes[2]]
 

@@ -3,7 +3,6 @@ import { getUrl } from 'app/utils/static.util'
 import { cn } from '@/lib/utils'
 
 const Prize = ({ prize, locale, t }) => {
-  console.log('prize', prize)
   return (
     <div
       className={cn(

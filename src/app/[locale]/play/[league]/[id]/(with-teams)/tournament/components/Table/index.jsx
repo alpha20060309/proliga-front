@@ -19,7 +19,6 @@ import Body from 'components/Table/Body'
 import Link from 'next/link'
 const columnHelper = createColumnHelper()
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
-import { selectCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.selector'
 
 function TournamentTable({ showUserTourTeam }) {
   const { t } = useTranslation()
@@ -27,8 +26,6 @@ function TournamentTable({ showUserTourTeam }) {
   const allTeams = useSelector(selectAllTeams)
 
   const currentCompetition = useSelector(selectCurrentCompetition)
-  const currentTourTeam = useSelector(selectCurrentTourTeam)
-  console.log(currentTourTeam)
 
   const columns = [
     columnHelper.accessor('', {

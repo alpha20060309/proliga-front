@@ -25,8 +25,8 @@ const columnHelper = createColumnHelper()
 
 function StatisticsTable() {
   const { t } = useTranslation()
-  const players = useSelector(selectPlayers)
   const { lang } = useSelector((state) => state.systemLanguage)
+  const players = useSelector(selectPlayers)
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: 13,
@@ -145,7 +145,7 @@ function StatisticsTable() {
 
   return (
     <>
-      <div className="flex gap-1">
+      <section className="flex gap-1">
         {table
           .getHeaderGroups()
           .map((headerGroup) =>
@@ -153,7 +153,7 @@ function StatisticsTable() {
               <StatisticsTableFilters key={header.id} column={header.column} />
             ))
           )}
-      </div>
+      </section>
       <Table className="text-2xs text-foreground xs:text-xs min-w-88 md:text-sm">
         <Head table={table} />
         <Body table={table} flexRender={flexRender} />

@@ -8,8 +8,9 @@ import {
 } from '@/components/ui/select'
 import { selectTours } from 'app/lib/features/tour/tour.selector'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { memo } from 'react'
 
-const TournamentSelectedTour = ({ tour, setTour }) => {
+const TourFilter = memo(({ tour, setTour }) => {
   const tours = useSelector(selectTours)
   const { teamsLoading } = useSelector((state) => state.team)
   const { lang } = useSelector((store) => store.systemLanguage)
@@ -36,6 +37,8 @@ const TournamentSelectedTour = ({ tour, setTour }) => {
       </SelectContent>
     </Select>
   )
-}
+})
 
-export default TournamentSelectedTour
+TourFilter.displayName = 'TourFilter'
+
+export default TourFilter

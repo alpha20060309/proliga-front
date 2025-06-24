@@ -3,14 +3,14 @@
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
 import { resetSearchResults } from 'app/lib/features/team/team.slice'
 import { searchAllTeams } from 'app/lib/features/team/team.thunk'
-import { useState, useCallback, useEffect, useRef } from 'react'
+import { useState, useCallback, useEffect, useRef, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Input } from '@/components/ui/input'
 import { Search } from 'lucide-react'
 import { debounce } from 'lodash'
 
-const TeamSearch = ({
+const TeamFilter = memo(({
   page,
   perPage,
   tour_id,
@@ -106,6 +106,8 @@ const TeamSearch = ({
       <Search className="xs:block text-muted-foreground absolute top-1/2 right-2 hidden size-5 -translate-y-1/2" />
     </div>
   )
-}
+})
 
-export default TeamSearch
+TeamFilter.displayName = 'TeamFilter'
+
+export default TeamFilter
