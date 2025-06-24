@@ -68,27 +68,6 @@ const Player = ({ player }) => {
             imageErr={imageErr}
             player={player}
           />
-          <div className="xs:size-8 relative size-6 md:size-10 lg:size-8 xl:size-10">
-            <Image
-              src={tShirt || ''}
-              alt="player tshirt"
-              width={48}
-              height={48}
-              onError={imageErr}
-              draggable={false}
-              className="h-full w-full"
-            />
-            {player.is_captain && (
-              <Image
-                src="/icons/captain-badge.svg"
-                alt="captain"
-                width={16}
-                height={16}
-                draggable={false}
-                className="absolute -right-1 bottom-0 size-3 md:size-4 2xl:size-5"
-              />
-            )}
-          </div>
           <PlayerName>
             {lastName}
           </PlayerName>

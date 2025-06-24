@@ -14,8 +14,9 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { cn } from '@/lib/utils'
 
-const ClubsFilter = ({ column }) => {
+const ClubsFilter = ({ column, className }) => {
   const selectedClubs = useSelector(selectClubs)
   const { t } = useTranslation()
   const { lang } = useSelector((store) => store.systemLanguage)
@@ -38,7 +39,10 @@ const ClubsFilter = ({ column }) => {
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
-          className="hover:text-foreground h-8 w-full justify-start truncate border-dashed"
+          className={cn(
+            'hover:text-foreground h-8 w-full justify-start truncate border-dashed',
+            className
+          )}
         >
           {selectedClubIds.length
             ? `${selectedClubIds.length} ${t('selected')}`

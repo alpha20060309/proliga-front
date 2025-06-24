@@ -11,8 +11,8 @@ import { selectCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.select
 import { selectPrevTeam } from 'app/lib/features/teamPlayer/teamPlayer.selector'
 import { selectTourTeams } from 'app/lib/features/tourTeam/tourTeam.selector'
 import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
-import { selectedTours } from 'app/lib/features/tour/tour.selector'
 import { setCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.slice'
+import { selectTours } from 'app/lib/features/tour/tour.selector'
 
 const PlayLayout = ({ children, params }) => {
   const { league, id } = use(params)
@@ -21,7 +21,7 @@ const PlayLayout = ({ children, params }) => {
   const prevTeam = useSelector(selectPrevTeam)
   const tourTeams = useSelector(selectTourTeams)
   const currentTourTeam = useSelector(selectCurrentTourTeam)
-  const selectTours = useSelector(selectedTours)
+  const selectedTours = useSelector(selectTours)
 
   useEffect(() => {
     if (id && currentTour?.id) {
@@ -55,12 +55,12 @@ const PlayLayout = ({ children, params }) => {
   }, [dispatch, currentTour?.id, league, prevTeam])
 
   useEffect(() => {
-    if (selectTours?.length > 0 && tourTeams?.length > 0) {
+    if (selectedTours?.length > 0 && tourTeams?.length > 0) {
       if (currentTour?.id !== currentTourTeam?.tour_id) {
         dispatch(setCurrentTourTeam(currentTour))
       }
     }
-  }, [dispatch, selectTours?.length, currentTourTeam, tourTeams?.length, currentTour])
+  }, [dispatch, selectedTours?.length, currentTourTeam, tourTeams?.length, currentTour])
 
   return (
     <div className="flex w-full flex-col gap-4">

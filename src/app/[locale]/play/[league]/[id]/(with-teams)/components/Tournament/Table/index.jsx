@@ -39,7 +39,7 @@ function TournamentTable({ showUserTourTeam }) {
     columnHelper.accessor('name', {
       accessorFn: (row) => row?.team?.name ?? '',
       cell: (info) => (
-        <Link href={`/team-view/${currentCompetition?.id}/${currentTourTeam.team?.id ?? 0}`}>
+        <Link href={`/team-view/${currentCompetition?.id}/${info?.row?.original?.team?.id ?? 0}`}>
           {info.getValue()}
         </Link>
       ),

@@ -7,14 +7,15 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import JournalTableBody from './Body'
-import TableHead from 'components/Table/Head'
+import Body from 'components/Table/Body'
+import Head from 'components/Table/Head'
 import { useSelector } from 'react-redux'
 import { createColumnHelper } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { formatDate } from 'app/utils/formatDate.util'
 import { selectUserActivities } from 'app/lib/features/userActivity/userActivity.selector'
+import { Table } from '@/components/ui/table'
 
 const columnHelper = createColumnHelper()
 
@@ -31,7 +32,6 @@ function JournalTable() {
     }),
     columnHelper.accessor('name', {
       accessorKey: 'name',
-      cell: (info) => info.getValue(),
       header: t('Message'),
       id: 'name',
       accessorFn: (row) =>
@@ -48,10 +48,10 @@ function JournalTable() {
   })
 
   return (
-    <table className="text-foreground h-auto w-full text-xs md:text-sm">
-      <TableHead table={table} />
-      <JournalTableBody table={table} flexRender={flexRender} />
-    </table>
+    <Table className="text-foreground h-auto w-full text-xs md:text-sm">
+      <Head table={table} />
+      <Body table={table} flexRender={flexRender} />
+    </Table>
   )
 }
 
