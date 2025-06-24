@@ -29,7 +29,7 @@ function StatisticsTable() {
   const players = useSelector(selectPlayers)
   const [pagination, setPagination] = useState({
     pageIndex: 0,
-    pageSize: 13,
+    pageSize: 15,
   })
 
   const columns = [

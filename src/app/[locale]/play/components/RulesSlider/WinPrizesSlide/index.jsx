@@ -1,17 +1,42 @@
 'use client'
+
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
-import { selectPrizes } from 'app/lib/features/prize/prize.selector'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { getUrl } from 'app/utils/static.util'
+import { useEffect, useState } from 'react'
+import { supabase } from 'app/lib/supabaseClient'
+import { toast } from 'sonner'
 
 const WinPrizesSlide = () => {
   const path = usePathname()
   const { t } = useTranslation()
-  const prizes = useSelector(selectPrizes)
+  const [prizes, setPrizes] = useState([])
   const competition_id = +path.split('/')[3] || 0
+
+  useEffect(() => {
+    const fetchPrizes = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('prize')
+          .select('*, competition_id(id, name, flag)')
+          .is('deleted_at', null)
+          .is('is_active', true)
+          .eq('competition_id', competition_id)
+          .order('order', { ascending: true })
+
+        if (error) {
+          toast.error(error.message)
+        }
+        setPrizes(data)
+      } catch (error) {
+        toast.error(error.message)
+      }
+    }
+    fetchPrizes()
+  }, [competition_id])
 
   return (
     <div className="flex h-auto flex-col space-y-4 md:space-y-6">
@@ -43,7 +68,7 @@ const Prize = ({ prize }) => {
       className={cn(
         'flex min-w-24 flex-1 flex-col items-center justify-center md:max-w-80',
         prize.order === 3 &&
-          'col-span-2 mx-auto max-w-[50%] sm:col-span-1 sm:mx-0 sm:max-w-max'
+        'col-span-2 mx-auto max-w-[50%] sm:col-span-1 sm:mx-0 sm:max-w-max'
       )}
     >
       <p className="mb-1 text-xs sm:text-sm md:mb-2 md:text-lg xl:text-xl">

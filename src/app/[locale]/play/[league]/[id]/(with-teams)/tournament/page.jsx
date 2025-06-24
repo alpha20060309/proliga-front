@@ -60,7 +60,7 @@ const Tournament = () => {
   const showUserTourTeam =
     !curTourTeam && toursCondition && allTeams?.length !== 0
 
-  const perPage = 14
+  const perPage = 15
   const pages = useMemo(
     () => Math.ceil(teamsCount / perPage),
     [teamsCount, perPage]

@@ -19,7 +19,7 @@ function Journal() {
   const { isLoading, count } = useSelector((state) => state.userActivity)
   const currentTeam = useSelector(selectCurrentTeam)
   const [page, setPage] = useState(0)
-  const perPage = 16
+  const perPage = 15
   const pages = useMemo(() => {
     return Math.ceil(count / perPage)
   }, [count, perPage])

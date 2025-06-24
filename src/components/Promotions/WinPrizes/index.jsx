@@ -1,19 +1,28 @@
-'use client'
 
-import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
-import { selectPrizes } from 'app/lib/features/prize/prize.selector'
 import {
   Card,
   CardContent,
   CardTitle,
   CardDescription,
 } from '@/components/ui/card'
+import prisma from 'lib/prisma'
 
-const PromotionWinPrizes = () => {
-  const { t } = useTranslation()
-  const prizes = useSelector(selectPrizes)
+const fetchPrizes = async () => {
+  const prizes = await prisma.prize.findMany({
+    where: {
+
+      is_active: true,
+    },
+    orderBy: {
+      order: 'asc'
+    }
+  })
+  return prizes
+}
+
+const PromotionWinPrizes = async ({ t, locale }) => {
+  const prizes = await fetchPrizes()
 
   if (prizes?.length === 0) return null
 
@@ -31,7 +40,7 @@ const PromotionWinPrizes = () => {
             ?.slice(0, 4)
             .map(
               (prize, index) =>
-                prize?.image && <Prize prize={prize} key={index} />
+                prize?.image && <Prize prize={prize} key={index} locale={locale} />
             )}
         </div>
       </CardContent>
@@ -39,12 +48,11 @@ const PromotionWinPrizes = () => {
   )
 }
 
-const Prize = ({ prize }) => {
-  const { lang } = useSelector((store) => store.systemLanguage)
+const Prize = ({ prize, locale }) => {
   return (
     <div className="flex aspect-square flex-col items-center gap-1 lg:gap-2">
       <h4 className="text-foreground text-lg xl:text-xl">
-        {getCorrectName({ lang, uz: prize?.name, ru: prize?.name_ru })}
+        {getCorrectName({ lang: locale, uz: prize?.name, ru: prize?.name_ru })}
       </h4>
       <div className="flex aspect-square items-center justify-center overflow-hidden rounded-xl bg-white p-1 lg:p-2">
         <img

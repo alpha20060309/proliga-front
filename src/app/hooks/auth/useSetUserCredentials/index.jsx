@@ -121,7 +121,6 @@ export const useSetUserCredentials = () => {
         })
         cb()
       } catch (error) {
-        console.log(error)
         handleError(
           error instanceof Error
             ? error.message

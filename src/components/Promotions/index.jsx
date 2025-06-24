@@ -17,7 +17,7 @@ const Promotions = async ({ params }) => {
         <PromotionGatherPoints t={t} />
         <PromotionMakeTransfers t={t} />
         <PromotionCompete t={t} />
-        <PromotionWinPrizes />
+        <PromotionWinPrizes t={t} locale={locale} />
       </Gutter>
     </section>
   )
