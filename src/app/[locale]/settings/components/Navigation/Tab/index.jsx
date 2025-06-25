@@ -1,3 +1,5 @@
+'use client'
+
 import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
 import { Shield, User, Cog, Banknote } from 'lucide-react'
@@ -44,7 +46,7 @@ const SettingsNavigationTab = ({ tab }) => {
       {renderIcon(tab.icon)}
       <div
         className={cn(
-          'hidden select-none lg:block lg:text-sm',
+          'hidden select-none md:block lg:text-sm',
           isActive ? active : passive
         )}
       >

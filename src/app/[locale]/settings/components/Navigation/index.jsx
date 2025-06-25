@@ -1,19 +1,12 @@
-'use client'
-
-import dynamic from 'next/dynamic'
-const SettingsNavigationTab = dynamic(() => import('./Tab'), {
-  ssr: false,
-})
-const SettingsSidebarLogOut = dynamic(() => import('./LogOut/LogOut'), {
-  ssr: false,
-})
+import SettingsNavigationTab from './Tab'
+import SettingsSidebarLogOut from './LogOut'
 import { Card, CardContent } from '@/components/ui/card'
 
 const SettingsNavigation = ({ setTab, currentTab }) => {
   return (
-    <Card className="fade-in animate-in w-full p-2 backdrop-blur-sm duration-300 lg:w-64">
+    <Card className="fade-in animate-in w-full flex-row px-2 py-4 backdrop-blur-sm duration-300 md:px-4 lg:w-80 lg:flex-col lg:justify-between">
       <CardContent
-        className={'flex flex-row space-x-0.5 p-0 lg:flex-col lg:gap-1'}
+        className={'flex h-full w-full flex-row px-0 lg:flex-col lg:gap-1'}
       >
         {SETTINGS_TABS.map((tab) => (
           <SettingsNavigationTab
@@ -23,8 +16,8 @@ const SettingsNavigation = ({ setTab, currentTab }) => {
             currentTab={currentTab}
           />
         ))}
+        <SettingsSidebarLogOut />
       </CardContent>
-      <SettingsSidebarLogOut />
     </Card>
   )
 }

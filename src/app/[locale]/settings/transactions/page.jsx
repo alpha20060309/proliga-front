@@ -1,8 +1,7 @@
 'use client'
 
-import CabinetTransactionsBalanceTable from './components/BalanceTable'
-import CabinetTransactionsExpensesTable from './components/PackagesTable'
-import CabinetTransactionsSkeleton from './components/Skeleton'
+import BalanceTable from './components/BalanceTable'
+import PackagesTable from './components/PackagesTable'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
@@ -10,7 +9,6 @@ import { fetchPayBalance } from 'app/lib/features/payBalance/payBalance.thunk'
 import { fetchPayExpenses } from 'app/lib/features/payExpense/payExpense.thunk'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { Wallet, Boxes, RefreshCcw } from 'lucide-react'
-import { cn } from '@/lib/utils'
 import { selectExpenses } from 'app/lib/features/payExpense/payExpense.selector'
 import { selectBalances } from 'app/lib/features/payBalance/payBalance.selector'
 import { Button } from '@/components/ui/button'
@@ -19,11 +17,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 const CabinetTransactionsHistory = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const [currentTab, setCurrentTab] = useState(TRANSACTIONTABS.BALANCE)
+  const [currentTab, setCurrentTab] = useState(TRANSACTION_TABS.BALANCE)
   const userTable = useSelector(selectUserTable)
   const expenses = useSelector(selectExpenses)
   const balances = useSelector(selectBalances)
-  const { isLoading: balanceLoading } = useSelector((state) => state.payBalance)
 
   useEffect(() => {
     if (userTable?.id && expenses?.length === 0 && balances?.length === 0) {
@@ -36,9 +33,9 @@ const CabinetTransactionsHistory = () => {
 
   const refreshData = () => {
     switch (currentTab) {
-      case TRANSACTIONTABS.BALANCE:
+      case TRANSACTION_TABS.BALANCE:
         return dispatch(fetchPayBalance({ user_id: userTable?.id }))
-      case TRANSACTIONTABS.EXPENSES:
+      case TRANSACTION_TABS.EXPENSES:
         return dispatch(fetchPayExpenses({ user_id: userTable?.id }))
       default:
         break
@@ -47,8 +44,8 @@ const CabinetTransactionsHistory = () => {
 
   return (
     <Tabs
-      defaultValue={TRANSACTIONTABS.BALANCE}
-      className="w-full sm:w-96"
+      defaultValue={TRANSACTION_TABS.BALANCE}
+      className="flex h-full w-full flex-col"
       onValueChange={(value) => setCurrentTab(value)}
     >
       <div className="mb-2 flex flex-col gap-1 sm:mb-0 sm:justify-between md:flex-row">
@@ -56,40 +53,42 @@ const CabinetTransactionsHistory = () => {
           {t('Xarajatlar tarixi')}
         </h3>
 
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value={TRANSACTIONTABS.BALANCE}>
+        <TabsList>
+          <TabsTrigger className="w-40" value={TRANSACTION_TABS.BALANCE}>
             <Wallet className="mr-2 h-4 w-4" />
             {t('Balans')}
           </TabsTrigger>
-          <TabsTrigger value={TRANSACTIONTABS.EXPENSES}>
+          <TabsTrigger className="w-40" value={TRANSACTION_TABS.EXPENSES}>
             <Boxes className="mr-2 h-4 w-4" />
             {t('Paketlar')}
           </TabsTrigger>
         </TabsList>
+        <Button
+          onClick={refreshData}
+          variant="outline"
+          size="icon"
+          className="text-foreground/80 hover:text-foreground hidden items-center justify-center gap-1 self-end p-0 text-sm md:flex"
+        >
+          <RefreshCcw className="text-foreground size-4" />
+        </Button>
       </div>
-
-      {currentTab === TRANSACTIONTABS.BALANCE &&
-        (balanceLoading ? (
-          <CabinetTransactionsSkeleton cols={4} />
-        ) : (
-          <div className="flex h-full w-full flex-1 flex-col">
-            {balances?.length > 0 ? (
-              <CabinetTransactionsBalanceTable />
-            ) : (
-              <p className="fade-in-fast text-foreground flex min-h-96 items-center justify-center text-center">
-                {t('Balans haqida malumot topilmadi!')}
-              </p>
-            )}
-          </div>
-        ))}
-      {currentTab === TRANSACTIONTABS.EXPENSES && (
-        <CabinetTransactionsExpensesTable />
-      )}
+      <TabsContent
+        className={'flex min-h-128 flex-col justify-between'}
+        value={TRANSACTION_TABS.BALANCE}
+      >
+        <BalanceTable />
+      </TabsContent>
+      <TabsContent
+        value={TRANSACTION_TABS.EXPENSES}
+        className={'flex min-h-128 flex-col justify-between'}
+      >
+        <PackagesTable />
+      </TabsContent>
     </Tabs>
   )
 }
 
-const TRANSACTIONTABS = {
+const TRANSACTION_TABS = {
   BALANCE: 'balance',
   EXPENSES: 'expenses',
 }
