@@ -29,6 +29,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import { useTheme } from 'next-themes'
 
 const columnHelper = createColumnHelper()
 
@@ -124,7 +125,7 @@ function TransactionsPackagesTable() {
       </Table>
       <TanStackPagination
         table={table}
-        className={'mt-auto h-full items-end self-center'}
+        className={'mt-auto items-end self-center'}
       />
     </section >
   )
@@ -160,12 +161,14 @@ const PackageIcon = ({ type, amount, name }) => {
 
 export const PaymentOptionIcon = ({ system }) => {
   const { t } = useTranslation()
+  const { resolvedTheme } = useTheme()
+
   switch (system) {
     case PAYMENT_OPTIONS.CLICKUP:
       return (
         <span>
           <Image
-            src="./icons/click-up.svg"
+            src={resolvedTheme === 'dark' ? '/icons/click-up.svg' : '/icons/click-up-dark.svg'}
             alt="click up"
             width={20}
             className="xs:w-16 h-7 w-12 md:h-8 md:w-20"
@@ -177,7 +180,7 @@ export const PaymentOptionIcon = ({ system }) => {
       return (
         <span>
           <Image
-            src="./icons/payme.svg"
+            src="/icons/payme.svg"
             alt="payme"
             width={20}
             height={20}

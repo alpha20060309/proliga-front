@@ -435,6 +435,7 @@ model player {
   blocked_penalty                                  Int?             @default(0)
   autogoal                                         Int?             @default(0)
   red_card                                         Int?             @default(0)
+  is_public                                        Boolean?
   match_event_match_event_player_idToplayer        match_event[]    @relation("match_event_player_idToplayer")
   match_event_match_event_second_player_idToplayer match_event[]    @relation("match_event_second_player_idToplayer")
   club                                             club?            @relation(fields: [club_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_club_id")

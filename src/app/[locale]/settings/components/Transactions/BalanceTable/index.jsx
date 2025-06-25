@@ -97,7 +97,7 @@ function BalanceTable() {
       </Table>
       <TanStackPagination
         table={table}
-        className={'mt-auto h-full flex-1 items-end self-center'}
+        className={'mt-auto  flex-1 items-end self-center'}
       />
     </section>
   )
