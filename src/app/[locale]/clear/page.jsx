@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useLogOut } from 'app/hooks/auth/useLogOut/useLogOut'
+import { useLogOut } from 'app/hooks/auth/useLogOut'
 
 function Clear() {
   const { logOut } = useLogOut()

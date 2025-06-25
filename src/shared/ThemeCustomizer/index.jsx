@@ -17,15 +17,15 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Switch } from '@/components/ui/switch'
 import CreateThemeModal from './components/CreateThemeModal'
-import { useResetUserThemes } from 'app/hooks/theme/useResetUserThemes/useResetUserThemes'
+import { useResetUserThemes } from 'app/hooks/theme/useResetUserThemes'
 import ColorModifier from './components/ColorModifier'
 import FontModifier from './components/FontModifer'
 import GlobalModifier from './components/GlobalModifier'
 import ShadowModifier from './components/ShadowsModifier'
 import SelectTheme from './components/SelectTheme'
 import { selectThemes } from 'app/lib/features/theme/theme.selector'
-import { useSaveTheme } from 'app/hooks/theme/useSaveTheme/useSaveTheme'
-import { useSetThemeDefault } from 'app/hooks/theme/useSetThemeDefault/useSetThemeDefault'
+import { useSaveTheme } from 'app/hooks/theme/useSaveTheme'
+import { useSetThemeDefault } from 'app/hooks/theme/useSetThemeDefault'
 import {
   selectDarkTheme,
   selectLightTheme,

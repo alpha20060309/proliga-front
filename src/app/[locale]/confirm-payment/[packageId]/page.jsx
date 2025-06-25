@@ -1,6 +1,6 @@
 'use client'
 
-import Gutter from 'shared/Gutter'
+import Gutter from 'components/Gutter'
 import dynamic from 'next/dynamic'
 const CurrentPackage = dynamic(() => import('./components/CurrentPackage'), {
   ssr: false,

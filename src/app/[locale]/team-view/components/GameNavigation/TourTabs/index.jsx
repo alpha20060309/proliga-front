@@ -1,8 +1,8 @@
 import Box from '@mui/material/Box'
-import { StyledTab, StyledTabs } from 'components/StyledTabs'
+import { StyledTab, StyledTabs, GameTab } from 'components/StyledTabs'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { TOUR_STATUS, getTourName } from 'app/utils/tour.util'
+import { TOUR_STATUS } from 'app/utils/tour.util'
 import { setCurrentTourIndex } from 'app/lib/features/tour/tour.slice'
 import { setCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.slice'
 import {
@@ -11,9 +11,7 @@ import {
   selectTours,
 } from 'app/lib/features/tour/tour.selector'
 import { emptyTeamPlayers } from 'app/lib/features/teamPlayer/teamPlayer.slice'
-import { useTranslation } from 'react-i18next'
 import { tabsClasses } from '@mui/material'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
 import {
   selectCurrentTourTeam,
   selectTourTeams,
@@ -21,8 +19,6 @@ import {
 
 export default function TourTabs() {
   const dispatch = useDispatch()
-  const { t } = useTranslation()
-  const { lang } = useSelector((store) => store.systemLanguage)
   const { currentTourIndex } = useSelector((store) => store.tour)
   const registeredTour = useSelector(selectRegisteredTour)
   const currentTourTeam = useSelector(selectCurrentTourTeam)
@@ -81,14 +77,7 @@ export default function TourTabs() {
               item.order < registeredTour?.order
             }
             label={
-              <div className="tour-tab-container">
-                <p className="tour-tab-title">
-                  {getCorrectName({ lang, uz: item?.name, ru: item?.name_ru })}
-                </p>
-                <p className="tour-tab-description">
-                  {getTourName(item.status, t)}
-                </p>
-              </div>
+              <GameTab item={item} />
             }
           />
         ))}

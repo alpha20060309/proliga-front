@@ -1,27 +1,47 @@
-'use client'
+import initTranslations from 'app/lib/i18n'
+import prisma from 'lib/prisma'
+import { cache } from 'react'
+import PrizeContainer from './components/PrizeContainer'
 
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
-import { fetchCompetition } from 'app/lib/features/competition/competition.thunk'
-import dynamic from 'next/dynamic'
-const PrizesSection = dynamic(() => import('./components/Prizes'), {
-  ssr: false,
-  loading: () => <PrizesSkeleton />,
+const fetchCompetitions = cache(async () => {
+  const competitions = await prisma.competition.findMany({
+    where: {
+      deleted_at: null,
+      is_active: true,
+    },
+  })
+  return { data: competitions }
 })
-import { PrizesSkeleton } from './components/PrizesSkeleton'
-import { selectCompetition } from 'app/lib/features/competition/competition.selector'
 
-const Prizes = () => {
-  const dispatch = useDispatch()
-  const competitions = useSelector(selectCompetition)
+const Prizes = async ({ params }) => {
+  const { locale } = await params
+  const { t } = await initTranslations(locale)
 
-  useEffect(() => {
-    if (competitions?.length === 0) {
-      dispatch(fetchCompetition())
-    }
-  }, [dispatch, competitions?.length])
+  const { data: competitions, error } = await fetchCompetitions()
 
-  return <PrizesSection />
+  if (error || competitions.length === 0) {
+    return (
+      <h1 className="text-foreground text-center text-2xl">
+        {t('Hozircha yutuqlar yoq')}
+      </h1>
+    )
+  }
+
+  return (
+    <>
+      <h1 className="text-white mb-6 text-2xl font-bold">
+        <span className='mr-2 text-primary'>
+          {t('Available')}
+        </span>
+        {t('Yutuqlar')}
+      </h1>
+      <section className="flex flex-col items-center justify-center gap-2">
+        {competitions.map((competition) => (
+          <PrizeContainer competition={competition} locale={locale} key={competition.id} t={t} />
+        ))}
+      </section>
+    </>
+  )
 }
 
 export default Prizes

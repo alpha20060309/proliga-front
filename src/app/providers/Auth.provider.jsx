@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setUserTable } from '../lib/features/auth/auth.slice'
 import { usePathname } from 'next/navigation'
 import { CONFIG_KEY } from 'app/utils/config.util'
-import { useLogOut } from 'app/hooks/auth/useLogOut/useLogOut'
+import { useLogOut } from 'app/hooks/auth/useLogOut'
 import { toast } from 'sonner'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { useTranslation } from 'react-i18next'
 import { useSession } from 'next-auth/react'
-import { useAuthStatus } from 'app/hooks/auth/useAuthStatus/useAuthStatus'
+import { useAuthStatus } from 'app/hooks/auth/useAuthStatus'
 
 const AuthProvider = ({ children }) => {
   const { t } = useTranslation()

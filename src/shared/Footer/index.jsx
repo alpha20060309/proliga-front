@@ -11,7 +11,7 @@ import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.s
 import { FaTelegram, FaInstagram } from 'react-icons/fa'
 import { Mail } from 'lucide-react'
 import AnimatedGradientText from '@/components/ui/animated-gradient-text'
-import Gutter from 'shared/Gutter'
+import Gutter from 'components/Gutter'
 
 const Footer = () => {
   const path = usePathname()
@@ -106,7 +106,9 @@ const Footer = () => {
           </div>
           <div className="flex flex-col items-center justify-center gap-2 sm:items-start">
             <Button
-              className={'h-12 w-full max-w-64 font-bold hover:scale-105'}
+              className={
+                'text-background h-12 w-full max-w-64 font-bold hover:scale-105'
+              }
               variant="gradient"
               style={{
                 '--bg-size': `100%`,

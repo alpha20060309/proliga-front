@@ -8,13 +8,14 @@ import {
   useReactTable,
   getPaginationRowModel,
 } from '@tanstack/react-table'
-import TransactionsTableHead from './Head'
-import TransactionsTableBody from './Body'
+import { Table } from '@/components/ui/table'
+import Head from 'components/Table/Head'
+import Body from 'components/Table/Body'
 import { createColumnHelper } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
-import TanStackPagination from 'components/Table/TanStackPagination'
+import TanStackPagination from 'components/Table/Pagination/Client'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { formatDate } from 'app/utils/formatDate.util'
 import { formatCurrency } from 'app/utils/formatCurrency'
@@ -117,15 +118,15 @@ function TransactionsPackagesTable() {
 
   return (
     <section className="flex h-full w-full flex-1 flex-col justify-between gap-1 overflow-x-auto">
-      <table className="text-2xs w-full min-w-96 table-fixed rounded-sm sm:text-xs lg:text-sm">
-        <TransactionsTableHead table={table} />
-        <TransactionsTableBody table={table} flexRender={flexRender} />
-      </table>
+      <Table>
+        <Head table={table} />
+        <Body table={table} flexRender={flexRender} />
+      </Table>
       <TanStackPagination
         table={table}
         className={'mt-auto h-full items-end self-center'}
       />
-    </section>
+    </section >
   )
 }
 

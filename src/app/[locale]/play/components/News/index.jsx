@@ -6,12 +6,12 @@ import { useTranslation } from 'react-i18next'
 import { useState, useEffect, useMemo } from 'react'
 import { NewsSkeleton } from './Skeleton'
 import { cn } from '@/lib/utils'
-import { Pagination } from 'components/Table/Pagination'
+import { Pagination } from 'components/Table/Pagination/Server'
 import { selectNews } from 'app/lib/features/news/news.selector'
 import { Button } from '@/components/ui/button'
 import { RefreshCcw, Newspaper } from 'lucide-react'
 import Article from './Article'
-import NewsArticle from 'components/Modals/NewsArticle'
+import NewsArticle from 'shared/Modals/NewsArticle'
 import {
   Card,
   CardContent,

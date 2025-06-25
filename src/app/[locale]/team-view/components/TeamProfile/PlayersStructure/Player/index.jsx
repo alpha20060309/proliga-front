@@ -7,6 +7,12 @@ import { staticPath } from 'app/utils/static.util'
 import Image from 'next/image'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { memo } from 'react'
+import {
+  PlayerContainer,
+  PlayerImage,
+  PlayerName,
+  PlayerPoint,
+} from 'components/Game/Player'
 
 const Player = ({ player }) => {
   const { lang } = useSelector((store) => store.systemLanguage)
@@ -37,12 +43,11 @@ const Player = ({ player }) => {
     ru: player?.player?.name_ru,
   })
 
-  const firstName = player.name ? name?.split(' ')[0] : ''
   const lastName = name?.split(' ')[1] ?? ''
   const tShirt = staticPath + '/club-svg/' + clubPath + '/app.svg'
 
   return (
-    <div className="text-muted text-sms flex h-min flex-col items-center justify-center select-none sm:text-base">
+    <PlayerContainer>
       {!player.name && (
         <>
           <Image
@@ -57,40 +62,23 @@ const Player = ({ player }) => {
       )}
       {player.name && (
         <>
-          <div className="xs:size-8 relative size-6 md:size-10 lg:size-8 xl:size-10">
-            <Image
-              src={tShirt || ''}
-              alt="player tshirt"
-              width={48}
-              height={48}
-              onError={imageErr}
-              draggable={false}
-              className="h-full w-full"
-            />
-            {player.is_captain && (
-              <Image
-                src="/icons/captain-badge.svg"
-                alt="captain"
-                width={16}
-                height={16}
-                draggable={false}
-                className="absolute -right-1 bottom-0 size-3 md:size-4 2xl:size-5"
-              />
-            )}
-          </div>
-          <p className="xs:text-2xs xs:text-xs text-3xs text-shadow-player line-clamp-1 text-white md:text-sm">
-            {firstName} {lastName.slice(0, 1).toUpperCase()} {lastName && '.'}
-          </p>
-          <div className="flex items-center gap-0.5">
-            <div className="bg-primary border-primary-foreground text-primary-foreground flex h-4 w-6 cursor-default items-center justify-center rounded-sm border text-center text-xs font-bold sm:h-5 sm:w-8 md:text-sm">
-              {player.is_captain
-                ? (currentPlayerPoint?.point ?? 0) * 2
-                : (currentPlayerPoint?.point ?? 0)}
-            </div>
-          </div>
+          <PlayerImage
+            tShirt={tShirt}
+            handleInfoModal={() => { }}
+            imageErr={imageErr}
+            player={player}
+          />
+          <PlayerName>
+            {lastName}
+          </PlayerName>
+          <PlayerPoint>
+            {player.is_captain
+              ? (currentPlayerPoint?.point ?? 0) * 2
+              : (currentPlayerPoint?.point ?? 0)}
+          </PlayerPoint>
         </>
       )}
-    </div>
+    </PlayerContainer>
   )
 }
 

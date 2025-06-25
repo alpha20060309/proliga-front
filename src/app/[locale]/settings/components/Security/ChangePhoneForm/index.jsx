@@ -13,8 +13,8 @@ import {
   selectUserTable,
 } from 'app/lib/features/auth/auth.selector'
 import { PhoneInput } from 'components/PhoneInput'
-import { useAuthChangePhone } from 'app/hooks/auth/useAuthChangePhone/useAuthChangePhone'
-import ConfirmOTP from 'components/Modals/ConfirmOTP'
+import { useAuthChangePhone } from 'app/hooks/auth/useAuthChangePhone'
+import ConfirmOTP from 'shared/Modals/ConfirmOTP'
 import { toast } from 'sonner'
 
 export default function ChangePhoneForm() {
@@ -109,7 +109,7 @@ export default function ChangePhoneForm() {
           </div>
         </div>
         <Button
-          className="hover:bg-accent/80 max-w-40"
+          className="hover:dark:bg-accent max-w-40"
           size="lg"
           variant={'outline'}
           type="submit"

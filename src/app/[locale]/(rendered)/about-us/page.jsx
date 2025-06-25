@@ -1,4 +1,4 @@
-import { getPage } from 'app/actions/get-html-page.action'
+import { getPage } from 'app/actions/getHTMLPage.action'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 
 const AboutUs = async ({ params }) => {

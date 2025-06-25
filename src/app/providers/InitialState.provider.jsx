@@ -3,10 +3,10 @@
 import { useEffect, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchSystemConfig } from '../lib/features/systemConfig/systemConfig.thunk'
-import { useGenerateFingerprint } from 'app/hooks/system/useGenerateFingerprint/useGenerateFingerprint'
-import { useGetUserAgent } from 'app/hooks/system/useGetUserAgent/useGetUserAgent'
+import { useGenerateFingerprint } from 'app/hooks/system/useGenerateFingerprint'
+import { useGetUserAgent } from 'app/hooks/system/useGetUserAgent'
 import { fetchGeo } from 'app/lib/features/auth/auth.thunk'
-import { fetchPrizes } from 'app/lib/features/prize/prize.thunk'
+// import { fetchPrizes } from 'app/lib/features/prize/prize.thunk'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import {
   fetchBroadcastNotifications,
@@ -14,7 +14,6 @@ import {
 } from 'app/lib/features/systemNotification/systemNotification.thunk'
 import dynamic from 'next/dynamic'
 const registerSW = dynamic(() => import('app/lib/registerSw'), { ssr: false })
-// import { useGenerateLanguage } from 'app/hooks/system/useGenerateLanguage/useGenerateLanguage'
 
 const InitialStateProvider = ({ children }) => {
   const dispatch = useDispatch()
@@ -25,7 +24,7 @@ const InitialStateProvider = ({ children }) => {
   useEffect(() => {
     Promise.all([
       dispatch(fetchGeo()),
-      dispatch(fetchPrizes()),
+      // dispatch(fetchPrizes()),
       dispatch(fetchSystemConfig()),
       getUserAgent(),
       generateFingerprint(),
@@ -43,13 +42,6 @@ const InitialStateProvider = ({ children }) => {
   useEffect(() => {
     registerSW()
   }, [])
-
-  // const { generate } = useGenerateLanguage()
-
-  // useEffect(() => {
-  //   const fetch = async () => await generate()
-  //   fetch()
-  // }, [generate])
 
   return children
 }

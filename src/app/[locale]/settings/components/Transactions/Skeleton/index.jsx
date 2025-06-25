@@ -1,12 +1,14 @@
 import { Skeleton } from '@/components/ui/skeleton'
+import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table'
+
 
 const CabinetTransactionsSkeleton = ({ rows = 10, cols = 4 }) => {
   return (
     <div className="flex h-full flex-col justify-between gap-1">
-      <table className="h-auto w-full">
+      <Table className="h-auto w-full">
         <CabinetTransactionsSkeletonHead cols={cols} />
         <CabinetTransactionsSkeletonBody cols={cols} rows={rows} />
-      </table>
+      </Table>
       <CabinetTransactionsSkeletonPagination />
     </div>
   )
@@ -14,47 +16,47 @@ const CabinetTransactionsSkeleton = ({ rows = 10, cols = 4 }) => {
 
 const CabinetTransactionsSkeletonBody = ({ cols = 5, rows = 9 }) => {
   return (
-    <tbody>
+    <TableBody>
       {[...Array(rows)].map((_, rowIndex) => (
-        <tr
+        <TableRow
           key={rowIndex}
           className="border-border hover:bg-background mx-auto w-full border-b"
         >
           {[...Array(cols)].map((_, cellIndex) => (
-            <td
+            <TableCell
               key={cellIndex}
               className="h-14 w-min px-0.5 py-1 text-center sm:min-w-8 md:h-11 md:text-start"
             >
               <Skeleton className="h-5 w-full" />
-            </td>
+            </TableCell>
           ))}
-        </tr>
+        </TableRow>
       ))}
-    </tbody>
+    </TableBody>
   )
 }
 
 const CabinetTransactionsSkeletonHead = ({ cols = 5 }) => {
   return (
-    <thead>
-      <tr className="relative rounded-md">
+    <TableHeader>
+      <TableRow className="relative rounded-md">
         {[...Array(cols)].map((_, index) => (
-          <th
+          <TableHead
             key={index}
             className="min-w-5 p-0.5 text-center md:p-1 md:text-start"
           >
             <Skeleton className="h-6 w-full" />
-          </th>
+          </TableHead>
         ))}
-      </tr>
-    </thead>
+      </TableRow>
+    </TableHeader>
   )
 }
 
 const CabinetTransactionsSkeletonPagination = () => {
   return (
     <section className="mt-1 flex items-center justify-center gap-2 overflow-x-auto">
-      {[...Array(7)].map((_, index) => (
+      {[...Array(5)].map((_, index) => (
         <Skeleton key={index} className="size-6 rounded-sm md:size-8" />
       ))}
     </section>

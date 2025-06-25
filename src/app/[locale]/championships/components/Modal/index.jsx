@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { useCreateTeam } from 'app/hooks/transfer/useCreateTeam/useCreateTeam'
+import { useCreateTeam } from 'app/hooks/transfer/useCreateTeam'
 import { useState } from 'react'
 import { FORMATIONS } from 'app/utils/formations.util'
 import { useTransitionRouter } from 'next-view-transitions'

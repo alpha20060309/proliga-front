@@ -88,10 +88,9 @@ const CabinetTransactionsHistory = () => {
           onClick={refreshData}
           variant="outline"
           size="sm"
-          className="text-foreground/80 hover:text-foreground hidden h-9 w-32 items-center justify-center gap-1 self-end p-0 text-sm md:flex"
+          className="text-foreground/80 hover:text-foreground hidden size-9 items-center justify-center gap-1 self-end p-0 text-sm md:flex"
         >
           <RefreshCcw className="text-foreground size-4" />
-          {t('Refresh')}
         </Button>
       </div>
       {currentTab === TRANSACTIONTABS.BALANCE &&

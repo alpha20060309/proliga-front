@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { formatDate } from 'app/utils/formatDate.util'
 import { CalendarDays, Eye } from 'lucide-react'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
-import { useUpdateNewsView } from 'app/hooks/system/useUpdateNewsView/useUpdateNewsView'
+import { useUpdateNewsView } from 'app/hooks/system/useUpdateNewsView'
 import { getUrl } from 'app/utils/static.util'
 import { setCurrentNews, setNewsModal } from 'app/lib/features/news/news.slice'
 import { memo } from 'react'
@@ -23,7 +23,7 @@ const Article = ({ item }) => {
     <>
       <article
         onClick={handleClick}
-        className="group bg-background flex h-[100px] w-auto overflow-hidden rounded-sm hover:cursor-pointer"
+        className="group bg-secondary flex h-[100px] w-auto overflow-hidden rounded-sm hover:cursor-pointer"
       >
         <section className="my-auto flex aspect-4/3 h-full w-24 shrink-0 items-center justify-center md:w-32">
           <img

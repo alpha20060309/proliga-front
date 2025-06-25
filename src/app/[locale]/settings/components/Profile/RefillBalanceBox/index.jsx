@@ -5,7 +5,7 @@ import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { ArrowUpCircle } from 'lucide-react'
-import RefillBalance from 'components/Modals/RefillBalance'
+import RefillBalance from 'shared/Modals/RefillBalance'
 import { useState } from 'react'
 
 const ProfessionalRefillBalanceBox = () => {

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getMessaging } from 'firebase-admin/messaging'
 import { initializeFirebaseAdmin } from 'app/lib/firebase/firebase-admin'
-import { db } from 'lib/db'
+import prisma from 'lib/prisma'
 
 initializeFirebaseAdmin()
 
@@ -25,7 +25,7 @@ export async function POST(request) {
     await getMessaging().subscribeToTopic(token, topic)
 
     // Get notification topics
-    const user = await db.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: {
         id: +user_id,
         deleted_at: null,
@@ -46,7 +46,7 @@ export async function POST(request) {
     topics.push(topic)
     topics = [...new Set(topics)]
 
-    await db.user.update({
+    await prisma.user.update({
       where: {
         id: +user_id,
         deleted_at: null,

@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react'
 import { useDispatch } from 'react-redux'
 import { setPhoneModal } from 'app/lib/features/auth/auth.slice'
 import { toast } from 'sonner'
-import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
+import { useSendOTP } from 'app/hooks/auth/useSendOTP'
 import { useTranslation } from 'react-i18next'
 import { useTransitionRouter } from 'next-view-transitions'
 

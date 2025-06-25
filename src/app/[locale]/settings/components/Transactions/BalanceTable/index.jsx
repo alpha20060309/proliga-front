@@ -9,13 +9,13 @@ import {
   getPaginationRowModel,
 } from '@tanstack/react-table'
 import { formatCurrency } from 'app/utils/formatCurrency'
-import TransactionsTableHead from './Head'
-import TransactionsTableBody from './Body'
+import Head from 'components/Table/Head'
+import Body from 'components/Table/Body'
 import { createColumnHelper } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
-import TanStackPagination from 'components/Table/TanStackPagination'
+import TanStackPagination from 'components/Table/Pagination/Client'
 import { formatDate } from 'app/utils/formatDate.util'
 import { selectBalances } from 'app/lib/features/payBalance/payBalance.selector'
 import {
@@ -24,10 +24,11 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { PaymentOptionIcon } from '../PackagesTable'
+import { Table } from '@/components/ui/table'
 
 const columnHelper = createColumnHelper()
 
-function CabinetTransactionsBalanceTable() {
+function BalanceTable() {
   const { t } = useTranslation()
   const balances = useSelector(selectBalances)
   const [pagination, setPagination] = useState({
@@ -90,10 +91,10 @@ function CabinetTransactionsBalanceTable() {
   })
   return (
     <section className="flex h-full w-full flex-1 flex-col justify-between gap-1 overflow-x-auto">
-      <table className="text-2xs xs:text-xs w-full table-fixed rounded-sm md:text-sm">
-        <TransactionsTableHead table={table} />
-        <TransactionsTableBody table={table} flexRender={flexRender} />
-      </table>
+      <Table className="text-2xs xs:text-xs w-full table-fixed rounded-sm md:text-sm">
+        <Head table={table} />
+        <Body table={table} flexRender={flexRender} />
+      </Table>
       <TanStackPagination
         table={table}
         className={'mt-auto h-full flex-1 items-end self-center'}
@@ -102,4 +103,4 @@ function CabinetTransactionsBalanceTable() {
   )
 }
 
-export default CabinetTransactionsBalanceTable
+export default BalanceTable

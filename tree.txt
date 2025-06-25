@@ -1,0 +1,1062 @@
+Folder PATH listing for volume Dev
+Volume serial number is F2D8-081C
+D:\PROJECTS\PROLIGA-FRONT\SRC
+|   auth.config.js
+|   middleware.js
+|   
++---@
+|   +---components
+|   |   \---ui
+|   |           accordion.jsx
+|   |           alert-dialog.jsx
+|   |           alert.jsx
+|   |           animated-gradient-text.jsx
+|   |           avatar.jsx
+|   |           badge.jsx
+|   |           button.jsx
+|   |           calendar.jsx
+|   |           card.jsx
+|   |           carousel.jsx
+|   |           checkbox.jsx
+|   |           collapsible.jsx
+|   |           command.jsx
+|   |           context-menu.jsx
+|   |           dialog.jsx
+|   |           dropdown-menu.jsx
+|   |           hover-card.jsx
+|   |           input-otp.jsx
+|   |           input.jsx
+|   |           label.jsx
+|   |           popover.jsx
+|   |           scroll-area.jsx
+|   |           select.jsx
+|   |           separator.jsx
+|   |           sheet.jsx
+|   |           skeleton.jsx
+|   |           slider.jsx
+|   |           sonner.jsx
+|   |           switch.jsx
+|   |           table.jsx
+|   |           tabs.jsx
+|   |           textarea.jsx
+|   |           toast.jsx
+|   |           tooltip.jsx
+|   |           
+|   \---lib
+|           utils.js
+|           
++---app
+|   |   error.jsx
+|   |   firebase.json
+|   |   fonts.js
+|   |   globals.css
+|   |   manifests.js
+|   |   sitemap.js
+|   |   sw.js
+|   |   
+|   +---actions
+|   |       getHTMLPage.action.jsx
+|   |       login.action.jsx
+|   |       register.action.jsx
+|   |       resetPassword.action.jsx
+|   |       saveFile.action.jsx
+|   |       
+|   +---api
+|   |   +---auth
+|   |   |   \---[...nextauth]
+|   |   |           route.js
+|   |   |           
+|   |   +---geoip
+|   |   |       route.js
+|   |   |       
+|   |   +---push-notifications
+|   |   |   +---subscribe
+|   |   |   |       route.js
+|   |   |   |       
+|   |   |   \---unsubscribe
+|   |   |           route.js
+|   |   |           
+|   |   +---theme
+|   |   |   |   utils.js
+|   |   |   |   
+|   |   |   +---set-default
+|   |   |   |       route.js
+|   |   |   |       
+|   |   |   +---set-preset
+|   |   |   |       route.js
+|   |   |   |       
+|   |   |   \---set-user
+|   |   |           route.js
+|   |   |           
+|   |   +---upload
+|   |   |       route.js
+|   |   |       
+|   |   \---upload-64
+|   |           route.js
+|   |           
+|   +---hooks
+|   |   +---auth
+|   |   |   +---useAuthChangePhone
+|   |   |   |       index.jsx
+|   |   |   |       
+|   |   |   +---useAuthStatus
+|   |   |   |       index.jsx
+|   |   |   |       
+|   |   |   +---useConfirmOTP
+|   |   |   |       index.jsx
+|   |   |   |       
+|   |   |   +---useLogOut
+|   |   |   |       index.jsx
+|   |   |   |       
+|   |   |   +---useSendOTP
+|   |   |   |       index.jsx
+|   |   |   |       
+|   |   |   \---useSetUserCredentials
+|   |   |           index.jsx
+|   |   |           
+|   |   +---payment
+|   |   |   +---useBuyPackageWithClick
+|   |   |   |       index.jsx
+|   |   |   |       
+|   |   |   +---useBuyPackageWithPayme
+|   |   |   |       index.jsx
+|   |   |   |       
+|   |   |   +---useBuyPackageWithWallet
+|   |   |   |       index.jsx
+|   |   |   |       
+|   |   |   +---useRedirectToClick
+|   |   |   |       index.jsx
+|   |   |   |       
+|   |   |   \---useRedirectToPayme
+|   |   |           index.jsx
+|   |   |           
+|   |   +---system
+|   |   |   +---useCreateBannerView
+|   |   |   |       index.jsx
+|   |   |   |       
+|   |   |   +---useGenerateFingerprint
+|   |   |   |       index.jsx
+|   |   |   |       
+|   |   |   +---useGetPage
+|   |   |   |       index.jsx
+|   |   |   |       
+|   |   |   +---useGetUserAgent
+|   |   |   |       index.jsx
+|   |   |   |       
+|   |   |   +---useUpdateNewsView
+|   |   |   |       index.jsx
+|   |   |   |       
+|   |   |   \---useUpdateSearchParams
+|   |   |           index.jsx
+|   |   |           
+|   |   +---theme
+|   |   |   +---useCreatePresetTheme
+|   |   |   |       index.jsx
+|   |   |   |       
+|   |   |   +---useCreateUserTheme
+|   |   |   |       index.jsx
+|   |   |   |       
+|   |   |   +---useResetUserThemes
+|   |   |   |       index.jsx
+|   |   |   |       
+|   |   |   +---useSaveTheme
+|   |   |   |       index.jsx
+|   |   |   |       
+|   |   |   \---useSetThemeDefault
+|   |   |           index.jsx
+|   |   |           
+|   |   +---transfer
+|   |   |   +---useAutoGenerateTeamPlayers
+|   |   |   |       index.jsx
+|   |   |   |       
+|   |   |   +---useCreateTeam
+|   |   |   |       index.jsx
+|   |   |   |       
+|   |   |   +---useUpdateTeam
+|   |   |   |       index.jsx
+|   |   |   |       
+|   |   |   +---useUpdateTeamCaptains
+|   |   |   |       index.jsx
+|   |   |   |       
+|   |   |   +---useUpdateTeamPlayers
+|   |   |   |       index.jsx
+|   |   |   |       
+|   |   |   \---useUpdateTourTeam
+|   |   |           index.jsx
+|   |   |           
+|   |   \---user
+|   |       +---useGetUserPhone
+|   |       |       index.jsx
+|   |       |       
+|   |       +---useUpdateUserData
+|   |       |       index.jsx
+|   |       |       
+|   |       +---useUpdateUserLanguage
+|   |       |       index.jsx
+|   |       |       
+|   |       +---useUpdateUserLocation
+|   |       |       index.jsx
+|   |       |       
+|   |       +---useUpdateUserNotificationInfo
+|   |       |       index.jsx
+|   |       |       
+|   |       \---useUpdateUserPhoto
+|   |               index.jsx
+|   |               
+|   +---lib
+|   |   |   i18n.config.js
+|   |   |   i18n.js
+|   |   |   registerSw.js
+|   |   |   root.reducer.js
+|   |   |   store.global.js
+|   |   |   supabaseClient.js
+|   |   |   
+|   |   +---features
+|   |   |   +---auth
+|   |   |   |       auth.extraReducer.js
+|   |   |   |       auth.selector.js
+|   |   |   |       auth.slice.js
+|   |   |   |       auth.thunk.js
+|   |   |   |       
+|   |   |   +---banner
+|   |   |   |       banner.extraReducer.js
+|   |   |   |       banner.selector.js
+|   |   |   |       banner.slice.js
+|   |   |   |       banner.thunk.js
+|   |   |   |       
+|   |   |   +---club
+|   |   |   |       club.extraReducer.js
+|   |   |   |       club.selector.js
+|   |   |   |       club.slice.js
+|   |   |   |       club.thunk.js
+|   |   |   |       
+|   |   |   +---competition
+|   |   |   |       competition.extraReducer.js
+|   |   |   |       competition.selector.js
+|   |   |   |       competition.slice.js
+|   |   |   |       competition.thunk.js
+|   |   |   |       
+|   |   |   +---currentTeam
+|   |   |   |       currentTeam.extraReducer.js
+|   |   |   |       currentTeam.selector.js
+|   |   |   |       currentTeam.slice.js
+|   |   |   |       currentTeam.thunk.js
+|   |   |   |       
+|   |   |   +---match
+|   |   |   |       match.extraReducer.js
+|   |   |   |       match.selector.js
+|   |   |   |       match.slice.js
+|   |   |   |       match.thunk.js
+|   |   |   |       
+|   |   |   +---matchEvent
+|   |   |   |       matchEvent.extraReducer.js
+|   |   |   |       matchEvent.selector.js
+|   |   |   |       matchEvent.slice.js
+|   |   |   |       matchEvent.thunk.js
+|   |   |   |       
+|   |   |   +---news
+|   |   |   |       news.extraReducer.js
+|   |   |   |       news.selector.js
+|   |   |   |       news.slice.js
+|   |   |   |       news.thunk.js
+|   |   |   |       
+|   |   |   +---package
+|   |   |   |       package.extraReducer.js
+|   |   |   |       package.selector.js
+|   |   |   |       package.slice.js
+|   |   |   |       package.thunk.js
+|   |   |   |       
+|   |   |   +---payBalance
+|   |   |   |       payBalance.extraReducer.js
+|   |   |   |       payBalance.selector.js
+|   |   |   |       payBalance.slice.js
+|   |   |   |       payBalance.thunk.js
+|   |   |   |       
+|   |   |   +---payExpense
+|   |   |   |       payExpense.extraReducer.js
+|   |   |   |       payExpense.selector.js
+|   |   |   |       payExpense.slice.js
+|   |   |   |       payExpense.thunk.js
+|   |   |   |       
+|   |   |   +---player
+|   |   |   |       player.extraReducer.js
+|   |   |   |       player.selector.js
+|   |   |   |       player.slice.js
+|   |   |   |       player.thunk.js
+|   |   |   |       
+|   |   |   +---playerPoint
+|   |   |   |       playerPoint.extraReducer.js
+|   |   |   |       playerPoint.selector.js
+|   |   |   |       playerPoint.slice.js
+|   |   |   |       playerPoint.thunk.js
+|   |   |   |       
+|   |   |   +---prize
+|   |   |   |       prize.extraReducer.js
+|   |   |   |       prize.selector.js
+|   |   |   |       prize.slice.js
+|   |   |   |       prize.thunk.js
+|   |   |   |       
+|   |   |   +---season
+|   |   |   |       season.extraReducer.js
+|   |   |   |       season.slice.js
+|   |   |   |       season.thunk.js
+|   |   |   |       
+|   |   |   +---systemConfig
+|   |   |   |       systemConfig.extraReducer.js
+|   |   |   |       systemConfig.selector.js
+|   |   |   |       systemConfig.slice.js
+|   |   |   |       systemConfig.thunk.js
+|   |   |   |       
+|   |   |   +---systemLanguage
+|   |   |   |       systemLanguage.slice.js
+|   |   |   |       
+|   |   |   +---systemNotification
+|   |   |   |       systemNotification.extraReducer.js
+|   |   |   |       systemNotification.selector.js
+|   |   |   |       systemNotification.slice.js
+|   |   |   |       systemNotification.thunk.js
+|   |   |   |       
+|   |   |   +---team
+|   |   |   |       team.extraReducer.js
+|   |   |   |       team.selector.js
+|   |   |   |       team.slice.js
+|   |   |   |       team.thunk.js
+|   |   |   |       
+|   |   |   +---teamPlayer
+|   |   |   |   |   teamPlayer.extraReducer.js
+|   |   |   |   |   teamPlayer.selector.js
+|   |   |   |   |   teamPlayer.slice.js
+|   |   |   |   |   teamPlayer.thunk.js
+|   |   |   |   |   
+|   |   |   |   \---reducers
+|   |   |   |           addTeamPlayerReducer.js
+|   |   |   |           autoAssembleTeamReducer.js
+|   |   |   |           deleteTeamPlayerReducer.js
+|   |   |   |           revertTeamPlayersReducer.js
+|   |   |   |           setCaptainReducer.js
+|   |   |   |           swapTeamPlayerReducer.js
+|   |   |   |           updateTeamPlayerReducer.js
+|   |   |   |           
+|   |   |   +---theme
+|   |   |   |       theme.extraReducer.js
+|   |   |   |       theme.selector.js
+|   |   |   |       theme.slice.js
+|   |   |   |       theme.thunk.js
+|   |   |   |       
+|   |   |   +---tour
+|   |   |   |       tour.extraReducer.js
+|   |   |   |       tour.selector.js
+|   |   |   |       tour.slice.js
+|   |   |   |       tour.thunk.js
+|   |   |   |       
+|   |   |   +---tourTeam
+|   |   |   |       tourTeam.extraReducer.js
+|   |   |   |       tourTeam.selector.js
+|   |   |   |       tourTeam.slice.js
+|   |   |   |       tourTeam.thunk.js
+|   |   |   |       
+|   |   |   \---userActivity
+|   |   |           userActivity.extraReducer.js
+|   |   |           userActivity.selector.js
+|   |   |           userActivity.slice.js
+|   |   |           userActivity.thunk.js
+|   |   |           
+|   |   \---firebase
+|   |           firebase-admin.js
+|   |           firebase.js
+|   |           
+|   +---plugins
+|   |   \---UploadFile
+|   |           UppyServerActionUpload.jsx
+|   |           
+|   +---providers
+|   |       Auth.provider.jsx
+|   |       AuthListener.provider.jsx
+|   |       Firebase.provider.jsx
+|   |       Geolocation.provider.jsx
+|   |       InitialState.provider.jsx
+|   |       PWACache.provider.jsx
+|   |       Root.provider.jsx
+|   |       Session.provider.jsx
+|   |       Store.provider.jsx
+|   |       Theme.provider.jsx
+|   |       ThemeCustomization.provider.jsx
+|   |       Translations.provider.jsx
+|   |       
+|   +---utils
+|   |       animations.global.css
+|   |       banner.util.js
+|   |       colors.util.js
+|   |       config.util.js
+|   |       default-theme.util.js
+|   |       defaults.global.css
+|   |       fonts.util.js
+|   |       formatCurrency.js
+|   |       formatDate.util.js
+|   |       formations.util.js
+|   |       getCorrectName.util.js
+|   |       getCorrectPlayerPosition.utils.js
+|   |       languages.util.js
+|   |       match.util.js
+|   |       packages.util.js
+|   |       paymentOptions.util.js
+|   |       player.util.js
+|   |       setLanguageCookie.js
+|   |       shadow.utils.js
+|   |       static.util.js
+|   |       tabs.util.js
+|   |       tour.util.js
+|   |       validateTeamName.util.js
+|   |       
+|   \---[locale]
+|       |   layout.jsx
+|       |   loading.jsx
+|       |   not-found.jsx
+|       |   page.jsx
+|       |   robots.txt
+|       |   
+|       +---(auth)
+|       |   +---auth
+|       |   |   |   layout.jsx
+|       |   |   |   loading.jsx
+|       |   |   |   page.jsx
+|       |   |   |   
+|       |   |   \---components
+|       |   |       +---LoginForm
+|       |   |       |       index.jsx
+|       |   |       |       
+|       |   |       +---SignUpForm
+|       |   |       |       index.jsx
+|       |   |       |       
+|       |   |       +---Skeleton
+|       |   |       |       index.jsx
+|       |   |       |       
+|       |   |       \---SocialLogin
+|       |   |           |   index.jsx
+|       |   |           |   
+|       |   |           +---Google
+|       |   |           |       index.jsx
+|       |   |           |       
+|       |   |           \---Yandex
+|       |   |                   index.jsx
+|       |   |                   
+|       |   +---confirm-otp
+|       |   |   |   loading.jsx
+|       |   |   |   page.jsx
+|       |   |   |   
+|       |   |   +---ConfirmOTPForm
+|       |   |   |       index.jsx
+|       |   |   |       
+|       |   |   \---ResendOTPBox
+|       |   |           index.jsx
+|       |   |           
+|       |   \---reset-password
+|       |       |   loading.jsx
+|       |       |   page.jsx
+|       |       |   
+|       |       \---ResetPasswordForm
+|       |               index.jsx
+|       |               
+|       +---(rendered)
+|       |   |   layout.jsx
+|       |   |   
+|       |   +---about-us
+|       |   |       loading.jsx
+|       |   |       page.jsx
+|       |   |       
+|       |   +---regulation
+|       |   |       loading.jsx
+|       |   |       page.jsx
+|       |   |       
+|       |   \---user-agreement
+|       |           loading.jsx
+|       |           page.jsx
+|       |           
+|       +---about-us
+|       |   \---db
+|       +---championships
+|       |   |   layout.jsx
+|       |   |   loading.jsx
+|       |   |   page.jsx
+|       |   |   
+|       |   \---components
+|       |       +---Championship
+|       |       |       index.jsx
+|       |       |       
+|       |       +---Modal
+|       |       |       index.jsx
+|       |       |       
+|       |       +---Skeleton
+|       |       |       index.jsx
+|       |       |       
+|       |       \---Title
+|       |               index.jsx
+|       |               
+|       +---clear
+|       |       page.jsx
+|       |       
+|       +---confirm-payment
+|       |   |   layout.jsx
+|       |   |   loading.jsx
+|       |   |   
+|       |   \---[packageId]
+|       |       |   page.jsx
+|       |       |   
+|       |       \---components
+|       |           +---ConfirmPaymentTab
+|       |           |       index.jsx
+|       |           |       
+|       |           +---CurrentPackage
+|       |           |       index.jsx
+|       |           |       
+|       |           \---PaymentOptions
+|       |               |   index.jsx
+|       |               |   
+|       |               +---ClickUp
+|       |               |       index.jsx
+|       |               |       
+|       |               +---Payme
+|       |               |       index.jsx
+|       |               |       
+|       |               \---Wallet
+|       |                       index.jsx
+|       |                       
+|       +---packages
+|       |   |   layout.jsx
+|       |   |   loading.jsx
+|       |   |   page.jsx
+|       |   |   
+|       |   \---components
+|       |       +---Package
+|       |       |       index.jsx
+|       |       |       
+|       |       +---Packages
+|       |       |       index.jsx
+|       |       |       
+|       |       \---PackagesSkeleton
+|       |               index.jsx
+|       |               
+|       +---play
+|       |   |   layout.jsx
+|       |   |   loading.jsx
+|       |   |   
+|       |   +---components
+|       |   |   +---BannerTemplate
+|       |   |   |       index.jsx
+|       |   |   |       
+|       |   |   +---Matches
+|       |   |   |   |   index.jsx
+|       |   |   |   |   
+|       |   |   |   \---Match
+|       |   |   |       |   index.jsx
+|       |   |   |       |   
+|       |   |   |       +---Skeleton
+|       |   |   |       |       index.jsx
+|       |   |   |       |       
+|       |   |   |       +---Status
+|       |   |   |       |       index.jsx
+|       |   |   |       |       
+|       |   |   |       \---TeamDisplay
+|       |   |   |               index.jsx
+|       |   |   |               
+|       |   |   +---News
+|       |   |   |   |   index.jsx
+|       |   |   |   |   
+|       |   |   |   +---Article
+|       |   |   |   |       index.jsx
+|       |   |   |   |       
+|       |   |   |   \---Skeleton
+|       |   |   |           index.jsx
+|       |   |   |           
+|       |   |   +---PlayFooter
+|       |   |   |       index.jsx
+|       |   |   |       
+|       |   |   \---RulesSlider
+|       |   |       |   index.jsx
+|       |   |       |   
+|       |   |       +---CompeteSlide
+|       |   |       |       index.jsx
+|       |   |       |       
+|       |   |       +---CreateTeamSlide
+|       |   |       |       index.jsx
+|       |   |       |       
+|       |   |       +---GatherPointsSlide
+|       |   |       |       index.jsx
+|       |   |       |       
+|       |   |       +---MakeTransfersSlide
+|       |   |       |       index.jsx
+|       |   |       |       
+|       |   |       +---RulesSliderTitle
+|       |   |       |       index.jsx
+|       |   |       |       
+|       |   |       \---WinPrizesSlide
+|       |   |               index.jsx
+|       |   |               
+|       |   \---[league]
+|       |       \---[id]
+|       |           |   layout.jsx
+|       |           |   loading.jsx
+|       |           |   
+|       |           +---(with-teams)
+|       |           |   |   layout.jsx
+|       |           |   |   
+|       |           |   +---components
+|       |           |   |   \---TopTeams
+|       |           |   |       |   index.jsx
+|       |           |   |       |   
+|       |           |   |       +---Players
+|       |           |   |       |       index.jsx
+|       |           |   |       |       
+|       |           |   |       +---Skeleton
+|       |           |   |       |       index.jsx
+|       |           |   |       |       
+|       |           |   |       \---Teams
+|       |           |   |               index.jsx
+|       |           |   |               
+|       |           |   +---journal
+|       |           |   |   |   loading.jsx
+|       |           |   |   |   page.jsx
+|       |           |   |   |   
+|       |           |   |   \---components
+|       |           |   |       \---Table
+|       |           |   |               index.jsx
+|       |           |   |               
+|       |           |   +---statistics
+|       |           |   |   |   page.jsx
+|       |           |   |   |   
+|       |           |   |   \---components
+|       |           |   |       \---Filters
+|       |           |   |               index.jsx
+|       |           |   |               
+|       |           |   \---tournament
+|       |           |       |   loading.jsx
+|       |           |       |   page.jsx
+|       |           |       |   
+|       |           |       \---components
+|       |           |           +---Filters
+|       |           |           |   +---Team
+|       |           |           |   |       index.jsx
+|       |           |           |   |       
+|       |           |           |   \---Tour
+|       |           |           |           index.jsx
+|       |           |           |           
+|       |           |           \---Table
+|       |           |                   index.jsx
+|       |           |                   
+|       |           \---(with-tour)
+|       |               |   layout.jsx
+|       |               |   page.jsx
+|       |               |   
+|       |               +---components
+|       |               |   +---GameNavigation
+|       |               |   |       index.jsx
+|       |               |   |       
+|       |               |   +---GameProfile
+|       |               |   |   |   index.jsx
+|       |               |   |   |   
+|       |               |   |   +---GameBrief
+|       |               |   |   |       index.jsx
+|       |               |   |   |       
+|       |               |   |   +---PlayersStructure
+|       |               |   |   |   |   index.jsx
+|       |               |   |   |   |   
+|       |               |   |   |   \---Player
+|       |               |   |   |           index.jsx
+|       |               |   |   |           
+|       |               |   |   \---ProfileStadiumForm
+|       |               |   |           index.jsx
+|       |               |   |           
+|       |               |   \---Transfer
+|       |               |       |   index.jsx
+|       |               |       |   
+|       |               |       +---PlayersStructure
+|       |               |       |   |   index.jsx
+|       |               |       |   |   
+|       |               |       |   \---Player
+|       |               |       |           index.jsx
+|       |               |       |           
+|       |               |       +---PlayersTable
+|       |               |       |   |   index.jsx
+|       |               |       |   |   
+|       |               |       |   +---AddPlayerButton
+|       |               |       |   |       index.jsx
+|       |               |       |   |       
+|       |               |       |   +---Filters
+|       |               |       |   |   |   index.jsx
+|       |               |       |   |   |   
+|       |               |       |   |   \---Positions
+|       |               |       |   |           index.jsx
+|       |               |       |   |           
+|       |               |       |   \---Skeleton
+|       |               |       |           index.jsx
+|       |               |       |           
+|       |               |       +---TeamOverview
+|       |               |       |   |   index.jsx
+|       |               |       |   |   
+|       |               |       |   +---TeamBalance
+|       |               |       |   |   |   index.jsx
+|       |               |       |   |   |   
+|       |               |       |   |   \---Modal
+|       |               |       |   |           index.jsx
+|       |               |       |   |           
+|       |               |       |   +---TeamMaxClubMembers
+|       |               |       |   |   |   index.jsx
+|       |               |       |   |   |   
+|       |               |       |   |   \---Modal
+|       |               |       |   |           index.jsx
+|       |               |       |   |           
+|       |               |       |   +---TeamMaxTransfers
+|       |               |       |   |   |   index.jsx
+|       |               |       |   |   |   
+|       |               |       |   |   \---Modal
+|       |               |       |   |           index.jsx
+|       |               |       |   |           
+|       |               |       |   \---TeamPrice
+|       |               |       |           index.jsx
+|       |               |       |           
+|       |               |       \---TransferStadiumForm
+|       |               |               index.jsx
+|       |               |               
+|       |               \---transfer
+|       |                       page.jsx
+|       |                       
+|       +---prizes
+|       |   |   layout.jsx
+|       |   |   loading.jsx
+|       |   |   page.jsx
+|       |   |   
+|       |   \---components
+|       |       +---Prize
+|       |       |       index.jsx
+|       |       |       
+|       |       \---PrizeContainer
+|       |               index.jsx
+|       |               
+|       +---settings
+|       |   |   layout.jsx
+|       |   |   loading.jsx
+|       |   |   page.jsx
+|       |   |   tabs.js
+|       |   |   
+|       |   \---components
+|       |       +---Container
+|       |       |       index.jsx
+|       |       |       
+|       |       +---Navigation
+|       |       |   |   index.jsx
+|       |       |   |   
+|       |       |   +---LogOut
+|       |       |   |       LogOut.jsx
+|       |       |   |       
+|       |       |   \---Tab
+|       |       |           index.jsx
+|       |       |           
+|       |       +---Profile
+|       |       |   |   index.jsx
+|       |       |   |   
+|       |       |   \---RefillBalanceBox
+|       |       |           index.jsx
+|       |       |           
+|       |       +---Security
+|       |       |   |   index.jsx
+|       |       |   |   
+|       |       |   +---ChangePasswordForm
+|       |       |   |       index.jsx
+|       |       |   |       
+|       |       |   \---ChangePhoneForm
+|       |       |           index.jsx
+|       |       |           
+|       |       +---Settings
+|       |       |   |   index.jsx
+|       |       |   |   
+|       |       |   \---PhoneVerification
+|       |       |           index.jsx
+|       |       |           
+|       |       +---Skeleton
+|       |       |       index.jsx
+|       |       |       
+|       |       \---Transactions
+|       |           |   index.jsx
+|       |           |   
+|       |           +---BalanceTable
+|       |           |       index.jsx
+|       |           |       
+|       |           +---PackagesTable
+|       |           |       index.jsx
+|       |           |       
+|       |           \---Skeleton
+|       |                   index.jsx
+|       |                   
+|       +---team-view
+|       |   +---components
+|       |   |   +---GameNavigation
+|       |   |   |   |   index.jsx
+|       |   |   |   |   
+|       |   |   |   \---TourTabs
+|       |   |   |           index.jsx
+|       |   |   |           
+|       |   |   \---TeamProfile
+|       |   |       |   index.jsx
+|       |   |       |   
+|       |   |       +---GameBrief
+|       |   |       |       index.jsx
+|       |   |       |       
+|       |   |       \---PlayersStructure
+|       |   |           |   index.jsx
+|       |   |           |   
+|       |   |           \---Player
+|       |   |                   index.jsx
+|       |   |                   
+|       |   \---[league]
+|       |       \---[id]
+|       |               layout.jsx
+|       |               loading.jsx
+|       |               page.jsx
+|       |               
+|       +---_news
+|       |   |   layout.jsx
+|       |   |   
+|       |   \---[id]
+|       |           page.jsx
+|       |           
+|       \---~offline
+|           |   page.jsx
+|           |   
+|           \---components
+|                   OfflineClient.jsx
+|                   
++---components
+|   +---DatePicker
+|   |       index.jsx
+|   |       
+|   +---Game
+|   |   +---Player
+|   |   |       index.jsx
+|   |   |       
+|   |   +---Stadium
+|   |   |       index.jsx
+|   |   |       
+|   |   +---StadiumSpinner
+|   |   |       index.jsx
+|   |   |       
+|   |   \---Wrapper
+|   |           index.jsx
+|   |           
+|   +---Gutter
+|   |       index.jsx
+|   |       
+|   +---Hero
+|   |   |   index.jsx
+|   |   |   
+|   |   \---Link
+|   |           index.jsx
+|   |           
+|   +---Marquee
+|   |       index.jsx
+|   |       
+|   +---MotionNumber
+|   |       index.jsx
+|   |       
+|   +---PageSkeleton
+|   |       index.jsx
+|   |       
+|   +---PhoneInput
+|   |       index.jsx
+|   |       
+|   +---Promotions
+|   |   |   index.jsx
+|   |   |   
+|   |   +---Compete
+|   |   |       index.jsx
+|   |   |       
+|   |   +---CreateTeam
+|   |   |       index.jsx
+|   |   |       
+|   |   +---GatherPoints
+|   |   |       index.jsx
+|   |   |       
+|   |   +---MakeTransfers
+|   |   |       index.jsx
+|   |   |       
+|   |   \---WinPrizes
+|   |           index.jsx
+|   |           
+|   +---Spinner
+|   |       index.jsx
+|   |       
+|   +---StyledTabs
+|   |       index.jsx
+|   |       
+|   \---Table
+|       +---Body
+|       |       index.jsx
+|       |       
+|       +---Filters
+|       |   +---Clubs
+|       |   |       index.jsx
+|       |   |       
+|       |   +---Name
+|       |   |       index.jsx
+|       |   |       
+|       |   \---Price
+|       |           index.jsx
+|       |           
+|       +---Head
+|       |       index.jsx
+|       |       
+|       \---Pagination
+|           +---Client
+|           |       index.jsx
+|           |       
+|           \---Server
+|                   index.jsx
+|                   
++---lib
+|   +---prisma
+|   |       index.js
+|   |       
+|   +---schema
+|   |       index.js
+|   |       
+|   \---utils
+|           auth.util.js
+|           
+\---shared
+    +---Avatar
+    |       index.jsx
+    |       
+    +---Banners
+    |   +---Big
+    |   |       index.jsx
+    |   |       
+    |   +---LeftSide
+    |   |       index.jsx
+    |   |       
+    |   +---Mini
+    |   |       index.jsx
+    |   |       
+    |   +---Modal
+    |   |       index.jsx
+    |   |       
+    |   +---RightSide
+    |   |       index.jsx
+    |   |       
+    |   \---YandexAd
+    |           index.jsx
+    |           
+    +---Footer
+    |       index.jsx
+    |       
+    +---GameBrief
+    |       index.jsx
+    |       
+    +---Modals
+    |   +---Confirmation
+    |   |       index.jsx
+    |   |       
+    |   +---ConfirmOTP
+    |   |   |   index.jsx
+    |   |   |   
+    |   |   \---ResendOTP
+    |   |           index.jsx
+    |   |           
+    |   +---ForgotPassword
+    |   |       index.jsx
+    |   |       
+    |   +---MatchEvent
+    |   |   |   animations.styles.js
+    |   |   |   index.jsx
+    |   |   |   
+    |   |   +---Content
+    |   |   |   |   index.jsx
+    |   |   |   |   
+    |   |   |   +---Event
+    |   |   |   |   |   index.jsx
+    |   |   |   |   |   
+    |   |   |   |   \---Icon
+    |   |   |   |           index.jsx
+    |   |   |   |           
+    |   |   |   \---Skeleton
+    |   |   |           index.jsx
+    |   |   |           
+    |   |   +---Header
+    |   |   |       index.jsx
+    |   |   |       
+    |   |   \---Score
+    |   |           index.jsx
+    |   |           
+    |   +---NewsArticle
+    |   |       index.jsx
+    |   |       
+    |   +---PlayerInfo
+    |   |   |   index.jsx
+    |   |   |   
+    |   |   +---PlayerPhoto
+    |   |   |       index.jsx
+    |   |   |       
+    |   |   \---Table
+    |   |           index.jsx
+    |   |           
+    |   +---PlayerTransfer
+    |   |   |   index.jsx
+    |   |   |   
+    |   |   \---Table
+    |   |       |   index.jsx
+    |   |       |   
+    |   |       +---Filters
+    |   |       |       index.jsx
+    |   |       |       
+    |   |       \---SwapPlayerButton
+    |   |               index.jsx
+    |   |               
+    |   +---RefillBalance
+    |   |       index.jsx
+    |   |       
+    |   +---SetUserCredentials
+    |   |       index.jsx
+    |   |       
+    |   \---UploadFile
+    |       |   index.jsx
+    |       |   
+    |       \---Uploader
+    |               index.jsx
+    |               
+    +---Navbar
+    |   |   index.jsx
+    |   |   
+    |   +---Dropdown
+    |   |       index.jsx
+    |   |       
+    |   +---Links
+    |   |       index.jsx
+    |   |       
+    |   \---Mobile
+    |           index.jsx
+    |           
+    +---Notification
+    |   |   index.jsx
+    |   |   
+    |   +---Modal
+    |   |       index.jsx
+    |   |       
+    |   \---NotificationArticle
+    |           index.jsx
+    |           
+    +---SwitcherLanguage
+    |       index.jsx
+    |       
+    +---SwitcherTheme
+    |       index.jsx
+    |       
+    \---ThemeCustomizer
+        |   index.jsx
+        |   
+        \---components
+                ColorModifier.jsx
+                CreateThemeModal.jsx
+                FontModifer.jsx
+                GlobalModifier.jsx
+                SelectTheme.jsx
+                ShadowsModifier.jsx
+                ThemePreview.jsx
+                

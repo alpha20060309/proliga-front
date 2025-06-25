@@ -1,0 +1,184 @@
+'use client'
+
+import { Home, Repeat, Users, Notebook, BarChart2 } from 'lucide-react'
+import { useSelector } from 'react-redux'
+import { usePathname } from 'next/navigation'
+import { useTranslation } from 'react-i18next'
+import { TABS } from 'app/utils/tabs.util'
+import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
+import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
+import { TOUR_STATUS } from 'app/utils/tour.util'
+import { cn } from '@/lib/utils'
+import { Link } from 'next-view-transitions'
+import { memo, useEffect, useState } from 'react'
+import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
+
+// Simpler icon selection: just use a switch statement in NavLink
+const NavLink = ({
+  href,
+  iconName,
+  label,
+  className,
+  isDisabled,
+  isActive,
+}) => {
+  let IconComponent
+  switch (iconName) {
+    case TABS.GameProfile:
+      IconComponent = Home
+      break
+    case TABS.Transfer:
+      IconComponent = Repeat
+      break
+    case TABS.Tournament:
+      IconComponent = Users
+      break
+    case TABS.Journal:
+      IconComponent = Notebook
+      break
+    case TABS.Statistics:
+      IconComponent = BarChart2
+      break
+    default:
+      IconComponent = Home
+  }
+
+  let iconClass = 'size-4.5'
+  if (isDisabled) {
+    iconClass += ' text-muted-foreground'
+  } else if (isActive) {
+    iconClass += ' text-sidebar-accent-foreground'
+  } else {
+    iconClass += ' text-sidebar-foreground'
+  }
+
+  return (
+    <Link
+      href={isDisabled ? '#' : href}
+      onClick={
+        isDisabled
+          ? (e) => {
+              e.preventDefault()
+            }
+          : undefined
+      }
+      className={cn(
+        'group flex-1 cursor-pointer p-0 text-center no-underline',
+        className,
+        {
+          'pointer-events-none opacity-50': isDisabled,
+          'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground':
+            !isDisabled,
+        }
+      )}
+      aria-disabled={isDisabled}
+      aria-label={label}
+      tabIndex={isDisabled ? -1 : 0}
+    >
+      <div
+        className={cn(
+          'flex h-16 w-full flex-col items-center justify-center rounded-md p-1 text-sidebar-foreground',
+          className,
+          {
+            'bg-sidebar-accent text-sidebar-accent-foreground': isActive && !isDisabled,
+          }
+        )}
+      >
+        <IconComponent className={iconClass} />
+        <span className="mt-0.5 text-xs">{label}</span>
+      </div>
+    </Link>
+  )
+}
+
+function MobileNavigation() {
+  const path = usePathname()
+  const { t } = useTranslation()
+  const currentTeam = useSelector(selectCurrentTeam)
+  const currentTour = useSelector(selectCurrentTour)
+  const currentCompetition = useSelector(selectCurrentCompetition)
+  const { lastVisitedTeam } = useSelector((store) => store.currentTeam)
+  const [gameTab, setGameTab] = useState('')
+
+  useEffect(() => {
+    const pathLength = path.split('/').length
+
+    if (path.includes('play') && pathLength === 6) {
+      Object.keys(TABS).forEach((tab) => {
+        if (path.includes(TABS[tab])) {
+          setGameTab(TABS[tab])
+        }
+      })
+    } else {
+      setGameTab(TABS.GameProfile)
+    }
+  }, [path])
+
+  const navItems = [
+    {
+      id: TABS.GameProfile,
+      iconName: TABS.GameProfile,
+      labelKey: 'Profil',
+      tab: TABS.GameProfile,
+    },
+    {
+      id: TABS.Transfer,
+      iconName: TABS.Transfer,
+      labelKey: 'Transferlar',
+      tab: TABS.Transfer,
+    },
+    {
+      id: TABS.Tournament,
+      iconName: TABS.Tournament,
+      labelKey: 'Turnir',
+      tab: TABS.Tournament,
+    },
+    {
+      id: TABS.Journal,
+      iconName: TABS.Journal,
+      labelKey: 'Jurnal',
+      tab: TABS.Journal,
+    },
+    {
+      id: TABS.Statistics,
+      iconName: TABS.Statistics,
+      labelKey: 'Statistika',
+      tab: TABS.Statistics,
+    },
+  ]
+
+  return (
+    <nav
+      className={cn(
+        'border-sidebar-border bg-sidebar text-sidebar-foreground fixed inset-x-0 bottom-0 z-50 flex h-16 items-center justify-between gap-0 overflow-hidden rounded-tl-lg rounded-tr-lg border-t shadow backdrop-blur lg:hidden',
+        !lastVisitedTeam && 'hidden'
+      )}
+    >
+      {navItems.map((item) => {
+        const correctTab = item.tab !== TABS.GameProfile ? item.tab : ''
+        const href = lastVisitedTeam
+          ? `/play/${currentCompetition?.id}/${currentTeam?.id}/${correctTab}`
+          : '#'
+
+        const isTransferTab = item.tab === TABS.Transfer
+        const isDisabled = isTransferTab
+          ? currentTour?.status !== TOUR_STATUS.notStartedTransfer ||
+            !currentTeam?.is_team_created
+          : !currentTeam?.is_team_created
+
+        return (
+          <NavLink
+            key={item.id}
+            iconName={item.iconName}
+            label={t(item.labelKey)}
+            href={href}
+            isDisabled={isDisabled}
+            isActive={gameTab === item.tab}
+          />
+        )
+      })}
+    </nav>
+  )
+}
+
+export default memo(MobileNavigation)

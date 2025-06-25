@@ -17,7 +17,7 @@ export default function SettingsPage() {
         {t('Security settings')}
       </h2>
       <section className="flex flex-col gap-4 lg:flex-row">
-        <FormContainer>
+        <Card className={'border-border w-full'}>
           <CardHeader>
             <CardTitle className={cn('mb-2 text-lg font-bold')}>
               {t('Parol Yangilash')}
@@ -26,9 +26,9 @@ export default function SettingsPage() {
           <CardContent>
             <ChangePasswordForm />
           </CardContent>
-        </FormContainer>
+        </Card>
         <Separator className="my-4 lg:hidden" />
-        <FormContainer>
+        <Card className={'border-border w-full'}>
           <CardHeader>
             <CardTitle className={cn('mb-2 text-lg font-bold')}>
               {t('Update Phone Number')}
@@ -37,12 +37,8 @@ export default function SettingsPage() {
           <CardContent>
             <ChangePhoneForm />
           </CardContent>
-        </FormContainer>
+        </Card>
       </section>
     </SettingsContainer>
   )
-}
-
-const FormContainer = ({ children }) => {
-  return <Card className={'w-full p-2 py-6 lg:px-4'}>{children}</Card>
 }

@@ -9,8 +9,8 @@ import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { useSelector } from 'react-redux'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
-import ConfirmOTP from 'components/Modals/ConfirmOTP'
-import { useSendOTP } from 'app/hooks/auth/useSendOTP/useSendOTP'
+import ConfirmOTP from 'shared/Modals/ConfirmOTP'
+import { useSendOTP } from 'app/hooks/auth/useSendOTP'
 import { resetPassword } from 'app/actions/resetPassword.action'
 
 function ChangePasswordForm() {
@@ -115,7 +115,7 @@ function ChangePasswordForm() {
           </div>
         </div>
         <Button
-          className="hover:bg-accent/80 max-w-40"
+          className="hover:dark:bg-accent max-w-40"
           size="lg"
           variant={'outline'}
           type="submit"

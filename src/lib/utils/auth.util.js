@@ -1,8 +1,8 @@
-import { db } from 'lib/db'
+import prisma from "lib/prisma"
 
 export const getAccountByUserId = async (user_id) => {
   try {
-    const account = await db.auth_account.findUnique({
+    const account = await prisma.auth_account.findUnique({
       where: { user_id },
     })
 
@@ -14,7 +14,7 @@ export const getAccountByUserId = async (user_id) => {
 
 export const getUserById = async (id) => {
   try {
-    const user = await db.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: { id },
     })
 
@@ -26,7 +26,7 @@ export const getUserById = async (id) => {
 
 export const getUserByPhone = async (phone) => {
   try {
-    const user = await db.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: { phone },
     })
     return user
@@ -37,7 +37,7 @@ export const getUserByPhone = async (phone) => {
 
 export const getUserByEmail = async (email) => {
   try {
-    const user = await db.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: { email },
     })
     return user

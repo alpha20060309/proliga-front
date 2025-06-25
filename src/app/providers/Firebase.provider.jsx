@@ -4,7 +4,7 @@
 import { useEffect, memo } from 'react'
 import { initializeFirebase, getFirebaseToken } from 'app/lib/firebase/firebase'
 import { useSelector } from 'react-redux'
-import { useUpdateUserNotificationInfo } from 'app/hooks/user/useUpdateUserNotificationInfo/useUpdateUserNotificationInfo'
+import { useUpdateUserNotificationInfo } from 'app/hooks/user/useUpdateUserNotificationInfo'
 
 const FirebaseProvider = ({ children }) => {
   const { user } = useSelector((state) => state.auth)

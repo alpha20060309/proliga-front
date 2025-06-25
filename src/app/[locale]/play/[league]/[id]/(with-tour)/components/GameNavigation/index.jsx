@@ -1,0 +1,102 @@
+'use client'
+
+import Box from '@mui/material/Box'
+import { StyledTab, StyledTabs, GameTab } from 'components/StyledTabs'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { TOUR_STATUS } from 'app/utils/tour.util'
+import { setCurrentTourIndex } from 'app/lib/features/tour/tour.slice'
+import { setCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.slice'
+import {
+  selectRegisteredTour,
+  selectTours,
+} from 'app/lib/features/tour/tour.selector'
+import { emptyTeamPlayers } from 'app/lib/features/teamPlayer/teamPlayer.slice'
+import { tabsClasses } from '@mui/material'
+import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
+import { useTransitionRouter } from 'next-view-transitions'
+import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
+import { TABS } from 'app/utils/tabs.util'
+import { usePathname } from 'next/navigation'
+
+export default function TourTabs() {
+  const path = usePathname()
+  const dispatch = useDispatch()
+  const router = useTransitionRouter()
+  const selectedTours = useSelector(selectTours)
+  const currentCompetition = useSelector(selectCurrentCompetition)
+  const { currentTourIndex } = useSelector((state) => state.tour)
+  const registeredTour = useSelector(selectRegisteredTour)
+  const currentTeam = useSelector(selectCurrentTeam)
+  const [gameTab, setGameTab] = useState('')
+
+  useEffect(() => {
+    const pathLength = path.split('/').length
+
+    if (path.includes('play') && pathLength === 6) {
+      Object.keys(TABS).forEach((tab) => {
+        if (path.includes(TABS[tab])) {
+          setGameTab(TABS[tab])
+        }
+      })
+    } else {
+      setGameTab(TABS.GameProfile)
+    }
+  }, [path])
+
+  const handleClick = (index, item) => {
+    if (currentTourIndex !== index) {
+      dispatch(emptyTeamPlayers())
+    }
+    if (
+      gameTab === TABS.Transfer &&
+      item.status !== TOUR_STATUS.notStartedTransfer
+    ) {
+      router.push(`/play/${currentCompetition?.id}/${currentTeam?.id}`)
+    }
+    dispatch(setCurrentTourTeam(index))
+    dispatch(setCurrentTourIndex(index))
+  }
+
+  return (
+    <Box
+      sx={{
+        width: '100%',
+        bgcolor: 'var(--card)',
+        color: 'var(--card-foreground)',
+        height: 'auto',
+        borderRadius: 'var(--radius)',
+        minHeight: '64px',
+      }}
+    >
+      <StyledTabs
+        value={currentTourIndex}
+        variant="scrollable"
+        scrollButtons
+        allowScrollButtonsMobile
+        className="fade-in animate-in text-foreground disabled:text-muted-foreground m-0 snap-x snap-center rounded duration-500"
+        aria-label="tour tabs"
+        sx={{
+          [`& .${tabsClasses.scrollButtons}`]: {
+            '&.Mui-disabled': { opacity: 0.4 },
+          },
+        }}
+      >
+        {selectedTours?.map((item, index) => (
+          <StyledTab
+            key={item.id}
+            onClick={() => handleClick(index, item)}
+            className="m-0 w-32 space-y-0 disabled:cursor-default sm:w-40"
+            disabled={
+              currentTeam?.is_team_created
+                ? item.status === TOUR_STATUS.notStarted ||
+                item.order < registeredTour?.order
+                : item.status !== TOUR_STATUS.notStartedTransfer
+            }
+            label={<GameTab item={item} />}
+          />
+        ))}
+      </StyledTabs>
+    </Box>
+  )
+}

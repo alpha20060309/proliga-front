@@ -148,7 +148,7 @@ const TeamView = ({ params }) => {
     return <Spinner />
   }
   return (
-    <section className="flex flex-col gap-4 overflow-hidden">
+    <section className="flex flex-col gap-4 pt-4 overflow-hidden">
       <TeamTabs />
       <TeamProfile />
     </section>

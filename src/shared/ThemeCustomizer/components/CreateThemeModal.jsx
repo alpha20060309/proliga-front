@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
-import { useCreateUserTheme } from 'app/hooks/theme/useCreateUserTheme/useCreateUserTheme'
+import { useCreateUserTheme } from 'app/hooks/theme/useCreateUserTheme'
 import { Loader2, Save } from 'lucide-react'
 import {
   fetchThemes,
@@ -22,7 +22,7 @@ import {
   selectDarkTheme,
   selectLightTheme,
 } from 'app/lib/features/theme/theme.selector'
-import { useCreatePresetTheme } from 'app/hooks/theme/useCreatePresetTheme/useCreatePresetTheme'
+import { useCreatePresetTheme } from 'app/hooks/theme/useCreatePresetTheme'
 
 const CreateThemeModal = ({ isGlobal, open, setOpen }) => {
   const dispatch = useDispatch()
