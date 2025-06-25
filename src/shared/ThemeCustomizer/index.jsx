@@ -127,8 +127,8 @@ const ThemeCustomizer = () => {
 
   return (
     <Sheet>
-      <SheetTrigger className="relative flex size-8 items-center justify-center bg-transparent p-0 font-sans font-medium hover:bg-transparent">
-        <Palette className="text-foreground hover:text-accent size-5 select-none" />
+      <SheetTrigger className="bg-background hover:bg-accent dark:bg-input/30 dark:border-input dark:hover:bg-input/50 focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive relative flex size-7 shrink-0 items-center justify-center gap-2 rounded-md border p-0 font-sans text-sm font-medium whitespace-nowrap shadow-xs transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50">
+        <Palette className="text-foreground hover:text-accent-foreground dark:text-accent size-4 select-none" />
       </SheetTrigger>
       <SheetContent
         className={

@@ -6,10 +6,12 @@ import { useTranslation } from 'react-i18next'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import { formatDate } from 'app/utils/formatDate.util'
 import { Phone, CalendarDays, UsersRound } from 'lucide-react'
-import RefillBalanceBox from './components/RefillBalanceBox'
+import RefillBalance from './components/RefillBalance'
 import Avatar from 'shared/Avatar'
 import { getUrl } from 'app/utils/static.util'
 import { Copy } from 'lucide-react'
+import NotificationToggle from './components/NotificationToggle'
+import ThemeCustomizer from './components/ThemeCustomizer'
 
 const SettingsProfile = () => {
   const { t } = useTranslation()
@@ -33,7 +35,7 @@ const SettingsProfile = () => {
 
   return (
     <>
-      <h3 className="text-foreground mb-2 text-xl font-bold tracking-tight">
+      <h3 className="text-foreground text-xl font-bold tracking-tight">
         {t('Profil')}
       </h3>
       <div className="flex flex-wrap items-center gap-4">
@@ -117,7 +119,11 @@ const SettingsProfile = () => {
       <div className="bg-card/50 border-border text-muted-foreground line-clamp-5 h-28 max-w-full overflow-y-scroll rounded-lg border p-2 text-sm text-wrap break-words shadow md:p-4">
         {user?.bio ? user?.bio : t("Ma'lumot yo'q")}
       </div>
-      <RefillBalanceBox />
+      <section className="flex gap-2 flex-wrap">
+        <RefillBalance />
+        <NotificationToggle />
+        <ThemeCustomizer />
+      </section>
     </>
   )
 }

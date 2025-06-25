@@ -1,11 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
@@ -16,16 +17,18 @@ import { useRedirectToClick } from 'app/hooks/payment/useRedirectToClick'
 import { useRedirectToPayme } from 'app/hooks/payment/useRedirectToPayme'
 import { CONFIG_KEY } from 'app/utils/config.util'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
-import { formatCurrency } from 'app/utils/formatCurrency'
-import { memo } from 'react'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
-import { BALANCE_OPTIONS } from 'app/utils/paymentOptions.util'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import Image from 'next/image'
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+import { useTheme } from 'next-themes'
+
+const PREDEFINED_AMOUNTS = [50000, 100000, 200000, 500000]
 
 const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
   const { t } = useTranslation()
+  const { resolvedTheme } = useTheme()
   const userTable = useSelector(selectUserTable)
   const config = useSelector(selectSystemConfig)
   const { lang } = useSelector((store) => store.systemLanguage)
@@ -39,6 +42,15 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
     config[CONFIG_KEY.cabinet_click]?.value.toLowerCase() === 'true' || false
   const [paymentOption, setPaymentOption] = useState(null)
   const [amount, setAmount] = useState('')
+
+  const formatNumber = (num) => {
+    if (typeof num !== 'number' || !num) return '0'
+    return new Intl.NumberFormat('ru-RU').format(num)
+  }
+
+  const handleSetAmount = (newAmount) => {
+    setAmount(String(newAmount))
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -67,99 +79,130 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-      <DialogContent className="text-foreground max-h-[80%] w-[98%] max-w-lg overflow-auto rounded-xl p-4 xl:p-6">
-        <DialogTitle className="text-lg font-bold sm:text-xl">
-          {t('Balansingizni toldiring')}
-        </DialogTitle>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <div className="w-full space-y-1">
-            <h3 className="text-muted-foreground text-sm font-medium sm:text-base">
+      <DialogContent className="text-foreground max-h-[90vh] w-[98%] max-w-lg overflow-y-auto rounded-xl p-4 sm:max-w-lg xl:p-6">
+        <DialogHeader>
+          <DialogTitle className="text-lg font-bold sm:text-xl">
+            {t('Balansni toldirish')}
+          </DialogTitle>
+        </DialogHeader>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6 py-4">
+          <div className="w-full space-y-3">
+            <Label className="text-sm font-medium sm:text-base">
               {t("To'lov usulini tanlang")}
-            </h3>
-            <section className="flex max-w-full flex-wrap justify-start gap-1 sm:flex-nowrap">
-              {cabinet_click && (
-                <PaymentOption
-                  onClick={() => setPaymentOption(BALANCE_OPTIONS.CLICKUP)}
-                  style={
-                    paymentOption === BALANCE_OPTIONS.CLICKUP ? ACTIVE : PASSIVE
-                  }
-                  img={'/icons/click-up.svg'}
-                  alt={'click-up'}
-                />
-              )}
-              {cabinet_payme && (
-                <PaymentOption
-                  onClick={() => setPaymentOption(BALANCE_OPTIONS.PAYME)}
-                  style={
-                    paymentOption === BALANCE_OPTIONS.PAYME ? ACTIVE : PASSIVE
-                  }
-                  img={'/icons/payme.svg'}
-                  alt={'payme'}
-                />
-              )}
-              {!cabinet_click && !cabinet_payme && (
-                <p className="text-foreground border-destructive/50 bg-red-destructive flex h-10 w-full items-center justify-center rounded-sm border font-bold">
-                  {t("Hozircha to'lovlar o'chirib qo'yilgan!")}
-                </p>
-              )}
-            </section>
-          </div>
-          <div className="w-full space-y-1">
-            <Label
-              className="text-muted-foreground text-sm font-medium sm:text-base"
-              htmlFor="money"
-            >
-              {t("To'lash summasini tering")}
             </Label>
-            <Input
-              type="number"
-              id="money"
-              placeholder={formatCurrency({
-                value: 10000000,
-                t,
-                decimalPlaces: 0,
-              })}
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              name="money"
-              className="border-border bg-input text-foreground placeholder:text-muted-foreground flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus:border-none disabled:cursor-not-allowed disabled:opacity-50"
-            />
+            <ToggleGroup
+              type="single"
+              value={paymentOption}
+              onValueChange={(value) => {
+                if (value) setPaymentOption(value)
+              }}
+              className="grid grid-cols-2 gap-3"
+            >
+              {cabinet_payme && (
+                <ToggleGroupItem
+                  value={PAYMENT_OPTIONS.PAYME}
+                  aria-label="Payme"
+                  className="data-[state=on]:bg-background flex h-auto flex-col gap-2 rounded-lg border-2 p-4 data-[state=on]:border-[#0cbbbc]"
+                >
+                  <Image
+                    src={'/icons/payme.svg'}
+                    width={80}
+                    height={24}
+                    alt="payme"
+                  />
+                </ToggleGroupItem>
+              )}
+              {cabinet_click && (
+                <ToggleGroupItem
+                  value={PAYMENT_OPTIONS.CLICKUP}
+                  aria-label="Click"
+                  className="data-[state=on]:bg-background flex h-auto flex-col gap-2 rounded-lg border-2 p-4 data-[state=on]:border-[#0065FF]"
+                >
+                  <Image
+                    src={
+                      resolvedTheme === 'dark'
+                        ? '/icons/click-up.svg'
+                        : '/icons/click-up-dark.svg'
+                    }
+                    width={80}
+                    height={24}
+                    alt="click-up"
+                  />
+                </ToggleGroupItem>
+              )}
+            </ToggleGroup>
+            {!cabinet_click && !cabinet_payme && (
+              <p className="text-foreground border-destructive/50 bg-red-destructive flex h-10 w-full items-center justify-center rounded-sm border font-bold">
+                {t("Hozircha to'lovlar o'chirib qo'yilgan!")}
+              </p>
+            )}
+          </div>
+
+          <div className="w-full space-y-3">
+            <Label className="text-sm font-medium sm:text-base">
+              {t('Summani tanlang')}
+            </Label>
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+              {PREDEFINED_AMOUNTS.map((predefinedAmount) => (
+                <Button
+                  key={predefinedAmount}
+                  type="button"
+                  variant={+amount === predefinedAmount ? 'default' : 'outline'}
+                  onClick={() => handleSetAmount(predefinedAmount)}
+                  className="h-12 text-base"
+                >
+                  {formatNumber(predefinedAmount)}
+                </Button>
+              ))}
+            </div>
+          </div>
+
+          <div className="w-full space-y-3">
+            <Label className="text-sm font-medium sm:text-base" htmlFor="money">
+              {t("Yoki o'z summanigizni kiriting")}
+            </Label>
+            <div className="relative">
+              <Input
+                type="number"
+                id="money"
+                placeholder={t('Summani kiriting...')}
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                name="money"
+                className="h-12 pr-14 text-base"
+              />
+              <span className="text-muted-foreground absolute top-1/2 right-4 -translate-y-1/2 text-sm">
+                {t("so'm")}
+              </span>
+            </div>
+            <p className="text-muted-foreground text-xs">
+              {t('Minimal: $ so`m').replace(
+                '$',
+                // eslint-disable-next-line no-undef
+                formatNumber(Number(process.env.NEXT_PUBLIC_DEFAULT_BALANCE))
+              )}
+            </p>
           </div>
           <Button
             type="submit"
-            className="border-border bg-primary/80 text-primary-foreground hover:bg-primary h-12 rounded-sm border font-bold transition-all"
+            size="lg"
+            className="h-12 text-base border  font-bold"
+            disabled={
+              !paymentOption ||
+              !amount ||
+              // eslint-disable-next-line no-undef
+              +amount < Number(process.env.NEXT_PUBLIC_DEFAULT_BALANCE)
+            }
           >
             {t("To'lash")}
           </Button>
         </form>
+        <DialogDescription className="hidden">
+          This is a dialog to refill user balance
+        </DialogDescription>
       </DialogContent>
-      <DialogDescription className="hidden">
-        This is a dialog to refill user balance
-      </DialogDescription>
     </Dialog>
   )
 }
-
-const PaymentOption = ({ onClick, style, img, alt }) => {
-  return (
-    <Button
-      onClick={onClick}
-      type="button"
-      className={`xs:h-16 xs:w-36 bg-foreground/20 border-border flex h-14 w-32 items-center justify-center rounded border p-3 transition-all ${style}`}
-    >
-      <Image
-        src={img}
-        width={36}
-        draggable={false}
-        height={36}
-        className="h-full w-full self-center"
-        alt={alt}
-      />
-    </Button>
-  )
-}
-
-const ACTIVE = 'border-accent  bg-accent/25'
-const PASSIVE = 'border-accent bg-popover hover:border-primary'
 
 export default memo(RefillBalance)

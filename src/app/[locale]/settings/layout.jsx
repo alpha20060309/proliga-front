@@ -21,7 +21,9 @@ export default function SettingsLayout({ children }) {
         <main className="flex h-full min-h-176 flex-col gap-2 lg:min-h-152 lg:flex-row">
           <SettingsNavigation />
           <Card className={'w-full'}>
-            <CardContent>{children}</CardContent>
+            <CardContent className={'flex flex-col gap-2'}>
+              {children}
+            </CardContent>
           </Card>
         </main>
       </Gutter>

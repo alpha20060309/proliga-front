@@ -50,7 +50,7 @@ function BalanceTable() {
       id: 'code',
       cell: (info) => (
         <Popover>
-          <PopoverTrigger className="text-primary cursor-pointer text-sm font-bold select-none md:text-base">
+          <PopoverTrigger className=" cursor-pointer text-sm font-bold select-none md:text-base">
             ******
           </PopoverTrigger>
           <PopoverContent

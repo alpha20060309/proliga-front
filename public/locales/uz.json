@@ -717,5 +717,12 @@
   "Set theme as default": "Mavzuni standart holatga o‘rnatish",
   "Create a Theme": "Mavzu yaratish",
   "selected": "tanlangan",
-  "Message": "Xabar"
+  "Message": "Xabar",
+  "Summani tanlang": "Summani tanlang",
+  "Summani kiriting...": "Summani kiriting...",
+  "Yoki o'z summanigizni kiriting": "Yoki o'z summanigizni kiriting",
+  "Minimal: $ so`m": "Minimal: $ so`m",
+  "Получайте уведомление о важных новостях, сообщениях, и действиях в режиме реального времени": "Haqiqiy vaqtda muhim yangiliklar, xabarlar va harakatlar haqida xabardor bo'ling",
+  "Персонализируй свою тему при помощи пользовательских тем, цветовых схем и настроек внешнего вида.": "Shaxsiy mavzular, rang sxemalari va tashqi ko'rinish sozlamalari bilan mavzuingizni shaxsiylashtiring.",
+  "Настройки темы": "Mavzu sozlamalari"
 }

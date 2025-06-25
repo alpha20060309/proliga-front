@@ -54,7 +54,7 @@ function TransactionsPackagesTable() {
       accessorFn: (row) => row?.transaction_id ?? '',
       cell: (info) => (
         <Popover>
-          <PopoverTrigger className="text-primary cursor-pointer text-sm font-bold select-none md:text-base">
+          <PopoverTrigger className=" cursor-pointer text-sm font-bold select-none md:text-base">
             ******
           </PopoverTrigger>
           <PopoverContent
@@ -147,7 +147,7 @@ const PackageIcon = ({ type, amount, name }) => {
   return (
     <Popover>
       <PopoverTrigger>
-        <span className="text-primary flex cursor-pointer items-center gap-0.5 text-sm font-bold md:text-base">
+        <span className="dark:text-primary flex cursor-pointer items-center gap-0.5 text-sm font-bold md:text-base">
           {renderIcons()} {amount}
         </span>
       </PopoverTrigger>

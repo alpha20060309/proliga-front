@@ -15,7 +15,7 @@ const SettingsNavigationTab = ({ tab }) => {
   const containerActive = 'bg-accent/75 dark:bg-secondary'
   const containerPassive =
     'bg-transparent hover:bg-accent/50 dark:hover:bg-secondary/50'
-  const isActive = pathname === tab.href
+  const isActive = pathname.endsWith(tab.href)
 
   const renderIcon = (type) => {
     switch (type) {

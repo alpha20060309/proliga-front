@@ -1,7 +1,5 @@
-import SettingsSkeleton from './components/Skeleton'
+import { Skeleton } from '@/components/ui/skeleton'
 
-const Loading = () => {
-  return <SettingsSkeleton />
+export default function SettingsSkeleton() {
+  return <Skeleton className="h-full w-full" />
 }
-
-export default Loading

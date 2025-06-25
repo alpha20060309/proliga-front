@@ -12,7 +12,6 @@ import NavigationDropdown from './Dropdown'
 import ChangeLanguageDropdown from '../SwitcherLanguage'
 import Notification from '../Notification'
 import Marquee from 'components/Marquee'
-import ThemeCustomizer from '../ThemeCustomizer'
 import dynamic from 'next/dynamic'
 import MobileNavigation from './Mobile'
 
@@ -65,7 +64,6 @@ const Navbar = () => {
             <ChangeLanguageDropdown />
             <Notification />
             <ThemeSwitcher />
-            <ThemeCustomizer />
             <NavigationDropdown />
           </div>
         </div>
