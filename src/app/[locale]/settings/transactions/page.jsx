@@ -1,0 +1,96 @@
+'use client'
+
+import BalanceTable from './components/BalanceTable'
+import PackagesTable from './components/PackagesTable'
+import { useDispatch, useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
+import { useEffect, useState } from 'react'
+import { fetchPayBalance } from 'app/lib/features/payBalance/payBalance.thunk'
+import { fetchPayExpenses } from 'app/lib/features/payExpense/payExpense.thunk'
+import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { Wallet, Boxes, RefreshCcw } from 'lucide-react'
+import { selectExpenses } from 'app/lib/features/payExpense/payExpense.selector'
+import { selectBalances } from 'app/lib/features/payBalance/payBalance.selector'
+import { Button } from '@/components/ui/button'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+
+const CabinetTransactionsHistory = () => {
+  const dispatch = useDispatch()
+  const { t } = useTranslation()
+  const [currentTab, setCurrentTab] = useState(TRANSACTION_TABS.BALANCE)
+  const userTable = useSelector(selectUserTable)
+  const expenses = useSelector(selectExpenses)
+  const balances = useSelector(selectBalances)
+
+  useEffect(() => {
+    if (userTable?.id && expenses?.length === 0 && balances?.length === 0) {
+      Promise.all([
+        dispatch(fetchPayBalance({ user_id: userTable?.id })),
+        dispatch(fetchPayExpenses({ user_id: userTable?.id })),
+      ])
+    }
+  }, [dispatch, userTable, expenses?.length, balances?.length])
+
+  const refreshData = () => {
+    switch (currentTab) {
+      case TRANSACTION_TABS.BALANCE:
+        return dispatch(fetchPayBalance({ user_id: userTable?.id }))
+      case TRANSACTION_TABS.EXPENSES:
+        return dispatch(fetchPayExpenses({ user_id: userTable?.id }))
+      default:
+        break
+    }
+  }
+
+  return (
+    <Tabs
+      defaultValue={TRANSACTION_TABS.BALANCE}
+      className="flex h-full w-full flex-col"
+      onValueChange={(value) => setCurrentTab(value)}
+    >
+      <div className="mb-2 flex flex-col gap-1 sm:mb-0 sm:justify-between md:flex-row">
+        <h3 className="text-foreground text-xl font-bold tracking-tight">
+          {t('Xarajatlar tarixi')}
+        </h3>
+
+        <TabsList>
+          <TabsTrigger className="w-40" value={TRANSACTION_TABS.BALANCE}>
+            <Wallet className="mr-2 h-4 w-4" />
+            {t('Balans')}
+          </TabsTrigger>
+          <TabsTrigger className="w-40" value={TRANSACTION_TABS.EXPENSES}>
+            <Boxes className="mr-2 h-4 w-4" />
+            {t('Paketlar')}
+          </TabsTrigger>
+        </TabsList>
+        <Button
+          onClick={refreshData}
+          variant="outline"
+          size="icon"
+          className="text-foreground/80 hover:text-foreground hidden items-center justify-center gap-1 self-end p-0 text-sm md:flex"
+        >
+          <RefreshCcw className="text-foreground size-4" />
+        </Button>
+      </div>
+      <TabsContent
+        className={'flex min-h-128 flex-col justify-between'}
+        value={TRANSACTION_TABS.BALANCE}
+      >
+        <BalanceTable />
+      </TabsContent>
+      <TabsContent
+        value={TRANSACTION_TABS.EXPENSES}
+        className={'flex min-h-128 flex-col justify-between'}
+      >
+        <PackagesTable />
+      </TabsContent>
+    </Tabs>
+  )
+}
+
+const TRANSACTION_TABS = {
+  BALANCE: 'balance',
+  EXPENSES: 'expenses',
+}
+
+export default CabinetTransactionsHistory

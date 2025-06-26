@@ -36,7 +36,7 @@ const PlayLinks = () => {
   }, [path])
 
   return (
-    <section className="text-foreground bold hidden items-center gap-2 sm:text-sm lg:flex xl:gap-4 xl:text-base 2xl:gap-6">
+    <section className="text-foreground hidden items-center gap-2 sm:text-sm lg:flex xl:gap-4 xl:text-base 2xl:gap-6">
       {lastVisitedTeam && (
         <>
           <TabLink
@@ -143,26 +143,10 @@ const PlayLinks = () => {
   )
 }
 
-const TabLink = ({ title, tab, styling, disabled = false }) => {
+const TabLink = ({ title, tab, styling, disabled }) => {
   const currentCompetition = useSelector(selectCurrentCompetition)
-  const currentTour = useSelector(selectCurrentTour)
   const currentTeam = useSelector(selectCurrentTeam)
   const { t } = useTranslation()
-
-  const handleClick = () => {
-    if (!currentTeam?.is_team_created) {
-      return
-    }
-    if (
-      currentTour?.status !== TOUR_STATUS.notStartedTransfer &&
-      tab === TABS.Transfer
-    ) {
-      return
-    }
-
-    return
-  }
-
   const correctTab = tab !== TABS.GameProfile ? tab : ''
 
   return (
@@ -170,10 +154,14 @@ const TabLink = ({ title, tab, styling, disabled = false }) => {
       className={cn(
         'relative transition-all before:absolute before:-bottom-4 before:hidden before:h-1',
         'before:bg-accent hover:text-foreground before:w-full before:rounded-md',
-        styling
+        styling,
+        disabled && 'pointer-events-none opacity-50'
       )}
-      disabled={disabled}
-      onClick={handleClick}
+      onClick={(e) => {
+        if (disabled) {
+          e.preventDefault()
+        }
+      }}
       href={`/play/${currentCompetition?.id}/${currentTeam?.id}/${correctTab}`}
     >
       {t(title)}
@@ -182,6 +170,6 @@ const TabLink = ({ title, tab, styling, disabled = false }) => {
 }
 
 const ACTIVE = 'before:block before:bg-primary'
-const PASSIVE = ' hover:before:block'
+const PASSIVE = 'hover:before:block'
 
 export default PlayLinks

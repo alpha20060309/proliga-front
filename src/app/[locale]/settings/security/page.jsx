@@ -2,9 +2,8 @@
 
 import { cn } from '@/lib/utils'
 import { useTranslation } from 'react-i18next'
-import { SettingsContainer } from '../Container'
-import ChangePasswordForm from './ChangePasswordForm'
-import ChangePhoneForm from './ChangePhoneForm'
+import ChangePasswordForm from './components/ChangePasswordForm'
+import ChangePhoneForm from './components/ChangePhoneForm'
 import { Separator } from '@/components/ui/separator'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
@@ -12,10 +11,7 @@ export default function SettingsPage() {
   const { t } = useTranslation()
 
   return (
-    <SettingsContainer>
-      <h2 className="text-foreground text-xl font-bold tracking-tight">
-        {t('Security settings')}
-      </h2>
+    <>
       <section className="flex flex-col gap-4 lg:flex-row">
         <Card className={'border-border w-full'}>
           <CardHeader>
@@ -39,6 +35,6 @@ export default function SettingsPage() {
           </CardContent>
         </Card>
       </section>
-    </SettingsContainer>
+    </>
   )
 }

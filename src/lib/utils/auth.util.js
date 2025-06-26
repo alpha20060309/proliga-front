@@ -1,47 +1,26 @@
 import prisma from "lib/prisma"
+import { cache } from "react"
 
-export const getAccountByUserId = async (user_id) => {
-  try {
-    const account = await prisma.auth_account.findUnique({
-      where: { user_id },
-    })
+export const getUserById = cache(async (id) => {
+  const user = await prisma.user.findUnique({
+    where: { id, deleted_at: null },
+  })
 
-    return account
-  } catch {
-    return null
-  }
-}
+  return user
+})
 
-export const getUserById = async (id) => {
-  try {
-    const user = await prisma.user.findUnique({
-      where: { id },
-    })
+export const getUserByPhone = cache(async (phone) => {
+  const user = await prisma.user.findUnique({
+    where: { phone, deleted_at: null },
+  })
 
-    return user
-  } catch {
-    return null
-  }
-}
+  return user
+})
 
-export const getUserByPhone = async (phone) => {
-  try {
-    const user = await prisma.user.findUnique({
-      where: { phone },
-    })
-    return user
-  } catch {
-    return null
-  }
-}
-
-export const getUserByEmail = async (email) => {
-  try {
-    const user = await prisma.user.findUnique({
-      where: { email },
-    })
-    return user
-  } catch {
-    return null
-  }
-}
+export const getUserByEmail = cache(async (email) => {
+  const user = await prisma.user.findUnique({
+    where: { email, deleted_at: null },
+  })
+  
+  return user
+})

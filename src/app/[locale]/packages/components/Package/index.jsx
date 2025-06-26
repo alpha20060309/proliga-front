@@ -4,15 +4,9 @@ import { Button } from '@/components/ui/button'
 import { Link } from 'next-view-transitions'
 import { Separator } from '@/components/ui/separator'
 import { Badge } from '@/components/ui/badge'
-import { useSelector } from 'react-redux'
 import { PACKAGE_TYPE } from 'app/utils/packages.util'
-import { useTranslation } from 'react-i18next'
-import { selectPackages } from 'app/lib/features/package/package.selector'
 
-const PackageContainer = ({ packageType }) => {
-  const packages = useSelector(selectPackages)
-  const { t } = useTranslation()
-
+const PackageContainer = ({ packageType, packages, t }) => {
   const getPackageTitle = (type) => {
     switch (type) {
       case PACKAGE_TYPE.team_balance:
@@ -27,14 +21,12 @@ const PackageContainer = ({ packageType }) => {
   }
 
   return (
-    <Card className="border-accent hover:border-accent shadow transition-all">
-      <CardHeader className="pb-2">
-        <div className="flex items-center justify-between">
-          <CardTitle className="text-foreground xs:text-xl text-lg font-bold">
-            {getPackageTitle(packageType)}
-          </CardTitle>
-          <PackageIcon type={packageType} />
-        </div>
+    <Card className="border-accent/50 hover:border-accent gap-0  shadow transition-all">
+      <CardHeader className="flex items-center justify-between" >
+        <CardTitle className="text-xl font-bold">
+          {getPackageTitle(packageType)}
+        </CardTitle>
+        <PackageIcon type={packageType} />
       </CardHeader>
       <CardContent className="space-y-0 pt-4">
         <Separator className="bg-accent/20 mb-4" />

@@ -1,6 +1,7 @@
 import { Skeleton } from '@/components/ui/skeleton'
 import { PaginationSkeleton } from 'components/Table/Pagination/Server'
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table'
+
 const TournamentTableSkeleton = ({
     rows = 14,
     cols = 5,
@@ -8,7 +9,7 @@ const TournamentTableSkeleton = ({
 }) => {
     return (
         <>
-            <Table className="h-auto w-full min-w-72 table-auto text-xs sm:text-sm">
+            <Table className="h-full w-full min-w-72 table-auto text-xs sm:text-sm">
                 <TableHeader>
                     <TableRow>
                         {[...Array(cols)].map((_, index) => (
@@ -41,7 +42,7 @@ const TournamentTableSkeleton = ({
             </Table>
             <PaginationSkeleton
                 count={paginationCount}
-                className={'h-full items-end'}
+                className={'w-full items-end'}
             />
         </>
     )

@@ -50,7 +50,7 @@ function BalanceTable() {
       id: 'code',
       cell: (info) => (
         <Popover>
-          <PopoverTrigger className="text-primary cursor-pointer text-sm font-bold select-none md:text-base">
+          <PopoverTrigger className=" cursor-pointer text-sm font-bold select-none md:text-base">
             ******
           </PopoverTrigger>
           <PopoverContent
@@ -90,16 +90,16 @@ function BalanceTable() {
     },
   })
   return (
-    <section className="flex h-full w-full flex-1 flex-col justify-between gap-1 overflow-x-auto">
+    <>
       <Table className="text-2xs xs:text-xs w-full table-fixed rounded-sm md:text-sm">
         <Head table={table} />
         <Body table={table} flexRender={flexRender} />
       </Table>
       <TanStackPagination
         table={table}
-        className={'mt-auto h-full flex-1 items-end self-center'}
+        className={'mt-auto items-end self-center'}
       />
-    </section>
+    </>
   )
 }
 

@@ -28,7 +28,7 @@ const CreateTeamSlide = () => {
       </div>
       <div className="xs:w-4/5 h-auto max-h-144 w-full flex-1 items-end self-center md:w-auto">
         <Image
-          src="/images/promotion-1.png"
+          src="/images/promotion-stadium.svg"
           width={380}
           priority={false}
           height={380}

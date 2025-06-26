@@ -3,7 +3,7 @@ import * as SwitchPrimitive from '@radix-ui/react-switch'
 
 import { cn } from '@/lib/utils'
 
-function Switch({ className, ...props }) {
+function Switch({ className, thumbClassName, ...props }) {
   return (
     <SwitchPrimitive.Root
       data-slot="switch"
@@ -16,7 +16,8 @@ function Switch({ className, ...props }) {
       <SwitchPrimitive.Thumb
         data-slot="switch-thumb"
         className={cn(
-          'data-[state=unchecked]:bg-background data-[state=checked]:bg-background dark:data-[state=unchecked]:bg-foreground dark:data-[state=checked]:bg-primary-foreground border-muted-foreground/50 shadow-muted-foreground/50 pointer-events-none block size-4 rounded-full border shadow-sm ring-0 transition-transform data-[state=checked]:translate-x-[calc(100%-2px)] data-[state=unchecked]:translate-x-0'
+          'data-[state=unchecked]:bg-background data-[state=checked]:bg-background dark:data-[state=checked]:bg-primary-foreground dark:data-[state=unchecked]:bg-foreground border-muted-foreground/50 shadow-muted-foreground/50 pointer-events-none block size-4 rounded-full border shadow-sm ring-0 transition-transform data-[state=checked]:translate-x-[calc(100%-2px)] data-[state=unchecked]:translate-x-0',
+          thumbClassName,
         )}
       />
     </SwitchPrimitive.Root>

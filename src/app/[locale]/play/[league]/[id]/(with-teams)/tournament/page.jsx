@@ -110,7 +110,7 @@ const Tournament = () => {
 
   return (
     <>
-      <div className="mb-2 flex w-full items-center gap-1">
+      <div className=" flex w-full items-center gap-1">
         <TeamFilter
           page={page}
           perPage={perPage}

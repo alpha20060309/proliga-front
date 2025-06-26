@@ -2,6 +2,12 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { CalendarDays, Eye } from 'lucide-react'
 import { PaginationSkeleton } from 'components/Table/Pagination/Server'
 import { cn } from '@/lib/utils'
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from '@/components/ui/card'
 
 function ArticleSkeleton() {
   return (
@@ -33,20 +39,23 @@ function ArticleSkeleton() {
 
 export function NewsSkeleton({ count = 5, paginationCount = 5 }) {
   return (
-    <div
+    <Card
       className={cn(
-        'relative mx-auto flex h-min min-h-168 w-full max-w-lg flex-col',
-        'bg-background items-stretch justify-between rounded-xl p-4 md:p-6 lg:mx-0',
-        'border-border gap-2 border lg:w-auto lg:min-w-72 lg:flex-1'
+        'relative mx-auto lg:mx-0 flex h-172 w-full max-w-lg border-border lg:min-w-72 lg:flex-1 gap-4'
       )}
     >
-      <Skeleton className="h-8 w-32 self-start" />
-      <div className="flex h-full w-full flex-1 flex-col gap-2">
+      <CardHeader className="flex flex-row items-center justify-between">
+        <Skeleton className="h-7 w-36" />
+        <Skeleton className="size-9 rounded-md" />
+      </CardHeader>
+      <CardContent className="flex h-full w-full flex-1 flex-col gap-2">
         {[...Array(count)].map((_, index) => (
           <ArticleSkeleton key={index} />
         ))}
-      </div>
-      <PaginationSkeleton count={paginationCount} />
-    </div>
+      </CardContent>
+      <CardFooter>
+        <PaginationSkeleton count={paginationCount} className="w-full" />
+      </CardFooter>
+    </Card>
   )
 }

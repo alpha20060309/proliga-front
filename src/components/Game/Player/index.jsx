@@ -43,9 +43,9 @@ export const PlayerName = ({ children }) => {
   )
 }
 
-export const PlayerImage = ({ tShirt, handleInfoModal, imageErr, player }) => {
+export const PlayerImage = ({ tShirt, handleInfoModal, imageErr, player, className }) => {
   return (
-    <div className="xs:size-8 relative size-6 md:size-10 lg:size-8 xl:size-10">
+    <div className={cn("xs:size-8 relative size-6 md:size-10 lg:size-8 xl:size-10", className)}>
       <Image
         src={tShirt}
         alt="player tshirt"

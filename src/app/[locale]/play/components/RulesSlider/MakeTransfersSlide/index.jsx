@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { useTranslation } from 'react-i18next'
+import { ArrowRightLeft } from 'lucide-react'
 
 const MakeTransfersSlide = () => {
   const { t } = useTranslation()
@@ -11,16 +12,11 @@ const MakeTransfersSlide = () => {
       <p className="xs:text-sm text-muted-foreground mt-4 self-center text-center text-xs md:w-3/4 lg:text-base xl:mt-8 xl:text-lg">
         {t('Agar sizning jamoangizdagi')}
       </p>
-      <div className="mx-auto mt-10 w-full flex-1 md:w-auto md:items-center md:justify-center">
-        <Image
-          width={536}
-          height={193}
-          src="/images/promotion-transfer.png"
-          alt="transfer players"
-          className="mx-auto w-full md:mx-0 md:h-48 xl:h-64"
-          unoptimized
-        />
-      </div>
+      <div className="mx-auto mt-10 flex w-full flex-1 items-center justify-center gap-6 md:w-auto md:flex-row">
+          <Image src='/images/transfer-from.png' quality={100} alt='transfer field' className='rounded-full size-48' width={540} height={200} />
+          <ArrowRightLeft className='size-12 text-foreground' />
+          <Image src='/images/transfer-to.png' quality={100} alt='transfer field' className='rounded-full size-48' width={540} height={200} />
+        </div>
     </article>
   )
 }

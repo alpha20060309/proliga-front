@@ -1,14 +1,21 @@
+'use client'
+
 import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
 import { Shield, User, Cog, Banknote } from 'lucide-react'
+import { Link } from 'next-view-transitions'
+import { usePathname } from 'next/navigation'
 
-const SettingsNavigationTab = ({ tab, currentTab, setTab }) => {
+const SettingsNavigationTab = ({ tab }) => {
+  const pathname = usePathname()
+
   const { t } = useTranslation()
   const active = 'text-foreground dark:text-primary'
   const passive = 'text-muted-foreground'
-  const containerActive = 'bg-accent/80 dark:bg-secondary'
-  const containerPassive = 'bg-transparent'
-  const isActive = tab.key === currentTab
+  const containerActive = 'bg-accent/75 dark:bg-secondary'
+  const containerPassive =
+    'bg-transparent hover:bg-accent/50 dark:hover:bg-secondary/50'
+  const isActive = pathname.endsWith(tab.href)
 
   const renderIcon = (type) => {
     switch (type) {
@@ -17,7 +24,9 @@ const SettingsNavigationTab = ({ tab, currentTab, setTab }) => {
       case 'Cog':
         return <Cog className={cn('size-6', isActive ? active : passive)} />
       case 'Banknote':
-        return <Banknote className={cn('size-6', isActive ? active : passive)} />
+        return (
+          <Banknote className={cn('size-6', isActive ? active : passive)} />
+        )
       case 'Shield':
         return <Shield className={cn('size-6', isActive ? active : passive)} />
       default:
@@ -25,15 +34,9 @@ const SettingsNavigationTab = ({ tab, currentTab, setTab }) => {
     }
   }
 
-  const handleClick = (tab) => {
-    window.location.hash = tab.key
-    setTab(tab.key)
-  }
-
   return (
-    <button
-      key={tab}
-      onClick={() => handleClick(tab)}
+    <Link
+      href={tab.href}
       className={cn(
         'flex w-full cursor-pointer items-center justify-center gap-2 lg:justify-start',
         'hover:bg-card rounded-md p-2 transition-all lg:w-auto',
@@ -43,13 +46,13 @@ const SettingsNavigationTab = ({ tab, currentTab, setTab }) => {
       {renderIcon(tab.icon)}
       <div
         className={cn(
-          'hidden select-none lg:block lg:text-sm',
+          'hidden select-none md:block lg:text-sm',
           isActive ? active : passive
         )}
       >
         {t(tab.title)}
       </div>
-    </button>
+    </Link>
   )
 }
 

@@ -23,7 +23,7 @@ import { Zap, Users, Coins, Wallet } from 'lucide-react'
 import { PACKAGE_TYPE } from 'app/utils/packages.util'
 import { PAYMENT_OPTIONS } from 'app/utils/paymentOptions.util'
 import Image from 'next/image'
-
+import { useTheme } from 'next-themes'
 import {
   Popover,
   PopoverContent,
@@ -54,7 +54,7 @@ function TransactionsPackagesTable() {
       accessorFn: (row) => row?.transaction_id ?? '',
       cell: (info) => (
         <Popover>
-          <PopoverTrigger className="text-primary cursor-pointer text-sm font-bold select-none md:text-base">
+          <PopoverTrigger className=" cursor-pointer text-sm font-bold select-none md:text-base">
             ******
           </PopoverTrigger>
           <PopoverContent
@@ -117,16 +117,16 @@ function TransactionsPackagesTable() {
   })
 
   return (
-    <section className="flex h-full w-full flex-1 flex-col justify-between gap-1 overflow-x-auto">
+    <>
       <Table>
         <Head table={table} />
         <Body table={table} flexRender={flexRender} />
       </Table>
       <TanStackPagination
         table={table}
-        className={'mt-auto h-full items-end self-center'}
+        className={'mt-auto items-end self-center'}
       />
-    </section >
+    </>
   )
 }
 
@@ -147,7 +147,7 @@ const PackageIcon = ({ type, amount, name }) => {
   return (
     <Popover>
       <PopoverTrigger>
-        <span className="text-primary flex cursor-pointer items-center gap-0.5 text-sm font-bold md:text-base">
+        <span className="dark:text-primary flex cursor-pointer items-center gap-0.5 text-sm font-bold md:text-base">
           {renderIcons()} {amount}
         </span>
       </PopoverTrigger>
@@ -160,12 +160,18 @@ const PackageIcon = ({ type, amount, name }) => {
 
 export const PaymentOptionIcon = ({ system }) => {
   const { t } = useTranslation()
+  const { resolvedTheme } = useTheme()
+
   switch (system) {
     case PAYMENT_OPTIONS.CLICKUP:
       return (
         <span>
           <Image
-            src="./icons/click-up.svg"
+            src={
+              resolvedTheme === 'dark'
+                ? '/icons/click-up.svg'
+                : '/icons/click-up-dark.svg'
+            }
             alt="click up"
             width={20}
             className="xs:w-16 h-7 w-12 md:h-8 md:w-20"
@@ -177,7 +183,7 @@ export const PaymentOptionIcon = ({ system }) => {
       return (
         <span>
           <Image
-            src="./icons/payme.svg"
+            src="/icons/payme.svg"
             alt="payme"
             width={20}
             height={20}
