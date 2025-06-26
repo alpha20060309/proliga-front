@@ -31,8 +31,8 @@ export const StadiumContainer = ({ children, hideShareButton = false }) => {
             <Image
                 src="/icons/stadium.svg"
                 alt="stadium"
-                width={700}
-                height={600}
+                width={500}
+                height={450}
                 draggable={false}
                 priority
                 className="w-full rounded-xl select-none "
