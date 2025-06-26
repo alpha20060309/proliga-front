@@ -55,7 +55,7 @@ const RefillBalance = () => {
         <Button
           onClick={() => setModalOpen(true)}
           size="lg"
-          className="group bg-primary text-primary-foreground hover:bg-primary/90 relative w-full overflow-hidden border transition-all duration-300 hover:shadow-lg"
+          className="group border-border bg-primary text-primary-foreground hover:bg-primary/90 relative w-full overflow-hidden border transition-all duration-300 hover:shadow-lg"
         >
           <ArrowUpCircle className="h-5 w-5 transition-transform" />
           <span className="font-semibold">{t('Balansni toldirish')}</span>
