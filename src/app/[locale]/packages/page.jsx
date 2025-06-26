@@ -24,7 +24,7 @@ const Packages = async ({ params }) => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <>
       <h1 className="text-foreground mb-8 text-center text-xl font-bold sm:text-2xl lg:text-3xl">
         {t('O‘yiningizni mukammallikka yetkazing')}
       </h1>
@@ -33,7 +33,7 @@ const Packages = async ({ params }) => {
           <PackageContainer key={packageType} packageType={packageType} packages={packages} t={t} />
         ))}
       </div>
-    </div>
+    </>
   )
 }
 
