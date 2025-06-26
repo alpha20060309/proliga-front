@@ -28,7 +28,7 @@ function JournalTable() {
     columnHelper.accessor('created_at', {
       id: 'date',
       header: t('Sana'),
-      accessorFn: (row) => formatDate(row.created_at),
+      accessorFn: (row) => formatDate(row?.created_at),
     }),
     columnHelper.accessor('name', {
       accessorKey: 'name',
@@ -48,9 +48,9 @@ function JournalTable() {
   })
 
   return (
-    <Table className="text-foreground h-auto w-full text-xs md:text-sm">
+    <Table className="text-foreground text-start h-auto w-full text-xs md:text-sm">
       <Head table={table} />
-      <Body table={table} flexRender={flexRender} />
+      <Body table={table} flexRender={flexRender} rowClassName={'text-start'} />
     </Table>
   )
 }

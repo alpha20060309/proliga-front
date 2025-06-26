@@ -13,7 +13,6 @@ import { Link } from 'next-view-transitions'
 import { memo, useEffect, useState } from 'react'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
 
-// Simpler icon selection: just use a switch statement in NavLink
 const NavLink = ({
   href,
   iconName,
@@ -58,8 +57,8 @@ const NavLink = ({
       onClick={
         isDisabled
           ? (e) => {
-              e.preventDefault()
-            }
+            e.preventDefault()
+          }
           : undefined
       }
       className={cn(
@@ -150,7 +149,7 @@ function MobileNavigation() {
   return (
     <nav
       className={cn(
-        'border-sidebar-border bg-sidebar text-sidebar-foreground fixed inset-x-0 bottom-0 z-50 flex h-16 items-center justify-between gap-0 overflow-hidden rounded-tl-lg rounded-tr-lg border-t shadow backdrop-blur lg:hidden',
+        'border-sidebar-border bg-sidebar text-sidebar-foreground fixed inset-x-0 bottom-0 z-50 flex h-16 items-center justify-between gap-0 overflow-hidden rounded-lg border-t shadow backdrop-blur lg:hidden mx-2 mb-2',
         !lastVisitedTeam && 'hidden'
       )}
     >
@@ -163,7 +162,7 @@ function MobileNavigation() {
         const isTransferTab = item.tab === TABS.Transfer
         const isDisabled = isTransferTab
           ? currentTour?.status !== TOUR_STATUS.notStartedTransfer ||
-            !currentTeam?.is_team_created
+          !currentTeam?.is_team_created
           : !currentTeam?.is_team_created
 
         return (

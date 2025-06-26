@@ -11,7 +11,7 @@ const ThemeCustomizer = () => {
   const { t } = useTranslation()
 
   return (
-    <Card className="xs:max-w-64 flex w-full px-4 flex-col ">
+    <Card className="sm:max-w-64 flex w-full px-4 flex-col ">
       <CardHeader className={'flex items-center p-0 justify-between'}>
         <CardTitle>{t('Настройки темы')}</CardTitle>
         <ThemeCustomizerModal />

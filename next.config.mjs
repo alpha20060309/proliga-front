@@ -5,8 +5,6 @@ const withSerwist = withSerwistInit({
   swDest: 'public/sw.js',
   scope: '/',
   register: true,
-  // eslint-disable-next-line no-undef
-  disable: process.env.NODE_ENV === 'development',
   cacheOnNavigation: true,
 })
 

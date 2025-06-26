@@ -66,7 +66,6 @@ const Player = ({ player }) => {
   const toggleDeleteModal = () => {
     setDeleteModalOpen(!isDeleteModalOpen)
   }
-
   return (
     <>
       <PlayerContainer>
@@ -91,7 +90,7 @@ const Player = ({ player }) => {
               player={player}
             />
             <PlayerName>
-              {lastName}
+              {lastName === '' ? name : lastName}
             </PlayerName>
             <PlayerButtonsContainer>
               <PlayerButton onClick={handleTransfer}>

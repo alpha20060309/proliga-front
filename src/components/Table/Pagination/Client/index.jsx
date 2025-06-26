@@ -42,7 +42,7 @@ const TanStackPagination = ({ table, active, className, buttonClassName }) => {
           size={'sm'}
           onClick={() => table.setPageIndex(page - 1)}
           className={cn(
-            'bg-background border-muted text-foreground hover:bg-accent hover:text-accent-foreground size-6 xs:size-7  border p-0 select-none md:size-8',
+            'bg-background border-muted text-foreground hover:bg-accent hover:text-accent-foreground size-7  border p-0 select-none md:size-8',
             buttonClassName,
             currentPage === page
               ? cn('bg-primary text-primary-foreground', active)
@@ -90,7 +90,7 @@ const PaginationButton = ({ onClick, disabled, icon, className }) => {
       disabled={disabled}
       variant={'outline'}
       className={cn(
-        'bg-background text-foreground hover:text-foreground hover:bg-secondary dark:hover:bg-secondary border-border size-6 sm:size-7 cursor-pointer p-0 md:size-8',
+        'bg-background text-foreground hover:text-foreground hover:bg-secondary dark:hover:bg-secondary border-border size-7 cursor-pointer p-0 md:size-8',
         className
       )}
       size={'sm'}
