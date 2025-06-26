@@ -7,8 +7,9 @@ import {
   CardDescription,
 } from '@/components/ui/card'
 import prisma from 'lib/prisma'
+import { cache } from 'react'
 
-const fetchPrizes = async () => {
+const fetchPrizes = cache(async () => {
   const prizes = await prisma.prize.findMany({
     where: {
 
@@ -19,7 +20,7 @@ const fetchPrizes = async () => {
     }
   })
   return prizes
-}
+})
 
 const PromotionWinPrizes = async ({ t, locale }) => {
   const prizes = await fetchPrizes()
