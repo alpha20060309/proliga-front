@@ -3,15 +3,16 @@ import PackageContainer from './components/Package'
 import prisma from 'lib/prisma'
 import initTranslations from 'app/lib/i18n'
 import { PACKAGE_TYPE } from 'app/utils/packages.util'
+import { cache } from 'react'
 
-const fetchPackages = async () => {
+const fetchPackages = cache(async () => {
   const packages = await prisma.pay_package.findMany({
     where: {
       deleted_at: null,
     }
   })
   return packages
-}
+})
 
 const Packages = async ({ params }) => {
   const { locale } = await params
