@@ -1,31 +1,38 @@
-'use client'
 
-import { fetchPackages } from 'app/lib/features/package/package.thunk'
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import Gutter from 'components/Gutter'
-import dynamic from 'next/dynamic'
-import PackagesSkeleton from './components/PackagesSkeleton'
-import { selectPackages } from 'app/lib/features/package/package.selector'
-const PaymentPackages = dynamic(() => import('./components/Packages'), {
-  ssr: false,
-  loading: () => <PackagesSkeleton />,
-})
+import PackageContainer from './components/Package'
+import prisma from 'lib/prisma'
+import initTranslations from 'app/lib/i18n'
+import { PACKAGE_TYPE } from 'app/utils/packages.util'
 
-const Packages = () => {
-  const dispatch = useDispatch()
-  const packages = useSelector(selectPackages)
-
-  useEffect(() => {
-    if (packages?.length === 0) {
-      dispatch(fetchPackages())
+const fetchPackages = async () => {
+  const packages = await prisma.pay_package.findMany({
+    where: {
+      deleted_at: null,
     }
-  }, [dispatch, packages?.length])
+  })
+  return packages
+}
+
+const Packages = async ({ params }) => {
+  const { locale } = await params
+  const { t } = await initTranslations(locale)
+  const packages = await fetchPackages()
+
+  if (packages.length === 0) {
+    return <div>{t('No payment packages found')}</div>
+  }
 
   return (
-    <Gutter>
-      {packages?.length === 0 ? <PackagesSkeleton /> : <PaymentPackages />}
-    </Gutter>
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-foreground mb-8 text-center text-xl font-bold sm:text-2xl lg:text-3xl">
+        {t('O‘yiningizni mukammallikka yetkazing')}
+      </h1>
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {Object.values(PACKAGE_TYPE).map((packageType) => (
+          <PackageContainer key={packageType} packageType={packageType} packages={packages} t={t} />
+        ))}
+      </div>
+    </div>
   )
 }
 

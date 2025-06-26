@@ -35,7 +35,7 @@ const PromotionCreateTeam = ({ t }) => {
         </div>
         <div className="relative flex w-full lg:h-full">
           <Image
-            src="/images/promotion-1.png"
+            src="/images/promotion-stadium.svg"
             priority={false}
             height={400}
             width={400}
