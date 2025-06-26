@@ -3,7 +3,7 @@ import { cache } from "react"
 
 export const getUserById = cache(async (id) => {
   const user = await prisma.user.findUnique({
-    where: { id, deleted_at: null },
+    where: { id: Number(id), deleted_at: null },
   })
 
   return user
