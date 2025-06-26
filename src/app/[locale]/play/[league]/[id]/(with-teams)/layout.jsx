@@ -8,13 +8,13 @@ export default function TeamPagesLayout({ children }) {
   return (
     <Gutter mobileFriendly>
       <BannerTemplate>
-        <section className="flex w-full flex-col gap-2 lg:flex-row">
+        <section className="flex w-full flex-col gap-2 lg:flex-row max-w-2xl lg:max-w-none mx-auto lg:mx-0">
           <Card
             className={'border-border h-full w-full overflow-x-auto lg:w-2/3'}
           >
             <CardContent
               className={
-                'flex h-[38rem] flex-col justify-between gap-2 px-4 lg:h-full xl:h-[44rem]'
+                'flex min-h-[36rem] flex-col justify-between gap-2 px-4 h-full '
               }
             >
               {children}

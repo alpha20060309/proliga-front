@@ -80,7 +80,7 @@ const Player = ({ player }) => {
             player={player}
           />
           <PlayerName>
-            {lastName}
+            {lastName === '' ? name : lastName}
           </PlayerName>
           <PlayerButtonsContainer>
             <PlayerButton onClick={handleInfoModal} className={'p-0 rounded-full'}>

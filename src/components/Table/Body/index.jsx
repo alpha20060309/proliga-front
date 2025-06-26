@@ -15,8 +15,7 @@ const Body = ({ table, flexRender, className, rowClassName }) => {
                     {row.getVisibleCells().map((cell) => (
                         <TableCell
                             className={cn(
-                                ' text-center sm:text-start',
-                                ' text-2xs xs:text-xs md:text-sm lg:text-xs xl:text-sm',
+                                'text-center sm:text-start text-2xs sm:text-xs xl:text-sm',
                                 rowClassName
                             )}
                             key={cell.id}

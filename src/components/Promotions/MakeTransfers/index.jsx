@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import {
   Card,
   CardContent,
@@ -18,9 +17,9 @@ const PromotionMakeTransfers = ({ t }) => {
           {t('Agar sizning jamoangizdagi')}
         </CardDescription>
         <div className="mx-auto flex w-full flex-1 items-center justify-center gap-6 md:w-auto md:flex-row">
-          <Image src='/images/transfer-from.png' quality={100} alt='transfer field' className='rounded-full size-48' width={540} height={200} />
-          <ArrowRightLeft className='size-12 text-foreground' />
-          <Image src='/images/transfer-to.png' quality={100} alt='transfer field' className='rounded-full size-48' width={540} height={200} />
+          <img src='/images/transfer-from.png' alt='transfer field' className='rounded-full size-30 xs:size-40 md:size-48' />
+          <ArrowRightLeft className='size-6 md:size-12 text-foreground' />
+          <img src='/images/transfer-to.png' alt='transfer field' className='rounded-full size-30 xs:size-40 md:size-48' />
         </div>
       </CardContent>
     </Card>

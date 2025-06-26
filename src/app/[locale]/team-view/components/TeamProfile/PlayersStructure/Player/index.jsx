@@ -69,7 +69,7 @@ const Player = ({ player }) => {
             player={player}
           />
           <PlayerName>
-            {lastName}
+            {lastName === '' ? name : lastName}
           </PlayerName>
           <PlayerPoint>
             {player.is_captain

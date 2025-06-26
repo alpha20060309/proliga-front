@@ -40,6 +40,8 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |   |           tabs.jsx
 |   |           textarea.jsx
 |   |           toast.jsx
+|   |           toggle-group.jsx
+|   |           toggle.jsx
 |   |           tooltip.jsx
 |   |           
 |   \---lib
@@ -290,12 +292,6 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |   |   |   |       playerPoint.slice.js
 |   |   |   |       playerPoint.thunk.js
 |   |   |   |       
-|   |   |   +---prize
-|   |   |   |       prize.extraReducer.js
-|   |   |   |       prize.selector.js
-|   |   |   |       prize.slice.js
-|   |   |   |       prize.thunk.js
-|   |   |   |       
 |   |   |   +---season
 |   |   |   |       season.extraReducer.js
 |   |   |   |       season.slice.js
@@ -472,8 +468,6 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |       |           loading.jsx
 |       |           page.jsx
 |       |           
-|       +---about-us
-|       |   \---db
 |       +---championships
 |       |   |   layout.jsx
 |       |   |   loading.jsx
@@ -527,13 +521,7 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |       |   |   page.jsx
 |       |   |   
 |       |   \---components
-|       |       +---Package
-|       |       |       index.jsx
-|       |       |       
-|       |       +---Packages
-|       |       |       index.jsx
-|       |       |       
-|       |       \---PackagesSkeleton
+|       |       \---Package
 |       |               index.jsx
 |       |               
 |       +---play
@@ -736,48 +724,44 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |       |   |   layout.jsx
 |       |   |   loading.jsx
 |       |   |   page.jsx
-|       |   |   tabs.js
 |       |   |   
-|       |   \---components
-|       |       +---Container
-|       |       |       index.jsx
-|       |       |       
-|       |       +---Navigation
-|       |       |   |   index.jsx
-|       |       |   |   
-|       |       |   +---LogOut
-|       |       |   |       LogOut.jsx
-|       |       |   |       
-|       |       |   \---Tab
-|       |       |           index.jsx
-|       |       |           
-|       |       +---Profile
-|       |       |   |   index.jsx
-|       |       |   |   
-|       |       |   \---RefillBalanceBox
-|       |       |           index.jsx
-|       |       |           
-|       |       +---Security
-|       |       |   |   index.jsx
-|       |       |   |   
-|       |       |   +---ChangePasswordForm
-|       |       |   |       index.jsx
-|       |       |   |       
-|       |       |   \---ChangePhoneForm
-|       |       |           index.jsx
-|       |       |           
-|       |       +---Settings
-|       |       |   |   index.jsx
-|       |       |   |   
-|       |       |   \---PhoneVerification
-|       |       |           index.jsx
-|       |       |           
-|       |       +---Skeleton
-|       |       |       index.jsx
-|       |       |       
-|       |       \---Transactions
-|       |           |   index.jsx
-|       |           |   
+|       |   +---components
+|       |   |   +---Navigation
+|       |   |   |   |   index.jsx
+|       |   |   |   |   
+|       |   |   |   +---LogOut
+|       |   |   |   |       index.jsx
+|       |   |   |   |       
+|       |   |   |   \---Tab
+|       |   |   |           index.jsx
+|       |   |   |           
+|       |   |   +---NotificationToggle
+|       |   |   |       index.jsx
+|       |   |   |       
+|       |   |   +---RefillBalance
+|       |   |   |       index.jsx
+|       |   |   |       
+|       |   |   \---ThemeCustomizer
+|       |   |           index.jsx
+|       |   |           
+|       |   +---general
+|       |   |       page.jsx
+|       |   |       
+|       |   +---payment-history
+|       |   +---security
+|       |   |   |   page.jsx
+|       |   |   |   
+|       |   |   \---components
+|       |   |       +---ChangePasswordForm
+|       |   |       |       index.jsx
+|       |   |       |       
+|       |   |       \---ChangePhoneForm
+|       |   |               index.jsx
+|       |   |               
+|       |   \---transactions
+|       |       |   page.jsx
+|       |       |   
+|       |       \---components
 |       |           +---BalanceTable
 |       |           |       index.jsx
 |       |           |       
@@ -846,11 +830,8 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |   |       index.jsx
 |   |       
 |   +---Hero
-|   |   |   index.jsx
-|   |   |   
-|   |   \---Link
-|   |           index.jsx
-|   |           
+|   |       index.jsx
+|   |       
 |   +---Marquee
 |   |       index.jsx
 |   |       
@@ -867,6 +848,7 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |   |   |   index.jsx
 |   |   |   
 |   |   +---Compete
+|   |   |       CompeteTable.jsx
 |   |   |       index.jsx
 |   |   |       
 |   |   +---CreateTeam
