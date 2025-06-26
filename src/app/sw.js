@@ -8,10 +8,15 @@ import {
 } from 'serwist'
 import { defaultCache } from '@serwist/next/worker'
 
-const urlsToPrecache = ['/', '/uz', '/ru', '/uz/~offline', '/ru/~offline']
-
 const serwist = new Serwist({
-  precacheEntries: self.__SW_MANIFEST,
+  precacheEntries: [
+    ...(self.__SW_MANIFEST || []),
+    { url: '/', revision: null },
+    { url: '/uz', revision: null },
+    { url: '/ru', revision: null },
+    { url: '/uz/~offline', revision: null },
+    { url: '/ru/~offline', revision: null },
+  ],
   precacheOptions: {
     cleanupOutdatedCaches: true,
     matchOptions: {
@@ -72,16 +77,6 @@ const backgroundSync = async (event) => {
   }
 }
 
-self.addEventListener('install', (event) => {
-  const requestPromises = Promise.all(
-    urlsToPrecache.map((entry) => {
-      return serwist.handleRequest({ request: new Request(entry), event })
-    })
-  )
-
-  event.waitUntil(requestPromises)
-})
-
 self.addEventListener('fetch', (event) => {
   const { request } = event
 
@@ -109,5 +104,29 @@ self.addEventListener('fetch', (event) => {
     }
   }());
 })
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((names) =>
+      Promise.all(
+        names.map((cacheName) =>
+          caches.open(cacheName).then((cache) =>
+            cache.keys().then((requests) =>
+              Promise.all(
+                requests.map((req) =>
+                  cache.match(req).then((res) => {
+                    if (res && !res.ok) {
+                      return cache.delete(req)
+                    }
+                  })
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+  )
+});
 
 serwist.addEventListeners()
