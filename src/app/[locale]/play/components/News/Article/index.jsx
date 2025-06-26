@@ -23,7 +23,7 @@ const Article = ({ item }) => {
     <>
       <article
         onClick={handleClick}
-        className="group bg-secondary flex h-[100px] w-auto overflow-hidden rounded-sm hover:cursor-pointer"
+        className="group bg-background flex h-[100px] w-auto overflow-hidden rounded-sm hover:cursor-pointer"
       >
         <section className="my-auto flex aspect-4/3 h-full w-24 shrink-0 items-center justify-center md:w-32">
           <img

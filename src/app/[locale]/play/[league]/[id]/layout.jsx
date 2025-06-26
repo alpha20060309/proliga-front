@@ -49,6 +49,8 @@ export default function PlayLayout({ children }) {
   const { isLoading: isLoadingCompetition } = useSelector(
     (state) => state.competition
   )
+  const { isLoading: isLoadingNews } = useSelector((state) => state.news)
+  const { isLoading: isLoadingClub } = useSelector((state) => state.club)
 
   const isLoading =
     isLoadingPlayer ||
@@ -57,7 +59,9 @@ export default function PlayLayout({ children }) {
     isLoadingPackages ||
     isLoadingBanners ||
     isLoadingSeason ||
-    isLoadingCompetition
+    isLoadingCompetition ||
+    isLoadingNews ||
+    isLoadingClub
 
   useEffect(() => {
     dispatch(fetchCompetition())
