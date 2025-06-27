@@ -6,7 +6,6 @@ import { fetchSystemConfig } from '../lib/features/systemConfig/systemConfig.thu
 import { useGenerateFingerprint } from 'app/hooks/system/useGenerateFingerprint'
 import { useGetUserAgent } from 'app/hooks/system/useGetUserAgent'
 import { fetchGeo } from 'app/lib/features/auth/auth.thunk'
-// import { fetchPrizes } from 'app/lib/features/prize/prize.thunk'
 import { selectUserTable } from 'app/lib/features/auth/auth.selector'
 import {
   fetchBroadcastNotifications,

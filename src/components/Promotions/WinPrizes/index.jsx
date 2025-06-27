@@ -10,16 +10,20 @@ import prisma from 'lib/prisma'
 import { cache } from 'react'
 
 const fetchPrizes = cache(async () => {
-  const prizes = await prisma.prize.findMany({
-    where: {
-
-      is_active: true,
-    },
-    orderBy: {
-      order: 'asc'
-    }
-  })
-  return prizes
+  try {
+    const prizes = await prisma.prize.findMany({
+      where: {
+        is_active: true,
+      },
+      orderBy: {
+        order: 'asc'
+      }
+    })
+    return prizes
+  } catch (error) {
+    console.error(error)
+    return []
+  }
 })
 
 const PromotionWinPrizes = async ({ t, locale }) => {
