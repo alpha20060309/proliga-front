@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 export default function PrizesLayout({ children }) {
   return (
-    <main className="relative min-h-screen overflow-hidden pt-24 pb-12">
+    <main className="relative min-h-screen overflow-hidden pt-20 pb-4">
       <div aria-hidden="true" className="absolute inset-0 z-0 h-full w-full">
         <Image
           src="/images/Hero.png"

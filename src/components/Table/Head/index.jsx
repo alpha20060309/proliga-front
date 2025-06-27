@@ -31,12 +31,12 @@ const Head = ({ table, className }) => {
                                 {{
                                     asc: (
                                         <ChevronsDown
-                                            className="hidden text-primary size-4 sm:inline-block"
+                                            className="hidden text-foreground dark:text-primary size-4 sm:inline-block"
                                         />
                                     ),
                                     desc: (
                                         <ChevronsUp
-                                            className="hidden text-primary size-4 sm:inline-block"
+                                            className="hidden text-foreground dark:text-primary size-4 sm:inline-block"
                                         />
                                     ),
                                 }[header.column.getIsSorted()] ?? (
