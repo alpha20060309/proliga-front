@@ -102,13 +102,15 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
                 <ToggleGroupItem
                   value={PAYMENT_OPTIONS.PAYME}
                   aria-label="Payme"
-                  className="data-[state=on]:bg-background flex h-auto flex-col gap-2 rounded-lg border-2 p-4 data-[state=on]:border-[#0cbbbc]"
+                  className="data-[state=on]:bg-background flex w-28 h-16  flex-col gap-2 rounded-lg border-2 p-4 data-[state=on]:border-[#0cbbbc]"
                 >
                   <Image
                     src={'/icons/payme.svg'}
                     width={80}
                     height={24}
                     alt="payme"
+                    className='w-full h-full'
+
                   />
                 </ToggleGroupItem>
               )}
@@ -116,7 +118,7 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
                 <ToggleGroupItem
                   value={PAYMENT_OPTIONS.CLICKUP}
                   aria-label="Click"
-                  className="data-[state=on]:bg-background flex h-auto flex-col gap-2 rounded-lg border-2 p-4 data-[state=on]:border-[#0065FF]"
+                  className="w-28 h-16 data-[state=on]:bg-background flex  flex-col gap-2 rounded-lg border-2 p-4 data-[state=on]:border-[#0065FF]"
                 >
                   <Image
                     src={
@@ -126,6 +128,7 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
                     }
                     width={80}
                     height={24}
+                    className='w-full h-full'
                     alt="click-up"
                   />
                 </ToggleGroupItem>

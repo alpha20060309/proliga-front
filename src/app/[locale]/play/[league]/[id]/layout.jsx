@@ -25,8 +25,10 @@ import { setLastVisitedTeam } from 'app/lib/features/currentTeam/currentTeam.sli
 import { setCurrentCompetition } from 'app/lib/features/competition/competition.slice'
 import { fetchTours } from 'app/lib/features/tour/tour.thunk'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
+import { usePathname } from 'next/navigation'
 
 export default function PlayLayout({ children }) {
+  const path = usePathname()
   const [isModalOpen, setModalOpen] = useState(false)
   const { league, id } = useParams()
   const user = useSelector(selectUserTable)
@@ -116,9 +118,11 @@ export default function PlayLayout({ children }) {
   useEffect(() => {
     if (user?.id && id && league) {
       dispatch(fetchCurrentTeam({ id, user_id: user?.id }))
-      dispatch(setLastVisitedTeam(`${league}/${id}`))
+      if (path.includes('play')) {
+        dispatch(setLastVisitedTeam(`${league}/${id}`))
+      }
     }
-  }, [id, league, dispatch, user?.id])
+  }, [id, league, dispatch, user?.id, path])
 
   useEffect(() => {
     if (competitions?.length > 0 && league) {

@@ -75,7 +75,7 @@ const SettingsProfile = () => {
             {t('Foydalanuvchi ID-si')}
           </p>
           <div
-            className="bg-accent hover:bg-primary text-accent-foreground flex cursor-pointer items-center justify-center gap-1 rounded-md px-3 py-1.5 text-base font-medium transition-all"
+            className="bg-primary hover:bg-accent border border-border text-accent-foreground flex cursor-pointer items-center justify-center gap-1 rounded-md px-2 py-1 text-base font-medium transition-all"
             onClick={() => handleClick(user?.id)}
           >
             <Copy className="text-accent-foreground size-4" />
@@ -130,7 +130,7 @@ const SettingsProfile = () => {
 
 const ProfileItem = ({ children }) => {
   return (
-    <div className="bg-card/50 border-border flex items-center gap-2 rounded-lg border p-2 shadow xl:p-4">
+    <div className="bg-input/50 border-border flex items-center gap-2 rounded-lg border p-2 shadow xl:p-4">
       {children}
     </div>
   )

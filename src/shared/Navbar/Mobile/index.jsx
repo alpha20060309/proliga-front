@@ -11,7 +11,6 @@ import { TOUR_STATUS } from 'app/utils/tour.util'
 import { cn } from '@/lib/utils'
 import { Link } from 'next-view-transitions'
 import { memo, useEffect, useState } from 'react'
-import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
 
 const NavLink = ({
   href,
@@ -95,10 +94,10 @@ function MobileNavigation() {
   const { t } = useTranslation()
   const currentTeam = useSelector(selectCurrentTeam)
   const currentTour = useSelector(selectCurrentTour)
-  const currentCompetition = useSelector(selectCurrentCompetition)
   const { lastVisitedTeam } = useSelector((store) => store.currentTeam)
   const [gameTab, setGameTab] = useState('')
-
+  const isTeamViewRoute = path.includes('team-view')
+  console.log(isTeamViewRoute, path)
   useEffect(() => {
     const pathLength = path.split('/').length
 
@@ -119,30 +118,40 @@ function MobileNavigation() {
       iconName: TABS.GameProfile,
       labelKey: 'Profil',
       tab: TABS.GameProfile,
+      disabled: !currentTeam?.is_team_created,
     },
     {
       id: TABS.Transfer,
       iconName: TABS.Transfer,
       labelKey: 'Transferlar',
       tab: TABS.Transfer,
+      disabled: currentTour?.status !== TOUR_STATUS.notStartedTransfer ||
+        !currentTeam?.is_team_created ||
+        isTeamViewRoute
     },
     {
       id: TABS.Tournament,
       iconName: TABS.Tournament,
       labelKey: 'Turnir',
       tab: TABS.Tournament,
+      disabled: !currentTeam?.is_team_created ||
+        isTeamViewRoute
     },
     {
       id: TABS.Journal,
       iconName: TABS.Journal,
       labelKey: 'Jurnal',
       tab: TABS.Journal,
+      disabled: !currentTeam?.is_team_created ||
+        isTeamViewRoute
     },
     {
       id: TABS.Statistics,
       iconName: TABS.Statistics,
       labelKey: 'Statistika',
       tab: TABS.Statistics,
+      disabled: !currentTeam?.is_team_created ||
+        isTeamViewRoute
     },
   ]
 
@@ -156,14 +165,9 @@ function MobileNavigation() {
       {navItems.map((item) => {
         const correctTab = item.tab !== TABS.GameProfile ? item.tab : ''
         const href = lastVisitedTeam
-          ? `/play/${currentCompetition?.id}/${currentTeam?.id}/${correctTab}`
+          ? `/play/${lastVisitedTeam}/${correctTab}`
           : '#'
 
-        const isTransferTab = item.tab === TABS.Transfer
-        const isDisabled = isTransferTab
-          ? currentTour?.status !== TOUR_STATUS.notStartedTransfer ||
-          !currentTeam?.is_team_created
-          : !currentTeam?.is_team_created
 
         return (
           <NavLink
@@ -171,7 +175,8 @@ function MobileNavigation() {
             iconName={item.iconName}
             label={t(item.labelKey)}
             href={href}
-            isDisabled={isDisabled}
+
+            isDisabled={item.disabled}
             isActive={gameTab === item.tab}
           />
         )
