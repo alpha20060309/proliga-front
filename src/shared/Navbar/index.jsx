@@ -13,8 +13,8 @@ import ChangeLanguageDropdown from '../SwitcherLanguage'
 import Notification from '../Notification'
 import Marquee from 'components/Marquee'
 import dynamic from 'next/dynamic'
+import { useTheme } from 'next-themes'
 import MobileNavigation from './Mobile'
-
 const ThemeSwitcher = dynamic(() => import('../SwitcherTheme'), {
   ssr: false,
   loading: () => <ThemeSwitcherSkeleton />,
@@ -27,6 +27,7 @@ const Navbar = () => {
     // eslint-disable-next-line no-undef
     process.env.NEXT_PUBLIC_TEST_NAV_SLIDER ?? ''
   )
+  const { resolvedTheme } = useTheme()
 
   return (
     <nav
@@ -50,13 +51,13 @@ const Navbar = () => {
             }
           >
             <Image
-              src="/icons/proliga-full.svg"
+              src={resolvedTheme === 'dark' ? '/icons/proliga-full.svg' : '/icons/proliga-full-dark.svg'}
               priority={true}
               alt="Proliga"
               width={180}
               height={56}
               draggable={false}
-              className="xs:w-32 w-28 cursor-pointer shadow md:w-36"
+              className="xs:w-32 w-28 cursor-pointer md:w-36"
             />
           </Link>
           <PlayLinks />

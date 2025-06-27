@@ -20,6 +20,7 @@ import {
 } from '@/components/ui/select'
 import { Label } from '@/components/ui/label'
 import Avatar from 'shared/Avatar'
+import { useTransitionRouter } from 'next-view-transitions'
 
 const GENDERS = {
   UNSET: 'unset',
@@ -28,6 +29,7 @@ const GENDERS = {
 }
 
 const GeneralSettings = () => {
+  const router = useTransitionRouter()
   const { t } = useTranslation()
   const userTable = useSelector(selectUserTable)
   const [date, setDate] = useState(userTable?.birth_date ?? new Date())
@@ -57,6 +59,9 @@ const GeneralSettings = () => {
       gender,
       birth_date: date,
       userTable,
+      cb: () => {
+        router.push('/settings')
+      }
     })
   }
 
