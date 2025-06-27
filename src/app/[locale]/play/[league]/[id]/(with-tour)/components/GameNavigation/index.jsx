@@ -1,7 +1,6 @@
 'use client'
 
-import Box from '@mui/material/Box'
-import { StyledTab, StyledTabs, GameTab } from 'components/StyledTabs'
+import { StyledTab, StyledTabs, GameTab, CustomBox } from 'components/StyledTabs'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { TOUR_STATUS } from 'app/utils/tour.util'
@@ -59,16 +58,7 @@ export default function TourTabs() {
   }
 
   return (
-    <Box
-      sx={{
-        width: '100%',
-        bgcolor: 'var(--card)',
-        color: 'var(--card-foreground)',
-        height: 'auto',
-        borderRadius: 'var(--radius)',
-        minHeight: '64px',
-      }}
-    >
+    <CustomBox>
       <StyledTabs
         value={currentTourIndex}
         variant="scrollable"
@@ -97,6 +87,6 @@ export default function TourTabs() {
           />
         ))}
       </StyledTabs>
-    </Box>
+    </CustomBox>
   )
 }

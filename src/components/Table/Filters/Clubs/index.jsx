@@ -49,7 +49,7 @@ const ClubsFilter = ({ column, className }) => {
             : t('Hamma_Clublar')}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-background w-56">
+      <DropdownMenuContent className="bg-background w-56 max-h-96">
         <DropdownMenuLabel className={'text-foreground'}>
           {t('Hamma_Clublar')}
         </DropdownMenuLabel>

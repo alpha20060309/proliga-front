@@ -1,4 +1,5 @@
 import { Tabs, Tab } from '@mui/material'
+import Box from '@mui/material/Box'
 import { styled } from '@mui/material'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { useTranslation } from 'react-i18next'
@@ -10,7 +11,7 @@ export const GameTab = ({ item }) => {
   const { t } = useTranslation()
 
   return (
-    <div className="flex min-h-16 flex-col items-center justify-start gap-0.5 pt-2 sm:min-h-18 xl:pt-1">
+    <div className="flex min-h-18 flex-col items-center justify-start gap-0.5 pt-2 sm:min-h-18 xl:pt-1">
       <p className="text-foreground text-start text-xs font-medium md:text-sm xl:text-base">
         {getCorrectName({ lang, uz: item?.name, ru: item?.name_ru })}
       </p>
@@ -54,3 +55,21 @@ export const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
     },
   })
 )
+
+
+export const CustomBox = ({ children }) => {
+  return (
+    <Box
+      sx={{
+        width: '100%',
+        bgcolor: 'var(--card)',
+        color: 'var(--card-foreground)',
+        height: 'auto',
+        borderRadius: 'var(--radius)',
+        minHeight: '64px',
+      }}
+    >
+      {children}
+    </Box>
+  )
+}
