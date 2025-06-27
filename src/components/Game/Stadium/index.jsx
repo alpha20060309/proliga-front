@@ -56,7 +56,7 @@ export const StadiumContainer = ({ children, hideShareButton = false }) => {
 
 export function StadiumSectionWrapper({ children }) {
     return (
-        <div className="mx-auto flex h-full w-full max-w-lg grow flex-col px-4 sm:px-0 lg:mx-0 lg:w-1/2 lg:max-w-2xl xl:grow-0">
+        <div className="mx-auto flex h-full w-full max-w-lg grow flex-col px-2 xs:px-0 lg:mx-0 lg:w-1/2 lg:max-w-2xl xl:grow-0">
             {children}
         </div>
     )
@@ -65,7 +65,7 @@ export function StadiumSectionWrapper({ children }) {
 export function StadiumSelectTrigger({ children, ...props }) {
     return (
         <SelectTrigger
-            className=" border-border bg-card dark:bg-card dark:hover:bg-card text-foreground hover:border-primary w-36 data-[size=default]:h-10 sm:w-40 md:w-48"
+            className=" border-border bg-card dark:bg-card dark:hover:bg-card text-foreground hover:border-primary w-40 data-[size=default]:h-10 xs:w-44 md:w-48"
             {...props}
         >
             {children}

@@ -14,7 +14,6 @@ import { ArrowUpCircle } from 'lucide-react'
 import RefillBalanceModal from 'shared/Modals/RefillBalance'
 import { useState } from 'react'
 import { Wallet } from 'lucide-react'
-import { Label } from '@/components/ui/label'
 
 const RefillBalance = () => {
   const { t } = useTranslation()
@@ -22,7 +21,7 @@ const RefillBalance = () => {
   const [isModalOpen, setModalOpen] = useState(false)
 
   return (
-    <Card className="sm:max-w-64 w-full gap-2">
+    <Card className="sm:max-w-64 w-full gap-4">
       <RefillBalanceModal
         setIsModalOpen={setModalOpen}
         isModalOpen={isModalOpen}
@@ -35,9 +34,6 @@ const RefillBalance = () => {
       </CardHeader>
 
       <CardContent>
-        <Label className="text-muted-foreground text-sm font-medium">
-          {t('Balans')}:
-        </Label>
         <NumericFormat
           value={userTable?.balance / 100 || 0}
           className="text-foreground w-full border-none bg-transparent text-right text-lg font-bold outline-hidden select-none"

@@ -14,7 +14,7 @@ export default function TeamPagesLayout({ children }) {
           >
             <CardContent
               className={
-                'flex min-h-[36rem] flex-col justify-between gap-2 px-4 h-full '
+                'flex min-h-[32rem] lg:min-h-[36rem] flex-col justify-between gap-2 px-4 h-full '
               }
             >
               {children}

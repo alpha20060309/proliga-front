@@ -11,7 +11,7 @@ const NotificationToggle = () => {
   const { t } = useTranslation()
 
   return (
-    <Card className="xs:max-w-64 flex w-full flex-col px-4">
+    <Card className="sm:max-w-64 flex w-full flex-col px-4 gap-4">
       <CardHeader className={'flex items-center justify-between p-0'}>
         <CardTitle>{t('Xabarnomalar')}</CardTitle>
         <Switch
