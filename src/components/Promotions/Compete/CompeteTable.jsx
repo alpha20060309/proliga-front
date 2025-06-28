@@ -66,7 +66,7 @@ export function CompeteTable({ className }) {
     })
 
     return (
-        <Table className={cn("mx-auto w-full rounded-lg bg-background p-2 md:mx-0 md:size-80 xl:size-100", className)}>
+        <Table className={cn("mx-auto  w-full rounded-lg bg-background p-2 md:mx-0 max-w-80  xl:max-w-102", className)}>
             <Head table={table} />
             <Body table={table} flexRender={flexRender} />
         </Table>

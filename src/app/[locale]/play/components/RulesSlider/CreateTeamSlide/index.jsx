@@ -28,11 +28,11 @@ const CreateTeamSlide = () => {
       </div>
       <div className="xs:w-4/5 h-auto max-h-144 w-full flex-1 items-end self-center md:w-auto">
         <Image
-          src="/images/promotion-stadium.svg"
+          src="/images/promotion-stadium.png"
           width={380}
           priority={false}
           height={380}
-          className="mx-auto aspect-[1/1.025] h-80 w-min lg:h-96 xl:h-128 2xl:h-140"
+          className="mx-auto h-80 w-min max-w-80 sm:max-w-72  xl:max-w-120 lg:h-96 xl:h-128 2xl:h-140"
           alt="interactive stadium"
           unoptimized
         />

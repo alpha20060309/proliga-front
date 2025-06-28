@@ -1,6 +1,5 @@
 'use server'
 
-import prisma from 'lib/prisma'
 import { cache } from 'react'
 import { supabase } from 'app/lib/supabaseClient'
 

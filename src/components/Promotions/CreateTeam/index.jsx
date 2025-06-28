@@ -35,10 +35,13 @@ const PromotionCreateTeam = ({ t }) => {
           />
         </div>
         <div className="relative flex w-full lg:h-full">
-          <img
-            src="/images/promotion-stadium.svg"
+          <Image
+            width={450}
+            height={500}
+            quality={100}
+            src="/images/promotion-stadium.png"
             draggable={false}
-            className="mx-auto h-full w-full max-w-[32rem] object-contain lg:mr-0 lg:ml-auto"
+            className="mx-auto h-full aspect-[1/1.1] w-full max-w-[32rem] object-contain lg:mr-0 lg:ml-auto"
             alt="interactive stadium"
           />
         </div>
