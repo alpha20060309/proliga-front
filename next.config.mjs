@@ -7,7 +7,6 @@ const withSerwist = withSerwistInit({
   // eslint-disable-next-line no-undef
   disable: process.env.NODE_ENV === 'development',
   register: true,
-  cacheOnNavigation: true,
 })
 
 /** @type {import('next').NextConfig} */
