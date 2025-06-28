@@ -52,7 +52,7 @@ const Navbar = () => {
           >
             {theme === 'dark' ? (
               <Image
-                src={'/icons/proliga-full.svg'}
+                src={'/icons/proliga-full-dark.svg'}
                 priority={true}
                 quality={100}
                 alt="Proliga"
@@ -63,7 +63,7 @@ const Navbar = () => {
               />
             ) : (
               <Image
-                src={'/icons/proliga-full-dark.svg'}
+                src={'/icons/proliga-full-light.svg'}
                 priority={true}
                 quality={100}
                 alt="Proliga"
