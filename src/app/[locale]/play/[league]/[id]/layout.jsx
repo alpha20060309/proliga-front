@@ -145,7 +145,7 @@ export default function PlayLayout({ children }) {
     return <Spinner />
   }
   return (
-    <main className="text-foreground bg-background relative flex min-h-[85vh] flex-col gap-4 overflow-hidden pt-14 pb-2">
+    <main className="text-foreground bg-background relative flex min-h-[85vh] 2xl:min-h-[80vh] flex-col gap-4 overflow-hidden pt-14 pb-2">
       <div aria-hidden="true" className="absolute inset-0 z-0 h-full w-full">
         <Image
           src="/images/Hero.png"

@@ -31,7 +31,7 @@ const PackageContainer = ({ packageType, packages, t }) => {
       <CardContent className="space-y-0 pt-4">
         <Separator className="bg-accent/20 mb-4" />
         <div className="space-y-4">
-          {packages
+          {packages?.length > 0 && packages
             .filter((item) => item.type === packageType)
             .map((item, index) => (
               <div

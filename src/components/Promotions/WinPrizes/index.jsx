@@ -6,20 +6,20 @@ import {
   CardTitle,
   CardDescription,
 } from '@/components/ui/card'
-import prisma from 'lib/prisma'
 import { cache } from 'react'
+import { supabase } from 'app/lib/supabaseClient'
 
 const fetchPrizes = cache(async () => {
   try {
-    const prizes = await prisma.prize.findMany({
-      where: {
-        is_active: true,
-      },
-      orderBy: {
-        order: 'asc'
-      }
-    })
-    return prizes
+    const { data, error } = await supabase
+      .from('prize')
+      .select('*')
+      .eq('is_active', true)
+      .order('order', { ascending: true })
+
+    if (error) throw error
+
+    return data
   } catch (error) {
     console.error(error)
     return []

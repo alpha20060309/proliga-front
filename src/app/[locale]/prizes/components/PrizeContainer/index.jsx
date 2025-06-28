@@ -2,23 +2,22 @@
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import Prize from '../Prize'
 import { getUrl } from 'app/utils/static.util'
-import prisma from 'lib/prisma'
 import { cache } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { supabase } from 'app/lib/supabaseClient'
 
 const fetchPrizesByCompetition = cache(async (competitionId) => {
   try {
-    const prizes = await prisma.prize.findMany({
-      where: {
-        is_active: true,
-        competition_id: competitionId,
-        deleted_at: null,
-      },
-      orderBy: {
-        order: 'asc',
-      },
-    })
-    return { data: prizes }
+    const { data: prizes, error } = await supabase
+      .from('prize')
+      .select('*')
+      .eq('is_active', true)
+      .eq('competition_id', competitionId)
+      .is('deleted_at', null)
+      .order('order', { ascending: true })
+
+
+    return { data: prizes, error }
   } catch (error) {
     return { error: error.message }
   }

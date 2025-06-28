@@ -123,7 +123,7 @@ const Tournament = () => {
       </div>
       {isLoading ? (
         <TournamentTableSkeleton
-          paginationCount={pages < 5 ? pages : 5}
+          paginationCount={5}
           rows={15}
         />
       ) : (

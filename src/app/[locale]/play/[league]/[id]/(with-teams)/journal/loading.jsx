@@ -38,6 +38,6 @@ export function JournalSkeleton({ rows, paginationCount }) {
 
 export default function Loading() {
     return (
-        <JournalSkeleton rows={13} paginationCount={13} />
+        <JournalSkeleton rows={10} paginationCount={13} />
     )
 }

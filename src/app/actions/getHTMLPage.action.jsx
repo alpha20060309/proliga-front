@@ -2,6 +2,7 @@
 
 import prisma from 'lib/prisma'
 import { cache } from 'react'
+import { supabase } from 'app/lib/supabaseClient'
 
 export const getHTMLPage = async (name) => {
   if (!name) {
@@ -9,26 +10,22 @@ export const getHTMLPage = async (name) => {
   }
 
   try {
-    const page = await prisma.system_language
-      .findUnique({
-        where: {
-          name,
-          deleted_at: null,
-        },
-        select: {
-          id: true,
-          name: true,
-          ru: true,
-          uz: true,
-        },
-      })
-      .then((data) => {
-        return data
-      })
-    if (!page) {
-      return { error: `Page with name '${name}' not found` }
+    const { data: page, error } = await supabase
+      .from('system_language')
+      .select('*')
+      .eq('name', name)
+      .is('deleted_at', null)
+      .single()
+
+    if (error) {
+      return { error: error?.message }
     }
-    return { data: page }
+
+    if (!page) {
+      return { error: `${error?.message} with name '${name}' not found` }
+    }
+
+    return { data: page, error: null }
   } catch (error) {
     return {
       error,

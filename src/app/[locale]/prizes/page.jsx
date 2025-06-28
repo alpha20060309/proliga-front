@@ -1,16 +1,20 @@
 import initTranslations from 'app/lib/i18n'
-import prisma from 'lib/prisma'
 import { cache } from 'react'
 import PrizeContainer from './components/PrizeContainer'
+import { supabase } from 'app/lib/supabaseClient'
 
 const fetchCompetitions = cache(async () => {
-  const competitions = await prisma.competition.findMany({
-    where: {
-      deleted_at: null,
-      is_active: true,
-    },
-  })
-  return { data: competitions }
+  const { data: competitions, error } = await supabase
+    .from('competition')
+    .select('*')
+    .is('deleted_at', null)
+    .eq('is_active', true)
+
+  if (error) {
+    return { error: error?.message }
+  }
+
+  return { data: competitions, error: null }
 })
 
 const Prizes = async ({ params }) => {
