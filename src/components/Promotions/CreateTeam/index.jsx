@@ -26,6 +26,7 @@ const PromotionCreateTeam = ({ t }) => {
           <Image
             width={200}
             height={200}
+            quality={100}
             alt="footballers images"
             className="hidden h-full w-full max-w-[440px] object-contain lg:block"
             src="/images/footballers-tile.png"
@@ -34,11 +35,8 @@ const PromotionCreateTeam = ({ t }) => {
           />
         </div>
         <div className="relative flex w-full lg:h-full">
-          <Image
+          <img
             src="/images/promotion-stadium.svg"
-            priority={false}
-            height={400}
-            width={400}
             draggable={false}
             className="mx-auto h-full w-full max-w-[32rem] object-contain lg:mr-0 lg:ml-auto"
             alt="interactive stadium"

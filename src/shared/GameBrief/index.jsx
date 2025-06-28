@@ -2,12 +2,13 @@ import { cn } from '@/lib/utils'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Card, CardContent } from '@/components/ui/card'
 
-export const GameBriefContainer = ({ children, isLoading }) => {
+export const GameBriefContainer = ({ children, isLoading, className }) => {
   return (
     <Card
-      className={
-        'border-border relative mx-auto w-full max-w-lg gap-0 py-8 lg:mx-0 lg:w-[55%] lg:max-w-2xl xl:h-min'
-      }
+      className={cn(
+        'border-border relative mx-auto w-full max-w-lg gap-0 py-8 lg:mx-0 lg:w-[55%] lg:max-w-2xl xl:h-min',
+        className
+      )}
     >
       <CardContent
         className={cn(

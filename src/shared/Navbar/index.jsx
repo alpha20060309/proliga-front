@@ -27,7 +27,7 @@ const Navbar = () => {
     // eslint-disable-next-line no-undef
     process.env.NEXT_PUBLIC_TEST_NAV_SLIDER ?? ''
   )
-  const { resolvedTheme } = useTheme()
+  const { theme } = useTheme()
 
   return (
     <nav
@@ -50,15 +50,29 @@ const Navbar = () => {
               path.split('/').includes('championships') ? '/' : '/championships'
             }
           >
-            <Image
-              src={resolvedTheme === 'dark' ? '/icons/proliga-full.svg' : '/icons/proliga-full-dark.svg'}
-              priority={true}
-              alt="Proliga"
-              width={180}
-              height={56}
-              draggable={false}
-              className="xs:w-32 w-28 cursor-pointer md:w-36"
-            />
+            {theme === 'dark' ? (
+              <Image
+                src={'/icons/proliga-full.svg'}
+                priority={true}
+                quality={100}
+                alt="Proliga"
+                width={180}
+                height={56}
+                draggable={false}
+                className="xs:w-32 w-28 cursor-pointer md:w-36"
+              />
+            ) : (
+              <Image
+                src={'/icons/proliga-full-dark.svg'}
+                priority={true}
+                quality={100}
+                alt="Proliga"
+                width={180}
+                height={56}
+                draggable={false}
+                className="xs:w-32 w-28 cursor-pointer md:w-36"
+              />
+            )}
           </Link>
           <PlayLinks />
           <div className="flex w-max items-center justify-center gap-3 sm:gap-4">

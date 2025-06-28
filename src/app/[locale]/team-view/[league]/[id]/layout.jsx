@@ -15,7 +15,7 @@ export default function TeamViewLayout({ children }) {
         />
         <div className="animate-in fade-in absolute inset-0 bg-black/30 duration-500 dark:bg-black/60" />
       </div>
-      <Gutter>{children}</Gutter>
+      <Gutter mobileFriendly>{children}</Gutter>
     </div>
   )
 }

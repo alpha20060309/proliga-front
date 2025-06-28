@@ -55,7 +55,7 @@ const GameBrief = () => {
   }
 
   return (
-    <GameBriefContainer isLoading={isLoading}>
+    <GameBriefContainer isLoading={isLoading} className="h-auto xl:h-auto">
       {isLoading ? (
         <GameBriefSkeleton />
       ) : (

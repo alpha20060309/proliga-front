@@ -4,7 +4,7 @@ import { Card, CardContent } from '@/components/ui/card'
 
 const SettingsNavigation = ({ setTab, currentTab }) => {
   return (
-    <Card className="fade-in animate-in w-full flex-row px-2 py-4 backdrop-blur-sm duration-300 md:px-4 lg:w-80 lg:flex-col lg:justify-between">
+    <Card className="fade-in animate-in w-full flex-row p-4 backdrop-blur-sm duration-300 lg:w-80 lg:flex-col lg:justify-between">
       <CardContent
         className={'flex h-full w-full flex-row px-0 lg:flex-col lg:gap-1'}
       >

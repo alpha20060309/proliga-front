@@ -9,7 +9,6 @@ import { TOUR_STATUS } from 'app/utils/tour.util'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
 import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
 import { cn } from '@/lib/utils'
-import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
 import { useEffect, useState } from 'react'
 
 const PlayLinks = () => {
@@ -19,6 +18,7 @@ const PlayLinks = () => {
   const currentTeam = useSelector(selectCurrentTeam)
   const { lastVisitedTeam } = useSelector((store) => store.currentTeam)
   const isPlayRoute = path.includes('play')
+  const isTeamViewRoute = path.includes('team-view')
   const [gameTab, setGameTab] = useState('')
 
   useEffect(() => {
@@ -57,7 +57,8 @@ const PlayLinks = () => {
             tab={TABS.Transfer}
             disabled={
               currentTour?.status !== TOUR_STATUS.notStartedTransfer ||
-              !currentTeam?.is_team_created
+              !currentTeam?.is_team_created ||
+              isTeamViewRoute
             }
             styling={
               isPlayRoute
@@ -70,7 +71,8 @@ const PlayLinks = () => {
           />
           <TabLink
             title={'Turnir'}
-            disabled={!currentTeam?.is_team_created}
+            disabled={!currentTeam?.is_team_created ||
+              isTeamViewRoute}
             styling={
               isPlayRoute
                 ? gameTab === TABS.Tournament
@@ -83,7 +85,8 @@ const PlayLinks = () => {
           />
           <TabLink
             title={'Jurnal'}
-            disabled={!currentTeam?.is_team_created}
+            disabled={!currentTeam?.is_team_created ||
+              isTeamViewRoute}
             tab={TABS.Journal}
             styling={
               isPlayRoute
@@ -104,7 +107,8 @@ const PlayLinks = () => {
                   : PASSIVE
                 : PASSIVE
             }
-            disabled={!currentTeam?.is_team_created}
+            disabled={!currentTeam?.is_team_created ||
+              isTeamViewRoute}
             setTab={setGameTab}
           />
         </>
@@ -144,8 +148,7 @@ const PlayLinks = () => {
 }
 
 const TabLink = ({ title, tab, styling, disabled }) => {
-  const currentCompetition = useSelector(selectCurrentCompetition)
-  const currentTeam = useSelector(selectCurrentTeam)
+  const { lastVisitedTeam } = useSelector((store) => store.currentTeam)
   const { t } = useTranslation()
   const correctTab = tab !== TABS.GameProfile ? tab : ''
 
@@ -162,7 +165,7 @@ const TabLink = ({ title, tab, styling, disabled }) => {
           e.preventDefault()
         }
       }}
-      href={`/play/${currentCompetition?.id}/${currentTeam?.id}/${correctTab}`}
+      href={`/play/${lastVisitedTeam}/${correctTab}`}
     >
       {t(title)}
     </Link>
