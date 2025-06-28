@@ -36,12 +36,12 @@ const TeamMaxTransfersModal = () => {
     >
       <DialogContent className="max-h-[92%] max-w-[96%] overflow-auto rounded-lg sm:max-w-md xl:max-w-lg xl:p-6">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold">
+          <DialogTitle className="text-xl lg:text-2xl font-bold">
             {t('Boost Your Transfer Limit!')}
           </DialogTitle>
           <HoverCard>
             <HoverCardTrigger asChild>
-              <DialogDescription className="flex cursor-help items-center text-base">
+              <DialogDescription className="flex cursor-help items-center text-sm lg:text-base">
                 {t('Upgrade your game strategy with more transfers')}
                 <InfoIcon className="ml-1 h-4 w-4" />
               </DialogDescription>
@@ -93,7 +93,7 @@ const TeamMaxTransfersModal = () => {
           )}
         </div>
         <div className="mt-6 flex items-center justify-center space-x-2 text-sm">
-          <Zap className="text-accent h-4 w-4" />
+          <Zap className="text-foreground dark:text-accent h-4 w-4" />
           <p className="text-muted-foreground font-medium">
             {t('Upgrade now for instant access!')}
           </p>

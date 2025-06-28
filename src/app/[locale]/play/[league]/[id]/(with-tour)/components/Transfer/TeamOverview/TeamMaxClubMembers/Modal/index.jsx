@@ -37,12 +37,12 @@ const TeamMaxClubMembersModal = () => {
     >
       <DialogContent className="max-h-[92%] max-w-[96%] overflow-auto rounded-lg sm:max-w-md xl:max-w-lg xl:p-6">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold">
+          <DialogTitle className="text-xl lg:text-2xl font-bold">
             {t('Expand Your Club Roster!')}
           </DialogTitle>
           <HoverCard>
             <HoverCardTrigger asChild>
-              <DialogDescription className="flex cursor-help items-center text-base">
+              <DialogDescription className="flex cursor-help items-center text-sm lg:text-base">
                 {t(
                   "Boost your team's potential with more players from a single club."
                 )}
@@ -96,7 +96,7 @@ const TeamMaxClubMembersModal = () => {
           )}
         </div>
         <div className="mt-6 flex items-center justify-center space-x-2 text-sm">
-          <Users className="text-primary h-4 w-4" />
+          <Users className="text-foreground dark:text-primary h-4 w-4" />
           <p className="text-muted-foreground font-medium">
             {t('Build a stronger team for victory! ')}
           </p>
