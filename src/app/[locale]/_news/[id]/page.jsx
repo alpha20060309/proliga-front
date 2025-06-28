@@ -1,22 +1,20 @@
-import prisma from 'lib/prisma'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { notFound } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { cache } from 'react'
+import { supabase } from 'app/lib/supabaseClient'
 
 export async function generateStaticParams() {
   try {
-    const newsItems = await prisma.news.findMany({
-      select: {
-        id: true,
-      },
-      where: {
-        deleted_at: null,
-      },
-      take: 10,
-    })
+    const { data: newsItems, error } = await supabase
+      .from('news')
+      .select('id')
+      .is('deleted_at', null)
 
     if (!newsItems) return []
+    if (error) {
+      return []
+    }
 
     const locales = ['ru', 'uz']
 
@@ -33,18 +31,23 @@ export async function generateStaticParams() {
 }
 
 export const revalidate = 60
-
 const getNews = cache(async (id) => {
   const parsedId = Number(id)
   if (!id || isNaN(parsedId) || !Number.isInteger(parsedId) || parsedId <= 0) {
     return { data: null, error: new Error('Invalid news id') }
   }
   try {
-    const newsItem = await prisma.news.findUnique({
-      where: {
-        id: parsedId,
-      },
-    })
+    const { data: newsItem, error } = await supabase
+      .from('news')
+      .select('*')
+      .eq('id', parsedId)
+      .is('deleted_at', null)
+      .single()
+
+    if (error) {
+      throw error
+    }
+
     return { data: newsItem, error: null }
   } catch (error) {
     console.error(`Failed to fetch news with id "${id}":`, error)

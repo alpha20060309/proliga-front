@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
 import { Link } from 'next-view-transitions'
 import { ThemeSwitcherSkeleton } from '../SwitcherTheme'
-import Image from 'next/image'
 import Gutter from '../../components/Gutter'
 import PlayLinks from './Links'
 import NavigationDropdown from './Dropdown'
@@ -13,8 +12,12 @@ import ChangeLanguageDropdown from '../SwitcherLanguage'
 import Notification from '../Notification'
 import Marquee from 'components/Marquee'
 import dynamic from 'next/dynamic'
-import { useTheme } from 'next-themes'
 import MobileNavigation from './Mobile'
+import { Skeleton } from '@/components/ui/skeleton'
+const NavbarLogo = dynamic(() => import('./Logo'), {
+  ssr: false,
+  loading: () => <Skeleton className="w-28 xs:w-32 md:w-36 h-7.5" />,
+})
 const ThemeSwitcher = dynamic(() => import('../SwitcherTheme'), {
   ssr: false,
   loading: () => <ThemeSwitcherSkeleton />,
@@ -27,7 +30,6 @@ const Navbar = () => {
     // eslint-disable-next-line no-undef
     process.env.NEXT_PUBLIC_TEST_NAV_SLIDER ?? ''
   )
-  const { theme } = useTheme()
 
   return (
     <nav
@@ -50,29 +52,7 @@ const Navbar = () => {
               path.split('/').includes('championships') ? '/' : '/championships'
             }
           >
-            {theme === 'dark' ? (
-              <Image
-                src={'/icons/proliga-full-dark.svg'}
-                priority={true}
-                quality={100}
-                alt="Proliga"
-                width={180}
-                height={56}
-                draggable={false}
-                className="xs:w-32 w-28 cursor-pointer md:w-36"
-              />
-            ) : (
-              <Image
-                src={'/icons/proliga-full-light.svg'}
-                priority={true}
-                quality={100}
-                alt="Proliga"
-                width={180}
-                height={56}
-                draggable={false}
-                className="xs:w-32 w-28 cursor-pointer md:w-36"
-              />
-            )}
+            <NavbarLogo />
           </Link>
           <PlayLinks />
           <div className="flex w-max items-center justify-center gap-3 sm:gap-4">

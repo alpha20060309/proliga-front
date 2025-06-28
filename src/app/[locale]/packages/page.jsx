@@ -1,25 +1,29 @@
 
 import PackageContainer from './components/Package'
-import prisma from 'lib/prisma'
 import initTranslations from 'app/lib/i18n'
 import { PACKAGE_TYPE } from 'app/utils/packages.util'
 import { cache } from 'react'
+import { supabase } from 'app/lib/supabaseClient'
 
 const fetchPackages = cache(async () => {
-  const packages = await prisma.pay_package.findMany({
-    where: {
-      deleted_at: null,
-    }
-  })
-  return packages
+  const { data: packages, error } = await supabase
+    .from('pay_package')
+    .select('*')
+    .is('deleted_at', null)
+
+  if (error) {
+    return { error: error?.message }
+  }
+
+  return { data: packages, error: null }
 })
 
 const Packages = async ({ params }) => {
   const { locale } = await params
   const { t } = await initTranslations(locale)
-  const packages = await fetchPackages()
+  const { data: packages, error } = await fetchPackages()
 
-  if (packages.length === 0) {
+  if (error || packages.length === 0) {
     return <div>{t('No payment packages found')}</div>
   }
 
