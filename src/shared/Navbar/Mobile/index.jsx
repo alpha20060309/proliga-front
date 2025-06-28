@@ -97,7 +97,7 @@ function MobileNavigation() {
   const { lastVisitedTeam } = useSelector((store) => store.currentTeam)
   const [gameTab, setGameTab] = useState('')
   const isTeamViewRoute = path.includes('team-view')
-  console.log(isTeamViewRoute, path)
+  
   useEffect(() => {
     const pathLength = path.split('/').length
 
