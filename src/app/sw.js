@@ -2,9 +2,6 @@ import {
   Serwist,
   NetworkOnly,
   BackgroundSyncQueue,
-  ExpirationPlugin,
-  StaleWhileRevalidate,
-  CacheableResponsePlugin,
 } from 'serwist'
 import { defaultCache } from '@serwist/next/worker'
 
@@ -35,21 +32,9 @@ const serwist = new Serwist({
       method: 'PATCH',
       matcher: ({ request }) => request.method === 'PATCH',
     },
-    {
-      matcher: ({ request }) => request.destination === 'document',
-      handler: new StaleWhileRevalidate({
-        plugins: [
-          new CacheableResponsePlugin({ statuses: [200] }),
-          new ExpirationPlugin({
-            maxEntries: 50,
-            maxAgeSeconds: 24 * 60 * 60, // 10 day
-          }),
-        ],
-      }),
-    },
   ],
-  // skipWaiting: true,
-  // clientsClaim: true,
+  skipWaiting: true,
+  clientsClaim: true,
   offlineAnalyticsConfig: true,
   // disableDevLogs: true,
   importScripts: ['/firebase-messaging-sw.js'],
