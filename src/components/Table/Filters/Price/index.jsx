@@ -83,7 +83,7 @@ const PriceFilter = ({ column, columnFilterValue, title = 'Narx' }) => {
                 <Button
                     variant="outline"
                     size="sm"
-                    className="hover:text-foreground justify-start border-dashed"
+                    className="hover:text-foreground justify-start border-dashed h-8 w-full truncate  focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-background hover:bg-accent dark:bg-input/30 dark:border-input dark:hover:bg-input/50  border-border rounded-md border px-3 text-sm font-medium whitespace-nowrap shadow-xs transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50"
                     aria-label={
                         columnFilterValue
                             ? `Clear ${t(title)} filter`
