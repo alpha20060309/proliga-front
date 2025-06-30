@@ -37,7 +37,6 @@ export const useCreateBannerView = () => {
         const { error } = await supabase
           .from('banner_view')
           .insert({ banner_id, geo: geo, agent: agent, user_id: userTable.id })
-          .is('deleted_at', null)
 
         if (error) {
           setError(
