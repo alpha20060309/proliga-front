@@ -66,48 +66,46 @@ const Player = ({ player }) => {
   const toggleDeleteModal = () => {
     setDeleteModalOpen(!isDeleteModalOpen)
   }
+
+  if (!player.name) {
+    return (
+      <PlayerContainer>
+        <Image
+          src="/icons/player-tshirt.svg"
+          alt="player tshirt"
+          width={48}
+          height={48}
+          draggable={false}
+          className="xs:size-8 size-6 md:size-10 lg:size-8 xl:size-10"
+        />
+      </PlayerContainer>
+    )
+  }
+
   return (
     <>
       <PlayerContainer>
-        {!player.name && (
-          <>
-            <Image
-              src="/icons/player-tshirt.svg"
-              alt="player tshirt"
-              width={48}
-              height={48}
-              draggable={false}
-              className="xs:size-8 size-6 md:size-10 lg:size-8 xl:size-10"
-            />
-          </>
-        )}
-        {player.name && (
-          <>
-            <PlayerImage
-              tShirt={tShirt}
-              handleInfoModal={handleTransfer}
-              imageErr={imageErr}
-              player={player}
-            />
-            <PlayerName>
-              {lastName === '' ? name : lastName}
-            </PlayerName>
-            <PlayerButtonsContainer>
-              <PlayerButton onClick={handleTransfer}>
-                <ArrowUpDown className="text-foreground group-hover:text-accent-foreground size-4 sm:size-5" />
-              </PlayerButton>
-              <div className="border-foreground bg-background text-foreground flex h-4 w-6 cursor-default items-center justify-center rounded-sm border text-center text-xs font-bold sm:h-5 sm:w-8 md:text-sm">
-                {player.price ?? '00'}
-              </div>
-              <PlayerButton
-                onClick={toggleDeleteModal}
-                className={'bg-destructive'}
-              >
-                <X className="text-foreground group-hover:text-accent-foreground size-4 sm:size-5" />
-              </PlayerButton>
-            </PlayerButtonsContainer>
-          </>
-        )}
+        <PlayerImage
+          tShirt={tShirt}
+          handleInfoModal={handleTransfer}
+          imageErr={imageErr}
+          player={player}
+        />
+        <PlayerName>{lastName === '' ? name : lastName}</PlayerName>
+        <PlayerButtonsContainer>
+          <PlayerButton onClick={handleTransfer}>
+            <ArrowUpDown className="text-foreground group-hover:text-accent-foreground size-4 sm:size-5" />
+          </PlayerButton>
+          <div className="border-foreground bg-background text-foreground flex h-4 w-6 cursor-default items-center justify-center rounded-sm border text-center text-xs font-bold sm:h-5 sm:w-8 md:text-sm">
+            {player.price ?? '00'}
+          </div>
+          <PlayerButton
+            onClick={toggleDeleteModal}
+            className={'bg-destructive'}
+          >
+            <X className="text-foreground group-hover:text-accent-foreground size-4 sm:size-5" />
+          </PlayerButton>
+        </PlayerButtonsContainer>
       </PlayerContainer>
       <Confirmation
         onConfirm={handleDeletePlayer}

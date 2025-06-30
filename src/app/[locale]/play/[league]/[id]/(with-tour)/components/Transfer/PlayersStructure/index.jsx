@@ -10,7 +10,14 @@ import {
 import { TOUR_STATUS } from 'app/utils/tour.util'
 import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
 // import { PlayersStructureContainer, MIDContainer, DEFContainer, STRContainer, GOAContainer } from 'components/Game/Player'
-import { PlayersStructureContainer, MIDContainer, DEFContainer, STRContainer, GOAContainer } from 'components/Game/Player'
+import {
+  PlayersStructureContainer,
+  MIDContainer,
+  DEFContainer,
+  STRContainer,
+  GOAContainer,
+} from 'components/Game/Player'
+import { memo } from 'react'
 
 const TransferPlayersStructure = () => {
   const currentTour = useSelector(selectCurrentTour)
@@ -57,4 +64,4 @@ const TransferPlayersStructure = () => {
   )
 }
 
-export default TransferPlayersStructure
+export default memo(TransferPlayersStructure)
