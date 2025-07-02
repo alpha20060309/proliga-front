@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getMessaging } from 'firebase-admin/messaging'
 import { initializeFirebaseAdmin } from 'app/lib/firebase/firebase-admin'
-import prisma from 'lib/prisma'
+import { supabase } from 'app/lib/supabaseClient'
 
 initializeFirebaseAdmin()
 
@@ -25,35 +25,37 @@ export async function POST(request) {
     await getMessaging().unsubscribeFromTopic(token, topic)
 
     // Get notification topics
-    const user = await prisma.user.findUnique({
-      where: {
-        id: +user_id,
-        deleted_at: null,
-      },
-      select: {
-        ntf_topics: true,
-      },
-    })
+    const { data: tokens, error } = await supabase
+      .from('user_token')
+      .select('*')
+      .eq('user_id', user_id)
 
-    if (!user) {
+    if (error) {
       return NextResponse.json(
         { success: false, message: 'Error getting user notification topics' },
         { status: 500 }
       )
     }
-    console.log(user.notification_topics)
-    let topics = JSON.parse(user.notification_topics || '[]')
+
+    console.log(tokens)
+
+    if (!tokens) {
+      return NextResponse.json(
+        { success: false, message: 'Error getting user notification topics' },
+        { status: 500 }
+      )
+    }
+
+    let topics = JSON.parse(tokens.notification_topics || '[]')
     topics = topics.filter((t) => t !== topic)
 
     console.log(topics)
-    await prisma.user.update({
-      where: {
-        id: +user_id,
-        deleted_at: null,
-      },
-      data: {
-      },
-    })
+    await supabase
+      .from('user_token')
+      .update({
+        notification_topics: topics,
+      })
+      .eq('user_id', user_id)
 
     return NextResponse.json({
       success: true,

@@ -22,7 +22,7 @@ function validateFirebaseConfig() {
     !measurementId ||
     !storageBucket ||
     !appId
-    
+
   ) {
     alert(`Missing Firebase config values`)
     throw new Error(`Missing Firebase config values`)
@@ -71,8 +71,6 @@ export async function getFirebaseToken() {
       )
       return null
     }
-
-    console.log('FCM Token successfully generated:', currentToken)
     return currentToken
   } catch (error) {
     console.error('An error occurred while retrieving token:', error)
