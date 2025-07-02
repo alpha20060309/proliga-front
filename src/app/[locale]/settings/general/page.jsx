@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 import { Camera, Loader } from 'lucide-react'
 import { useUpdateUserData } from 'app/hooks/user/useUpdateUserData'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'app/lib/features/auth/auth.selector'
 import UploadFile from 'shared/Modals/UploadFile'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -31,13 +31,13 @@ const GENDERS = {
 const GeneralSettings = () => {
   const router = useTransitionRouter()
   const { t } = useTranslation()
-  const userTable = useSelector(selectUserTable)
-  const [date, setDate] = useState(userTable?.birth_date ?? new Date())
-  const [firstName, setFirstName] = useState(userTable?.name ?? '')
-  const [lastName, setLastName] = useState(userTable?.last_name ?? '')
-  const [middleName, setMiddleName] = useState(userTable?.middle_name ?? '')
-  const [bio, setBio] = useState(userTable?.bio ?? '')
-  const [gender, setGender] = useState(userTable?.gender ?? GENDERS.UNSET)
+  const user = useSelector(selectUser)
+  const [date, setDate] = useState(user?.birth_date ?? new Date())
+  const [firstName, setFirstName] = useState(user?.name ?? '')
+  const [lastName, setLastName] = useState(user?.last_name ?? '')
+  const [middleName, setMiddleName] = useState(user?.middle_name ?? '')
+  const [bio, setBio] = useState(user?.bio ?? '')
+  const [gender, setGender] = useState(user?.gender ?? GENDERS.UNSET)
   const [isModalOpen, setModalOpen] = useState(false)
   const { updateUserData, isLoading } = useUpdateUserData()
 
@@ -58,7 +58,7 @@ const GeneralSettings = () => {
       bio,
       gender,
       birth_date: date,
-      userTable,
+      user,
       cb: () => {
         router.push('/settings')
       }

@@ -1,8 +1,9 @@
 'use client'
 
 import { ThemeProvider } from 'next-themes'
+import { memo } from 'react'
 
-export default function ThemesProviders({ children }) {
+const ThemesProviders = ({ children }) => {
   return (
     <ThemeProvider
       attribute="class"
@@ -15,3 +16,5 @@ export default function ThemesProviders({ children }) {
     </ThemeProvider>
   )
 }
+
+export default memo(ThemesProviders)

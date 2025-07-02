@@ -13,7 +13,7 @@ import { getCorrentPlayerPosition } from 'app/utils/getCorrectPlayerPosition.uti
 import { useUpdateTeamCaptains } from 'app/hooks/transfer/useUpdateTeamCaptains'
 import { selectTeamConcat } from 'app/lib/features/teamPlayer/teamPlayer.selector'
 import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'app/lib/features/auth/auth.selector'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { TOUR_STATUS } from 'app/utils/tour.util'
@@ -24,7 +24,7 @@ const ProfileStadiumForm = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const currentTeam = useSelector(selectCurrentTeam)
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const currentCompetition = useSelector(selectCurrentCompetition)
   const teamConcat = useSelector(selectTeamConcat)
   const { playersCount } = useSelector((state) => state.teamPlayer)
@@ -64,7 +64,7 @@ const ProfileStadiumForm = () => {
       team: teamConcat,
       team_id: currentTeam.id,
       tour_id: currentTour.id,
-      userTable,
+      user,
       currentCompetition,
     })
   }

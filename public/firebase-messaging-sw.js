@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-undef
-importScripts("https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js");
+importScripts("https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js");
 // eslint-disable-next-line no-undef
-importScripts("https://www.gstatic.com/firebasejs/8.8.0/firebase-messaging.js");
+importScripts("https://www.gstatic.com/firebasejs/9.23.0/firebase-messaging-compat.js");
 
 const firebaseConfig = {
   apiKey: "AIzaSyA8TSa7hv25LtomigQekCxixYXLH8k4zBk",
@@ -12,7 +12,7 @@ const firebaseConfig = {
   appId: "1:892756456327:web:e3784f6a6ee90b242a9922",
   measurementId: "G-V9T9SPRXYJ",
 };
-
+console.log('firebaseConfig', firebaseConfig)
 // eslint-disable-next-line no-undef
 firebase.initializeApp(firebaseConfig);
 // eslint-disable-next-line no-undef

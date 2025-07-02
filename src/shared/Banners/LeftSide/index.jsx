@@ -9,7 +9,7 @@ import { useCreateBannerView } from 'app/hooks/system/useCreateBannerView'
 import {
   selectAgent,
   selectGeo,
-  selectUserTable,
+  selectUser,
 } from 'app/lib/features/auth/auth.selector'
 import { selectBanners } from 'app/lib/features/banner/banner.selector'
 import { getUrl } from 'app/utils/static.util'
@@ -17,7 +17,7 @@ import { getUrl } from 'app/utils/static.util'
 const LeftSideBanner = () => {
   const banners = useSelector(selectBanners)
   const agent = useSelector(selectAgent)
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const geo = useSelector(selectGeo)
   const NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH =
     // eslint-disable-next-line no-undef
@@ -51,10 +51,10 @@ const LeftSideBanner = () => {
       windowWidth >= NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH &&
       banner?.type === BANNER_SERVICE_TYPE.CUSTOM
     ) {
-      if (banner?.id && userTable?.id && geo && agent) {
+      if (banner?.id && user?.id && geo && agent) {
         createBannerView({
           banner_id: banner?.id,
-          userTable,
+          user,
           geo,
           agent,
         })
@@ -65,7 +65,7 @@ const LeftSideBanner = () => {
     NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH,
     windowWidth,
     agent,
-    userTable,
+    user?.id,
     geo,
     createBannerView,
   ])

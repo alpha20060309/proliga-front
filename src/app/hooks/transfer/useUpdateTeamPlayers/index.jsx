@@ -12,7 +12,7 @@ export const useUpdateTeamPlayers = () => {
   const { t } = useTranslation()
 
   const updateTeamPlayers = useCallback(
-    async ({ team, team_id, tour_id, userTable, currentCompetition }) => {
+    async ({ team, team_id, tour_id, user, currentCompetition }) => {
       setIsLoading(false)
       setError(null)
 
@@ -24,7 +24,7 @@ export const useUpdateTeamPlayers = () => {
           player_id: player.player_id,
           team_id,
           tour_id,
-          user_id: userTable.id,
+          user_id: user.id,
           is_captain: player.is_captain,
         }))
 

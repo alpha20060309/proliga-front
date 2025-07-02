@@ -3,7 +3,7 @@
 import { toast } from 'sonner'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { selectUser} from 'app/lib/features/auth/auth.selector'
 import { formatDate } from 'app/utils/formatDate.util'
 import { Phone, CalendarDays, UsersRound } from 'lucide-react'
 import RefillBalance from './components/RefillBalance'
@@ -15,7 +15,7 @@ import ThemeCustomizer from './components/ThemeCustomizer'
 
 const SettingsProfile = () => {
   const { t } = useTranslation()
-  const user = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
 
   const getCorrectGenderText = (gender) => {
     switch (gender) {

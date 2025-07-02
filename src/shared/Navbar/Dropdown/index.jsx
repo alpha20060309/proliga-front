@@ -2,7 +2,7 @@ import { Popover, PopoverTrigger } from '@/components/ui/popover'
 import { useState } from 'react'
 import Avatar from 'shared/Avatar'
 import { useSelector } from 'react-redux'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'app/lib/features/auth/auth.selector'
 import { Trophy, Settings, LogOut, LogIn } from 'lucide-react'
 import { useLogOut } from 'app/hooks/auth/useLogOut'
 import { useTranslation } from 'react-i18next'
@@ -12,7 +12,7 @@ import { Link } from 'next-view-transitions'
 const Dropdown = () => {
   const { logOut } = useLogOut()
   const { t } = useTranslation()
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
 
   return (
     <PopoverContent
@@ -23,7 +23,7 @@ const Dropdown = () => {
         <Trophy className="h-6 w-6" />
         <p>{t('Chempionatlar')}</p>
       </NavLink>
-      {userTable?.id ? (
+      {user?.id ? (
         <>
           <NavLink href="/settings">
             <Settings className="h-6 w-6" />
@@ -60,7 +60,7 @@ const NavLink = ({ children, href }) => {
 
 const NavigationDropdown = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false)
-  const user = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
 
   return (
     <Popover open={isDropdownOpen} onOpenChange={setDropdownOpen}>

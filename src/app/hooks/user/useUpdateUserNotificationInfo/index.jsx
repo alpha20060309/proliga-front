@@ -11,8 +11,8 @@ export const useUpdateUserNotificationInfo = () => {
   const { update } = useSession()
 
   const updateNotificationToken = useCallback(
-    async ({ notification_token, userTable, cb = () => {} }) => {
-      if (!userTable?.id) {
+    async ({ notification_token, user, cb = () => {} }) => {
+      if (!user?.id) {
         setError('User not authenticated')
         return toast.error(t('Foydalanuvchi autentifikatsiya qilinmagan'))
       }
@@ -28,7 +28,7 @@ export const useUpdateUserNotificationInfo = () => {
         const { data, error } = await supabase
           .from('user')
           .update(obj)
-          .eq('id', userTable?.id)
+          .eq('id', user?.id)
           .is('deleted_at', null)
           .single()
 

@@ -31,7 +31,7 @@ const GeolocationProvider = ({ children }) => {
           if (!user?.location) {
             return updateLocation({
               location: JSON.stringify(position),
-              userTable: user,
+              user,
             })
           }
 
@@ -43,7 +43,7 @@ const GeolocationProvider = ({ children }) => {
           ) {
             updateLocation({
               location: JSON.stringify(position),
-              userTable: user,
+              user,
             })
           }
         },

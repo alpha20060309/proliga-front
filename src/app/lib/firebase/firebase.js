@@ -1,6 +1,5 @@
 import { initializeApp } from 'firebase/app'
 import { getMessaging, getToken, onMessage } from 'firebase/messaging'
-
 /* eslint-disable no-undef */
 export const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || '',
@@ -48,7 +47,6 @@ export async function initializeFirebase() {
     return app
   } catch (error) {
     console.error('Error initializing Firebase:', error)
-    throw error
   }
 }
 

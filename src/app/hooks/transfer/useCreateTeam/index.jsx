@@ -15,11 +15,11 @@ export const useCreateTeam = () => {
   const { t } = useTranslation()
 
   const createTeam = useCallback(
-    async ({ title, formation, competition_id, userTable, cb = () => {} }) => {
+    async ({ title, formation, competition_id, user, cb = () => {} }) => {
       setIsLoading(false)
       setError(null)
 
-      if (!userTable?.id) {
+      if (!user?.id) {
         setError('"Jamoa tuzish uchun tizimga kirishingiz kerak')
         toast.warning(t('Jamoa tuzish uchun tizimga kirishingiz kerak'), {
           theme: 'dark',
@@ -49,7 +49,7 @@ export const useCreateTeam = () => {
             name: title,
             formation,
             competition_id,
-            user_id: userTable.id,
+            user_id: user.id,
           })
           .is('deleted_at', null)
           .select()

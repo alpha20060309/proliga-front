@@ -10,7 +10,7 @@ import { Palette } from 'lucide-react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { RefreshCw, Loader2, Save } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'app/lib/features/auth/auth.selector'
 import { toast } from 'sonner'
 import { setDefaultTheme } from 'app/lib/features/theme/theme.slice'
 import { useState } from 'react'
@@ -38,7 +38,7 @@ import {
 const ThemeCustomizer = () => {
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
-  const user = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const { selectedTheme, isModified } = useSelector((store) => store.theme)
   const themes = useSelector(selectThemes)
   const { t } = useTranslation()

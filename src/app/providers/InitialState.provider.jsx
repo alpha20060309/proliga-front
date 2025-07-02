@@ -6,7 +6,7 @@ import { fetchSystemConfig } from '../lib/features/systemConfig/systemConfig.thu
 import { useGenerateFingerprint } from 'app/hooks/system/useGenerateFingerprint'
 import { useGetUserAgent } from 'app/hooks/system/useGetUserAgent'
 import { fetchGeo } from 'app/lib/features/auth/auth.thunk'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'app/lib/features/auth/auth.selector'
 import {
   fetchBroadcastNotifications,
   fetchPersonalNotifications,
@@ -16,7 +16,7 @@ const registerSW = dynamic(() => import('app/lib/registerSw'), { ssr: false })
 
 const InitialStateProvider = ({ children }) => {
   const dispatch = useDispatch()
-  const user = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const { generateFingerprint } = useGenerateFingerprint()
   const { getUserAgent } = useGetUserAgent()
 

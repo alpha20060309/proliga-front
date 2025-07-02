@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useTheme } from 'next-themes'
 import { colorKeys, toVarName } from 'app/utils/colors.util'
 import { SHADOW_KEYS, updateShadows } from 'app/utils/shadow.utils'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'app/lib/features/auth/auth.selector'
 import {
   selectDarkTheme,
   selectLightTheme,
@@ -22,7 +22,7 @@ const CustomThemeProvider = ({ children }) => {
   const { resolvedTheme } = useTheme()
   const darkTheme = useSelector(selectDarkTheme)
   const lightTheme = useSelector(selectLightTheme)
-  const user = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const themes = useSelector(selectThemes)
 
   // 1. the user is not logged in set default

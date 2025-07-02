@@ -19,7 +19,7 @@ import ResendOTP from './ResendOTP'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'app/lib/features/auth/auth.selector'
 
 const ConfirmOTP = ({
   isModalOpen,
@@ -34,7 +34,7 @@ const ConfirmOTP = ({
   const { t } = useTranslation()
   const { confirmOTP, isLoading: confirmLoading } = useConfirmOTP()
   const { isLoading: sendLoading } = useSendOTP()
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
 
   const isLoading = confirmLoading || sendLoading
 
@@ -48,7 +48,7 @@ const ConfirmOTP = ({
     if (defaultHook) {
       await confirmOTP({
         code,
-        guid: userTable?.guid,
+        guid: user?.guid,
         phone,
         is_update,
         cb: () => {

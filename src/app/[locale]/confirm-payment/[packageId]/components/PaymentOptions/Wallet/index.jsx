@@ -2,7 +2,7 @@ import { PAYMENT_OPTIONS } from 'app/utils/paymentOptions.util'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { NumericFormat } from 'react-number-format'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'app/lib/features/auth/auth.selector'
 import { cn } from '@/lib/utils'
 import { Wallet } from 'lucide-react'
 
@@ -14,7 +14,7 @@ const WalletPaymentOption = ({
   toggleModal,
 }) => {
   const { t } = useTranslation()
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
 
   return (
     <div
@@ -30,7 +30,7 @@ const WalletPaymentOption = ({
           {t('Proliga hisobi')}
         </h4>
         <NumericFormat
-          value={userTable?.balance / 100 || 0}
+          value={user?.balance / 100 || 0}
           className="text-foreground mx-1 w-full max-w-32 border-none bg-transparent text-center text-sm font-bold outline-hidden select-none md:max-w-40 xl:text-base"
           defaultValue={0}
           readOnly

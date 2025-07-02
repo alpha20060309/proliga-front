@@ -11,12 +11,12 @@ export const useRedirectToPayme = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   const redirectToPayme = useCallback(
-    ({ amount, lang, userTable }) => {
+    ({ amount, lang, user }) => {
       const RETURN_URL = process.env.NEXT_PUBLIC_URL
       setIsLoading(false)
       setError(null)
 
-      if (!userTable?.id) {
+      if (!user?.id) {
         setError('User not found')
         toast.error('User not found')
         return
@@ -33,7 +33,7 @@ export const useRedirectToPayme = () => {
 
         const url = new URL('https://checkout.paycom.uz')
         const m = process.env.NEXT_PUBLIC_PAYME_ID // merchant id
-        const ac = userTable?.id // account
+        const ac = user?.id // account
         const a = amount * 100 // amount
         const l = lang
         const cr = 4217 // UZS

@@ -29,7 +29,7 @@ import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.sele
 import { selectCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.selector'
 import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
 import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'app/lib/features/auth/auth.selector'
 import { selectPlayers } from 'app/lib/features/player/player.selector'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
@@ -42,7 +42,7 @@ const TransferStadiumForm = () => {
   const dispatch = useDispatch()
   const teamConcat = useSelector(selectTeamConcat)
   const currentCompetition = useSelector(selectCurrentCompetition)
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const currentTeam = useSelector(selectCurrentTeam)
   const currentTour = useSelector(selectCurrentTour)
   const players = useSelector(selectPlayers)
@@ -153,7 +153,7 @@ const TransferStadiumForm = () => {
       team: teamConcat,
       team_id: currentTeam.id,
       tour_id: currentTour.id,
-      userTable,
+      user,
       currentCompetition,
     })
 

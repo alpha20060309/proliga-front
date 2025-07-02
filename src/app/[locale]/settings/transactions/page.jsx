@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 import { fetchPayBalance } from 'app/lib/features/payBalance/payBalance.thunk'
 import { fetchPayExpenses } from 'app/lib/features/payExpense/payExpense.thunk'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'app/lib/features/auth/auth.selector'
 import { Wallet, Boxes, RefreshCcw } from 'lucide-react'
 import { selectExpenses } from 'app/lib/features/payExpense/payExpense.selector'
 import { selectBalances } from 'app/lib/features/payBalance/payBalance.selector'
@@ -18,25 +18,25 @@ const CabinetTransactionsHistory = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const [currentTab, setCurrentTab] = useState(TRANSACTION_TABS.BALANCE)
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const expenses = useSelector(selectExpenses)
   const balances = useSelector(selectBalances)
 
   useEffect(() => {
-    if (userTable?.id && expenses?.length === 0 && balances?.length === 0) {
+    if (user?.id && expenses?.length === 0 && balances?.length === 0) {
       Promise.all([
-        dispatch(fetchPayBalance({ user_id: userTable?.id })),
-        dispatch(fetchPayExpenses({ user_id: userTable?.id })),
+        dispatch(fetchPayBalance({ user_id: user?.id })),
+        dispatch(fetchPayExpenses({ user_id: user?.id })),
       ])
     }
-  }, [dispatch, userTable, expenses?.length, balances?.length])
+  }, [dispatch, user, expenses?.length, balances?.length])
 
   const refreshData = () => {
     switch (currentTab) {
       case TRANSACTION_TABS.BALANCE:
-        return dispatch(fetchPayBalance({ user_id: userTable?.id }))
+        return dispatch(fetchPayBalance({ user_id: user?.id }))
       case TRANSACTION_TABS.EXPENSES:
-        return dispatch(fetchPayExpenses({ user_id: userTable?.id }))
+        return dispatch(fetchPayExpenses({ user_id: user?.id }))
       default:
         break
     }

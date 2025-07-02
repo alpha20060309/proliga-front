@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux'
 import {
   selectAgent,
   selectGeo,
-  selectUserTable,
+  selectUser
 } from 'app/lib/features/auth/auth.selector'
 import { PhoneInput } from 'components/PhoneInput'
 import { useAuthChangePhone } from 'app/hooks/auth/useAuthChangePhone'
@@ -21,7 +21,7 @@ export default function ChangePhoneForm() {
   const [isModalOpen, setModalOpen] = useState(false)
   const { t } = useTranslation()
   const { isLoading, updatePhone } = useAuthChangePhone()
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const agent = useSelector(selectAgent)
   const geo = useSelector(selectGeo)
 
@@ -44,8 +44,8 @@ export default function ChangePhoneForm() {
       password,
       agent,
       geo,
-      id: userTable?.id,
-      phone: userTable?.phone,
+      id: user?.id,
+      phone: user?.phone,
       cb: () => setModalOpen(true),
     })
 

@@ -19,7 +19,7 @@ import {
   selectCurrentCompetition,
 } from 'app/lib/features/competition/competition.selector'
 import { fetchTopTeams } from 'app/lib/features/team/team.thunk'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'app/lib/features/auth/auth.selector'
 import { fetchCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.thunk'
 import { setLastVisitedTeam } from 'app/lib/features/currentTeam/currentTeam.slice'
 import { setCurrentCompetition } from 'app/lib/features/competition/competition.slice'
@@ -31,7 +31,7 @@ export default function PlayLayout({ children }) {
   const path = usePathname()
   const [isModalOpen, setModalOpen] = useState(false)
   const { league, id } = useParams()
-  const user = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const dispatch = useDispatch()
   const { count: playersCount, isLoading: isLoadingPlayer } = useSelector(
     (store) => store.player

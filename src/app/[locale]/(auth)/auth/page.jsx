@@ -7,7 +7,7 @@ import { LoginFormSkeleton, SignUpFormSkeleton } from './components/Skeleton'
 import { useSearchParams } from 'next/navigation'
 import { useTransitionRouter } from 'next-view-transitions'
 import { useSelector } from 'react-redux'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'app/lib/features/auth/auth.selector'
 import { useTranslation } from 'react-i18next'
 import { useAuthStatus } from 'app/hooks/auth/useAuthStatus'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
@@ -24,7 +24,7 @@ const LoginForm = dynamic(() => import('./components/LoginForm'), {
 const Auth = () => {
   const { t } = useTranslation()
   const router = useTransitionRouter()
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const params = useSearchParams()
   const error = params.get('error')
   const [shouldRedirect, setShouldRedirect] = useState(true)
@@ -36,10 +36,10 @@ const Auth = () => {
       localStorage.getItem('sign-in-method') !== 'undefined' &&
       localStorage.getItem('sign-in-method')
 
-    if (Boolean(userTable?.id) && shouldRedirect && !SIGN_IN_METHOD) {
+    if (Boolean(user?.id) && shouldRedirect && !SIGN_IN_METHOD) {
       router.push('/championships')
     }
-  }, [userTable?.id, router, shouldRedirect])
+  }, [user?.id, router, shouldRedirect])
 
   useEffect(() => {
     if (error) {

@@ -10,14 +10,14 @@ export const useRedirectToClick = () => {
   const { t } = useTranslation()
 
   const redirectToClick = useCallback(
-    ({ amount, userTable }) => {
+    ({ amount, user }) => {
       const SERVICE_ID = process.env.NEXT_PUBLIC_CLICK_SERVICE_ID
       const MERCHANT_ID = process.env.NEXT_PUBLIC_CLICK_MERCHANT_ID
       const RETURN_URL = process.env.NEXT_PUBLIC_URL
       setIsLoading(false)
       setError(null)
 
-      if (!userTable?.id) {
+      if (!user?.id) {
         setError('User not found')
         toast.error('User not found')
         return
@@ -36,9 +36,9 @@ export const useRedirectToClick = () => {
         url.searchParams.append('service_id', SERVICE_ID)
         url.searchParams.append('merchant_id', MERCHANT_ID)
         url.searchParams.append('amount', amount)
-        url.searchParams.append('transaction_param', userTable?.id)
+        url.searchParams.append('transaction_param', user?.id)
         url.searchParams.append('return_url', RETURN_URL)
-        url.searchParams.append('param2', userTable?.id)
+        url.searchParams.append('param2', user?.id)
 
         router.push(url.href)
       } catch (error) {

@@ -16,7 +16,7 @@ export const useUpdateUserLanguage = () => {
   const { i18n } = useTranslation()
 
   const updateUserLanguage = useCallback(
-    async ({ lang, userTable }) => {
+    async ({ lang, user }) => {
       try {
         setIsLoading(true)
         setError('')
@@ -26,7 +26,7 @@ export const useUpdateUserLanguage = () => {
           .update({
             language: lang,
           })
-          .eq('id', userTable.id)
+          .eq('id', user?.id)
           .is('deleted_at', null)
           .select(
             'id, name, email, phone, image, last_name, middle_name, gender, birth_date, bio, balance, deleted_at, language, phone_verified'

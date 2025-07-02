@@ -14,15 +14,15 @@ import { useState, useMemo, useEffect } from 'react'
 import { saveFile } from 'app/actions/saveFile.action'
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { useUpdateUserPhoto } from 'app/hooks/user/useUpdateUserPhoto'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'app/lib/features/auth/auth.selector'
 
 export const UppyUploader = ({ closeModal }) => {
   const { lang } = useSelector((state) => state.systemLanguage)
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const { updateUserPhoto } = useUpdateUserPhoto()
   const [fileType, setFileType] = useState('')
   const dir = 'user'
-  const subDir = useMemo(() => userTable?.id.toString() || '', [userTable])
+  const subDir = useMemo(() => user?.id.toString() || '', [user])
   const path = useMemo(
     () => `/${dir}/${subDir}/image.${fileType}`,
     [dir, subDir, fileType]
@@ -55,10 +55,10 @@ export const UppyUploader = ({ closeModal }) => {
   useEffect(() => {
     if (fileType && path) {
       uppy.on('upload-success', async () => {
-        await updateUserPhoto({ path, cb: () => closeModal(), userTable })
+        await updateUserPhoto({ path, cb: () => closeModal(), user })
       })
     }
-  }, [uppy, path, fileType, userTable, closeModal, updateUserPhoto])
+  }, [uppy, path, fileType, user, closeModal, updateUserPhoto])
 
   return <Dashboard className="w-full rounded-xl" theme="dark" uppy={uppy} />
 }

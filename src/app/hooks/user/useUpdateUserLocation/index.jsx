@@ -11,14 +11,14 @@ export const useUpdateUserLocation = () => {
   const { update } = useSession()
 
   const updateLocation = useCallback(
-    async ({ location, userTable, cb = () => {} }) => {
+    async ({ location, user, cb = () => { } }) => {
       if (!location) {
         setError(t('Location data is required'))
         return toast.warning(t('Location data is required'), {
           theme: 'dark',
         })
       }
-      if (!userTable?.id) {
+      if (!user?.id) {
         setError('User not authenticated')
         return toast.error(t('Foydalanuvchi autentifikatsiya qilinmagan'))
       }
@@ -30,7 +30,7 @@ export const useUpdateUserLocation = () => {
         const { data, error } = await supabase
           .from('user')
           .update({ location })
-          .eq('id', userTable?.id)
+          .eq('id', user?.id)
           .is('deleted_at', null)
           .single()
 

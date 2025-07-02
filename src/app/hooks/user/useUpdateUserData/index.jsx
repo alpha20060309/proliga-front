@@ -18,7 +18,7 @@ export const useUpdateUserData = () => {
       bio,
       gender,
       birth_date,
-      userTable,
+      user,
       cb = () => {},
     }) => {
       if (!name) {
@@ -33,7 +33,7 @@ export const useUpdateUserData = () => {
         setError(t("Tug'ilgan yilingizni kiriting"))
         return toast.warning(t("Tug'ilgan yilingizni kiriting"))
       }
-      if (!userTable?.id) {
+      if (!user?.id) {
         setError('User not authenticated')
         return toast.error(t('Foydalanuvchi autentifikatsiya qilinmagan'))
       }
@@ -54,7 +54,7 @@ export const useUpdateUserData = () => {
         const { data, error } = await supabase
           .from('user')
           .update(obj)
-          .eq('id', userTable?.id)
+          .eq('id', user?.id)
           .is('deleted_at', null)
           .single()
 

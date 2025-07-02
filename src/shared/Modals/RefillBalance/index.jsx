@@ -16,7 +16,7 @@ import { useSelector } from 'react-redux'
 import { useRedirectToClick } from 'app/hooks/payment/useRedirectToClick'
 import { useRedirectToPayme } from 'app/hooks/payment/useRedirectToPayme'
 import { CONFIG_KEY } from 'app/utils/config.util'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'app/lib/features/auth/auth.selector'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
@@ -29,7 +29,7 @@ const PREDEFINED_AMOUNTS = [50000, 100000, 200000, 500000]
 const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
   const { t } = useTranslation()
   const { resolvedTheme } = useTheme()
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const config = useSelector(selectSystemConfig)
   const { lang } = useSelector((store) => store.systemLanguage)
 
@@ -65,15 +65,15 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
       )
       return
     }
-    if (!userTable) {
+    if (!user?.id) {
       return toast.error(t("Siz ro'yxatdan o'tmagansiz"))
     }
 
     if (paymentOption === PAYMENT_OPTIONS.CLICKUP) {
-      redirectToClick({ amount, userTable })
+      redirectToClick({ amount, user })
     }
     if (paymentOption === PAYMENT_OPTIONS.PAYME) {
-      redirectToPayme({ amount, lang, userTable })
+      redirectToPayme({ amount, lang, user })
     }
   }
 

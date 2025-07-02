@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { NumericFormat } from 'react-number-format'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'app/lib/features/auth/auth.selector'
 import {
   Card,
   CardContent,
@@ -17,7 +17,7 @@ import { Wallet } from 'lucide-react'
 
 const RefillBalance = () => {
   const { t } = useTranslation()
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const [isModalOpen, setModalOpen] = useState(false)
 
   return (
@@ -35,7 +35,7 @@ const RefillBalance = () => {
 
       <CardContent>
         <NumericFormat
-          value={userTable?.balance / 100 || 0}
+          value={user?.balance / 100 || 0}
           className="text-foreground w-full border-none bg-transparent text-right text-lg font-bold outline-hidden select-none"
           defaultValue={0}
           readOnly

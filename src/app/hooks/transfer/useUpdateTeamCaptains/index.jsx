@@ -12,7 +12,7 @@ export const useUpdateTeamCaptains = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   const updateTeamCaptains = useCallback(
-    async ({ team, team_id, tour_id, currentCompetition, userTable }) => {
+    async ({ team, team_id, tour_id, currentCompetition, user }) => {
       setIsLoading(false)
       setError(null)
 
@@ -23,7 +23,7 @@ export const useUpdateTeamCaptains = () => {
           id: player.id,
           team_id,
           tour_id,
-          user_id: userTable.id,
+          user_id: user.id,
           is_captain: player.is_captain,
         }))
 

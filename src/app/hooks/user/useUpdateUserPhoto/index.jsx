@@ -14,7 +14,7 @@ export const useUpdateUserPhoto = () => {
   const { t } = useTranslation()
 
   const updateUserPhoto = useCallback(
-    async ({ path, cb = () => {}, userTable }) => {
+    async ({ path, cb = () => {}, user }) => {
       try {
         setIsLoading(true)
         setError('')
@@ -25,7 +25,7 @@ export const useUpdateUserPhoto = () => {
           return
         }
 
-        if (!userTable?.id) {
+        if (!user?.id) {
           setError('User not authenticated')
           toast.error(t('Foydalanuvchi autentifikatsiya qilinmagan'))
           return
@@ -36,7 +36,7 @@ export const useUpdateUserPhoto = () => {
           .update({
             image: path,
           })
-          .eq('id', userTable?.id)
+          .eq('id', user?.id)
           .is('deleted_at', null)
           .select(
             'id, name, email, phone, image, last_name, middle_name, gender, birth_date, bio, balance, deleted_at, language, phone_verified'

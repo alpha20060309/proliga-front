@@ -6,13 +6,13 @@ import { useSendOTP } from 'app/hooks/auth/useSendOTP'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { cn } from '@/lib/utils'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'app/lib/features/auth/auth.selector'
 import { RefreshCcw } from 'lucide-react'
 
 export default function ResendOTP() {
   const { sendOTP } = useSendOTP()
   const { t } = useTranslation()
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const [countdown, setCountdown] = useState(60)
   const [isResendEnabled, setIsResendEnabled] = useState(false)
 
@@ -29,7 +29,7 @@ export default function ResendOTP() {
   }, [countdown])
 
   const handleClick = async () => {
-    await sendOTP({ phone: userTable?.phone })
+    await sendOTP({ phone: user?.phone })
     setCountdown(60)
     setIsResendEnabled(false)
   }

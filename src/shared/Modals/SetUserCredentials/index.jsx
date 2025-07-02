@@ -18,7 +18,7 @@ import { setPhoneModal } from 'app/lib/features/auth/auth.slice'
 import {
   selectAgent,
   selectGeo,
-  selectUserTable,
+  selectUser,
 } from 'app/lib/features/auth/auth.selector'
 import { toast } from 'sonner'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
@@ -32,7 +32,7 @@ function SetUserCredentials() {
   const { phoneModal, fingerprint } = useSelector((store) => store.auth)
   const { t } = useTranslation()
   const { data: session } = useSession()
-  const user = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const agent = useSelector(selectAgent)
   const geo = useSelector(selectGeo)
   const [phone, setPhone] = useState('')

@@ -9,11 +9,11 @@ export const useCreateBannerView = () => {
   const { t } = useTranslation()
 
   const createBannerView = useCallback(
-    async ({ banner_id, userTable, geo, agent }) => {
+    async ({ banner_id, user, geo, agent }) => {
       setIsLoading(false)
       setError(null)
 
-      if (!userTable?.id) {
+      if (!user?.id) {
         setError('User not found')
         toast.error('User not found')
         return
@@ -36,7 +36,7 @@ export const useCreateBannerView = () => {
 
         const { error } = await supabase
           .from('banner_view')
-          .insert({ banner_id, geo: geo, agent: agent, user_id: userTable.id })
+          .insert({ banner_id, geo: geo, agent: agent, user_id: user.id })
 
         if (error) {
           setError(

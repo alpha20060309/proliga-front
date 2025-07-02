@@ -29,7 +29,7 @@ import {
   selectCurrentPackage,
   selectPackages,
 } from 'app/lib/features/package/package.selector'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'app/lib/features/auth/auth.selector'
 import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
 import { use } from 'react'
 const ConfirmPayment = ({ params }) => {
@@ -45,14 +45,14 @@ const ConfirmPayment = ({ params }) => {
   const currentTeam = useSelector(selectCurrentTeam)
   const currentTour = useSelector(selectCurrentTour)
   const currentCompetition = useSelector(selectCurrentCompetition)
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
 
   useEffect(() => {
     if (
       !currentTeam?.id ||
       !currentTour?.id ||
       !currentCompetition?.id ||
-      !userTable?.id
+      !user?.id
     ) {
       toast.info(t('Iltimos, avval jamoani tanlang!'))
       router.push('/championships')
@@ -62,7 +62,7 @@ const ConfirmPayment = ({ params }) => {
     currentTour?.id,
     currentCompetition?.id,
     router,
-    userTable?.id,
+    user?.id,
     t,
   ])
 

@@ -10,13 +10,13 @@ export const useBuyPackageWithPayme = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   const buyPackageWithPayme = useCallback(
-    ({ userTable, currentPackage, currentTeam, lang }) => {
+    ({ user, currentPackage, currentTeam, lang }) => {
       // eslint-disable-next-line no-undef
       const RETURN_URL = process.env.NEXT_PUBLIC_URL
       setIsLoading(false)
       setError(null)
 
-      if (!userTable?.id) {
+      if (!user?.id) {
         setError('User not found')
         toast.error('User not found')
         return

@@ -10,7 +10,7 @@ export const useBuyPackageWithClick = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   const buyPackageWithClick = useCallback(
-    ({ userTable, currentPackage, currentTeam }) => {
+    ({ user, currentPackage, currentTeam }) => {
       // eslint-disable-next-line no-undef
       const SERVICE_ID = process.env.NEXT_PUBLIC_CLICK_EXPENSE_SERVICE_ID
       // eslint-disable-next-line no-undef
@@ -20,7 +20,7 @@ export const useBuyPackageWithClick = () => {
       setIsLoading(false)
       setError(null)
 
-      if (!userTable?.id) {
+      if (!user?.id) {
         setError('User not found')
         toast.error('User not found')
         return
