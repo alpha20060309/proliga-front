@@ -7,7 +7,7 @@ initializeFirebaseAdmin();
 export async function POST(request) {
     try {
         const { token, data } = await request.json();
-        console.log("token-api", token);
+
         if (!token) {
             return NextResponse.json(
                 { success: false, message: "FCM token is required" },
@@ -18,16 +18,15 @@ export async function POST(request) {
         const message = {
             token,
             data: {
-                title: JSON.stringify(data?.title) || '',
-                body: JSON.stringify(data?.body) || '',
-                icon: JSON.stringify(data?.icon) || '',
-                image: JSON.stringify(data?.image) || '',
+                title: data?.title || '',
+                body: data?.body || '',
+                icon: data?.icon || '',
+                image: data?.image || '',
                 actions: JSON.stringify(data?.actions) || '',
                 vibrate: JSON.stringify(data?.vibrate) || '',
                 requireInteraction: JSON.stringify(data?.requireInteraction) || '',
             },
         };
-        console.log("message", message);
 
         const response = await getMessaging().send(message);
 

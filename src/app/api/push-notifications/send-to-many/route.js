@@ -7,7 +7,7 @@ initializeFirebaseAdmin();
 export async function POST(request) {
     try {
         const { tokens, data } = await request.json();
-        console.log("tokens-api", tokens);
+
         if (!tokens || !Array.isArray(tokens) || tokens.length === 0) {
             return NextResponse.json(
                 { success: false, message: "Array of FCM tokens is required" },
@@ -18,19 +18,17 @@ export async function POST(request) {
         const message = {
             tokens,
             data: {
-                title: JSON.stringify(data?.title) || '',
-                body: JSON.stringify(data?.body) || '',
-                icon: JSON.stringify(data?.icon) || '',
-                image: JSON.stringify(data?.image) || '',
+                title: data?.title || '',
+                body: data?.body || '',
+                icon: data?.icon || '',
+                image: data?.image || '',
                 actions: JSON.stringify(data?.actions) || '',
                 vibrate: JSON.stringify(data?.vibrate) || '',
                 requireInteraction: JSON.stringify(data?.requireInteraction) || '',
             },
         };
-        console.log("message", message);
 
         const response = await getMessaging().sendEachForMulticast(message);
-        console.log("response", response);
 
         const failedTokens = [];
         if (response.failureCount > 0) {
@@ -39,7 +37,6 @@ export async function POST(request) {
                     failedTokens.push(tokens[idx]);
                 }
             });
-            console.log('List of tokens that caused failures:', failedTokens);
         }
 
         return NextResponse.json({
@@ -50,7 +47,6 @@ export async function POST(request) {
             failedTokens,
         });
     } catch (error) {
-        console.log(error);
         return NextResponse.json(
             {
                 success: false,

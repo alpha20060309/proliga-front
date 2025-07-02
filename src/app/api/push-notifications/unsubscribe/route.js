@@ -7,7 +7,7 @@ initializeFirebaseAdmin()
 
 export async function POST(request) {
   try {
-    const { token, topic, user_id } = await request.json()
+    const { token, topic, user_id, fingerprint } = await request.json()
 
     if (!token || !topic) {
       return NextResponse.json(
@@ -22,40 +22,44 @@ export async function POST(request) {
       )
     }
 
-    await getMessaging().unsubscribeFromTopic(token, topic)
-
-    // Get notification topics
-    const { data: tokens, error } = await supabase
+    const { data: user_token, error } = await supabase
       .from('user_token')
       .select('*')
       .eq('user_id', user_id)
+      .eq('fingerprint', fingerprint)
+      .single()
 
-    if (error) {
+    if (error && error.code !== 'PGRST116') {
       return NextResponse.json(
         { success: false, message: 'Error getting user notification topics' },
         { status: 500 }
       )
     }
 
-    console.log(tokens)
-
-    if (!tokens) {
+    if (!user_token?.id) {
       return NextResponse.json(
-        { success: false, message: 'Error getting user notification topics' },
-        { status: 500 }
+        { success: false, message: 'User token not found' },
+        { status: 404 }
       )
     }
 
-    let topics = JSON.parse(tokens.notification_topics || '[]')
-    topics = topics.filter((t) => t !== topic)
+    const newTopics = (user_token.topics || []).filter(t => t !== topic)
 
-    console.log(topics)
-    await supabase
+    const { error: updateError } = await supabase
       .from('user_token')
       .update({
-        notification_topics: topics,
+        topics: newTopics,
       })
-      .eq('user_id', user_id)
+      .eq('id', user_token.id)
+
+    if (updateError) {
+      return NextResponse.json(
+        { success: false, message: 'Error updating user token' },
+        { status: 500 }
+      )
+    }
+
+    await getMessaging().unsubscribeFromTopic(token, topic)
 
     return NextResponse.json({
       success: true,
