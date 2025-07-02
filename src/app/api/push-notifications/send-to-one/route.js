@@ -6,7 +6,7 @@ initializeFirebaseAdmin();
 
 export async function POST(request) {
     try {
-        const { token, title, body, data } = await request.json();
+        const { token, data } = await request.json();
         console.log("token-api", token);
         if (!token) {
             return NextResponse.json(
@@ -17,15 +17,19 @@ export async function POST(request) {
 
         const message = {
             token,
-            notification: {
-                title,
-                body,
+            data: {
+                title: JSON.stringify(data?.title) || '',
+                body: JSON.stringify(data?.body) || '',
+                icon: JSON.stringify(data?.icon) || '',
+                image: JSON.stringify(data?.image) || '',
+                actions: JSON.stringify(data?.actions) || '',
+                vibrate: JSON.stringify(data?.vibrate) || '',
+                requireInteraction: JSON.stringify(data?.requireInteraction) || '',
             },
-            data: data || {},
         };
-        console.log('message', message)
+        console.log("message", message);
+
         const response = await getMessaging().send(message);
-        console.log("response", response);
 
         return NextResponse.json({
             success: true,

@@ -1,6 +1,5 @@
-// eslint-disable-next-line no-undef
+/* eslint-disable no-undef */
 importScripts("https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js");
-// eslint-disable-next-line no-undef
 importScripts("https://www.gstatic.com/firebasejs/9.23.0/firebase-messaging-compat.js");
 
 const firebaseConfig = {
@@ -12,21 +11,48 @@ const firebaseConfig = {
   appId: "1:892756456327:web:e3784f6a6ee90b242a9922",
   measurementId: "G-V9T9SPRXYJ",
 };
-console.log('firebaseConfig', firebaseConfig)
-// eslint-disable-next-line no-undef
+
 firebase.initializeApp(firebaseConfig);
-// eslint-disable-next-line no-undef
+
 const messaging = firebase.messaging();
 
+const parseJSON = (v) => { try { return v ? JSON.parse(v) : undefined; } catch { return undefined; } };
+const parseBool = (v, d = false) => v === 'true' ? true : v === 'false' ? false : d;
+
 messaging.onBackgroundMessage((payload) => {
-  console.log(
-    "[firebase-messaging-sw.js] Received background message ",
-    payload
-  );
-  const notificationTitle = payload.notification.title;
-  const notificationOptions = {
-    body: payload.notification.body,
-    icon: "./favicon-32x32.png",
+  //  --- split title from the other keys
+  const { title = '', ...raw } = payload.data || {};
+  console.log("title", title);
+  const options = {
+    body: raw.body,
+    icon: raw.icon,
+    image: raw.image,
+    badge: raw.badge,
+    sound: raw.sound,
+    tag: raw.tag,
+
+    // values that need conversion
+    actions: parseJSON(raw.actions),          // JSON string → array
+    vibrate: parseJSON(raw.vibrate),          // JSON string → array
+    requireInteraction: parseBool(raw.requireInteraction),
+    renotify: parseBool(raw.renotify),
   };
-  self.registration.showNotification(notificationTitle, notificationOptions);
+
+  self.registration.showNotification(title, options);
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+
+  const url = event.action === 'open'
+    ? 'https://your.site/specific-page'
+    : '/';
+
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true })
+      .then(winList => {
+        for (const w of winList) { if (w.url === url && 'focus' in w) return w.focus(); }
+        if (clients.openWindow) return clients.openWindow(url);
+      })
+  );
 });
