@@ -144,6 +144,7 @@ export default function PlayLayout({ children }) {
   if (isLoading) {
     return <Spinner />
   }
+  
   return (
     <main className="text-foreground bg-background relative flex min-h-[85vh] 2xl:min-h-[80vh] flex-col gap-4 overflow-hidden pt-14 pb-2">
       <div aria-hidden="true" className="absolute inset-0 z-0 h-full w-full">
