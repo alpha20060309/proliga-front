@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "./generated"
 }
 
 datasource db {
@@ -880,7 +879,6 @@ model user {
   updated_by                                       Int?
   deleted_by                                       Int?
   language                                         language?             @default(uz)
-  ntf_enabled                                      Boolean?              @default(true)
   phone_verified                                   Boolean?              @default(false)
   visitor                                          String?               @db.VarChar(32)
   visited_at                                       DateTime?             @db.Timestamptz(6)

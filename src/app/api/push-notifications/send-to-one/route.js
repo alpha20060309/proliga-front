@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getMessaging } from "firebase-admin/messaging";
-import { initializeFirebaseAdmin } from "@/lib/firebase-admin";
+import { initializeFirebaseAdmin } from "app/lib/firebase/firebase-admin";
 
 initializeFirebaseAdmin();
 
