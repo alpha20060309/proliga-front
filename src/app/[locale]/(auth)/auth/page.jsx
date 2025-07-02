@@ -15,7 +15,7 @@ const SignUpForm = dynamic(() => import('./components/SignUpForm'), {
   ssr: false,
   loading: () => <SignUpFormSkeleton />,
 })
-import SetUserCredentials from 'shared/Modals/SetUserCredentials'
+import SetUserCredentials from './components/SetUserCredentials'
 const LoginForm = dynamic(() => import('./components/LoginForm'), {
   ssr: false,
   loading: () => <LoginFormSkeleton />,

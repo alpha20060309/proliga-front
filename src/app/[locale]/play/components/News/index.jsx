@@ -11,7 +11,7 @@ import { selectNews } from 'app/lib/features/news/news.selector'
 import { Button } from '@/components/ui/button'
 import { RefreshCcw, Newspaper } from 'lucide-react'
 import Article from './Article'
-import NewsArticle from 'shared/Modals/NewsArticle'
+import NewsArticle from './NewsArticle'
 import {
   Card,
   CardContent,

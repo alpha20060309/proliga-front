@@ -12,7 +12,7 @@ export const GameBriefContainer = ({ children, isLoading, className }) => {
     >
       <CardContent
         className={cn(
-          'animate-in fade-in flex h-full w-full flex-col justify-between gap-4 duration-300 xl:gap-6 2xl:gap-8',
+          'animate-in fade-in flex h-full w-full flex-col justify-between gap-4 lg:gap-5 xl:gap-6  duration-300 ',
           isLoading ? 'justify-center' : 'justify-between'
         )}
       >
@@ -24,7 +24,7 @@ export const GameBriefContainer = ({ children, isLoading, className }) => {
 
 export const Section = ({ children, className }) => {
   return (
-    <div className={cn('flex flex-col gap-2 pb-2', className)}>{children}</div>
+    <div className={cn('flex flex-col gap-2  pb-4 lg:pb-5 xl:pb-6 last:pb-0', className)}>{children}</div>
   )
 }
 export const Item = ({ children, className }) => {

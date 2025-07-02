@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { useSelector } from 'react-redux'
 import { selectUser } from 'app/lib/features/auth/auth.selector'
-import ConfirmOTP from 'shared/Modals/ConfirmOTP'
+import ConfirmOTP from '../ConfirmOTP'
 import { useSendOTP } from 'app/hooks/auth/useSendOTP'
 import { resetPassword } from 'app/actions/resetPassword.action'
 

@@ -14,7 +14,7 @@ import {
 } from 'app/lib/features/auth/auth.selector'
 import { PhoneInput } from 'components/PhoneInput'
 import { useAuthChangePhone } from 'app/hooks/auth/useAuthChangePhone'
-import ConfirmOTP from 'shared/Modals/ConfirmOTP'
+import ConfirmOTP from '../ConfirmOTP'
 import { toast } from 'sonner'
 
 export default function ChangePhoneForm() {

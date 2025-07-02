@@ -1,6 +1,6 @@
 'use client'
 
-import ForgotPassword from 'shared/Modals/ForgotPassword'
+import ForgotPassword from '../ForgotPassword'
 import SocialLogin from '../SocialLogin'
 import { toast } from 'sonner'
 import { useState, memo, useTransition } from 'react'

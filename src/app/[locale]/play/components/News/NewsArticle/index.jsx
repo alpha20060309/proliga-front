@@ -28,7 +28,7 @@ function NewsArticle() {
 
   return (
     <Dialog open={isModalOpen && currentNews?.id} onOpenChange={setModalOpen}>
-      <DialogContent className="w-full max-w-4xl rounded-xl px-2 py-4 md:p-4 2xl:max-w-5xl">
+      <DialogContent className="w-full max-w-4xl sm:max-w-4xl rounded-xl px-2 py-4 md:p-4 2xl:max-w-5xl">
         <DialogTitle className="mr-7 text-xl leading-tight font-medium tracking-wide">
           {getCorrectName({
             lang,

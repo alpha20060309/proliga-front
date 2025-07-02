@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { ArrowUpCircle } from 'lucide-react'
-import RefillBalanceModal from 'shared/Modals/RefillBalance'
+import RefillBalanceModal from 'shared/RefillBalanceModal'
 import { useState } from 'react'
 import { Wallet } from 'lucide-react'
 

@@ -1,6 +1,6 @@
 'use client'
 
-import Confirmation from 'shared/Modals/Confirmation'
+import Confirmation from 'components/ConfirmationModal'
 import Image from 'next/image'
 import { useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
