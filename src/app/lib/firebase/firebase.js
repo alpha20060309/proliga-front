@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { getMessaging, getToken, onMessage } from 'firebase/messaging'
+import { getMessaging, getToken } from 'firebase/messaging'
 /* eslint-disable no-undef */
 export const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || '',
@@ -37,22 +37,6 @@ export async function initializeFirebase() {
     validateFirebaseConfig()
     const app = initializeApp(firebaseConfig)
     messaging = getMessaging(app)
-
-    onMessage(messaging, (payload) => {
-      console.log('[foreground] ', payload)
-
-      if (payload?.notification) {
-        new Notification(payload.notification.title, {
-          body: payload.notification.body,
-          icon: '/favicon.png',
-        })
-      } else if (payload?.data) {
-        new Notification(payload.data.title, {
-          body: payload.data.body,
-          icon: '/favicon.png',
-        })
-      }
-    })
 
     // await navigator.serviceWorker.register("/firebase-messaging-sw.js");
 
