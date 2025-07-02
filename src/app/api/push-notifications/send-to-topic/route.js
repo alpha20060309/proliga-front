@@ -6,8 +6,8 @@ initializeFirebaseAdmin();
 
 export async function POST(request) {
     try {
-        const { topic, title, body, data } = await request.json();
-
+        const { topic, data } = await request.json();
+        console.log("topic-api", topic);
         if (!topic) {
             return NextResponse.json(
                 { success: false, message: "Topic is required" },
@@ -17,12 +17,17 @@ export async function POST(request) {
 
         const message = {
             topic,
-            notification: {
-                title,
-                body,
+            data: {
+                title: JSON.stringify(data?.title) || '',
+                body: JSON.stringify(data?.body) || '',
+                icon: JSON.stringify(data?.icon) || '',
+                image: JSON.stringify(data?.image) || '',
+                actions: JSON.stringify(data?.actions) || '',
+                vibrate: JSON.stringify(data?.vibrate) || '',
+                requireInteraction: JSON.stringify(data?.requireInteraction) || '',
             },
-            data: data || {},
         };
+        console.log("message", message);
 
         const response = await getMessaging().send(message);
 
@@ -32,14 +37,14 @@ export async function POST(request) {
             messageId: response,
         });
     } catch (error) {
-        console.error("Error sending push notification to topic:", error);
+        console.log(error)
         return NextResponse.json(
             {
                 success: false,
                 message:
                     error instanceof Error
                         ? error.message
-                        : "An error occurred sending notification to topic",
+                        : "An error occurred sending notification",
             },
             { status: 500 }
         );
