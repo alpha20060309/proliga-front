@@ -42,9 +42,9 @@ export async function POST(request) {
       )
     }
 
-    let topics = JSON.parse(user.ntf_topics || '[]')
-    topics.push(topic)
-    topics = [...new Set(topics)]
+    // let topics = JSON.parse(user.ntf_topics || '[]')
+    // topics.push(topic)
+    // topics = [...new Set(topics)]
 
     await prisma.user.update({
       where: {
@@ -52,7 +52,6 @@ export async function POST(request) {
         deleted_at: null,
       },
       data: {
-        ntf_topics: JSON.stringify(topics),
       },
     })
 

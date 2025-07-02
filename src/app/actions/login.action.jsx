@@ -30,8 +30,8 @@ export const login = async (values) => {
     await prisma.user.update({
       where: { id: existingUser.id, deleted_at: null },
       data: {
-        geo: JSON.stringify(data?.geo),
-        agent: JSON.stringify(data?.agent),
+        geo: data?.geo,
+        agent: data?.agent,
         visitor: data?.fingerprint,
         visited_at: new Date(),
       },

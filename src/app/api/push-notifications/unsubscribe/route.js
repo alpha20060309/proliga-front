@@ -52,7 +52,6 @@ export async function POST(request) {
         deleted_at: null,
       },
       data: {
-        ntf_topics: JSON.stringify(topics),
       },
     })
 

@@ -10,6 +10,8 @@ const FirebaseProvider = ({ children }) => {
 
   useEffect(() => {
     const initializeNotifications = async () => {
+      if (!user?.id) return
+
       await initializeFirebase()
       if (Notification.permission === 'granted') {
         const token = await getFirebaseToken()
@@ -18,7 +20,7 @@ const FirebaseProvider = ({ children }) => {
     }
 
     initializeNotifications()
-  }, [])
+  }, [user?.id])
 
   return <>{children}</>
 }

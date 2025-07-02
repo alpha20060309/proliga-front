@@ -75,8 +75,8 @@ export const useAuthChangePhone = () => {
         const obj = {
           visitor: fingerprint,
           visited_at: new Date(),
-          geo: JSON.stringify(geo),
-          agent: JSON.stringify(agent),
+          geo,
+          agent,
           phone_new,
         }
         const { error: fullUserError } = await supabase
