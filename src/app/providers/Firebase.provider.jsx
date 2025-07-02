@@ -12,10 +12,8 @@ const FirebaseProvider = ({ children }) => {
     const initializeNotifications = async () => {
       await initializeFirebase()
       if (Notification.permission === 'granted') {
-        const savedToken = localStorage.getItem('fcm_token')
-        if (savedToken) return
         const token = await getFirebaseToken()
-        localStorage.setItem('fcm_token', token)
+        console.log('token', token)
       }
     }
 

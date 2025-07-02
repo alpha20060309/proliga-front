@@ -39,7 +39,19 @@ export async function initializeFirebase() {
     messaging = getMessaging(app)
 
     onMessage(messaging, (payload) => {
-      console.log('message', payload)
+      console.log('[foreground] ', payload)
+
+      if (payload?.notification) {
+        new Notification(payload.notification.title, {
+          body: payload.notification.body,
+          icon: '/favicon.png',
+        })
+      } else if (payload?.data) {
+        new Notification(payload.data.title, {
+          body: payload.data.body,
+          icon: '/favicon.png',
+        })
+      }
     })
 
     // await navigator.serviceWorker.register("/firebase-messaging-sw.js");
