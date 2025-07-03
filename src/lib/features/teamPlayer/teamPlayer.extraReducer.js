@@ -50,7 +50,7 @@ export const teamPlayerExtraReducer = (builder) => {
       state.isLoading = false
     })
     .addCase(fetchTeamPlayers.rejected, (state, action) => {
-      state.error = action?.payload?.error ?? null
+      state.error = action?.error ?? null
       state.isLoading = false
     })
 }

@@ -25,6 +25,6 @@ export const fetchFirebaseToken = createAsyncThunk(
       throw error
     }
 
-    return data
+    return { data }
   }
 )

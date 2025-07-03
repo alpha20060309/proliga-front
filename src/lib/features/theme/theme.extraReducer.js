@@ -11,7 +11,7 @@ export const themeExtraReducer = (builder) => {
       state.isLoading = false
     })
     .addCase(fetchThemes.rejected, (state, action) => {
-      state.error = action?.error?.message
+      state.error = action?.error
       state.isLoading = false
     })
     .addCase(fetchUserThemes.pending, (state) => {
@@ -23,7 +23,7 @@ export const themeExtraReducer = (builder) => {
       state.isLoading = false
     })
     .addCase(fetchUserThemes.rejected, (state, action) => {
-      state.error = action?.error?.message
+      state.error = action?.error
       state.isLoading = false
     })
 }

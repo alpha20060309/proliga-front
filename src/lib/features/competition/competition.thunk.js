@@ -10,6 +10,10 @@ export const fetchCompetition = createAsyncThunk(
       .is('deleted_at', null)
       .order('order')
 
-    return { data, error }
+    if (error) {
+      throw error
+    }
+
+    return { data }
   }
 )

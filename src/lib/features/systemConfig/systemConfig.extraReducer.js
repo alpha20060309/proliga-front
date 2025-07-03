@@ -19,6 +19,6 @@ export const systemConfigExtraReducer = (builder) => {
     })
     .addCase(fetchSystemConfig.rejected, (state, action) => {
       state.isLoading = false
-      state.error = action?.payload?.error ?? null
+      state.error = action?.error ?? null
     })
 }

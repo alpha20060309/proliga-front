@@ -33,7 +33,7 @@ export const toursExtraReducer = (builder) => {
       state.isLoading = false
     })
     .addCase(fetchTours.rejected, (state, action) => {
-      state.error = action?.error?.message ?? null
+      state.error = action?.error ?? null
       state.isLoading = false
     })
     .addCase(fetchTeamViewTours.pending, (state) => {
@@ -74,7 +74,7 @@ export const toursExtraReducer = (builder) => {
       state.isLoading = false
     })
     .addCase(fetchTeamViewTours.rejected, (state, action) => {
-      state.error = action?.error?.message ?? null
+      state.error = action?.error ?? null
       state.isLoading = false
     })
 }

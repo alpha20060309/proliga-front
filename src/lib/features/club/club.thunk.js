@@ -11,6 +11,10 @@ export const fetchClubs = createAsyncThunk(
       .order('name')
       .is('deleted_at', null)
 
-    return { data, error }
+    if (error) {
+      throw error
+    }
+
+    return { data }
   }
 )

@@ -11,7 +11,11 @@ export const fetchBroadcastNotifications = createAsyncThunk(
       .is('deleted_at', null)
       .order('created_at', { ascending: true })
 
-    return { data, error }
+    if (error) {
+      throw error
+    }
+
+    return { data }
   }
 )
 
@@ -25,6 +29,10 @@ export const fetchPersonalNotifications = createAsyncThunk(
       .is('deleted_at', null)
       .order('created_at', { ascending: true })
 
-    return { data, error }
+    if (error) {
+      throw error
+    }
+
+    return { data }
   }
 )

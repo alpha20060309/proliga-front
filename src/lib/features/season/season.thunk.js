@@ -8,5 +8,9 @@ export const fetchSeason = createAsyncThunk('season/fetchSeason', async () => {
     .eq('active', 'TRUE')
     .is('deleted_at', null)
 
-  return { data, error }
+  if (error) {
+    throw error
+  }
+
+  return { data }
 })

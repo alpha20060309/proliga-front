@@ -15,5 +15,9 @@ export const fetchBanners = createAsyncThunk('banner/fetchBanner', async () => {
     .in('banner_type', bannerPositions)
     .in('type', bannerTypes)
 
-  return { data, error }
+  if (error) {
+    throw error
+  }
+
+  return { data }
 })

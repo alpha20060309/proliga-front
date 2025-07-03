@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { supabase } from 'lib/supabaseClient'
 
 export const fetchUserTeams = createAsyncThunk(
-  'teams/fetchTeams',
+  'team/fetchTeams',
   async ({ user_id, season_id }) => {
     const { data, error } = await supabase
       .from('team')
@@ -11,23 +11,31 @@ export const fetchUserTeams = createAsyncThunk(
       .eq('season_id', season_id)
       .is('deleted_at', null)
 
-    return { data, error }
+    if (error) {
+      throw error
+    }
+
+    return { data }
   }
 )
 
 export const fetchTopTeams = createAsyncThunk(
-  'teams/fetchTopTeams',
+  'team/fetchTopTeams',
   async ({ competition_id }) => {
     const { data, error } = await supabase.rpc('get__team_point_desc', {
       comp_id: competition_id,
     })
 
-    return { data, error }
+    if (error) {
+      throw error
+    }
+
+    return { data }
   }
 )
 
 export const fetchAllTeams = createAsyncThunk(
-  'teams/fetchAllTeams',
+  'team/fetchAllTeams',
   async ({ season_id, competition_id, page, perPage, tour_id }) => {
     let from = page * perPage
     let to = from + perPage - 1
@@ -47,12 +55,16 @@ export const fetchAllTeams = createAsyncThunk(
       })
       .range(from, to)
 
-    return { data, error, count }
+    if (error) {
+      throw error
+    }
+
+    return { data, count }
   }
 )
 
 export const searchAllTeams = createAsyncThunk(
-  'teams/searchAllTeams',
+  'team/searchAllTeams',
   async ({ season_id, competition_id, page, perPage, searchTerm, tour_id }) => {
     const from = page * perPage
     const to = from + perPage - 1
@@ -70,6 +82,10 @@ export const searchAllTeams = createAsyncThunk(
       .is('deleted_at', null)
       .ilike('team.name', `%${searchTerm}%`)
 
-    return { data, error, count }
+    if (error) {
+      throw error
+    }
+
+    return { data, count }
   }
 )

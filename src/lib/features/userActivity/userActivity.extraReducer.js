@@ -14,7 +14,7 @@ export const userActivityExtraReducer = (builder) => {
       state.isLoading = false
     })
     .addCase(fetchUserActivity.rejected, (state, action) => {
-      state.error = action?.error?.message ?? null
+      state.error = action?.error ?? null
       state.isLoading = false
     })
 }

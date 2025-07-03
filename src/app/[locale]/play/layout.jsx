@@ -11,7 +11,7 @@ const PlayLayout = async ({ children }) => {
   }
 
   return (
-    <main className="bg-background min-h-screen pb-4">
+    <main suppressHydrationWarning className="bg-background min-h-screen pb-4">
       {children}
       <PlayFooter />
     </main>
