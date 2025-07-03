@@ -11,13 +11,13 @@ const ChampionshipsTitle = dynamic(() => import('./components/Title'), {
 import dynamic from 'next/dynamic'
 import { useEffect, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchUserTeams } from 'app/lib/features/team/team.thunk'
-import { fetchCompetition } from 'app/lib/features/competition/competition.thunk'
-import { selectCompetition } from 'app/lib/features/competition/competition.selector'
-import { fetchSeason } from 'app/lib/features/season/season.thunk'
+import { fetchUserTeams } from 'lib/features/team/team.thunk'
+import { fetchCompetition } from 'lib/features/competition/competition.thunk'
+import { selectCompetition } from 'lib/features/competition/competition.selector'
+import { fetchSeason } from 'lib/features/season/season.thunk'
 import { ChampionshipSkeleton } from './components/Skeleton'
 import { Skeleton } from '@/components/ui/skeleton'
-import { selectUser } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'lib/features/auth/auth.selector'
 
 const Championships = () => {
   const dispatch = useDispatch()

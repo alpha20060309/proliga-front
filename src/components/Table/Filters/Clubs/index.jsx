@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { useSelector } from 'react-redux'
-import { selectClubs } from 'app/lib/features/club/club.selector'
+import { selectClubs } from 'lib/features/club/club.selector'
 import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/ui/button'
 import {
@@ -13,7 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { getCorrectName } from 'utils/getCorrectName.util'
 import { cn } from '@/lib/utils'
 
 const ClubsFilter = ({ column, className }) => {

@@ -8,19 +8,19 @@ import {
 } from 'components/StyledTabs'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { TOUR_STATUS } from 'app/utils/tour.util'
-import { setCurrentTourIndex } from 'app/lib/features/tour/tour.slice'
-import { setCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.slice'
+import { TOUR_STATUS } from 'utils/tour.util'
+import { setCurrentTourIndex } from 'lib/features/tour/tour.slice'
+import { setCurrentTourTeam } from 'lib/features/tourTeam/tourTeam.slice'
 import {
   selectRegisteredTour,
   selectTours,
-} from 'app/lib/features/tour/tour.selector'
-import { emptyTeamPlayers } from 'app/lib/features/teamPlayer/teamPlayer.slice'
+} from 'lib/features/tour/tour.selector'
+import { emptyTeamPlayers } from 'lib/features/teamPlayer/teamPlayer.slice'
 import { tabsClasses } from '@mui/material'
-import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
+import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
 import { useTransitionRouter } from 'next-view-transitions'
-import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
-import { TABS } from 'app/utils/tabs.util'
+import { selectCurrentCompetition } from 'lib/features/competition/competition.selector'
+import { TABS } from 'utils/tabs.util'
 import { usePathname } from 'next/navigation'
 
 export default function TourTabs() {

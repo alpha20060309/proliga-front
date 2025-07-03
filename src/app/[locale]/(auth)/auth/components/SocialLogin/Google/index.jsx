@@ -1,9 +1,9 @@
 import { Button } from '@/components/ui/button'
 import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
-import { SUPABASE_PROVIDERS } from 'app/lib/supabaseClient'
+import { SUPABASE_PROVIDERS } from 'lib/supabaseClient'
 import { signIn } from 'next-auth/react'
-import { selectUser } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'lib/features/auth/auth.selector'
 import { useSelector } from 'react-redux'
 import * as React from 'react'
 

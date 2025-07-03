@@ -10,8 +10,8 @@ import {
   DialogDescription,
 } from '@/components/ui/dialog'
 import { PhoneInput } from 'components/PhoneInput'
-import { useSendOTP } from 'app/hooks/auth/useSendOTP'
-import { useGetUserPhone } from 'app/hooks/user/useGetUserPhone'
+import { useSendOTP } from 'hooks/auth/useSendOTP'
+import { useGetUserPhone } from 'hooks/user/useGetUserPhone'
 import { memo } from 'react'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'

@@ -3,12 +3,12 @@
 import JournalTable from './components/Table'
 import { JournalSkeleton } from './loading'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchUserActivity } from 'app/lib/features/userActivity/userActivity.thunk'
+import { fetchUserActivity } from 'lib/features/userActivity/userActivity.thunk'
 import { useState, useEffect, useMemo } from 'react'
 import { usePathname } from 'next/navigation'
-import { selectUser } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'lib/features/auth/auth.selector'
 import { Pagination } from 'components/Table/Pagination/Server'
-import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
+import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
 import { memo } from 'react'
 
 function Journal() {

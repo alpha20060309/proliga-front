@@ -18,9 +18,9 @@ import Head from 'components/Table/Head'
 import Body from 'components/Table/Body'
 import TanStackPagination from 'components/Table/Pagination/Client'
 import { createColumnHelper } from '@tanstack/react-table'
-import { selectClubs } from 'app/lib/features/club/club.selector'
-import { selectCurrentPlayer } from 'app/lib/features/player/player.selector'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { selectClubs } from 'lib/features/club/club.selector'
+import { selectCurrentPlayer } from 'lib/features/player/player.selector'
+import { getCorrectName } from 'utils/getCorrectName.util'
 
 const columnHelper = createColumnHelper()
 

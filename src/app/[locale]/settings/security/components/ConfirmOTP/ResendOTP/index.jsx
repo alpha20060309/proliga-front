@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
-import { useSendOTP } from 'app/hooks/auth/useSendOTP'
+import { useSendOTP } from 'hooks/auth/useSendOTP'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { cn } from '@/lib/utils'
-import { selectUser } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'lib/features/auth/auth.selector'
 import { RefreshCcw } from 'lucide-react'
 
 export default function ResendOTP() {

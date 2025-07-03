@@ -3,7 +3,7 @@
 import { Link } from 'next-view-transitions'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { PACKAGE_TYPE } from 'app/utils/packages.util'
+import { PACKAGE_TYPE } from 'utils/packages.util'
 import {
   Dialog,
   DialogContent,
@@ -11,7 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import { setBalanceModal } from 'app/lib/features/currentTeam/currentTeam.slice'
+import { setBalanceModal } from 'lib/features/currentTeam/currentTeam.slice'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -21,7 +21,7 @@ import {
   HoverCard,
   HoverCardContent,
 } from '@/components/ui/hover-card'
-import { selectPackages } from 'app/lib/features/package/package.selector'
+import { selectPackages } from 'lib/features/package/package.selector'
 
 const TeamBalanceModal = () => {
   const dispatch = useDispatch()

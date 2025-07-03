@@ -3,8 +3,8 @@ import TeamBalanceModal from './Modal'
 import { MoveUp } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { setBalanceModal } from 'app/lib/features/currentTeam/currentTeam.slice'
-import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
+import { setBalanceModal } from 'lib/features/currentTeam/currentTeam.slice'
+import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
 
 const TeamBalance = () => {
   const dispatch = useDispatch()

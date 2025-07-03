@@ -1,8 +1,8 @@
-import { PAYMENT_OPTIONS } from 'app/utils/paymentOptions.util'
+import { PAYMENT_OPTIONS } from 'utils/paymentOptions.util'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { NumericFormat } from 'react-number-format'
-import { selectUser } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'lib/features/auth/auth.selector'
 import { cn } from '@/lib/utils'
 import { Wallet } from 'lucide-react'
 

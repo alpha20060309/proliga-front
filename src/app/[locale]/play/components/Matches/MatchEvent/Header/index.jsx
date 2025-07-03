@@ -1,8 +1,8 @@
 import { DialogTitle } from '@/components/ui/dialog'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
-import { formatDate } from 'app/utils/formatDate.util'
+import { getCorrectName } from 'utils/getCorrectName.util'
+import { formatDate } from 'utils/formatDate.util'
 import { useSelector } from 'react-redux'
-import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
+import { selectCurrentCompetition } from 'lib/features/competition/competition.selector'
 
 const MatchEventHeader = ({ started_date }) => {
   const { lang } = useSelector((store) => store.systemLanguage)

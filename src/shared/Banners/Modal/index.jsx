@@ -8,16 +8,16 @@ import {
 import YandexAd from '../YandexAd'
 import { Link } from 'next-view-transitions'
 import { useSelector } from 'react-redux'
-import { BANNER, BANNER_SERVICE_TYPE } from 'app/utils/banner.util'
+import { BANNER, BANNER_SERVICE_TYPE } from 'utils/banner.util'
 import { useMemo, useState, useEffect, memo } from 'react'
-import { useCreateBannerView } from 'app/hooks/system/useCreateBannerView'
+import { useCreateBannerView } from 'hooks/system/useCreateBannerView'
 import {
   selectAgent,
   selectGeo,
   selectUser,
-} from 'app/lib/features/auth/auth.selector'
-import { selectBanners } from 'app/lib/features/banner/banner.selector'
-import { getUrl } from 'app/utils/static.util'
+} from 'lib/features/auth/auth.selector'
+import { selectBanners } from 'lib/features/banner/banner.selector'
+import { getUrl } from 'utils/static.util'
 
 const ModalBanner = ({ isModalOpen, setModalOpen }) => {
   const banners = useSelector(selectBanners)

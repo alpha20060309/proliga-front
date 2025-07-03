@@ -1,4 +1,4 @@
-import { PACKAGE_TYPE } from 'app/utils/packages.util'
+import { PACKAGE_TYPE } from 'utils/packages.util'
 import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'

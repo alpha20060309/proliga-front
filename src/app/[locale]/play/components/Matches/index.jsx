@@ -12,14 +12,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { fetchMatches } from 'app/lib/features/match/match.thunk'
+import { fetchMatches } from 'lib/features/match/match.thunk'
 import Match from './Match'
 import MatchSkeleton from './Match/Skeleton'
 import MatchEvent from './MatchEvent'
 import { Pagination } from 'components/Table/Pagination/Server'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
-import { selectMatches } from 'app/lib/features/match/match.selector'
-import { selectTours } from 'app/lib/features/tour/tour.selector'
+import { getCorrectName } from 'utils/getCorrectName.util'
+import { selectMatches } from 'lib/features/match/match.selector'
+import { selectTours } from 'lib/features/tour/tour.selector'
 import { usePathname } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardFooter } from '@/components/ui/card'
 

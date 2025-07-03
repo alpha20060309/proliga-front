@@ -6,7 +6,7 @@ import {
   selectGOA,
   selectMID,
   selectSTR,
-} from 'app/lib/features/teamPlayer/teamPlayer.selector'
+} from 'lib/features/teamPlayer/teamPlayer.selector'
 import {
   PlayersStructureContainer,
   GOAContainer,

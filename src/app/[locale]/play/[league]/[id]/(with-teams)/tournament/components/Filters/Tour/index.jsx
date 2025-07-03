@@ -6,8 +6,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { selectTours } from 'app/lib/features/tour/tour.selector'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { selectTours } from 'lib/features/tour/tour.selector'
+import { getCorrectName } from 'utils/getCorrectName.util'
 import { memo } from 'react'
 
 const TourFilter = memo(({ tour, setTour }) => {

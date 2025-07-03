@@ -7,11 +7,11 @@ import {
 import { CalendarDays, Eye } from 'lucide-react'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { useTranslation } from 'react-i18next'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { getCorrectName } from 'utils/getCorrectName.util'
 import { useDispatch, useSelector } from 'react-redux'
-import { formatDate } from 'app/utils/formatDate.util'
-import { selectCurrentNews } from 'app/lib/features/news/news.selector'
-import { setNewsModal } from 'app/lib/features/news/news.slice'
+import { formatDate } from 'utils/formatDate.util'
+import { selectCurrentNews } from 'lib/features/news/news.selector'
+import { setNewsModal } from 'lib/features/news/news.slice'
 import { memo } from 'react'
 
 function NewsArticle() {

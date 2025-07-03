@@ -11,9 +11,9 @@ import {
   selectAgent,
   selectGeo,
   selectUser,
-} from 'app/lib/features/auth/auth.selector'
+} from 'lib/features/auth/auth.selector'
 import { PhoneInput } from 'components/PhoneInput'
-import { useAuthChangePhone } from 'app/hooks/auth/useAuthChangePhone'
+import { useAuthChangePhone } from 'hooks/auth/useAuthChangePhone'
 import ConfirmOTP from '../ConfirmOTP'
 import { toast } from 'sonner'
 

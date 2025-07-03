@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Link } from 'next-view-transitions'
 import { Separator } from '@/components/ui/separator'
 import { Badge } from '@/components/ui/badge'
-import { PACKAGE_TYPE } from 'app/utils/packages.util'
+import { PACKAGE_TYPE } from 'utils/packages.util'
 
 const PackageContainer = ({ packageType, packages, t }) => {
   const getPackageTitle = (type) => {

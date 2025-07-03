@@ -2,12 +2,12 @@
 
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { getCorrectName } from 'utils/getCorrectName.util'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { getUrl } from 'app/utils/static.util'
+import { getUrl } from 'utils/static.util'
 import { useEffect, useState } from 'react'
-import { supabase } from 'app/lib/supabaseClient'
+import { supabase } from 'lib/supabaseClient'
 import { toast } from 'sonner'
 
 const WinPrizesSlide = () => {

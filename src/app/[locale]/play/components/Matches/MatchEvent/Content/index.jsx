@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion'
 import { useSelector } from 'react-redux'
-import { selectMatchEvents } from 'app/lib/features/matchEvent/matchEvent.selector'
+import { selectMatchEvents } from 'lib/features/matchEvent/matchEvent.selector'
 import MatchEvent from './Event'
 import MatchEventSkeleton from './Skeleton'
 import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { MATCH_STATUS } from 'app/utils/match.util'
-import { selectCurrentMatch } from 'app/lib/features/match/match.selector'
+import { MATCH_STATUS } from 'utils/match.util'
+import { selectCurrentMatch } from 'lib/features/match/match.selector'
 
 const MatchEventContent = () => {
   const { t } = useTranslation()

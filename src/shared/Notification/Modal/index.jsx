@@ -5,7 +5,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { useSelector } from 'react-redux'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { getCorrectName } from 'utils/getCorrectName.util'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { DialogDescription } from '@radix-ui/react-dialog'
 

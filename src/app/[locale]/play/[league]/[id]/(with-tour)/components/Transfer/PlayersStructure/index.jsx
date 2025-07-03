@@ -6,9 +6,9 @@ import {
   selectGOA,
   selectMID,
   selectSTR,
-} from 'app/lib/features/teamPlayer/teamPlayer.selector'
-import { TOUR_STATUS } from 'app/utils/tour.util'
-import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
+} from 'lib/features/teamPlayer/teamPlayer.selector'
+import { TOUR_STATUS } from 'utils/tour.util'
+import { selectCurrentTour } from 'lib/features/tour/tour.selector'
 // import { PlayersStructureContainer, MIDContainer, DEFContainer, STRContainer, GOAContainer } from 'components/Game/Player'
 import {
   PlayersStructureContainer,

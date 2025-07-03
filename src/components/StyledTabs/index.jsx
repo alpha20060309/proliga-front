@@ -1,10 +1,10 @@
 import { Tabs, Tab } from '@mui/material'
 import Box from '@mui/material/Box'
 import { styled } from '@mui/material'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { getCorrectName } from 'utils/getCorrectName.util'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
-import { getTourName } from 'app/utils/tour.util'
+import { getTourName } from 'utils/tour.util'
 
 export const GameTab = ({ item }) => {
   const { lang } = useSelector((state) => state.systemLanguage)

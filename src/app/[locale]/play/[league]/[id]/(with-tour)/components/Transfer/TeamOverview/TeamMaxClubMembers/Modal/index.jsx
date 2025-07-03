@@ -1,6 +1,6 @@
 import { Link } from 'next-view-transitions'
 import { useTranslation } from 'react-i18next'
-import { PACKAGE_TYPE } from 'app/utils/packages.util'
+import { PACKAGE_TYPE } from 'utils/packages.util'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   Dialog,
@@ -14,12 +14,12 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from '@/components/ui/hover-card'
-import { setClubModal } from 'app/lib/features/teamPlayer/teamPlayer.slice'
+import { setClubModal } from 'lib/features/teamPlayer/teamPlayer.slice'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { ArrowRight, Users, InfoIcon } from 'lucide-react'
-import { selectPackages } from 'app/lib/features/package/package.selector'
+import { selectPackages } from 'lib/features/package/package.selector'
 
 const TeamMaxClubMembersModal = () => {
   const dispatch = useDispatch()

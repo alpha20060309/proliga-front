@@ -3,7 +3,7 @@ import { authConfig } from 'auth.config'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import prisma from 'lib/prisma'
 import { getUserById } from 'lib/utils/auth.util'
-import { LANGUAGE } from 'app/utils/languages.util'
+import { LANGUAGE } from 'utils/languages.util'
 
 export const {
   handlers: { GET, POST },

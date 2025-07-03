@@ -1,7 +1,7 @@
-import initTranslations from 'app/lib/i18n'
+import initTranslations from 'lib/i18n'
 import { cache } from 'react'
 import PrizeContainer from './components/PrizeContainer'
-import { supabase } from 'app/lib/supabaseClient'
+import { supabase } from 'lib/supabaseClient'
 
 const fetchCompetitions = cache(async () => {
   const { data: competitions, error } = await supabase

@@ -1,4 +1,4 @@
-import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { getCorrectName } from 'utils/getCorrectName.util'
 import {
   Card,
   CardContent,
@@ -6,7 +6,7 @@ import {
   CardDescription,
 } from '@/components/ui/card'
 import { cache } from 'react'
-import { supabase } from 'app/lib/supabaseClient'
+import { supabase } from 'lib/supabaseClient'
 
 const fetchPrizes = cache(async () => {
   try {

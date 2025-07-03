@@ -8,14 +8,14 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from '@/components/ui/accordion'
-import { colorKeys, toVarName } from 'app/utils/colors.util'
+import { colorKeys, toVarName } from 'utils/colors.util'
 import { useDispatch, useSelector } from 'react-redux'
-import { setLightTheme, setDarkTheme } from 'app/lib/features/theme/theme.slice'
+import { setLightTheme, setDarkTheme } from 'lib/features/theme/theme.slice'
 import { useTranslation } from 'react-i18next'
 import {
   selectDarkTheme,
   selectLightTheme,
-} from 'app/lib/features/theme/theme.selector'
+} from 'lib/features/theme/theme.selector'
 
 const ColorModifier = () => {
   const { resolvedTheme } = useTheme()

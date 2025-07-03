@@ -1,7 +1,7 @@
 import { Link } from 'next-view-transitions'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
-import { PACKAGE_TYPE } from 'app/utils/packages.util'
+import { PACKAGE_TYPE } from 'utils/packages.util'
 import {
   Dialog,
   DialogContent,
@@ -14,12 +14,12 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from '@/components/ui/hover-card'
-import { setTransferModal } from 'app/lib/features/currentTeam/currentTeam.slice'
+import { setTransferModal } from 'lib/features/currentTeam/currentTeam.slice'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { ArrowRight, Zap, InfoIcon } from 'lucide-react'
-import { selectPackages } from 'app/lib/features/package/package.selector'
+import { selectPackages } from 'lib/features/package/package.selector'
 
 const TeamMaxTransfersModal = () => {
   const dispatch = useDispatch()

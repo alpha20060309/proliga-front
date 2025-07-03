@@ -4,7 +4,7 @@ import PromotionGatherPoints from './GatherPoints'
 import PromotionMakeTransfers from './MakeTransfers'
 import PromotionWinPrizes from './WinPrizes'
 import Gutter from 'components/Gutter'
-import initTranslations from 'app/lib/i18n'
+import initTranslations from 'lib/i18n'
 
 const Promotions = async ({ params }) => {
   const { locale } = await params

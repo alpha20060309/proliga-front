@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { PAYMENT_OPTIONS } from 'app/utils/paymentOptions.util'
+import { PAYMENT_OPTIONS } from 'utils/paymentOptions.util'
 import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
 

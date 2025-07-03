@@ -14,17 +14,17 @@ import { Loader2, Mail } from 'lucide-react'
 import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { setPhoneModal } from 'app/lib/features/auth/auth.slice'
+import { setPhoneModal } from 'lib/features/auth/auth.slice'
 import {
   selectAgent,
   selectGeo,
   selectUser,
-} from 'app/lib/features/auth/auth.selector'
+} from 'lib/features/auth/auth.selector'
 import { toast } from 'sonner'
-import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
-import { CONFIG_KEY } from 'app/utils/config.util'
+import { selectSystemConfig } from 'lib/features/systemConfig/systemConfig.selector'
+import { CONFIG_KEY } from 'utils/config.util'
 import { Input } from '@/components/ui/input'
-import { useSetUserCredentials } from 'app/hooks/auth/useSetUserCredentials'
+import { useSetUserCredentials } from 'hooks/auth/useSetUserCredentials'
 import { useSession } from 'next-auth/react'
 
 function SetUserCredentials() {

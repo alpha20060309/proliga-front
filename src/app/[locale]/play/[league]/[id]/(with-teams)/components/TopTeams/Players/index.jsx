@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { useMemo } from 'react'
-import { staticPath } from 'app/utils/static.util'
-import { selectTopPlayers } from 'app/lib/features/player/player.selector'
-import { getUrl } from 'app/utils/static.util'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { staticPath } from 'utils/static.util'
+import { selectTopPlayers } from 'lib/features/player/player.selector'
+import { getUrl } from 'utils/static.util'
+import { getCorrectName } from 'utils/getCorrectName.util'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 const RankingPlayers = () => {

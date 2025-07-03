@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
-import { formatDate } from 'app/utils/formatDate.util'
+import { getCorrectName } from 'utils/getCorrectName.util'
+import { formatDate } from 'utils/formatDate.util'
 
 const NotificationArticle = ({ notification, handleNotificationClick }) => {
   const { lang } = useSelector((store) => store.systemLanguage)

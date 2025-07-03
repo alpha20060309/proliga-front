@@ -8,10 +8,10 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { useSelector } from 'react-redux'
-import { selectUser } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'lib/features/auth/auth.selector'
 import ConfirmOTP from '../ConfirmOTP'
-import { useSendOTP } from 'app/hooks/auth/useSendOTP'
-import { resetPassword } from 'app/actions/resetPassword.action'
+import { useSendOTP } from 'hooks/auth/useSendOTP'
+import { resetPassword } from 'actions/resetPassword.action'
 
 function ChangePasswordForm() {
   const [isModalOpen, setModalOpen] = useState(false)

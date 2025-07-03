@@ -2,12 +2,12 @@
 
 import { Link } from 'next-view-transitions'
 import { useSelector } from 'react-redux'
-import { TABS } from 'app/utils/tabs.util'
+import { TABS } from 'utils/tabs.util'
 import { usePathname } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
-import { TOUR_STATUS } from 'app/utils/tour.util'
-import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
-import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
+import { TOUR_STATUS } from 'utils/tour.util'
+import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
+import { selectCurrentTour } from 'lib/features/tour/tour.selector'
 import { cn } from '@/lib/utils'
 import { useEffect, useState } from 'react'
 

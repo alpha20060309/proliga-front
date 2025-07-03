@@ -1,9 +1,9 @@
 import TeamMaxTransfersModal from './Modal'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { setTransferModal } from 'app/lib/features/currentTeam/currentTeam.slice'
-import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
-import { selectCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.selector'
+import { setTransferModal } from 'lib/features/currentTeam/currentTeam.slice'
+import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
+import { selectCurrentTourTeam } from 'lib/features/tourTeam/tourTeam.selector'
 import MotionNumber from 'components/MotionNumber'
 import { MoveUp } from 'lucide-react'
 

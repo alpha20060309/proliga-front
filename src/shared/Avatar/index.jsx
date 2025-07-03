@@ -1,7 +1,7 @@
-import { selectUser } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'lib/features/auth/auth.selector'
 import { useSelector } from 'react-redux'
 import { User } from 'lucide-react'
-import { getUrl } from 'app/utils/static.util'
+import { getUrl } from 'utils/static.util'
 import { cn } from '../../@/lib/utils'
 
 const Avatar = ({ className }) => {

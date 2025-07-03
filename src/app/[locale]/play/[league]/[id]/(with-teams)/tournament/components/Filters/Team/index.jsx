@@ -1,8 +1,8 @@
 'use client'
 
-import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
-import { resetSearchResults } from 'app/lib/features/team/team.slice'
-import { searchAllTeams } from 'app/lib/features/team/team.thunk'
+import { selectCurrentCompetition } from 'lib/features/competition/competition.selector'
+import { resetSearchResults } from 'lib/features/team/team.slice'
+import { searchAllTeams } from 'lib/features/team/team.thunk'
 import { useState, useCallback, useEffect, useRef, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'

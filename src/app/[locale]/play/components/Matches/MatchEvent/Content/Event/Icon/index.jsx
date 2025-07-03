@@ -1,4 +1,4 @@
-import { MATCH_EVENTS } from 'app/utils/match.util'
+import { MATCH_EVENTS } from 'utils/match.util'
 import { RefreshCcw } from 'lucide-react'
 
 const MatchEventIcon = ({ type }) => {

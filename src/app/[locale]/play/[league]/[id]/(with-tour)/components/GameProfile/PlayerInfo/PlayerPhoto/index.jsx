@@ -1,8 +1,8 @@
 import { DialogTitle } from '@radix-ui/react-dialog'
-import { staticPath, getUrl } from 'app/utils/static.util'
+import { staticPath, getUrl } from 'utils/static.util'
 import { User, DollarSign, Percent } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { getCorrectName } from 'utils/getCorrectName.util'
 import { useSelector } from 'react-redux'
 
 const PlayerPhoto = ({ currentPlayer, position }) => {

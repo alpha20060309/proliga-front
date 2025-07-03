@@ -12,9 +12,9 @@ import Head from 'components/Table/Head'
 import { useSelector } from 'react-redux'
 import { createColumnHelper } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
-import { formatDate } from 'app/utils/formatDate.util'
-import { selectUserActivities } from 'app/lib/features/userActivity/userActivity.selector'
+import { getCorrectName } from 'utils/getCorrectName.util'
+import { formatDate } from 'utils/formatDate.util'
+import { selectUserActivities } from 'lib/features/userActivity/userActivity.selector'
 import { Table } from '@/components/ui/table'
 
 const columnHelper = createColumnHelper()

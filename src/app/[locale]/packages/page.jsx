@@ -1,8 +1,8 @@
 import PackageContainer from './components/Package'
-import initTranslations from 'app/lib/i18n'
-import { PACKAGE_TYPE } from 'app/utils/packages.util'
+import initTranslations from 'lib/i18n'
+import { PACKAGE_TYPE } from 'utils/packages.util'
 import { cache } from 'react'
-import { supabase } from 'app/lib/supabaseClient'
+import { supabase } from 'lib/supabaseClient'
 
 const fetchPackages = cache(async () => {
   const { data: packages, error } = await supabase

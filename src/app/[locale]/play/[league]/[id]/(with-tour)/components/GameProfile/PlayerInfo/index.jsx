@@ -10,10 +10,10 @@ import {
   DialogContent,
   DialogDescription,
 } from '@/components/ui/dialog'
-import { selectPlayerPoint } from 'app/lib/features/playerPoint/playerPoint.selector'
-import { getCorrentPlayerPosition } from 'app/utils/getCorrectPlayerPosition.utils'
-import { setPlayerInfoModal } from 'app/lib/features/teamPlayer/teamPlayer.slice'
-import { selectCurrentPlayer } from 'app/lib/features/player/player.selector'
+import { selectPlayerPoint } from 'lib/features/playerPoint/playerPoint.selector'
+import { getCorrentPlayerPosition } from 'utils/getCorrectPlayerPosition.utils'
+import { setPlayerInfoModal } from 'lib/features/teamPlayer/teamPlayer.slice'
+import { selectCurrentPlayer } from 'lib/features/player/player.selector'
 import { memo } from 'react'
 
 const PlayerInfo = () => {

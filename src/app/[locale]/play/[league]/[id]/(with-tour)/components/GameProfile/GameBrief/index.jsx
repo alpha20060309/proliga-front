@@ -1,22 +1,22 @@
 'use client'
 
-import { formatDate } from 'app/utils/formatDate.util'
+import { formatDate } from 'utils/formatDate.util'
 import { useEffect, useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { TOUR_STATUS } from 'app/utils/tour.util'
+import { TOUR_STATUS } from 'utils/tour.util'
 import { useSelector } from 'react-redux'
 import { toast } from 'sonner'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
-import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
-import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
+import { getCorrectName } from 'utils/getCorrectName.util'
+import { selectCurrentCompetition } from 'lib/features/competition/competition.selector'
+import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
 import {
   selectCurrentTour,
   selectTours,
-} from 'app/lib/features/tour/tour.selector'
+} from 'lib/features/tour/tour.selector'
 import {
   selectCurrentTourTeam,
   selectTourTeams,
-} from 'app/lib/features/tourTeam/tourTeam.selector'
+} from 'lib/features/tourTeam/tourTeam.selector'
 import { Copy } from 'lucide-react'
 import {
   GameBriefContainer,

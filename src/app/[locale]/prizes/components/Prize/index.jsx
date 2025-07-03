@@ -1,5 +1,5 @@
-import { getCorrectName } from 'app/utils/getCorrectName.util'
-import { getUrl } from 'app/utils/static.util'
+import { getCorrectName } from 'utils/getCorrectName.util'
+import { getUrl } from 'utils/static.util'
 import { cn } from '@/lib/utils'
 
 const Prize = ({ prize, locale, t }) => {

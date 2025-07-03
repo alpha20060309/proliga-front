@@ -6,20 +6,20 @@ import {
 } from 'components/StyledTabs'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { TOUR_STATUS } from 'app/utils/tour.util'
-import { setCurrentTourIndex } from 'app/lib/features/tour/tour.slice'
-import { setCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.slice'
+import { TOUR_STATUS } from 'utils/tour.util'
+import { setCurrentTourIndex } from 'lib/features/tour/tour.slice'
+import { setCurrentTourTeam } from 'lib/features/tourTeam/tourTeam.slice'
 import {
   selectCurrentTour,
   selectRegisteredTour,
   selectTours,
-} from 'app/lib/features/tour/tour.selector'
-import { emptyTeamPlayers } from 'app/lib/features/teamPlayer/teamPlayer.slice'
+} from 'lib/features/tour/tour.selector'
+import { emptyTeamPlayers } from 'lib/features/teamPlayer/teamPlayer.slice'
 import { tabsClasses } from '@mui/material'
 import {
   selectCurrentTourTeam,
   selectTourTeams,
-} from 'app/lib/features/tourTeam/tourTeam.selector'
+} from 'lib/features/tourTeam/tourTeam.selector'
 
 export default function TourTabs() {
   const dispatch = useDispatch()

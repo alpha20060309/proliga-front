@@ -5,8 +5,8 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import RefillBalance from 'shared/RefillBalanceModal'
 import { useSelector } from 'react-redux'
-import { CONFIG_KEY } from 'app/utils/config.util'
-import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
+import { CONFIG_KEY } from 'utils/config.util'
+import { selectSystemConfig } from 'lib/features/systemConfig/systemConfig.selector'
 
 const PaymentOptions = ({ paymentOption, setPaymentOption }) => {
   const { t } = useTranslation()
