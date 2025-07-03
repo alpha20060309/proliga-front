@@ -28,7 +28,7 @@ export const useCreateToken = () => {
                 .single()
 
             if (existingToken) {
-                dispatch(setToken(existingToken))
+                dispatch(setToken(existingToken?.token))
                 return 
             }
 
