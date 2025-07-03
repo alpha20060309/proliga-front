@@ -47,6 +47,13 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |   \---lib
 |           utils.js
 |           
++---actions
+|       getHTMLPage.action.jsx
+|       login.action.jsx
+|       register.action.jsx
+|       resetPassword.action.jsx
+|       saveFile.action.jsx
+|       
 +---app
 |   |   error.jsx
 |   |   firebase.json
@@ -56,13 +63,6 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |   |   sitemap.js
 |   |   sw.js
 |   |   
-|   +---actions
-|   |       getHTMLPage.action.jsx
-|   |       login.action.jsx
-|   |       register.action.jsx
-|   |       resetPassword.action.jsx
-|   |       saveFile.action.jsx
-|   |       
 |   +---api
 |   |   +---auth
 |   |   |   \---[...nextauth]
@@ -72,6 +72,20 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |   |   |       route.js
 |   |   |       
 |   |   +---push-notifications
+|   |   |   |   utils.js
+|   |   |   |   
+|   |   |   +---create-user-token
+|   |   |   |       route.js
+|   |   |   |       
+|   |   |   +---send-to-many
+|   |   |   |       route.js
+|   |   |   |       
+|   |   |   +---send-to-one
+|   |   |   |       route.js
+|   |   |   |       
+|   |   |   +---send-to-topic
+|   |   |   |       route.js
+|   |   |   |       
 |   |   |   +---subscribe
 |   |   |   |       route.js
 |   |   |   |       
@@ -96,313 +110,6 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |   |   \---upload-64
 |   |           route.js
 |   |           
-|   +---hooks
-|   |   +---auth
-|   |   |   +---useAuthChangePhone
-|   |   |   |       index.jsx
-|   |   |   |       
-|   |   |   +---useAuthStatus
-|   |   |   |       index.jsx
-|   |   |   |       
-|   |   |   +---useConfirmOTP
-|   |   |   |       index.jsx
-|   |   |   |       
-|   |   |   +---useLogOut
-|   |   |   |       index.jsx
-|   |   |   |       
-|   |   |   +---useSendOTP
-|   |   |   |       index.jsx
-|   |   |   |       
-|   |   |   \---useSetUserCredentials
-|   |   |           index.jsx
-|   |   |           
-|   |   +---payment
-|   |   |   +---useBuyPackageWithClick
-|   |   |   |       index.jsx
-|   |   |   |       
-|   |   |   +---useBuyPackageWithPayme
-|   |   |   |       index.jsx
-|   |   |   |       
-|   |   |   +---useBuyPackageWithWallet
-|   |   |   |       index.jsx
-|   |   |   |       
-|   |   |   +---useRedirectToClick
-|   |   |   |       index.jsx
-|   |   |   |       
-|   |   |   \---useRedirectToPayme
-|   |   |           index.jsx
-|   |   |           
-|   |   +---system
-|   |   |   +---useCreateBannerView
-|   |   |   |       index.jsx
-|   |   |   |       
-|   |   |   +---useGenerateFingerprint
-|   |   |   |       index.jsx
-|   |   |   |       
-|   |   |   +---useGetPage
-|   |   |   |       index.jsx
-|   |   |   |       
-|   |   |   +---useGetUserAgent
-|   |   |   |       index.jsx
-|   |   |   |       
-|   |   |   +---useUpdateNewsView
-|   |   |   |       index.jsx
-|   |   |   |       
-|   |   |   \---useUpdateSearchParams
-|   |   |           index.jsx
-|   |   |           
-|   |   +---theme
-|   |   |   +---useCreatePresetTheme
-|   |   |   |       index.jsx
-|   |   |   |       
-|   |   |   +---useCreateUserTheme
-|   |   |   |       index.jsx
-|   |   |   |       
-|   |   |   +---useResetUserThemes
-|   |   |   |       index.jsx
-|   |   |   |       
-|   |   |   +---useSaveTheme
-|   |   |   |       index.jsx
-|   |   |   |       
-|   |   |   \---useSetThemeDefault
-|   |   |           index.jsx
-|   |   |           
-|   |   +---transfer
-|   |   |   +---useAutoGenerateTeamPlayers
-|   |   |   |       index.jsx
-|   |   |   |       
-|   |   |   +---useCreateTeam
-|   |   |   |       index.jsx
-|   |   |   |       
-|   |   |   +---useUpdateTeam
-|   |   |   |       index.jsx
-|   |   |   |       
-|   |   |   +---useUpdateTeamCaptains
-|   |   |   |       index.jsx
-|   |   |   |       
-|   |   |   +---useUpdateTeamPlayers
-|   |   |   |       index.jsx
-|   |   |   |       
-|   |   |   \---useUpdateTourTeam
-|   |   |           index.jsx
-|   |   |           
-|   |   \---user
-|   |       +---useGetUserPhone
-|   |       |       index.jsx
-|   |       |       
-|   |       +---useUpdateUserData
-|   |       |       index.jsx
-|   |       |       
-|   |       +---useUpdateUserLanguage
-|   |       |       index.jsx
-|   |       |       
-|   |       +---useUpdateUserLocation
-|   |       |       index.jsx
-|   |       |       
-|   |       +---useUpdateUserNotificationInfo
-|   |       |       index.jsx
-|   |       |       
-|   |       \---useUpdateUserPhoto
-|   |               index.jsx
-|   |               
-|   +---lib
-|   |   |   i18n.config.js
-|   |   |   i18n.js
-|   |   |   registerSw.js
-|   |   |   root.reducer.js
-|   |   |   store.global.js
-|   |   |   supabaseClient.js
-|   |   |   
-|   |   +---features
-|   |   |   +---auth
-|   |   |   |       auth.extraReducer.js
-|   |   |   |       auth.selector.js
-|   |   |   |       auth.slice.js
-|   |   |   |       auth.thunk.js
-|   |   |   |       
-|   |   |   +---banner
-|   |   |   |       banner.extraReducer.js
-|   |   |   |       banner.selector.js
-|   |   |   |       banner.slice.js
-|   |   |   |       banner.thunk.js
-|   |   |   |       
-|   |   |   +---club
-|   |   |   |       club.extraReducer.js
-|   |   |   |       club.selector.js
-|   |   |   |       club.slice.js
-|   |   |   |       club.thunk.js
-|   |   |   |       
-|   |   |   +---competition
-|   |   |   |       competition.extraReducer.js
-|   |   |   |       competition.selector.js
-|   |   |   |       competition.slice.js
-|   |   |   |       competition.thunk.js
-|   |   |   |       
-|   |   |   +---currentTeam
-|   |   |   |       currentTeam.extraReducer.js
-|   |   |   |       currentTeam.selector.js
-|   |   |   |       currentTeam.slice.js
-|   |   |   |       currentTeam.thunk.js
-|   |   |   |       
-|   |   |   +---match
-|   |   |   |       match.extraReducer.js
-|   |   |   |       match.selector.js
-|   |   |   |       match.slice.js
-|   |   |   |       match.thunk.js
-|   |   |   |       
-|   |   |   +---matchEvent
-|   |   |   |       matchEvent.extraReducer.js
-|   |   |   |       matchEvent.selector.js
-|   |   |   |       matchEvent.slice.js
-|   |   |   |       matchEvent.thunk.js
-|   |   |   |       
-|   |   |   +---news
-|   |   |   |       news.extraReducer.js
-|   |   |   |       news.selector.js
-|   |   |   |       news.slice.js
-|   |   |   |       news.thunk.js
-|   |   |   |       
-|   |   |   +---package
-|   |   |   |       package.extraReducer.js
-|   |   |   |       package.selector.js
-|   |   |   |       package.slice.js
-|   |   |   |       package.thunk.js
-|   |   |   |       
-|   |   |   +---payBalance
-|   |   |   |       payBalance.extraReducer.js
-|   |   |   |       payBalance.selector.js
-|   |   |   |       payBalance.slice.js
-|   |   |   |       payBalance.thunk.js
-|   |   |   |       
-|   |   |   +---payExpense
-|   |   |   |       payExpense.extraReducer.js
-|   |   |   |       payExpense.selector.js
-|   |   |   |       payExpense.slice.js
-|   |   |   |       payExpense.thunk.js
-|   |   |   |       
-|   |   |   +---player
-|   |   |   |       player.extraReducer.js
-|   |   |   |       player.selector.js
-|   |   |   |       player.slice.js
-|   |   |   |       player.thunk.js
-|   |   |   |       
-|   |   |   +---playerPoint
-|   |   |   |       playerPoint.extraReducer.js
-|   |   |   |       playerPoint.selector.js
-|   |   |   |       playerPoint.slice.js
-|   |   |   |       playerPoint.thunk.js
-|   |   |   |       
-|   |   |   +---season
-|   |   |   |       season.extraReducer.js
-|   |   |   |       season.slice.js
-|   |   |   |       season.thunk.js
-|   |   |   |       
-|   |   |   +---systemConfig
-|   |   |   |       systemConfig.extraReducer.js
-|   |   |   |       systemConfig.selector.js
-|   |   |   |       systemConfig.slice.js
-|   |   |   |       systemConfig.thunk.js
-|   |   |   |       
-|   |   |   +---systemLanguage
-|   |   |   |       systemLanguage.slice.js
-|   |   |   |       
-|   |   |   +---systemNotification
-|   |   |   |       systemNotification.extraReducer.js
-|   |   |   |       systemNotification.selector.js
-|   |   |   |       systemNotification.slice.js
-|   |   |   |       systemNotification.thunk.js
-|   |   |   |       
-|   |   |   +---team
-|   |   |   |       team.extraReducer.js
-|   |   |   |       team.selector.js
-|   |   |   |       team.slice.js
-|   |   |   |       team.thunk.js
-|   |   |   |       
-|   |   |   +---teamPlayer
-|   |   |   |   |   teamPlayer.extraReducer.js
-|   |   |   |   |   teamPlayer.selector.js
-|   |   |   |   |   teamPlayer.slice.js
-|   |   |   |   |   teamPlayer.thunk.js
-|   |   |   |   |   
-|   |   |   |   \---reducers
-|   |   |   |           addTeamPlayerReducer.js
-|   |   |   |           autoAssembleTeamReducer.js
-|   |   |   |           deleteTeamPlayerReducer.js
-|   |   |   |           revertTeamPlayersReducer.js
-|   |   |   |           setCaptainReducer.js
-|   |   |   |           swapTeamPlayerReducer.js
-|   |   |   |           updateTeamPlayerReducer.js
-|   |   |   |           
-|   |   |   +---theme
-|   |   |   |       theme.extraReducer.js
-|   |   |   |       theme.selector.js
-|   |   |   |       theme.slice.js
-|   |   |   |       theme.thunk.js
-|   |   |   |       
-|   |   |   +---tour
-|   |   |   |       tour.extraReducer.js
-|   |   |   |       tour.selector.js
-|   |   |   |       tour.slice.js
-|   |   |   |       tour.thunk.js
-|   |   |   |       
-|   |   |   +---tourTeam
-|   |   |   |       tourTeam.extraReducer.js
-|   |   |   |       tourTeam.selector.js
-|   |   |   |       tourTeam.slice.js
-|   |   |   |       tourTeam.thunk.js
-|   |   |   |       
-|   |   |   \---userActivity
-|   |   |           userActivity.extraReducer.js
-|   |   |           userActivity.selector.js
-|   |   |           userActivity.slice.js
-|   |   |           userActivity.thunk.js
-|   |   |           
-|   |   \---firebase
-|   |           firebase-admin.js
-|   |           firebase.js
-|   |           
-|   +---plugins
-|   |   \---UploadFile
-|   |           UppyServerActionUpload.jsx
-|   |           
-|   +---providers
-|   |       Auth.provider.jsx
-|   |       AuthListener.provider.jsx
-|   |       Firebase.provider.jsx
-|   |       Geolocation.provider.jsx
-|   |       InitialState.provider.jsx
-|   |       Root.provider.jsx
-|   |       Session.provider.jsx
-|   |       Store.provider.jsx
-|   |       Theme.provider.jsx
-|   |       ThemeCustomization.provider.jsx
-|   |       Translations.provider.jsx
-|   |       
-|   +---utils
-|   |       animations.global.css
-|   |       banner.util.js
-|   |       colors.util.js
-|   |       config.util.js
-|   |       default-theme.util.js
-|   |       defaults.global.css
-|   |       fonts.util.js
-|   |       formatCurrency.js
-|   |       formatDate.util.js
-|   |       formations.util.js
-|   |       getCorrectName.util.js
-|   |       getCorrectPlayerPosition.utils.js
-|   |       languages.util.js
-|   |       match.util.js
-|   |       packages.util.js
-|   |       paymentOptions.util.js
-|   |       player.util.js
-|   |       setLanguageCookie.js
-|   |       shadow.utils.js
-|   |       static.util.js
-|   |       tabs.util.js
-|   |       tour.util.js
-|   |       validateTeamName.util.js
-|   |       
 |   \---[locale]
 |       |   layout.jsx
 |       |   loading.jsx
@@ -953,7 +660,271 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |           \---Server
 |                   index.jsx
 |                   
++---hooks
+|   +---auth
+|   |   +---useAuthChangePhone
+|   |   |       index.jsx
+|   |   |       
+|   |   +---useAuthStatus
+|   |   |       index.jsx
+|   |   |       
+|   |   +---useConfirmOTP
+|   |   |       index.jsx
+|   |   |       
+|   |   +---useLogOut
+|   |   |       index.jsx
+|   |   |       
+|   |   +---useSendOTP
+|   |   |       index.jsx
+|   |   |       
+|   |   \---useSetUserCredentials
+|   |           index.jsx
+|   |           
+|   +---payment
+|   |   +---useBuyPackageWithClick
+|   |   |       index.jsx
+|   |   |       
+|   |   +---useBuyPackageWithPayme
+|   |   |       index.jsx
+|   |   |       
+|   |   +---useBuyPackageWithWallet
+|   |   |       index.jsx
+|   |   |       
+|   |   +---useRedirectToClick
+|   |   |       index.jsx
+|   |   |       
+|   |   \---useRedirectToPayme
+|   |           index.jsx
+|   |           
+|   +---system
+|   |   +---useCreateBannerView
+|   |   |       index.jsx
+|   |   |       
+|   |   +---useGenerateFingerprint
+|   |   |       index.jsx
+|   |   |       
+|   |   +---useGetPage
+|   |   |       index.jsx
+|   |   |       
+|   |   +---useGetUserAgent
+|   |   |       index.jsx
+|   |   |       
+|   |   +---useUpdateNewsView
+|   |   |       index.jsx
+|   |   |       
+|   |   \---useUpdateSearchParams
+|   |           index.jsx
+|   |           
+|   +---theme
+|   |   +---useCreatePresetTheme
+|   |   |       index.jsx
+|   |   |       
+|   |   +---useCreateUserTheme
+|   |   |       index.jsx
+|   |   |       
+|   |   +---useResetUserThemes
+|   |   |       index.jsx
+|   |   |       
+|   |   +---useSaveTheme
+|   |   |       index.jsx
+|   |   |       
+|   |   \---useSetThemeDefault
+|   |           index.jsx
+|   |           
+|   +---transfer
+|   |   +---useAutoGenerateTeamPlayers
+|   |   |       index.jsx
+|   |   |       
+|   |   +---useCreateTeam
+|   |   |       index.jsx
+|   |   |       
+|   |   +---useUpdateTeam
+|   |   |       index.jsx
+|   |   |       
+|   |   +---useUpdateTeamCaptains
+|   |   |       index.jsx
+|   |   |       
+|   |   +---useUpdateTeamPlayers
+|   |   |       index.jsx
+|   |   |       
+|   |   \---useUpdateTourTeam
+|   |           index.jsx
+|   |           
+|   \---user
+|       +---useGetUserPhone
+|       |       index.jsx
+|       |       
+|       +---useUpdateUserData
+|       |       index.jsx
+|       |       
+|       +---useUpdateUserLanguage
+|       |       index.jsx
+|       |       
+|       +---useUpdateUserLocation
+|       |       index.jsx
+|       |       
+|       +---useUpdateUserNotificationInfo
+|       |       index.jsx
+|       |       
+|       \---useUpdateUserPhoto
+|               index.jsx
+|               
 +---lib
+|   |   i18n.config.js
+|   |   i18n.js
+|   |   registerSw.js
+|   |   root.reducer.js
+|   |   store.global.js
+|   |   supabaseClient.js
+|   |   
+|   +---features
+|   |   +---auth
+|   |   |       auth.extraReducer.js
+|   |   |       auth.selector.js
+|   |   |       auth.slice.js
+|   |   |       auth.thunk.js
+|   |   |       
+|   |   +---banner
+|   |   |       banner.extraReducer.js
+|   |   |       banner.selector.js
+|   |   |       banner.slice.js
+|   |   |       banner.thunk.js
+|   |   |       
+|   |   +---club
+|   |   |       club.extraReducer.js
+|   |   |       club.selector.js
+|   |   |       club.slice.js
+|   |   |       club.thunk.js
+|   |   |       
+|   |   +---competition
+|   |   |       competition.extraReducer.js
+|   |   |       competition.selector.js
+|   |   |       competition.slice.js
+|   |   |       competition.thunk.js
+|   |   |       
+|   |   +---currentTeam
+|   |   |       currentTeam.extraReducer.js
+|   |   |       currentTeam.selector.js
+|   |   |       currentTeam.slice.js
+|   |   |       currentTeam.thunk.js
+|   |   |       
+|   |   +---match
+|   |   |       match.extraReducer.js
+|   |   |       match.selector.js
+|   |   |       match.slice.js
+|   |   |       match.thunk.js
+|   |   |       
+|   |   +---matchEvent
+|   |   |       matchEvent.extraReducer.js
+|   |   |       matchEvent.selector.js
+|   |   |       matchEvent.slice.js
+|   |   |       matchEvent.thunk.js
+|   |   |       
+|   |   +---news
+|   |   |       news.extraReducer.js
+|   |   |       news.selector.js
+|   |   |       news.slice.js
+|   |   |       news.thunk.js
+|   |   |       
+|   |   +---package
+|   |   |       package.extraReducer.js
+|   |   |       package.selector.js
+|   |   |       package.slice.js
+|   |   |       package.thunk.js
+|   |   |       
+|   |   +---payBalance
+|   |   |       payBalance.extraReducer.js
+|   |   |       payBalance.selector.js
+|   |   |       payBalance.slice.js
+|   |   |       payBalance.thunk.js
+|   |   |       
+|   |   +---payExpense
+|   |   |       payExpense.extraReducer.js
+|   |   |       payExpense.selector.js
+|   |   |       payExpense.slice.js
+|   |   |       payExpense.thunk.js
+|   |   |       
+|   |   +---player
+|   |   |       player.extraReducer.js
+|   |   |       player.selector.js
+|   |   |       player.slice.js
+|   |   |       player.thunk.js
+|   |   |       
+|   |   +---playerPoint
+|   |   |       playerPoint.extraReducer.js
+|   |   |       playerPoint.selector.js
+|   |   |       playerPoint.slice.js
+|   |   |       playerPoint.thunk.js
+|   |   |       
+|   |   +---season
+|   |   |       season.extraReducer.js
+|   |   |       season.slice.js
+|   |   |       season.thunk.js
+|   |   |       
+|   |   +---systemConfig
+|   |   |       systemConfig.extraReducer.js
+|   |   |       systemConfig.selector.js
+|   |   |       systemConfig.slice.js
+|   |   |       systemConfig.thunk.js
+|   |   |       
+|   |   +---systemLanguage
+|   |   |       systemLanguage.slice.js
+|   |   |       
+|   |   +---systemNotification
+|   |   |       systemNotification.extraReducer.js
+|   |   |       systemNotification.selector.js
+|   |   |       systemNotification.slice.js
+|   |   |       systemNotification.thunk.js
+|   |   |       
+|   |   +---team
+|   |   |       team.extraReducer.js
+|   |   |       team.selector.js
+|   |   |       team.slice.js
+|   |   |       team.thunk.js
+|   |   |       
+|   |   +---teamPlayer
+|   |   |   |   teamPlayer.extraReducer.js
+|   |   |   |   teamPlayer.selector.js
+|   |   |   |   teamPlayer.slice.js
+|   |   |   |   teamPlayer.thunk.js
+|   |   |   |   
+|   |   |   \---reducers
+|   |   |           addTeamPlayerReducer.js
+|   |   |           autoAssembleTeamReducer.js
+|   |   |           deleteTeamPlayerReducer.js
+|   |   |           revertTeamPlayersReducer.js
+|   |   |           setCaptainReducer.js
+|   |   |           swapTeamPlayerReducer.js
+|   |   |           updateTeamPlayerReducer.js
+|   |   |           
+|   |   +---theme
+|   |   |       theme.extraReducer.js
+|   |   |       theme.selector.js
+|   |   |       theme.slice.js
+|   |   |       theme.thunk.js
+|   |   |       
+|   |   +---tour
+|   |   |       tour.extraReducer.js
+|   |   |       tour.selector.js
+|   |   |       tour.slice.js
+|   |   |       tour.thunk.js
+|   |   |       
+|   |   +---tourTeam
+|   |   |       tourTeam.extraReducer.js
+|   |   |       tourTeam.selector.js
+|   |   |       tourTeam.slice.js
+|   |   |       tourTeam.thunk.js
+|   |   |       
+|   |   \---userActivity
+|   |           userActivity.extraReducer.js
+|   |           userActivity.selector.js
+|   |           userActivity.slice.js
+|   |           userActivity.thunk.js
+|   |           
+|   +---firebase
+|   |       firebase-admin.js
+|   |       firebase.js
+|   |       
 |   +---prisma
 |   |       index.js
 |   |       
@@ -963,77 +934,119 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |   \---utils
 |           auth.util.js
 |           
-\---shared
-    +---Avatar
-    |       index.jsx
-    |       
-    +---Banners
-    |   +---Big
-    |   |       index.jsx
-    |   |       
-    |   +---LeftSide
-    |   |       index.jsx
-    |   |       
-    |   +---Mini
-    |   |       index.jsx
-    |   |       
-    |   +---Modal
-    |   |       index.jsx
-    |   |       
-    |   +---RightSide
-    |   |       index.jsx
-    |   |       
-    |   \---YandexAd
-    |           index.jsx
-    |           
-    +---Footer
-    |       index.jsx
-    |       
-    +---GameBrief
-    |       index.jsx
-    |       
-    +---Navbar
-    |   |   index.jsx
-    |   |   
-    |   +---Dropdown
-    |   |       index.jsx
-    |   |       
-    |   +---Links
-    |   |       index.jsx
-    |   |       
-    |   +---Logo
-    |   |       index.jsx
-    |   |       
-    |   \---Mobile
-    |           index.jsx
-    |           
-    +---Notification
-    |   |   index.jsx
-    |   |   
-    |   +---Modal
-    |   |       index.jsx
-    |   |       
-    |   \---NotificationArticle
-    |           index.jsx
-    |           
-    +---RefillBalanceModal
-    |       index.jsx
-    |       
-    +---SwitcherLanguage
-    |       index.jsx
-    |       
-    +---SwitcherTheme
-    |       index.jsx
-    |       
-    \---ThemeCustomizer
-        |   index.jsx
-        |   
-        \---components
-                ColorModifier.jsx
-                CreateThemeModal.jsx
-                FontModifer.jsx
-                GlobalModifier.jsx
-                SelectTheme.jsx
-                ShadowsModifier.jsx
-                ThemePreview.jsx
-                
++---plugins
+|   \---UploadFile
+|           UppyServerActionUpload.jsx
+|           
++---providers
+|       Auth.provider.jsx
+|       AuthListener.provider.jsx
+|       Firebase.provider.jsx
+|       Geolocation.provider.jsx
+|       InitialState.provider.jsx
+|       Root.provider.jsx
+|       Session.provider.jsx
+|       Store.provider.jsx
+|       Theme.provider.jsx
+|       ThemeCustomization.provider.jsx
+|       Translations.provider.jsx
+|       
++---shared
+|   +---Avatar
+|   |       index.jsx
+|   |       
+|   +---Banners
+|   |   +---Big
+|   |   |       index.jsx
+|   |   |       
+|   |   +---LeftSide
+|   |   |       index.jsx
+|   |   |       
+|   |   +---Mini
+|   |   |       index.jsx
+|   |   |       
+|   |   +---Modal
+|   |   |       index.jsx
+|   |   |       
+|   |   +---RightSide
+|   |   |       index.jsx
+|   |   |       
+|   |   \---YandexAd
+|   |           index.jsx
+|   |           
+|   +---Footer
+|   |       index.jsx
+|   |       
+|   +---GameBrief
+|   |       index.jsx
+|   |       
+|   +---Navbar
+|   |   |   index.jsx
+|   |   |   
+|   |   +---Dropdown
+|   |   |       index.jsx
+|   |   |       
+|   |   +---Links
+|   |   |       index.jsx
+|   |   |       
+|   |   +---Logo
+|   |   |       index.jsx
+|   |   |       
+|   |   \---Mobile
+|   |           index.jsx
+|   |           
+|   +---Notification
+|   |   |   index.jsx
+|   |   |   
+|   |   +---Modal
+|   |   |       index.jsx
+|   |   |       
+|   |   \---NotificationArticle
+|   |           index.jsx
+|   |           
+|   +---RefillBalanceModal
+|   |       index.jsx
+|   |       
+|   +---SwitcherLanguage
+|   |       index.jsx
+|   |       
+|   +---SwitcherTheme
+|   |       index.jsx
+|   |       
+|   \---ThemeCustomizer
+|       |   index.jsx
+|       |   
+|       \---components
+|               ColorModifier.jsx
+|               CreateThemeModal.jsx
+|               FontModifer.jsx
+|               GlobalModifier.jsx
+|               SelectTheme.jsx
+|               ShadowsModifier.jsx
+|               ThemePreview.jsx
+|               
+\---utils
+        animations.global.css
+        banner.util.js
+        colors.util.js
+        config.util.js
+        default-theme.util.js
+        defaults.global.css
+        fonts.util.js
+        formatCurrency.js
+        formatDate.util.js
+        formations.util.js
+        getCorrectName.util.js
+        getCorrectPlayerPosition.utils.js
+        languages.util.js
+        match.util.js
+        packages.util.js
+        paymentOptions.util.js
+        player.util.js
+        setLanguageCookie.js
+        shadow.utils.js
+        static.util.js
+        tabs.util.js
+        tour.util.js
+        validateTeamName.util.js
+        
