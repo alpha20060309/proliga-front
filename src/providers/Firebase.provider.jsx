@@ -6,15 +6,18 @@ import { useSelector, useDispatch } from 'react-redux'
 import { selectUser } from 'lib/features/auth/auth.selector'
 import { fetchFirebaseToken } from 'lib/features/auth/auth.thunk'
 import { useCreateToken } from 'hooks/system/useCreateToken'
+import { useUpdateToken } from 'hooks/system/useUpdateToken'
+import axios from 'axios'
 
 const FirebaseProvider = ({ children }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectUser)
   const { token, fingerprint, tokenLoaded } = useSelector((store) => store.auth)
   const { createToken } = useCreateToken()
+  const { updateToken } = useUpdateToken()
 
   useEffect(() => {
-    if (user?.id && fingerprint) {
+    if (user?.id && fingerprint?.length > 0) {
       dispatch(fetchFirebaseToken({ user_id: user.id, fingerprint }))
     }
   }, [user?.id, dispatch, fingerprint])
@@ -28,11 +31,18 @@ const FirebaseProvider = ({ children }) => {
 
         if (Notification.permission !== 'granted') {
           await Notification.requestPermission()
+          return
         }
 
         if (!token?.id && tokenLoaded) {
-          const newToken = await getFirebaseToken()
+          const newToken = await getFirebaseToken({ user_id: user.id, updateToken, fingerprint })
           await createToken({ user_id: user.id, fingerprint, token: newToken })
+          await axios.post('/api/push-notifications/subscribe', {
+            token: newToken,
+            topic: 'global',
+            user_id: user.id,
+            fingerprint,
+          })
         }
 
       } catch (error) {
@@ -41,7 +51,7 @@ const FirebaseProvider = ({ children }) => {
     }
 
     initializeNotifications()
-  }, [user?.id, token, dispatch, fingerprint, createToken, tokenLoaded])
+  }, [user?.id, token, dispatch, fingerprint, createToken, tokenLoaded, updateToken])
 
   return <>{children}</>
 }

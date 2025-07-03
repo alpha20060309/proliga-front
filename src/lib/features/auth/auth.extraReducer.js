@@ -24,5 +24,6 @@ export const authExtraReducer = (builder) => {
     .addCase(fetchFirebaseToken.rejected, (state, action) => {
       state.tokenLoading = false
       state.tokenError = action?.error
+      state.tokenLoaded = true
     })
 }
