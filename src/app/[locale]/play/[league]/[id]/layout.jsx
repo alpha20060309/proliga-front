@@ -11,7 +11,6 @@ import { fetchClubs } from 'lib/features/club/club.thunk'
 import { fetchPlayers } from 'lib/features/player/player.thunk'
 import Image from 'next/image'
 import ModalBanner from 'shared/Banners/Modal'
-import Spinner from 'components/Spinner'
 import { fetchTopPlayers } from 'lib/features/player/player.thunk'
 import { fetchAdditionalPlayers } from 'lib/features/player/player.thunk'
 import {
@@ -26,6 +25,7 @@ import { setCurrentCompetition } from 'lib/features/competition/competition.slic
 import { fetchTours } from 'lib/features/tour/tour.thunk'
 import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
 import { usePathname } from 'next/navigation'
+import Spinner from 'components/Spinner'
 
 export default function PlayLayout({ children }) {
   const path = usePathname()

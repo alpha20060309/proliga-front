@@ -2,34 +2,39 @@
 
 import { useEffect, memo } from 'react'
 import { initializeFirebase, getFirebaseToken } from 'lib/firebase/firebase'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { selectUser } from 'lib/features/auth/auth.selector'
+import { setToken } from 'lib/features/auth/auth.slice'
 
 const FirebaseProvider = ({ children }) => {
+  const dispatch = useDispatch()
   const user = useSelector(selectUser)
   const { token, tokenLoading } = useSelector((store) => store.auth)
 
   useEffect(() => {
     const initializeNotifications = async () => {
-      console.log('initializeFirebase1')
+      try {
+        if (!user?.id || tokenLoading) return
 
-      if (!user?.id || tokenLoading) return
-      await initializeFirebase()
-      console.log('initializeFirebase')
-      if (Notification.permission !== 'granted') {
-        Notification.requestPermission()
+        await initializeFirebase()
+
+        if (Notification.permission !== 'granted') {
+          await Notification.requestPermission()
+        }
+
+        if (!token) {
+          const newToken = await getFirebaseToken()
+          if (newToken) {
+            dispatch(setToken(newToken))
+          }
+        }
+      } catch (error) {
+        console.error('Error initializing notifications:', error)
       }
-
-      if (!token) {
-        console.log('no token')
-        const newToken = await getFirebaseToken()
-        console.log('newToken', newToken)
-      }
-
     }
 
     initializeNotifications()
-  }, [user?.id, tokenLoading, token])
+  }, [user?.id, tokenLoading, token, dispatch])
 
   return <>{children}</>
 }

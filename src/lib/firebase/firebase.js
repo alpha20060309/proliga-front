@@ -50,7 +50,6 @@ export async function getFirebaseToken() {
   if (!messaging) {
     throw new Error('Firebase messaging is not initialized')
   }
-
   try {
     // Check for service worker registration
     if (!('serviceWorker' in navigator)) {
