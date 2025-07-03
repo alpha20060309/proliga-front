@@ -18,6 +18,7 @@ import { fetchFirebaseToken } from 'lib/features/auth/auth.thunk'
 const InitialStateProvider = ({ children }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectUser)
+  const { fingerprint } = useSelector((store) => store.auth)
   const { generateFingerprint } = useGenerateFingerprint()
   const { getUserAgent } = useGetUserAgent()
 
@@ -35,11 +36,11 @@ const InitialStateProvider = ({ children }) => {
     if (user?.id && user?.phone && user?.phone_verified) {
       dispatch(fetchBroadcastNotifications())
       dispatch(fetchPersonalNotifications({ user_id: user?.id }))
-      if (user?.fingerprint) {
-        dispatch(fetchFirebaseToken({ userId: user?.id, fingerprint: user?.fingerprint }))
+      if (fingerprint) {
+        dispatch(fetchFirebaseToken({ user_id: user?.id, fingerprint }))
       }
     }
-  }, [dispatch, user?.id, user?.phone, user?.phone_verified, user?.fingerprint])
+  }, [dispatch, user?.id, user?.phone, user?.phone_verified, fingerprint])
 
   useEffect(() => {
     registerSW()

@@ -23,7 +23,7 @@ export const systemNotificationExtraReducer = (builder) => {
     })
     .addCase(fetchBroadcastNotifications.rejected, (state, action) => {
       state.isLoading = false
-      state.error = action?.error?.message
+      state.error = action?.error ?? null
     })
     .addCase(fetchPersonalNotifications.pending, (state) => {
       state.isLoading = true
@@ -43,6 +43,6 @@ export const systemNotificationExtraReducer = (builder) => {
     })
     .addCase(fetchPersonalNotifications.rejected, (state, action) => {
       state.isLoading = false
-      state.error = action?.error?.message ?? null
+      state.error = action?.error ?? null
     })
 }

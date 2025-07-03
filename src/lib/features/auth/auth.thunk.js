@@ -11,15 +11,20 @@ export const fetchGeo = createAsyncThunk('auth/fetchGeo', async () => {
   return { data }
 })
 
-export const fetchFirebaseToken = createAsyncThunk('auth/fetchFirebaseToken',
-  async ({ userId, fingerprint }) => {
+export const fetchFirebaseToken = createAsyncThunk(
+  'auth/fetchFirebaseToken',
+  async ({ user_id, fingerprint }) => {
     const { data, error } = await supabase
       .from('user_token')
       .select('*')
-      .eq('user_id', userId)
+      .eq('user_id', user_id)
       .eq('fingerprint', fingerprint)
       .single()
 
+    if (error) {
+      throw error
+    }
 
-    return { data, error }
-  })
+    return data
+  }
+)

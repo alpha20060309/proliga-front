@@ -13,7 +13,7 @@ export const payExpenseExtraReducer = (builder) => {
       state.isLoading = false
     })
     .addCase(fetchPayExpenses.rejected, (state, action) => {
-      state.error = action?.error?.message ?? null
+      state.error = action?.error ?? null
       state.isLoading = false
     })
 }
