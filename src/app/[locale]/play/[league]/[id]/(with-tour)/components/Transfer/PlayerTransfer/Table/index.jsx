@@ -183,7 +183,7 @@ function PlayerTable() {
   })
 
   return (
-    <main className="text-foreground flex gap-2 flex-1 flex-col md:text-sm">
+    <main className="text-foreground flex flex-1 flex-col gap-2 md:text-sm">
       <div className="xs:text-xs grid grid-cols-2 grid-rows-2 gap-x-1 gap-y-2 text-sm sm:grid-cols-4 sm:grid-rows-1 md:gap-1 md:text-sm lg:text-base">
         {table
           .getHeaderGroups()

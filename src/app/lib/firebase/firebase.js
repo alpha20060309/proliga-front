@@ -22,7 +22,6 @@ function validateFirebaseConfig() {
     !measurementId ||
     !storageBucket ||
     !appId
-
   ) {
     alert(`Missing Firebase config values`)
     throw new Error(`Missing Firebase config values`)

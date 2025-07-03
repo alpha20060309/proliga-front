@@ -18,7 +18,10 @@ import { selectCurrentCompetition } from 'app/lib/features/competition/competiti
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { TOUR_STATUS } from 'app/utils/tour.util'
 import { Loader2 } from 'lucide-react'
-import { StadiumSelectTrigger, StadiumSaveButton } from 'components/Game/Stadium'
+import {
+  StadiumSelectTrigger,
+  StadiumSaveButton,
+} from 'components/Game/Stadium'
 
 const ProfileStadiumForm = () => {
   const { t } = useTranslation()
@@ -139,10 +142,7 @@ const ProfileStadiumForm = () => {
           )}
         </SelectContent>
       </Select>
-      <StadiumSaveButton
-        type="submit"
-        disabled={isLoading}
-      >
+      <StadiumSaveButton type="submit" disabled={isLoading}>
         {isLoading ? (
           <Loader2 className="mx-auto size-6 animate-spin" />
         ) : (

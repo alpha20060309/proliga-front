@@ -1,9 +1,5 @@
 import { Skeleton } from '@/components/ui/skeleton'
-import {
-  Card,
-  CardContent,
-  CardHeader,
-} from '@/components/ui/card'
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
 
 export function PrizesSkeleton({ count = 4 }) {
   return (
@@ -30,8 +26,8 @@ export function PrizeSkeleton() {
 
 export function CompetitionSkeleton() {
   return (
-    <Card className="w-full border-border">
-      <CardHeader className="mb-4 flex items-center gap-2 border-b border-border">
+    <Card className="border-border w-full">
+      <CardHeader className="border-border mb-4 flex items-center gap-2 border-b">
         <Skeleton className="bg-muted h-10 w-10 rounded-full" />
         <Skeleton className="bg-muted h-6 w-32" />
       </CardHeader>

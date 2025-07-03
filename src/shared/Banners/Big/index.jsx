@@ -37,7 +37,7 @@ const BigBanner = () => {
         })
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [banner, agent, user?.id, geo, createBannerView])
 
   return (

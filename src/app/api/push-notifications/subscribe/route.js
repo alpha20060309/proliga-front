@@ -29,7 +29,7 @@ export async function POST(request) {
       .eq('fingerprint', fingerprint)
       .single()
 
-      if (error && error.code !== 'PGRST116') {
+    if (error && error.code !== 'PGRST116') {
       return NextResponse.json(
         { success: false, message: 'Error getting user notification topics' },
         { status: 500 }
@@ -53,11 +53,14 @@ export async function POST(request) {
       }
     }
 
-    const newTopics = [...new Set([...user_token.topics || [], topic])]
+    const newTopics = [...new Set([...(user_token.topics || []), topic])]
 
-    const { error: updateError } = await supabase.from('user_token').update({
-      topics: newTopics,
-    }).eq('id', user_token.id)
+    const { error: updateError } = await supabase
+      .from('user_token')
+      .update({
+        topics: newTopics,
+      })
+      .eq('id', user_token.id)
 
     if (updateError) {
       return NextResponse.json(

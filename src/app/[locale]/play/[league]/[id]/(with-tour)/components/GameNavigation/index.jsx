@@ -1,6 +1,11 @@
 'use client'
 
-import { StyledTab, StyledTabs, GameTab, CustomBox } from 'components/StyledTabs'
+import {
+  StyledTab,
+  StyledTabs,
+  GameTab,
+  CustomBox,
+} from 'components/StyledTabs'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { TOUR_STATUS } from 'app/utils/tour.util'
@@ -80,7 +85,7 @@ export default function TourTabs() {
             disabled={
               currentTeam?.is_team_created
                 ? item.status === TOUR_STATUS.notStarted ||
-                item.order < registeredTour?.order
+                  item.order < registeredTour?.order
                 : item.status !== TOUR_STATUS.notStartedTransfer
             }
             label={<GameTab item={item} />}

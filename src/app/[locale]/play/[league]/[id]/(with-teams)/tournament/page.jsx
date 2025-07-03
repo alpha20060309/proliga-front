@@ -110,7 +110,7 @@ const Tournament = () => {
 
   return (
     <>
-      <div className=" flex w-full items-center gap-1">
+      <div className="flex w-full items-center gap-1">
         <TeamFilter
           page={page}
           perPage={perPage}
@@ -122,10 +122,7 @@ const Tournament = () => {
         <TourFilter setTour={setTour} tour={tour} />
       </div>
       {isLoading ? (
-        <TournamentTableSkeleton
-          paginationCount={5}
-          rows={15}
-        />
+        <TournamentTableSkeleton paginationCount={5} rows={15} />
       ) : (
         <>
           <TournamentTable showUserTourTeam={showUserTourTeam} />

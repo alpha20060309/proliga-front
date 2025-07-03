@@ -17,7 +17,7 @@ const TeamBalance = () => {
   return (
     <>
       <div
-        className="group w-full lg:w-auto cursor-pointer capitalize"
+        className="group w-full cursor-pointer capitalize lg:w-auto"
         onClick={() => dispatch(setBalanceModal(!balanceModal))}
       >
         <header className="text-muted-foreground group-hover:text-foreground flex cursor-pointer transition-all group-hover:underline">

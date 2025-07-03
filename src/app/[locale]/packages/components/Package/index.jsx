@@ -21,8 +21,8 @@ const PackageContainer = ({ packageType, packages, t }) => {
   }
 
   return (
-    <Card className="border-accent/50 hover:border-accent gap-0  shadow transition-all">
-      <CardHeader className="flex items-center justify-between" >
+    <Card className="border-accent/50 hover:border-accent gap-0 shadow transition-all">
+      <CardHeader className="flex items-center justify-between">
         <CardTitle className="text-xl font-bold">
           {getPackageTitle(packageType)}
         </CardTitle>
@@ -31,31 +31,32 @@ const PackageContainer = ({ packageType, packages, t }) => {
       <CardContent className="space-y-0 pt-4">
         <Separator className="bg-accent/20 mb-4" />
         <div className="space-y-4">
-          {packages?.length > 0 && packages
-            .filter((item) => item.type === packageType)
-            .map((item, index) => (
-              <div
-                key={index}
-                className="bg-card hover:bg-secondary flex items-center justify-between rounded-sm p-2 shadow transition-all"
-              >
-                <div className="flex cursor-default items-center space-x-2">
-                  <Badge
-                    variant="outline"
-                    className="bg-primary/15 border-accent text-accent border"
-                  >
-                    {item.amount}
-                  </Badge>
-                  <span className="text-muted-foreground text-sm">
-                    {t('ga oshirish')}
-                  </span>
+          {packages?.length > 0 &&
+            packages
+              .filter((item) => item.type === packageType)
+              .map((item, index) => (
+                <div
+                  key={index}
+                  className="bg-card hover:bg-secondary flex items-center justify-between rounded-sm p-2 shadow transition-all"
+                >
+                  <div className="flex cursor-default items-center space-x-2">
+                    <Badge
+                      variant="outline"
+                      className="bg-primary/15 border-accent text-accent border"
+                    >
+                      {item.amount}
+                    </Badge>
+                    <span className="text-muted-foreground text-sm">
+                      {t('ga oshirish')}
+                    </span>
+                  </div>
+                  <Button asChild size="sm">
+                    <Link href={`/confirm-payment/${item.id}`}>
+                      {t('Tanlash')}
+                    </Link>
+                  </Button>
                 </div>
-                <Button asChild size="sm">
-                  <Link href={`/confirm-payment/${item.id}`}>
-                    {t('Tanlash')}
-                  </Link>
-                </Button>
-              </div>
-            ))}
+              ))}
         </div>
       </CardContent>
     </Card>

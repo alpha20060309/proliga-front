@@ -71,8 +71,7 @@ const PlayLinks = () => {
           />
           <TabLink
             title={'Turnir'}
-            disabled={!currentTeam?.is_team_created ||
-              isTeamViewRoute}
+            disabled={!currentTeam?.is_team_created || isTeamViewRoute}
             styling={
               isPlayRoute
                 ? gameTab === TABS.Tournament
@@ -85,8 +84,7 @@ const PlayLinks = () => {
           />
           <TabLink
             title={'Jurnal'}
-            disabled={!currentTeam?.is_team_created ||
-              isTeamViewRoute}
+            disabled={!currentTeam?.is_team_created || isTeamViewRoute}
             tab={TABS.Journal}
             styling={
               isPlayRoute
@@ -107,8 +105,7 @@ const PlayLinks = () => {
                   : PASSIVE
                 : PASSIVE
             }
-            disabled={!currentTeam?.is_team_created ||
-              isTeamViewRoute}
+            disabled={!currentTeam?.is_team_created || isTeamViewRoute}
             setTab={setGameTab}
           />
         </>

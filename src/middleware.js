@@ -9,7 +9,6 @@ const apiAuthPrefix = '/api/auth'
 
 export const DEFAULT_LOGIN_REDIRECT = '/auth'
 
-
 export default middleware((req) => {
   const i18nResponse = i18nRouter(req, i18nConfig)
 

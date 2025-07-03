@@ -46,7 +46,7 @@ const News = () => {
   return (
     <Card
       className={cn(
-        'relative mx-auto lg:mx-0 flex h-172 w-full max-w-lg border-border lg:min-w-72 lg:flex-1 gap-4'
+        'border-border relative mx-auto flex h-172 w-full max-w-lg gap-4 lg:mx-0 lg:min-w-72 lg:flex-1'
       )}
     >
       <CardHeader className="flex items-center justify-between">

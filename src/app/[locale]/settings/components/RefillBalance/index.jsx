@@ -21,7 +21,7 @@ const RefillBalance = () => {
   const [isModalOpen, setModalOpen] = useState(false)
 
   return (
-    <Card className="sm:max-w-64 w-full gap-4">
+    <Card className="w-full gap-4 sm:max-w-64">
       <RefillBalanceModal
         setIsModalOpen={setModalOpen}
         isModalOpen={isModalOpen}

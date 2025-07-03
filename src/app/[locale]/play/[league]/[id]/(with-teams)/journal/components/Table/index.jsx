@@ -48,7 +48,7 @@ function JournalTable() {
   })
 
   return (
-    <Table className="text-foreground text-start h-auto w-full text-xs md:text-sm">
+    <Table className="text-foreground h-auto w-full text-start text-xs md:text-sm">
       <Head table={table} />
       <Body table={table} flexRender={flexRender} rowClassName={'text-start'} />
     </Table>

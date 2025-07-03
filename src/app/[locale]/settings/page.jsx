@@ -3,7 +3,7 @@
 import { toast } from 'sonner'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { selectUser} from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'app/lib/features/auth/auth.selector'
 import { formatDate } from 'app/utils/formatDate.util'
 import { Phone, CalendarDays, UsersRound } from 'lucide-react'
 import RefillBalance from './components/RefillBalance'
@@ -75,7 +75,7 @@ const SettingsProfile = () => {
             {t('Foydalanuvchi ID-si')}
           </p>
           <div
-            className="bg-primary hover:bg-accent border border-border text-accent-foreground flex cursor-pointer items-center justify-center gap-1 rounded-md px-2 py-1 text-base font-medium transition-all"
+            className="bg-primary hover:bg-accent border-border text-accent-foreground flex cursor-pointer items-center justify-center gap-1 rounded-md border px-2 py-1 text-base font-medium transition-all"
             onClick={() => handleClick(user?.id)}
           >
             <Copy className="text-accent-foreground size-4" />
@@ -119,7 +119,7 @@ const SettingsProfile = () => {
       <div className="bg-card/50 border-border text-muted-foreground line-clamp-5 h-28 max-w-full overflow-y-scroll rounded-lg border p-2 text-sm text-wrap break-words shadow md:p-4">
         {user?.bio ? user?.bio : t("Ma'lumot yo'q")}
       </div>
-      <section className="flex gap-2 flex-wrap">
+      <section className="flex flex-wrap gap-2">
         <RefillBalance />
         <NotificationToggle />
         <ThemeCustomizer />

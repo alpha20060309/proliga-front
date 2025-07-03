@@ -1,5 +1,5 @@
-import prisma from "lib/prisma"
-import { cache } from "react"
+import prisma from 'lib/prisma'
+import { cache } from 'react'
 
 export const getUserById = cache(async (id) => {
   const user = await prisma.user.findUnique({
@@ -21,6 +21,6 @@ export const getUserByEmail = cache(async (email) => {
   const user = await prisma.user.findUnique({
     where: { email, deleted_at: null },
   })
-  
+
   return user
 })

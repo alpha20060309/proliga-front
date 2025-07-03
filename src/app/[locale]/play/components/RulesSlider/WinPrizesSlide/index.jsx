@@ -68,7 +68,7 @@ const Prize = ({ prize }) => {
       className={cn(
         'flex min-w-24 flex-1 flex-col items-center justify-center md:max-w-80',
         prize.order === 3 &&
-        'col-span-2 mx-auto max-w-[50%] sm:col-span-1 sm:mx-0 sm:max-w-max'
+          'col-span-2 mx-auto max-w-[50%] sm:col-span-1 sm:mx-0 sm:max-w-max'
       )}
     >
       <p className="mb-1 text-xs sm:text-sm md:mb-2 md:text-lg xl:text-xl">

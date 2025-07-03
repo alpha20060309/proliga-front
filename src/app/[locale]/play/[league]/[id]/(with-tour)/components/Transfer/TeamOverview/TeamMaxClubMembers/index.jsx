@@ -15,7 +15,7 @@ export default function TeamMaxClubMembers() {
   return (
     <>
       <div
-        className="group w-full lg:w-auto cursor-pointer capitalize"
+        className="group w-full cursor-pointer capitalize lg:w-auto"
         onClick={() => dispatch(setClubModal(!clubModal))}
       >
         <header className="text-muted-foreground group-hover:text-foreground flex transition-all group-hover:underline">

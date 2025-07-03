@@ -38,7 +38,7 @@ const TeamBalanceModal = () => {
     >
       <DialogContent className="max-h-[92%] max-w-[96%] overflow-auto rounded-lg sm:max-w-md xl:max-w-lg xl:p-6">
         <DialogHeader>
-          <DialogTitle className="text-xl lg:text-2xl font-bold">
+          <DialogTitle className="text-xl font-bold lg:text-2xl">
             {t('Boost Your Team Balance!')}
           </DialogTitle>
           <HoverCard>
@@ -96,7 +96,7 @@ const TeamBalanceModal = () => {
           )}
         </div>
         <div className="mt-6 flex items-center justify-center space-x-2 text-sm">
-          <Coins className="h-4 w-4 text-foreground dark:text-primary" />
+          <Coins className="text-foreground dark:text-primary h-4 w-4" />
           <p className="text-muted-foreground font-medium">
             {t("invest in your team's success")}
           </p>

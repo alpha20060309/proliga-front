@@ -60,7 +60,13 @@ const PlayLayout = ({ children, params }) => {
         dispatch(setCurrentTourTeam(currentTour))
       }
     }
-  }, [dispatch, selectedTours?.length, currentTourTeam, tourTeams?.length, currentTour])
+  }, [
+    dispatch,
+    selectedTours?.length,
+    currentTourTeam,
+    tourTeams?.length,
+    currentTour,
+  ])
 
   return (
     <div className="flex w-full flex-col gap-4">

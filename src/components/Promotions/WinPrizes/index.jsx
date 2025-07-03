@@ -1,4 +1,3 @@
-
 import { getCorrectName } from 'app/utils/getCorrectName.util'
 import {
   Card,
@@ -45,7 +44,9 @@ const PromotionWinPrizes = async ({ t, locale }) => {
             ?.slice(0, 4)
             .map(
               (prize, index) =>
-                prize?.image && <Prize prize={prize} key={index} locale={locale} />
+                prize?.image && (
+                  <Prize prize={prize} key={index} locale={locale} />
+                )
             )}
         </div>
       </CardContent>

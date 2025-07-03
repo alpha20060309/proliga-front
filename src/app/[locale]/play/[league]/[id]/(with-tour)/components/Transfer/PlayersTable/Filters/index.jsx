@@ -11,10 +11,7 @@ function TransferTableFilters({ column }) {
   switch (filterVariant) {
     case 'name':
       return (
-        <NameFilter
-          column={column}
-          columnFilterValue={columnFilterValue}
-        />
+        <NameFilter column={column} columnFilterValue={columnFilterValue} />
       )
     case 'club':
       return (

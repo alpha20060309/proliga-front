@@ -160,7 +160,10 @@ function PlayerStatisticsTable({ matches }) {
   return (
     <>
       <Table className="text-3xs xs:text-3xs text-foreground h-full w-full min-w-80 table-auto md:text-xs xl:text-sm">
-        <Head table={table} className={'text-3xs sm:text-2xs lg:text-xs xl:text-sm'} />
+        <Head
+          table={table}
+          className={'text-3xs sm:text-2xs lg:text-xs xl:text-sm'}
+        />
         <Body table={table} flexRender={flexRender} />
       </Table>
       {matches?.length > 9 && <TanStackPagination table={table} />}

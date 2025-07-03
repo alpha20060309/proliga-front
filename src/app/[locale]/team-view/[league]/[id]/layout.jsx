@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 export default function TeamViewLayout({ children }) {
   return (
-    <div className="relative text-foreground flex flex-col gap-4 overflow-hidden bg-linear-to-tr pt-14 pb-2">
+    <div className="text-foreground relative flex flex-col gap-4 overflow-hidden bg-linear-to-tr pt-14 pb-2">
       <div aria-hidden="true" className="absolute inset-0 z-0 h-full w-full">
         <Image
           src="/images/Hero.png"

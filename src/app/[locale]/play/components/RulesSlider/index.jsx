@@ -15,7 +15,10 @@ import WinPrizesSlide from './WinPrizesSlide'
 
 function RulesSlider() {
   return (
-    <Carousel opts={{ loop: true }} className="bg-card border border-border rounded-xl px-6 py-4">
+    <Carousel
+      opts={{ loop: true }}
+      className="bg-card border-border rounded-xl border px-6 py-4"
+    >
       <RulesSliderTitle />
       <CarouselContent className="mb-4">
         <CarouselItem className="min-h-96 rounded md:min-h-104 xl:min-h-136">

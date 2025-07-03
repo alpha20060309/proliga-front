@@ -54,7 +54,7 @@ function TransactionsPackagesTable() {
       accessorFn: (row) => row?.transaction_id ?? '',
       cell: (info) => (
         <Popover>
-          <PopoverTrigger className=" cursor-pointer text-sm font-bold select-none md:text-base">
+          <PopoverTrigger className="cursor-pointer text-sm font-bold select-none md:text-base">
             ******
           </PopoverTrigger>
           <PopoverContent

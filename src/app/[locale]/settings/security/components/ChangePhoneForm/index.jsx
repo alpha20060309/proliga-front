@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux'
 import {
   selectAgent,
   selectGeo,
-  selectUser
+  selectUser,
 } from 'app/lib/features/auth/auth.selector'
 import { PhoneInput } from 'components/PhoneInput'
 import { useAuthChangePhone } from 'app/hooks/auth/useAuthChangePhone'

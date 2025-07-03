@@ -35,7 +35,10 @@ import { getCorrectName } from 'app/utils/getCorrectName.util'
 import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
 import { Loader2, Undo2, Compass } from 'lucide-react'
 import { TOUR_STATUS } from 'app/utils/tour.util'
-import { StadiumSelectTrigger, StadiumSaveButton } from 'components/Game/Stadium'
+import {
+  StadiumSelectTrigger,
+  StadiumSaveButton,
+} from 'components/Game/Stadium'
 
 const TransferStadiumForm = () => {
   const { t } = useTranslation()
@@ -257,15 +260,12 @@ const TransferStadiumForm = () => {
           size="icon"
           onClick={() => dispatch(revertTeamPlayers())}
           title={t('orqaga qaytish')}
-          className="bg-card  text-foreground hover:border-primary border-border border hover:text-accent-foreground flex size-10 items-center justify-center gap-1 transition-all"
+          className="bg-card text-foreground hover:border-primary border-border hover:text-accent-foreground flex size-10 items-center justify-center gap-1 border transition-all"
         >
           <Undo2 className="size-6" />
         </Button>
       </div>
-      <StadiumSaveButton
-        type="submit"
-        disabled={isLoading}
-      >
+      <StadiumSaveButton type="submit" disabled={isLoading}>
         {isLoading ? (
           <Loader2 className="text-foreground mx-auto size-6 animate-spin" />
         ) : (

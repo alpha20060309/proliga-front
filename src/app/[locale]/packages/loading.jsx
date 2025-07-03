@@ -25,9 +25,9 @@ const PackagesSkeleton = () => {
         {Object.values(PACKAGE_TYPE).map((packageType) => (
           <Card
             key={packageType}
-            className="border-accent gap-0 bg-card hover:border-accent transition-all"
+            className="border-accent bg-card hover:border-accent gap-0 transition-all"
           >
-            <CardHeader >
+            <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-foreground text-xl font-bold">
                   <Skeleton className="h-6 w-24" />

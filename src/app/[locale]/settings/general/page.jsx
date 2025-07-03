@@ -61,7 +61,7 @@ const GeneralSettings = () => {
       user,
       cb: () => {
         router.push('/settings')
-      }
+      },
     })
   }
 

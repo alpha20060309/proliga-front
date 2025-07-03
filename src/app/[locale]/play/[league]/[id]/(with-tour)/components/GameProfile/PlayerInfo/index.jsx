@@ -45,7 +45,7 @@ const PlayerInfo = () => {
 
   return (
     <Dialog open={infoModal && currentPlayer?.id} onOpenChange={setModalOpen}>
-      <DialogContent className="overflox-y-auto xs:mx-auto border-border flex max-h-[90vh] min-h-[50vh] w-full max-w-4xl flex-col gap-4 overflow-y-auto rounded-xl sm:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl:">
+      <DialogContent className="overflox-y-auto xs:mx-auto border-border 2xl:max-w-6xl: flex max-h-[90vh] min-h-[50vh] w-full max-w-4xl flex-col gap-4 overflow-y-auto rounded-xl sm:max-w-3xl lg:max-w-4xl xl:max-w-5xl">
         <PlayerPhoto
           currentPlayer={currentPlayer}
           position={getCorrentPlayerPosition(

@@ -11,7 +11,7 @@ export const useUpdateUserLocation = () => {
   const { update } = useSession()
 
   const updateLocation = useCallback(
-    async ({ location, user, cb = () => { } }) => {
+    async ({ location, user, cb = () => {} }) => {
       if (!location) {
         setError(t('Location data is required'))
         return toast.warning(t('Location data is required'), {

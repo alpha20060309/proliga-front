@@ -60,7 +60,7 @@ const LeftSideBanner = () => {
         })
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     banner,
     NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH,

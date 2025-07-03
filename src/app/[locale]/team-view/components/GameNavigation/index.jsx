@@ -1,4 +1,9 @@
-import { StyledTab, StyledTabs, GameTab, CustomBox } from 'components/StyledTabs'
+import {
+  StyledTab,
+  StyledTabs,
+  GameTab,
+  CustomBox,
+} from 'components/StyledTabs'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { TOUR_STATUS } from 'app/utils/tour.util'
@@ -65,9 +70,7 @@ export default function TourTabs() {
               item.status === TOUR_STATUS.notStartedTransfer ||
               item.order < registeredTour?.order
             }
-            label={
-              <GameTab item={item} />
-            }
+            label={<GameTab item={item} />}
           />
         ))}
       </StyledTabs>

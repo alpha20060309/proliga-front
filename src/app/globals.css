@@ -196,14 +196,16 @@
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
   input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 var(--autofill-shadow-size) var(--autofill-shadow-color) inset !important;
+    -webkit-box-shadow: 0 0 0 var(--autofill-shadow-size)
+      var(--autofill-shadow-color) inset !important;
     -webkit-text-fill-color: var(--autofill-text-color);
     @apply text-sm tracking-normal md:text-base;
   }
 
   select option:checked,
   select option:hover {
-    box-shadow: 0 0 var(--select-shadow-spread) var(--select-shadow-size) var(--select-shadow-color) inset;
+    box-shadow: 0 0 var(--select-shadow-spread) var(--select-shadow-size)
+      var(--select-shadow-color) inset;
   }
 }
 
@@ -226,11 +228,15 @@
 
 .border-gradient {
   background:
-    linear-gradient(var(--color-background), var(--color-background)) padding-box,
-    linear-gradient(to right,
-      var(--color-chart-2),
-      var(--color-chart-1),
-      var(--color-chart-3)) border-box;
+    linear-gradient(var(--color-background), var(--color-background))
+      padding-box,
+    linear-gradient(
+        to right,
+        var(--color-chart-2),
+        var(--color-chart-1),
+        var(--color-chart-3)
+      )
+      border-box;
   border-color: transparent;
 }
 

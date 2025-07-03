@@ -45,7 +45,7 @@ export function Pagination({
           className={cn(
             'bg-background border-muted text-foreground hover:bg-accent hover:text-accent-foreground size-7 border p-0 md:size-8',
             isCurrentPage &&
-            'bg-primary text-primary-foreground hover:bg-primary/90',
+              'bg-primary text-primary-foreground hover:bg-primary/90',
             buttonClassName
           )}
         >

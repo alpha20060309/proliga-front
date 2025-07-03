@@ -102,15 +102,14 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
                 <ToggleGroupItem
                   value={PAYMENT_OPTIONS.PAYME}
                   aria-label="Payme"
-                  className="data-[state=on]:bg-background flex w-28 h-16  flex-col gap-2 rounded-lg border-2 p-4 data-[state=on]:border-[#0cbbbc]"
+                  className="data-[state=on]:bg-background flex h-16 w-28 flex-col gap-2 rounded-lg border-2 p-4 data-[state=on]:border-[#0cbbbc]"
                 >
                   <Image
                     src={'/icons/payme.svg'}
                     width={80}
                     height={24}
                     alt="payme"
-                    className='w-full h-full'
-
+                    className="h-full w-full"
                   />
                 </ToggleGroupItem>
               )}
@@ -118,7 +117,7 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
                 <ToggleGroupItem
                   value={PAYMENT_OPTIONS.CLICKUP}
                   aria-label="Click"
-                  className="w-28 h-16 data-[state=on]:bg-background flex  flex-col gap-2 rounded-lg border-2 p-4 data-[state=on]:border-[#0065FF]"
+                  className="data-[state=on]:bg-background flex h-16 w-28 flex-col gap-2 rounded-lg border-2 p-4 data-[state=on]:border-[#0065FF]"
                 >
                   <Image
                     src={
@@ -128,7 +127,7 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
                     }
                     width={80}
                     height={24}
-                    className='w-full h-full'
+                    className="h-full w-full"
                     alt="click-up"
                   />
                 </ToggleGroupItem>
@@ -189,7 +188,7 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
           <Button
             type="submit"
             size="lg"
-            className="h-12 text-base border  font-bold"
+            className="h-12 border text-base font-bold"
             disabled={
               !paymentOption ||
               !amount ||

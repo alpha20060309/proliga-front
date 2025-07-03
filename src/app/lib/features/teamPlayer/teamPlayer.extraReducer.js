@@ -33,7 +33,7 @@ export const teamPlayerExtraReducer = (builder) => {
           playersCount: { GOA: 0, DEF: 0, MID: 0, STR: 0 },
           teamPrice: 0,
           duplicatesMap: {},
-        },
+        }
       )
 
       state.GOA = teamData.GOA

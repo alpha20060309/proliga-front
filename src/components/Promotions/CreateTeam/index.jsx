@@ -41,7 +41,7 @@ const PromotionCreateTeam = ({ t }) => {
             quality={100}
             src="/images/promotion-stadium.png"
             draggable={false}
-            className="mx-auto h-full aspect-[1/1.1] w-full max-w-[32rem] object-contain lg:mr-0 lg:ml-auto"
+            className="mx-auto aspect-[1/1.1] h-full w-full max-w-[32rem] object-contain lg:mr-0 lg:ml-auto"
             alt="interactive stadium"
           />
         </div>

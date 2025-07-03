@@ -10,7 +10,7 @@ const RankingTeams = () => {
   const topTeams = useSelector(selectTopTeams)
 
   return (
-    <Card className="border-border w-full py-4 gap-2">
+    <Card className="border-border w-full gap-2 py-4">
       <CardHeader className="flex flex-row items-center justify-between px-4">
         <CardTitle className="text-xl font-bold">
           {t('Eng kuchli top 3 jamoalar')}
@@ -18,7 +18,7 @@ const RankingTeams = () => {
       </CardHeader>
       <CardContent
         className={cn(
-          'sm:grid-cols-3 px-4 mt-4 h-auto min-h-32 grid-cols-2 gap-2',
+          'mt-4 h-auto min-h-32 grid-cols-2 gap-2 px-4 sm:grid-cols-3',
           topTeams?.length > 0 && 'grid'
         )}
       >

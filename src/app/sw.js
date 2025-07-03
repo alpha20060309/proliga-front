@@ -1,8 +1,4 @@
-import {
-  Serwist,
-  NetworkOnly,
-  BackgroundSyncQueue,
-} from 'serwist'
+import { Serwist, NetworkOnly, BackgroundSyncQueue } from 'serwist'
 import { defaultCache } from '@serwist/next/worker'
 
 const serwist = new Serwist({
@@ -17,8 +13,8 @@ const serwist = new Serwist({
   precacheOptions: {
     cleanupOutdatedCaches: true,
     matchOptions: {
-      ignoreSearch: true
-    }
+      ignoreSearch: true,
+    },
   },
   runtimeCaching: [
     ...defaultCache,
@@ -41,11 +37,11 @@ const serwist = new Serwist({
   fallbacks: {
     entries: [
       {
-        url: "/~offline",
+        url: '/~offline',
         matcher({ request }) {
-          return request.destination === "document";
+          return request.destination === 'document'
         },
-      }
+      },
     ],
   },
 })
@@ -71,23 +67,25 @@ self.addEventListener('fetch', (event) => {
     return event.respondWith(backgroundSync(event))
   }
 
-  event.respondWith(async function () {
-    const cachedResponse = await caches.match(request);
-    if (cachedResponse) return cachedResponse;
+  event.respondWith(
+    (async function () {
+      const cachedResponse = await caches.match(request)
+      if (cachedResponse) return cachedResponse
 
-    try {
-      return await fetch(request);
-    } catch (err) {
-      if (request.mode === 'navigate') {
-        const url = new URL(request.url)
-        const locale = url.pathname.split('/')[1]
-        const fallback = await caches.match(`/${locale}/~offline`)
-        return fallback || caches.match('/uz/~offline')
+      try {
+        return await fetch(request)
+      } catch (err) {
+        if (request.mode === 'navigate') {
+          const url = new URL(request.url)
+          const locale = url.pathname.split('/')[1]
+          const fallback = await caches.match(`/${locale}/~offline`)
+          return fallback || caches.match('/uz/~offline')
+        }
+
+        throw err
       }
-
-      throw err;
-    }
-  }());
+    })()
+  )
 })
 
 self.addEventListener('activate', (event) => {
@@ -112,6 +110,6 @@ self.addEventListener('activate', (event) => {
       )
     )
   )
-});
+})
 
 serwist.addEventListeners()

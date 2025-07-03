@@ -43,7 +43,7 @@ export async function POST(request) {
       )
     }
 
-    const newTopics = (user_token.topics || []).filter(t => t !== topic)
+    const newTopics = (user_token.topics || []).filter((t) => t !== topic)
 
     const { error: updateError } = await supabase
       .from('user_token')

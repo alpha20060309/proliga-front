@@ -2,12 +2,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { CalendarDays, Eye } from 'lucide-react'
 import { PaginationSkeleton } from 'components/Table/Pagination/Server'
 import { cn } from '@/lib/utils'
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from '@/components/ui/card'
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 
 function ArticleSkeleton() {
   return (
@@ -41,7 +36,7 @@ export function NewsSkeleton({ count = 5, paginationCount = 5 }) {
   return (
     <Card
       className={cn(
-        'relative mx-auto lg:mx-0 flex h-172 w-full max-w-lg border-border lg:min-w-72 lg:flex-1 gap-4'
+        'border-border relative mx-auto flex h-172 w-full max-w-lg gap-4 lg:mx-0 lg:min-w-72 lg:flex-1'
       )}
     >
       <CardHeader className="flex flex-row items-center justify-between">

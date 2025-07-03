@@ -79,11 +79,12 @@ const Player = ({ player }) => {
             imageErr={imageErr}
             player={player}
           />
-          <PlayerName>
-            {lastName === '' ? name : lastName}
-          </PlayerName>
+          <PlayerName>{lastName === '' ? name : lastName}</PlayerName>
           <PlayerButtonsContainer>
-            <PlayerButton onClick={handleInfoModal} className={'p-0 rounded-full'}>
+            <PlayerButton
+              onClick={handleInfoModal}
+              className={'rounded-full p-0'}
+            >
               <Info className="text-foreground group-hover:text-accent-foreground size-4 sm:size-5" />
             </PlayerButton>
             <PlayerPoint>

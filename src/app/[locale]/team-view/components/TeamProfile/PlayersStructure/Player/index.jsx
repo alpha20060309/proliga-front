@@ -64,13 +64,11 @@ const Player = ({ player }) => {
         <>
           <PlayerImage
             tShirt={tShirt}
-            handleInfoModal={() => { }}
+            handleInfoModal={() => {}}
             imageErr={imageErr}
             player={player}
           />
-          <PlayerName>
-            {lastName === '' ? name : lastName}
-          </PlayerName>
+          <PlayerName>{lastName === '' ? name : lastName}</PlayerName>
           <PlayerPoint>
             {player.is_captain
               ? (currentPlayerPoint?.point ?? 0) * 2
