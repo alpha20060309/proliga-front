@@ -1,4 +1,4 @@
-import { fetchGeo } from './auth.thunk'
+import { fetchGeo, fetchFirebaseToken } from './auth.thunk'
 
 export const authExtraReducer = (builder) => {
   builder
@@ -12,5 +12,16 @@ export const authExtraReducer = (builder) => {
     .addCase(fetchGeo.rejected, (state, action) => {
       state.geoLoading = false
       state.geoError = action.payload?.data.message ?? null
+    })
+    .addCase(fetchFirebaseToken.pending, (state) => {
+      state.tokenLoading = true
+    })
+    .addCase(fetchFirebaseToken.fulfilled, (state, action) => {
+      state.tokenLoading = false
+      state.token = action.payload?.data || null
+    })
+    .addCase(fetchFirebaseToken.rejected, (state, action) => {
+      state.tokenLoading = false
+      state.tokenError = action.payload?.data.message ?? null
     })
 }

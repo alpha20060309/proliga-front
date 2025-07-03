@@ -9,6 +9,9 @@ const initialState = {
   geoError: null,
   geoLoading: false,
   phoneModal: false,
+  token: null,
+  tokenError: null,
+  tokenLoading: false,
 }
 
 const authSlice = createSlice({
@@ -33,6 +36,9 @@ const authSlice = createSlice({
     setPhoneModal: (state, action) => {
       state.phoneModal = action.payload
     },
+    setFirebaseToken: (state, action) => {
+      state.token = action.payload
+    },
   },
   extraReducers: authExtraReducer,
 })
@@ -44,7 +50,6 @@ export const {
   setFingerprint,
   setGeo,
   setAgent,
-  setLoginMethod,
   setPhoneModal,
   setFirebaseToken,
 } = authSlice.actions

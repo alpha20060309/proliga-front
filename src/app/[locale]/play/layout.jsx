@@ -12,7 +12,7 @@ const PlayLayout = async ({ children }) => {
   }
 
   return (
-    <main className="bg-background min-h-screen py-4">
+    <main className="bg-background min-h-screen pb-4">
       {children}
       <PlayFooter />
     </main>

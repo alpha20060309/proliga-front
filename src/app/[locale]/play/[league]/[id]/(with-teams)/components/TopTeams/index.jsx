@@ -17,7 +17,7 @@ const TopTeams = () => {
   if (isLoading) return <TopTeamsSkeleton />
 
   return (
-    <div className="mx-auto flex h-min w-full max-w-lg flex-col gap-2 lg:mx-0 lg:w-1/3 lg:max-w-none">
+    <div className="mx-auto flex h-min w-full max-w-2xl flex-col gap-2 lg:mx-0 lg:w-1/3 lg:max-w-none">
       <RankingTeams />
       <RankingPlayers />
     </div>
