@@ -27,9 +27,10 @@ export async function POST(request) {
       .select('*')
       .eq('user_id', user_id)
       .eq('fingerprint', fingerprint)
+      .lte('expires_at', new Date(Date.now()))
       .single()
 
-    if (error && error.code !== 'PGRST116') {
+    if (error) {
       return NextResponse.json(
         { success: false, message: 'Error getting user notification topics' },
         { status: 500 }

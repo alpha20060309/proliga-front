@@ -27,30 +27,21 @@ export async function POST(request) {
       .select('*')
       .eq('user_id', user_id)
       .eq('fingerprint', fingerprint)
+      .lte('expires_at', new Date(Date.now()))
       .single()
 
-    if (error && error.code !== 'PGRST116') {
+    if (error?.code === 'PGRST116') {
+      return NextResponse.json({
+        success: false,
+        message: 'User token not found',
+      }, { status: 404 })
+    }
+
+    if (error) {
       return NextResponse.json(
         { success: false, message: 'Error getting user notification topics' },
         { status: 500 }
       )
-    }
-
-    if (!user_token?.id) {
-      const { error: newError } = await supabase.from('user_token').insert({
-        user_id,
-        fingerprint,
-        token,
-        topics: [topic],
-        expires_at: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
-      })
-
-      if (newError) {
-        return NextResponse.json(
-          { success: false, message: 'Error creating user token' },
-          { status: 500 }
-        )
-      }
     }
 
     const newTopics = [...new Set([...(user_token.topics || []), topic])]

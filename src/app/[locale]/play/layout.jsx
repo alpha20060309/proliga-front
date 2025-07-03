@@ -1,7 +1,6 @@
 import PlayFooter from './components/PlayFooter'
 import { auth } from 'app/api/auth/[...nextauth]/route'
 import { redirect } from 'next/navigation'
-// import { toast } from 'sonner'
 
 const PlayLayout = async ({ children }) => {
   const session = await auth()

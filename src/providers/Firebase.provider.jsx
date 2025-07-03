@@ -7,25 +7,29 @@ import { selectUser } from 'lib/features/auth/auth.selector'
 
 const FirebaseProvider = ({ children }) => {
   const user = useSelector(selectUser)
+  const { token, tokenLoading } = useSelector((store) => store.auth)
 
   useEffect(() => {
     const initializeNotifications = async () => {
-      if (!user?.id) return
+      console.log('initializeFirebase1')
 
+      if (!user?.id || tokenLoading) return
       await initializeFirebase()
+      console.log('initializeFirebase')
       if (Notification.permission !== 'granted') {
         Notification.requestPermission()
       }
 
-      // if (Notification.permission === 'granted') {
-      //   const token = await getFirebaseToken()
-      //   console.log('token', token)
-      // }
+      if (!token) {
+        console.log('no token')
+        const newToken = await getFirebaseToken()
+        console.log('newToken', newToken)
+      }
 
     }
 
     initializeNotifications()
-  }, [user?.id])
+  }, [user?.id, tokenLoading, token])
 
   return <>{children}</>
 }
