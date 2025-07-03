@@ -14,7 +14,7 @@ import { selectCurrentTour } from 'lib/features/tour/tour.selector'
 import { setCurrentTourTeam } from 'lib/features/tourTeam/tourTeam.slice'
 import { selectTours } from 'lib/features/tour/tour.selector'
 
-const PlayLayout = ({ children, params }) => {
+const GameLayout = ({ children, params }) => {
   const { league, id } = use(params)
   const dispatch = useDispatch()
   const currentTour = useSelector(selectCurrentTour)
@@ -69,13 +69,11 @@ const PlayLayout = ({ children, params }) => {
   ])
 
   return (
-    <div className="flex w-full flex-col gap-4">
-      <Gutter mobileFriendly>
-        <GameNavigation />
-      </Gutter>
-      <Gutter mobileFriendly>{children}</Gutter>
-    </div>
+    <Gutter mobileFriendly className={"flex w-full flex-col gap-4"}>
+      <GameNavigation />
+      {children}
+    </Gutter>
   )
 }
 
-export default PlayLayout
+export default GameLayout

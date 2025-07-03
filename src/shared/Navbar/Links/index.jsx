@@ -36,7 +36,7 @@ const PlayLinks = () => {
   }, [path])
 
   return (
-    <section className="text-foreground hidden items-center gap-2 sm:text-sm lg:flex xl:gap-4 xl:text-base 2xl:gap-6">
+    <section className="text-foreground hidden items-center  sm:text-sm lg:flex gap-4 xl:text-base 2xl:gap-6">
       {lastVisitedTeam && (
         <>
           <TabLink

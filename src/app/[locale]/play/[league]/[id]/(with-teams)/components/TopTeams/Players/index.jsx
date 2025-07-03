@@ -18,7 +18,7 @@ const RankingPlayers = () => {
           {t('Eng kuchli top 3 - futbolchilar')}
         </CardTitle>
       </CardHeader>
-      <CardContent className="mt-4 grid grid-cols-2 gap-2 px-4 sm:grid-cols-3">
+      <CardContent className="mt-4 grid grid-cols-2 gap-2 px-4 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
         {topPlayers?.length > 0 ? (
           topPlayers?.map((player, index) => (
             <PlayerPlace

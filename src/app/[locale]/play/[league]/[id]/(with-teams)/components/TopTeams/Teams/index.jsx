@@ -18,7 +18,7 @@ const RankingTeams = () => {
       </CardHeader>
       <CardContent
         className={cn(
-          'mt-4 h-auto min-h-32 grid-cols-2 gap-2 px-4 sm:grid-cols-3',
+          'mt-4 h-auto min-h-32 grid-cols-2 gap-2 px-4 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3',
           topTeams?.length > 0 && 'grid'
         )}
       >
