@@ -1,6 +1,6 @@
 import { Badge } from '@/components/ui/badge'
 import { useTranslation } from 'react-i18next'
-import { MATCH_STATUS } from 'app/utils/match.util'
+import { MATCH_STATUS } from 'utils/match.util'
 
 const MatchStatus = ({ status, homeScore, awayScore }) => {
   const { t } = useTranslation()

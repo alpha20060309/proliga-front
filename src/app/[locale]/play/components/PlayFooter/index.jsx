@@ -4,6 +4,7 @@ import Matches from '../Matches'
 import News from '../News'
 import MiniBanner from 'shared/Banners/Mini'
 import BigBanner from 'shared/Banners/Big'
+import { memo } from 'react'
 
 const PlayFooter = () => {
   return (
@@ -21,4 +22,4 @@ const PlayFooter = () => {
   )
 }
 
-export default PlayFooter
+export default memo(PlayFooter)

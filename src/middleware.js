@@ -2,13 +2,12 @@ import { auth as middleware } from 'app/api/auth/[...nextauth]/route'
 import { NextResponse } from 'next/server'
 
 import { i18nRouter } from 'next-i18n-router'
-import i18nConfig from './app/lib/i18n.config'
+import i18nConfig from './lib/i18n.config'
 
 const protectedRoutes = ['/settings', '/play']
 const apiAuthPrefix = '/api/auth'
 
 export const DEFAULT_LOGIN_REDIRECT = '/auth'
-
 
 export default middleware((req) => {
   const i18nResponse = i18nRouter(req, i18nConfig)

@@ -1,9 +1,9 @@
 import TeamMaxTransfersModal from './Modal'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { setTransferModal } from 'app/lib/features/currentTeam/currentTeam.slice'
-import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
-import { selectCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.selector'
+import { setTransferModal } from 'lib/features/currentTeam/currentTeam.slice'
+import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
+import { selectCurrentTourTeam } from 'lib/features/tourTeam/tourTeam.selector'
 import MotionNumber from 'components/MotionNumber'
 import { MoveUp } from 'lucide-react'
 
@@ -23,11 +23,10 @@ const TeamMaxTransfers = () => {
   return (
     <>
       <div
-        className="group w-full lg:w-auto cursor-pointer capitalize"
+        className="group w-full cursor-pointer capitalize lg:w-auto"
         onClick={() => dispatch(setTransferModal(!transferModal))}
       >
-        <header
-          className="text-muted-foreground group-hover:text-foreground flex cursor-pointer transition-all group-hover:underline">
+        <header className="text-muted-foreground group-hover:text-foreground flex cursor-pointer transition-all group-hover:underline">
           <h3
             title="Maksimum sotib olish mumkin bolgan o'yinchilar"
             className="text-xs sm:text-xs lg:text-xs 2xl:text-sm"
@@ -39,7 +38,9 @@ const TeamMaxTransfers = () => {
         <p className="text-foreground text-2xl font-bold xl:text-3xl">
           <span
             className={
-              currentTransferCount === 0 ? 'text-destructive' : 'text-foreground'
+              currentTransferCount === 0
+                ? 'text-destructive'
+                : 'text-foreground'
             }
           >
             <MotionNumber value={currentTransferCount} />

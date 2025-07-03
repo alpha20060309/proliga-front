@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { useMemo } from 'react'
-import { staticPath } from 'app/utils/static.util'
-import { selectTopPlayers } from 'app/lib/features/player/player.selector'
-import { getUrl } from 'app/utils/static.util'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { staticPath } from 'utils/static.util'
+import { selectTopPlayers } from 'lib/features/player/player.selector'
+import { getUrl } from 'utils/static.util'
+import { getCorrectName } from 'utils/getCorrectName.util'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 const RankingPlayers = () => {
@@ -12,13 +12,13 @@ const RankingPlayers = () => {
   const topPlayers = useSelector(selectTopPlayers)
 
   return (
-    <Card className="border-border w-full py-4 gap-2 ">
+    <Card className="border-border w-full gap-2 py-4">
       <CardHeader className="flex flex-row items-center justify-between px-4">
         <CardTitle className="text-xl font-bold">
           {t('Eng kuchli top 3 - futbolchilar')}
         </CardTitle>
       </CardHeader>
-      <CardContent className="sm:grid-cols-3 mt-4 grid grid-cols-2 gap-2 px-4">
+      <CardContent className="mt-4 grid grid-cols-2 gap-2 px-4 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
         {topPlayers?.length > 0 ? (
           topPlayers?.map((player, index) => (
             <PlayerPlace

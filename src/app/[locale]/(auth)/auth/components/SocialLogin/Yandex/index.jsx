@@ -1,17 +1,17 @@
 import { Button } from '@/components/ui/button'
 import { signIn } from 'next-auth/react'
-import { SUPABASE_PROVIDERS } from 'app/lib/supabaseClient'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { SUPABASE_PROVIDERS } from 'lib/supabaseClient'
+import { selectUser } from 'lib/features/auth/auth.selector'
 import { useSelector } from 'react-redux'
 import { FaYandex } from 'react-icons/fa'
 import { useTranslation } from 'react-i18next'
 
 const YandexSignIn = () => {
   const { t } = useTranslation()
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
 
   const handleYandexSignIn = async () => {
-    if (!userTable?.id) {
+    if (!user?.id) {
       localStorage.setItem('sign-in-method', SUPABASE_PROVIDERS.YANDEX)
       await signIn('yandex', {
         redirect: true,

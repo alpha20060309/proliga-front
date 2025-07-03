@@ -1,7 +1,7 @@
-import initTranslations from 'app/lib/i18n'
+import initTranslations from 'lib/i18n'
 import { cache } from 'react'
 import PrizeContainer from './components/PrizeContainer'
-import { supabase } from 'app/lib/supabaseClient'
+import { supabase } from 'lib/supabaseClient'
 
 const fetchCompetitions = cache(async () => {
   const { data: competitions, error } = await supabase
@@ -33,15 +33,18 @@ const Prizes = async ({ params }) => {
 
   return (
     <>
-      <h1 className="text-white mb-6 text-2xl font-bold">
-        <span className='mr-2 text-primary'>
-          {t('Available')}
-        </span>
+      <h1 className="mb-6 text-2xl font-bold text-white">
+        <span className="text-primary mr-2">{t('Available')}</span>
         {t('Yutuqlar')}
       </h1>
       <section className="flex flex-col items-center justify-center gap-2">
         {competitions.map((competition) => (
-          <PrizeContainer competition={competition} locale={locale} key={competition.id} t={t} />
+          <PrizeContainer
+            competition={competition}
+            locale={locale}
+            key={competition.id}
+            t={t}
+          />
         ))}
       </section>
     </>

@@ -1,17 +1,17 @@
 'use client'
 
-import { fetchNews } from 'app/lib/features/news/news.thunk'
+import { fetchNews } from 'lib/features/news/news.thunk'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { useState, useEffect, useMemo } from 'react'
 import { NewsSkeleton } from './Skeleton'
 import { cn } from '@/lib/utils'
 import { Pagination } from 'components/Table/Pagination/Server'
-import { selectNews } from 'app/lib/features/news/news.selector'
+import { selectNews } from 'lib/features/news/news.selector'
 import { Button } from '@/components/ui/button'
 import { RefreshCcw, Newspaper } from 'lucide-react'
 import Article from './Article'
-import NewsArticle from 'shared/Modals/NewsArticle'
+import NewsArticle from './NewsArticle'
 import {
   Card,
   CardContent,
@@ -46,7 +46,7 @@ const News = () => {
   return (
     <Card
       className={cn(
-        'relative mx-auto lg:mx-0 flex h-172 w-full max-w-lg border-border lg:min-w-72 lg:flex-1 gap-4'
+        'border-border relative mx-auto flex h-172 w-full max-w-lg gap-4 lg:mx-0 lg:min-w-72 lg:flex-1'
       )}
     >
       <CardHeader className="flex items-center justify-between">

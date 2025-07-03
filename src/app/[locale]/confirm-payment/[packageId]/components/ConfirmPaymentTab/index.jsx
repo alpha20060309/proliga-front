@@ -3,13 +3,13 @@ import { toast } from 'sonner'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { NumericFormat } from 'react-number-format'
-import { PAYMENT_OPTIONS } from 'app/utils/paymentOptions.util'
-import { useBuyPackageWithWallet } from 'app/hooks/payment/useBuyPackageWithWallet'
-import { useBuyPackageWithPayme } from 'app/hooks/payment/useBuyPackageWithPayme'
-import { useBuyPackageWithClick } from 'app/hooks/payment/useBuyPackageWithClick'
-import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
-import { selectCurrentPackage } from 'app/lib/features/package/package.selector'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { PAYMENT_OPTIONS } from 'utils/paymentOptions.util'
+import { useBuyPackageWithWallet } from 'hooks/payment/useBuyPackageWithWallet'
+import { useBuyPackageWithPayme } from 'hooks/payment/useBuyPackageWithPayme'
+import { useBuyPackageWithClick } from 'hooks/payment/useBuyPackageWithClick'
+import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
+import { selectCurrentPackage } from 'lib/features/package/package.selector'
+import { selectUser } from 'lib/features/auth/auth.selector'
 import { useSession } from 'next-auth/react'
 import { Loader } from 'lucide-react'
 
@@ -18,7 +18,7 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
   const { lang } = useSelector((store) => store.systemLanguage)
   const currentPackage = useSelector(selectCurrentPackage)
   const currentTeam = useSelector(selectCurrentTeam)
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const { update } = useSession()
 
   const { t } = useTranslation()
@@ -33,7 +33,7 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
     if (!paymentOption) return toast.error(t('To‘lov varianti topilmadi!'))
     if (
       paymentOption === PAYMENT_OPTIONS.WALLET &&
-      userTable.balance < currentPackage?.price
+      user.balance < currentPackage?.price
     ) {
       return toast.error(t('Mablag‘ yetarli emas!'))
     }
@@ -45,14 +45,14 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
     }
     if (paymentOption === PAYMENT_OPTIONS.PAYME) {
       buyPackageWithPayme({
-        userTable,
+        user,
         currentPackage,
         currentTeam,
         lang,
       })
     }
     if (paymentOption === PAYMENT_OPTIONS.CLICKUP) {
-      buyPackageWithClick({ userTable, currentPackage, currentTeam })
+      buyPackageWithClick({ user, currentPackage, currentTeam })
     }
     await update({
       updated_at: new Date(),

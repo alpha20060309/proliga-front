@@ -2,21 +2,21 @@
 
 import { Link } from 'next-view-transitions'
 import { useSelector } from 'react-redux'
-import { BANNER, BANNER_SERVICE_TYPE } from 'app/utils/banner.util'
+import { BANNER, BANNER_SERVICE_TYPE } from 'utils/banner.util'
 import { useMemo, useEffect, memo } from 'react'
-import { useCreateBannerView } from 'app/hooks/system/useCreateBannerView'
+import { useCreateBannerView } from 'hooks/system/useCreateBannerView'
 import {
   selectGeo,
   selectAgent,
-  selectUserTable,
-} from 'app/lib/features/auth/auth.selector'
-import { selectBanners } from 'app/lib/features/banner/banner.selector'
-import { getUrl } from 'app/utils/static.util'
+  selectUser,
+} from 'lib/features/auth/auth.selector'
+import { selectBanners } from 'lib/features/banner/banner.selector'
+import { getUrl } from 'utils/static.util'
 
 const MiniBanner = () => {
   const banners = useSelector(selectBanners)
   const agent = useSelector(selectAgent)
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const geo = useSelector(selectGeo)
   const { createBannerView } = useCreateBannerView()
 
@@ -27,16 +27,17 @@ const MiniBanner = () => {
 
   useEffect(() => {
     if (banner?.type === BANNER_SERVICE_TYPE.CUSTOM) {
-      if (banner?.id && userTable?.id && geo && agent) {
+      if (banner?.id && user?.id && geo && agent) {
         createBannerView({
           banner_id: banner?.id,
-          userTable,
+          user,
           geo,
           agent,
         })
       }
     }
-  }, [banner, agent, userTable, geo, createBannerView])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [banner, agent, user?.id, geo, createBannerView])
 
   return (
     <>

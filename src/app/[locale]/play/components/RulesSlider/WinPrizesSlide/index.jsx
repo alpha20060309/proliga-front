@@ -2,12 +2,12 @@
 
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { getCorrectName } from 'utils/getCorrectName.util'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { getUrl } from 'app/utils/static.util'
+import { getUrl } from 'utils/static.util'
 import { useEffect, useState } from 'react'
-import { supabase } from 'app/lib/supabaseClient'
+import { supabase } from 'lib/supabaseClient'
 import { toast } from 'sonner'
 
 const WinPrizesSlide = () => {
@@ -68,7 +68,7 @@ const Prize = ({ prize }) => {
       className={cn(
         'flex min-w-24 flex-1 flex-col items-center justify-center md:max-w-80',
         prize.order === 3 &&
-        'col-span-2 mx-auto max-w-[50%] sm:col-span-1 sm:mx-0 sm:max-w-max'
+          'col-span-2 mx-auto max-w-[50%] sm:col-span-1 sm:mx-0 sm:max-w-max'
       )}
     >
       <p className="mb-1 text-xs sm:text-sm md:mb-2 md:text-lg xl:text-xl">

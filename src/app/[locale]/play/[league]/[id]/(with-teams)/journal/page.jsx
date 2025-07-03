@@ -3,18 +3,18 @@
 import JournalTable from './components/Table'
 import { JournalSkeleton } from './loading'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchUserActivity } from 'app/lib/features/userActivity/userActivity.thunk'
+import { fetchUserActivity } from 'lib/features/userActivity/userActivity.thunk'
 import { useState, useEffect, useMemo } from 'react'
 import { usePathname } from 'next/navigation'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'lib/features/auth/auth.selector'
 import { Pagination } from 'components/Table/Pagination/Server'
-import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
+import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
 import { memo } from 'react'
 
 function Journal() {
   const path = usePathname()
   const dispatch = useDispatch()
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const { season } = useSelector((state) => state.season)
   const { isLoading, count } = useSelector((state) => state.userActivity)
   const currentTeam = useSelector(selectCurrentTeam)
@@ -30,14 +30,14 @@ function Journal() {
       dispatch(
         fetchUserActivity({
           competition_id,
-          user_id: userTable?.id,
+          user_id: user?.id,
           team_id: currentTeam?.id,
           page,
           perPage,
         })
       )
     }
-  }, [dispatch, competition_id, season, page, perPage, userTable, currentTeam])
+  }, [dispatch, competition_id, season, page, perPage, user?.id, currentTeam])
 
   if (isLoading)
     return <JournalSkeleton paginationCount={pages < 5 ? pages : 5} />

@@ -1,10 +1,9 @@
-
-import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { getCorrectName } from 'utils/getCorrectName.util'
 import Prize from '../Prize'
-import { getUrl } from 'app/utils/static.util'
+import { getUrl } from 'utils/static.util'
 import { cache } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { supabase } from 'app/lib/supabaseClient'
+import { supabase } from 'lib/supabaseClient'
 
 const fetchPrizesByCompetition = cache(async (competitionId) => {
   try {
@@ -15,7 +14,6 @@ const fetchPrizesByCompetition = cache(async (competitionId) => {
       .eq('competition_id', competitionId)
       .is('deleted_at', null)
       .order('order', { ascending: true })
-
 
     return { data: prizes, error }
   } catch (error) {
@@ -30,13 +28,13 @@ const PrizeContainer = async ({ competition, locale, t }) => {
   const orderedPrizes = [prizes[1], prizes[0], prizes[2]]
 
   return (
-    <Card className="w-full border-border">
-      <CardHeader className="flex border-border  mb-4 items-center gap-2 border-b">
+    <Card className="border-border w-full">
+      <CardHeader className="border-border mb-4 flex items-center gap-2 border-b">
         <img
           src={getUrl(competition.flag)}
           loading="lazy"
           alt={competition.title}
-          className="bg-white z-10 size-10 rounded-full p-1 select-none"
+          className="z-10 size-10 rounded-full bg-white p-1 select-none"
           draggable={false}
         />
         <CardTitle>
@@ -48,17 +46,15 @@ const PrizeContainer = async ({ competition, locale, t }) => {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className='lg:grid grid-cols-1 grid-rows-3 lg:grid-rows-1 gap-2 lg:grid-cols-3 hidden'>
-          {orderedPrizes.map(
-            (prize) =>
-              <Prize prize={prize} key={prize.id} locale={locale} t={t} />
-          )}
+        <div className="hidden grid-cols-1 grid-rows-3 gap-2 lg:grid lg:grid-cols-3 lg:grid-rows-1">
+          {orderedPrizes.map((prize) => (
+            <Prize prize={prize} key={prize.id} locale={locale} t={t} />
+          ))}
         </div>
-        <div className='lg:hidden grid-cols-1 grid-rows-3 lg:grid-rows-1 gap-2 lg:grid-cols-3 grid'>
-          {prizes.map(
-            (prize) =>
-              <Prize prize={prize} key={prize.id} locale={locale} t={t} />
-          )}
+        <div className="grid grid-cols-1 grid-rows-3 gap-2 lg:hidden lg:grid-cols-3 lg:grid-rows-1">
+          {prizes.map((prize) => (
+            <Prize prize={prize} key={prize.id} locale={locale} t={t} />
+          ))}
         </div>
       </CardContent>
     </Card>

@@ -16,7 +16,7 @@ import MobileNavigation from './Mobile'
 import { Skeleton } from '@/components/ui/skeleton'
 const NavbarLogo = dynamic(() => import('./Logo'), {
   ssr: false,
-  loading: () => <Skeleton className="w-28 xs:w-32 md:w-36 h-7.5" />,
+  loading: () => <Skeleton className="xs:w-32 h-7.5 w-28 md:w-36" />,
 })
 const ThemeSwitcher = dynamic(() => import('../SwitcherTheme'), {
   ssr: false,

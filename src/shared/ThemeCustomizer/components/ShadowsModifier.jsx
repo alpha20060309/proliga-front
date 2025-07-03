@@ -8,15 +8,15 @@ import {
   UNITS,
   SHADOW_KEYS,
   updateShadows,
-} from 'app/utils/shadow.utils'
+} from 'utils/shadow.utils'
 import { useSelector, useDispatch } from 'react-redux'
-import { setDarkTheme, setLightTheme } from 'app/lib/features/theme/theme.slice'
+import { setDarkTheme, setLightTheme } from 'lib/features/theme/theme.slice'
 import { useTheme } from 'next-themes'
 import { useTranslation } from 'react-i18next'
 import {
   selectDarkTheme,
   selectLightTheme,
-} from 'app/lib/features/theme/theme.selector'
+} from 'lib/features/theme/theme.selector'
 
 const ShadowModifier = () => {
   const { resolvedTheme } = useTheme()

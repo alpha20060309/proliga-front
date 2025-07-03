@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { getUrl } from 'app/utils/static.util'
+import { getUrl } from 'utils/static.util'
 
 const MatchTeamDisplay = ({
   name,

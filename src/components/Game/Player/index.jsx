@@ -19,7 +19,7 @@ export const MIDContainer = ({ children }) => {
 }
 
 export const STRContainer = ({ children }) => {
-  return <div className="flex items-start pt-2 justify-evenly">{children}</div>
+  return <div className="flex items-start justify-evenly pt-2">{children}</div>
 }
 
 export const GOAContainer = ({ children }) => {
@@ -43,9 +43,20 @@ export const PlayerName = ({ children }) => {
   )
 }
 
-export const PlayerImage = ({ tShirt, handleInfoModal, imageErr, player, className }) => {
+export const PlayerImage = ({
+  tShirt,
+  handleInfoModal,
+  imageErr,
+  player,
+  className,
+}) => {
   return (
-    <div className={cn("xs:size-8 relative size-6 md:size-10 lg:size-8 xl:size-10", className)}>
+    <div
+      className={cn(
+        'xs:size-8 relative size-6 md:size-10 lg:size-8 xl:size-10',
+        className
+      )}
+    >
       <Image
         src={tShirt}
         alt="player tshirt"
@@ -80,15 +91,22 @@ export const PlayerPoint = ({ children }) => {
 
 export const PlayerButtonsContainer = ({ children }) => {
   return (
-    <div className="flex items-center gap-0.5 sm:gap-1 lg:gap-0.5 xl:gap-1">{children}</div>
+    <div className="flex items-center gap-0.5 sm:gap-1 lg:gap-0.5 xl:gap-1">
+      {children}
+    </div>
   )
 }
 
 export const PlayerButton = ({ children, onClick, className }) => {
   return (
-    <button onClick={onClick} className={cn("hover:border-accent hover:bg-accent border-foreground/50 bg-background group flex size-4 items-center justify-center overflow-hidden rounded-sm border p-0.5 transition-colors sm:size-5 lg:size-4.5 xl:size-5", className)}>
+    <button
+      onClick={onClick}
+      className={cn(
+        'hover:border-accent hover:bg-accent border-foreground/50 bg-background group flex size-4 items-center justify-center overflow-hidden rounded-sm border p-0.5 transition-colors sm:size-5 lg:size-4.5 xl:size-5',
+        className
+      )}
+    >
       {children}
     </button>
   )
 }
-

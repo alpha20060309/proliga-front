@@ -2,6 +2,7 @@ import PositionsFilter from './Positions'
 import NameFilter from 'components/Table/Filters/Name'
 import ClubsFilter from 'components/Table/Filters/Clubs'
 import PriceFilter from 'components/Table/Filters/Price'
+import { memo } from 'react'
 
 function TransferTableFilters({ column }) {
   const { filterVariant } = column.columnDef.meta ?? {}
@@ -10,10 +11,7 @@ function TransferTableFilters({ column }) {
   switch (filterVariant) {
     case 'name':
       return (
-        <NameFilter
-          column={column}
-          columnFilterValue={columnFilterValue}
-        />
+        <NameFilter column={column} columnFilterValue={columnFilterValue} />
       )
     case 'club':
       return (
@@ -35,4 +33,4 @@ function TransferTableFilters({ column }) {
   }
 }
 
-export default TransferTableFilters
+export default memo(TransferTableFilters)

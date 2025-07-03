@@ -4,16 +4,16 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { staticPath } from 'app/utils/static.util'
+import { staticPath } from 'utils/static.util'
 import { useTranslation } from 'react-i18next'
-import { formatDate } from 'app/utils/formatDate.util'
+import { formatDate } from 'utils/formatDate.util'
 import { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   setCurrentMatch,
   setMatchModalOpen,
-} from 'app/lib/features/match/match.slice'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
+} from 'lib/features/match/match.slice'
+import { getCorrectName } from 'utils/getCorrectName.util'
 import { memo } from 'react'
 import MatchStatus from './Status'
 import MatchTeamDisplay from './TeamDisplay'

@@ -3,12 +3,12 @@ import { useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { toast } from 'sonner'
 import { useTranslation } from 'react-i18next'
-import { formatDate } from 'app/utils/formatDate.util'
+import { formatDate } from 'utils/formatDate.util'
 import { cn } from '@/lib/utils'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { getCorrectName } from 'utils/getCorrectName.util'
 import CompetitionModal from '../Modal/index'
-import { selectTeams } from 'app/lib/features/team/team.selector'
-import { getUrl } from 'app/utils/static.util'
+import { selectTeams } from 'lib/features/team/team.selector'
+import { getUrl } from 'utils/static.util'
 import { Card, CardContent, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 
@@ -55,7 +55,7 @@ const Championship = ({ game }) => {
       <Card
         className={cn(
           'bg-card relative flex h-32 items-start overflow-hidden rounded-lg border shadow',
-          'justify-center px-4 transition-all border-2',
+          'justify-center border-2 px-4 transition-all',
           cardVariants
         )}
         onClick={handleClick}

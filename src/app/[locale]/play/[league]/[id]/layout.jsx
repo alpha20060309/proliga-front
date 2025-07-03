@@ -3,35 +3,35 @@
 import { useParams } from 'next/navigation'
 import { useEffect, useState, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchCompetition } from 'app/lib/features/competition/competition.thunk'
-import { fetchSeason } from 'app/lib/features/season/season.thunk'
-import { fetchPackages } from 'app/lib/features/package/package.thunk'
-import { fetchBanners } from 'app/lib/features/banner/banner.thunk'
-import { fetchClubs } from 'app/lib/features/club/club.thunk'
-import { fetchPlayers } from 'app/lib/features/player/player.thunk'
+import { fetchCompetition } from 'lib/features/competition/competition.thunk'
+import { fetchSeason } from 'lib/features/season/season.thunk'
+import { fetchPackages } from 'lib/features/package/package.thunk'
+import { fetchBanners } from 'lib/features/banner/banner.thunk'
+import { fetchClubs } from 'lib/features/club/club.thunk'
+import { fetchPlayers } from 'lib/features/player/player.thunk'
 import Image from 'next/image'
 import ModalBanner from 'shared/Banners/Modal'
-import Spinner from 'components/Spinner'
-import { fetchTopPlayers } from 'app/lib/features/player/player.thunk'
-import { fetchAdditionalPlayers } from 'app/lib/features/player/player.thunk'
+import { fetchTopPlayers } from 'lib/features/player/player.thunk'
+import { fetchAdditionalPlayers } from 'lib/features/player/player.thunk'
 import {
   selectCompetition,
   selectCurrentCompetition,
-} from 'app/lib/features/competition/competition.selector'
-import { fetchTopTeams } from 'app/lib/features/team/team.thunk'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
-import { fetchCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.thunk'
-import { setLastVisitedTeam } from 'app/lib/features/currentTeam/currentTeam.slice'
-import { setCurrentCompetition } from 'app/lib/features/competition/competition.slice'
-import { fetchTours } from 'app/lib/features/tour/tour.thunk'
-import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
+} from 'lib/features/competition/competition.selector'
+import { fetchTopTeams } from 'lib/features/team/team.thunk'
+import { selectUser } from 'lib/features/auth/auth.selector'
+import { fetchCurrentTeam } from 'lib/features/currentTeam/currentTeam.thunk'
+import { setLastVisitedTeam } from 'lib/features/currentTeam/currentTeam.slice'
+import { setCurrentCompetition } from 'lib/features/competition/competition.slice'
+import { fetchTours } from 'lib/features/tour/tour.thunk'
+import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
 import { usePathname } from 'next/navigation'
+import Spinner from 'components/Spinner'
 
 export default function PlayLayout({ children }) {
   const path = usePathname()
   const [isModalOpen, setModalOpen] = useState(false)
   const { league, id } = useParams()
-  const user = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const dispatch = useDispatch()
   const { count: playersCount, isLoading: isLoadingPlayer } = useSelector(
     (store) => store.player
@@ -144,8 +144,9 @@ export default function PlayLayout({ children }) {
   if (isLoading) {
     return <Spinner />
   }
+
   return (
-    <main className="text-foreground bg-background relative flex min-h-[85vh] 2xl:min-h-[80vh] flex-col gap-4 overflow-hidden pt-14 pb-2">
+    <main className="text-foreground bg-background relative flex min-h-[80vh] flex-col gap-4 overflow-hidden pt-18 pb-2 2xl:min-h-[80vh]">
       <div aria-hidden="true" className="absolute inset-0 z-0 h-full w-full">
         <Image
           src="/images/Hero.png"

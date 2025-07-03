@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
-import { useSendOTP } from 'app/hooks/auth/useSendOTP'
+import { useSendOTP } from 'hooks/auth/useSendOTP'
 import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
 import { RefreshCcw } from 'lucide-react'

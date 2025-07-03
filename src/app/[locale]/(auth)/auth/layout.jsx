@@ -1,4 +1,4 @@
-import AuthListener from 'app/providers/AuthListener.provider'
+import AuthListener from 'providers/AuthListener.provider'
 
 const AuthLayout = ({ children }) => {
   return (

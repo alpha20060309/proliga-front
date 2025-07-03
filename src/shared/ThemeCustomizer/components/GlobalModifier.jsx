@@ -4,12 +4,12 @@ import React from 'react'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { useTheme } from 'next-themes'
 import { useSelector, useDispatch } from 'react-redux'
-import { setDarkTheme, setLightTheme } from 'app/lib/features/theme/theme.slice'
+import { setDarkTheme, setLightTheme } from 'lib/features/theme/theme.slice'
 import { useTranslation } from 'react-i18next'
 import {
   selectDarkTheme,
   selectLightTheme,
-} from 'app/lib/features/theme/theme.selector'
+} from 'lib/features/theme/theme.selector'
 
 const GlobalModifier = () => {
   const { t } = useTranslation()

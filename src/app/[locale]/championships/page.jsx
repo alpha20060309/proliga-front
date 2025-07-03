@@ -11,13 +11,13 @@ const ChampionshipsTitle = dynamic(() => import('./components/Title'), {
 import dynamic from 'next/dynamic'
 import { useEffect, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchUserTeams } from 'app/lib/features/team/team.thunk'
-import { fetchCompetition } from 'app/lib/features/competition/competition.thunk'
-import { selectCompetition } from 'app/lib/features/competition/competition.selector'
-import { fetchSeason } from 'app/lib/features/season/season.thunk'
+import { fetchUserTeams } from 'lib/features/team/team.thunk'
+import { fetchCompetition } from 'lib/features/competition/competition.thunk'
+import { selectCompetition } from 'lib/features/competition/competition.selector'
+import { fetchSeason } from 'lib/features/season/season.thunk'
 import { ChampionshipSkeleton } from './components/Skeleton'
 import { Skeleton } from '@/components/ui/skeleton'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'lib/features/auth/auth.selector'
 
 const Championships = () => {
   const dispatch = useDispatch()
@@ -25,7 +25,7 @@ const Championships = () => {
   const { isLoading: competitionLoading } = useSelector(
     (state) => state.competition
   )
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const { season, isLoading: seasonLoading } = useSelector(
     (state) => state.season
   )
@@ -44,15 +44,15 @@ const Championships = () => {
   }, [dispatch, season?.id])
 
   useEffect(() => {
-    if (userTable?.id && season?.id) {
+    if (user?.id && season?.id) {
       dispatch(
         fetchUserTeams({
-          user_id: userTable.id,
+          user_id: user.id,
           season_id: season.id,
         })
       )
     }
-  }, [dispatch, userTable?.id, season?.id])
+  }, [dispatch, user?.id, season?.id])
 
   const isLoading = useMemo(
     () => competitionLoading || seasonLoading || teamsLoading,

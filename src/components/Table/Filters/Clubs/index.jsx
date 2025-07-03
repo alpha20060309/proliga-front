@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { useSelector } from 'react-redux'
-import { selectClubs } from 'app/lib/features/club/club.selector'
+import { selectClubs } from 'lib/features/club/club.selector'
 import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/ui/button'
 import {
@@ -13,7 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { getCorrectName } from 'utils/getCorrectName.util'
 import { cn } from '@/lib/utils'
 
 const ClubsFilter = ({ column, className }) => {
@@ -40,7 +40,7 @@ const ClubsFilter = ({ column, className }) => {
         <Button
           variant="outline"
           className={cn(
-            'hover:text-foreground h-8 w-full justify-start truncate  focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-background hover:bg-accent dark:bg-input/30 dark:border-input dark:hover:bg-input/50  border-border rounded-md border border-dashed px-3 text-sm font-medium whitespace-nowrap shadow-xs transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50',
+            'hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-background hover:bg-accent dark:bg-input/30 dark:border-input dark:hover:bg-input/50 border-border h-8 w-full justify-start truncate rounded-md border border-dashed px-3 text-sm font-medium whitespace-nowrap shadow-xs transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50',
             className
           )}
         >
@@ -49,7 +49,7 @@ const ClubsFilter = ({ column, className }) => {
             : t('Hamma_Clublar')}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-background w-56 max-h-96">
+      <DropdownMenuContent className="bg-background max-h-96 w-56">
         <DropdownMenuLabel className={'text-foreground'}>
           {t('Hamma_Clublar')}
         </DropdownMenuLabel>

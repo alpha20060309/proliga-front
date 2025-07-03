@@ -13,14 +13,14 @@ import { Badge } from '@/components/ui/badge'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import NotificationModal from './Modal'
 import NotificationArticle from './NotificationArticle'
-import { selectNotifications } from 'app/lib/features/systemNotification/systemNotification.selector'
-import { supabase } from 'app/lib/supabaseClient'
+import { selectNotifications } from 'lib/features/systemNotification/systemNotification.selector'
+import { supabase } from 'lib/supabaseClient'
 import {
   addNotification,
   updateNotification,
   deleteNotification,
-} from 'app/lib/features/systemNotification/systemNotification.slice'
-import { SUPABASE_EVENT_TYPE } from 'app/lib/supabaseClient'
+} from 'lib/features/systemNotification/systemNotification.slice'
+import { SUPABASE_EVENT_TYPE } from 'lib/supabaseClient'
 import { Bell } from 'lucide-react'
 
 const Notification = () => {

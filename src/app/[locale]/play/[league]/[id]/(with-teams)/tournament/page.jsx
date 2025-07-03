@@ -2,20 +2,20 @@
 
 import { useSelector } from 'react-redux'
 import { useState, useEffect, useMemo } from 'react'
-import { fetchAllTeams } from 'app/lib/features/team/team.thunk'
+import { fetchAllTeams } from 'lib/features/team/team.thunk'
 import { useDispatch } from 'react-redux'
 import { Pagination } from 'components/Table/Pagination/Server'
 import {
   selectCurrentTour,
   selectTours,
-} from 'app/lib/features/tour/tour.selector'
-import { selectAllTeams } from 'app/lib/features/team/team.selector'
-import { selectCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.selector'
-import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
+} from 'lib/features/tour/tour.selector'
+import { selectAllTeams } from 'lib/features/team/team.selector'
+import { selectCurrentTourTeam } from 'lib/features/tourTeam/tourTeam.selector'
+import { selectCurrentCompetition } from 'lib/features/competition/competition.selector'
 import TournamentTable from './components/Table'
 import TeamFilter from './components/Filters/Team'
 import TourFilter from './components/Filters/Tour'
-import { searchAllTeams } from 'app/lib/features/team/team.thunk'
+import { searchAllTeams } from 'lib/features/team/team.thunk'
 import { memo } from 'react'
 import TournamentTableSkeleton from './loading'
 
@@ -110,7 +110,7 @@ const Tournament = () => {
 
   return (
     <>
-      <div className=" flex w-full items-center gap-1">
+      <div className="flex w-full items-center gap-1">
         <TeamFilter
           page={page}
           perPage={perPage}
@@ -122,10 +122,7 @@ const Tournament = () => {
         <TourFilter setTour={setTour} tour={tour} />
       </div>
       {isLoading ? (
-        <TournamentTableSkeleton
-          paginationCount={5}
-          rows={15}
-        />
+        <TournamentTableSkeleton paginationCount={5} rows={15} />
       ) : (
         <>
           <TournamentTable showUserTourTeam={showUserTourTeam} />

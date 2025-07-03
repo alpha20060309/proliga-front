@@ -1,5 +1,5 @@
-import { getPage } from 'app/actions/getHTMLPage.action'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { getPage } from 'actions/getHTMLPage.action'
+import { getCorrectName } from 'utils/getCorrectName.util'
 
 const Regulation = async ({ params }) => {
   const { locale } = await params

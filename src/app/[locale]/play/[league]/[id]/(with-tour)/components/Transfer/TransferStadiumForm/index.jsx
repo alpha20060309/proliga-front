@@ -1,16 +1,16 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'sonner'
 import { useEffect, useMemo } from 'react'
-import { useUpdateTeamPlayers } from 'app/hooks/transfer/useUpdateTeamPlayers'
-import { setCaptain } from 'app/lib/features/teamPlayer/teamPlayer.slice'
+import { useUpdateTeamPlayers } from 'hooks/transfer/useUpdateTeamPlayers'
+import { setCaptain } from 'lib/features/teamPlayer/teamPlayer.slice'
 import { useState } from 'react'
-import { useUpdateTeam } from 'app/hooks/transfer/useUpdateTeam'
-import { setTab } from 'app/lib/features/tour/tour.slice'
-import { TABS } from 'app/utils/tabs.util'
-import { revertTeamPlayers } from 'app/lib/features/teamPlayer/teamPlayer.slice'
+import { useUpdateTeam } from 'hooks/transfer/useUpdateTeam'
+import { setTab } from 'lib/features/tour/tour.slice'
+import { TABS } from 'utils/tabs.util'
+import { revertTeamPlayers } from 'lib/features/teamPlayer/teamPlayer.slice'
 import { useTranslation } from 'react-i18next'
-import { useUpdateTourTeam } from 'app/hooks/transfer/useUpdateTourTeam'
-import { useAutoGenerateTeamPlayers } from 'app/hooks/transfer/useAutoGenerateTeamPlayers'
+import { useUpdateTourTeam } from 'hooks/transfer/useUpdateTourTeam'
+import { useAutoGenerateTeamPlayers } from 'hooks/transfer/useAutoGenerateTeamPlayers'
 import {
   Select,
   SelectContent,
@@ -18,31 +18,34 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
-import { setTransferModal } from 'app/lib/features/currentTeam/currentTeam.slice'
-import { getCorrentPlayerPosition } from 'app/utils/getCorrectPlayerPosition.utils'
-import { CONFIG_KEY } from 'app/utils/config.util'
+import { setTransferModal } from 'lib/features/currentTeam/currentTeam.slice'
+import { getCorrentPlayerPosition } from 'utils/getCorrectPlayerPosition.utils'
+import { CONFIG_KEY } from 'utils/config.util'
 import {
   selectPrevTeam,
   selectTeamConcat,
-} from 'app/lib/features/teamPlayer/teamPlayer.selector'
-import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
-import { selectCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.selector'
-import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
-import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
-import { selectPlayers } from 'app/lib/features/player/player.selector'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
-import { selectSystemConfig } from 'app/lib/features/systemConfig/systemConfig.selector'
+} from 'lib/features/teamPlayer/teamPlayer.selector'
+import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
+import { selectCurrentTourTeam } from 'lib/features/tourTeam/tourTeam.selector'
+import { selectCurrentTour } from 'lib/features/tour/tour.selector'
+import { selectCurrentCompetition } from 'lib/features/competition/competition.selector'
+import { selectUser } from 'lib/features/auth/auth.selector'
+import { selectPlayers } from 'lib/features/player/player.selector'
+import { getCorrectName } from 'utils/getCorrectName.util'
+import { selectSystemConfig } from 'lib/features/systemConfig/systemConfig.selector'
 import { Loader2, Undo2, Compass } from 'lucide-react'
-import { TOUR_STATUS } from 'app/utils/tour.util'
-import { StadiumSelectTrigger, StadiumSaveButton } from 'components/Game/Stadium'
+import { TOUR_STATUS } from 'utils/tour.util'
+import {
+  StadiumSelectTrigger,
+  StadiumSaveButton,
+} from 'components/Game/Stadium'
 
 const TransferStadiumForm = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const teamConcat = useSelector(selectTeamConcat)
   const currentCompetition = useSelector(selectCurrentCompetition)
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const currentTeam = useSelector(selectCurrentTeam)
   const currentTour = useSelector(selectCurrentTour)
   const players = useSelector(selectPlayers)
@@ -153,7 +156,7 @@ const TransferStadiumForm = () => {
       team: teamConcat,
       team_id: currentTeam.id,
       tour_id: currentTour.id,
-      userTable,
+      user,
       currentCompetition,
     })
 
@@ -257,15 +260,12 @@ const TransferStadiumForm = () => {
           size="icon"
           onClick={() => dispatch(revertTeamPlayers())}
           title={t('orqaga qaytish')}
-          className="bg-card  text-foreground hover:border-primary border-border border hover:text-accent-foreground flex size-10 items-center justify-center gap-1 transition-all"
+          className="bg-card text-foreground hover:border-primary border-border hover:text-accent-foreground flex size-10 items-center justify-center gap-1 border transition-all"
         >
           <Undo2 className="size-6" />
         </Button>
       </div>
-      <StadiumSaveButton
-        type="submit"
-        disabled={isLoading}
-      >
+      <StadiumSaveButton type="submit" disabled={isLoading}>
         {isLoading ? (
           <Loader2 className="text-foreground mx-auto size-6 animate-spin" />
         ) : (

@@ -17,9 +17,17 @@ const PromotionMakeTransfers = ({ t }) => {
           {t('Agar sizning jamoangizdagi')}
         </CardDescription>
         <div className="mx-auto flex w-full flex-1 items-center justify-center gap-6 md:w-auto md:flex-row">
-          <img src='/images/transfer-from.png' alt='transfer field' className='rounded-full size-30 xs:size-40 md:size-48' />
-          <ArrowRightLeft className='size-6 md:size-12 text-foreground' />
-          <img src='/images/transfer-to.png' alt='transfer field' className='rounded-full size-30 xs:size-40 md:size-48' />
+          <img
+            src="/images/transfer-from.png"
+            alt="transfer field"
+            className="sm:size-40 size-30 rounded-full md:size-48"
+          />
+          <ArrowRightLeft className="text-foreground size-6 md:size-12" />
+          <img
+            src="/images/transfer-to.png"
+            alt="transfer field"
+            className="sm:size-40 size-30 rounded-full md:size-48"
+          />
         </div>
       </CardContent>
     </Card>

@@ -3,8 +3,8 @@ import TeamBalanceModal from './Modal'
 import { MoveUp } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { setBalanceModal } from 'app/lib/features/currentTeam/currentTeam.slice'
-import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
+import { setBalanceModal } from 'lib/features/currentTeam/currentTeam.slice'
+import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
 
 const TeamBalance = () => {
   const dispatch = useDispatch()
@@ -17,7 +17,7 @@ const TeamBalance = () => {
   return (
     <>
       <div
-        className="group w-full lg:w-auto cursor-pointer capitalize"
+        className="group w-full cursor-pointer capitalize lg:w-auto"
         onClick={() => dispatch(setBalanceModal(!balanceModal))}
       >
         <header className="text-muted-foreground group-hover:text-foreground flex cursor-pointer transition-all group-hover:underline">

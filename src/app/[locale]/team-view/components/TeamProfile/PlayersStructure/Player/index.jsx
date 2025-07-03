@@ -1,11 +1,11 @@
 'use client'
 
-import { selectPlayerPoint } from 'app/lib/features/playerPoint/playerPoint.selector'
+import { selectPlayerPoint } from 'lib/features/playerPoint/playerPoint.selector'
 import { useSelector } from 'react-redux'
 import { useEffect, useState, useMemo } from 'react'
-import { staticPath } from 'app/utils/static.util'
+import { staticPath } from 'utils/static.util'
 import Image from 'next/image'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { getCorrectName } from 'utils/getCorrectName.util'
 import { memo } from 'react'
 import {
   PlayerContainer,
@@ -64,13 +64,11 @@ const Player = ({ player }) => {
         <>
           <PlayerImage
             tShirt={tShirt}
-            handleInfoModal={() => { }}
+            handleInfoModal={() => {}}
             imageErr={imageErr}
             player={player}
           />
-          <PlayerName>
-            {lastName === '' ? name : lastName}
-          </PlayerName>
+          <PlayerName>{lastName === '' ? name : lastName}</PlayerName>
           <PlayerPoint>
             {player.is_captain
               ? (currentPlayerPoint?.point ?? 0) * 2

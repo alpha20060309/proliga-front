@@ -12,14 +12,14 @@ import Head from 'components/Table/Head'
 import { useSelector } from 'react-redux'
 import { createColumnHelper } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
-import { selectAllTeams } from 'app/lib/features/team/team.selector'
+import { selectAllTeams } from 'lib/features/team/team.selector'
 import { capitalize } from 'lodash'
 import { Table } from '@/components/ui/table'
 import Body from 'components/Table/Body'
 import { Link } from 'next-view-transitions'
 
 const columnHelper = createColumnHelper()
-import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
+import { selectCurrentCompetition } from 'lib/features/competition/competition.selector'
 
 function TournamentTable({ showUserTourTeam }) {
   const { t } = useTranslation()
@@ -37,7 +37,9 @@ function TournamentTable({ showUserTourTeam }) {
     columnHelper.accessor('name', {
       accessorFn: (row) => row?.team?.name ?? '',
       cell: (info) => (
-        <Link href={`/team-view/${currentCompetition?.id}/${info?.row?.original?.team?.id ?? 0}`}>
+        <Link
+          href={`/team-view/${currentCompetition?.id}/${info?.row?.original?.team?.id ?? 0}`}
+        >
           {info.getValue()}
         </Link>
       ),

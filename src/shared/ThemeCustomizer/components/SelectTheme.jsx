@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   setSelectedTheme,
   setThemeVariant,
-} from 'app/lib/features/theme/theme.slice'
+} from 'lib/features/theme/theme.slice'
 import {
   Select,
   SelectContent,
@@ -14,8 +14,8 @@ import {
 } from '@/components/ui/select'
 import { useTranslation } from 'react-i18next'
 import ThemePreview from './ThemePreview'
-import { selectThemes } from 'app/lib/features/theme/theme.selector'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { selectThemes } from 'lib/features/theme/theme.selector'
+import { getCorrectName } from 'utils/getCorrectName.util'
 import { useTheme } from 'next-themes'
 
 const SelectTheme = () => {

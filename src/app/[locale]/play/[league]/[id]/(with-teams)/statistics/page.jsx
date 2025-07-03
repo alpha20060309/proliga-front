@@ -12,14 +12,14 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { createColumnHelper } from '@tanstack/react-table'
-import { selectPlayers } from 'app/lib/features/player/player.selector'
-import { getCorrentPlayerPosition } from 'app/utils/getCorrectPlayerPosition.utils'
+import { selectPlayers } from 'lib/features/player/player.selector'
+import { getCorrentPlayerPosition } from 'utils/getCorrectPlayerPosition.utils'
 import Head from 'components/Table/Head'
 import Body from 'components/Table/Body'
 import { Table } from '@/components/ui/table'
 import StatisticsTableFilters from './components/Filters'
 import TanStackPagination from 'components/Table/Pagination/Client'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { getCorrectName } from 'utils/getCorrectName.util'
 
 const columnHelper = createColumnHelper()
 

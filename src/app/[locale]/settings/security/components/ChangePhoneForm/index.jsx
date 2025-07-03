@@ -10,18 +10,18 @@ import { useSelector } from 'react-redux'
 import {
   selectAgent,
   selectGeo,
-  selectUserTable,
-} from 'app/lib/features/auth/auth.selector'
+  selectUser,
+} from 'lib/features/auth/auth.selector'
 import { PhoneInput } from 'components/PhoneInput'
-import { useAuthChangePhone } from 'app/hooks/auth/useAuthChangePhone'
-import ConfirmOTP from 'shared/Modals/ConfirmOTP'
+import { useAuthChangePhone } from 'hooks/auth/useAuthChangePhone'
+import ConfirmOTP from '../ConfirmOTP'
 import { toast } from 'sonner'
 
 export default function ChangePhoneForm() {
   const [isModalOpen, setModalOpen] = useState(false)
   const { t } = useTranslation()
   const { isLoading, updatePhone } = useAuthChangePhone()
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const agent = useSelector(selectAgent)
   const geo = useSelector(selectGeo)
 
@@ -44,8 +44,8 @@ export default function ChangePhoneForm() {
       password,
       agent,
       geo,
-      id: userTable?.id,
-      phone: userTable?.phone,
+      id: user?.id,
+      phone: user?.phone,
       cb: () => setModalOpen(true),
     })
 

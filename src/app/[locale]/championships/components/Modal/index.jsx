@@ -1,7 +1,7 @@
 import Image from 'next/image'
-import { useCreateTeam } from 'app/hooks/transfer/useCreateTeam'
+import { useCreateTeam } from 'hooks/transfer/useCreateTeam'
 import { useState } from 'react'
-import { FORMATIONS } from 'app/utils/formations.util'
+import { FORMATIONS } from 'utils/formations.util'
 import { useTransitionRouter } from 'next-view-transitions'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
@@ -21,8 +21,8 @@ import {
 } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
-import { validateTeamName } from 'app/utils/validateTeamName.util'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { validateTeamName } from 'utils/validateTeamName.util'
+import { selectUser } from 'lib/features/auth/auth.selector'
 import { Loader2 } from 'lucide-react'
 
 const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
@@ -30,7 +30,7 @@ const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
   const { t } = useTranslation()
   const [title, setTitle] = useState('')
   const [formation, setFormation] = useState(FORMATIONS['4-3-3'])
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
 
   const { createTeam, isLoading } = useCreateTeam()
 
@@ -44,7 +44,7 @@ const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
       title,
       formation,
       competition_id: competition.id,
-      userTable,
+      user,
       cb: (game) => {
         toggleModal()
         router.push(`/play/${game.competition_id}/${game.id}`)

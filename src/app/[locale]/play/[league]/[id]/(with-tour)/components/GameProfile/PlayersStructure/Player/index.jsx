@@ -3,11 +3,11 @@
 import { useEffect, useState, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Image from 'next/image'
-import { staticPath } from 'app/utils/static.util'
-import { selectPlayerPoint } from 'app/lib/features/playerPoint/playerPoint.selector'
-import { setPlayerInfoModal } from 'app/lib/features/teamPlayer/teamPlayer.slice'
-import { setCurrentPlayer } from 'app/lib/features/player/player.slice'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
+import { staticPath } from 'utils/static.util'
+import { selectPlayerPoint } from 'lib/features/playerPoint/playerPoint.selector'
+import { setPlayerInfoModal } from 'lib/features/teamPlayer/teamPlayer.slice'
+import { setCurrentPlayer } from 'lib/features/player/player.slice'
+import { getCorrectName } from 'utils/getCorrectName.util'
 import { memo } from 'react'
 import { Info } from 'lucide-react'
 import {
@@ -79,11 +79,12 @@ const Player = ({ player }) => {
             imageErr={imageErr}
             player={player}
           />
-          <PlayerName>
-            {lastName === '' ? name : lastName}
-          </PlayerName>
+          <PlayerName>{lastName === '' ? name : lastName}</PlayerName>
           <PlayerButtonsContainer>
-            <PlayerButton onClick={handleInfoModal} className={'p-0 rounded-full'}>
+            <PlayerButton
+              onClick={handleInfoModal}
+              className={'rounded-full p-0'}
+            >
               <Info className="text-foreground group-hover:text-accent-foreground size-4 sm:size-5" />
             </PlayerButton>
             <PlayerPoint>

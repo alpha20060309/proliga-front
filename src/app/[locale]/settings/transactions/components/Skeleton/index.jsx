@@ -1,6 +1,12 @@
 import { Skeleton } from '@/components/ui/skeleton'
-import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table'
-
+import {
+  Table,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+} from '@/components/ui/table'
 
 const CabinetTransactionsSkeleton = ({ rows = 10, cols = 4 }) => {
   return (

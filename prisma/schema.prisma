@@ -659,11 +659,11 @@ model system_notification {
   updated_by   Int?
   deleted_by   Int?
   is_broadcast Boolean?  @default(false)
-  is_sms       Boolean?  @default(false)
-  is_email     Boolean?  @default(false)
   published_at DateTime? @default(now()) @db.Timestamptz(6)
   name_ru      String?   @db.VarChar(64)
   desc_ru      String?
+  provider     String?   @db.VarChar(255)
+  type         String?   @db.VarChar(255)
   user         user?     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_id")
 
   @@index([user_id], map: "idx_fk_user_id")
@@ -775,7 +775,7 @@ model theme {
   created_by                     Int?
   updated_by                     Int?
   deleted_by                     Int?
-  user                           user?     @relation(fields: [user_id], references: [id], onUpdate: SetNull)
+  user_theme_user_idTouser       user?     @relation("theme_user_idTouser", fields: [user_id], references: [id], onUpdate: SetNull)
   user_user_theme_idTotheme      user[]    @relation("user_theme_idTotheme")
   user_user_user_theme_idTotheme user[]    @relation("user_user_theme_idTotheme")
 }
@@ -879,12 +879,11 @@ model user {
   updated_by                                       Int?
   deleted_by                                       Int?
   language                                         language?             @default(uz)
-  ntf_enabled                                      Boolean?              @default(true)
   phone_verified                                   Boolean?              @default(false)
   visitor                                          String?               @db.VarChar(32)
   visited_at                                       DateTime?             @db.Timestamptz(6)
-  geo                                              String?
-  agent                                            String?
+  geo                                              Json?
+  agent                                            Json?
   is_test                                          Boolean?              @default(false)
   phone_new                                        String?               @db.VarChar(64)
   phones_old                                       Json?
@@ -892,10 +891,7 @@ model user {
   emailVerified                                    DateTime?
   isOAuth                                          Boolean?              @default(false)
   password                                         String?
-  ntf_topics                                       String?
-  location                                         String?
-  ntf_token                                        String?
-  ntf_token_created_at                             DateTime?             @db.Timestamptz(6)
+  location                                         Json?
   is_admin                                         Boolean?              @default(false)
   theme_id                                         Int?
   user_theme_id                                    Int?
@@ -923,7 +919,7 @@ model user {
   system_notification                              system_notification[]
   team                                             team[]
   team_player                                      team_player[]
-  theme                                            theme[]
+  theme_theme_user_idTouser                        theme[]               @relation("theme_user_idTouser")
   tour_team                                        tour_team[]
   theme_user_theme_idTotheme                       theme?                @relation("user_theme_idTotheme", fields: [theme_id], references: [id], onUpdate: SetNull, map: "theme_id_fkey")
   theme_user_user_theme_idTotheme                  theme?                @relation("user_user_theme_idTotheme", fields: [user_theme_id], references: [id], onUpdate: SetNull, map: "theme_id_fkey2")
@@ -932,6 +928,7 @@ model user {
   user_activity_user_activity_updated_byTouser     user_activity[]       @relation("user_activity_updated_byTouser")
   user_activity_user_activity_user_idTouser        user_activity[]       @relation("user_activity_user_idTouser")
   user_prize                                       user_prize[]
+  user_token                                       user_token[]
 
   @@index([id], map: "idx_user_id")
   @@index([name], map: "name_user_copy1")
@@ -1010,6 +1007,16 @@ model user_prize {
   @@index([season_id], map: "idx_user_prize_season_id")
   @@index([team_id], map: "idx_user_prize_team_id")
   @@index([user_id], map: "idx_user_prize_user_id")
+}
+
+model user_token {
+  id          Int       @id @default(autoincrement())
+  user_id     Int?
+  token       String?
+  expires_at  DateTime? @db.Timestamptz(6)
+  fingerprint String?
+  topics      Json?
+  user        user?     @relation(fields: [user_id], references: [id], onUpdate: SetNull, map: "token_user_id_fkey")
 }
 
 model verification_token {

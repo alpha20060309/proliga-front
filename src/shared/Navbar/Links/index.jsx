@@ -2,12 +2,12 @@
 
 import { Link } from 'next-view-transitions'
 import { useSelector } from 'react-redux'
-import { TABS } from 'app/utils/tabs.util'
+import { TABS } from 'utils/tabs.util'
 import { usePathname } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
-import { TOUR_STATUS } from 'app/utils/tour.util'
-import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
-import { selectCurrentTour } from 'app/lib/features/tour/tour.selector'
+import { TOUR_STATUS } from 'utils/tour.util'
+import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
+import { selectCurrentTour } from 'lib/features/tour/tour.selector'
 import { cn } from '@/lib/utils'
 import { useEffect, useState } from 'react'
 
@@ -36,7 +36,7 @@ const PlayLinks = () => {
   }, [path])
 
   return (
-    <section className="text-foreground hidden items-center gap-2 sm:text-sm lg:flex xl:gap-4 xl:text-base 2xl:gap-6">
+    <section className="text-foreground hidden items-center  sm:text-sm lg:flex gap-4 xl:text-base 2xl:gap-6">
       {lastVisitedTeam && (
         <>
           <TabLink
@@ -71,8 +71,7 @@ const PlayLinks = () => {
           />
           <TabLink
             title={'Turnir'}
-            disabled={!currentTeam?.is_team_created ||
-              isTeamViewRoute}
+            disabled={!currentTeam?.is_team_created || isTeamViewRoute}
             styling={
               isPlayRoute
                 ? gameTab === TABS.Tournament
@@ -85,8 +84,7 @@ const PlayLinks = () => {
           />
           <TabLink
             title={'Jurnal'}
-            disabled={!currentTeam?.is_team_created ||
-              isTeamViewRoute}
+            disabled={!currentTeam?.is_team_created || isTeamViewRoute}
             tab={TABS.Journal}
             styling={
               isPlayRoute
@@ -107,8 +105,7 @@ const PlayLinks = () => {
                   : PASSIVE
                 : PASSIVE
             }
-            disabled={!currentTeam?.is_team_created ||
-              isTeamViewRoute}
+            disabled={!currentTeam?.is_team_created || isTeamViewRoute}
             setTab={setGameTab}
           />
         </>

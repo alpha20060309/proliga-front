@@ -8,7 +8,7 @@ import {
   useReactTable,
   getPaginationRowModel,
 } from '@tanstack/react-table'
-import { formatCurrency } from 'app/utils/formatCurrency'
+import { formatCurrency } from 'utils/formatCurrency'
 import Head from 'components/Table/Head'
 import Body from 'components/Table/Body'
 import { createColumnHelper } from '@tanstack/react-table'
@@ -16,8 +16,8 @@ import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
 import TanStackPagination from 'components/Table/Pagination/Client'
-import { formatDate } from 'app/utils/formatDate.util'
-import { selectBalances } from 'app/lib/features/payBalance/payBalance.selector'
+import { formatDate } from 'utils/formatDate.util'
+import { selectBalances } from 'lib/features/payBalance/payBalance.selector'
 import {
   Popover,
   PopoverContent,
@@ -50,7 +50,7 @@ function BalanceTable() {
       id: 'code',
       cell: (info) => (
         <Popover>
-          <PopoverTrigger className=" cursor-pointer text-sm font-bold select-none md:text-base">
+          <PopoverTrigger className="cursor-pointer text-sm font-bold select-none md:text-base">
             ******
           </PopoverTrigger>
           <PopoverContent

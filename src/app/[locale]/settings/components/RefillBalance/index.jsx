@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { NumericFormat } from 'react-number-format'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'lib/features/auth/auth.selector'
 import {
   Card,
   CardContent,
@@ -11,17 +11,17 @@ import {
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { ArrowUpCircle } from 'lucide-react'
-import RefillBalanceModal from 'shared/Modals/RefillBalance'
+import RefillBalanceModal from 'shared/RefillBalanceModal'
 import { useState } from 'react'
 import { Wallet } from 'lucide-react'
 
 const RefillBalance = () => {
   const { t } = useTranslation()
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const [isModalOpen, setModalOpen] = useState(false)
 
   return (
-    <Card className="sm:max-w-64 w-full gap-4">
+    <Card className="w-full gap-4 sm:max-w-64">
       <RefillBalanceModal
         setIsModalOpen={setModalOpen}
         isModalOpen={isModalOpen}
@@ -35,7 +35,7 @@ const RefillBalance = () => {
 
       <CardContent>
         <NumericFormat
-          value={userTable?.balance / 100 || 0}
+          value={user?.balance / 100 || 0}
           className="text-foreground w-full border-none bg-transparent text-right text-lg font-bold outline-hidden select-none"
           defaultValue={0}
           readOnly

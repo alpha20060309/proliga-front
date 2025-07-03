@@ -1,5 +1,5 @@
 Folder PATH listing for volume Dev
-Volume serial number is F2D8-081C
+Volume serial number is 00520053 F2D8:081C
 D:\PROJECTS\PROLIGA-FRONT\SRC
 |   auth.config.js
 |   middleware.js
@@ -371,7 +371,6 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |   |       Firebase.provider.jsx
 |   |       Geolocation.provider.jsx
 |   |       InitialState.provider.jsx
-|   |       PWACache.provider.jsx
 |   |       Root.provider.jsx
 |   |       Session.provider.jsx
 |   |       Store.provider.jsx
@@ -418,7 +417,13 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |       |   |   |   page.jsx
 |       |   |   |   
 |       |   |   \---components
+|       |   |       +---ForgotPassword
+|       |   |       |       index.jsx
+|       |   |       |       
 |       |   |       +---LoginForm
+|       |   |       |       index.jsx
+|       |   |       |       
+|       |   |       +---SetUserCredentials
 |       |   |       |       index.jsx
 |       |   |       |       
 |       |   |       +---SignUpForm
@@ -535,22 +540,47 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |       |   |   +---Matches
 |       |   |   |   |   index.jsx
 |       |   |   |   |   
-|       |   |   |   \---Match
+|       |   |   |   +---Match
+|       |   |   |   |   |   index.jsx
+|       |   |   |   |   |   
+|       |   |   |   |   +---Skeleton
+|       |   |   |   |   |       index.jsx
+|       |   |   |   |   |       
+|       |   |   |   |   +---Status
+|       |   |   |   |   |       index.jsx
+|       |   |   |   |   |       
+|       |   |   |   |   \---TeamDisplay
+|       |   |   |   |           index.jsx
+|       |   |   |   |           
+|       |   |   |   \---MatchEvent
+|       |   |   |       |   animations.styles.js
 |       |   |   |       |   index.jsx
 |       |   |   |       |   
-|       |   |   |       +---Skeleton
+|       |   |   |       +---Content
+|       |   |   |       |   |   index.jsx
+|       |   |   |       |   |   
+|       |   |   |       |   +---Event
+|       |   |   |       |   |   |   index.jsx
+|       |   |   |       |   |   |   
+|       |   |   |       |   |   \---Icon
+|       |   |   |       |   |           index.jsx
+|       |   |   |       |   |           
+|       |   |   |       |   \---Skeleton
+|       |   |   |       |           index.jsx
+|       |   |   |       |           
+|       |   |   |       +---Header
 |       |   |   |       |       index.jsx
 |       |   |   |       |       
-|       |   |   |       +---Status
-|       |   |   |       |       index.jsx
-|       |   |   |       |       
-|       |   |   |       \---TeamDisplay
+|       |   |   |       \---Score
 |       |   |   |               index.jsx
 |       |   |   |               
 |       |   |   +---News
 |       |   |   |   |   index.jsx
 |       |   |   |   |   
 |       |   |   |   +---Article
+|       |   |   |   |       index.jsx
+|       |   |   |   |       
+|       |   |   |   +---NewsArticle
 |       |   |   |   |       index.jsx
 |       |   |   |   |       
 |       |   |   |   \---Skeleton
@@ -645,6 +675,15 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |       |               |   |   +---GameBrief
 |       |               |   |   |       index.jsx
 |       |               |   |   |       
+|       |               |   |   +---PlayerInfo
+|       |               |   |   |   |   index.jsx
+|       |               |   |   |   |   
+|       |               |   |   |   +---PlayerPhoto
+|       |               |   |   |   |       index.jsx
+|       |               |   |   |   |       
+|       |               |   |   |   \---Table
+|       |               |   |   |           index.jsx
+|       |               |   |   |           
 |       |               |   |   +---PlayersStructure
 |       |               |   |   |   |   index.jsx
 |       |               |   |   |   |   
@@ -678,6 +717,18 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |       |               |       |   \---Skeleton
 |       |               |       |           index.jsx
 |       |               |       |           
+|       |               |       +---PlayerTransfer
+|       |               |       |   |   index.jsx
+|       |               |       |   |   
+|       |               |       |   \---Table
+|       |               |       |       |   index.jsx
+|       |               |       |       |   
+|       |               |       |       +---Filters
+|       |               |       |       |       index.jsx
+|       |               |       |       |       
+|       |               |       |       \---SwapPlayerButton
+|       |               |       |               index.jsx
+|       |               |       |               
 |       |               |       +---TeamOverview
 |       |               |       |   |   index.jsx
 |       |               |       |   |   
@@ -741,9 +792,15 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |       |   |   +---RefillBalance
 |       |   |   |       index.jsx
 |       |   |   |       
-|       |   |   \---ThemeCustomizer
-|       |   |           index.jsx
-|       |   |           
+|       |   |   +---ThemeCustomizer
+|       |   |   |       index.jsx
+|       |   |   |       
+|       |   |   \---UploadFile
+|       |   |       |   index.jsx
+|       |   |       |   
+|       |   |       \---Uploader
+|       |   |               index.jsx
+|       |   |               
 |       |   +---general
 |       |   |       page.jsx
 |       |   |       
@@ -755,9 +812,15 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |       |   |       +---ChangePasswordForm
 |       |   |       |       index.jsx
 |       |   |       |       
-|       |   |       \---ChangePhoneForm
-|       |   |               index.jsx
-|       |   |               
+|       |   |       +---ChangePhoneForm
+|       |   |       |       index.jsx
+|       |   |       |       
+|       |   |       \---ConfirmOTP
+|       |   |           |   index.jsx
+|       |   |           |   
+|       |   |           \---ResendOTP
+|       |   |                   index.jsx
+|       |   |                   
 |       |   \---transactions
 |       |       |   page.jsx
 |       |       |   
@@ -774,11 +837,8 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |       +---team-view
 |       |   +---components
 |       |   |   +---GameNavigation
-|       |   |   |   |   index.jsx
-|       |   |   |   |   
-|       |   |   |   \---TourTabs
-|       |   |   |           index.jsx
-|       |   |   |           
+|       |   |   |       index.jsx
+|       |   |   |       
 |       |   |   \---TeamProfile
 |       |   |       |   index.jsx
 |       |   |       |   
@@ -810,7 +870,7 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |                   OfflineClient.jsx
 |                   
 +---components
-|   +---DatePicker
+|   +---ConfirmationModal
 |   |       index.jsx
 |   |       
 |   +---Game
@@ -932,77 +992,6 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
     +---GameBrief
     |       index.jsx
     |       
-    +---Modals
-    |   +---Confirmation
-    |   |       index.jsx
-    |   |       
-    |   +---ConfirmOTP
-    |   |   |   index.jsx
-    |   |   |   
-    |   |   \---ResendOTP
-    |   |           index.jsx
-    |   |           
-    |   +---ForgotPassword
-    |   |       index.jsx
-    |   |       
-    |   +---MatchEvent
-    |   |   |   animations.styles.js
-    |   |   |   index.jsx
-    |   |   |   
-    |   |   +---Content
-    |   |   |   |   index.jsx
-    |   |   |   |   
-    |   |   |   +---Event
-    |   |   |   |   |   index.jsx
-    |   |   |   |   |   
-    |   |   |   |   \---Icon
-    |   |   |   |           index.jsx
-    |   |   |   |           
-    |   |   |   \---Skeleton
-    |   |   |           index.jsx
-    |   |   |           
-    |   |   +---Header
-    |   |   |       index.jsx
-    |   |   |       
-    |   |   \---Score
-    |   |           index.jsx
-    |   |           
-    |   +---NewsArticle
-    |   |       index.jsx
-    |   |       
-    |   +---PlayerInfo
-    |   |   |   index.jsx
-    |   |   |   
-    |   |   +---PlayerPhoto
-    |   |   |       index.jsx
-    |   |   |       
-    |   |   \---Table
-    |   |           index.jsx
-    |   |           
-    |   +---PlayerTransfer
-    |   |   |   index.jsx
-    |   |   |   
-    |   |   \---Table
-    |   |       |   index.jsx
-    |   |       |   
-    |   |       +---Filters
-    |   |       |       index.jsx
-    |   |       |       
-    |   |       \---SwapPlayerButton
-    |   |               index.jsx
-    |   |               
-    |   +---RefillBalance
-    |   |       index.jsx
-    |   |       
-    |   +---SetUserCredentials
-    |   |       index.jsx
-    |   |       
-    |   \---UploadFile
-    |       |   index.jsx
-    |       |   
-    |       \---Uploader
-    |               index.jsx
-    |               
     +---Navbar
     |   |   index.jsx
     |   |   
@@ -1010,6 +999,9 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
     |   |       index.jsx
     |   |       
     |   +---Links
+    |   |       index.jsx
+    |   |       
+    |   +---Logo
     |   |       index.jsx
     |   |       
     |   \---Mobile
@@ -1024,6 +1016,9 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
     |   \---NotificationArticle
     |           index.jsx
     |           
+    +---RefillBalanceModal
+    |       index.jsx
+    |       
     +---SwitcherLanguage
     |       index.jsx
     |       

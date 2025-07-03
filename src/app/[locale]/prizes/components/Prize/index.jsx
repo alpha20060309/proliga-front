@@ -1,16 +1,12 @@
-import { getCorrectName } from 'app/utils/getCorrectName.util'
-import { getUrl } from 'app/utils/static.util'
+import { getCorrectName } from 'utils/getCorrectName.util'
+import { getUrl } from 'utils/static.util'
 import { cn } from '@/lib/utils'
 
 const Prize = ({ prize, locale, t }) => {
   return (
-    <div
-      className={cn(
-        'flex flex-col items-center min-h-96 transition-all '
-      )}
-    >
+    <div className={cn('flex min-h-96 flex-col items-center transition-all')}>
       <p className="text-lg">
-        <span className="font-bold">{prize.order + " "}</span>
+        <span className="font-bold">{prize.order + ' '}</span>
 
         {t("O'RIN")}
       </p>
@@ -19,7 +15,7 @@ const Prize = ({ prize, locale, t }) => {
         loading="lazy"
         alt={prize?.name}
         className={cn(
-          'aspect-auto  bg-cover',
+          'aspect-auto bg-cover',
           prize.order === 1 && 'scale-100',
           prize.order === 2 && 'scale-100 lg:scale-90',
           prize.order === 3 && 'scale-100 lg:scale-80'

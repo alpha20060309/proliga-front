@@ -10,35 +10,35 @@ import { Palette } from 'lucide-react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { RefreshCw, Loader2, Save } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
+import { selectUser } from 'lib/features/auth/auth.selector'
 import { toast } from 'sonner'
-import { setDefaultTheme } from 'app/lib/features/theme/theme.slice'
+import { setDefaultTheme } from 'lib/features/theme/theme.slice'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Switch } from '@/components/ui/switch'
 import CreateThemeModal from './components/CreateThemeModal'
-import { useResetUserThemes } from 'app/hooks/theme/useResetUserThemes'
+import { useResetUserThemes } from 'hooks/theme/useResetUserThemes'
 import ColorModifier from './components/ColorModifier'
 import FontModifier from './components/FontModifer'
 import GlobalModifier from './components/GlobalModifier'
 import ShadowModifier from './components/ShadowsModifier'
 import SelectTheme from './components/SelectTheme'
-import { selectThemes } from 'app/lib/features/theme/theme.selector'
-import { useSaveTheme } from 'app/hooks/theme/useSaveTheme'
-import { useSetThemeDefault } from 'app/hooks/theme/useSetThemeDefault'
+import { selectThemes } from 'lib/features/theme/theme.selector'
+import { useSaveTheme } from 'hooks/theme/useSaveTheme'
+import { useSetThemeDefault } from 'hooks/theme/useSetThemeDefault'
 import {
   selectDarkTheme,
   selectLightTheme,
-} from 'app/lib/features/theme/theme.selector'
+} from 'lib/features/theme/theme.selector'
 import {
   fetchThemes,
   fetchUserThemes,
-} from 'app/lib/features/theme/theme.thunk'
+} from 'lib/features/theme/theme.thunk'
 
 const ThemeCustomizer = () => {
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
-  const user = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const { selectedTheme, isModified } = useSelector((store) => store.theme)
   const themes = useSelector(selectThemes)
   const { t } = useTranslation()

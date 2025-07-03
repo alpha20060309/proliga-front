@@ -6,14 +6,14 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import Image from 'next/image'
-import { LANGUAGE } from 'app/utils/languages.util'
+import { LANGUAGE } from 'utils/languages.util'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { setLanguage } from 'app/lib/features/systemLanguage/systemLanguage.slice'
+import { setLanguage } from 'lib/features/systemLanguage/systemLanguage.slice'
 import { Globe } from 'lucide-react'
 import { useRouter, usePathname } from 'next/navigation'
-import { setLanguageCookie } from 'app/utils/setLanguageCookie'
-import i18nConfig from 'app/lib/i18n.config'
+import { setLanguageCookie } from 'utils/setLanguageCookie'
+import i18nConfig from 'lib/i18n.config'
 import { useEffect } from 'react'
 
 const ChangeLanguageDropdown = () => {

@@ -11,25 +11,25 @@ import { Label } from '@/components/ui/label'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
-import { useCreateUserTheme } from 'app/hooks/theme/useCreateUserTheme'
+import { selectUser } from 'lib/features/auth/auth.selector'
+import { useCreateUserTheme } from 'hooks/theme/useCreateUserTheme'
 import { Loader2, Save } from 'lucide-react'
 import {
   fetchThemes,
   fetchUserThemes,
-} from 'app/lib/features/theme/theme.thunk'
+} from 'lib/features/theme/theme.thunk'
 import {
   selectDarkTheme,
   selectLightTheme,
-} from 'app/lib/features/theme/theme.selector'
-import { useCreatePresetTheme } from 'app/hooks/theme/useCreatePresetTheme'
+} from 'lib/features/theme/theme.selector'
+import { useCreatePresetTheme } from 'hooks/theme/useCreatePresetTheme'
 
 const CreateThemeModal = ({ isGlobal, open, setOpen }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const [name, setName] = useState('')
   const [nameRu, setNameRu] = useState('')
-  const user = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const { createUserTheme, isLoading: isUserLoading } = useCreateUserTheme()
   const { createPresetTheme, isLoading: isPresetLoading } =
     useCreatePresetTheme()

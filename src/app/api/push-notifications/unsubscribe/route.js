@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server'
 import { getMessaging } from 'firebase-admin/messaging'
-import { initializeFirebaseAdmin } from 'app/lib/firebase/firebase-admin'
-import prisma from 'lib/prisma'
+import { initializeFirebaseAdmin } from 'lib/firebase/firebase-admin'
+import { supabase } from 'lib/supabaseClient'
 
 initializeFirebaseAdmin()
 
 export async function POST(request) {
   try {
-    const { token, topic, user_id } = await request.json()
+    const { token, topic, user_id, fingerprint } = await request.json()
 
     if (!token || !topic) {
       return NextResponse.json(
@@ -22,39 +22,45 @@ export async function POST(request) {
       )
     }
 
-    await getMessaging().unsubscribeFromTopic(token, topic)
+    const { data: user_token, error } = await supabase
+      .from('user_token')
+      .select('*')
+      .eq('user_id', user_id)
+      .eq('fingerprint', fingerprint)
+      .lte('expires_at', new Date(Date.now()))
+      .single()
 
-    // Get notification topics
-    const user = await prisma.user.findUnique({
-      where: {
-        id: +user_id,
-        deleted_at: null,
-      },
-      select: {
-        ntf_topics: true,
-      },
-    })
-
-    if (!user) {
+    if (error) {
       return NextResponse.json(
         { success: false, message: 'Error getting user notification topics' },
         { status: 500 }
       )
     }
-    console.log(user.notification_topics)
-    let topics = JSON.parse(user.notification_topics || '[]')
-    topics = topics.filter((t) => t !== topic)
 
-    console.log(topics)
-    await prisma.user.update({
-      where: {
-        id: +user_id,
-        deleted_at: null,
-      },
-      data: {
-        ntf_topics: JSON.stringify(topics),
-      },
-    })
+    if (!user_token?.id) {
+      return NextResponse.json(
+        { success: false, message: 'User token not found' },
+        { status: 404 }
+      )
+    }
+
+    const newTopics = (user_token.topics || []).filter((t) => t !== topic)
+
+    const { error: updateError } = await supabase
+      .from('user_token')
+      .update({
+        topics: newTopics,
+      })
+      .eq('id', user_token.id)
+
+    if (updateError) {
+      return NextResponse.json(
+        { success: false, message: 'Error updating user token' },
+        { status: 500 }
+      )
+    }
+
+    await getMessaging().unsubscribeFromTopic(token, topic)
 
     return NextResponse.json({
       success: true,

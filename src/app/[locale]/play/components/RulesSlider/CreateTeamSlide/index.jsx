@@ -32,7 +32,7 @@ const CreateTeamSlide = () => {
           width={380}
           priority={false}
           height={380}
-          className="mx-auto h-80 w-min max-w-80 sm:max-w-72  xl:max-w-120 lg:h-96 xl:h-128 2xl:h-140"
+          className="mx-auto h-80 w-min max-w-80 sm:max-w-72 lg:h-96 xl:h-128 xl:max-w-120 2xl:h-140"
           alt="interactive stadium"
           unoptimized
         />

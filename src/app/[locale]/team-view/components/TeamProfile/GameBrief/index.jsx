@@ -3,18 +3,18 @@
 import {
   selectCurrentTour,
   selectTours,
-} from 'app/lib/features/tour/tour.selector'
+} from 'lib/features/tour/tour.selector'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
-import { TOUR_STATUS } from 'app/utils/tour.util'
+import { TOUR_STATUS } from 'utils/tour.util'
 import { useSelector } from 'react-redux'
 import { toast } from 'sonner'
 import { Coins, PercentCircle } from 'lucide-react'
-import { getCorrectName } from 'app/utils/getCorrectName.util'
-import { selectCurrentCompetition } from 'app/lib/features/competition/competition.selector'
-import { selectCurrentTeam } from 'app/lib/features/currentTeam/currentTeam.selector'
-import { selectCurrentTourTeam } from 'app/lib/features/tourTeam/tourTeam.selector'
-import { formatDate } from 'app/utils/formatDate.util'
+import { getCorrectName } from 'utils/getCorrectName.util'
+import { selectCurrentCompetition } from 'lib/features/competition/competition.selector'
+import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
+import { selectCurrentTourTeam } from 'lib/features/tourTeam/tourTeam.selector'
+import { formatDate } from 'utils/formatDate.util'
 import { Copy } from 'lucide-react'
 import {
   GameBriefContainer,

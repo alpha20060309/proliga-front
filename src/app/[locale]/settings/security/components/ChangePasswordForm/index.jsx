@@ -8,16 +8,16 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { useSelector } from 'react-redux'
-import { selectUserTable } from 'app/lib/features/auth/auth.selector'
-import ConfirmOTP from 'shared/Modals/ConfirmOTP'
-import { useSendOTP } from 'app/hooks/auth/useSendOTP'
-import { resetPassword } from 'app/actions/resetPassword.action'
+import { selectUser } from 'lib/features/auth/auth.selector'
+import ConfirmOTP from '../ConfirmOTP'
+import { useSendOTP } from 'hooks/auth/useSendOTP'
+import { resetPassword } from 'actions/resetPassword.action'
 
 function ChangePasswordForm() {
   const [isModalOpen, setModalOpen] = useState(false)
   const { t } = useTranslation()
 
-  const userTable = useSelector(selectUserTable)
+  const user = useSelector(selectUser)
   const { sendOTP } = useSendOTP()
   const isLoading = false
 
@@ -35,7 +35,7 @@ function ChangePasswordForm() {
     if (password.length < 6 || confirmPassword.length < 6) {
       return toast.warning(t("Parolar 6 ta belgidan kam bo'lmasligi kerak"))
     }
-    await sendOTP({ phone: userTable?.phone })
+    await sendOTP({ phone: user?.phone })
     setModalOpen(true)
   }
 
@@ -46,7 +46,7 @@ function ChangePasswordForm() {
         isModalOpen={isModalOpen}
         defaultHook={false}
         cb={(code) => {
-          const res = resetPassword({ phone: userTable?.phone, code, password })
+          const res = resetPassword({ phone: user?.phone, code, password })
 
           if (res?.error) {
             return toast.error(t(res?.error))
@@ -54,7 +54,7 @@ function ChangePasswordForm() {
           toast.success(t("Parol o'zgartirildi"))
           setModalOpen(false)
         }}
-        phone={userTable?.phone}
+        phone={user?.phone}
       />
       <form
         onSubmit={handleSubmit}

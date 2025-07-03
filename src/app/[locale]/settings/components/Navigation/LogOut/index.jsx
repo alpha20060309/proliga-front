@@ -2,7 +2,7 @@
 
 import { LogOut } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { useLogOut } from 'app/hooks/auth/useLogOut'
+import { useLogOut } from 'hooks/auth/useLogOut'
 import { Button } from '@/components/ui/button'
 
 const SettingsSidebarLogOut = () => {
