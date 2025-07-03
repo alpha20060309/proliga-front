@@ -15,13 +15,13 @@ const MakeTransfersSlide = () => {
         <img
           src="/images/transfer-from.png"
           alt="transfer field"
-          className="xs:size-40 size-30 rounded-full md:size-48"
+          className="sm:size-40 size-30 rounded-full md:size-48"
         />
         <ArrowRightLeft className="text-foreground size-6 md:size-12" />
         <img
           src="/images/transfer-to.png"
           alt="transfer field"
-          className="xs:size-40 size-30 rounded-full md:size-48"
+          className="sm:size-40 size-30 rounded-full md:size-48"
         />
       </div>
     </article>
