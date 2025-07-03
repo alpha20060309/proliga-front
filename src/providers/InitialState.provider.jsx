@@ -13,7 +13,6 @@ import {
 } from 'lib/features/systemNotification/systemNotification.thunk'
 import dynamic from 'next/dynamic'
 const registerSW = dynamic(() => import('lib/registerSw'), { ssr: false })
-import { fetchFirebaseToken } from 'lib/features/auth/auth.thunk'
 
 const InitialStateProvider = ({ children }) => {
   const dispatch = useDispatch()
@@ -36,9 +35,6 @@ const InitialStateProvider = ({ children }) => {
     if (user?.id && user?.phone && user?.phone_verified) {
       dispatch(fetchBroadcastNotifications())
       dispatch(fetchPersonalNotifications({ user_id: user?.id }))
-      if (fingerprint) {
-        dispatch(fetchFirebaseToken({ user_id: user?.id, fingerprint }))
-      }
     }
   }, [dispatch, user?.id, user?.phone, user?.phone_verified, fingerprint])
 

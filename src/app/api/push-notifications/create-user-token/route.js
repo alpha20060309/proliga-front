@@ -13,12 +13,15 @@ export async function POST(request) {
       )
     }
 
-    const { data: user_token, error: newError } = await supabase.from('user_token').insert({
-      user_id,
-      fingerprint,
-      token,
-      expires_at: new Date(Date.now() + TOKEN_EXPIRATION_TIME),
-    }).select().single()
+    const { data: user_token, error: newError } = await supabase
+      .from('user_token')
+      .insert({
+        user_id,
+        fingerprint,
+        token,
+        expires_at: new Date(Date.now() + TOKEN_EXPIRATION_TIME),
+      }).select()
+      .single()
 
     if (newError) {
       return NextResponse.json(

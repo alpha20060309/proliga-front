@@ -18,10 +18,11 @@ export const authExtraReducer = (builder) => {
     })
     .addCase(fetchFirebaseToken.fulfilled, (state, action) => {
       state.tokenLoading = false
-      state.token = action.payload?.data || null
+      state.token = action.payload?.data?.token || null
+      state.tokenLoaded = true
     })
     .addCase(fetchFirebaseToken.rejected, (state, action) => {
       state.tokenLoading = false
-      state.tokenError = action?.error 
+      state.tokenError = action?.error
     })
 }
