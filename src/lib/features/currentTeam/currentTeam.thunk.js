@@ -11,7 +11,11 @@ export const fetchCurrentTeam = createAsyncThunk(
       .eq('user_id', user_id)
       .is('deleted_at', null)
 
-    return { data, error }
+    if (error) {
+      throw error
+    }
+
+    return { data }
   }
 )
 
@@ -24,6 +28,10 @@ export const fetchSelectedTeam = createAsyncThunk(
       .eq('id', id)
       .is('deleted_at', null)
 
-    return { data, error }
+    if (error) {
+      throw error
+    }
+
+    return { data }
   }
 )

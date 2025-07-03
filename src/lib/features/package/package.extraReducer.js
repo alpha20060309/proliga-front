@@ -14,7 +14,7 @@ export const packageExtraReducer = (builder) => {
       state.isLoading = false
     })
     .addCase(fetchPackages.rejected, (state, action) => {
-      state.error = action?.error?.message ?? null
+      state.error = action?.error ?? null
       state.isLoading = false
     })
 }

@@ -11,7 +11,11 @@ export const fetchTourTeams = createAsyncThunk(
       .is('deleted_at', null)
       .order('tour_id', { ascending: true })
 
-    return { data, error, currentTour }
+    if (error) {
+      throw error
+    }
+
+    return { data, currentTour }
   }
 )
 
@@ -36,7 +40,11 @@ export const fetchAllTeams = createAsyncThunk(
       })
       .range(from, to)
 
-    return { data, error, count }
+    if (error) {
+      throw error
+    }
+
+    return { data, count }
   }
 )
 
@@ -59,6 +67,10 @@ export const searchAllTeams = createAsyncThunk(
       .is('deleted_at', null)
       .ilike('team.name', `%${searchTerm}%`)
 
-    return { data, error, count }
+    if (error) {
+      throw error
+    }
+
+    return { data, count }
   }
 )

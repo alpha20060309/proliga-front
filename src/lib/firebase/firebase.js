@@ -28,7 +28,7 @@ function validateFirebaseConfig() {
   }
 }
 
-let messaging
+export let messaging
 
 export async function initializeFirebase() {
   if (typeof window === 'undefined') return
@@ -38,8 +38,8 @@ export async function initializeFirebase() {
     const app = initializeApp(firebaseConfig)
     messaging = getMessaging(app)
 
-    // await navigator.serviceWorker.register("/firebase-messaging-sw.js");
 
+    // await navigator.serviceWorker.register("/firebase-messaging-sw.js");
     return app
   } catch (error) {
     console.error('Error initializing Firebase:', error)

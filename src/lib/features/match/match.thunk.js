@@ -20,6 +20,10 @@ export const fetchMatches = createAsyncThunk(
       .range(from, to)
       .order('started_date', { ascending: true })
 
-    return { data, error, count }
+    if (error) {
+      throw error
+    }
+
+    return { data, count }
   }
 )

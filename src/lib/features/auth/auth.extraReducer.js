@@ -11,17 +11,19 @@ export const authExtraReducer = (builder) => {
     })
     .addCase(fetchGeo.rejected, (state, action) => {
       state.geoLoading = false
-      state.geoError = action.payload?.data.message ?? null
+      state.geoError = action.payload?.error ?? null
     })
     .addCase(fetchFirebaseToken.pending, (state) => {
       state.tokenLoading = true
     })
     .addCase(fetchFirebaseToken.fulfilled, (state, action) => {
       state.tokenLoading = false
-      state.token = action.payload?.data || null
+      state.token = action.payload?.data?.token || null
+      state.tokenLoaded = true
     })
     .addCase(fetchFirebaseToken.rejected, (state, action) => {
       state.tokenLoading = false
-      state.tokenError = action.payload?.data.message ?? null
+      state.tokenError = action?.error
+      state.tokenLoaded = true
     })
 }

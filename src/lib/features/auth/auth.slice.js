@@ -12,6 +12,7 @@ const initialState = {
   token: null,
   tokenError: null,
   tokenLoading: false,
+  tokenLoaded: false,
 }
 
 const authSlice = createSlice({
@@ -39,6 +40,9 @@ const authSlice = createSlice({
     setToken: (state, action) => {
       state.token = action.payload
     },
+    setTokenLoaded: (state, action) => {
+      state.tokenLoaded = action.payload
+    },
   },
   extraReducers: authExtraReducer,
 })
@@ -52,6 +56,7 @@ export const {
   setAgent,
   setPhoneModal,
   setToken,
+  setTokenLoaded,
 } = authSlice.actions
 
 export default authSlice.reducer

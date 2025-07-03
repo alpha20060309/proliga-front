@@ -16,6 +16,10 @@ export const fetchUserActivity = createAsyncThunk(
       .range(from, to)
       .is('deleted_at', null)
 
-    return { data, error, count }
+    if (error) {
+      throw error
+    }
+
+    return { data, count }
   }
 )

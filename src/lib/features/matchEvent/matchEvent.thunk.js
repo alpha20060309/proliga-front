@@ -19,6 +19,10 @@ export const fetchMatchEvents = createAsyncThunk(
       .is('deleted_at', null)
       .order('minute')
 
-    return { data, error }
+    if (error) {
+      throw error
+    }
+
+    return { data }
   }
 )

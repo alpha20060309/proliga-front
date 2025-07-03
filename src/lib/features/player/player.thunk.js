@@ -11,7 +11,11 @@ export const fetchPlayers = createAsyncThunk(
       .is('deleted_at', null)
       .limit(1000)
 
-    return { data, error, count }
+    if (error) {
+      throw error
+    }
+
+    return { data, count }
   }
 )
 export const fetchAdditionalPlayers = createAsyncThunk(
@@ -28,7 +32,11 @@ export const fetchAdditionalPlayers = createAsyncThunk(
       .limit(1000)
       .range(from, to)
 
-    return { data, error, page: page * 1000 }
+    if (error) {
+      throw error
+    }
+
+    return { data, page: page * 1000 }
   }
 )
 
@@ -41,6 +49,10 @@ export const fetchTopPlayers = createAsyncThunk(
       })
       .limit(3)
 
-    return { data, error }
+    if (error) {
+      throw error
+    }
+
+    return { data }
   }
 )

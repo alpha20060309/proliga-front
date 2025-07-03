@@ -16,6 +16,10 @@ export const fetchPlayerPoint = createAsyncThunk(
       .in('player_id', playerIds)
       .is('deleted_at', null)
 
-    return { data, error }
+    if (error) {
+      throw error
+    }
+
+    return { data }
   }
 )

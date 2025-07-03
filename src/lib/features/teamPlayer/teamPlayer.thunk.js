@@ -14,6 +14,11 @@ export const fetchTeamPlayers = createAsyncThunk(
       .is('deleted_at', null)
       .order('id')
 
-    return { data, error }
+
+    if (error) {
+      throw error
+    }
+
+    return { data }
   }
 )

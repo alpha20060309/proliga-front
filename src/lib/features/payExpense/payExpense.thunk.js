@@ -13,6 +13,10 @@ export const fetchPayExpenses = createAsyncThunk(
       .is('deleted_at', null)
       .order('created_at', { ascending: false })
 
-    return { data, error }
+    if (error) {
+      throw error
+    }
+
+    return { data }
   }
 )

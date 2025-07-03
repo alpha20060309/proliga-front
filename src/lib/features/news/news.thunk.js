@@ -14,6 +14,10 @@ export const fetchNews = createAsyncThunk(
       .is('deleted_at', null)
       .order('published_at', { ascending: false })
 
-    return { data, error, count }
+    if (error) {
+      throw error
+    }
+
+    return { data, count }
   }
 )

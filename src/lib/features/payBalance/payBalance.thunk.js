@@ -11,6 +11,10 @@ export const fetchPayBalance = createAsyncThunk(
       .eq('user_id', user_id)
       .is('deleted_at', null)
 
-    return { data, error }
+    if (error) {
+      throw error
+    }
+
+    return { data }
   }
 )

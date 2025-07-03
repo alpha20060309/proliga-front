@@ -8,7 +8,11 @@ export const fetchThemes = createAsyncThunk('theme/fetchThemes', async () => {
     .eq('is_global', true)
     .is('deleted_at', null)
 
-  return { data, error }
+  if (error) {
+    throw error
+  }
+
+  return { data }
 })
 
 export const fetchUserThemes = createAsyncThunk(
@@ -21,6 +25,10 @@ export const fetchUserThemes = createAsyncThunk(
       .eq('user_id', user_id)
       .is('deleted_at', null)
 
-    return { data, error }
+    if (error) {
+      throw error
+    }
+
+    return { data }
   }
 )

@@ -11,7 +11,11 @@ export const fetchTours = createAsyncThunk(
       .is('deleted_at', null)
       .order('order', { ascending: true })
 
-    return { data, error, registered_tour_id }
+    if (error) {
+      throw error
+    }
+
+    return { data, registered_tour_id }
   }
 )
 
@@ -25,6 +29,10 @@ export const fetchTeamViewTours = createAsyncThunk(
       .is('deleted_at', null)
       .order('order', { ascending: true })
 
-    return { data, error, registered_tour_id }
+    if (error) {
+      throw error
+    }
+
+    return { data, registered_tour_id }
   }
 )

@@ -9,6 +9,10 @@ export const fetchPackages = createAsyncThunk(
       .select('*')
       .is('deleted_at', null)
 
-    return { data, error }
+    if (error) {
+      throw error
+    }
+
+    return { data }
   }
 )
