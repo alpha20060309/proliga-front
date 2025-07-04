@@ -3,6 +3,7 @@ import { useState, useCallback } from 'react'
 import { toast } from 'sonner'
 import { useTranslation } from 'react-i18next'
 import { useSession } from 'next-auth/react'
+import axios from 'axios'
 
 export const useCreateUserTheme = () => {
   const [error, setError] = useState(null)
@@ -17,26 +18,23 @@ export const useCreateUserTheme = () => {
       name_ru,
       dark_theme,
       light_theme,
-      cb = () => {},
+      cb = () => { },
     }) => {
       try {
         setIsLoading(true)
         setError('')
 
-        const res = await fetch(
+        const res = await axios.post(
           // eslint-disable-next-line no-undef
           process.env.NEXT_PUBLIC_URL + '/api/theme/set-user',
           {
-            method: 'POST',
-            body: JSON.stringify({
-              user_id,
-              dark_theme,
-              light_theme,
-            }),
+            user_id,
+            dark_theme,
+            light_theme,
           }
         )
 
-        if (!res.ok) {
+        if (res.status !== 200) {
           setError(
             res.error instanceof Error
               ? res.error.message

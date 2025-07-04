@@ -21,11 +21,10 @@ import { Button } from 'components/ui/button'
 import { toast } from 'sonner'
 import { selectUser } from 'lib/features/auth/auth.selector'
 
-const ConfirmOTP = ({
+const ConfirmOTPModal = ({
   isModalOpen,
   setModalOpen,
-  cb = () => {},
-  refreshUser = true,
+  cb = () => { },
   defaultHook = true,
   phone,
   is_update = false,
@@ -55,7 +54,6 @@ const ConfirmOTP = ({
           setCode('')
           setModalOpen(false)
           cb(true)
-          refreshUser && fetch()
         },
       })
     } else {
@@ -104,4 +102,4 @@ const ConfirmOTP = ({
   )
 }
 
-export default ConfirmOTP
+export default ConfirmOTPModal

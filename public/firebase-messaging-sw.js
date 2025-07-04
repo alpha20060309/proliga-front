@@ -25,7 +25,7 @@ messaging.onBackgroundMessage((payload) => {
   console.log("title", title);
   const options = {
     body: raw.body,
-    icon: raw.icon,
+    icon: raw.icon || 'favicon-32x32.png',
     image: raw.image,
     badge: raw.badge,
     sound: raw.sound,

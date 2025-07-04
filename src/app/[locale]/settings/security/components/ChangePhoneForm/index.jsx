@@ -64,7 +64,6 @@ export default function ChangePhoneForm() {
         setModalOpen={setModalOpen}
         isModalOpen={isModalOpen}
         is_update={true}
-        refreshUser={false}
       />
       <form
         onSubmit={handleSubmit}
