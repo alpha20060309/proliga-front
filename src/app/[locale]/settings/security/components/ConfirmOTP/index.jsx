@@ -6,18 +6,18 @@ import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
-} from '@/components/ui/input-otp'
+} from 'components/ui/input-otp'
 import {
   DialogContent,
   DialogTitle,
   Dialog,
   DialogDescription,
-} from '@/components/ui/dialog'
+} from 'components/ui/dialog'
 import { useConfirmOTP } from 'hooks/auth/useConfirmOTP'
 import { useSelector } from 'react-redux'
 import ResendOTP from './ResendOTP'
 import { useSendOTP } from 'hooks/auth/useSendOTP'
-import { Button } from '@/components/ui/button'
+import { Button } from 'components/ui/button'
 import { toast } from 'sonner'
 import { selectUser } from 'lib/features/auth/auth.selector'
 

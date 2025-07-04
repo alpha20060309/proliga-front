@@ -11,8 +11,8 @@ import { selectUser } from 'lib/features/auth/auth.selector'
 import { Wallet, Boxes, RefreshCcw } from 'lucide-react'
 import { selectExpenses } from 'lib/features/payExpense/payExpense.selector'
 import { selectBalances } from 'lib/features/payBalance/payBalance.selector'
-import { Button } from '@/components/ui/button'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Button } from 'components/ui/button'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from 'components/ui/tabs'
 
 const CabinetTransactionsHistory = () => {
   const dispatch = useDispatch()

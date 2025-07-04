@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux'
 import { selectUser } from 'lib/features/auth/auth.selector'
 import { useTranslation } from 'react-i18next'
 import { useAuthStatus } from 'hooks/auth/useAuthStatus'
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from 'components/ui/tabs'
 const SignUpForm = dynamic(() => import('./components/SignUpForm'), {
   ssr: false,
   loading: () => <SignUpFormSkeleton />,

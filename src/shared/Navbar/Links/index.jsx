@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next'
 import { TOUR_STATUS } from 'utils/tour.util'
 import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
 import { selectCurrentTour } from 'lib/features/tour/tour.selector'
-import { cn } from '@/lib/utils'
+import { cn } from 'lib/utils'
 import { useEffect, useState } from 'react'
 
 const PlayLinks = () => {

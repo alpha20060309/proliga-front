@@ -4,8 +4,8 @@ import {
   Dialog,
   DialogTitle,
   DialogDescription,
-} from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
+} from 'components/ui/dialog'
+import { Button } from 'components/ui/button'
 
 const Confirmation = ({ onConfirm, onCancel, isModalOpen, setModalOpen }) => {
   const { t } = useTranslation()

@@ -1,15 +1,15 @@
 'use client'
 
 import React from 'react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { Button } from 'components/ui/button'
+import { Input } from 'components/ui/input'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover'
-import { Separator } from '@/components/ui/separator'
-import { Slider } from '@/components/ui/slider'
+} from 'components/ui/popover'
+import { Separator } from 'components/ui/separator'
+import { Slider } from 'components/ui/slider'
 import { XCircle } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 

@@ -6,7 +6,7 @@ import { useMemo } from 'react'
 import { MATCH_STATUS } from 'utils/match.util'
 import { getCorrectName } from 'utils/getCorrectName.util'
 import { useTranslation } from 'react-i18next'
-import { cn } from '@/lib/utils'
+import { cn } from 'lib/utils'
 
 const MatchEventScore = () => {
   const currentMatch = useSelector(selectCurrentMatch)

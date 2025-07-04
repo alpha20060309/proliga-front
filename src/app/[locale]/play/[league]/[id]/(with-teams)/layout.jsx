@@ -1,7 +1,7 @@
 'use client'
 import Gutter from 'components/Gutter'
 import TopTeams from './components/TopTeams'
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardContent } from 'components/ui/card'
 import BannerTemplate from 'app/[locale]/play/components/BannerTemplate'
 
 export default function TeamPagesLayout({ children }) {

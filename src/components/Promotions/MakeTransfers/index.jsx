@@ -3,7 +3,7 @@ import {
   CardContent,
   CardTitle,
   CardDescription,
-} from '@/components/ui/card'
+} from 'components/ui/card'
 import { ArrowRightLeft } from 'lucide-react'
 
 const PromotionMakeTransfers = ({ t }) => {

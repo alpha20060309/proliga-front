@@ -1,9 +1,9 @@
 import { selectTopTeams } from 'lib/features/team/team.selector'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
-import { cn } from '@/lib/utils'
+import { cn } from 'lib/utils'
 import Image from 'next/image'
-import { Card, CardContent, CardTitle, CardHeader } from '@/components/ui/card'
+import { Card, CardContent, CardTitle, CardHeader } from 'components/ui/card'
 
 const RankingTeams = () => {
   const { t } = useTranslation()

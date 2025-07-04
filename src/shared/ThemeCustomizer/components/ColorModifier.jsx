@@ -7,7 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from '@/components/ui/accordion'
+} from 'components/ui/accordion'
 import { colorKeys, toVarName } from 'utils/colors.util'
 import { useDispatch, useSelector } from 'react-redux'
 import { setLightTheme, setDarkTheme } from 'lib/features/theme/theme.slice'

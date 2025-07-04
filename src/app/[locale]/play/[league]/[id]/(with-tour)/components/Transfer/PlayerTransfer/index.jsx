@@ -7,7 +7,7 @@ import {
   DialogTitle,
   Dialog,
   DialogDescription,
-} from '@/components/ui/dialog'
+} from 'components/ui/dialog'
 import { useDispatch, useSelector } from 'react-redux'
 import { setPlayerTransferModal } from 'lib/features/teamPlayer/teamPlayer.slice'
 import { selectCurrentPlayer } from 'lib/features/player/player.selector'

@@ -8,17 +8,17 @@ import { Camera, Loader } from 'lucide-react'
 import { useUpdateUserData } from 'hooks/user/useUpdateUserData'
 import { selectUser } from 'lib/features/auth/auth.selector'
 import UploadFile from '../components/UploadFile'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
+import { Button } from 'components/ui/button'
+import { Input } from 'components/ui/input'
+import { Textarea } from 'components/ui/textarea'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { Label } from '@/components/ui/label'
+} from 'components/ui/select'
+import { Label } from 'components/ui/label'
 import Avatar from 'shared/Avatar'
 import { useTransitionRouter } from 'next-view-transitions'
 

@@ -8,8 +8,8 @@ import {
   CardHeader,
   CardTitle,
   CardFooter,
-} from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+} from 'components/ui/card'
+import { Button } from 'components/ui/button'
 import { ArrowUpCircle } from 'lucide-react'
 import RefillBalanceModal from 'shared/RefillBalanceModal'
 import { useState } from 'react'

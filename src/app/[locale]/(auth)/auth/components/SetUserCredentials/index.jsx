@@ -6,10 +6,10 @@ import {
   DialogContent,
   DialogTitle,
   DialogDescription,
-} from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
+} from 'components/ui/dialog'
+import { Button } from 'components/ui/button'
 import { PhoneInput } from 'components/PhoneInput'
-import { Label } from '@/components/ui/label'
+import { Label } from 'components/ui/label'
 import { Loader2, Mail } from 'lucide-react'
 import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -23,7 +23,7 @@ import {
 import { toast } from 'sonner'
 import { selectSystemConfig } from 'lib/features/systemConfig/systemConfig.selector'
 import { CONFIG_KEY } from 'utils/config.util'
-import { Input } from '@/components/ui/input'
+import { Input } from 'components/ui/input'
 import { useSetUserCredentials } from 'hooks/auth/useSetUserCredentials'
 import { useSession } from 'next-auth/react'
 

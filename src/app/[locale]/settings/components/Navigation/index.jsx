@@ -1,6 +1,6 @@
 import SettingsNavigationTab from './Tab'
 import SettingsSidebarLogOut from './LogOut'
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardContent } from 'components/ui/card'
 
 const SettingsNavigation = ({ setTab, currentTab }) => {
   return (

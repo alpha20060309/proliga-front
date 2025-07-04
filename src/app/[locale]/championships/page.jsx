@@ -16,7 +16,7 @@ import { fetchCompetition } from 'lib/features/competition/competition.thunk'
 import { selectCompetition } from 'lib/features/competition/competition.selector'
 import { fetchSeason } from 'lib/features/season/season.thunk'
 import { ChampionshipSkeleton } from './components/Skeleton'
-import { Skeleton } from '@/components/ui/skeleton'
+import { Skeleton } from 'components/ui/skeleton'
 import { selectUser } from 'lib/features/auth/auth.selector'
 
 const Championships = () => {

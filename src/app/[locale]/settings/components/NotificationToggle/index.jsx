@@ -4,8 +4,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
-import { Switch } from '@/components/ui/switch'
+} from 'components/ui/card'
+import { Switch } from 'components/ui/switch'
 
 const NotificationToggle = () => {
   const { t } = useTranslation()

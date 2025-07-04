@@ -1,9 +1,9 @@
-import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card'
+import { Card, CardHeader, CardContent, CardTitle } from 'components/ui/card'
 import { Zap, Users, Coins } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Button } from 'components/ui/button'
 import { Link } from 'next-view-transitions'
-import { Separator } from '@/components/ui/separator'
-import { Badge } from '@/components/ui/badge'
+import { Separator } from 'components/ui/separator'
+import { Badge } from 'components/ui/badge'
 import { PACKAGE_TYPE } from 'utils/packages.util'
 
 const PackageContainer = ({ packageType, packages, t }) => {

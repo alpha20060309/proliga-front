@@ -1,6 +1,6 @@
-import { Button } from '@/components/ui/button'
+import { Button } from 'components/ui/button'
 import { useTranslation } from 'react-i18next'
-import { cn } from '@/lib/utils'
+import { cn } from 'lib/utils'
 import { SUPABASE_PROVIDERS } from 'lib/supabaseClient'
 import { signIn } from 'next-auth/react'
 import { selectUser } from 'lib/features/auth/auth.selector'

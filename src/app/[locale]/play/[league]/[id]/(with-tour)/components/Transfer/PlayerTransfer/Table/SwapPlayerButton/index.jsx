@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { selectTeamConcat } from 'lib/features/teamPlayer/teamPlayer.selector'
 import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
 import { selectCurrentPlayer } from 'lib/features/player/player.selector'
-import { cn } from '@/lib/utils'
+import { cn } from 'lib/utils'
 import { selectSystemConfig } from 'lib/features/systemConfig/systemConfig.selector'
 import { ArrowUpDown, Check } from 'lucide-react'
 

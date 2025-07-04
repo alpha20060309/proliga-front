@@ -9,7 +9,7 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-} from '@/components/ui/dialog'
+} from 'components/ui/dialog'
 import { selectPlayerPoint } from 'lib/features/playerPoint/playerPoint.selector'
 import { getCorrentPlayerPosition } from 'utils/getCorrectPlayerPosition.utils'
 import { setPlayerInfoModal } from 'lib/features/teamPlayer/teamPlayer.slice'

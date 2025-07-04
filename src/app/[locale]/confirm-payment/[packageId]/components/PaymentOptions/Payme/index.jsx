@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { PAYMENT_OPTIONS } from 'utils/paymentOptions.util'
 import { useTranslation } from 'react-i18next'
-import { cn } from '@/lib/utils'
+import { cn } from 'lib/utils'
 
 const PaymePaymentOption = ({
   setPaymentOption,

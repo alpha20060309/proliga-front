@@ -1,5 +1,5 @@
-import { Skeleton } from '@/components/ui/skeleton'
-import { Card, CardContent, CardFooter } from '@/components/ui/card'
+import { Skeleton } from 'components/ui/skeleton'
+import { Card, CardContent, CardFooter } from 'components/ui/card'
 import {
   Table,
   TableBody,
@@ -7,7 +7,7 @@ import {
   TableHeader,
   TableRow,
   TableCell,
-} from '@/components/ui/table'
+} from 'components/ui/table'
 
 const PlayersTableSkeleton = () => {
   return (

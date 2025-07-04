@@ -8,7 +8,7 @@ import {
   useReactTable,
   getPaginationRowModel,
 } from '@tanstack/react-table'
-import { Table } from '@/components/ui/table'
+import { Table } from 'components/ui/table'
 import Head from 'components/Table/Head'
 import Body from 'components/Table/Body'
 import { createColumnHelper } from '@tanstack/react-table'
@@ -28,7 +28,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover'
+} from 'components/ui/popover'
 
 const columnHelper = createColumnHelper()
 

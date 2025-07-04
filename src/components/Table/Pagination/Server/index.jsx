@@ -4,9 +4,9 @@ import {
   ChevronsLeft,
   ChevronsRight,
 } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Skeleton } from '@/components/ui/skeleton'
-import { cn } from '@/lib/utils'
+import { Button } from 'components/ui/button'
+import { Skeleton } from 'components/ui/skeleton'
+import { cn } from 'lib/utils'
 
 export function Pagination({
   currentPage,

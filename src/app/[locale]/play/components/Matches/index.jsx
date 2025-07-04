@@ -4,14 +4,14 @@ import { useEffect, useState, useMemo, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import { ChevronLeft, ChevronRight, RefreshCcw } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Button } from 'components/ui/button'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
+} from 'components/ui/select'
 import { fetchMatches } from 'lib/features/match/match.thunk'
 import Match from './Match'
 import MatchSkeleton from './Match/Skeleton'
@@ -21,7 +21,7 @@ import { getCorrectName } from 'utils/getCorrectName.util'
 import { selectMatches } from 'lib/features/match/match.selector'
 import { selectTours } from 'lib/features/tour/tour.selector'
 import { usePathname } from 'next/navigation'
-import { Card, CardContent, CardHeader, CardFooter } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardFooter } from 'components/ui/card'
 
 const Matches = () => {
   const path = usePathname()

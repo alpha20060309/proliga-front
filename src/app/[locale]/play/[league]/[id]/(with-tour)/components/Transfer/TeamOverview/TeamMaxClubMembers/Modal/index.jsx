@@ -8,16 +8,16 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog'
+} from 'components/ui/dialog'
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from '@/components/ui/hover-card'
+} from 'components/ui/hover-card'
 import { setClubModal } from 'lib/features/teamPlayer/teamPlayer.slice'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
+import { Button } from 'components/ui/button'
+import { Card, CardContent } from 'components/ui/card'
+import { Badge } from 'components/ui/badge'
 import { ArrowRight, Users, InfoIcon } from 'lucide-react'
 import { selectPackages } from 'lib/features/package/package.selector'
 

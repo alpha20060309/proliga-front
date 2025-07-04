@@ -5,7 +5,7 @@ import { staticPath } from 'utils/static.util'
 import { selectTopPlayers } from 'lib/features/player/player.selector'
 import { getUrl } from 'utils/static.util'
 import { getCorrectName } from 'utils/getCorrectName.util'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from 'components/ui/card'
 
 const RankingPlayers = () => {
   const { t } = useTranslation()

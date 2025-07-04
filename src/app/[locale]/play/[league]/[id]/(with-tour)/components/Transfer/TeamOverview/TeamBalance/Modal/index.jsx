@@ -10,17 +10,17 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog'
+} from 'components/ui/dialog'
 import { setBalanceModal } from 'lib/features/currentTeam/currentTeam.slice'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
+import { Button } from 'components/ui/button'
+import { Card, CardContent } from 'components/ui/card'
+import { Badge } from 'components/ui/badge'
 import { ArrowRight, Coins, InfoIcon } from 'lucide-react'
 import {
   HoverCardTrigger,
   HoverCard,
   HoverCardContent,
-} from '@/components/ui/hover-card'
+} from 'components/ui/hover-card'
 import { selectPackages } from 'lib/features/package/package.selector'
 
 const TeamBalanceModal = () => {

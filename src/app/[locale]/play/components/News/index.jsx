@@ -5,10 +5,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { useState, useEffect, useMemo } from 'react'
 import { NewsSkeleton } from './Skeleton'
-import { cn } from '@/lib/utils'
+import { cn } from 'lib/utils'
 import { Pagination } from 'components/Table/Pagination/Server'
 import { selectNews } from 'lib/features/news/news.selector'
-import { Button } from '@/components/ui/button'
+import { Button } from 'components/ui/button'
 import { RefreshCcw, Newspaper } from 'lucide-react'
 import Article from './Article'
 import NewsArticle from './NewsArticle'
@@ -18,7 +18,7 @@ import {
   CardHeader,
   CardFooter,
   CardTitle,
-} from '@/components/ui/card'
+} from 'components/ui/card'
 
 const News = () => {
   const dispatch = useDispatch()

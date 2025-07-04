@@ -15,7 +15,7 @@ import { useTranslation } from 'react-i18next'
 import { getCorrectName } from 'utils/getCorrectName.util'
 import { formatDate } from 'utils/formatDate.util'
 import { selectUserActivities } from 'lib/features/userActivity/userActivity.selector'
-import { Table } from '@/components/ui/table'
+import { Table } from 'components/ui/table'
 
 const columnHelper = createColumnHelper()
 

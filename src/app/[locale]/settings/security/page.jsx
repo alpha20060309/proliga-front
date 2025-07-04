@@ -1,11 +1,11 @@
 'use client'
 
-import { cn } from '@/lib/utils'
+import { cn } from 'lib/utils'
 import { useTranslation } from 'react-i18next'
 import ChangePasswordForm from './components/ChangePasswordForm'
 import ChangePhoneForm from './components/ChangePhoneForm'
-import { Separator } from '@/components/ui/separator'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Separator } from 'components/ui/separator'
+import { Card, CardContent, CardHeader, CardTitle } from 'components/ui/card'
 
 export default function SettingsPage() {
   const { t } = useTranslation()

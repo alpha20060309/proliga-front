@@ -1,4 +1,4 @@
-import { Skeleton } from '@/components/ui/skeleton'
+import { Skeleton } from 'components/ui/skeleton'
 import { PaginationSkeleton } from 'components/Table/Pagination/Server'
 import {
   Table,
@@ -7,7 +7,7 @@ import {
   TableHead,
   TableBody,
   TableCell,
-} from '@/components/ui/table'
+} from 'components/ui/table'
 
 const TournamentTableSkeleton = ({ rows = 15, cols = 5, paginationCount }) => {
   return (

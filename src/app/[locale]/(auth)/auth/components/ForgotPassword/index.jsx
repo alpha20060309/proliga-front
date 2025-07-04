@@ -8,13 +8,13 @@ import {
   DialogTitle,
   Dialog,
   DialogDescription,
-} from '@/components/ui/dialog'
+} from 'components/ui/dialog'
 import { PhoneInput } from 'components/PhoneInput'
 import { useSendOTP } from 'hooks/auth/useSendOTP'
 import { useGetUserPhone } from 'hooks/user/useGetUserPhone'
 import { memo } from 'react'
-import { Button } from '@/components/ui/button'
-import { Label } from '@/components/ui/label'
+import { Button } from 'components/ui/button'
+import { Label } from 'components/ui/label'
 import { Loader } from 'lucide-react'
 
 const ForgotPassword = ({ isModalOpen, setModalOpen }) => {

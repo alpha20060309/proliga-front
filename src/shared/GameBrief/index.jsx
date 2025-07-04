@@ -1,6 +1,6 @@
-import { cn } from '@/lib/utils'
-import { Skeleton } from '@/components/ui/skeleton'
-import { Card, CardContent } from '@/components/ui/card'
+import { cn } from 'lib/utils'
+import { Skeleton } from 'components/ui/skeleton'
+import { Card, CardContent } from 'components/ui/card'
 
 export const GameBriefContainer = ({ children, isLoading, className }) => {
   return (

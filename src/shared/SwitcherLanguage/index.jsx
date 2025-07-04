@@ -4,7 +4,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from 'components/ui/dropdown-menu'
 import Image from 'next/image'
 import { LANGUAGE } from 'utils/languages.util'
 import { useTranslation } from 'react-i18next'

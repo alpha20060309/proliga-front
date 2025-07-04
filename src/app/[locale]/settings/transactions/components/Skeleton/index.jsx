@@ -1,4 +1,4 @@
-import { Skeleton } from '@/components/ui/skeleton'
+import { Skeleton } from 'components/ui/skeleton'
 import {
   Table,
   TableHeader,
@@ -6,7 +6,7 @@ import {
   TableHead,
   TableBody,
   TableCell,
-} from '@/components/ui/table'
+} from 'components/ui/table'
 
 const CabinetTransactionsSkeleton = ({ rows = 10, cols = 4 }) => {
   return (

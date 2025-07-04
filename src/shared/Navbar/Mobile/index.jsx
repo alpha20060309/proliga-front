@@ -8,7 +8,7 @@ import { TABS } from 'utils/tabs.util'
 import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
 import { selectCurrentTour } from 'lib/features/tour/tour.selector'
 import { TOUR_STATUS } from 'utils/tour.util'
-import { cn } from '@/lib/utils'
+import { cn } from 'lib/utils'
 import { Link } from 'next-view-transitions'
 import { memo, useEffect, useState } from 'react'
 

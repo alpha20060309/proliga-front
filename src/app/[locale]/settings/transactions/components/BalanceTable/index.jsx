@@ -22,9 +22,9 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover'
+} from 'components/ui/popover'
 import { PaymentOptionIcon } from '../PackagesTable'
-import { Table } from '@/components/ui/table'
+import { Table } from 'components/ui/table'
 
 const columnHelper = createColumnHelper()
 
