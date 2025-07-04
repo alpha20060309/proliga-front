@@ -1,0 +1,40 @@
+// 🔔 Push Notification Token Management Tasklist
+
+- [X] **Do NOT attempt to revoke browser notification permission programmatically**
+  - Browsers do not allow apps to revoke notification permission once granted.
+  - Users must manage notification permissions themselves via browser settings.
+
+- [ ] **Notification Toggle Logic**
+  - [ ] When user turns notifications **ON**:
+    - [ ] Ensure notification permission is granted (prompt if not).
+    - [ ] Retrieve the FCM token using `getToken()`.
+    - [ ] Register the token with your backend and subscribe it to the `"global"` topic.
+  - [ ] When user turns notifications **OFF**:
+    - [ ] Unsubscribe the user’s FCM token from the `"global"` topic (on your backend or via FCM API).
+    - [ ] *Optionally:* Delete the FCM token from your backend.
+    - [ ] *Optionally:* Call `deleteToken()` on the client to fully remove the token.
+
+- [ ] **Token Synchronization Best Practices**
+  - [ ] On app start, always retrieve and validate the current token.
+  - [ ] If notification permission changes, immediately request a new token.
+  - [ ] Periodically (or on relevant triggers), call `getToken()` again to detect token changes.
+  - [ ] If the token is new or has changed, update your backend accordingly.
+  - [ ] On logout or opt-out, call `deleteToken()` and remove the token from your backend.
+
+- [ ] **Handle Token Errors Gracefully**
+  - [ ] If you encounter errors (e.g., "Requested entity was not found"), request a new token and update your backend.
+
+- [ ] **Clean Up Old Tokens**
+  - [ ] Remove invalid or expired tokens from your backend to prevent sending notifications to dead endpoints.
+
+- [ ] **Efficient Backend Sync**
+  - [ ] Only send the token to your backend if it is new or has changed.
+
+- [ ] **User Control**
+  - [ ] Ensure the toggle manages your app’s notification logic, not browser permissions.
+  - [ ] Allow users to toggle notifications on/off without changing browser settings.
+
+- [ ] **Prepare for Future Enhancements**
+  - [ ] Design for per-topic or per-device notification preferences.
+
+---

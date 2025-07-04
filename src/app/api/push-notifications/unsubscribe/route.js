@@ -22,40 +22,15 @@ export async function POST(request) {
       )
     }
 
-    const { data: user_token, error } = await supabase
+    const { error } = await supabase
       .from('user_token')
-      .select('*')
+      .delete()
       .eq('user_id', user_id)
       .eq('fingerprint', fingerprint)
-      .lte('expires_at', new Date(Date.now()))
-      .single()
 
     if (error) {
       return NextResponse.json(
-        { success: false, message: 'Error getting user notification topics' },
-        { status: 500 }
-      )
-    }
-
-    if (!user_token?.id) {
-      return NextResponse.json(
-        { success: false, message: 'User token not found' },
-        { status: 404 }
-      )
-    }
-
-    const newTopics = (user_token.topics || []).filter((t) => t !== topic)
-
-    const { error: updateError } = await supabase
-      .from('user_token')
-      .update({
-        topics: newTopics,
-      })
-      .eq('id', user_token.id)
-
-    if (updateError) {
-      return NextResponse.json(
-        { success: false, message: 'Error updating user token' },
+        { success: false, message: 'Error deleting user notification token' },
         { status: 500 }
       )
     }

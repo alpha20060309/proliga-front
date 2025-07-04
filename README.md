@@ -4,7 +4,7 @@
 
 ![Desktop Home Page](./public/Screenshot.png)
 
-Proliga is a cutting-edge fantasy football platform that empowers users to create and manage virtual teams using real-life players and leagues. Built with Next.js 15, it delivers a premium experience for football enthusiasts.
+Proliga is a modern fantasy football platform that lets users create and manage virtual teams using real-life players and leagues. Built with Next.js 15 and React 19, it delivers a premium experience for football fans.
 
 ## ⭐ Key Features
 
@@ -16,49 +16,65 @@ Proliga is a cutting-edge fantasy football platform that empowers users to creat
 
 ## 🛠️ Technology Stack
 
-| Category    | Technologies                                                |
-| ----------- | ----------------------------------------------------------- |
-| 🔧 Core     | • Next.js & React<br>• Supabase<br>• Redux Toolkit  |
-| 🎨 UI/UX    | • Radix UI & Material-UI<br>• Tailwind CSS<br>• Uppy        |
-| 🌐 Features | • Supabase Auth<br>• i18next<br>• Click & Payme Integration |
+| Category    | Technologies                                                                                 |
+| ----------- | ---------------------------------------------------------------------------------------------|
+| 🔧 Core     | • Next.js 15 & React 19<br>• Supabase<br>• Redux Toolkit                                     |
+| 🎨 UI/UX    | • ShadCN & Material-UI<br>• Tailwind CSS<br>• Uppy                                           |
+| 🌐 Features | • Supabase Auth<br>• i18next<br>• Click & Payme Integration                                  |
+
+## 📂 Project Structure
+
+The codebase is organized for scalability and maintainability. Key directories include:
+
+- `components/` – UI components (ShadCN, MUI, custom)
+- `lib/` – Core logic, Redux Toolkit features, utilities, and Supabase client
+- `hooks/` – Custom React hooks (auth, payment, user, theme, etc.)
+- `providers/` – Context and state providers (Auth, Theme, Store, etc.)
+- `public/` – Static assets (images, screenshots)
+- `app/` – Next.js routing and page components
+- `shared/` – Shared UI elements (Avatar, etc.)
+- `plugins/` – Integrations (e.g., Uppy file upload)
+- `utils/` – Utility functions and helpers
+
+For a more detailed structure, see `tree.txt`.
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- 📦 Node.js (LTS version)
+- 📦 Node.js (LTS version recommended)
 - 📥 npm or yarn
 
 ### 📥 Installation
 
 1. Clone the repository:
 
-```bash
-git clone https://github.com/smarts-uz/proliga-next.git
-cd proliga-next
-```
+   ```bash
+   git clone https://github.com/smarts-uz/proliga-front.git
+   cd proliga-front
+   ```
 
 2. Install dependencies:
 
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
-3. Install dev dependencies:
+3. Install dev dependencies (if not already included):
 
-```bash
-npm install -D eslint@^8.57.1 eslint-config-next@^15.1.3 postcss@^8.4.41 prettier@^3.3.3 prettier-plugin-tailwindcss@^0.6.6 tailwindcss@^3.4.17
-```
+   ```bash
+   npm install -D eslint@^9.27.0 eslint-config-next@^15.1.8 postcss@^8.5.3 prettier@^3.5.3 prettier-plugin-tailwindcss@^0.6.11 tailwindcss@^4.1.7
+   ```
 
-4. Configure environment variables:
+4. Configure environment variables:  
    Create a `.env` file with:
 
-```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_key
-NEXT_PUBLIC_CLICK_SERVICE_ID=your_click_id
-NEXT_PUBLIC_PAYME_ID=your_payme_id
-```
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_key
+   NEXT_PUBLIC_CLICK_SERVICE_ID=your_click_id
+   NEXT_PUBLIC_PAYME_ID=your_payme_id
+   ```
 
 ### 💻 Development
 
@@ -149,3 +165,4 @@ Need help? We're here for you!
 ## 📄 License
 
 Proprietary software. All rights reserved.
+
