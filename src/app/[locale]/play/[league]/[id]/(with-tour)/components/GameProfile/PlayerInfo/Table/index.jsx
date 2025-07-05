@@ -11,7 +11,7 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { Table } from '@/components/ui/table'
+import { Table } from 'components/ui/table'
 // import Head from './Head'
 // import Body from './Body'
 import Head from 'components/Table/Head'

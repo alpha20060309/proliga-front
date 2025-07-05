@@ -9,10 +9,6 @@ const initialState = {
   geoError: null,
   geoLoading: false,
   phoneModal: false,
-  token: null,
-  tokenError: null,
-  tokenLoading: false,
-  tokenLoaded: false,
 }
 
 const authSlice = createSlice({
@@ -37,12 +33,6 @@ const authSlice = createSlice({
     setPhoneModal: (state, action) => {
       state.phoneModal = action.payload
     },
-    setToken: (state, action) => {
-      state.token = action.payload
-    },
-    setTokenLoaded: (state, action) => {
-      state.tokenLoaded = action.payload
-    },
   },
   extraReducers: authExtraReducer,
 })
@@ -55,8 +45,6 @@ export const {
   setGeo,
   setAgent,
   setPhoneModal,
-  setToken,
-  setTokenLoaded,
 } = authSlice.actions
 
 export default authSlice.reducer

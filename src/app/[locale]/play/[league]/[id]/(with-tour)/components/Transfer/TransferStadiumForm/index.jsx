@@ -16,8 +16,8 @@ import {
   SelectContent,
   SelectItem,
   SelectValue,
-} from '@/components/ui/select'
-import { Button } from '@/components/ui/button'
+} from 'components/ui/select'
+import { Button } from 'components/ui/button'
 import { setTransferModal } from 'lib/features/currentTeam/currentTeam.slice'
 import { getCorrentPlayerPosition } from 'utils/getCorrectPlayerPosition.utils'
 import { CONFIG_KEY } from 'utils/config.util'

@@ -1,7 +1,7 @@
 import { flexRender } from '@tanstack/react-table'
 import { ChevronsUpDown, ChevronsDown, ChevronsUp } from 'lucide-react'
-import { cn } from '@/lib/utils'
-import { TableHeader, TableHead, TableRow } from '@/components/ui/table'
+import { cn } from 'lib/utils'
+import { TableHeader, TableHead, TableRow } from 'components/ui/table'
 
 const Head = ({ table, className }) => {
   return (

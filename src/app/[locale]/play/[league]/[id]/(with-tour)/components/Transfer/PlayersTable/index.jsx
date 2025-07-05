@@ -33,8 +33,8 @@ import {
 } from 'lib/features/teamPlayer/teamPlayer.selector'
 import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
 import { selectSystemConfig } from 'lib/features/systemConfig/systemConfig.selector'
-import { Card, CardContent, CardFooter } from '@/components/ui/card'
-import { Table } from '@/components/ui/table'
+import { Card, CardContent, CardFooter } from 'components/ui/card'
+import { Table } from 'components/ui/table'
 import Body from 'components/Table/Body'
 
 const columnHelper = createColumnHelper()

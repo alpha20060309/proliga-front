@@ -14,7 +14,7 @@ import { createColumnHelper } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
 import { selectAllTeams } from 'lib/features/team/team.selector'
 import { capitalize } from 'lodash'
-import { Table } from '@/components/ui/table'
+import { Table } from 'components/ui/table'
 import Body from 'components/Table/Body'
 import { Link } from 'next-view-transitions'
 

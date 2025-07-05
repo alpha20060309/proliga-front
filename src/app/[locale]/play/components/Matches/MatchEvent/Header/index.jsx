@@ -1,4 +1,4 @@
-import { DialogTitle } from '@/components/ui/dialog'
+import { DialogTitle } from 'components/ui/dialog'
 import { getCorrectName } from 'utils/getCorrectName.util'
 import { formatDate } from 'utils/formatDate.util'
 import { useSelector } from 'react-redux'

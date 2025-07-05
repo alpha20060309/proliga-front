@@ -11,7 +11,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
+} from 'components/ui/select'
 import { useTranslation } from 'react-i18next'
 import ThemePreview from './ThemePreview'
 import { selectThemes } from 'lib/features/theme/theme.selector'

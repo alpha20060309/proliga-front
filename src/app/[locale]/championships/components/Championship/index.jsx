@@ -4,13 +4,13 @@ import { useSelector } from 'react-redux'
 import { toast } from 'sonner'
 import { useTranslation } from 'react-i18next'
 import { formatDate } from 'utils/formatDate.util'
-import { cn } from '@/lib/utils'
+import { cn } from 'lib/utils'
 import { getCorrectName } from 'utils/getCorrectName.util'
 import CompetitionModal from '../Modal/index'
 import { selectTeams } from 'lib/features/team/team.selector'
 import { getUrl } from 'utils/static.util'
-import { Card, CardContent, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardTitle } from 'components/ui/card'
+import { Badge } from 'components/ui/badge'
 
 const Championship = ({ game }) => {
   const { t } = useTranslation()

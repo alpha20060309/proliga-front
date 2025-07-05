@@ -36,8 +36,16 @@ export async function POST(request) {
       messageId: response,
     })
   } catch (error) {
-    // console.error("Error sending push notification:", error);
-    console.log(error)
+    console.error('Error sending push notification:', error)
+    if (error.code === 'messaging/registration-token-not-registered') {
+      return NextResponse.json(
+        {
+          success: false,
+          message: 'The provided FCM token is no longer valid.',
+        },
+        { status: 404 }
+      )
+    }
     return NextResponse.json(
       {
         success: false,

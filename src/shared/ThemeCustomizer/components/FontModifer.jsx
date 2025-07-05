@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from 'components/ui/card'
 import { fonts } from 'utils/fonts.util'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTheme } from 'next-themes'

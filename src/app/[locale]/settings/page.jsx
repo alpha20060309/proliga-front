@@ -116,7 +116,7 @@ const SettingsProfile = () => {
           </p>
         </ProfileItem>
       </section>
-      <div className="bg-card/50 border-border text-muted-foreground line-clamp-5 h-28 max-w-full overflow-y-scroll rounded-lg border p-2 text-sm text-wrap break-words shadow md:p-4">
+      <div className="bg-card border-border text-foreground/80 line-clamp-5 h-28 max-w-full overflow-y-scroll rounded-lg border p-2 text-sm text-wrap break-words shadow md:p-4">
         {user?.bio ? user?.bio : t("Ma'lumot yo'q")}
       </div>
       <section className="flex flex-wrap gap-2">
@@ -130,7 +130,7 @@ const SettingsProfile = () => {
 
 const ProfileItem = ({ children }) => {
   return (
-    <div className="bg-input/50 border-border flex items-center gap-2 rounded-lg border p-2 shadow xl:p-4">
+    <div className="bg-card border-border flex items-center gap-2 rounded-lg border p-2 shadow xl:p-4">
       {children}
     </div>
   )

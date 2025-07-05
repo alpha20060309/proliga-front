@@ -6,7 +6,7 @@ import { setBalanceModal } from 'lib/features/currentTeam/currentTeam.slice'
 import { CONFIG_KEY } from 'utils/config.util'
 import { useTranslation } from 'react-i18next'
 import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
-import { cn } from '@/lib/utils'
+import { cn } from 'lib/utils'
 import { selectSystemConfig } from 'lib/features/systemConfig/systemConfig.selector'
 import { Plus, Check, X } from 'lucide-react'
 

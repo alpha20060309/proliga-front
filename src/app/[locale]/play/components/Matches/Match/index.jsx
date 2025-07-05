@@ -3,7 +3,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/ui/tooltip'
+} from 'components/ui/tooltip'
 import { staticPath } from 'utils/static.util'
 import { useTranslation } from 'react-i18next'
 import { formatDate } from 'utils/formatDate.util'

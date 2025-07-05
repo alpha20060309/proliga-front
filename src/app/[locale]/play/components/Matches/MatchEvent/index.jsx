@@ -1,6 +1,6 @@
 'use client'
 
-import { Dialog, DialogContent } from '@/components/ui/dialog'
+import { Dialog, DialogContent } from 'components/ui/dialog'
 import { DialogDescription } from '@radix-ui/react-dialog'
 import { useDispatch, useSelector } from 'react-redux'
 import { setMatchModalOpen } from 'lib/features/match/match.slice'

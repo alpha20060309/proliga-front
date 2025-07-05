@@ -5,7 +5,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '@/components/ui/carousel'
+} from 'components/ui/carousel'
 import CreateTeamSlide from './CreateTeamSlide'
 import GatherPointsSlide from './GatherPointsSlide'
 import MakeTransfersSlide from './MakeTransfersSlide'

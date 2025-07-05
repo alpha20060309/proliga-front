@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
-import { cn } from '@/lib/utils'
+import { cn } from 'lib/utils'
 import { Link } from 'next-view-transitions'
 import { ThemeSwitcherSkeleton } from '../SwitcherTheme'
 import Gutter from '../../components/Gutter'
@@ -13,7 +13,7 @@ import Notification from '../Notification'
 import Marquee from 'components/Marquee'
 import dynamic from 'next/dynamic'
 import MobileNavigation from './Mobile'
-import { Skeleton } from '@/components/ui/skeleton'
+import { Skeleton } from 'components/ui/skeleton'
 const NavbarLogo = dynamic(() => import('./Logo'), {
   ssr: false,
   loading: () => <Skeleton className="xs:w-32 h-7.5 w-28 md:w-36" />,

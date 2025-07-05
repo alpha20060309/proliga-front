@@ -1,67 +1,62 @@
 'use client'
 
-import { useEffect, memo } from 'react'
-import { initializeFirebase, getFirebaseToken } from 'lib/firebase/firebase'
+import { useEffect, memo, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { getNotificationPermissionAndToken } from 'hooks/system/useFCMToken'
 import { selectUser } from 'lib/features/auth/auth.selector'
-import { fetchFirebaseToken } from 'lib/features/auth/auth.thunk'
+import { fetchUserToken } from 'lib/features/userToken/userToken.thunk'
 import { useCreateToken } from 'hooks/system/useCreateToken'
 import { useUpdateToken } from 'hooks/system/useUpdateToken'
+import { selectAgent } from 'lib/features/auth/auth.selector'
 import axios from 'axios'
 
 const FirebaseProvider = ({ children }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectUser)
-  const { token, fingerprint, tokenLoaded } = useSelector((store) => store.auth)
+  const agent = useSelector(selectAgent)
   const { createToken } = useCreateToken()
   const { updateToken } = useUpdateToken()
+  const { userToken } = useSelector((store) => store.userToken)
+  const [deviceToken, setDeviceToken] = useState(null)
 
   useEffect(() => {
-    if (user?.id && fingerprint?.length > 0) {
-      dispatch(fetchFirebaseToken({ user_id: user.id, fingerprint }))
+    const getDeviceToken = async () => {
+      if (!user?.id) return;
+      const token = await getNotificationPermissionAndToken()
+      dispatch(fetchUserToken({ user_id: user.id, token }));
+      setDeviceToken(token)
     }
-  }, [user?.id, dispatch, fingerprint])
+    getDeviceToken()
+  }, [dispatch, user?.id])
 
   useEffect(() => {
-    const initializeNotifications = async () => {
+    const syncNotificationToken = async () => {
+      if (!user?.id || !deviceToken) return;
+
       try {
-        if (!user?.id) return
-
-        await initializeFirebase()
-
-        if (Notification.permission !== 'granted') {
-          await Notification.requestPermission()
-          return
-        }
-
-        if (!token?.id && tokenLoaded) {
-          const newToken = await getFirebaseToken({ user_id: user.id, updateToken, fingerprint })
-          await createToken({ user_id: user.id, fingerprint, token: newToken })
+        const device = `${agent?.platform ?? ''} ${agent?.browser ?? ''}`;
+        if (!userToken?.id) {
+          // No token in backend, create and subscribe
+          await createToken({ user_id: user.id, token: deviceToken, device });
           await axios.post('/api/push-notifications/subscribe', {
-            token: newToken,
+            token: deviceToken,
             topic: 'global',
             user_id: user.id,
-            fingerprint,
-          })
+          });
+        } else if (userToken?.token !== deviceToken) {
+          // Token changed, update backend
+          await updateToken({ user_id: user.id, token: deviceToken, device });
         }
-
-      } catch (error) {
-        console.error('Error initializing notifications:', error)
+      } catch (err) {
+        console.error('Error during notification sync:', err);
       }
-    }
+    };
 
-    initializeNotifications()
-  }, [user?.id, token, dispatch, fingerprint, createToken, tokenLoaded, updateToken])
+    syncNotificationToken();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id, userToken?.id, createToken, updateToken]);
 
   return <>{children}</>
 }
 
 export default memo(FirebaseProvider)
-
-
-// 1. Get user token
-// 2. Initialize firebase
-// 3. ?Request permission
-// 4. Create token
-// 5. Save token to database
-// 6. Save token to redux

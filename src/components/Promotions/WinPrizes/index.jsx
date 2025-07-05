@@ -4,7 +4,7 @@ import {
   CardContent,
   CardTitle,
   CardDescription,
-} from '@/components/ui/card'
+} from 'components/ui/card'
 import { cache } from 'react'
 import { supabase } from 'lib/supabaseClient'
 

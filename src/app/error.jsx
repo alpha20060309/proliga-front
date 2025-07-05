@@ -1,7 +1,7 @@
 'use client'
 import { Link, useTransitionRouter } from 'next-view-transitions'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
+import { Button } from 'components/ui/button'
+import { Card } from 'components/ui/card'
 import { useEffect } from 'react'
 import './globals.css'
 

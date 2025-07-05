@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { Card, CardHeader, CardTitle, CardContent } from 'components/ui/card'
 import { useTheme } from 'next-themes'
 import { useSelector, useDispatch } from 'react-redux'
 import { setDarkTheme, setLightTheme } from 'lib/features/theme/theme.slice'

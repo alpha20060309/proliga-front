@@ -2,7 +2,7 @@ import { getCorrectName } from 'utils/getCorrectName.util'
 import Prize from '../Prize'
 import { getUrl } from 'utils/static.util'
 import { cache } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from 'components/ui/card'
 import { supabase } from 'lib/supabaseClient'
 
 const fetchPrizesByCompetition = cache(async (competitionId) => {

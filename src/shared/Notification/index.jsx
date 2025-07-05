@@ -7,10 +7,10 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover'
-import { cn } from '@/lib/utils'
-import { Badge } from '@/components/ui/badge'
-import { ScrollArea } from '@/components/ui/scroll-area'
+} from 'components/ui/popover'
+import { cn } from 'lib/utils'
+import { Badge } from 'components/ui/badge'
+import { ScrollArea } from 'components/ui/scroll-area'
 import NotificationModal from './Modal'
 import NotificationArticle from './NotificationArticle'
 import { selectNotifications } from 'lib/features/systemNotification/systemNotification.selector'

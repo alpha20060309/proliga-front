@@ -2,6 +2,7 @@ import { supabase } from 'lib/supabaseClient'
 import { useState, useCallback } from 'react'
 import { toast } from 'sonner'
 import { useTranslation } from 'react-i18next'
+import axios from 'axios'
 
 export const useSetThemeDefault = () => {
   const [error, setError] = useState(null)
@@ -9,24 +10,22 @@ export const useSetThemeDefault = () => {
   const { t } = useTranslation()
 
   const setThemeDefault = useCallback(
-    async ({ theme_id, dark_theme, light_theme, cb = () => {} }) => {
+    async ({ theme_id, dark_theme, light_theme, cb = () => { } }) => {
       try {
         setIsLoading(true)
         setError('')
 
-        const res = await fetch(
+        const res = await axios.post(
           // eslint-disable-next-line no-undef
           process.env.NEXT_PUBLIC_URL + '/api/theme/set-default',
           {
-            method: 'POST',
-            body: JSON.stringify({
-              dark_theme,
-              light_theme,
-            }),
+            theme_id,
+            dark_theme,
+            light_theme,
           }
         )
 
-        if (!res.ok) {
+        if (res.status !== 200) {
           setError(
             res.error instanceof Error
               ? res.error.message

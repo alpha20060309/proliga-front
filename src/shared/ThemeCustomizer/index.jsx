@@ -5,9 +5,9 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from '@/components/ui/sheet'
+} from 'components/ui/sheet'
 import { Palette } from 'lucide-react'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from 'components/ui/tabs'
 import { RefreshCw, Loader2, Save } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectUser } from 'lib/features/auth/auth.selector'
@@ -15,7 +15,7 @@ import { toast } from 'sonner'
 import { setDefaultTheme } from 'lib/features/theme/theme.slice'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Switch } from '@/components/ui/switch'
+import { Switch } from 'components/ui/switch'
 import CreateThemeModal from './components/CreateThemeModal'
 import { useResetUserThemes } from 'hooks/theme/useResetUserThemes'
 import ColorModifier from './components/ColorModifier'

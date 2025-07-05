@@ -4,10 +4,10 @@ import * as React from 'react'
 import * as RPNInput from 'react-phone-number-input'
 import flags from 'react-phone-number-input/flags'
 
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { Button } from 'components/ui/button'
+import { Input } from 'components/ui/input'
 
-import { cn } from '@/lib/utils'
+import { cn } from 'lib/utils'
 import { forwardRef } from 'react'
 
 const PhoneInput = forwardRef(({ className, onChange, ...props }, ref) => {

@@ -1011,14 +1011,16 @@ model user_prize {
 }
 
 model user_token {
-  id          Int       @id @default(autoincrement())
-  user_id     Int
-  token       String
-  expires_at  DateTime  @db.Timestamptz(6)
-  fingerprint String    @unique(map: "fingerprint_unique")
-  topics      Json?
-  created_at  DateTime? @default(now()) @db.Timestamptz(6)
-  user        user      @relation(fields: [user_id], references: [id], onDelete: SetNull, onUpdate: SetNull, map: "token_user_id_fkey")
+  id         BigInt    @id @default(autoincrement())
+  user_id    Int
+  token      String    @unique(map: "idx_user_token_token")
+  expires_at DateTime  @db.Timestamptz(6)
+  topics     Json?
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+  device     String?   @db.VarChar(32)
+  user       user      @relation(fields: [user_id], references: [id], onDelete: SetNull, onUpdate: SetNull, map: "token_user_id_fkey")
+
+  @@index([user_id], map: "idx_user_token_user_id")
 }
 
 model verification_token {

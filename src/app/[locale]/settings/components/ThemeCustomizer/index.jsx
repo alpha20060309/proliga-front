@@ -4,7 +4,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
+} from 'components/ui/card'
 import ThemeCustomizerModal from 'shared/ThemeCustomizer'
 
 const ThemeCustomizer = () => {

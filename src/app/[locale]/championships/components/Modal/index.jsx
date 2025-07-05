@@ -10,17 +10,17 @@ import {
   DialogTitle,
   Dialog,
   DialogDescription,
-} from '@/components/ui/dialog'
-import { Input } from '@/components/ui/input'
+} from 'components/ui/dialog'
+import { Input } from 'components/ui/input'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { Button } from '@/components/ui/button'
-import { Label } from '@/components/ui/label'
+} from 'components/ui/select'
+import { Button } from 'components/ui/button'
+import { Label } from 'components/ui/label'
 import { validateTeamName } from 'utils/validateTeamName.util'
 import { selectUser } from 'lib/features/auth/auth.selector'
 import { Loader2 } from 'lucide-react'

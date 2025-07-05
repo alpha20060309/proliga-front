@@ -1,6 +1,6 @@
 import { getCorrectName } from 'utils/getCorrectName.util'
 import { notFound } from 'next/navigation'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from 'components/ui/card'
 import { cache } from 'react'
 import { supabase } from 'lib/supabaseClient'
 

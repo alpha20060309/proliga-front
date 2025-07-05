@@ -4,7 +4,7 @@ import {
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from '@/components/ui/dialog'
+} from 'components/ui/dialog'
 import YandexAd from '../YandexAd'
 import { Link } from 'next-view-transitions'
 import { useSelector } from 'react-redux'

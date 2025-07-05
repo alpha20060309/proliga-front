@@ -1,52 +1,9 @@
 Folder PATH listing for volume Dev
-Volume serial number is 00520053 F2D8:081C
+Volume serial number is F2D8-081C
 D:\PROJECTS\PROLIGA-FRONT\SRC
 |   auth.config.js
 |   middleware.js
 |   
-+---@
-|   +---components
-|   |   \---ui
-|   |           accordion.jsx
-|   |           alert-dialog.jsx
-|   |           alert.jsx
-|   |           animated-gradient-text.jsx
-|   |           avatar.jsx
-|   |           badge.jsx
-|   |           button.jsx
-|   |           calendar.jsx
-|   |           card.jsx
-|   |           carousel.jsx
-|   |           checkbox.jsx
-|   |           collapsible.jsx
-|   |           command.jsx
-|   |           context-menu.jsx
-|   |           dialog.jsx
-|   |           dropdown-menu.jsx
-|   |           hover-card.jsx
-|   |           input-otp.jsx
-|   |           input.jsx
-|   |           label.jsx
-|   |           popover.jsx
-|   |           scroll-area.jsx
-|   |           select.jsx
-|   |           separator.jsx
-|   |           sheet.jsx
-|   |           skeleton.jsx
-|   |           slider.jsx
-|   |           sonner.jsx
-|   |           switch.jsx
-|   |           table.jsx
-|   |           tabs.jsx
-|   |           textarea.jsx
-|   |           toast.jsx
-|   |           toggle-group.jsx
-|   |           toggle.jsx
-|   |           tooltip.jsx
-|   |           
-|   \---lib
-|           utils.js
-|           
 +---actions
 |       getHTMLPage.action.jsx
 |       login.action.jsx
@@ -72,11 +29,6 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |   |   |       route.js
 |   |   |       
 |   |   +---push-notifications
-|   |   |   |   utils.js
-|   |   |   |   
-|   |   |   +---create-user-token
-|   |   |   |       route.js
-|   |   |   |       
 |   |   |   +---send-to-many
 |   |   |   |       route.js
 |   |   |   |       
@@ -511,7 +463,6 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |       |   +---general
 |       |   |       page.jsx
 |       |   |       
-|       |   +---payment-history
 |       |   +---security
 |       |   |   |   page.jsx
 |       |   |   |   
@@ -636,30 +587,68 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |   +---StyledTabs
 |   |       index.jsx
 |   |       
-|   \---Table
-|       +---Body
-|       |       index.jsx
-|       |       
-|       +---Filters
-|       |   +---Clubs
-|       |   |       index.jsx
-|       |   |       
-|       |   +---Name
-|       |   |       index.jsx
-|       |   |       
-|       |   \---Price
-|       |           index.jsx
-|       |           
-|       +---Head
-|       |       index.jsx
-|       |       
-|       \---Pagination
-|           +---Client
-|           |       index.jsx
-|           |       
-|           \---Server
-|                   index.jsx
-|                   
+|   +---Table
+|   |   +---Body
+|   |   |       index.jsx
+|   |   |       
+|   |   +---Filters
+|   |   |   +---Clubs
+|   |   |   |       index.jsx
+|   |   |   |       
+|   |   |   +---Name
+|   |   |   |       index.jsx
+|   |   |   |       
+|   |   |   \---Price
+|   |   |           index.jsx
+|   |   |           
+|   |   +---Head
+|   |   |       index.jsx
+|   |   |       
+|   |   \---Pagination
+|   |       +---Client
+|   |       |       index.jsx
+|   |       |       
+|   |       \---Server
+|   |               index.jsx
+|   |               
+|   \---ui
+|           accordion.jsx
+|           alert-dialog.jsx
+|           alert.jsx
+|           animated-gradient-text.jsx
+|           avatar.jsx
+|           badge.jsx
+|           button.jsx
+|           calendar.jsx
+|           card.jsx
+|           carousel.jsx
+|           checkbox.jsx
+|           collapsible.jsx
+|           command.jsx
+|           context-menu.jsx
+|           dialog.jsx
+|           dropdown-menu.jsx
+|           hover-card.jsx
+|           input-otp.jsx
+|           input.jsx
+|           label.jsx
+|           popover.jsx
+|           scroll-area.jsx
+|           select.jsx
+|           separator.jsx
+|           sheet.jsx
+|           skeleton.jsx
+|           slider.jsx
+|           sonner.jsx
+|           switch.jsx
+|           table.jsx
+|           tabs.jsx
+|           textarea.jsx
+|           toast.jsx
+|           toggle-group.jsx
+|           toggle.jsx
+|           tooltip.jsx
+|           
 +---hooks
 |   +---auth
 |   |   +---useAuthChangePhone
@@ -700,10 +689,10 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |   |   +---useCreateBannerView
 |   |   |       index.jsx
 |   |   |       
-|   |   +---useGenerateFingerprint
+|   |   +---useCreateToken
 |   |   |       index.jsx
 |   |   |       
-|   |   +---useGetPage
+|   |   +---useGenerateFingerprint
 |   |   |       index.jsx
 |   |   |       
 |   |   +---useGetUserAgent
@@ -712,7 +701,10 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |   |   +---useUpdateNewsView
 |   |   |       index.jsx
 |   |   |       
-|   |   \---useUpdateSearchParams
+|   |   +---useUpdateSearchParams
+|   |   |       index.jsx
+|   |   |       
+|   |   \---useUpdateToken
 |   |           index.jsx
 |   |           
 |   +---theme
@@ -776,6 +768,7 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |   |   root.reducer.js
 |   |   store.global.js
 |   |   supabaseClient.js
+|   |   utils.js
 |   |   
 |   +---features
 |   |   +---auth
@@ -923,6 +916,7 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
 |   |           
 |   +---firebase
 |   |       firebase-admin.js
+|   |       firebase-new.js
 |   |       firebase.js
 |   |       
 |   +---prisma
@@ -1032,6 +1026,7 @@ D:\PROJECTS\PROLIGA-FRONT\SRC
         config.util.js
         default-theme.util.js
         defaults.global.css
+        firebase.utils.js
         fonts.util.js
         formatCurrency.js
         formatDate.util.js

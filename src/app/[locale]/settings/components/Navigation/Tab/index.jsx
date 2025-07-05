@@ -1,7 +1,7 @@
 'use client'
 
 import { useTranslation } from 'react-i18next'
-import { cn } from '@/lib/utils'
+import { cn } from 'lib/utils'
 import { Shield, User, Cog, Banknote } from 'lucide-react'
 import { Link } from 'next-view-transitions'
 import { usePathname } from 'next/navigation'

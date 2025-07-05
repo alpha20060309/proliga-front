@@ -1,4 +1,4 @@
-import { Popover, PopoverTrigger } from '@/components/ui/popover'
+import { Popover, PopoverTrigger } from 'components/ui/popover'
 import { useState } from 'react'
 import Avatar from 'shared/Avatar'
 import { useSelector } from 'react-redux'
@@ -6,7 +6,7 @@ import { selectUser } from 'lib/features/auth/auth.selector'
 import { Trophy, Settings, LogOut, LogIn } from 'lucide-react'
 import { useLogOut } from 'hooks/auth/useLogOut'
 import { useTranslation } from 'react-i18next'
-import { PopoverContent } from '@/components/ui/popover'
+import { PopoverContent } from 'components/ui/popover'
 import { Link } from 'next-view-transitions'
 
 const Dropdown = () => {

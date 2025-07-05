@@ -5,7 +5,7 @@ import {
   DialogTitle,
   Dialog,
   DialogDescription,
-} from '@/components/ui/dialog'
+} from 'components/ui/dialog'
 import { UppyUploader } from './Uploader'
 import { memo } from 'react'
 

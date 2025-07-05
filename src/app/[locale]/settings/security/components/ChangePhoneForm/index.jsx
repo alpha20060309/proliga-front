@@ -3,9 +3,9 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Eye, EyeOff, Loader } from 'lucide-react'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { Label } from '@/components/ui/label'
+import { Input } from 'components/ui/input'
+import { Button } from 'components/ui/button'
+import { Label } from 'components/ui/label'
 import { useSelector } from 'react-redux'
 import {
   selectAgent,
@@ -64,7 +64,6 @@ export default function ChangePhoneForm() {
         setModalOpen={setModalOpen}
         isModalOpen={isModalOpen}
         is_update={true}
-        refreshUser={false}
       />
       <form
         onSubmit={handleSubmit}

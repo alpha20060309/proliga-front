@@ -1,10 +1,10 @@
 import Image from 'next/image'
-import { Button } from '@/components/ui/button'
+import { Button } from 'components/ui/button'
 import { Share2 } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { cn } from 'lib/utils'
 import { toast } from 'sonner'
 import { useTranslation } from 'react-i18next'
-import { SelectTrigger } from '@/components/ui/select'
+import { SelectTrigger } from 'components/ui/select'
 import { Loader } from 'lucide-react'
 
 export const StadiumContainer = ({ children, hideShareButton = false }) => {

@@ -8,7 +8,7 @@ import {
   SelectContent,
   SelectItem,
   SelectValue,
-} from '@/components/ui/select'
+} from 'components/ui/select'
 import { getCorrentPlayerPosition } from 'utils/getCorrectPlayerPosition.utils'
 import { useUpdateTeamCaptains } from 'hooks/transfer/useUpdateTeamCaptains'
 import { selectTeamConcat } from 'lib/features/teamPlayer/teamPlayer.selector'

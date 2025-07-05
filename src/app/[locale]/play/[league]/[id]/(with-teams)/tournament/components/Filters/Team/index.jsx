@@ -6,7 +6,7 @@ import { searchAllTeams } from 'lib/features/team/team.thunk'
 import { useState, useCallback, useEffect, useRef, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { Input } from '@/components/ui/input'
+import { Input } from 'components/ui/input'
 import { Search } from 'lucide-react'
 import { debounce } from 'lodash'
 

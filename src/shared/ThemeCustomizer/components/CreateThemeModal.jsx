@@ -3,11 +3,11 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
+} from 'components/ui/dialog'
+import { Button } from 'components/ui/button'
 import { useState } from 'react'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { Input } from 'components/ui/input'
+import { Label } from 'components/ui/label'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 import { useSelector, useDispatch } from 'react-redux'

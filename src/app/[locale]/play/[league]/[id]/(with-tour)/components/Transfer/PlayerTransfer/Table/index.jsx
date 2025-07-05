@@ -28,7 +28,7 @@ import { CONFIG_KEY } from 'utils/config.util'
 import { swapTeamPlayer } from 'lib/features/teamPlayer/teamPlayer.slice'
 import SwapPlayerButton from './SwapPlayerButton'
 import Head from 'components/Table/Head'
-import { Table } from '@/components/ui/table'
+import { Table } from 'components/ui/table'
 const columnHelper = createColumnHelper()
 
 function PlayerTable() {

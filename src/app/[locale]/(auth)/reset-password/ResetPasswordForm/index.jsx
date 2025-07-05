@@ -1,18 +1,18 @@
 'use client'
 
 import { useTranslation } from 'react-i18next'
-import { Input } from '@/components/ui/input'
+import { Input } from 'components/ui/input'
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { useTransitionRouter } from 'next-view-transitions'
 import { toast } from 'sonner'
 import { Eye, EyeOff } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Button } from 'components/ui/button'
 import { Lock, Loader2 } from 'lucide-react'
 import { resetPassword } from 'actions/resetPassword.action'
 import { useTransition } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Label } from '@/components/ui/label'
+import { Card, CardContent, CardHeader, CardTitle } from 'components/ui/card'
+import { Label } from 'components/ui/label'
 
 const ResetPasswordForm = () => {
   const router = useTransitionRouter()

@@ -1,7 +1,7 @@
 import Gutter from 'components/Gutter'
 import Image from 'next/image'
 import SettingsNavigation from './components/Navigation'
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardContent } from 'components/ui/card'
 
 export default function SettingsLayout({ children }) {
   return (

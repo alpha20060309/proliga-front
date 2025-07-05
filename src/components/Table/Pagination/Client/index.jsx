@@ -1,11 +1,11 @@
-import { cn } from '@/lib/utils'
+import { cn } from 'lib/utils'
 import {
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
 } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Button } from 'components/ui/button'
 
 const TanStackPagination = ({ table, active, className, buttonClassName }) => {
   const currentPage = table.getState().pagination.pageIndex + 1

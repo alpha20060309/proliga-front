@@ -4,13 +4,13 @@ import {
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { Table } from '@/components/ui/table'
+import { Table } from 'components/ui/table'
 import { FaArrowUp, FaArrowDown } from 'react-icons/fa'
 import { GoDotFill } from 'react-icons/go'
 import Head from 'components/Table/Head'
 import Body from 'components/Table/Body'
 import { useTranslation } from 'react-i18next'
-import { cn } from '@/lib/utils'
+import { cn } from 'lib/utils'
 
 const data = [
   { id: 1, order: 1, team: 'Algoritmskiy10', score: 1500, status: 'up' },

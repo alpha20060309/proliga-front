@@ -5,7 +5,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
+} from 'components/ui/select'
 import { selectTours } from 'lib/features/tour/tour.selector'
 import { getCorrectName } from 'utils/getCorrectName.util'
 import { memo } from 'react'

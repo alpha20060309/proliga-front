@@ -3,6 +3,7 @@ import { useState, useCallback } from 'react'
 import { toast } from 'sonner'
 import { useTranslation } from 'react-i18next'
 import { useSession } from 'next-auth/react'
+import axios from 'axios'
 
 export const useCreatePresetTheme = () => {
   const [error, setError] = useState(null)
@@ -17,7 +18,7 @@ export const useCreatePresetTheme = () => {
       name_ru,
       dark_theme,
       light_theme,
-      cb = () => {},
+      cb = () => { },
     }) => {
       try {
         setIsLoading(true)
@@ -49,20 +50,17 @@ export const useCreatePresetTheme = () => {
           return
         }
 
-        const res = await fetch(
+        const res = await axios.post(
           // eslint-disable-next-line no-undef
           process.env.NEXT_PUBLIC_URL + '/api/theme/set-preset',
           {
-            method: 'POST',
-            body: JSON.stringify({
-              preset_id: data?.id,
-              dark_theme,
-              light_theme,
-            }),
+            preset_id: data?.id,
+            dark_theme,
+            light_theme,
           }
         )
 
-        if (!res.ok) {
+        if (res.status !== 200) {
           setError(
             res.error instanceof Error
               ? res.error.message

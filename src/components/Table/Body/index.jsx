@@ -1,5 +1,5 @@
-import { cn } from '@/lib/utils'
-import { TableBody, TableRow, TableCell } from '@/components/ui/table'
+import { cn } from 'lib/utils'
+import { TableBody, TableRow, TableCell } from 'components/ui/table'
 
 const Body = ({ table, flexRender, className, rowClassName }) => {
   return (

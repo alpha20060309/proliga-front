@@ -8,8 +8,8 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog'
-import { Input } from '@/components/ui/input'
+} from 'components/ui/dialog'
+import { Input } from 'components/ui/input'
 import { toast } from 'sonner'
 import { PAYMENT_OPTIONS } from 'utils/paymentOptions.util'
 import { useSelector } from 'react-redux'
@@ -18,10 +18,10 @@ import { useRedirectToPayme } from 'hooks/payment/useRedirectToPayme'
 import { CONFIG_KEY } from 'utils/config.util'
 import { selectUser } from 'lib/features/auth/auth.selector'
 import { selectSystemConfig } from 'lib/features/systemConfig/systemConfig.selector'
-import { Button } from '@/components/ui/button'
-import { Label } from '@/components/ui/label'
+import { Button } from 'components/ui/button'
+import { Label } from 'components/ui/label'
 import Image from 'next/image'
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+import { ToggleGroup, ToggleGroupItem } from 'components/ui/toggle-group'
 import { useTheme } from 'next-themes'
 
 const PREDEFINED_AMOUNTS = [50000, 100000, 200000, 500000]

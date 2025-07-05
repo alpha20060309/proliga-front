@@ -4,7 +4,7 @@ import * as React from 'react'
 import { useSelector } from 'react-redux'
 import { selectClubs } from 'lib/features/club/club.selector'
 import { useTranslation } from 'react-i18next'
-import { Button } from '@/components/ui/button'
+import { Button } from 'components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -12,9 +12,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from 'components/ui/dropdown-menu'
 import { getCorrectName } from 'utils/getCorrectName.util'
-import { cn } from '@/lib/utils'
+import { cn } from 'lib/utils'
 
 const ClubsFilter = ({ column, className }) => {
   const selectedClubs = useSelector(selectClubs)

@@ -4,9 +4,6 @@ import { defaultCache } from '@serwist/next/worker'
 const serwist = new Serwist({
   precacheEntries: [
     ...(self.__SW_MANIFEST || []),
-    { url: '/', revision: null },
-    { url: '/uz', revision: null },
-    { url: '/ru', revision: null },
     { url: '/uz/~offline', revision: null },
     { url: '/ru/~offline', revision: null },
   ],

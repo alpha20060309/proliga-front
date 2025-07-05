@@ -3,9 +3,9 @@ import {
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from '@/components/ui/dialog'
+} from 'components/ui/dialog'
 import { CalendarDays, Eye } from 'lucide-react'
-import { ScrollArea } from '@/components/ui/scroll-area'
+import { ScrollArea } from 'components/ui/scroll-area'
 import { useTranslation } from 'react-i18next'
 import { getCorrectName } from 'utils/getCorrectName.util'
 import { useDispatch, useSelector } from 'react-redux'

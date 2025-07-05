@@ -1,4 +1,4 @@
-import { Skeleton } from '@/components/ui/skeleton'
+import { Skeleton } from 'components/ui/skeleton'
 import { ChampionshipSkeleton } from './components/Skeleton'
 
 export default function ChampionshipsLoading() {

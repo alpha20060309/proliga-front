@@ -1,7 +1,7 @@
 'use client'
 
-import { Separator } from '@/components/ui/separator'
-import { Button } from '@/components/ui/button'
+import { Separator } from 'components/ui/separator'
+import { Button } from 'components/ui/button'
 import { CONFIG_KEY } from 'utils/config.util'
 import { useTranslation } from 'react-i18next'
 import { usePathname } from 'next/navigation'
@@ -10,7 +10,7 @@ import { Link } from 'next-view-transitions'
 import { selectSystemConfig } from 'lib/features/systemConfig/systemConfig.selector'
 import { FaTelegram, FaInstagram } from 'react-icons/fa'
 import { Mail } from 'lucide-react'
-import AnimatedGradientText from '@/components/ui/animated-gradient-text'
+import AnimatedGradientText from 'components/ui/animated-gradient-text'
 import Gutter from 'components/Gutter'
 
 const Footer = () => {
