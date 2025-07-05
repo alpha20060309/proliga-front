@@ -15,26 +15,19 @@
     - [ ] *Optionally:* Call `deleteToken()` on the client to fully remove the token.
 
 - [ ] **Token Synchronization Best Practices**
-  - [ ] On app start, always retrieve and validate the current token.
+  - [x] On app start, always retrieve and validate the current token.
   - [ ] If notification permission changes, immediately request a new token.
   - [ ] Periodically (or on relevant triggers), call `getToken()` again to detect token changes.
-  - [ ] If the token is new or has changed, update your backend accordingly.
-  - [ ] On logout or opt-out, call `deleteToken()` and remove the token from your backend.
+  - [x] If the token is new or has changed, update your backend accordingly.
+  - [x] On logout or opt-out, call `deleteToken()` and remove the token from your backend.
 
-- [ ] **Handle Token Errors Gracefully**
-  - [ ] If you encounter errors (e.g., "Requested entity was not found"), request a new token and update your backend.
+- [x] **Handle Token Errors Gracefully**
+  - [x] If you encounter errors (e.g., "Requested entity was not found"), request a new token and update your backend.
 
 - [ ] **Clean Up Old Tokens**
   - [ ] Remove invalid or expired tokens from your backend to prevent sending notifications to dead endpoints.
 
-- [ ] **Efficient Backend Sync**
+- [x] **Efficient Backend Sync**
   - [ ] Only send the token to your backend if it is new or has changed.
-
-- [ ] **User Control**
-  - [ ] Ensure the toggle manages your app’s notification logic, not browser permissions.
-  - [ ] Allow users to toggle notifications on/off without changing browser settings.
-
-- [ ] **Prepare for Future Enhancements**
-  - [ ] Design for per-topic or per-device notification preferences.
 
 ---

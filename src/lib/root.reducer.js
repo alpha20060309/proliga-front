@@ -23,9 +23,11 @@ import BannerSlice from './features/banner/banner.slice.js'
 import SystemConfigSlice from './features/systemConfig/systemConfig.slice.js'
 import MatchEventSlice from './features/matchEvent/matchEvent.slice.js'
 import ThemeSlice from './features/theme/theme.slice.js'
+import UserTokenSlice from './features/userToken/userToken.slice.js'
 
 export const combinedReducer = combineReducers({
   auth: AuthSlice,
+  userToken: UserTokenSlice,
   competition: CompetitionSlice,
   player: PlayerSlice,
   team: TeamSlice,

@@ -1018,7 +1018,11 @@ model user_token {
   fingerprint String    @unique(map: "fingerprint_unique")
   topics      Json?
   created_at  DateTime? @default(now()) @db.Timestamptz(6)
+  device      String?   @db.VarChar(32)
   user        user      @relation(fields: [user_id], references: [id], onDelete: SetNull, onUpdate: SetNull, map: "token_user_id_fkey")
+
+  @@index([fingerprint], map: "idx_user_token_fingerprint")
+  @@index([user_id], map: "idx_user_token_user_id")
 }
 
 model verification_token {

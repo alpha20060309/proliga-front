@@ -22,15 +22,16 @@ export async function POST(request) {
       )
     }
 
+    // Just set topics to null for this user_token row
     const { error } = await supabase
       .from('user_token')
-      .delete()
+      .update({ topics: null })
       .eq('user_id', user_id)
       .eq('fingerprint', fingerprint)
 
     if (error) {
       return NextResponse.json(
-        { success: false, message: 'Error deleting user notification token' },
+        { success: false, message: 'Error updating user notification token topics' },
         { status: 500 }
       )
     }

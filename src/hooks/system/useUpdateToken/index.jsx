@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react'
 import { supabase } from '../../../lib/supabaseClient'
 import { toast } from 'sonner'
 import { TOKEN_EXPIRATION_TIME } from 'utils/firebase.utils'
-import { setToken } from 'lib/features/auth/auth.slice'
+import { setUserToken } from 'lib/features/userToken/userToken.slice'
 import { useDispatch } from 'react-redux'
 
 export const useUpdateToken = () => {
@@ -10,7 +10,7 @@ export const useUpdateToken = () => {
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
 
-    const updateToken = useCallback(async ({ user_id, fingerprint, token, cb = () => { } }) => {
+    const updateToken = useCallback(async ({ user_id, fingerprint, token, cb = () => { }, device }) => {
         setIsLoading(true)
         setError(null)
 
@@ -26,6 +26,7 @@ export const useUpdateToken = () => {
                 .update({
                     token,
                     expires_at: new Date(Date.now() + TOKEN_EXPIRATION_TIME),
+                    device
                 })
                 .eq('user_id', user_id)
                 .eq('fingerprint', fingerprint)
@@ -38,7 +39,7 @@ export const useUpdateToken = () => {
                 toast.error('Error creating user token')
                 return
             }
-            dispatch(setToken(user_token.token))
+            dispatch(setUserToken(user_token))
             return cb(user_token)
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Error creating user token')

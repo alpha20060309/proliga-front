@@ -11,6 +11,7 @@ import {
 import { resetTeams } from 'lib/features/team/team.slice'
 import { signOut } from 'next-auth/react'
 import { useTransitionRouter } from 'next-view-transitions'
+import { deleteToken } from 'firebase/messaging'
 
 export const useLogOut = () => {
   const router = useTransitionRouter()
@@ -27,7 +28,7 @@ export const useLogOut = () => {
   }, [dispatch])
 
   const logOut = useCallback(
-    async ({ showMessage = true, cb = () => {} } = {}) => {
+    async ({ showMessage = true, cb = () => { } } = {}) => {
       try {
         await signOut({
           redirect: false,
@@ -38,6 +39,7 @@ export const useLogOut = () => {
         if (showMessage) {
           toast.success(t('Tizimdan chiqdingiz'))
         }
+        await deleteToken()
         cb()
         router.push('/')
       } catch (error) {
