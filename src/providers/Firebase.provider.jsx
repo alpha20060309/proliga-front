@@ -13,21 +13,20 @@ import axios from 'axios'
 const FirebaseProvider = ({ children }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectUser)
-  const { fingerprint } = useSelector((store) => store.auth)
   const agent = useSelector(selectAgent)
   const { createToken } = useCreateToken()
   const { updateToken } = useUpdateToken()
   const { userToken, tokenLoaded } = useSelector((store) => store.userToken)
 
   useEffect(() => {
-    if (user?.id && fingerprint?.length > 0) {
-      dispatch(fetchUserToken({ user_id: user.id, fingerprint }))
+    if (user?.id) {
+      dispatch(fetchUserToken({ user_id: user.id }))
     }
-  }, [user?.id, dispatch, fingerprint])
+  }, [user?.id, dispatch])
 
   useEffect(() => {
     const initializeAndSync = async () => {
-      if (!user?.id || !fingerprint || !tokenLoaded) {
+      if (!user?.id || !tokenLoaded) {
         return
       }
 
@@ -36,16 +35,14 @@ const FirebaseProvider = ({ children }) => {
 
         if (deviceToken) {
           if (!userToken?.id) {
-            await createToken({ user_id: user.id, fingerprint, token: deviceToken })
+            await createToken({ user_id: user.id, token: deviceToken, device: `${agent?.platform} ${agent?.browser}` })
             await axios.post('/api/push-notifications/subscribe', {
               token: deviceToken,
               topic: 'global',
               user_id: user.id,
-              fingerprint,
             })
           } else if (userToken?.token !== deviceToken) {
-            console.log('update token', deviceToken)
-            await updateToken({ user_id: user.id, fingerprint, token: deviceToken, device: `${agent?.os} ${agent?.browser}` })
+            await updateToken({ user_id: user.id, token: deviceToken, device: `${agent?.platform} ${agent?.browser}` })
           }
         }
       } catch (error) {
@@ -55,7 +52,7 @@ const FirebaseProvider = ({ children }) => {
 
     initializeAndSync()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user?.id, fingerprint, tokenLoaded, userToken?.id, createToken, updateToken])
+  }, [user?.id, tokenLoaded, userToken?.id, createToken, updateToken])
 
   return <>{children}</>
 }

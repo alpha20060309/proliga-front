@@ -7,7 +7,7 @@ initializeFirebaseAdmin()
 
 export async function POST(request) {
   try {
-    const { token, topic, user_id, fingerprint } = await request.json()
+    const { token, topic, user_id } = await request.json()
 
     if (!token || !topic) {
       return NextResponse.json(
@@ -25,9 +25,9 @@ export async function POST(request) {
     // Just set topics to null for this user_token row
     const { error } = await supabase
       .from('user_token')
-      .update({ topics: null })
+      .update({ topics: [] })
       .eq('user_id', user_id)
-      .eq('fingerprint', fingerprint)
+      .eq('token', token)
 
     if (error) {
       return NextResponse.json(

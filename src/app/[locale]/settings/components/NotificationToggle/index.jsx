@@ -10,11 +10,9 @@ import {
 import { Switch } from 'components/ui/switch'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { selectAgent, selectUser } from 'lib/features/auth/auth.selector'
+import { selectUser } from 'lib/features/auth/auth.selector'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteToken } from 'firebase/messaging'
-import { getNotificationPermissionAndToken } from 'hooks/system/useFCMToken'
-import { useUpdateToken } from 'hooks/system/useUpdateToken'
 import { messaging } from 'lib/firebase/firebase'
 import { toast } from 'sonner'
 import { setUserToken } from 'lib/features/userToken/userToken.slice'
@@ -24,10 +22,7 @@ const NotificationToggle = () => {
   const [permission, setPermission] = useState('default')
   const [isEnabled, setIsEnabled] = useState(false)
   const user = useSelector(selectUser)
-  const { fingerprint } = useSelector(store => store.auth)
-  const agent = useSelector(selectAgent)
-  const { token } = useSelector(store => store.userToken)
-  const { updateToken } = useUpdateToken()
+  const { userToken } = useSelector(store => store.userToken)
   const [disabled, setDisabled] = useState(false)
   const dispatch = useDispatch()
 
@@ -40,25 +35,17 @@ const NotificationToggle = () => {
   }, [permission])
 
   const handleTurnOn = async () => {
-    const deviceToken = await getNotificationPermissionAndToken()
-
-    if (deviceToken) {
-      if (token !== deviceToken) {
-        try {
-          await updateToken({ user_id: user.id, fingerprint, token: deviceToken, device: `${agent?.os} ${agent?.browser}` })
-          await axios.post('/api/push-notifications/subscribe', {
-            token: deviceToken,
-            topic: 'global',
-            user_id: user.id,
-            fingerprint,
-          })
-          setIsEnabled(true)
-          setPermission('granted')
-        } catch (error) {
-          toast.error(error.message)
-        }
-      }
-    } else {
+    try {
+      await axios.post('/api/push-notifications/subscribe', {
+        token: userToken?.token,
+        topic: 'global',
+        user_id: user.id,
+      })
+      dispatch(setUserToken({ ...userToken, topics: ['global'] }))
+      setIsEnabled(true)
+      setPermission('granted')
+    } catch (error) {
+      toast.error(error.message)
       setIsEnabled(false)
     }
   }
@@ -66,12 +53,11 @@ const NotificationToggle = () => {
   const handleTurnOff = async () => {
     try {
       await axios.post('/api/push-notifications/unsubscribe', {
-        token,
+        token: userToken?.token,
         topic: 'global',
         user_id: user.id,
-        fingerprint,
       })
-      dispatch(setUserToken(null))
+      dispatch(setUserToken({ ...userToken, topics: [] }))
       const fcmMessaging = await messaging()
       if (fcmMessaging) {
         await deleteToken(fcmMessaging)
@@ -94,13 +80,13 @@ const NotificationToggle = () => {
     if ('Notification' in window) {
       const permission = Notification.permission
       setPermission(permission)
-      if (permission === 'granted' && token) {
+      if (permission === 'granted' && userToken?.token && userToken?.topics?.length > 0) {
         setIsEnabled(true)
       } else {
         setIsEnabled(false)
       }
     }
-  }, [token])
+  }, [userToken?.token, userToken?.topics?.length])
 
   return (
     <Card className="flex w-full flex-col gap-4 px-4 sm:max-w-64">

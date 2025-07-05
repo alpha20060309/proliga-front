@@ -7,7 +7,7 @@ initializeFirebaseAdmin()
 
 export async function POST(request) {
   try {
-    const { token, topic, user_id, fingerprint } = await request.json()
+    const { token, topic, user_id } = await request.json()
 
     if (!token || !topic) {
       return NextResponse.json(
@@ -26,7 +26,7 @@ export async function POST(request) {
       .from('user_token')
       .select('*')
       .eq('user_id', user_id)
-      .eq('fingerprint', fingerprint)
+      .eq('token', token)
       .single()
 
     if (error?.code === 'PGRST116') {

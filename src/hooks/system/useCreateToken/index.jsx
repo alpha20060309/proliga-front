@@ -10,12 +10,12 @@ export const useCreateToken = () => {
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
 
-    const createToken = useCallback(async ({ user_id, fingerprint, token, cb = () => { }, device }) => {
+    const createToken = useCallback(async ({ user_id, token, cb = () => { }, device }) => {
         setIsLoading(true)
         setError(null)
 
         try {
-            if (!user_id || !fingerprint || !token) {
+            if (!user_id || !token) {
                 setError('Missing required fields')
                 toast.error('Missing required fields')
                 return
@@ -24,7 +24,7 @@ export const useCreateToken = () => {
                 .from('user_token')
                 .select()
                 .eq('user_id', user_id)
-                .eq('fingerprint', fingerprint)
+                .eq('token', token)
                 .single()
 
             if (existingToken) {
@@ -36,7 +36,6 @@ export const useCreateToken = () => {
                 .from('user_token')
                 .insert({
                     user_id,
-                    fingerprint,
                     token,
                     expires_at: new Date(Date.now() + TOKEN_EXPIRATION_TIME),
                     device
