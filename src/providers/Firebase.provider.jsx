@@ -1,8 +1,8 @@
 'use client'
 
 import { useEffect, memo } from 'react'
-import { initializeFirebase, getFirebaseToken } from 'lib/firebase/firebase'
 import { useSelector, useDispatch } from 'react-redux'
+import { getNotificationPermissionAndToken } from 'hooks/system/useFCMToken'
 import { selectUser } from 'lib/features/auth/auth.selector'
 import { fetchFirebaseToken } from 'lib/features/auth/auth.thunk'
 import { useCreateToken } from 'hooks/system/useCreateToken'
@@ -23,45 +23,37 @@ const FirebaseProvider = ({ children }) => {
   }, [user?.id, dispatch, fingerprint])
 
   useEffect(() => {
-    const initializeNotifications = async () => {
+    const initializeAndSync = async () => {
+      if (!user?.id || !fingerprint || !tokenLoaded) {
+        return
+      }
+
       try {
-        if (!user?.id) return
+        const deviceToken = await getNotificationPermissionAndToken()
 
-        await initializeFirebase()
-
-        if (Notification.permission !== 'granted') {
-          await Notification.requestPermission()
-          return
+        if (deviceToken) {
+          if (!token) {
+            await createToken({ user_id: user.id, fingerprint, token: deviceToken })
+            await axios.post('/api/push-notifications/subscribe', {
+              token: deviceToken,
+              topic: 'global',
+              user_id: user.id,
+              fingerprint,
+            })
+          } else if (token !== deviceToken) {
+            console.log('update token', deviceToken)
+            await updateToken({ user_id: user.id, fingerprint, token: deviceToken })
+          }
         }
-
-        if (!token?.id && tokenLoaded) {
-          const newToken = await getFirebaseToken({ user_id: user.id, updateToken, fingerprint })
-          await createToken({ user_id: user.id, fingerprint, token: newToken })
-          await axios.post('/api/push-notifications/subscribe', {
-            token: newToken,
-            topic: 'global',
-            user_id: user.id,
-            fingerprint,
-          })
-        }
-
       } catch (error) {
-        console.error('Error initializing notifications:', error)
+        console.error('Error during notification sync:', error)
       }
     }
 
-    initializeNotifications()
-  }, [user?.id, token, dispatch, fingerprint, createToken, tokenLoaded, updateToken])
+    initializeAndSync()
+  }, [user?.id, fingerprint, tokenLoaded, token, createToken, updateToken])
 
   return <>{children}</>
 }
 
 export default memo(FirebaseProvider)
-
-
-// 1. Get user token
-// 2. Initialize firebase
-// 3. ?Request permission
-// 4. Create token
-// 5. Save token to database
-// 6. Save token to redux

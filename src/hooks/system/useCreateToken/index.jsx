@@ -29,7 +29,7 @@ export const useCreateToken = () => {
 
             if (existingToken) {
                 dispatch(setToken(existingToken?.token))
-                return 
+                return
             }
 
             const { data: user_token, error: newError } = await supabase
@@ -49,6 +49,7 @@ export const useCreateToken = () => {
                 return
             }
 
+            dispatch(setToken(user_token?.token))
             return cb(user_token)
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Error creating user token')

@@ -20,17 +20,6 @@ export const useUpdateToken = () => {
                 toast.error('Missing required fields')
                 return
             }
-            const { data: existingToken } = await supabase
-                .from('user_token')
-                .select()
-                .eq('user_id', user_id)
-                .eq('fingerprint', fingerprint)
-                .single()
-
-            if (existingToken) {
-                dispatch(setToken(existingToken?.token))
-                return 
-            }
 
             const { data: user_token, error: newError } = await supabase
                 .from('user_token')
@@ -43,12 +32,13 @@ export const useUpdateToken = () => {
                 .select()
                 .single()
 
+
             if (newError) {
                 setError('Error creating user token')
                 toast.error('Error creating user token')
                 return
             }
-
+            dispatch(setToken(user_token.token))
             return cb(user_token)
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Error creating user token')
