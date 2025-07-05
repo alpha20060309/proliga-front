@@ -3,9 +3,8 @@ import { userTokenExtraReducer } from './userToken.extraReducer'
 
 const initialState = {
     userToken: null,
-    tokenError: null,
+    error: null,
     isLoading: false,
-    tokenLoaded: false,
 }
 
 const userTokenSlice = createSlice({
