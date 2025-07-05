@@ -12,8 +12,6 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { selectUser } from 'lib/features/auth/auth.selector'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteToken } from 'firebase/messaging'
-import { messaging } from 'lib/firebase/firebase'
 import { toast } from 'sonner'
 import { setUserToken } from 'lib/features/userToken/userToken.slice'
 
@@ -58,10 +56,6 @@ const NotificationToggle = () => {
         user_id: user.id,
       })
       dispatch(setUserToken({ ...userToken, topics: [] }))
-      const fcmMessaging = await messaging()
-      if (fcmMessaging) {
-        await deleteToken(fcmMessaging)
-      }
       setIsEnabled(false)
     } catch (error) {
       toast.error(error.message)

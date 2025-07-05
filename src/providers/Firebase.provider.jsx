@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, memo } from 'react'
+import { useEffect, memo, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getNotificationPermissionAndToken } from 'hooks/system/useFCMToken'
 import { selectUser } from 'lib/features/auth/auth.selector'
@@ -16,43 +16,45 @@ const FirebaseProvider = ({ children }) => {
   const agent = useSelector(selectAgent)
   const { createToken } = useCreateToken()
   const { updateToken } = useUpdateToken()
-  const { userToken, tokenLoaded } = useSelector((store) => store.userToken)
+  const { userToken } = useSelector((store) => store.userToken)
+  const [deviceToken, setDeviceToken] = useState(null)
 
   useEffect(() => {
-    if (user?.id) {
-      dispatch(fetchUserToken({ user_id: user.id }))
+    const getDeviceToken = async () => {
+      if (!user?.id) return;
+      const token = await getNotificationPermissionAndToken()
+      dispatch(fetchUserToken({ user_id: user.id, token }));
+      setDeviceToken(token)
     }
-  }, [user?.id, dispatch])
+    getDeviceToken()
+  }, [dispatch, user?.id])
 
   useEffect(() => {
-    const initializeAndSync = async () => {
-      if (!user?.id || !tokenLoaded) {
-        return
-      }
+    const syncNotificationToken = async () => {
+      if (!user?.id || !deviceToken) return;
 
       try {
-        const deviceToken = await getNotificationPermissionAndToken()
-
-        if (deviceToken) {
-          if (!userToken?.id) {
-            await createToken({ user_id: user.id, token: deviceToken, device: `${agent?.platform} ${agent?.browser}` })
-            await axios.post('/api/push-notifications/subscribe', {
-              token: deviceToken,
-              topic: 'global',
-              user_id: user.id,
-            })
-          } else if (userToken?.token !== deviceToken) {
-            await updateToken({ user_id: user.id, token: deviceToken, device: `${agent?.platform} ${agent?.browser}` })
-          }
+        const device = `${agent?.platform ?? ''} ${agent?.browser ?? ''}`;
+        if (!userToken?.id) {
+          // No token in backend, create and subscribe
+          await createToken({ user_id: user.id, token: deviceToken, device });
+          await axios.post('/api/push-notifications/subscribe', {
+            token: deviceToken,
+            topic: 'global',
+            user_id: user.id,
+          });
+        } else if (userToken?.token !== deviceToken) {
+          // Token changed, update backend
+          await updateToken({ user_id: user.id, token: deviceToken, device });
         }
-      } catch (error) {
-        console.error('Error during notification sync:', error)
+      } catch (err) {
+        console.error('Error during notification sync:', err);
       }
-    }
+    };
 
-    initializeAndSync()
+    syncNotificationToken();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user?.id, tokenLoaded, userToken?.id, createToken, updateToken])
+  }, [user?.id, userToken?.id, createToken, updateToken]);
 
   return <>{children}</>
 }
