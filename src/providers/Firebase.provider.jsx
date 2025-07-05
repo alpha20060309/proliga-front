@@ -35,6 +35,7 @@ const FirebaseProvider = ({ children }) => {
 
       try {
         const device = `${agent?.platform ?? ''} ${agent?.browser ?? ''}`;
+        console.log(userToken)
         if (!userToken?.id) {
           // No token in backend, create and subscribe
           await createToken({ user_id: user.id, token: deviceToken, device });
@@ -53,8 +54,7 @@ const FirebaseProvider = ({ children }) => {
     };
 
     syncNotificationToken();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user?.id, userToken?.id, createToken, updateToken]);
+  }, [user?.id, userToken, createToken, updateToken, deviceToken, agent?.platform, agent?.browser]);
 
   return <>{children}</>
 }

@@ -1,7 +1,6 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { useTranslation } from 'react-i18next'
 import { cn } from 'lib/utils'
 import { Link } from 'next-view-transitions'
 import { ThemeSwitcherSkeleton } from '../SwitcherTheme'
@@ -10,7 +9,6 @@ import PlayLinks from './Links'
 import NavigationDropdown from './Dropdown'
 import ChangeLanguageDropdown from '../SwitcherLanguage'
 import Notification from '../Notification'
-import Marquee from 'components/Marquee'
 import dynamic from 'next/dynamic'
 import MobileNavigation from './Mobile'
 import { Skeleton } from 'components/ui/skeleton'
@@ -25,42 +23,27 @@ const ThemeSwitcher = dynamic(() => import('../SwitcherTheme'), {
 
 const Navbar = () => {
   const path = usePathname()
-  const { t } = useTranslation()
-  const NEXT_PUBLIC_TEST_NAV_SLIDER = Boolean(
-    // eslint-disable-next-line no-undef
-    process.env.NEXT_PUBLIC_TEST_NAV_SLIDER ?? ''
-  )
 
   return (
     <nav
       className={cn(
-        'bg-sidebar border-border fixed top-0 right-0 left-0 z-50 w-screen border-b',
-        NEXT_PUBLIC_TEST_NAV_SLIDER ? 'pb-3' : 'py-3'
+        'bg-sidebar border-border fixed top-0 right-0 left-0 z-50 w-screen sm:w-[calc(100vw-1rem)] border-b h-14',
       )}
     >
-      {NEXT_PUBLIC_TEST_NAV_SLIDER && (
-        <Marquee
-          text={t('Website is in test mode')}
-          className="mb-3"
-          speed="slow"
-        />
-      )}
-      <Gutter>
-        <div className="text-foreground flex w-full items-center justify-between">
-          <Link
-            href={
-              path.split('/').includes('championships') ? '/' : '/championships'
-            }
-          >
-            <NavbarLogo />
-          </Link>
-          <PlayLinks />
-          <div className="flex w-max items-center justify-center gap-3 sm:gap-4">
-            <ChangeLanguageDropdown />
-            <Notification />
-            <ThemeSwitcher />
-            <NavigationDropdown />
-          </div>
+      <Gutter className="text-foreground flex w-full h-full items-center justify-between">
+        <Link
+          href={
+            path.split('/').includes('championships') ? '/' : '/championships'
+          }
+        >
+          <NavbarLogo />
+        </Link>
+        <PlayLinks />
+        <div className="flex w-max items-center justify-center gap-3 sm:gap-4">
+          <ChangeLanguageDropdown />
+          <Notification />
+          <ThemeSwitcher />
+          <NavigationDropdown />
         </div>
       </Gutter>
       <MobileNavigation />
