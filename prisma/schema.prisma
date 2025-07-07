@@ -896,6 +896,7 @@ model user {
   is_admin                                         Boolean?              @default(false)
   theme_id                                         Int?
   user_theme_id                                    Int?
+  notification_enabled                             Boolean?              @default(true)
   account                                          account[]
   banner_view                                      banner_view[]
   club_club_created_byTouser                       club[]                @relation("club_created_byTouser")

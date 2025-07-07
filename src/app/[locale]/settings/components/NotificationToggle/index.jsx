@@ -14,6 +14,7 @@ import { selectUser } from 'lib/features/auth/auth.selector'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'sonner'
 import { setUserToken } from 'lib/features/userToken/userToken.slice'
+import { useToggleNotification } from 'hooks/user/useToggleNotification'
 
 const NotificationToggle = () => {
   const { t } = useTranslation()
@@ -23,6 +24,7 @@ const NotificationToggle = () => {
   const { userToken } = useSelector(store => store.userToken)
   const [disabled, setDisabled] = useState(false)
   const dispatch = useDispatch()
+  const { toggleNotification } = useToggleNotification()
 
   useEffect(() => {
     if (!('Notification' in window)) {
@@ -34,6 +36,10 @@ const NotificationToggle = () => {
 
   const handleTurnOn = async () => {
     try {
+      await toggleNotification({
+        user_id: user.id,
+        notification_enabled: true,
+      })
       await axios.post('/api/push-notifications/subscribe', {
         token: userToken?.token,
         topic: 'global',
@@ -50,6 +56,10 @@ const NotificationToggle = () => {
 
   const handleTurnOff = async () => {
     try {
+      await toggleNotification({
+        user_id: user.id,
+        notification_enabled: false,
+      })
       await axios.post('/api/push-notifications/unsubscribe', {
         token: userToken?.token,
         topic: 'global',
