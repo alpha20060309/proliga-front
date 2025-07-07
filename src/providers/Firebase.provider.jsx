@@ -39,11 +39,13 @@ const FirebaseProvider = ({ children }) => {
         if (!userToken?.id) {
           // No token in backend, create and subscribe
           await createToken({ user_id: user.id, token: deviceToken, device });
-          await axios.post('/api/push-notifications/subscribe', {
-            token: deviceToken,
-            topic: 'global',
-            user_id: user.id,
-          });
+          if (userToken?.notification_enabled) {
+            await axios.post('/api/push-notifications/subscribe', {
+              token: deviceToken,
+              topic: 'global',
+              user_id: user.id,
+            });
+          }
         } else if (userToken?.token !== deviceToken) {
           // Token changed, update backend
           await updateToken({ user_id: user.id, token: deviceToken, device });

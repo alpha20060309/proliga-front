@@ -41,6 +41,7 @@ export const {
         token.theme_id = null
         token.user_theme_id = null
         token.is_admin = false
+        token.notification_enabled = true
 
         const dbUser = await getUserById(user.id)
         if (dbUser) {
@@ -62,6 +63,7 @@ export const {
           token.theme_id = dbUser.theme_id
           token.user_theme_id = dbUser.user_theme_id
           token.is_admin = dbUser.is_admin
+          token.notification_enabled = dbUser.notification_enabled
         }
       }
 
@@ -91,6 +93,7 @@ export const {
           'visited_at',
           'geo',
           'agent',
+          'notification_enabled',
         ]
         for (const key of allowedUpdates) {
           if (Object.hasOwn(session, key)) {
@@ -123,6 +126,7 @@ export const {
         session.user.theme_id = token.theme_id
         session.user.user_theme_id = token.user_theme_id
         session.user.is_admin = token.is_admin
+        session.user.notification_enabled = token.notification_enabled
       }
       return session
     },
