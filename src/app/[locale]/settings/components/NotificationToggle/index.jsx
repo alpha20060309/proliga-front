@@ -9,12 +9,12 @@ import {
 } from 'components/ui/card'
 import { Switch } from 'components/ui/switch'
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import { selectUser } from 'lib/features/auth/auth.selector'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'sonner'
 import { setUserToken } from 'lib/features/userToken/userToken.slice'
 import { useToggleNotification } from 'hooks/user/useToggleNotification'
+import axios from 'axios'
 
 const NotificationToggle = () => {
   const { t } = useTranslation()
@@ -25,14 +25,6 @@ const NotificationToggle = () => {
   const [disabled, setDisabled] = useState(false)
   const dispatch = useDispatch()
   const { toggleNotification } = useToggleNotification()
-
-  useEffect(() => {
-    if (!('Notification' in window)) {
-      setDisabled(true)
-    } else if (permission === 'denied') {
-      setDisabled(true)
-    }
-  }, [permission])
 
   const handleTurnOn = async () => {
     try {
@@ -79,6 +71,14 @@ const NotificationToggle = () => {
       await handleTurnOff()
     }
   }
+
+  useEffect(() => {
+    if (!('Notification' in window)) {
+      setDisabled(true)
+    } else if (permission === 'denied') {
+      setDisabled(true)
+    }
+  }, [permission])
 
   useEffect(() => {
     if ('Notification' in window) {
