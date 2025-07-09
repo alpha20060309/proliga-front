@@ -17,7 +17,7 @@ export default function SettingsLayout({ children }) {
         />
         <div className="animate-in fade-in absolute inset-0 bg-black/30 duration-500 dark:bg-black/60" />
       </div>
-      <Gutter>
+      <Gutter mobileFriendly>
         <main className="flex h-full min-h-176 flex-col gap-2 lg:min-h-152 lg:flex-row">
           <SettingsNavigation />
           <Card className={'w-full'}>

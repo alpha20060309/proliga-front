@@ -134,11 +134,11 @@ const PackageIcon = ({ type, amount, name }) => {
   const renderIcons = () => {
     switch (type) {
       case PACKAGE_TYPE.single_club_count:
-        return <Users className="size-4 md:size-5" />
+        return <Users className="size-3.5 md:size-5" />
       case PACKAGE_TYPE.team_balance:
-        return <Coins className="size-4 md:size-5" />
+        return <Coins className="size-3.5 md:size-5" />
       case PACKAGE_TYPE.transfer_count:
-        return <Zap className="size-4 md:size-5" />
+        return <Zap className="size-3.5 md:size-5" />
       default:
         return
     }
@@ -174,7 +174,7 @@ export const PaymentOptionIcon = ({ system }) => {
             }
             alt="click up"
             width={20}
-            className="xs:w-16 h-7 w-12 md:h-8 md:w-20"
+            className="xs:w-16 h-7 w-16 md:h-8 md:w-20"
             height={20}
           />
         </span>
@@ -187,7 +187,7 @@ export const PaymentOptionIcon = ({ system }) => {
             alt="payme"
             width={20}
             height={20}
-            className="xs:w-16 h-7 w-12 md:h-8 md:w-20"
+            className="xs:w-16 h-7 w-16 md:h-8 md:w-20"
           />
         </span>
       )
