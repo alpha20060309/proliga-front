@@ -48,12 +48,12 @@ const CabinetTransactionsHistory = () => {
       className="flex h-full w-full flex-col"
       onValueChange={(value) => setCurrentTab(value)}
     >
-      <div className="mb-2 flex flex-col gap-1 sm:mb-0 sm:justify-between md:flex-row">
+      <div className="mb-2 flex flex-col gap-2 sm:mb-0 sm:justify-between justify-center md:flex-row">
         <h3 className="text-foreground text-xl font-bold tracking-tight">
           {t('Xarajatlar tarixi')}
         </h3>
 
-        <TabsList>
+        <TabsList className="w-full sm:w-auto">
           <TabsTrigger className="w-40" value={TRANSACTION_TABS.BALANCE}>
             <Wallet className="mr-2 h-4 w-4" />
             {t('Balans')}
