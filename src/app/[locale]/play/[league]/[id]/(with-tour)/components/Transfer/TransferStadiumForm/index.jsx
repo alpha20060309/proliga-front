@@ -249,7 +249,7 @@ const TransferStadiumForm = () => {
             type="button"
             variant="default"
             title="Avto jamoa yigish"
-            className="bg-card text-foreground hover:border-primary border-border flex size-10 items-center justify-center gap-1 rounded-sm border transition-all"
+            className="bg-card text-foreground hover:border-primary border-border hover:text-accent-foreground flex size-10 items-center justify-center gap-1 border transition-all"
           >
             <Compass className="size-6" />
           </Button>
