@@ -38,6 +38,10 @@ const Championship = ({ game }) => {
       }
     }
 
+    if (!game?.is_team_created) {
+      return router.push(`/play/${game.id}/${currentGame.id}/transfer`)
+    }
+
     return router.push(`/play/${game.id}/${currentGame.id}`)
   }
 

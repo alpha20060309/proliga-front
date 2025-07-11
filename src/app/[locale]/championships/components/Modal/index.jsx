@@ -47,7 +47,7 @@ const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
       user,
       cb: (game) => {
         toggleModal()
-        router.push(`/play/${game.competition_id}/${game.id}`)
+        router.push(`/play/${game.competition_id}/${game.id}/transfer`)
       },
     })
   }
