@@ -1,0 +1,169 @@
+Biz haqimizda 
+Proliga Fantasy Futbol - bu vertual futbol o'yini bo'lib, unda ishtirokchilar haqiqiy futbol ligalarining haqiqiy o'yinchilariga asoslangan vertual jamoalarning murabbiylari bo'lishadi. Ushbu o'yinda ishtirokchilar futbolchilarnii tanlash orqali o'z jamoalarini yaratadilar va haqiqiy o'yinlariga qarab ochko oladilar. 
+
+ 
+
+Proliga fantasy futbolning asosiy elementlari: 
+
+Jamoa yaratish: Ishtirokchilar ma'lum miqdordagi o'yinchilarni sayt ma'lumotlar bazasidan tanlaydilar, unga haqiqiy jamoalar va ligalar o'yinchilari kiradi.
+Ochkolar: Ishtirokchilar o‘zi tanlagan futbolchilarining turli yutuqlari – gollari, uzatmalari, darvozabonlar va himoyachilarning quruq o'yinlari, shuningdek, boshqa statistik ko‘rsatkichlar uchun ochko oladi.
+Transferlar va taktikalar: Mavsum davomida ishtirokchilar o'z jamoalari tarkibini transferlarni amalga oshirish orqali o'zgartirishlari mumkin, bu esa strategiya va rejalashtirish elementini qo'shadi.
+ 
+
+Fantastik futbol - bu haqiqiy futbol voqealari bilan o'zaro muloqot qilishning qiziqarli usuli bo'lib, muxlislarga sport haqidagi bilimlarini chuqurlashtirish va harakatlarga ko'proq jalb qilish imkonini beradi. 
+
+Qoidalar 
+ 
+
+Futbol Fentezi o‘yini butun dunyoda eng ommabop vertual futbol fentezi o‘yini hisoblanadi. Endi siz ham shu o‘yin ishtirokchisiga aylanishingiz mumkin. Bu o‘yin futbolga qiziqishingizni yanada ortirib, ushbu sport turida qay daraja mutaxassis ekanligingizni ochib beradi.
+ 
+Qisqacha o‘yin shartlari: Siz o‘zingizga jamoa tuzasiz va o‘sha tuzgan jamoangizdagi futbolchilar xaqiqiy hayotda gol ursa, golli uzatmalar oshirsa va yana kuplab xarakatlari uchun sizga ochkolar berib boriladi. 
+
+O‘yinni boshlash - O‘yinni boshlash uchun bir chempionatdan 11 ta futbolchi tanlab olasiz. 
+
+Futbolchilar limiti – har bir jamoadan 2tadan oshiq futbolchi sotib ololmaysiz. 
+
+Byudjet limiti – sizga 100 tanga beriladi, shu summaga 11 ta futbolchi harid qilasiz.
+
+Jamoa sardori - Har bir tur uchun 11 futbolchidan birini jamoa sardori etib tayinlaysiz. Jamoa sardori o‘sha turda qancha ochko olib kelsa ikkiga ko‘paytirilib sizga shuncha ochko yoziladi. 
+
+Dedlayn - Tur boshlanishidan oldin barcha o‘zgartirishlar, transferlar, sardor tanlash va jamoani tasdiqlashni DEDLAYNgacha qilib bo‘lishingiz shart! Masalan 2-tur dedlayni 20 avgust 16:00. Siz shu vaktgacha 2-tur uchun barcha o‘zgarishlarni qilib bo‘lishingiz zarur. 
+
+Transfer - Jamoani tuzib bo‘lganingizdan so‘ng, har bir turda 2 ta transfer qilish huquqiga ega bo‘lasiz. Transferni amalga oshirish uchun, Transfer oynasiga o‘tasiz va jamoangizdagi futbolchini sotib o‘rniga boshqa futbolchi harid qilasiz. Yodingizda tuting, transferlarni tur boshlanguniga qadar dedlayngacha qilib olishingiz zarur, dedlayn tugaganidan so‘ng qilingan transferlar keyingi turga o‘tadi. 
+
+Agar mavsum yakunida foydalanuvchilar teng miqdorda ochko ishlagan bo‘lsa g‘olib qanday aniqlanadi? - Ikki yoki undan ortiq foydalanuvchi o‘rtasida ochkolar teng bo‘lgan taqdirda, ularning chempionatning barcha turlarda erishgan g‘alabalari soni solishtiriladi. Agar ikki yoki undan ko‘proq o‘yinchi ma’lum bir turda bir xil eng ko‘p ochko to‘plagan bo‘lsa, u holda turdagi g‘alaba shu foydalanuvchilarga tegishli hisoblanadi. Agar turda to‘plangan ochkolar bo‘yicha barcha o‘yinchilar o‘rtasida tenglik bo‘lsa, g‘alaba hech kimga yozilmaydi. Natijada, turlarda eng ko‘p g‘alaba qozongan foydalanuvchi g‘olib deb topiladi. 
+
+Agar turlar bo‘yicha taqqoslaganda, o‘yinchilar bir xil miqdordagi g‘alabalarga erishgan bo‘lsa, g‘olib oxirgi turda aniqlanadi – unda eng ko'p ochko to‘plagan foydalanuvchi g‘olib deb topiladi. 
+
+ 
+Ochkolar hisoblash tizimi 
+
+Ko‘rsatkich 
+
+DAR 
+
+HIM 
+
+Y.HIM 
+
+XUJ 
+
+O‘yinga tushsa 
+
+1
+
+1 
+
+1
+
+1
+
+60 daqiqa va undan ko‘p o‘ynasa 
+
+1
+
+1 
+
+1
+
+1
+
+Har bitta gol uchun 
+
+6
+
+6 
+
+5
+
+4
+
+Golli uzatma uchun 
+
+3
+
+3 
+
+3
+
+3
+
+Quruq o‘yin uchun
+
+4
+
+4
+
+1
+
+Qaytarilgan penalti uchun 
+
+6
+
+Avto gol uchun 
+
+-2 
+
+-2 
+
+-2 
+
+-2 
+
+O‘tkazib yuborilgan har 2 top farqi uchun 
+
+-1
+
+-1
+
+Amalga oshirilmagan penalti uchun 
+
+-3
+
+-3
+
+-3
+
+-3 
+
+Sariq kartochka uchun 
+
+-1
+
+-1
+
+-1
+
+-1
+
+Qizil kartochka uchun 
+
+-2
+
+-2
+
+-2
+
+-2
+
+ 
+
+To‘lov xizmati 
+
+1. Sayt har bir tur uchun 2 ta transferga ruxsat beradi. Musobaqada g‘alaba qozonish uchun foydalanuvchiga yana 3 ta qo‘shimcha transfer kerak bo‘lishi mumkin (jami 5 ta transfer). Shu sababli, foydalanuvchiga zaruriyat bo‘lsa qo‘shimcha 3 ta transfer uchun to‘lov amalga oshirishi mumkin. 
+ 
+•Qo‘shimcha 1ta transfer uchun to‘lov narxi – 35.000 sum (xar bir chempionat uchun, butun mavsum amal qiladi). 
+•Qo‘shimcha 2ta transfer uchun to‘lov narxi – 50.000 sum (xar bir chempionat uchun, butun mavsum amal qiladi). 
+•Qo‘shimcha 3ta transfer uchun to‘lov narxi – 65.000 sum (xar bir chempionat uchun, butun mavsum amal qiladi). 
+
+2. Saytda har bir jamoadan 2 nafardan futbolchi sotib olishingiz mumkin. Musobaqada g‘alaba qozonish uchun ikkita o‘yinchi etarli bo‘lmasligi mumkin. Foydalanuvchiga qo‘shimcha ravishda har bir jamoadan yana 3 ta o‘yinchi (jami 5 o‘yinchi) sotib olishlari mumkin bo‘ladi. Shu sababli, foydalanuvchiga zaruriyat bo‘lsa qo‘shimcha 3 ta futbolchi uchun to‘lov amalga oshirishi mumkin. 
+ 
+•Qo‘shimcha 1ta futbolchi uchun to‘lov narxi – 35.000 sum (xar bir chempionat uchun, butun mavsum amal qiladi). 
+•Qo‘shimcha 2ta futbolchi uchun to‘lov narxi – 50.000 sum (xar bir chempionat uchun, butun mavsum amal qiladi). 
+•Qo‘shimcha 3ta futbolchi uchun to‘lov narxi – 65.000 sum (xar bir chempionat uchun, butun mavsum amal qiladi). 
+
+3. Saytdan o‘yinchilarni sotib olish uchun foydalanuvchiga 100 tanga (sayt valyutasi) beriladi. Musobaqada g‘alaba qozonish uchun 100 tanga etarli bo‘lmasligi mumkin. Tangalarni ko‘paytirish uchun foydalanuvchiga qo‘shimcha 30 tanga sotib olish imkoniyatiga ega bo‘ladi. Shu sababli, foydalanuvchiga zaruriyat bo‘lsa qo‘shimcha 30 tanga uchun to‘lov amalga oshirishi mumkin. 
+ 
+•Balansni 110 tanga oshirish narxi – 35.000 sum (xar bir chempionat uchun, butun mavsum amal qiladi).
+•Balansni 120 tanga oshirish narxi – 50.000 sum (xar bir chempionat uchun, butun mavsum amal qiladi). 
+•Balansni 130 tanga oshirish narxi – 60.000 sum (xar bir chempionat uchun, butun mavsum amal qiladi). 
