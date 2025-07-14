@@ -4,10 +4,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from 'components/ui/tooltip'
-import { staticPath } from 'utils/static.util'
 import { useTranslation } from 'react-i18next'
 import { formatDate } from 'utils/formatDate.util'
-import { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   setCurrentMatch,
@@ -25,15 +23,6 @@ const Match = ({ match }) => {
   const homeClub = match?.home_club_id ?? null
   const awayClub = match?.away_club_id ?? null
   const date = formatDate(match?.started_date, 'matches')
-
-  const homeImg = useMemo(
-    () => staticPath + '/club-jpeg/' + homeClub?.slug + '/logo.jpeg',
-    [homeClub?.slug]
-  )
-  const awayImg = useMemo(
-    () => staticPath + '/club-jpeg/' + awayClub?.slug + '/logo.jpeg',
-    [awayClub?.slug]
-  )
 
   const homeScore = parseInt(match?.home_club_result) || 0
   const awayScore = parseInt(match?.away_club_result) || 0
@@ -57,7 +46,7 @@ const Match = ({ match }) => {
           uz: homeClub?.name,
           ru: homeClub?.name_ru,
         })}
-        logo={homeImg}
+        logo={homeClub?.logo_img}
         isWinner={isHomeWinner}
         isDraw={isDraw}
         alignment="left"
@@ -85,7 +74,7 @@ const Match = ({ match }) => {
           uz: awayClub?.name,
           ru: awayClub?.name_ru,
         })}
-        logo={awayImg}
+        logo={awayClub?.logo_img}
         isWinner={isAwayWinner}
         isDraw={isDraw}
         alignment="right"

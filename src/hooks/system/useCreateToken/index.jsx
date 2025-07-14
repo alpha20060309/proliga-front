@@ -45,7 +45,7 @@ export const useCreateToken = () => {
 
             if (newError) {
                 setError('Error creating user token')
-                toast.error('Error creating user token')
+                // toast.error('Error creating user token')
                 return
             }
 

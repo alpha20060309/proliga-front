@@ -1,8 +1,7 @@
 import { selectCurrentMatch } from 'lib/features/match/match.selector'
 import { Timer } from 'lucide-react'
 import { useSelector } from 'react-redux'
-import { staticPath, getUrl } from 'utils/static.util'
-import { useMemo } from 'react'
+import { getUrl } from 'utils/static.util'
 import { MATCH_STATUS } from 'utils/match.util'
 import { getCorrectName } from 'utils/getCorrectName.util'
 import { useTranslation } from 'react-i18next'
@@ -12,35 +11,14 @@ const MatchEventScore = () => {
   const currentMatch = useSelector(selectCurrentMatch)
   const { lang } = useSelector((store) => store.systemLanguage)
 
-  const homeImg = useMemo(
-    () =>
-      staticPath +
-      '/club-jpeg/' +
-      currentMatch?.home_club_id?.slug +
-      '/logo.jpeg',
-    [currentMatch?.home_club_id?.slug]
-  )
-  const awayImg = useMemo(
-    () =>
-      staticPath +
-      '/club-jpeg/' +
-      currentMatch?.away_club_id?.slug +
-      '/logo.jpeg',
-    [currentMatch?.away_club_id?.slug]
-  )
-
   return (
     <section className="from-chart-1/20 via-chart-3/20 to-chart-2/20 h-min bg-linear-to-r py-3">
       <div className="flex items-center justify-center gap-4">
         <div className="flex w-1/3 flex-col items-center justify-center gap-2 text-center sm:w-[40%]">
           <img
-            src={getUrl(homeImg)}
-            onError={(e) => {
-              const img = e.currentTarget;
-              img.onerror = null;                             // prevent infinite loop
-              img.src = getUrl(homeImg.replace(/\.jpeg$/, '.jpg'));
-            }}
+            src={getUrl(currentMatch?.home_club_id?.logo_img)}
             alt="Arsenal"
+            onError={(e) => (e.currentTarget.src = '/icons/football.svg')}
             className="shadow-border size-10 rounded-full shadow-sm sm:size-16"
           />
           <h3 className="text-sm font-bold sm:text-base">
@@ -67,8 +45,9 @@ const MatchEventScore = () => {
         </div>
         <div className="flex w-1/3 flex-col items-center justify-center gap-2 text-center sm:w-[40%]">
           <img
-            src={getUrl(awayImg)}
+            src={getUrl(currentMatch?.away_club_id?.logo_img)}
             alt="Manchester City"
+            onError={(e) => (e.currentTarget.src = '/icons/football.svg')}
             className="shadow-border size-10 rounded-full shadow-sm sm:size-16"
           />
           <h3 className="text-sm font-bold sm:text-base">

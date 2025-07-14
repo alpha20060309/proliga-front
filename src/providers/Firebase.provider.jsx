@@ -35,7 +35,6 @@ const FirebaseProvider = ({ children }) => {
 
       try {
         const device = `${agent?.platform ?? ''} ${agent?.browser ?? ''}`;
-        console.log(userToken)
         if (!userToken?.id) {
           // No token in backend, create and subscribe
           await createToken({ user_id: user.id, token: deviceToken, device });
