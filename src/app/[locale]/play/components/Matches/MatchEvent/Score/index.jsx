@@ -35,6 +35,11 @@ const MatchEventScore = () => {
         <div className="flex w-1/3 flex-col items-center justify-center gap-2 text-center sm:w-[40%]">
           <img
             src={getUrl(homeImg)}
+            onError={(e) => {
+              const img = e.currentTarget;
+              img.onerror = null;                             // prevent infinite loop
+              img.src = getUrl(homeImg.replace(/\.jpeg$/, '.jpg'));
+            }}
             alt="Arsenal"
             className="shadow-border size-10 rounded-full shadow-sm sm:size-16"
           />

@@ -53,7 +53,7 @@ export const useCreateToken = () => {
             return cb(user_token)
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Error creating user token')
-            toast.error(err instanceof Error ? err.message : 'Error creating user token')
+            // toast.error(err instanceof Error ? err.message : 'Error creating user token')
         } finally {
             setIsLoading(false)
         }

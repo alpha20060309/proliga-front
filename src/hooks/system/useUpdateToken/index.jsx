@@ -15,7 +15,7 @@ export const useUpdateToken = () => {
         setError(null)
 
         try {
-            if (!user_id  || !token) {
+            if (!user_id || !token) {
                 setError('Missing required fields')
                 toast.error('Missing required fields')
                 return
@@ -43,7 +43,7 @@ export const useUpdateToken = () => {
             return cb(user_token)
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Error creating user token')
-            toast.error(err instanceof Error ? err.message : 'Error creating user token')
+            // toast.error(err instanceof Error ? err.message : 'Error creating user token')
         } finally {
             setIsLoading(false)
         }

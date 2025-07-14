@@ -3,7 +3,7 @@
 import bcrypt from 'bcryptjs'
 
 import { RegisterSchema } from 'lib/schema'
-import prisma from 'lib/prisma'
+import { supabase } from 'lib/supabaseClient'
 import { getUserByPhone, getUserByEmail } from 'lib/utils/auth.util'
 import { login } from './login.action'
 
@@ -29,13 +29,17 @@ export const register = async (values) => {
   }
 
   try {
-    await prisma.user.create({
-      data: {
-        email,
-        phone,
-        password: hashedPassword,
-      },
+    const { error: createError } = await supabase.from('user').insert({
+      email,
+      phone,
+      password: hashedPassword,
     })
+
+    if (createError) {
+      console.error('Error creating user:', createError)
+      return { error: 'Could not create user.' }
+    }
+
     const res = await login({ phone, password, data })
 
     if (res?.error) {
@@ -43,6 +47,7 @@ export const register = async (values) => {
     }
     return res
   } catch (error) {
-    return { error }
+    console.error('Registration error: ', error)
+    return { error: 'An unexpected error occurred.' }
   }
 }
