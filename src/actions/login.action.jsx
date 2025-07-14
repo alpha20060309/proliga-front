@@ -3,7 +3,7 @@
 import { LoginSchema } from 'lib/schema'
 import { signIn } from 'app/api/auth/[...nextauth]/route'
 import { getUserByPhone } from 'lib/utils/auth.util'
-import prisma from 'lib/prisma'
+import { supabase } from 'lib/supabaseClient'
 
 export const login = async (values) => {
   const validatedFields = LoginSchema.safeParse(values)
@@ -27,15 +27,21 @@ export const login = async (values) => {
       redirect: false,
     })
 
-    await prisma.user.update({
-      where: { id: existingUser.id, deleted_at: null },
-      data: {
+    const { error: updateError } = await supabase
+      .from('user')
+      .update({
         geo: data?.geo,
         agent: data?.agent,
         visitor: data?.fingerprint,
         visited_at: new Date(),
-      },
-    })
+      })
+      .eq('id', existingUser.id)
+      .is('deleted_at', null)
+
+    if (updateError) {
+      console.error('Error updating user:', updateError)
+      return { error: 'Could not update user information.' }
+    }
 
     return {
       success: true,

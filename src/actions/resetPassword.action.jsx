@@ -1,9 +1,9 @@
 'use server'
 
 import bcrypt from 'bcryptjs'
-import prisma from 'lib/prisma'
 import { getUserByPhone } from 'lib/utils/auth.util'
 import { ResetPasswordSchema } from 'lib/schema'
+import { supabase } from 'lib/supabaseClient'
 
 export const resetPassword = async (values) => {
   const validatedFields = ResetPasswordSchema.safeParse(values)
@@ -33,14 +33,20 @@ export const resetPassword = async (values) => {
 
     const hashedPassword = await bcrypt.hash(password, 10)
 
-    await prisma.user.update({
-      where: { id: existingUser.id, deleted_at: null },
-      data: {
+    const { error: updateError } = await supabase
+      .from('user')
+      .update({
         password: hashedPassword,
         sms_code: null, // Or some other invalidated state
         sms_created_at: null, // Or update to reflect invalidation
-      },
-    })
+      })
+      .eq('id', existingUser.id)
+      .is('deleted_at', null)
+
+    if (updateError) {
+      console.error('Error updating user:', updateError)
+      return { error: 'Could not update user password.' }
+    }
 
     return { success: true }
     // eslint-disable-next-line no-unused-vars
