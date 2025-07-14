@@ -2,6 +2,18 @@
   "name": "proliga.uz",
   "version": "0.3.7",
   "private": true,
+  "packageManager": "pnpm@10.13.1",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "author": "Ramz001",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smarts-uz/proliga-front"
+  },
+  "license": "UNLICENSED",
+  "homepage": "https://proliga.uz",
   "scripts": {
     "dev": "dotenv -e .env.development next dev --turbopack",
     "build": "next build",
@@ -117,8 +129,6 @@
     "prettier-plugin-tailwindcss": "^0.6.11",
     "prisma": "^6.11.1",
     "serwist": "^9.0.14",
-    "tailwindcss": "^4.1.7",
-    "typescript": "^5.8.3",
-    "typescript-eslint": "^8.32.1"
+    "tailwindcss": "^4.1.7"
   }
 }

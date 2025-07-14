@@ -10,7 +10,7 @@ export const fetchMatches = createAsyncThunk(
     const { data, error, count } = await supabase
       .from('match')
       .select(
-        'status, match_min, additional_min, home_club_result, away_club_result, winner_club_id, started_date, finished_date, home_club_id:club!home_club_id(name, slug, id, name_ru), away_club_id:club!away_club_id(name, slug, id, name_ru), id',
+        'status, match_min, additional_min, home_club_result, away_club_result, winner_club_id, started_date, finished_date, home_club_id:club!home_club_id(name, slug, id, name_ru, logo_img), away_club_id:club!away_club_id(name, slug, id, name_ru, logo_img), id',
         { count: 'estimated' }
       )
       .eq('season_id', season_id)
