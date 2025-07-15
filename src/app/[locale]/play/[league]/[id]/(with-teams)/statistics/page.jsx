@@ -51,7 +51,7 @@ function StatisticsTable() {
         filterVariant: 'name',
       },
     }),
-    columnHelper.accessor('club_id.name', {
+    columnHelper.accessor('club.name', {
       accessorFn: (row) =>
         getCorrectName({ lang, uz: row?.club?.name, ru: row?.club?.name_ru }),
       header: t('Klub'),

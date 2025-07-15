@@ -1,5 +1,5 @@
 import { DialogTitle } from '@radix-ui/react-dialog'
-import { staticPath, getUrl } from 'utils/static.util'
+import { getUrl } from 'utils/static.util'
 import { User, DollarSign, Percent } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { getCorrectName } from 'utils/getCorrectName.util'
@@ -8,15 +8,12 @@ import { useSelector } from 'react-redux'
 const PlayerPhoto = ({ currentPlayer, position }) => {
   const { t } = useTranslation()
   const { lang } = useSelector((store) => store.systemLanguage)
-  const image = staticPath + '/player-png/' + currentPlayer?.slug + '/app.png'
-  const club =
-    staticPath + '/club-jpeg/' + currentPlayer?.club?.slug + '/logo.jpeg'
 
   return (
     <section className="flex gap-2">
       <div className="size-24 shrink-0 sm:size-32 lg:size-36">
         <img
-          src={getUrl(image) || ''}
+          src={getUrl(currentPlayer?.image) || ''}
           alt="player image"
           loading="lazy"
           onError={(e) =>
@@ -36,7 +33,7 @@ const PlayerPhoto = ({ currentPlayer, position }) => {
           </DialogTitle>
           <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
             <img
-              src={getUrl(club) || ''}
+              src={getUrl(currentPlayer?.club?.logo_img) || ''}
               alt="home club"
               width={20}
               height={20}

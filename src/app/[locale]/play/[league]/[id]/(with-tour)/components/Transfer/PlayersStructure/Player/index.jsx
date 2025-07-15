@@ -2,13 +2,12 @@
 
 import Confirmation from 'components/ConfirmationModal'
 import Image from 'next/image'
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   deleteTeamPlayer,
   setPlayerTransferModal,
 } from 'lib/features/teamPlayer/teamPlayer.slice'
-import { staticPath } from 'utils/static.util'
 import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
 import { useTranslation } from 'react-i18next'
 import { setCurrentPlayer } from 'lib/features/player/player.slice'
@@ -28,10 +27,6 @@ const Player = ({ player }) => {
   const { t } = useTranslation()
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
   const currentTeam = useSelector(selectCurrentTeam)
-  const clubPath = useMemo(
-    () => (player.name ? player?.club_id?.slug : ''),
-    [player]
-  )
   const { lang } = useSelector((store) => store.systemLanguage)
 
   const name = getCorrectName({
@@ -40,7 +35,6 @@ const Player = ({ player }) => {
     ru: player?.player?.name_ru,
   })
 
-  const tShirt = staticPath + '/club-svg/' + clubPath + '/app.svg'
   const lastName = name?.split(' ')[1] ?? ''
 
   const imageErr = (e) => {
@@ -86,7 +80,7 @@ const Player = ({ player }) => {
     <>
       <PlayerContainer>
         <PlayerImage
-          tShirt={tShirt}
+          tShirt={player?.club?.form_img}
           handleInfoModal={handleTransfer}
           imageErr={imageErr}
           player={player}

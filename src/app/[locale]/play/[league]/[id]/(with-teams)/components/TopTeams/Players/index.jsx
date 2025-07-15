@@ -1,7 +1,5 @@
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
-import { useMemo } from 'react'
-import { staticPath } from 'utils/static.util'
 import { selectTopPlayers } from 'lib/features/player/player.selector'
 import { getUrl } from 'utils/static.util'
 import { getCorrectName } from 'utils/getCorrectName.util'
@@ -37,16 +35,12 @@ const RankingPlayers = () => {
 
 const PlayerPlace = ({ player, index }) => {
   const { lang } = useSelector((store) => store.systemLanguage)
-  const image = useMemo(
-    () => staticPath + '/player-png/' + player?.slug + '/app.png',
-    [player?.slug]
-  )
 
   return (
     <div className="bg-secondary relative min-h-32 rounded-sm p-2">
       <div className="flex items-center justify-between">
         <img
-          src={getUrl(image)}
+          src={getUrl(player?.image)}
           alt="player"
           width={24}
           height={24}

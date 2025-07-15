@@ -9,7 +9,7 @@ export const deleteTeamPlayerReducer = (state, action) => {
     const newTeam = [...state.GOA, ...state.DEF, ...state.MID, ...state.STR]
 
     newTeam.forEach((player) => {
-      const clubSlug = player?.club_id?.id ?? ''
+      const clubSlug = player?.club?.id ?? ''
 
       if (player.name) {
         state.duplicatesMap[clubSlug] = (state.duplicatesMap[clubSlug] || 0) + 1
@@ -29,7 +29,7 @@ export const deleteTeamPlayerReducer = (state, action) => {
     ...prevPlayer,
     player_id: null,
     name: null,
-    club_id: null,
+    club: null,
     price: null,
     percentage: null,
     image: null,

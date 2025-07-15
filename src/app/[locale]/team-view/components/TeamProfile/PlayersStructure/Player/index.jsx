@@ -2,8 +2,7 @@
 
 import { selectPlayerPoint } from 'lib/features/playerPoint/playerPoint.selector'
 import { useSelector } from 'react-redux'
-import { useEffect, useState, useMemo } from 'react'
-import { staticPath } from 'utils/static.util'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { getCorrectName } from 'utils/getCorrectName.util'
 import { memo } from 'react'
@@ -33,10 +32,6 @@ const Player = ({ player }) => {
     e.target.src = '/icons/player.svg'
   }
 
-  const clubPath = useMemo(
-    () => (player.name ? player?.club_id?.slug : ''),
-    [player]
-  )
   const name = getCorrectName({
     lang,
     uz: player?.player?.name,
@@ -44,7 +39,6 @@ const Player = ({ player }) => {
   })
 
   const lastName = name?.split(' ')[1] ?? ''
-  const tShirt = staticPath + '/club-svg/' + clubPath + '/app.svg'
 
   return (
     <PlayerContainer>
@@ -63,8 +57,8 @@ const Player = ({ player }) => {
       {player.name && (
         <>
           <PlayerImage
-            tShirt={tShirt}
-            handleInfoModal={() => {}}
+            tShirt={player?.club?.form_img}
+            handleInfoModal={() => { }}
             imageErr={imageErr}
             player={player}
           />

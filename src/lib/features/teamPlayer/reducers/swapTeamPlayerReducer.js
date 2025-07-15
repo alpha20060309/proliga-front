@@ -17,7 +17,7 @@ export const swapTeamPlayerReducer = (state, action) => {
     const newTeam = [...state.GOA, ...state.DEF, ...state.MID, ...state.STR]
 
     newTeam.forEach((player) => {
-      const clubSlug = player?.club_id?.id ?? ''
+      const clubSlug = player?.club?.id ?? ''
 
       if (player.name) {
         state.duplicatesMap[clubSlug] = (state.duplicatesMap[clubSlug] || 0) + 1
@@ -36,9 +36,11 @@ export const swapTeamPlayerReducer = (state, action) => {
   const createUpdatedPlayer = (prevPlayer, newPlayer) => ({
     ...prevPlayer,
     id: prevPlayer.id,
-    club_id: {
-      slug: newPlayer.club.slug,
-      id: newPlayer.club.id,
+    club: {
+      slug: player.club.slug,
+      id: player.club.id,
+      form_img: player.club?.form_img,
+      logo_img: player.club?.logo_img,
     },
     name: newPlayer.name,
     position: newPlayer.position,
@@ -54,7 +56,7 @@ export const swapTeamPlayerReducer = (state, action) => {
     },
   })
 
-  const clubId = player.club.id || player.club_id.id
+  const clubId = player.club.id || player.club.id
 
   if (state.duplicatesMap[clubId] === max_same_team_players) {
     toast.warning(t('Max players count reached from the same club!'), {
