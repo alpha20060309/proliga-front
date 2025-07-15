@@ -1,9 +1,8 @@
 'use client'
 
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Image from 'next/image'
-import { staticPath } from 'utils/static.util'
 import { selectPlayerPoint } from 'lib/features/playerPoint/playerPoint.selector'
 import { setPlayerInfoModal } from 'lib/features/teamPlayer/teamPlayer.slice'
 import { setCurrentPlayer } from 'lib/features/player/player.slice'
@@ -50,11 +49,6 @@ const Player = ({ player }) => {
     ru: player?.player?.name_ru,
   })
 
-  const clubPath = useMemo(
-    () => (player.name ? player?.club_id?.slug : ''),
-    [player]
-  )
-  const tShirt = staticPath + '/club-svg/' + clubPath + '/app.svg'
   const lastName = name?.split(' ')[1] ?? ''
 
   return (
@@ -74,7 +68,7 @@ const Player = ({ player }) => {
       {player.name && (
         <>
           <PlayerImage
-            tShirt={tShirt}
+            tShirt={player?.club?.logo_img}
             handleInfoModal={handleInfoModal}
             imageErr={imageErr}
             player={player}

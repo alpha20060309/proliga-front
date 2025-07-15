@@ -16,7 +16,7 @@ export const autoAssembleTeamReducer = (state, action) => {
     const newTeam = [...state.GOA, ...state.DEF, ...state.MID, ...state.STR]
 
     newTeam.forEach((player) => {
-      const clubSlug = player?.club_id?.id ?? ''
+      const clubSlug = player?.club?.id ?? ''
 
       if (player.name) {
         state.duplicatesMap[clubSlug] = (state.duplicatesMap[clubSlug] || 0) + 1
@@ -28,9 +28,11 @@ export const autoAssembleTeamReducer = (state, action) => {
     ...prevPlayer,
     player_id: player.id,
     name: player.name,
-    club_id: {
+    club: {
       slug: player.club.slug,
       id: player.club.id,
+      form_img: player.club?.form_img,
+      logo_img: player.club?.logo_img,
     },
     price: player.price,
     competition_id: team.competition_id.id,

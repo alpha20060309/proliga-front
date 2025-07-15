@@ -17,7 +17,7 @@ export const revertTeamPlayersReducer = (state) => {
   const team = state.prevTeam
   team?.length > 0 &&
     team.forEach((player) => {
-      const clubSlug = player?.club_id?.id ?? ''
+      const clubSlug = player?.club?.id ?? ''
 
       if (player.position === PLAYER_POSITION.GOA) {
         state.GOA.push(player)

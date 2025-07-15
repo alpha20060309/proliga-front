@@ -10,14 +10,14 @@ export const teamPlayerExtraReducer = (builder) => {
 
       const teamData = team.reduce(
         (acc, player) => {
-          const { position, club_id, name, price } = player
+          const { position, club, name, price } = player
 
           if (position && acc[position]) {
             acc[position].push(player)
             acc.teamPrice += price || 0
 
             if (name) {
-              const clubSlug = club_id?.id ?? ''
+              const clubSlug = club?.id ?? ''
               acc.playersCount[position]++
               acc.duplicatesMap[clubSlug] =
                 (acc.duplicatesMap[clubSlug] || 0) + 1
