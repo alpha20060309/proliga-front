@@ -10,15 +10,33 @@ import {
   CardFooter,
 } from 'components/ui/card'
 import { Button } from 'components/ui/button'
-import { ArrowUpCircle } from 'lucide-react'
+import { ArrowUpCircle, Wallet } from 'lucide-react'
 import RefillBalanceModal from 'shared/RefillBalanceModal'
-import { useState } from 'react'
-import { Wallet } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { supabase } from 'lib/supabaseClient'
 
 const RefillBalance = () => {
   const { t } = useTranslation()
   const user = useSelector(selectUser)
   const [isModalOpen, setModalOpen] = useState(false)
+  const [balance, setBalance] = useState(user?.balance / 100 || 0)
+
+  useEffect(() => {
+    const fetchBalance = async () => {
+      const { data, error } = await supabase
+        .from('user')
+        .select('balance')
+        .eq('id', user?.id)
+        .single()
+
+      if (error instanceof Error) {
+        console.error(error.message)
+      }
+
+      setBalance(data?.balance / 100 || 0)
+    }
+    fetchBalance()
+  }, [user?.id])
 
   return (
     <Card className="w-full gap-4 sm:max-w-64">
@@ -35,7 +53,7 @@ const RefillBalance = () => {
 
       <CardContent>
         <NumericFormat
-          value={user?.balance / 100 || 0}
+          value={balance}
           className="text-foreground w-full border-none bg-transparent text-right text-lg font-bold outline-hidden select-none"
           defaultValue={0}
           readOnly
