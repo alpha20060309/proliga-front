@@ -26,9 +26,10 @@ export const fetchToken = async () => {
       if ('serviceWorker' in navigator) {
         const registration = await navigator.serviceWorker.ready
         const token = await getToken(fcmMessaging, {
-          vapidKey: process.env.NEXT_PUBLIC_FIREBASE_FCM_VAPID_KEY,
+          vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY,
           serviceWorkerRegistration: registration,
         });
+
         return token;
       }
     }
