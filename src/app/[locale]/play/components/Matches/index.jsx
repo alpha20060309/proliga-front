@@ -118,7 +118,7 @@ const Matches = () => {
 
   return (
     <Card className="border-border relative mx-auto h-172 w-full max-w-lg justify-between lg:mx-0 lg:min-w-72 2xl:max-w-lg">
-      <CardHeader className="flex w-full items-center justify-center">
+      <CardHeader className="flex w-full items-center gap-0 justify-center">
         <div className="mx-auto ml-9 flex flex-1 items-center justify-center gap-2">
           <Button
             variant="outline"

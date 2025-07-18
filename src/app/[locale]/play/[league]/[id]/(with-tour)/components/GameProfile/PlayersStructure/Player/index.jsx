@@ -68,7 +68,7 @@ const Player = ({ player }) => {
       {player.name && (
         <>
           <PlayerImage
-            tShirt={player?.club?.logo_img}
+            tShirt={player?.club?.form_img}
             handleInfoModal={handleInfoModal}
             imageErr={imageErr}
             player={player}
