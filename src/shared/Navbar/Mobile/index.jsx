@@ -47,7 +47,7 @@ const NavLink = ({
   } else if (isActive) {
     iconClass += ' text-sidebar-accent-foreground'
   } else {
-    iconClass += ' text-sidebar-foreground'
+    iconClass += ' text-sidebar-foreground  group-hover:text-sidebar-accent-foreground'
   }
 
   return (
@@ -56,8 +56,8 @@ const NavLink = ({
       onClick={
         isDisabled
           ? (e) => {
-              e.preventDefault()
-            }
+            e.preventDefault()
+          }
           : undefined
       }
       className={cn(
@@ -65,7 +65,7 @@ const NavLink = ({
         className,
         {
           'pointer-events-none opacity-50': isDisabled,
-          'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground':
+          'hover:bg-sidebar-accent hover:rounded-md transition-all':
             !isDisabled,
         }
       )}
@@ -75,10 +75,10 @@ const NavLink = ({
     >
       <div
         className={cn(
-          'text-sidebar-foreground flex h-16 w-full flex-col items-center justify-center rounded-md p-1',
+          'text-sidebar-foreground group-hover:text-sidebar-accent-foreground flex h-16 w-full flex-col items-center justify-center rounded-md p-1',
           className,
           {
-            'bg-sidebar-accent text-sidebar-accent-foreground':
+            'bg-sidebar-accent text-sidebar-accent-foreground ':
               isActive && !isDisabled,
           }
         )}
