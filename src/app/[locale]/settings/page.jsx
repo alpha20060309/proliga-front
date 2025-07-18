@@ -12,6 +12,7 @@ import { getUrl } from 'utils/static.util'
 import { Copy } from 'lucide-react'
 import NotificationToggle from './components/NotificationToggle'
 import ThemeCustomizer from './components/ThemeCustomizer'
+import DeleteUser from './components/DeleteUser'
 
 const SettingsProfile = () => {
   const { t } = useTranslation()
@@ -123,6 +124,7 @@ const SettingsProfile = () => {
         <RefillBalance />
         <NotificationToggle />
         <ThemeCustomizer />
+        <DeleteUser />
       </section>
     </>
   )
