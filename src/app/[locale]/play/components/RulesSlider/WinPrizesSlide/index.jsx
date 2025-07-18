@@ -68,18 +68,18 @@ const Prize = ({ prize }) => {
       className={cn(
         'flex min-w-24 flex-1 flex-col items-center justify-center md:max-w-80',
         prize.order === 3 &&
-          'col-span-2 mx-auto max-w-[50%] sm:col-span-1 sm:mx-0 sm:max-w-max'
+        'col-span-2 mx-auto max-w-[50%] sm:col-span-1 sm:mx-0 sm:max-w-max'
       )}
     >
       <p className="mb-1 text-xs sm:text-sm md:mb-2 md:text-lg xl:text-xl">
         {getCorrectName({ lang, uz: prize?.name, ru: prize?.name_ru })}
       </p>
-      <div className="bg-background flex aspect-square items-center justify-center overflow-hidden rounded-xl p-1 lg:p-2">
+      <div className="bg-background flex aspect-square items-center justify-center">
         <img
           src={getUrl(prize?.image)}
           alt={prize?.name}
           loading="lazy"
-          className="aspect-auto h-auto w-auto bg-cover"
+          className="aspect-auto h-auto w-auto rounded p-2 bg-white bg-cover"
         />
       </div>
       <p>
