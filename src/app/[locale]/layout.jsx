@@ -93,7 +93,7 @@ export default async function RootLayout({ children, params }) {
         </head>
         <body
           className={cn(
-            'bg-background text-foreground min-h-svh scroll-smooth font-sans antialiased lg:min-h-screen',
+            'bg-background text-foreground min-h-svh scroll-smooth font-sans antialiased lg:min-h-screen pt-8',
             fontVariables
           )}
         >
