@@ -15,7 +15,7 @@ const Prize = ({ prize, locale, t }) => {
         loading="lazy"
         alt={prize?.name}
         className={cn(
-          'aspect-auto bg-cover',
+          'aspect-auto bg-cover p-2 md:p-4 bg-white rounded-xl',
           prize.order === 1 && 'scale-100',
           prize.order === 2 && 'scale-100 lg:scale-90',
           prize.order === 3 && 'scale-100 lg:scale-80'
