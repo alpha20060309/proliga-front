@@ -79,44 +79,44 @@ const Notification = () => {
     }
   }, [systemNotifications])
 
-  useEffect(() => {
-    if (!isOnline) return
+  // useEffect(() => {
+  //   if (!isOnline) return
 
-    const handleNotification = (payload) => {
-      const { new: New, old: Old, eventType } = payload
+  //   const handleNotification = (payload) => {
+  //     const { new: New, old: Old, eventType } = payload
 
-      switch (eventType) {
-        case SUPABASE_EVENT_TYPE.INSERT:
-          dispatch(addNotification(New))
-          break
-        case SUPABASE_EVENT_TYPE.UPDATE:
-          dispatch(updateNotification(New))
-          break
-        case SUPABASE_EVENT_TYPE.DELETE:
-          dispatch(deleteNotification(Old))
-          break
-        default:
-          null
-      }
-    }
+  //     switch (eventType) {
+  //       case SUPABASE_EVENT_TYPE.INSERT:
+  //         dispatch(addNotification(New))
+  //         break
+  //       case SUPABASE_EVENT_TYPE.UPDATE:
+  //         dispatch(updateNotification(New))
+  //         break
+  //       case SUPABASE_EVENT_TYPE.DELETE:
+  //         dispatch(deleteNotification(Old))
+  //         break
+  //       default:
+  //         null
+  //     }
+  //   }
 
-    const subscription = supabase
-      .channel('notifications')
-      .on(
-        'postgres_changes',
-        {
-          event: '*',
-          schema: 'public',
-          table: 'system_notification',
-        },
-        (payload) => handleNotification(payload)
-      )
-      .subscribe()
+  //   const subscription = supabase
+  //     .channel('notifications')
+  //     .on(
+  //       'postgres_changes',
+  //       {
+  //         event: '*',
+  //         schema: 'public',
+  //         table: 'system_notification',
+  //       },
+  //       (payload) => handleNotification(payload)
+  //     )
+  //     .subscribe()
 
-    return () => {
-      supabase.removeChannel(subscription)
-    }
-  }, [dispatch, isOnline])
+  //   return () => {
+  //     supabase.removeChannel(subscription)
+  //   }
+  // }, [dispatch, isOnline])
 
   return (
     <Popover open={isNotificationsOpen} onOpenChange={handleOpen}>
