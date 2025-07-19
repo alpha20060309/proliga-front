@@ -21,9 +21,9 @@ const fetchPrizesByCompetition = unstable_cache(
       return { error: error.message }
     }
   },
-  (competitionId) => [competitionId],
+  ['fetchPrizesByCompetition'],
   {
-    tags: (competitionId) => [competitionId],
+    tags: ['fetchPrizesByCompetition'],
     revalidate: 3600 * 24,
   }
 )

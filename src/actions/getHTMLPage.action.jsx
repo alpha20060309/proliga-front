@@ -34,9 +34,8 @@ export const getHTMLPage = async (name) => {
 
 export const getPage = unstable_cache(
   async (name) => await getHTMLPage(name),
-  async (name) => [name],
+  ['getHTMLPage'],
   {
-    tags: async (name) => [name],
     revalidate: 3600 * 24,
   }
 )

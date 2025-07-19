@@ -119,7 +119,7 @@ const Matches = () => {
   return (
     <Card className="border-border relative mx-auto h-172 w-full max-w-lg justify-between lg:mx-0 lg:min-w-72 2xl:max-w-lg">
       <CardHeader className="flex w-full items-center gap-0 justify-center">
-        <div className="mx-auto ml-12 flex flex-1 items-center justify-center gap-2">
+        <div className="mx-auto ml-9 flex flex-1 items-center justify-center gap-2">
           <Button
             variant="outline"
             size="icon"
@@ -136,11 +136,11 @@ const Matches = () => {
           >
             <SelectTrigger
               showIcon={false}
-              className="border-muted h-9 w-24 rounded-xs border-2 border-x-0 border-t-0 text-center text-base ring-0 ring-offset-0 outline-hidden hover:outline-hidden"
+              className="border-muted h-9 w-24 rounded-xs border-2 border-x-0 border-t-0 text-center text-base ring-0 ring-offset-0 outline-hidden hover:outline-hidden justify-center items-center placeholder:text-center"
             >
               <SelectValue placeholder={t('Tur')} />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent align="center">
               {tours.map((tour) => (
                 <SelectItem key={tour.id} value={tour.id}>
                   {getCorrectName({

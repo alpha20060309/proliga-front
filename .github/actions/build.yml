@@ -1,0 +1,53 @@
+name: Build and Deploy (Self-Hosted Ubuntu)
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build & Restart App
+    runs-on: [self-hosted, linux]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: "pnpm"
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Load environment variables from envs.txt
+        run: |
+          # Export each non-commented line in envs.txt into the GitHub Actions env
+          while IFS='=' read -r name value; do
+            if [[ ! "$name" =~ ^# && -n "$name" ]]; then
+              echo "$name=$value" >> "$GITHUB_ENV"
+            fi
+          done < envs.txt
+
+      - name: Build application
+        run: pnpm run build
+
+      - name: Generate Prisma client
+        run: pnpm exec prisma generate
+
+      - name: Restart application with PM2
+        run: |
+          pm2 delete proliga 2>/dev/null || true
+          pm2 start pnpm --name proliga -- start
+          pm2 save
