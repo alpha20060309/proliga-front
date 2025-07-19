@@ -1,7 +1,7 @@
 import { getCorrectName } from 'utils/getCorrectName.util'
 import { notFound } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle } from 'components/ui/card'
-import { cache } from 'react'
+import { unstable_cache } from 'next/cache'
 import { supabase } from 'lib/supabaseClient'
 
 export async function generateStaticParams() {
@@ -31,29 +31,41 @@ export async function generateStaticParams() {
 }
 
 export const revalidate = 60
-const getNews = cache(async (id) => {
-  const parsedId = Number(id)
-  if (!id || isNaN(parsedId) || !Number.isInteger(parsedId) || parsedId <= 0) {
-    return { data: null, error: new Error('Invalid news id') }
-  }
-  try {
-    const { data: newsItem, error } = await supabase
-      .from('news')
-      .select('*')
-      .eq('id', parsedId)
-      .is('deleted_at', null)
-      .single()
-
-    if (error) {
-      throw error
+const getNews = unstable_cache(
+  async (id) => {
+    const parsedId = Number(id)
+    if (
+      !id ||
+      isNaN(parsedId) ||
+      !Number.isInteger(parsedId) ||
+      parsedId <= 0
+    ) {
+      return { data: null, error: new Error('Invalid news id') }
     }
+    try {
+      const { data: newsItem, error } = await supabase
+        .from('news')
+        .select('*')
+        .eq('id', parsedId)
+        .is('deleted_at', null)
+        .single()
 
-    return { data: newsItem, error: null }
-  } catch (error) {
-    console.error(`Failed to fetch news with id "${id}":`, error)
-    return { data: null, error }
+      if (error) {
+        throw error
+      }
+
+      return { data: newsItem, error: null }
+    } catch (error) {
+      console.error(`Failed to fetch news with id "${id}":`, error)
+      return { data: null, error }
+    }
+  },
+  (id) => [id],
+  {
+    tags: (id) => [id],
+    revalidate: 3600,
   }
-})
+)
 
 export async function generateMetadata({ params }) {
   const { id, locale } = await params

@@ -1,21 +1,28 @@
 import initTranslations from 'lib/i18n'
-import { cache } from 'react'
+import { unstable_cache } from 'next/cache'
 import PrizeContainer from './components/PrizeContainer'
 import { supabase } from 'lib/supabaseClient'
 
-const fetchCompetitions = cache(async () => {
-  const { data: competitions, error } = await supabase
-    .from('competition')
-    .select('*')
-    .is('deleted_at', null)
-    .eq('is_active', true)
+const fetchCompetitions = unstable_cache(
+  async () => {
+    const { data: competitions, error } = await supabase
+      .from('competition')
+      .select('*')
+      .is('deleted_at', null)
+      .eq('is_active', true)
 
-  if (error) {
-    return { error: error?.message }
+    if (error) {
+      return { error: error?.message }
+    }
+
+    return { data: competitions, error: null }
+  },
+  ['prizes-competitions'],
+  {
+    tags: ['prizes-competitions'],
+    revalidate: 3600 * 24,
   }
-
-  return { data: competitions, error: null }
-})
+)
 
 const Prizes = async ({ params }) => {
   const { locale } = await params

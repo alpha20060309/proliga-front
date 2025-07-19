@@ -1,21 +1,25 @@
 import PackageContainer from './components/Package'
 import initTranslations from 'lib/i18n'
 import { PACKAGE_TYPE } from 'utils/packages.util'
-import { cache } from 'react'
+import { unstable_cache } from 'next/cache'
 import { supabase } from 'lib/supabaseClient'
 
-const fetchPackages = cache(async () => {
-  const { data: packages, error } = await supabase
-    .from('pay_package')
-    .select('*')
-    .is('deleted_at', null)
+const fetchPackages = unstable_cache(
+  async () => {
+    const { data: packages, error } = await supabase
+      .from('pay_package')
+      .select('*')
+      .is('deleted_at', null)
 
-  if (error) {
-    return { error: error?.message }
-  }
+    if (error) {
+      return { error: error?.message }
+    }
 
-  return { data: packages, error: null }
-})
+    return { data: packages, error: null }
+  },
+  ['packages'],
+  { revalidate: 3600 * 24 }
+)
 
 const Packages = async ({ params }) => {
   const { locale } = await params
