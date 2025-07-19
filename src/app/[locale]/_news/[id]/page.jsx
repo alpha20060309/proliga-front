@@ -60,9 +60,8 @@ const getNews = unstable_cache(
       return { data: null, error }
     }
   },
-  (id) => [id],
+  ['getNews'],
   {
-    tags: (id) => [id],
     revalidate: 3600,
   }
 )
