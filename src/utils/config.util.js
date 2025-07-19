@@ -15,4 +15,6 @@ export const CONFIG_KEY = {
   app_version: 'app_version',
   provider_google: 'provider_google',
   provider_facebook: 'provider_facebook',
+  seo_title: 'seo_title',
+  seo_description: 'seo_description',
 }

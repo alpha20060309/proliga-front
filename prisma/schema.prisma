@@ -128,7 +128,6 @@ model club {
   player_result                    player_result[]
   team_player                      team_player[]
 
-  @@index([competition_id])
   @@index([deleted_at])
   @@index([id], map: "club_id_index")
   @@index([name])
@@ -257,11 +256,8 @@ model match {
   @@index([updated_by], map: "idx_match_updated_by")
   @@index([winner_club_id], map: "idx_match_winner_club_id")
   @@index([id], map: "index_id")
-  @@index([competition_id])
   @@index([deleted_at])
-  @@index([season_id])
   @@index([started_date])
-  @@index([tour_id])
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -337,7 +333,6 @@ model pay_balance {
   @@index([user_id], map: "idx_pay_balance_user_id")
   @@index([created_at])
   @@index([deleted_at])
-  @@index([user_id])
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -379,7 +374,6 @@ model pay_expense {
   @@index([team_id], map: "idx_pay_expense_team_id")
   @@index([tour_id], map: "idx_pay_expense_tour_id")
   @@index([user_id], map: "idx_pay_expense_user_id")
-  @@index([user_id])
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -449,7 +443,6 @@ model player {
   @@index([club_id, competition_id], map: "idx_player_club_competition")
   @@index([competition_id], map: "idx_player_competition_id")
   @@index([id], map: "idx_player_id")
-  @@index([competition_id])
   @@index([deleted_at])
 }
 
@@ -498,10 +491,8 @@ model player_point {
   @@index([player_result_id], map: "idx_player_point_player_result_id")
   @@index([season_id], map: "idx_player_point_season_id")
   @@index([tour_id], map: "idx_player_point_tour_id")
-  @@index([competition_id])
   @@index([deleted_at])
   @@index([player_id])
-  @@index([tour_id])
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -716,10 +707,8 @@ model team {
   @@index([season_id], map: "idx_team_season_id")
   @@index([user_id], map: "idx_team_user_id")
   @@index([deleted_at])
-  @@index([id])
   @@index([name])
   @@index([registered_tour_id])
-  @@index([user_id])
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -758,7 +747,6 @@ model team_player {
   @@index([tour_id], map: "idx_team_player_tour_id")
   @@index([user_id], map: "idx_team_player_user_id")
   @@index([deleted_at])
-  @@index([player_id])
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -816,7 +804,6 @@ model tour {
   @@index([competition_id], map: "idx_tour_competition_id")
   @@index([id], map: "idx_tour_id")
   @@index([season_id], map: "idx_tour_season_id")
-  @@index([competition_id])
   @@index([deleted_at])
   @@index([order])
 }
@@ -852,10 +839,7 @@ model tour_team {
   @@index([team_id], map: "idx_tour_team_team_id")
   @@index([tour_id], map: "idx_tour_team_tour_id")
   @@index([user_id], map: "idx_tour_team_user_id")
-  @@index([competition_id])
   @@index([deleted_at])
-  @@index([team_id])
-  @@index([tour_id])
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -937,7 +921,6 @@ model user {
   @@index([name], map: "name_user_copy1")
   @@index([deleted_at])
   @@index([guid])
-  @@index([id])
   @@index([phone])
 }
 
@@ -974,11 +957,8 @@ model user_activity {
   @@index([tour_id], map: "idx_user_activity_tour_id")
   @@index([updated_by], map: "idx_user_activity_updated_by")
   @@index([user_id], map: "idx_user_activity_user_id")
-  @@index([competition_id])
   @@index([created_at])
   @@index([deleted_at])
-  @@index([team_id])
-  @@index([user_id])
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -1111,6 +1091,8 @@ enum config_key {
   provider_facebook
   provider_yandex
   secret_jwt
+  seo_title
+  seo_description
 }
 
 enum config_type {

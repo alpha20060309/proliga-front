@@ -1,25 +1,32 @@
 import { getCorrectName } from 'utils/getCorrectName.util'
 import Prize from '../Prize'
 import { getUrl } from 'utils/static.util'
-import { cache } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from 'components/ui/card'
 import { supabase } from 'lib/supabaseClient'
+import { unstable_cache } from 'next/cache'
 
-const fetchPrizesByCompetition = cache(async (competitionId) => {
-  try {
-    const { data: prizes, error } = await supabase
-      .from('prize')
-      .select('*')
-      .eq('is_active', true)
-      .eq('competition_id', competitionId)
-      .is('deleted_at', null)
-      .order('order', { ascending: true })
+const fetchPrizesByCompetition = unstable_cache(
+  async (competitionId) => {
+    try {
+      const { data: prizes, error } = await supabase
+        .from('prize')
+        .select('*')
+        .eq('is_active', true)
+        .eq('competition_id', competitionId)
+        .is('deleted_at', null)
+        .order('order', { ascending: true })
 
-    return { data: prizes, error }
-  } catch (error) {
-    return { error: error.message }
+      return { data: prizes, error }
+    } catch (error) {
+      return { error: error.message }
+    }
+  },
+  (competitionId) => [competitionId],
+  {
+    tags: (competitionId) => [competitionId],
+    revalidate: 3600 * 24,
   }
-})
+)
 
 const PrizeContainer = async ({ competition, locale, t }) => {
   const { data: prizes, error } = await fetchPrizesByCompetition(competition.id)

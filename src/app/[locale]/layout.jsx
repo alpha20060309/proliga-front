@@ -10,61 +10,9 @@ import Footer from 'shared/Footer'
 import initTranslations from 'lib/i18n'
 import RootProvider from 'providers/Root.provider'
 import TranslationsProvider from 'providers/Translations.provider'
+import { generateMetadata } from './metadata'
 
-const APP_NAME = 'Proliga - Fantaziya Futbol Platformasi'
-const APP_DESCRIPTION =
-  "O'zbekiston Fantaziya Futbol Ligasi - haqiqiy futbol ligalari o'yinchilariga asoslangan virtual futbol o'yini"
-
-export const metadata = {
-  title: APP_NAME,
-  description: APP_DESCRIPTION,
-  keywords:
-    "proliga, O'zbekiston futboli, professional liga, futbol, superliga, pro liga, proliga.uz, Proliga.uz, fantasy futbol, fantasy futbol uz",
-  authors: [{ name: 'Proliga' }],
-  creator: 'Proliga',
-  publisher: 'Proliga',
-  robots: 'index, follow',
-  icons: {
-    icon: [
-      { url: '/favicon.ico' },
-      { url: '/favicon.svg' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/favicon-16x16.jpg', sizes: '16x16', type: 'image/jpeg' },
-    ],
-    apple: [{ url: '/favicon.png', sizes: '180x180', type: 'image/png' }],
-  },
-  manifest: '/manifest.json',
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: 'default',
-    title: APP_NAME,
-    themeColor: '#000000',
-  },
-  openGraph: {
-    type: 'website',
-    locale: 'uz_UZ',
-    url: 'https://proliga.uz',
-    title: APP_NAME,
-    description: APP_DESCRIPTION,
-    siteName: 'Proliga',
-    images: [
-      {
-        url: '/Screenshot.png',
-        width: 1912,
-        height: 989,
-        alt: 'Proliga Screenshot',
-      },
-    ],
-  },
-  // eslint-disable-next-line no-undef
-  metadataBase: new URL(process.env.NEXT_PUBLIC_URL),
-  twitter: {
-    card: 'summary_large_image',
-    title: APP_DESCRIPTION,
-    description: APP_DESCRIPTION,
-    images: ['/Screenshot.png'],
-  },
-}
+export { generateMetadata }
 
 export default async function RootLayout({ children, params }) {
   const session = await auth()

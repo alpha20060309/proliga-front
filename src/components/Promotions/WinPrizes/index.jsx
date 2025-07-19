@@ -5,25 +5,32 @@ import {
   CardTitle,
   CardDescription,
 } from 'components/ui/card'
-import { cache } from 'react'
 import { supabase } from 'lib/supabaseClient'
+import { unstable_cache } from 'next/cache'
 
-const fetchPrizes = cache(async () => {
-  try {
-    const { data, error } = await supabase
-      .from('prize')
-      .select('*')
-      .eq('is_active', true)
-      .order('order', { ascending: true })
+const fetchPrizes = unstable_cache(
+  async () => {
+    try {
+      const { data, error } = await supabase
+        .from('prize')
+        .select('*')
+        .eq('is_active', true)
+        .order('order', { ascending: true })
 
-    if (error) throw error
+      if (error) throw error
 
-    return data
-  } catch (error) {
-    console.error(error)
-    return []
+      return data
+    } catch (error) {
+      console.error(error)
+      return []
+    }
+  },
+  ['prizes'],
+  {
+    tags: ['prizes'],
+    revalidate: 3600,
   }
-})
+)
 
 const PromotionWinPrizes = async ({ t, locale }) => {
   const prizes = await fetchPrizes()

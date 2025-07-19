@@ -1,6 +1,6 @@
 'use server'
 
-import { cache } from 'react'
+import { unstable_cache } from 'next/cache'
 import { supabase } from 'lib/supabaseClient'
 
 export const getHTMLPage = async (name) => {
@@ -32,6 +32,11 @@ export const getHTMLPage = async (name) => {
   }
 }
 
-export const getPage = cache(async (name) => {
-  return await getHTMLPage(name)
-})
+export const getPage = unstable_cache(
+  async (name) => await getHTMLPage(name),
+  async (name) => [name],
+  {
+    tags: async (name) => [name],
+    revalidate: 3600 * 24,
+  }
+)
