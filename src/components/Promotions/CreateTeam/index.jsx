@@ -29,7 +29,7 @@ const PromotionCreateTeam = ({ t }) => {
             quality={100}
             alt="footballers images"
             className="hidden h-full w-full max-w-[440px] object-contain lg:block"
-            src="/images/footballers-tile.png"
+            src="/images/footballers-tile.webp"
             draggable={false}
             unoptimized
           />
@@ -39,7 +39,7 @@ const PromotionCreateTeam = ({ t }) => {
             width={450}
             height={500}
             quality={100}
-            src="/images/promotion-stadium.png"
+            src="/images/promotion-stadium.webp"
             draggable={false}
             className="mx-auto aspect-[1/1.1] h-full w-full max-w-[32rem] object-contain lg:mr-0 lg:ml-auto"
             alt="interactive stadium"

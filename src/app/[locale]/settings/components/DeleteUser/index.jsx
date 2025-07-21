@@ -30,8 +30,8 @@ const DeleteUser = () => {
                 .eq('id', user.id)
                 .single()
 
-            toast.success(t('Account o\'chirildi'))
-            await logOut()
+            toast.success(t('Account deleted'))
+            await logOut({ showMessage: false })
         } catch (error) {
             toast.error(
                 error instanceof Error ? error.message : t('An unknown error occurred')
@@ -42,7 +42,7 @@ const DeleteUser = () => {
     }
 
     return (
-        <Card className="flex w-full flex-col gap-4 px-4 sm:max-w-64">
+        <Card className="flex w-full flex-col gap-4 px-4 ">
             <ConfirmationModal
                 isModalOpen={isModalOpen}
                 setModalOpen={setModalOpen}
@@ -51,7 +51,7 @@ const DeleteUser = () => {
             />
             <CardHeader className={"flex items-center justify-between p-0"}>
                 <CardTitle className="flex items-center gap-2">
-                    {t('Hisobni o\'chirish')}
+                    {t('Account deletion')}
                 </CardTitle>
                 <Button
                     variant="outline"
@@ -63,7 +63,7 @@ const DeleteUser = () => {
                 </Button>
             </CardHeader>
             <CardDescription>
-                {t('Akkountingizni butunlay o\'chirish. Ushbu amalni bekor qilib bolmaydi.')}
+                {t('Deleting your account. This action cannot be undone.')}
             </CardDescription>
         </Card>
     )

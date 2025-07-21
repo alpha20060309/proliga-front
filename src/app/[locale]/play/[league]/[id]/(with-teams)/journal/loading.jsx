@@ -1,7 +1,7 @@
 import { Skeleton } from 'components/ui/skeleton'
 import { PaginationSkeleton } from 'components/Table/Pagination/Server'
 
-function TableSkeleton({ rows = 13 }) {
+function TableSkeleton({ rows }) {
   return (
     <div className="space-y-4">
       <div className="flex gap-2 md:gap-4">
@@ -24,12 +24,11 @@ function TableSkeleton({ rows = 13 }) {
   )
 }
 
-export function JournalSkeleton({ rows, paginationCount }) {
+export function JournalSkeleton({ rows }) {
   return (
     <>
       <TableSkeleton rows={rows} />
       <PaginationSkeleton
-        count={paginationCount}
         className={'h-full items-end'}
       />
     </>
@@ -37,5 +36,5 @@ export function JournalSkeleton({ rows, paginationCount }) {
 }
 
 export default function Loading() {
-  return <JournalSkeleton rows={10} paginationCount={13} />
+  return <JournalSkeleton rows={8} />
 }

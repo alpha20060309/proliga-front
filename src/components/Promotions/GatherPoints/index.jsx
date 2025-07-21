@@ -20,7 +20,7 @@ const PromotionGatherPoints = ({ t }) => {
         </div>
         <div className="h-full self-center md:self-start">
           <Image
-            src="/images/promotion-2.png"
+            src="/images/promotion-2.webp"
             alt="football"
             width={400}
             height={400}

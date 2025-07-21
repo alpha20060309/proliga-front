@@ -20,7 +20,7 @@ const CreateTeamSlide = () => {
               height={200}
               alt="footballers images"
               className="h-64 w-auto xl:h-80"
-              src="/images/footballers-tile.png"
+              src="/images/footballers-tile.webp"
               unoptimized
             />
           </div>
@@ -28,7 +28,7 @@ const CreateTeamSlide = () => {
       </div>
       <div className="xs:w-4/5 h-auto max-h-144 w-full flex-1 items-end self-center md:w-auto">
         <Image
-          src="/images/promotion-stadium.png"
+          src="/images/promotion-stadium.webp"
           width={380}
           priority={false}
           height={380}

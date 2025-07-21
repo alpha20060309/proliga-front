@@ -39,19 +39,19 @@ const RefillBalance = () => {
   }, [user?.id])
 
   return (
-    <Card className="w-full gap-4 sm:max-w-64">
+    <Card className="w-full gap-4">
       <RefillBalanceModal
         setIsModalOpen={setModalOpen}
         isModalOpen={isModalOpen}
       />
-      <CardHeader className="relative flex items-center">
+      <CardHeader className="relative flex items-center px-4">
         <div className="bg-primary/10 flex h-8 w-8 items-center justify-center rounded-lg">
           <Wallet className="text-foreground h-4 w-4" />
         </div>
         <CardTitle className="text-sm font-semibold">{t('Balans')}</CardTitle>
       </CardHeader>
 
-      <CardContent>
+      <CardContent className={'px-4'}>
         <NumericFormat
           value={balance}
           className="text-foreground w-full border-none bg-transparent text-right text-lg font-bold outline-hidden select-none"
@@ -65,7 +65,7 @@ const RefillBalance = () => {
         />
       </CardContent>
 
-      <CardFooter>
+      <CardFooter className={'px-4'}>
         <Button
           onClick={() => setModalOpen(true)}
           size="lg"

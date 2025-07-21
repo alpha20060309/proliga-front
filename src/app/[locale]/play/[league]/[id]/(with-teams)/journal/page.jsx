@@ -40,7 +40,7 @@ function Journal() {
   }, [dispatch, competition_id, season, page, perPage, user?.id, currentTeam])
 
   if (isLoading)
-    return <JournalSkeleton paginationCount={pages < 5 ? pages : 5} />
+    return <JournalSkeleton/>
 
   return (
     <>

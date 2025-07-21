@@ -13,7 +13,7 @@ const Hero = async ({ params }) => {
       {/* Background Image */}
       <div aria-hidden="true" className="absolute inset-0 -z-10 h-full w-full">
         <Image
-          src="/images/Hero.png"
+          src="/images/Hero.webp"
           alt="Hero background"
           fill
           priority

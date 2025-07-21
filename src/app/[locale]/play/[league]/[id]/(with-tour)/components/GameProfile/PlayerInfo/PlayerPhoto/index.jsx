@@ -17,7 +17,7 @@ const PlayerPhoto = ({ currentPlayer, position }) => {
           alt="player image"
           loading="lazy"
           onError={(e) =>
-            (e.currentTarget.src = '/images/placeholder-user.png')
+            (e.currentTarget.src = '/images/placeholder-user.webp')
           }
           className="h-full w-full rounded-lg object-cover object-center shadow-md"
         />

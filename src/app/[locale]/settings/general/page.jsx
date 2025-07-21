@@ -76,7 +76,7 @@ const GeneralSettings = () => {
           <article className="relative">
             <Avatar
               className={
-                'border-foreground/80 size-32 w-full rounded-full border-2 xl:size-36'
+                'border-foreground/80 size-32 w-full rounded-xl border-2 xl:size-36'
               }
             />
             <Button

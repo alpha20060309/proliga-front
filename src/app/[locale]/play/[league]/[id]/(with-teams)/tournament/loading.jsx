@@ -9,7 +9,7 @@ import {
   TableCell,
 } from 'components/ui/table'
 
-const TournamentTableSkeleton = ({ rows = 15, cols = 5, paginationCount }) => {
+const TournamentTableSkeleton = ({ rows = 10, cols = 5, paginationCount }) => {
   return (
     <>
       <Table className="h-full min-w-72 table-auto text-xs sm:text-sm">
@@ -52,5 +52,5 @@ const TournamentTableSkeleton = ({ rows = 15, cols = 5, paginationCount }) => {
 }
 
 export default function Loading() {
-  return <TournamentTableSkeleton rows={15} cols={5} paginationCount={5} />
+  return <TournamentTableSkeleton rows={10} cols={5} paginationCount={5} />
 }

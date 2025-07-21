@@ -122,7 +122,7 @@ const Tournament = () => {
         <TourFilter setTour={setTour} tour={tour} />
       </div>
       {isLoading ? (
-        <TournamentTableSkeleton paginationCount={5} rows={15} />
+        <TournamentTableSkeleton paginationCount={5} rows={10} />
       ) : (
         <>
           <TournamentTable showUserTourTeam={showUserTourTeam} />

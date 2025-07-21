@@ -1,18 +1,28 @@
 {
-  "name": "Proliga - Fantaziya Futbol Platformasi",
-  "short_name": "Proliga",
+  "name": "Proliga.uz - Fantaziya Futbol Platformasi",
+  "short_name": "Proliga.uz",
   "description": "O'zbekiston Fantaziya Futbol Ligasi - haqiqiy futbol ligalari o'yinchilariga asoslangan virtual futbol o'yini",
   "start_url": "/",
   "launch_handler": {
     "platform": "windows",
     "url": "/",
-    "client_mode": ["navigate-existing", "auto"]
+    "client_mode": [
+      "navigate-existing",
+      "auto"
+    ]
   },
   "dir": "ltr",
-  "display_override": ["window-controls-overlay"],
+  "display_override": [
+    "window-controls-overlay"
+  ],
   "display": "standalone",
   "background_color": "#082A5A",
+  "navigation_color": "#FAD515",
   "theme_color": "#FAD515",
+  "theme_dark_color": "#082A5A",
+  "navigation_dark_color": "#082A5A",
+  "nav_divider_color": "#082A5A",
+  "nav_divider_dark_color": "#FAD515",
   "orientation": "portrait",
   "icons": [
     {
@@ -466,9 +476,24 @@
   ],
   "screenshots": [
     {
-      "src": "/Screenshot.png",
-      "sizes": "1912x989",
-      "type": "image/png"
+      "src": "/screenshots/home-desktop.webp",
+      "sizes": "1535x863",
+      "type": "image/webp"
+    },
+    {
+      "src": "/screenshots/home-mobile.webp",
+      "sizes": "339x863",
+      "type": "image/webp"
+    },
+    {
+      "src": "/screenshots/transfer-desktop.webp",
+      "sizes": "1439x809",
+      "type": "image/webp"
+    },
+    {
+      "src": "/screenshots/transfer-mobile.webp",
+      "sizes": "339x863",
+      "type": "image/webp"
     }
   ],
   "shortcuts": [
@@ -478,7 +503,7 @@
       "icons": [
         {
           "src": "/favicon.png",
-          "sizes": "180x180"
+          "sizes": "512x512"
         }
       ]
     },
@@ -488,14 +513,17 @@
       "icons": [
         {
           "src": "/favicon.png",
-          "sizes": "180x180"
+          "sizes": "512x512"
         }
       ]
     }
   ],
   "id": "uz.proliga.fantasy",
   "lang": "uz",
-  "categories": ["sports", "games"],
+  "form_factor": "both",
+  "categories": [
+    "sports"
+  ],
   "prefer_related_applications": false,
   "scope": "/",
   "related_applications": [
