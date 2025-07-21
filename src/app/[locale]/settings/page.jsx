@@ -43,7 +43,7 @@ const SettingsProfile = () => {
         <Avatar
           src={getUrl(user?.image)}
           className={
-            'size-24 rounded-xl object-cover object-top transition-all duration-1000 ease-in-out hover:object-bottom'
+            'size-24 rounded-xl bg-transparent object-cover object-top transition-all duration-1000 ease-in-out hover:object-bottom'
           }
         />
         <div className="flex flex-col justify-center">
@@ -120,7 +120,7 @@ const SettingsProfile = () => {
       <div className="bg-card border-border text-foreground/80 line-clamp-5 h-28 max-w-full overflow-y-scroll rounded-lg border p-2 text-sm text-wrap break-words shadow md:p-4">
         {user?.bio ? user?.bio : t("Ma'lumot yo'q")}
       </div>
-      <section className="flex flex-wrap gap-2">
+      <section className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <RefillBalance />
         <NotificationToggle />
         <ThemeCustomizer />

@@ -87,7 +87,7 @@ export function StadiumSaveButton({ children, ...props }) {
 export function StadiumSpinner() {
   return (
     <div className="absolute right-0 bottom-0 left-0 mx-auto flex h-full items-center justify-center self-center rounded-md">
-      <Loader className="mx-auto size-10 animate-spin sm:size-12" />
+      <Loader className="mx-auto size-10 text-white animate-spin sm:size-12" />
     </div>
   )
 }

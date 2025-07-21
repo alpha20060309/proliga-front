@@ -40,9 +40,9 @@ export async function generateMetadata() {
     description: APP_DESCRIPTION,
     keywords:
       "proliga, O'zbekiston futboli, professional liga, futbol, superliga, pro liga, proliga.uz, Proliga.uz, fantasy futbol, fantasy futbol uz",
-    authors: [{ name: 'Proliga' }],
-    creator: 'Proliga',
-    publisher: 'Proliga',
+    authors: [{ name: 'Ramz001' }],
+    creator: 'Ramz001',
+    publisher: 'Ramz001',
     robots: 'index, follow',
     icons: {
       icon: [
@@ -51,7 +51,7 @@ export async function generateMetadata() {
         { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
         { url: '/favicon-16x16.jpg', sizes: '16x16', type: 'image/jpeg' },
       ],
-      apple: [{ url: '/favicon.png', sizes: '180x180', type: 'image/png' }],
+      apple: [{ url: '/favicon.webp', sizes: '512x512', type: 'image/webp' }],
     },
     manifest: '/manifest.json',
     appleWebApp: {
@@ -66,13 +66,27 @@ export async function generateMetadata() {
       url: 'https://proliga.uz',
       title: APP_NAME,
       description: APP_DESCRIPTION,
-      siteName: 'Proliga',
+      siteName: 'proliga.uz',
       images: [
         {
-          url: '/Screenshot.png',
-          width: 1912,
-          height: 989,
-          alt: 'Proliga Screenshot',
+          src: '/screenshots/home-desktop.webp',
+          sizes: '1920x1080',
+          type: 'image/webp',
+        },
+        {
+          src: '/screenshots/home-mobile.webp',
+          sizes: '425x1080',
+          type: 'image/webp',
+        },
+        {
+          src: '/screenshots/transfer-desktop.webp',
+          sizes: '1920x1080',
+          type: 'image/webp',
+        },
+        {
+          src: '/screenshots/transfer-mobile.webp',
+          sizes: '425x1080',
+          type: 'image/webp',
         },
       ],
     },

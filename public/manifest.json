@@ -476,9 +476,24 @@
   ],
   "screenshots": [
     {
-      "src": "/Screenshot.png",
-      "sizes": "1912x989",
-      "type": "image/png"
+      "src": "/screenshots/home-desktop.webp",
+      "sizes": "1920x1080",
+      "type": "image/webp"
+    },
+    {
+      "src": "/screenshots/home-mobile.webp",
+      "sizes": "425x1080",
+      "type": "image/webp"
+    },
+    {
+      "src": "/screenshots/transfer-desktop.webp",
+      "sizes": "1920x1080",
+      "type": "image/webp"
+    },
+    {
+      "src": "/screenshots/transfer-mobile.webp",
+      "sizes": "425x1080",
+      "type": "image/webp"
     }
   ],
   "shortcuts": [
@@ -506,8 +521,7 @@
   "id": "uz.proliga.fantasy",
   "lang": "uz",
   "categories": [
-    "sports",
-    "games"
+    "sports"
   ],
   "prefer_related_applications": false,
   "scope": "/",
