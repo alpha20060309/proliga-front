@@ -2,6 +2,8 @@ import { createInstance } from 'i18next'
 import { initReactI18next } from 'react-i18next/initReactI18next'
 import resourcesToBackend from 'i18next-resources-to-backend'
 import i18nConfig from './i18n.config'
+import { getTranslations } from 'actions/getTranslations.action'
+import { LANGUAGE } from 'utils/languages.util'
 
 export default async function initTranslations(
   locale,
@@ -13,9 +15,18 @@ export default async function initTranslations(
   i18nInstance.use(initReactI18next)
 
   if (!resources) {
+    const ru = await getTranslations(LANGUAGE.ru)
+    const uz = await getTranslations(LANGUAGE.uz)
+
     i18nInstance.use(
       resourcesToBackend(
-        (language) => import(`../../public/locales/${language}.json`)
+        (language) => {
+          if (language === LANGUAGE.ru) {
+            return ru
+          } else if (language === LANGUAGE.uz) {
+            return uz
+          }
+        }
       )
     )
   }

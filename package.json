@@ -26,7 +26,6 @@
     "db:push:prod": "dotenv -e .env.production -- npx prisma db push",
     "db:seed:prod": "dotenv -e .env.production -- npx prisma db seed",
     "db:generate": "npx prisma generate",
-    "locales": "dotenv -e .env.production -- node ./scripts/refresh-locales",
     "serve-images": "node ./scripts/serve-images.js"
   },
   "prisma": {
