@@ -477,22 +477,22 @@
   "screenshots": [
     {
       "src": "/screenshots/home-desktop.webp",
-      "sizes": "1920x1080",
+      "sizes": "1535x863",
       "type": "image/webp"
     },
     {
       "src": "/screenshots/home-mobile.webp",
-      "sizes": "425x1080",
+      "sizes": "339x863",
       "type": "image/webp"
     },
     {
       "src": "/screenshots/transfer-desktop.webp",
-      "sizes": "1920x1080",
+      "sizes": "1439x809",
       "type": "image/webp"
     },
     {
       "src": "/screenshots/transfer-mobile.webp",
-      "sizes": "425x1080",
+      "sizes": "339x863",
       "type": "image/webp"
     }
   ],
@@ -503,7 +503,7 @@
       "icons": [
         {
           "src": "/favicon.png",
-          "sizes": "180x180"
+          "sizes": "512x512"
         }
       ]
     },
@@ -513,13 +513,14 @@
       "icons": [
         {
           "src": "/favicon.png",
-          "sizes": "180x180"
+          "sizes": "512x512"
         }
       ]
     }
   ],
   "id": "uz.proliga.fantasy",
   "lang": "uz",
+  "form_factor": "both",
   "categories": [
     "sports"
   ],

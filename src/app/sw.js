@@ -6,8 +6,6 @@ const serwist = new Serwist({
     ...(self.__SW_MANIFEST || []),
     { url: '/uz/~offline', revision: null },
     { url: '/ru/~offline', revision: null },
-    { url: '/proliga-full-dark.svg', revision: null },
-    { url: '/proliga-full-light.svg', revision: null },
   ],
   precacheOptions: {
     cleanupOutdatedCaches: true,
