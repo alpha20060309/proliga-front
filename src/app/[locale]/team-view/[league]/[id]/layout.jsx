@@ -6,7 +6,7 @@ export default function TeamViewLayout({ children }) {
     <div className="text-foreground relative flex flex-col gap-4 overflow-hidden bg-linear-to-tr pt-14 pb-2">
       <div aria-hidden="true" className="absolute inset-0 z-0 h-full w-full">
         <Image
-          src="/images/Hero.png"
+          src="/images/Hero.webp"
           alt="Hero background"
           fill
           priority

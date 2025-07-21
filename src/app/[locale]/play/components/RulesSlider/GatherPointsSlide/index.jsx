@@ -16,7 +16,7 @@ const GatherPointsSlide = () => {
       </div>
       <div className="h-full self-center md:self-start">
         <Image
-          src="/images/promotion-2.png"
+          src="/images/promotion-2.webp"
           alt="football"
           width={360}
           height={360}

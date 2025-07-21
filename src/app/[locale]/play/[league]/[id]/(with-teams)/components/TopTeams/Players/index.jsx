@@ -44,7 +44,7 @@ const PlayerPlace = ({ player, index }) => {
           alt="player"
           width={24}
           height={24}
-          onError={(e) => (e.target.src = '/images/placeholder-user.png')}
+          onError={(e) => (e.target.src = '/images/placeholder-user.webp')}
           className="size-6 rounded-full md:size-8"
         />
         <span className="bg-primary text-primary-foreground flex h-6 w-12 items-center justify-center rounded-full text-xs font-bold sm:text-sm">

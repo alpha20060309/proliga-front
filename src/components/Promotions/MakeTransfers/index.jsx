@@ -18,13 +18,13 @@ const PromotionMakeTransfers = ({ t }) => {
         </CardDescription>
         <div className="mx-auto flex w-full flex-1 items-center justify-center gap-6 md:w-auto md:flex-row">
           <img
-            src="/images/transfer-from.png"
+            src="/images/transfer-from.webp"
             alt="transfer field"
             className="sm:size-40 size-30 rounded-full md:size-48"
           />
           <ArrowRightLeft className="text-foreground size-6 md:size-12" />
           <img
-            src="/images/transfer-to.png"
+            src="/images/transfer-to.webp"
             alt="transfer field"
             className="sm:size-40 size-30 rounded-full md:size-48"
           />

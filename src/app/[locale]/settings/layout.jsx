@@ -8,7 +8,7 @@ export default function SettingsLayout({ children }) {
     <main className="relative min-h-svh overflow-hidden bg-linear-to-tr pt-18 pb-4 md:min-h-max">
       <div aria-hidden="true" className="absolute inset-0 z-0 h-full w-full">
         <Image
-          src="/images/Hero.png"
+          src="/images/Hero.webp"
           alt="Hero background"
           fill
           priority

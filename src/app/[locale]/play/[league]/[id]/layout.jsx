@@ -149,7 +149,7 @@ export default function PlayLayout({ children }) {
     <main className="text-foreground bg-background relative flex min-h-[80vh] flex-col gap-4 overflow-hidden pt-18 pb-2 2xl:min-h-[80vh]">
       <div aria-hidden="true" className="absolute inset-0 z-0 h-full w-full">
         <Image
-          src="/images/Hero.png"
+          src="/images/Hero.webp"
           alt="Hero background"
           fill
           priority
