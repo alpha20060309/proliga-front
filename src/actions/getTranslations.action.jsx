@@ -15,12 +15,11 @@ export const getTranslations = unstable_cache(async (locale) => {
     try {
         const { data, error } = await supabase
             .from('system_language')
-            .select('id, name, ru, uz, is_exclude')
+            .select('name, ru, uz')
             .filter('deleted_at', 'is', null)
             .not('ru', 'is', null)
             .not('uz', 'is', null)
             .or('is_exclude.is.null,is_exclude.eq.false')
-            .order('id', { ascending: true });
 
         if (error) {
             throw error;

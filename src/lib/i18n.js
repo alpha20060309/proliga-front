@@ -21,10 +21,11 @@ export default async function initTranslations(
     i18nInstance.use(
       resourcesToBackend(
         (language) => {
-          if (language === LANGUAGE.ru) {
-            return ru
-          } else if (language === LANGUAGE.uz) {
-            return uz
+          switch (language) {
+            case LANGUAGE.ru:
+              return ru
+            case LANGUAGE.uz:
+              return uz
           }
         }
       )
