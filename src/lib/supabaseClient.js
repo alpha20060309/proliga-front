@@ -2,11 +2,11 @@
 import { PostgrestClient } from '@supabase/postgrest-js';
 import { createClient } from '@supabase/supabase-js'
 
-// export const supabase = new PostgrestClient(process.env.NEXT_PUBLIC_SUPABASE_URL+'/rest/v1', {
-//   headers: {
-//     apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-//     Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`, // optional if using anon
-//   },
+// export const supabase = new PostgrestClient(process.env.NEXT_PUBLIC_SUPABASE_URL, {
+//   // headers: {
+//   //   apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+//   //   Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`, // optional if using anon
+//   // },
 // });
 
 export const supabase = createClient(
