@@ -25,6 +25,7 @@ export const fetchPersonalNotifications = createAsyncThunk(
     const { data, error } = await supabase
       .from('system_notification')
       .select('*')
+      .is('is_broadcast', false)
       .eq('user_id', user_id)
       .is('deleted_at', null)
       .order('created_at', { ascending: true })

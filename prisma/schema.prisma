@@ -402,7 +402,7 @@ model player {
   id                                               Int              @id(map: "_copy_1_copy_1_copy_1_copy_1_copy_2") @default(autoincrement())
   name                                             String?          @db.VarChar(255)
   position                                         player_position? @default(None)
-  price                                            Float?           @db.Real
+  price                                            Float?           @default(0) @db.Real
   image                                            String?          @db.VarChar(255)
   shirt_number                                     Int?             @db.SmallInt
   club_id                                          Int?
