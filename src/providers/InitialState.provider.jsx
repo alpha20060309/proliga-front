@@ -27,13 +27,13 @@ const InitialStateProvider = ({ children }) => {
       dispatch(fetchSystemConfig()),
       getUserAgent(),
       generateFingerprint(),
+      dispatch(fetchBroadcastNotifications())
     ])
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
     if (user?.id && user?.phone && user?.phone_verified) {
-      dispatch(fetchBroadcastNotifications())
       dispatch(fetchPersonalNotifications({ user_id: user?.id }))
     }
   }, [dispatch, user?.id, user?.phone, user?.phone_verified, fingerprint])
