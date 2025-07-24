@@ -57,22 +57,18 @@ export const PlayerImage = ({
         className
       )}
     >
-      <Image
+      <img
         src={tShirt}
         alt="player tshirt"
-        width={48}
         onClick={handleInfoModal}
-        height={48}
         onError={imageErr}
         draggable={false}
         className="h-full w-full"
       />
       {player.is_captain && (
-        <Image
+        <img
           src="/icons/captain-badge.svg"
           alt="captain"
-          width={16}
-          height={16}
           draggable={false}
           className="absolute -right-1 bottom-0 size-3 md:size-4 2xl:size-5"
         />

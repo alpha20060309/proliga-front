@@ -9,11 +9,10 @@ import { useTranslation } from 'react-i18next'
 import { Input } from 'components/ui/input'
 import { Search } from 'lucide-react'
 import { debounce } from 'lodash'
+import { DEBOUNCE_TIMING } from 'utils/config.global'
 
 const TeamFilter = memo(
   ({ page, perPage, tour_id, setPage, setIsSearchMode, setSearchTerm }) => {
-    // eslint-disable-next-line no-undef
-    const timing = +process.env.NEXT_PUBLIC_DEBOUNCE_TIMING || 1000
     const dispatch = useDispatch()
     const { t } = useTranslation()
     const [localSearchTerm, setLocalSearchTerm] = useState('')
@@ -56,7 +55,7 @@ const TeamFilter = memo(
     )
 
     useEffect(() => {
-      const debouncedSearch = debounce(performSearch, timing)
+      const debouncedSearch = debounce(performSearch, DEBOUNCE_TIMING)
       debouncedSearchRef.current = debouncedSearch
 
       return () => {
@@ -64,7 +63,7 @@ const TeamFilter = memo(
           debouncedSearchRef.current.cancel()
         }
       }
-    }, [performSearch, timing])
+    }, [performSearch])
 
     useEffect(() => {
       if (debouncedSearchRef.current) {

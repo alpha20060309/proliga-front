@@ -20,14 +20,13 @@ import { Card, CardContent } from 'components/ui/card'
 import { Badge } from 'components/ui/badge'
 import { ArrowRight, Zap, InfoIcon } from 'lucide-react'
 import { selectPackages } from 'lib/features/package/package.selector'
+import { DEFAULT_TRANSFERS } from 'utils/config.global'
 
 const TeamMaxTransfersModal = () => {
   const dispatch = useDispatch()
   const { transferModal } = useSelector((store) => store.currentTeam)
   const packages = useSelector(selectPackages)
   const { t } = useTranslation()
-  // eslint-disable-next-line no-undef
-  const defaultTransfers = +process.env.NEXT_PUBLIC_DEFAULT_TRANSFERS
 
   return (
     <Dialog
@@ -71,7 +70,7 @@ const TeamMaxTransfersModal = () => {
                             variant="secondary"
                             className="text-foreground mb-2"
                           >
-                            +{transfer.amount - defaultTransfers}{' '}
+                            +{transfer.amount - DEFAULT_TRANSFERS}{' '}
                             {t('Transfers')}
                           </Badge>
                           <h3 className="text-foreground text-lg font-semibold">
