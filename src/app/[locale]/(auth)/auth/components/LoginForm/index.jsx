@@ -90,6 +90,7 @@ const LoginForm = ({ setShouldRedirect }) => {
                 ),
             })
           }
+          localStorage.removeItem('sign-in-method')
           toast.success(t('Tizimga muvaffaqiyatli kirdingiz'))
         }
         // eslint-disable-next-line no-unused-vars
