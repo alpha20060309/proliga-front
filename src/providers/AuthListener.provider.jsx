@@ -8,6 +8,7 @@ import { toast } from 'sonner'
 import { useSendOTP } from 'hooks/auth/useSendOTP'
 import { useTranslation } from 'react-i18next'
 import { useTransitionRouter } from 'next-view-transitions'
+import { SUPABASE_PROVIDERS } from 'lib/supabaseClient'
 
 function AuthListener({ children }) {
   const router = useTransitionRouter()
@@ -26,7 +27,9 @@ function AuthListener({ children }) {
           ?.app_version?.value
         const SIGN_IN_METHOD = localStorage.getItem('sign-in-method')
 
-        if (!user?.id || !SIGN_IN_METHOD || !active) {
+        if (!user?.id || !SIGN_IN_METHOD || !active ||
+          SIGN_IN_METHOD !== SUPABASE_PROVIDERS.GOOGLE ||
+          SIGN_IN_METHOD !== SUPABASE_PROVIDERS.YANDEX) {
           return
         }
 

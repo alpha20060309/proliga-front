@@ -2,6 +2,9 @@ import initTranslations from 'lib/i18n'
 import { unstable_cache } from 'next/cache'
 import PrizeContainer from './components/PrizeContainer'
 import { supabase } from 'lib/supabaseClient'
+import {
+  FETCH_REVALIDATE
+} from 'utils/config.global'
 
 const fetchCompetitions = unstable_cache(
   async () => {
@@ -20,7 +23,7 @@ const fetchCompetitions = unstable_cache(
   ['prizes-competitions'],
   {
     tags: ['prizes-competitions'],
-    revalidate: 3600 * 24,
+    revalidate: FETCH_REVALIDATE,
   }
 )
 

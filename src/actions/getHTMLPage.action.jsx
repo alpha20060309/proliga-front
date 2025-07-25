@@ -2,6 +2,7 @@
 
 import { unstable_cache } from 'next/cache'
 import { supabase } from 'lib/supabaseClient'
+import { FETCH_REVALIDATE } from 'utils/config.global'
 
 export const getHTMLPage = async (name) => {
   if (!name) {
@@ -36,6 +37,6 @@ export const getPage = unstable_cache(
   async (name) => await getHTMLPage(name),
   ['getHTMLPage'],
   {
-    revalidate: 3600 * 24,
+    revalidate: FETCH_REVALIDATE,
   }
 )

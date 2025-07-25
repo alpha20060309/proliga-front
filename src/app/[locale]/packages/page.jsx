@@ -3,6 +3,7 @@ import initTranslations from 'lib/i18n'
 import { PACKAGE_TYPE } from 'utils/packages.util'
 import { unstable_cache } from 'next/cache'
 import { supabase } from 'lib/supabaseClient'
+import { FETCH_REVALIDATE } from 'utils/config.global'
 
 const fetchPackages = unstable_cache(
   async () => {
@@ -18,7 +19,7 @@ const fetchPackages = unstable_cache(
     return { data: packages, error: null }
   },
   ['packages'],
-  { revalidate: 3600 * 24 }
+  { revalidate: FETCH_REVALIDATE }
 )
 
 const Packages = async ({ params }) => {

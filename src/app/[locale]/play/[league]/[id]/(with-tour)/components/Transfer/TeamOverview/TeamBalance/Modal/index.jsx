@@ -22,14 +22,13 @@ import {
   HoverCardContent,
 } from 'components/ui/hover-card'
 import { selectPackages } from 'lib/features/package/package.selector'
+import { DEFAULT_BALANCE } from 'utils/config.global'
 
 const TeamBalanceModal = () => {
   const dispatch = useDispatch()
   const packages = useSelector(selectPackages)
   const { t } = useTranslation()
   const { balanceModal } = useSelector((store) => store.currentTeam)
-  // eslint-disable-next-line no-undef
-  const defaultBalance = +process.env.NEXT_PUBLIC_DEFAULT_BALANCE
 
   return (
     <Dialog
@@ -75,7 +74,7 @@ const TeamBalanceModal = () => {
                             variant="secondary"
                             className="text-foreground mb-2"
                           >
-                            +{item.amount - defaultBalance} {t('Coins')}
+                            +{item.amount - DEFAULT_BALANCE} {t('Coins')}
                           </Badge>
                           <h3 className="text-foreground text-lg font-semibold">
                             {t('Increase your balance!')}

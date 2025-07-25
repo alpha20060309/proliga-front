@@ -57,7 +57,7 @@ const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
       <DialogContent className="border-border from-background to-card/80 text-card-foreground flex max-w-[96%] flex-col items-center justify-between gap-4 rounded-lg border bg-transparent bg-gradient-to-t px-4 py-6 shadow-xl transition-all duration-300 ease-in-out sm:max-w-md md:gap-6 md:px-6 md:py-8 lg:max-w-lg 2xl:max-w-xl">
         <div className="w-full text-center">
           <Image
-            src="/favicon.svg"
+            src="/favicon-transparent.svg"
             width={64}
             height={64}
             alt="Soccer Ball"

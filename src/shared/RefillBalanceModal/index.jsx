@@ -23,7 +23,7 @@ import { Label } from 'components/ui/label'
 import Image from 'next/image'
 import { ToggleGroup, ToggleGroupItem } from 'components/ui/toggle-group'
 import { useTheme } from 'next-themes'
-
+import { DEFAULT_BALANCE } from 'utils/config.global'
 const PREDEFINED_AMOUNTS = [50000, 100000, 200000, 500000]
 
 const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {

@@ -20,15 +20,13 @@ import { Card, CardContent } from 'components/ui/card'
 import { Badge } from 'components/ui/badge'
 import { ArrowRight, Users, InfoIcon } from 'lucide-react'
 import { selectPackages } from 'lib/features/package/package.selector'
+import { DEFAULT_SAME_TEAM_PLAYERS } from 'utils/config.global'
 
 const TeamMaxClubMembersModal = () => {
   const dispatch = useDispatch()
   const { clubModal } = useSelector((store) => store.teamPlayer)
   const packages = useSelector(selectPackages)
   const { t } = useTranslation()
-  const defaultSameTeamPlayers =
-    // eslint-disable-next-line no-undef
-    +process.env.NEXT_PUBLIC_DEFAULT_SAME_TEAM_PLAYERS
 
   return (
     <Dialog
@@ -74,7 +72,7 @@ const TeamMaxClubMembersModal = () => {
                             variant="secondary"
                             className="text-foreground mb-2"
                           >
-                            +{item.amount - defaultSameTeamPlayers}{' '}
+                            +{item.amount - DEFAULT_SAME_TEAM_PLAYERS}{' '}
                             {t('Players')}
                           </Badge>
                           <h3 className="text-foreground text-lg font-semibold">

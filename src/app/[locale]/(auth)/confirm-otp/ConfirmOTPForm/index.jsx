@@ -42,7 +42,7 @@ const ConfirmOTPForm = ({ redirect, phone }) => {
     <Card className="mx-auto w-full max-w-md px-2 py-8">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <ShieldCheck className="text-primary h-8 w-8" />
+          <ShieldCheck className="text-foreground dark:text-primary h-8 w-8" />
           <h1 className="text-2xl font-bold">{t('SMS Kod Tasdiqlash')}</h1>
         </CardTitle>
       </CardHeader>
@@ -52,7 +52,7 @@ const ConfirmOTPForm = ({ redirect, phone }) => {
             <Label htmlFor="phone">{t('Telefon raqam')}:</Label>
             <Input
               id="phone"
-              className="h-10"
+              className="h-10 border-border"
               value={phone}
               disabled
               readOnly
@@ -67,12 +67,12 @@ const ConfirmOTPForm = ({ redirect, phone }) => {
               id="otp"
             >
               <InputOTPGroup className="w-full justify-between">
-                <InputOTPSlot index={0} className="size-10 rounded-md" />
-                <InputOTPSlot index={1} className="size-10 rounded-md" />
-                <InputOTPSlot index={2} className="size-10 rounded-md" />
-                <InputOTPSlot index={3} className="size-10 rounded-md" />
-                <InputOTPSlot index={4} className="size-10 rounded-md" />
-                <InputOTPSlot index={5} className="size-10 rounded-md" />
+                <InputOTPSlot index={0} className="size-10 rounded-md border-border" />
+                <InputOTPSlot index={1} className="size-10 rounded-md border-border" />
+                <InputOTPSlot index={2} className="size-10 rounded-md border-border" />
+                <InputOTPSlot index={3} className="size-10 rounded-md border-border" />
+                <InputOTPSlot index={4} className="size-10 rounded-md border-border" />
+                <InputOTPSlot index={5} className="size-10 rounded-md border-border" />
               </InputOTPGroup>
             </InputOTP>
           </div>

@@ -1,15 +1,15 @@
-import { fetchUserToken } from './userToken.thunk'
+import { fetchUserTokens } from './userToken.thunk'
 
 export const userTokenExtraReducer = (builder) => {
     builder
-        .addCase(fetchUserToken.pending, (state) => {
+        .addCase(fetchUserTokens.pending, (state) => {
             state.isLoading = true
         })
-        .addCase(fetchUserToken.fulfilled, (state, action) => {
+        .addCase(fetchUserTokens.fulfilled, (state, action) => {
             state.isLoading = false
-            state.userToken = action.payload?.data || null
+            state.tokens = action.payload?.data || []
         })
-        .addCase(fetchUserToken.rejected, (state, action) => {
+        .addCase(fetchUserTokens.rejected, (state, action) => {
             state.isLoading = false
             state.error = action?.error
         })

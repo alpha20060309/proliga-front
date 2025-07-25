@@ -4,6 +4,7 @@ import { getUrl } from 'utils/static.util'
 import { Card, CardContent, CardHeader, CardTitle } from 'components/ui/card'
 import { supabase } from 'lib/supabaseClient'
 import { unstable_cache } from 'next/cache'
+import { FETCH_REVALIDATE } from 'utils/config.global'
 
 const fetchPrizesByCompetition = unstable_cache(
   async (competitionId) => {
@@ -24,7 +25,7 @@ const fetchPrizesByCompetition = unstable_cache(
   ['fetchPrizesByCompetition'],
   {
     tags: ['fetchPrizesByCompetition'],
-    revalidate: 3600 * 24,
+    revalidate: FETCH_REVALIDATE,
   }
 )
 

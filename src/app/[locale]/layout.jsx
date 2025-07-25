@@ -34,27 +34,29 @@ export default async function RootLayout({ children, params }) {
   const themeURL = `${staticBaseUrl}${themePath}`
 
   return (
-    <ViewTransitions>
-      <html lang={locale} dir={'ltr'} suppressHydrationWarning>
-        <head>
-          <link rel="stylesheet" href={themeURL} />
-        </head>
-        <body
-          className={cn(
-            'bg-background text-foreground min-h-svh scroll-smooth font-sans antialiased lg:min-h-screen',
-            fontVariables
-          )}
-        >
-          <TranslationsProvider locale={locale} resources={resources}>
-            <Toaster />
-            <RootProvider>
-              <Navbar />
-              {children}
-              <Footer />
-            </RootProvider>
-          </TranslationsProvider>
-        </body>
-      </html>
-    </ViewTransitions>
+    <>
+      <Toaster />
+      <ViewTransitions>
+        <html lang={locale} dir={'ltr'} suppressHydrationWarning>
+          <head>
+            <link rel="stylesheet" href={themeURL} />
+          </head>
+          <body
+            className={cn(
+              'bg-background text-foreground min-h-svh scroll-smooth font-sans antialiased lg:min-h-screen',
+              fontVariables
+            )}
+          >
+            <TranslationsProvider locale={locale} resources={resources}>
+              <RootProvider>
+                <Navbar />
+                {children}
+                <Footer />
+              </RootProvider>
+            </TranslationsProvider>
+          </body>
+        </html>
+      </ViewTransitions>
+    </>
   )
 }

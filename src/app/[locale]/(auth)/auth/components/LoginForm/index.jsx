@@ -51,11 +51,9 @@ const LoginForm = ({ setShouldRedirect }) => {
       toast.error(t("Parol 6 ta belgidan kam bo'lmasligi kerak"))
       return
     }
-
     startTransition(async () => {
       try {
-        setShouldRedirect(false)
-        localStorage.removeItem('sign-in-method')
+        localStorage.setItem('sign-in-method', 'credentials')
 
         const res = await login({
           phone,
@@ -82,7 +80,7 @@ const LoginForm = ({ setShouldRedirect }) => {
           localStorage.setItem('app_version', app_version)
 
           if (!phone_verified && !!phone_number) {
-            await sendOTP({
+            return await sendOTP({
               phone,
               shouldRedirect: true,
               redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(phone_number)}`,
@@ -91,7 +89,6 @@ const LoginForm = ({ setShouldRedirect }) => {
                   t('We are redirecting you to an sms confirmation page!')
                 ),
             })
-            return
           }
           toast.success(t('Tizimga muvaffaqiyatli kirdingiz'))
         }
