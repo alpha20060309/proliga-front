@@ -214,6 +214,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
               id="agreement"
               checked={agreement}
               onCheckedChange={(checked) => setAgreement(checked)}
+              className={'border-foreground/20 bg-background'}
             />
             <Label
               htmlFor="agreement"

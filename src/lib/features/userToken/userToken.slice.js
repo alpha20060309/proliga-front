@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { userTokenExtraReducer } from './userToken.extraReducer'
 
 const initialState = {
+    tokens: [],
     userToken: null,
     error: null,
     isLoading: false,

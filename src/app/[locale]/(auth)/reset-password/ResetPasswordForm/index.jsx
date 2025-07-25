@@ -63,7 +63,7 @@ const ResetPasswordForm = () => {
     <Card className="mx-auto w-full max-w-md px-2 py-8">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Lock className="text-primary h-8 w-8" />
+          <Lock className="text-foreground dark:text-primary h-8 w-8" />
           <h1 className="text-2xl font-bold">{t('Parol Yangilash')}</h1>
         </CardTitle>
       </CardHeader>
@@ -77,7 +77,7 @@ const ResetPasswordForm = () => {
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="pr-10"
+                className="pr-10 border-border bg-input"
               />
               <Button
                 type="button"
@@ -87,9 +87,9 @@ const ResetPasswordForm = () => {
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? (
-                  <EyeOff className="text-secondary-foreground size-6" />
+                  <EyeOff className="text-muted-foreground size-6" />
                 ) : (
-                  <Eye className="text-secondary-foreground size-6" />
+                  <Eye className="text-muted-foreground size-6" />
                 )}
               </Button>
             </div>
@@ -104,7 +104,7 @@ const ResetPasswordForm = () => {
                 type={showConfirmPassword ? 'text' : 'password'}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="pr-10"
+                className="pr-10 border-border bg-input"
               />
               <Button
                 type="button"
@@ -114,9 +114,9 @@ const ResetPasswordForm = () => {
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               >
                 {showConfirmPassword ? (
-                  <EyeOff className="text-secondary-foreground size-6" />
+                  <EyeOff className="text-muted-foreground size-6" />
                 ) : (
-                  <Eye className="text-secondary-foreground size-6" />
+                  <Eye className="text-muted-foreground size-6" />
                 )}
               </Button>
             </div>

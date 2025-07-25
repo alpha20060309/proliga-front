@@ -17,7 +17,6 @@ const registerSW = dynamic(() => import('lib/registerSw'), { ssr: false })
 const InitialStateProvider = ({ children }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectUser)
-  const { fingerprint } = useSelector((store) => store.auth)
   const { generateFingerprint } = useGenerateFingerprint()
   const { getUserAgent } = useGetUserAgent()
 
@@ -27,16 +26,16 @@ const InitialStateProvider = ({ children }) => {
       dispatch(fetchSystemConfig()),
       getUserAgent(),
       generateFingerprint(),
-      dispatch(fetchBroadcastNotifications())
     ])
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
     if (user?.id && user?.phone && user?.phone_verified) {
+      dispatch(fetchBroadcastNotifications())
       dispatch(fetchPersonalNotifications({ user_id: user?.id }))
     }
-  }, [dispatch, user?.id, user?.phone, user?.phone_verified, fingerprint])
+  }, [dispatch, user?.id, user?.phone, user?.phone_verified])
 
   useEffect(() => {
     registerSW()
