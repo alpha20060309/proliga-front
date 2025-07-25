@@ -1,9 +1,7 @@
 'use client'
 
 import { toast } from 'sonner'
-import dynamic from 'next/dynamic'
 import { useState, useEffect } from 'react'
-import { LoginFormSkeleton, SignUpFormSkeleton } from './components/Skeleton'
 import { useSearchParams } from 'next/navigation'
 import { useTransitionRouter } from 'next-view-transitions'
 import { useSelector } from 'react-redux'
@@ -11,15 +9,9 @@ import { selectUser } from 'lib/features/auth/auth.selector'
 import { useTranslation } from 'react-i18next'
 import { useAuthStatus } from 'hooks/auth/useAuthStatus'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from 'components/ui/tabs'
-const SignUpForm = dynamic(() => import('./components/SignUpForm'), {
-  ssr: false,
-  loading: () => <SignUpFormSkeleton />,
-})
+import LoginForm from './components/LoginForm'
+import SignUpForm from './components/SignUpForm'
 import SetUserCredentials from './components/SetUserCredentials'
-const LoginForm = dynamic(() => import('./components/LoginForm'), {
-  ssr: false,
-  loading: () => <LoginFormSkeleton />,
-})
 
 const Auth = () => {
   const { t } = useTranslation()

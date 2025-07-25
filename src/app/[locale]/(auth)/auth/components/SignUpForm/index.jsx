@@ -66,7 +66,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
     if (phone.length !== 13) {
       return toast.error(t("Telefon raqam noto'g'ri"))
     }
-
+    localStorage.setItem('sign-in-method', 'sign-up')
     startTransition(async () => {
       try {
         const res = await register({

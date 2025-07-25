@@ -17,7 +17,7 @@ export const useSendOTP = () => {
       shouldRedirect = false,
       redirectTo = '',
       is_update = false,
-      cb = () => {},
+      cb = () => { },
     }) => {
       setIsLoading(false)
       setError(null)
@@ -39,23 +39,30 @@ export const useSendOTP = () => {
           setError(
             error instanceof Error
               ? error.message
-              : t('An unknown error occurred')
+              : t('An unknown error occurred'), { richColors: true }
           )
           toast.error(
             error instanceof Error
               ? error.message
-              : t('An unknown error occurred')
+              : t('An unknown error occurred'), { richColors: true }
           )
           return { error }
         }
-        if (data?.status !== 200) {
+        if (data?.status === 401) {
           setError(data?.message)
-          toast.error(data?.message)
+          toast.error(t('Authentication service is temporarily unavailable. Please try again later.'), { richColors: true })
+          return
+        }
+
+        if (data?.status !== 200) {
+          console.log("executed")
+          setError(data?.message)
+          toast.error(data?.message, { richColors: true })
           return { error }
         }
         if (data?.status === 200) {
           setData(data)
-          toast.success(t('SMS muvaffaqiyatli yuborildi'))
+          toast.success(t('SMS muvaffaqiyatli yuborildi'), { richColors: true })
           if (shouldRedirect) {
             router.push(redirectTo)
           }
@@ -66,16 +73,11 @@ export const useSendOTP = () => {
         setError(
           error instanceof Error
             ? error.message
-            : t('An unknown error occurred')
+            : t('An unknown error occurred'), { richColors: true }
         )
         toast.error(
-          t('Currenty SMS sending is not available, please try again later')
+          t('Currenty SMS sending is not available, please try again later'), { richColors: true }
         )
-        // toast.error(
-        //   error instanceof Error
-        //     ? error.message
-        //     : t('An unknown error occurred')
-        // )
       } finally {
         setIsLoading(false)
       }

@@ -43,7 +43,7 @@ const SettingsProfile = () => {
         <Avatar
           src={getUrl(user?.image)}
           className={
-            'size-24 rounded-xl bg-transparent object-cover object-top transition-all duration-1000 ease-in-out hover:object-bottom'
+            'size-24 rounded-xl border bg-transparent object-cover object-top transition-all duration-1000 ease-in-out hover:object-bottom'
           }
         />
         <div className="flex flex-col justify-center">

@@ -13,7 +13,6 @@ const ConfirmOTPPage = () => {
   const params = useSearchParams()
   const redirect = params.get('redirect') || '/auth'
   const phone = decodeURIComponent(params.get('phone')) || ''
-
   useEffect(() => {
     if (!phone) {
       router.push('/auth')
