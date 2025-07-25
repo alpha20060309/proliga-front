@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { PostgrestClient } from '@supabase/postgrest-js';
+// import { PostgrestClient } from '@supabase/postgrest-js';
 import { createClient } from '@supabase/supabase-js'
 
 // export const supabase = new PostgrestClient(process.env.NEXT_PUBLIC_SUPABASE_URL, {
