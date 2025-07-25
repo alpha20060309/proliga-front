@@ -1,6 +1,6 @@
 import path from 'path'
 import { NextResponse } from 'next/server'
-import { isEmpty } from 'lodash'
+import isEmpty from 'lodash/isEmpty'
 import { writeFile, mkdir } from 'fs/promises'
 import { generateThemeCssVariables } from '../utils'
 

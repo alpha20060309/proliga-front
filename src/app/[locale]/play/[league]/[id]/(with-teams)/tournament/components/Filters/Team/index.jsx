@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Input } from 'components/ui/input'
 import { Search } from 'lucide-react'
-import { debounce } from 'lodash'
+import debounce from 'lodash/debounce'
 import { DEBOUNCE_TIMING } from 'utils/config.global'
 
 const TeamFilter = memo(

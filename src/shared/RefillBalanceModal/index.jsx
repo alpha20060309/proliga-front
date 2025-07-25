@@ -180,8 +180,7 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
             <p className="text-muted-foreground text-xs">
               {t('Minimal: $ so`m').replace(
                 '$',
-                // eslint-disable-next-line no-undef
-                formatNumber(Number(process.env.NEXT_PUBLIC_DEFAULT_BALANCE))
+                formatNumber(DEFAULT_BALANCE)
               )}
             </p>
           </div>
@@ -192,8 +191,7 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
             disabled={
               !paymentOption ||
               !amount ||
-              // eslint-disable-next-line no-undef
-              +amount < Number(process.env.NEXT_PUBLIC_DEFAULT_BALANCE)
+              +amount < DEFAULT_BALANCE
             }
           >
             {t("To'lash")}

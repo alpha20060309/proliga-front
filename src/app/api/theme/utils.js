@@ -1,4 +1,5 @@
-import { kebabCase, isEmpty } from 'lodash'
+import kebabCase from 'lodash/kebabCase'
+import isEmpty from 'lodash/isEmpty'
 
 export function convertToKebabCase(key) {
   if (key.includes('-') && key.toLowerCase() === key) {
