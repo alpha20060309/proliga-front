@@ -768,6 +768,8 @@ model theme {
   user_theme_user_idTouser       user?     @relation("theme_user_idTouser", fields: [user_id], references: [id], onUpdate: SetNull)
   user_user_theme_idTotheme      user[]    @relation("user_theme_idTotheme")
   user_user_user_theme_idTotheme user[]    @relation("user_user_theme_idTotheme")
+
+  @@index([user_id])
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -922,6 +924,7 @@ model user {
   @@index([deleted_at])
   @@index([guid])
   @@index([phone])
+  @@index([theme_id])
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
