@@ -1,0 +1,23 @@
+workflows:
+  pwabuilder-ios:
+    name: Build PWABuilder iOS app
+    environment:
+      xcode: latest
+    scripts:
+      - name: Install any dependencies (optional)
+        script: |
+          echo "PWABuilder apps usually don't need npm installs"
+      - name: Build iOS app with xcodebuild
+        script: |
+          xcodebuild -project ios/App/App.xcodeproj \
+                     -scheme App \
+                     -configuration Release \
+                     -sdk iphoneos \
+                     -archivePath $CM_BUILD_DIR/App.xcarchive \
+                     archive
+          xcodebuild -exportArchive \
+                     -archivePath $CM_BUILD_DIR/App.xcarchive \
+                     -exportOptionsPlist ExportOptions.plist \
+                     -exportPath $CM_BUILD_DIR/export
+    artifacts:
+      - $CM_BUILD_DIR/export/*.ipa

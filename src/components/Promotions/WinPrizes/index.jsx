@@ -75,7 +75,7 @@ const Prize = ({ prize, locale }) => {
           height={300}
           loading="lazy"
           draggable={false}
-          className="h-full w-full max-w-72"
+          className="h-full aspect-square object-contain w-full max-w-72"
         />
       </div>
     </div>
