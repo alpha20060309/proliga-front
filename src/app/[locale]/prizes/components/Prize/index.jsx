@@ -7,13 +7,13 @@ const Prize = ({ prize, locale, t }) => {
     <div className={cn('flex min-h-96 flex-col items-center transition-all')}>
       <p className="text-lg">
         <span className="font-bold">{prize.order + ' '}</span>
-
         {t("O'RIN")}
       </p>
       <img
         src={getUrl(prize?.image)}
         loading="lazy"
         alt={prize?.name}
+        onError={e => { e.currentTarget.src = '/images/fallback-image.webp' }}
         className={cn(
           'aspect-auto bg-cover p-2 md:p-4 bg-white rounded-xl',
           prize.order === 1 && 'scale-100',

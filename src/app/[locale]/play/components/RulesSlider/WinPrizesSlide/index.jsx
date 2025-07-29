@@ -78,6 +78,7 @@ const Prize = ({ prize }) => {
         <img
           src={getUrl(prize?.image)}
           alt={prize?.name}
+          onError={(e) => (e.target.src = '/images/fallback-image.webp')}
           loading="lazy"
           className="aspect-auto h-auto w-auto rounded p-2 bg-white bg-cover"
         />
