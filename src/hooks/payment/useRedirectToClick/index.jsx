@@ -38,7 +38,6 @@ export const useRedirectToClick = () => {
         url.searchParams.append('amount', amount)
         url.searchParams.append('transaction_param', user?.id)
         url.searchParams.append('return_url', RETURN_URL)
-        url.searchParams.append('param2', user?.id)
 
         router.push(url.href)
       } catch (error) {
