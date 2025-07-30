@@ -44,7 +44,7 @@ export const useBuyPackageWithClick = () => {
         url.searchParams.append('amount', Number(currentPackage.price / 100))
         url.searchParams.append('transaction_param', currentTeam?.id)
         url.searchParams.append('return_url', RETURN_URL)
-        url.searchParams.append('param2', currentPackage?.id)
+        url.searchParams.append('additional_param3', currentPackage?.id)
 
         router.push(url.href)
       } catch (error) {
