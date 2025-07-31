@@ -45,7 +45,7 @@ export const useBuyPackageWithClick = () => {
         url.searchParams.append('transaction_param', currentTeam?.id)
         url.searchParams.append('return_url', RETURN_URL)
         url.searchParams.append('additional_param3', currentPackage?.id)
-        url.searchParams.append('param', currentPackage?.id)
+        url.searchParams.append('communal_param', currentPackage?.id)
 
         router.push(url.href)
       } catch (error) {
