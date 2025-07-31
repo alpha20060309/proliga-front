@@ -27,7 +27,6 @@ const TeamBalanceModal = () => {
   const packages = useSelector(selectPackages)
   const { t } = useTranslation()
   const { balanceModal } = useSelector((store) => store.currentTeam)
-  const { teamPackages } = useSelector((store) => store.payExpense)
 
   return (
     <Dialog

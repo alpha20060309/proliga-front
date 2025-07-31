@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 const ChampionshipsLayout = ({ children }) => {
   return (
-    <main className="relative h-svh overflow-hidden pt-20 pb-4 md:h-screen">
+    <main className="relative min-h-svh overflow-hidden pt-20 pb-4 md:min-h-screen">
       <div aria-hidden="true" className="absolute inset-0 z-0 h-full w-full">
         <Image
           src="/images/Hero.webp"

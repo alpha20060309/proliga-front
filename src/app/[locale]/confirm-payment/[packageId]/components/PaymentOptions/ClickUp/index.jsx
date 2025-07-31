@@ -11,7 +11,7 @@ const ClickUpPaymentOption = ({
   passive,
 }) => {
   const { t } = useTranslation()
-  const { theme } = useTheme()
+  const { resolvedTheme } = useTheme()
 
   return (
     <div
@@ -23,7 +23,9 @@ const ClickUpPaymentOption = ({
     >
       <Image
         src={
-          theme === 'dark' ? '/icons/click-up.svg' : '/icons/click-up-dark.svg'
+          resolvedTheme === 'dark'
+            ? '/icons/click-up.svg'
+            : '/icons/click-up-dark.svg'
         }
         width={36}
         draggable={false}
