@@ -2,17 +2,41 @@ workflows:
   pwabuilder-ios:
     name: Build PWABuilder iOS app
     environment:
-      xcode: latest
+      # Use a specific Xcode version if 'latest' is problematic
+      xcode: latest # or '16.4' based on your logs
     scripts:
-      - name: Install any dependencies (optional)
+      - name: Install Ruby and Bundler (if not already present for Cocoapods)
         script: |
-          echo "PWABuilder apps usually don't need npm installs"
+          # This might be needed on some CI/CD systems if Ruby/Bundler isn't pre-installed
+          # For most iOS-focused CIs (like CodeMagic), this step might be optional
+          # but it's good practice to ensure pod is available.
+          # Example for CodeMagic: They usually have Ruby/Bundler pre-installed.
+
+      - name: Install CocoaPods
+        script: |
+          # Ensure Cocoapods is installed for the runner
+          gem install cocoapods
+
+      - name: Install Pods
+        script: |
+          # Change directory to 'ios' where Podfile is located, then run pod install
+          cd ios
+          pod install
+          cd .. # Go back to the root if subsequent commands expect it
+
       - name: Build iOS app with xcodebuild
         script: |
-          # First xcodebuild command (ARCHIVE) - all on one line
-          xcodebuild -workspace ios/Proliga.uz.xcworkspace -scheme Proliga.uz -configuration Release -sdk iphoneos -archivePath $CM_BUILD_DIR/Proliga.uz.xcarchive archive
+          # Replace 'YOUR_TEAM_ID' with your actual Apple Developer Team ID
+          # You can find this in Apple Developer website -> Membership -> Team ID
+          # Or in Xcode -> Preferences -> Accounts -> Your Account -> Team ID
+          # Use your actual workspace and scheme name
+          xcodebuild -workspace ios/Proliga.uz.xcworkspace -scheme Proliga.uz -configuration Release -sdk iphoneos -archivePath $CM_BUILD_DIR/Proliga.uz.xcarchive \
+                     PROVISIONING_PROFILE_SPECIFIER="$PROVISIONING_PROFILE_NAME" \
+                     DEVELOPMENT_TEAM="YOUR_TEAM_ID" \
+                     archive
 
-          # Second xcodebuild command (EXPORT) - all on one line
+          # Second xcodebuild command (EXPORT)
+          # Ensure ExportOptions.plist is accessible from where the command runs
           xcodebuild -exportArchive -archivePath $CM_BUILD_DIR/Proliga.uz.xcarchive -exportOptionsPlist ios/ExportOptions.plist -exportPath $CM_BUILD_DIR/export
     artifacts:
       - $CM_BUILD_DIR/export/*.ipa
