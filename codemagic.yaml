@@ -9,18 +9,10 @@ workflows:
           echo "PWABuilder apps usually don't need npm installs"
       - name: Build iOS app with xcodebuild
         script: |
-          # Use your actual project path and scheme name
-          xcodebuild -workspace ios/Proliga.uz.xcworkspace \ # Use .xcworkspace if you have CocoaPods, otherwise .xcodeproj
-                     -scheme Proliga.uz \
-                     -configuration Release \
-                     -sdk iphoneos \
-                     -archivePath $CM_BUILD_DIR/Proliga.uz.xcarchive \ # Adjust archive name to match your app
-                     archive
-          # Ensure ExportOptions.plist is accessible from where the command runs
-          # If ExportOptions.plist is directly in the 'ios' folder:
-          xcodebuild -exportArchive \
-                     -archivePath $CM_BUILD_DIR/Proliga.uz.xcarchive \
-                     -exportOptionsPlist ios/ExportOptions.plist \ # Correct path to your ExportOptions.plist
-                     -exportPath $CM_BUILD_DIR/export
+          # First xcodebuild command (ARCHIVE) - all on one line
+          xcodebuild -workspace ios/Proliga.uz.xcworkspace -scheme Proliga.uz -configuration Release -sdk iphoneos -archivePath $CM_BUILD_DIR/Proliga.uz.xcarchive archive
+
+          # Second xcodebuild command (EXPORT) - all on one line
+          xcodebuild -exportArchive -archivePath $CM_BUILD_DIR/Proliga.uz.xcarchive -exportOptionsPlist ios/ExportOptions.plist -exportPath $CM_BUILD_DIR/export
     artifacts:
       - $CM_BUILD_DIR/export/*.ipa
