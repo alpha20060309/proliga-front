@@ -26,6 +26,7 @@ import { fetchTours } from 'lib/features/tour/tour.thunk'
 import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
 import { usePathname } from 'next/navigation'
 import Spinner from 'components/Spinner'
+import { fetchTeamPackages } from 'lib/features/payExpense/payExpense.thunk'
 
 export default function PlayLayout({ children }) {
   const path = usePathname()
@@ -123,6 +124,12 @@ export default function PlayLayout({ children }) {
       }
     }
   }, [id, league, dispatch, user?.id, path])
+
+  useEffect(() => {
+    if (user?.id && currentTeam?.id) {
+      dispatch(fetchTeamPackages({ user_id: user.id, team_id: currentTeam.id }))
+    }
+  }, [currentTeam?.id, user?.id, dispatch])
 
   useEffect(() => {
     if (competitions?.length > 0 && league) {
