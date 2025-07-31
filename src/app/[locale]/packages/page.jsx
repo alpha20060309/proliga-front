@@ -1,35 +1,19 @@
+'use client'
+
 import PackageContainer from './components/Package'
-import initTranslations from 'lib/i18n'
 import { PACKAGE_TYPE } from 'utils/packages.util'
-import { unstable_cache } from 'next/cache'
-import { supabase } from 'lib/supabaseClient'
-import { FETCH_REVALIDATE } from 'utils/config.global'
+import { useTranslation } from 'react-i18next'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { fetchPackages } from 'lib/features/package/package.thunk'
 
-const fetchPackages = unstable_cache(
-  async () => {
-    const { data: packages, error } = await supabase
-      .from('pay_package')
-      .select('*')
-      .is('deleted_at', null)
+const Packages = () => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
 
-    if (error) {
-      return { error: error?.message }
-    }
-
-    return { data: packages, error: null }
-  },
-  ['packages'],
-  { revalidate: FETCH_REVALIDATE }
-)
-
-const Packages = async ({ params }) => {
-  const { locale } = await params
-  const { t } = await initTranslations(locale)
-  const { data: packages, error } = await fetchPackages()
-
-  if (error || packages.length === 0) {
-    return <div>{t('No payment packages found')}</div>
-  }
+  useEffect(() => {
+    dispatch(fetchPackages())
+  }, [dispatch])
 
   return (
     <>
@@ -38,12 +22,7 @@ const Packages = async ({ params }) => {
       </h1>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {Object.values(PACKAGE_TYPE).map((packageType) => (
-          <PackageContainer
-            key={packageType}
-            packageType={packageType}
-            packages={packages}
-            t={t}
-          />
+          <PackageContainer key={packageType} packageType={packageType} t={t} />
         ))}
       </div>
     </>
