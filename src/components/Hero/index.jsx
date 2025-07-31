@@ -9,7 +9,7 @@ const Hero = async ({ params }) => {
   const session = await auth()
 
   return (
-    <section className="relative h-svh w-full overflow-hidden md:h-screen">
+    <section className="relative min-h-svh w-full overflow-hidden md:h-screen">
       {/* Background Image */}
       <div aria-hidden="true" className="absolute inset-0 -z-10 h-full w-full">
         <Image
@@ -22,7 +22,7 @@ const Hero = async ({ params }) => {
         />
         <div className="animate-in fade-in absolute inset-0 bg-black/30 duration-500 dark:bg-black/60" />
       </div>
-      <div className="mx-1 flex h-svh flex-col items-center justify-center gap-6 text-white md:h-screen">
+      <div className="mx-1 flex min-h-svh flex-col items-center justify-center gap-6 text-white md:h-screen">
         <div className="xs:gap-1 flex flex-col gap-0 text-center uppercase antialiased md:gap-2">
           <h2 className="xs:text-3xl text-2xl font-semibold sm:text-4xl 2xl:text-5xl">
             {t("O'z futbol jamoangizni")}

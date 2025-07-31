@@ -3,6 +3,7 @@ import { payExpenseExtraReducer } from './payExpense.extraReducer'
 
 const initialState = {
   expenses: [],
+  teamPackages: {},
   isLoading: false,
   error: null,
 }
