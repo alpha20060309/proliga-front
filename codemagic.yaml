@@ -4,12 +4,11 @@ workflows:
     name: Build PWABuilder iOS app
     environment:
       xcode: latest # or '16.4'
-      # CodeMagic automatically sets these if you upload signing files in the UI.
-      # You can find their names in the "Code signing" section after uploading.
-      # Example:
-      # CM_PROVISIONING_PROFILE_NAME: "$CM_PROVISIONING_PROFILE_NAME_FOR_PROLIGA_APP_STORE"
-      # CM_CERTIFICATE_UUID: "$CM_CERTIFICATE_UUID_FOR_PROLIGA_APP_STORE"
-      # (Actual variable names might vary based on your CodeMagic setup and how you name them)
+      # It's good practice to set these in CodeMagic's UI as secure environment variables.
+      # For example, under "Environment variables" in CodeMagic:
+      # CM_TEAM_ID: YOUR_ACTUAL_TEAM_ID (e.g., ABCDE12345) - Mark as secure
+      # CM_PROVISIONING_PROFILE: "Your Provisioning Profile Name" - Mark as secure if it contains sensitive info
+      # Or you might let CodeMagic auto-inject if you only use the "Code signing" UI.
 
     scripts:
       - name: Install CocoaPods
@@ -26,24 +25,21 @@ workflows:
       - name: Archive iOS app with xcodebuild
         script: |
           echo "Archiving iOS app..."
-          # Pass signing variables that CodeMagic provides via environment
-          # Make sure these are properly configured in CodeMagic's UI for "Code signing"
           xcodebuild -workspace ios/Proliga.uz.xcworkspace \
                      -scheme Proliga.uz \
                      -configuration Release \
                      -sdk iphoneos \
                      -archivePath $CM_BUILD_DIR/Proliga.uz.xcarchive \
                      archive \
-                     PROVISIONING_PROFILE_SPECIFIER="$CM_PROVISIONING_PROFILE" \ # CodeMagic's variable
-                     DEVELOPMENT_TEAM="$CM_TEAM_ID" # CodeMagic's variable (you need to define CM_TEAM_ID in env variables)
-                     # Or directly provide the ID if not using CM_TEAM_ID env var:
-                     # DEVELOPMENT_TEAM="YOUR_ACTUAL_TEAM_ID"
+                     PROVISIONING_PROFILE_SPECIFIER="$CM_PROVISIONING_PROFILE" \
+                     DEVELOPMENT_TEAM="$CM_TEAM_ID" # <--- REMOVED COMMENT ON THIS LINE
+                     # You can add comments on separate lines like this for clarity:
+                     # Make sure CM_PROVISIONING_PROFILE and CM_TEAM_ID are defined in CodeMagic environment variables.
+                     # Or replace with hardcoded values if you're not using CM env vars.
 
       - name: Export IPA
         script: |
           echo "Exporting IPA..."
-          # The -archivePath here MUST match the path from the 'archive' command.
-          # CM_BUILD_DIR is the correct way to refer to CodeMagic's designated build output directory.
           xcodebuild -exportArchive \
                      -archivePath $CM_BUILD_DIR/Proliga.uz.xcarchive \
                      -exportOptionsPlist ios/ExportOptions.plist \
