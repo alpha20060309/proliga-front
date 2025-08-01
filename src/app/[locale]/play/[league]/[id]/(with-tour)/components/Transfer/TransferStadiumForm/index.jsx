@@ -19,7 +19,6 @@ import {
 } from 'components/ui/select'
 import { Button } from 'components/ui/button'
 import { setTransferModal } from 'lib/features/currentTeam/currentTeam.slice'
-import { getCorrentPlayerPosition } from 'utils/getCorrectPlayerPosition.utils'
 import { CONFIG_KEY } from 'utils/config.util'
 import {
   selectPrevTeam,
@@ -177,15 +176,21 @@ const TransferStadiumForm = () => {
 
     teamConcat.forEach((player) => {
       if (!player.name || !player.price) {
-        toast.warning(
-          t('identifikatori bolgan va holatida bolgan oyinchi yaroqsiz')
-            .replace('$', player?.id)
-            .replace('*', getCorrentPlayerPosition(player?.position, lang))
-        )
+        // toast.warning(
+        //   t('identifikatori bolgan va holatida bolgan oyinchi yaroqsiz')
+        //     .replace('$', player?.id)
+        //     .replace('*', getCorrentPlayerPosition(player?.position, lang))
+        // )
         return (valid = false)
       }
     })
-
+    !valid &&
+      toast.warning(
+        t(
+          'Jamoa to‘liq tuzilmagan. Jamoani saqlash uchun barcha pozitsiyalarni to‘ldiring.'
+        ),
+        { richColors: true }
+      )
     return valid
   }
 

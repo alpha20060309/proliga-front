@@ -1,2 +1,0 @@
-https://my.click.uz/services/pay?service_id=39270&merchant_id=25140&amount=35000&transaction_param=32793&return_url=https%3A%2F%2Fproliga.uz&communal_param=1
-https://my.click.uz/services/pay?service_id=39270&merchant_id=25140&amount=35000&transaction_param=32793&return_url=https%3A%2F%2Fproliga.uz&additional_param3=1&param=1
