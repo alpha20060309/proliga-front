@@ -9,7 +9,6 @@ import {
   SelectItem,
   SelectValue,
 } from 'components/ui/select'
-import { getCorrentPlayerPosition } from 'utils/getCorrectPlayerPosition.utils'
 import { useUpdateTeamCaptains } from 'hooks/transfer/useUpdateTeamCaptains'
 import { selectTeamConcat } from 'lib/features/teamPlayer/teamPlayer.selector'
 import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
@@ -77,15 +76,21 @@ const ProfileStadiumForm = () => {
 
     teamConcat.forEach((player) => {
       if (!player.name || !player.price) {
-        toast.warning(
-          t('identifikatori bolgan va holatida bolgan oyinchi yaroqsiz')
-            .replace('$', player?.id)
-            .replace('*', getCorrentPlayerPosition(player?.position, lang))
-        )
+        // toast.warning(
+        //   t('identifikatori bolgan va holatida bolgan oyinchi yaroqsiz')
+        //     .replace('$', player?.id)
+        //     .replace('*', getCorrentPlayerPosition(player?.position, lang))
+        // )
         return (valid = false)
       }
     })
-
+    !valid &&
+      toast.warning(
+        t(
+          'Jamoa to‘liq tuzilmagan. Jamoani saqlash uchun barcha pozitsiyalarni to‘ldiring.'
+        ),
+        { richColors: true }
+      )
     return valid
   }
 
