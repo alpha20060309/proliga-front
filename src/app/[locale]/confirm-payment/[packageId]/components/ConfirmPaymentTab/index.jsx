@@ -22,7 +22,7 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
   const currentPackage = useSelector(selectCurrentPackage)
   const currentTeam = useSelector(selectCurrentTeam)
   const user = useSelector(selectUser)
-  const [balance, setBalance] = useState(user?.balance / 100 || 0)
+  const [balance, setBalance] = useState(user?.balance || 0)
 
   useEffect(() => {
     const fetchBalance = async () => {
@@ -36,7 +36,7 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
         console.error(error.message)
       }
 
-      setBalance(data?.balance / 100 || 0)
+      setBalance(data?.balance || 0)
     }
     fetchBalance()
   }, [user?.id])
@@ -52,6 +52,7 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
   const handleConfirmPayment = async () => {
     if (!currentPackage?.id) return toast.error(t('Joriy paket yo‘q!'))
     if (!paymentOption) return toast.error(t('To‘lov varianti topilmadi!'))
+    console.log(balance, currentPackage?.price)
     if (
       paymentOption === PAYMENT_OPTIONS.WALLET &&
       balance <= currentPackage?.price
