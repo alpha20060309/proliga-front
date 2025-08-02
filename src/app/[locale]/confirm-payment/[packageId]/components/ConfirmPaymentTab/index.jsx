@@ -1,3 +1,4 @@
+'use client'
 import { Link } from 'next-view-transitions'
 import { toast } from 'sonner'
 import { useSelector } from 'react-redux'
@@ -12,6 +13,8 @@ import { selectCurrentPackage } from 'lib/features/package/package.selector'
 import { selectUser } from 'lib/features/auth/auth.selector'
 import { useSession } from 'next-auth/react'
 import { Loader } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { supabase } from 'lib/supabaseClient'
 
 const ConfirmPaymentTab = ({ paymentOption }) => {
   const { lastVisitedTeam } = useSelector((store) => store.currentTeam)
@@ -19,6 +22,24 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
   const currentPackage = useSelector(selectCurrentPackage)
   const currentTeam = useSelector(selectCurrentTeam)
   const user = useSelector(selectUser)
+  const [balance, setBalance] = useState(user?.balance / 100 || 0)
+
+  useEffect(() => {
+    const fetchBalance = async () => {
+      const { data, error } = await supabase
+        .from('user')
+        .select('balance')
+        .eq('id', user?.id)
+        .single()
+
+      if (error instanceof Error) {
+        console.error(error.message)
+      }
+
+      setBalance(data?.balance / 100 || 0)
+    }
+    fetchBalance()
+  }, [user?.id])
   const { update } = useSession()
 
   const { t } = useTranslation()
@@ -33,7 +54,7 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
     if (!paymentOption) return toast.error(t('To‘lov varianti topilmadi!'))
     if (
       paymentOption === PAYMENT_OPTIONS.WALLET &&
-      user.balance < currentPackage?.price
+      balance < currentPackage?.price
     ) {
       return toast.error(t('Mablag‘ yetarli emas!'))
     }

@@ -32,6 +32,7 @@ import {
 import { selectUser } from 'lib/features/auth/auth.selector'
 import { selectCurrentTour } from 'lib/features/tour/tour.selector'
 import { use } from 'react'
+
 const ConfirmPayment = ({ params }) => {
   const { packageId } = use(params)
 
