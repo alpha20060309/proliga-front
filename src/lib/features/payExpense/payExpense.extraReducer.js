@@ -22,10 +22,12 @@ export const payExpenseExtraReducer = (builder) => {
     .addCase(fetchTeamPackages.fulfilled, (state, action) => {
       state.teamPackages = {}
       if (action.payload.data?.length > 0) {
-        // Group packages by type and find highest priority for each type
         state.teamPackages = action.payload.data.reduce((acc, pkg) => {
           const currentType = pkg.pay_package_type
-          if (!acc[currentType] || pkg.pay_package.priority > acc[currentType].pay_package.priority) {
+          if (
+            !acc[currentType] ||
+            pkg.pay_package.priority > acc[currentType].pay_package.priority
+          ) {
             acc[currentType] = pkg
           }
           return acc
