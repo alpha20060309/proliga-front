@@ -9,7 +9,7 @@ datasource db {
 }
 
 model account {
-  id                String  @id
+  id                String  @id @default(dbgenerated("gen_random_uuid()"))
   providerAccountId String
   access_token      String?
   expires_at        Int?

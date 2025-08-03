@@ -27,9 +27,12 @@ function AuthListener({ children }) {
           ?.app_version?.value
         const SIGN_IN_METHOD = localStorage.getItem('sign-in-method')
 
-        if (!user?.id || !SIGN_IN_METHOD || !active ||
-          SIGN_IN_METHOD !== SUPABASE_PROVIDERS.GOOGLE ||
-          SIGN_IN_METHOD !== SUPABASE_PROVIDERS.YANDEX) {
+        if (
+          !user?.id ||
+          !active ||
+          !SIGN_IN_METHOD ||
+          SIGN_IN_METHOD === SUPABASE_PROVIDERS.CREDENTIALS
+        ) {
           return
         }
 
