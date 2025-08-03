@@ -2,6 +2,9 @@ import { supabase } from 'lib/supabaseClient'
 import { cache } from 'react'
 
 export const getUserById = cache(async (id) => {
+  if (!id) {
+    throw new Error('User ID is required')
+  }
   const { data, error } = await supabase
     .from('user')
     .select('*')
@@ -16,6 +19,9 @@ export const getUserById = cache(async (id) => {
 })
 
 export const getUserByPhone = cache(async (phone) => {
+  if (!phone) {
+    throw new Error('Phone number is required')
+  }
   const { data, error } = await supabase
     .from('user')
     .select('*')
@@ -30,6 +36,9 @@ export const getUserByPhone = cache(async (phone) => {
 })
 
 export const getUserByEmail = cache(async (email) => {
+  if (!email) {
+    throw new Error('Email is required')
+  }
   const { data, error } = await supabase
     .from('user')
     .select('*')

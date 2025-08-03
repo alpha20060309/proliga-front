@@ -25,4 +25,5 @@ export const SUPABASE_PROVIDERS = {
   GOOGLE: 'google',
   FACEBOOK: 'facebook',
   YANDEX: 'yandex',
+  CREDENTIALS: 'credentials',
 }

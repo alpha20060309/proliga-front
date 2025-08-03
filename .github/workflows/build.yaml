@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     name: Build & Restart App
-    runs-on: [self-hosted, linux]
+    runs-on: self-hosted
 
     steps:
       - name: Checkout repository
