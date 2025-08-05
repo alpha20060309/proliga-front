@@ -2,11 +2,7 @@
 
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSlot,
-} from 'components/ui/input-otp'
+import { InputOTP, InputOTPGroup, InputOTPSlot } from 'components/ui/input-otp'
 import {
   DialogContent,
   DialogTitle,
@@ -20,11 +16,12 @@ import { useSendOTP } from 'hooks/auth/useSendOTP'
 import { Button } from 'components/ui/button'
 import { toast } from 'sonner'
 import { selectUser } from 'lib/features/auth/auth.selector'
+import { Loader2 } from 'lucide-react'
 
 const ConfirmOTPModal = ({
   isModalOpen,
   setModalOpen,
-  cb = () => { },
+  cb = () => {},
   defaultHook = true,
   phone,
   is_update = false,
@@ -63,40 +60,51 @@ const ConfirmOTPModal = ({
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setModalOpen}>
-      <DialogContent className="bg-background text-foreground shadow-border flex w-min min-w-80 flex-col items-center justify-between gap-2 rounded-xl p-6 shadow-sm">
+      <DialogContent className="bg-background text-foreground w-[90vw] max-w-sm rounded-2xl p-6 shadow-lg">
         <form
           onSubmit={handleConfirm}
-          className="flex flex-col items-start gap-6"
+          className="flex flex-col items-stretch gap-6"
         >
-          <DialogTitle className="mb-0">{t('SMS Kod Tasdiqlash')}</DialogTitle>
-          <div className="flex flex-col gap-4">
-            <InputOTP
-              maxLength={6}
-              value={code}
-              onChange={(value) => setCode(value)}
-            >
-              <InputOTPGroup>
-                <InputOTPSlot index={0} />
-                <InputOTPSlot index={1} />
-                <InputOTPSlot index={2} />
-                <InputOTPSlot index={3} />
-                <InputOTPSlot index={4} />
-                <InputOTPSlot index={5} />
-              </InputOTPGroup>
-            </InputOTP>
-            <ResendOTP />
+          <div>
+            <DialogTitle className="text-lg font-semibold tracking-tight">
+              {t('SMS Kod Tasdiqlash')}
+            </DialogTitle>
+            <DialogDescription className="text-muted-foreground mt-1 text-sm">
+              {t('Telefon raqamingizga yuborilgan 6 xonali kodni kiriting.')}
+            </DialogDescription>
           </div>
+
+          <InputOTP
+            maxLength={6}
+            value={code}
+            onChange={(value) => setCode(value)}
+            className="flex items-center gap-2"
+          >
+            <InputOTPGroup className="w-full gap-2 lg:justify-between">
+              {[...Array(6)].map((_, i) => (
+                <InputOTPSlot
+                  key={i}
+                  index={i}
+                  className="border-border focus:ring-primary h-12 w-10 rounded-md border text-center text-lg font-medium focus:ring-2"
+                />
+              ))}
+            </InputOTPGroup>
+          </InputOTP>
+
+          <ResendOTP />
+
           <Button
             type="submit"
             disabled={isLoading}
-            className="border-primary text-foreground hover:bg-background bg-background h-10 w-full rounded-sm border transition-all"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 h-11 w-full rounded-md font-medium transition"
           >
-            {t('Tasdiqlash')}
+            {isLoading ? (
+              <Loader2 className="text-primary-foreground size-5 animate-spin" />
+            ) : (
+              t('Tasdiqlash')
+            )}
           </Button>
         </form>
-        <DialogDescription className="hidden">
-          SMS confirmation
-        </DialogDescription>
       </DialogContent>
     </Dialog>
   )
