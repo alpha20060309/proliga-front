@@ -9,7 +9,7 @@ import { ScrollArea } from 'components/ui/scroll-area'
 import { useTranslation } from 'react-i18next'
 import { getCorrectName } from 'utils/getCorrectName.util'
 import { useDispatch, useSelector } from 'react-redux'
-import { formatDate } from 'utils/formatDate.util'
+import { formatDate, formatViews } from 'utils/formatDate.util'
 import { selectCurrentNews } from 'lib/features/news/news.selector'
 import { setNewsModal } from 'lib/features/news/news.slice'
 import { memo } from 'react'
@@ -46,7 +46,7 @@ function NewsArticle() {
           <div className="flex items-center">
             <Eye className="text-muted-foreground mr-1 size-5" />
             <span className="text-foreground/80">
-              {currentNews?.view_count || 0} {t('views')}
+              {formatViews(currentNews?.view_count || 0)} {t('views')}
             </span>
           </div>
         </div>
