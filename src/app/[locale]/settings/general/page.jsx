@@ -32,7 +32,7 @@ const GeneralSettings = () => {
   const router = useTransitionRouter()
   const { t } = useTranslation()
   const user = useSelector(selectUser)
-  const [date, setDate] = useState(user?.birth_date ?? new Date())
+  const [date, setDate] = useState(new Date(user?.birth_date ?? Date.now()))
   const [firstName, setFirstName] = useState(user?.name ?? '')
   const [lastName, setLastName] = useState(user?.last_name ?? '')
   const [middleName, setMiddleName] = useState(user?.middle_name ?? '')
@@ -135,7 +135,7 @@ const GeneralSettings = () => {
                 type="date"
                 placeholder={t("Tug'ilgan kuni")}
                 value={
-                  date instanceof Date
+                  date instanceof Date && !isNaN(date)
                     ? date?.toISOString().split('T')[0]
                     : date
                 }
