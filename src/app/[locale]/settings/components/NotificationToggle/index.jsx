@@ -21,7 +21,7 @@ const NotificationToggle = () => {
   const [permission, setPermission] = useState('default')
   const [isEnabled, setIsEnabled] = useState(false)
   const user = useSelector(selectUser)
-  const { userToken } = useSelector(store => store.userToken)
+  const { userToken } = useSelector((store) => store.userToken)
   const [disabled, setDisabled] = useState(false)
   const dispatch = useDispatch()
   const { toggleNotification } = useToggleNotification()
@@ -84,7 +84,11 @@ const NotificationToggle = () => {
     if ('Notification' in window) {
       const permission = Notification.permission
       setPermission(permission)
-      if (permission === 'granted' && userToken?.token && userToken?.topics?.length > 0) {
+      if (
+        permission === 'granted' &&
+        userToken?.token &&
+        userToken?.topics?.length > 0
+      ) {
         setIsEnabled(true)
       } else {
         setIsEnabled(false)
@@ -93,14 +97,14 @@ const NotificationToggle = () => {
   }, [userToken?.token, userToken?.topics?.length])
 
   return (
-    <Card className="flex w-full flex-col gap-4 px-4 ">
+    <Card className="flex w-full flex-col gap-4 px-4">
       <CardHeader className={'flex items-center justify-between p-0'}>
         <CardTitle>{t('Xabarnomalar')}</CardTitle>
         <Switch
           checked={isEnabled}
           onCheckedChange={handleToggle}
           disabled={disabled}
-          className="data-[state=checked]:bg-success cursor-pointer data-[state=unchecked]:bg-muted h-5 w-10"
+          className="data-[state=checked]:bg-success data-[state=unchecked]:bg-muted h-5 w-10 cursor-pointer"
           thumbClassName="size-5 data-[state=checked]:translate-x-5"
         />
       </CardHeader>

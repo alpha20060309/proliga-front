@@ -23,16 +23,15 @@ const FirebaseProvider = ({ children }) => {
   const tokens = useSelector(selectUserTokens)
 
   useEffect(() => {
-    if (!user?.id) return;
+    if (!user?.id) return
     dispatch(fetchUserTokens({ user_id: user?.id }))
   }, [dispatch, user?.id])
 
-
   useEffect(() => {
     const getDeviceToken = async () => {
-      if (!user?.id) return;
+      if (!user?.id) return
       const token = await getNotificationPermissionAndToken()
-      const dbToken = tokens?.find(t => t.token === token)
+      const dbToken = tokens?.find((t) => t.token === token)
       if (dbToken?.id) {
         dispatch(setUserToken(dbToken))
       }
@@ -43,31 +42,39 @@ const FirebaseProvider = ({ children }) => {
 
   useEffect(() => {
     const syncNotificationToken = async () => {
-      if (!user?.id || !deviceToken) return;
+      if (!user?.id || !deviceToken) return
 
       try {
-        const device = `${agent?.platform ?? ''} ${agent?.browser ?? ''}`;
+        const device = `${agent?.platform ?? ''} ${agent?.browser ?? ''}`
         if (!userToken?.id) {
           // No token in backend, create and subscribe
-          await createToken({ user_id: user.id, token: deviceToken, device });
-          if (userToken?.notification_enabled) {
+          await createToken({ user_id: user.id, token: deviceToken, device })
+          if (user?.notification_enabled) {
             await axios.post('/api/push-notifications/subscribe', {
               token: deviceToken,
               topic: 'global',
               user_id: user.id,
-            });
+            })
           }
         } else if (userToken?.token !== deviceToken) {
           // Token changed, update backend
-          await updateToken({ user_id: user.id, token: deviceToken, device });
+          await updateToken({ user_id: user.id, token: deviceToken, device })
         }
       } catch (err) {
-        console.error('Error during notification sync:', err);
+        console.error('Error during notification sync:', err)
       }
-    };
+    }
 
-    syncNotificationToken();
-  }, [user?.id, userToken, createToken, updateToken, deviceToken, agent?.platform, agent?.browser]);
+    syncNotificationToken()
+  }, [
+    user,
+    userToken,
+    createToken,
+    updateToken,
+    deviceToken,
+    agent?.platform,
+    agent?.browser,
+  ])
 
   return <>{children}</>
 }
