@@ -102,7 +102,7 @@ const SettingsProfile = () => {
             </p>
           </div>
           <p className="text-foreground text-sm">
-            {formatDate(user?.birth_date, 'news')}
+            {user?.birth_date && formatDate(user?.birth_date, 'news')}
           </p>
         </ProfileItem>
         <ProfileItem>

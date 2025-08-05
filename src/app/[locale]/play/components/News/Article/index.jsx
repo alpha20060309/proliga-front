@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { formatDate } from 'utils/formatDate.util'
+import { formatDate, formatViews } from 'utils/formatDate.util'
 import { CalendarDays, Eye } from 'lucide-react'
 import { getCorrectName } from 'utils/getCorrectName.util'
 import { useUpdateNewsView } from 'hooks/system/useUpdateNewsView'
@@ -11,7 +11,10 @@ const Article = ({ item }) => {
   const dispatch = useDispatch()
   const { lang } = useSelector((store) => store.systemLanguage)
   const { updateNewsView } = useUpdateNewsView()
-  const date = useMemo(() => formatDate(item?.created_at, 'news'), [item?.created_at])
+  const date = useMemo(
+    () => formatDate(item?.created_at, 'news'),
+    [item?.created_at]
+  )
 
   const handleClick = () => {
     dispatch(setCurrentNews(item))
@@ -43,7 +46,7 @@ const Article = ({ item }) => {
             </div>
             <div className="flex items-center gap-1">
               <Eye className="text-foreground size-4" />
-              <span>{item.view_count || 0}</span>
+              <span>{formatViews(+item.view_count || 0)}</span>
             </div>
           </div>
         </div>

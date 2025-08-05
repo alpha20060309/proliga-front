@@ -36,7 +36,7 @@ const PlayLinks = () => {
   }, [path])
 
   return (
-    <section className="text-foreground hidden items-center  sm:text-sm lg:flex gap-4 xl:text-base 2xl:gap-6">
+    <section className="text-foreground hidden items-center gap-4 sm:text-sm lg:flex xl:text-base 2xl:gap-6">
       {lastVisitedTeam && (
         <>
           <TabLink
@@ -48,7 +48,7 @@ const PlayLinks = () => {
                   : PASSIVE
                 : PASSIVE
             }
-            disabled={!currentTeam?.is_team_created}
+            disabled={!isTeamViewRoute && !currentTeam?.is_team_created}
             tab={TABS.GameProfile}
             setTab={setGameTab}
           />

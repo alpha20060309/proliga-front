@@ -3,11 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from 'components/ui/popover'
+import { Popover, PopoverContent, PopoverTrigger } from 'components/ui/popover'
 import { cn } from 'lib/utils'
 import { Badge } from 'components/ui/badge'
 import { ScrollArea } from 'components/ui/scroll-area'
@@ -135,7 +131,7 @@ const Notification = () => {
               isNotificationsOpen ? 'bg-card' : 'bg-destructive'
             )}
           >
-            {unreadCount}
+            {+unreadCount < 9 ? unreadCount : '9+'}
           </Badge>
         )}
       </PopoverTrigger>
