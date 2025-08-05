@@ -3,11 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from 'components/ui/popover'
+import { Popover, PopoverContent, PopoverTrigger } from 'components/ui/popover'
 import { cn } from 'lib/utils'
 import { Badge } from 'components/ui/badge'
 import { ScrollArea } from 'components/ui/scroll-area'
@@ -139,7 +135,7 @@ const Notification = () => {
           </Badge>
         )}
       </PopoverTrigger>
-      <PopoverContent className="mt-5 ml-2 w-80 p-0" align="end">
+      <PopoverContent className="mt-5 ml-2 w-80 p-0" align="center">
         <div className="flex items-center justify-between border-b px-4 py-2">
           <h3 className="text-foreground text-sm font-semibold">
             {t('Xabarnomalar')}
