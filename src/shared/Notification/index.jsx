@@ -131,11 +131,11 @@ const Notification = () => {
               isNotificationsOpen ? 'bg-card' : 'bg-destructive'
             )}
           >
-            {unreadCount}
+            {+unreadCount < 9 ? unreadCount : '9+'}
           </Badge>
         )}
       </PopoverTrigger>
-      <PopoverContent className="mt-5 ml-2 w-80 p-0" align="center">
+      <PopoverContent className="mt-5 ml-2 w-80 p-0" align="end">
         <div className="flex items-center justify-between border-b px-4 py-2">
           <h3 className="text-foreground text-sm font-semibold">
             {t('Xabarnomalar')}
