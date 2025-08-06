@@ -37,6 +37,8 @@ function ChangePasswordForm() {
     }
     await sendOTP({ phone: user?.phone })
     setModalOpen(true)
+    setPassword('')
+    setConfirmPassword('')
   }
 
   return (

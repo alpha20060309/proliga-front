@@ -38,7 +38,6 @@ export const useConfirmOTP = () => {
         setError(t("SMS kodingiz 6 ta raqamdan iborat bo'lishi kerak"))
         return
       }
-
       if (!phone) {
         toast.error(t('Telefon raqam kiritilmagan'))
         setError(t('Telefon raqam kiritilmagan'))
@@ -85,8 +84,9 @@ export const useConfirmOTP = () => {
         if (data?.status === 200) {
           setData(data)
           toast.success(t('SMS muvaffaqiyatli tasdiqlandi'))
-
-          await update({ phone_verified: true })
+          is_update
+            ? await update({ phone, phone_verified: true })
+            : await update({ phone_verified: true })
           cb()
           if (shouldRedirect) {
             router.push(redirectTo)
