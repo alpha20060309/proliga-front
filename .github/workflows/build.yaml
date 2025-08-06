@@ -33,7 +33,7 @@ jobs:
 
       - name: Generate .env.production from GitHub Secrets
         run: |
-          echo "PORT=3000" > .env.production
+          echo "PORT=${{ vars.PORT }}" > .env.production
 
           echo "# APP SETTINGS" >> .env.production
           echo "NEXT_PUBLIC_URL=${{ vars.NEXT_PUBLIC_URL }}" >> .env.production
