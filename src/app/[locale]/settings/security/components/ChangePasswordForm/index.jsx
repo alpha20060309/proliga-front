@@ -37,8 +37,6 @@ function ChangePasswordForm() {
     }
     await sendOTP({ phone: user?.phone })
     setModalOpen(true)
-    setPassword('')
-    setConfirmPassword('')
   }
 
   return (
@@ -47,14 +45,21 @@ function ChangePasswordForm() {
         setModalOpen={setModalOpen}
         isModalOpen={isModalOpen}
         defaultHook={false}
-        cb={(code) => {
-          const res = resetPassword({ phone: user?.phone, code, password })
-
+        cb={async (code) => {
+          const res = await resetPassword({
+            phone: user?.phone,
+            code,
+            password,
+          })
           if (res?.error) {
             return toast.error(t(res?.error))
           }
-          toast.success(t("Parol o'zgartirildi"))
-          setModalOpen(false)
+          if (res?.success) {
+            toast.success(t("Parol o'zgartirildi"))
+            setModalOpen(false)
+            setPassword('')
+            setConfirmPassword('')
+          }
         }}
         phone={user?.phone}
       />
