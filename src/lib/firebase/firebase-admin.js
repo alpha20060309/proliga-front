@@ -1,11 +1,13 @@
 import { initializeApp, cert, getApps } from 'firebase-admin/app'
-import serviceAccount from '../../app/firebase.json'
+
+// eslint-disable-next-line no-undef
+const json = JSON.parse(process.env.FIREBASE_ADMIN_CREDENTIALS || '{}')
 
 function initializeFirebaseAdmin() {
   if (!getApps().length) {
     try {
       initializeApp({
-        credential: cert(serviceAccount),
+        credential: cert(json),
       })
     } catch (error) {
       console.error('Failed to initialize Firebase Admin:', error)
