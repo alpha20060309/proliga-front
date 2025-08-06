@@ -11,51 +11,6 @@ jobs:
   build:
     name: Build & Restart App
     runs-on: self-hosted
-    env:
-      # APP SETTINGS
-      NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL }}
-      NEXT_PUBLIC_STATIC_URL: ${{ secrets.NEXT_PUBLIC_STATIC_URL }}
-      NEXT_PUBLIC_MAXMIND_DB_PATH: ${{ secrets.NEXT_PUBLIC_MAXMIND_DB_PATH }}
-      NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH: ${{ secrets.NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH }}
-      NEXT_PUBLIC_BANNER_TWO_RENDER_WIDTH: ${{ secrets.NEXT_PUBLIC_BANNER_TWO_RENDER_WIDTH }}
-
-      # AUTH
-      AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
-      AUTH_TRUST_HOST: ${{ secrets.AUTH_TRUST_HOST }}
-      AUTH_URL: ${{ secrets.AUTH_URL }}
-      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-      GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-      YANDEX_CLIENT_ID: ${{ secrets.YANDEX_CLIENT_ID }}
-      YANDEX_CLIENT_SECRET: ${{ secrets.YANDEX_CLIENT_SECRET }}
-
-      # DATABASE
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
-
-      # PAYMENT
-      NEXT_PUBLIC_CLICK_SERVICE_ID: ${{ secrets.NEXT_PUBLIC_CLICK_SERVICE_ID }}
-      NEXT_PUBLIC_CLICK_EXPENSE_SERVICE_ID: ${{ secrets.NEXT_PUBLIC_CLICK_EXPENSE_SERVICE_ID }}
-      NEXT_PUBLIC_CLICK_MERCHANT_ID: ${{ secrets.NEXT_PUBLIC_CLICK_MERCHANT_ID }}
-      NEXT_PUBLIC_PAYME_ID: ${{ secrets.NEXT_PUBLIC_PAYME_ID }}
-      NEXT_PUBLIC_PAYME_EXPENSE_ID: ${{ secrets.NEXT_PUBLIC_PAYME_EXPENSE_ID }}
-
-      # SITE CONFIG
-      NEXT_PUBLIC_ALLOWED_DOMAINS: ${{ secrets.NEXT_PUBLIC_ALLOWED_DOMAINS }}
-
-      # FIREBASE
-      NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
-      NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: ${{ secrets.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}
-      NEXT_PUBLIC_FIREBASE_APP_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}
-      NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID }}
-      NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID }}
-      NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}
-      NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: ${{ secrets.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}
-      NEXT_PUBLIC_FIREBASE_VAPID_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_VAPID_KEY }}
-      FIREBASE_ADMIN_CREDENTIALS: ${{ secrets.FIREBASE_ADMIN_CREDENTIALS }}
-
-      # ANALYTICS
-      NEXT_PUBLIC_YANDEX_METRIKA_ID: ${{ secrets.NEXT_PUBLIC_YANDEX_METRIKA_ID }}
 
     steps:
       - name: Checkout repository
@@ -76,104 +31,66 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      # - name: Generate .env.production from GitHub secrets
-      #   run: |
-      #     {
-      #       echo "# APP SETTINGS"
-      #       echo "PORT=3000"
-      #       echo "NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL}"
-      #       echo "NEXT_PUBLIC_STATIC_URL=${NEXT_PUBLIC_STATIC_URL}"
-      #       echo "NEXT_PUBLIC_MAXMIND_DB_PATH=${NEXT_PUBLIC_MAXMIND_DB_PATH}"
-      #       echo "NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH=${NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH}"
-      #       echo "NEXT_PUBLIC_BANNER_TWO_RENDER_WIDTH=${NEXT_PUBLIC_BANNER_TWO_RENDER_WIDTH}"
-
-      #       echo ""
-      #       echo "# AUTH"
-      #       echo "AUTH_SECRET=${AUTH_SECRET}"
-      #       echo "AUTH_TRUST_HOST=${AUTH_TRUST_HOST}"
-      #       echo "AUTH_URL=${AUTH_URL}"
-      #       echo "GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}"
-      #       echo "GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}"
-      #       echo "YANDEX_CLIENT_ID=${YANDEX_CLIENT_ID}"
-      #       echo "YANDEX_CLIENT_SECRET=${YANDEX_CLIENT_SECRET}"
-
-      #       echo ""
-      #       echo "# DATABASE"
-      #       echo "DATABASE_URL=${DATABASE_URL}"
-      #       echo "NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}"
-      #       echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}"
-
-      #       echo ""
-      #       echo "# PAYMENT"
-      #       echo "NEXT_PUBLIC_CLICK_SERVICE_ID=${NEXT_PUBLIC_CLICK_SERVICE_ID}"
-      #       echo "NEXT_PUBLIC_CLICK_EXPENSE_SERVICE_ID=${NEXT_PUBLIC_CLICK_EXPENSE_SERVICE_ID}"
-      #       echo "NEXT_PUBLIC_CLICK_MERCHANT_ID=${NEXT_PUBLIC_CLICK_MERCHANT_ID}"
-      #       echo "NEXT_PUBLIC_PAYME_ID=${NEXT_PUBLIC_PAYME_ID}"
-      #       echo "NEXT_PUBLIC_PAYME_EXPENSE_ID=${NEXT_PUBLIC_PAYME_EXPENSE_ID}"
-
-      #       echo ""
-      #       echo "# SITE CONFIG"
-      #       echo "NEXT_PUBLIC_ALLOWED_DOMAINS=${NEXT_PUBLIC_ALLOWED_DOMAINS}"
-
-      #       echo ""
-      #       echo "# FIREBASE"
-      #       echo "NEXT_PUBLIC_FIREBASE_API_KEY=${NEXT_PUBLIC_FIREBASE_API_KEY}"
-      #       echo "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=${NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN}"
-      #       echo "NEXT_PUBLIC_FIREBASE_APP_ID=${NEXT_PUBLIC_FIREBASE_APP_ID}"
-      #       echo "NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=${NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID}"
-      #       echo "NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=${NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID}"
-      #       echo "NEXT_PUBLIC_FIREBASE_PROJECT_ID=${NEXT_PUBLIC_FIREBASE_PROJECT_ID}"
-      #       echo "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=${NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET}"
-      #       echo "NEXT_PUBLIC_FIREBASE_VAPID_KEY=${NEXT_PUBLIC_FIREBASE_VAPID_KEY}"
-      #       echo "FIREBASE_ADMIN_CREDENTIALS='${FIREBASE_ADMIN_CREDENTIALS}'"
-
-      #       echo ""
-      #       echo "# ANALYTICS"
-      #       echo "NEXT_PUBLIC_YANDEX_METRIKA_ID=${NEXT_PUBLIC_YANDEX_METRIKA_ID}"
-      #     } > .env.production
-
-      #     echo "✅ .env.production generated successfully"
       - name: Generate .env.production from GitHub Secrets
-        shell: pwsh
         run: |
-          @"
-            PORT=3000
-            NEXT_PUBLIC_URL=${{ secrets.NEXT_PUBLIC_URL }}
-            NEXT_PUBLIC_STATIC_URL=${{ secrets.NEXT_PUBLIC_STATIC_URL }}
-            NEXT_PUBLIC_MAXMIND_DB_PATH=${{ secrets.NEXT_PUBLIC_MAXMIND_DB_PATH }}
-            NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH=${{ secrets.NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH }}
-            NEXT_PUBLIC_BANNER_TWO_RENDER_WIDTH=${{ secrets.NEXT_PUBLIC_BANNER_TWO_RENDER_WIDTH }}
-            AUTH_SECRET=${{ secrets.AUTH_SECRET }}
-            AUTH_TRUST_HOST=${{ secrets.AUTH_TRUST_HOST }}
-            AUTH_URL=${{ secrets.AUTH_URL }}
-            GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}
-            GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}
-            YANDEX_CLIENT_ID=${{ secrets.YANDEX_CLIENT_ID }}
-            YANDEX_CLIENT_SECRET=${{ secrets.YANDEX_CLIENT_SECRET }}
-            DATABASE_URL=${{ secrets.DATABASE_URL }}
-            NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-            NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
-            NEXT_PUBLIC_CLICK_SERVICE_ID=${{ secrets.NEXT_PUBLIC_CLICK_SERVICE_ID }}
-            NEXT_PUBLIC_CLICK_EXPENSE_SERVICE_ID=${{ secrets.NEXT_PUBLIC_CLICK_EXPENSE_SERVICE_ID }}
-            NEXT_PUBLIC_CLICK_MERCHANT_ID=${{ secrets.NEXT_PUBLIC_CLICK_MERCHANT_ID }}
-            NEXT_PUBLIC_PAYME_ID=${{ secrets.NEXT_PUBLIC_PAYME_ID }}
-            NEXT_PUBLIC_PAYME_EXPENSE_ID=${{ secrets.NEXT_PUBLIC_PAYME_EXPENSE_ID }}
-            NEXT_PUBLIC_ALLOWED_DOMAINS=${{ secrets.NEXT_PUBLIC_ALLOWED_DOMAINS }}
-            NEXT_PUBLIC_FIREBASE_API_KEY=${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
-            NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=${{ secrets.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}
-            NEXT_PUBLIC_FIREBASE_APP_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}
-            NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID }}
-            NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID }}
-            NEXT_PUBLIC_FIREBASE_PROJECT_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}
-            NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=${{ secrets.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}
-            NEXT_PUBLIC_FIREBASE_VAPID_KEY=${{ secrets.NEXT_PUBLIC_FIREBASE_VAPID_KEY }}
-            FIREBASE_ADMIN_CREDENTIALS='${{ secrets.FIREBASE_ADMIN_CREDENTIALS }}'
-            NEXT_PUBLIC_YANDEX_METRIKA_ID=${{ secrets.NEXT_PUBLIC_YANDEX_METRIKA_ID }}
-          "@ | Set-Content -Encoding UTF8 .env.production
-          Write-Host "✅ .env.production generated successfully"
+          echo "PORT=3000" > .env.production
+
+          echo "# APP SETTINGS" >> .env.production
+          echo "NEXT_PUBLIC_URL=${{ secrets.NEXT_PUBLIC_URL }}" >> .env.production
+          echo "NEXT_PUBLIC_STATIC_URL=${{ secrets.NEXT_PUBLIC_STATIC_URL }}" >> .env.production
+          echo "NEXT_PUBLIC_MAXMIND_DB_PATH=${{ secrets.NEXT_PUBLIC_MAXMIND_DB_PATH }}" >> .env.production
+          echo "NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH=${{ secrets.NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH }}" >> .env.production
+          echo "NEXT_PUBLIC_BANNER_TWO_RENDER_WIDTH=${{ secrets.NEXT_PUBLIC_BANNER_TWO_RENDER_WIDTH }}" >> .env.production
+
+          echo "" >> .env.production
+          echo "# AUTH" >> .env.production
+          echo "AUTH_SECRET=${{ secrets.AUTH_SECRET }}" >> .env.production
+          echo "AUTH_TRUST_HOST=${{ secrets.AUTH_TRUST_HOST }}" >> .env.production
+          echo "AUTH_URL=${{ secrets.AUTH_URL }}" >> .env.production
+          echo "GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}" >> .env.production
+          echo "GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}" >> .env.production
+          echo "YANDEX_CLIENT_ID=${{ secrets.YANDEX_CLIENT_ID }}" >> .env.production
+          echo "YANDEX_CLIENT_SECRET=${{ secrets.YANDEX_CLIENT_SECRET }}" >> .env.production
+
+          echo "" >> .env.production
+          echo "# DATABASE" >> .env.production
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env.production
+          echo "NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}" >> .env.production
+          echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}" >> .env.production
+
+          echo "" >> .env.production
+          echo "# PAYMENT" >> .env.production
+          echo "NEXT_PUBLIC_CLICK_SERVICE_ID=${{ secrets.NEXT_PUBLIC_CLICK_SERVICE_ID }}" >> .env.production
+          echo "NEXT_PUBLIC_CLICK_EXPENSE_SERVICE_ID=${{ secrets.NEXT_PUBLIC_CLICK_EXPENSE_SERVICE_ID }}" >> .env.production
+          echo "NEXT_PUBLIC_CLICK_MERCHANT_ID=${{ secrets.NEXT_PUBLIC_CLICK_MERCHANT_ID }}" >> .env.production
+          echo "NEXT_PUBLIC_PAYME_ID=${{ secrets.NEXT_PUBLIC_PAYME_ID }}" >> .env.production
+          echo "NEXT_PUBLIC_PAYME_EXPENSE_ID=${{ secrets.NEXT_PUBLIC_PAYME_EXPENSE_ID }}" >> .env.production
+
+          echo "" >> .env.production
+          echo "# SITE CONFIG" >> .env.production
+          echo "NEXT_PUBLIC_ALLOWED_DOMAINS=${{ secrets.NEXT_PUBLIC_ALLOWED_DOMAINS }}" >> .env.production
+
+          echo "" >> .env.production
+          echo "# FIREBASE" >> .env.production
+          echo "NEXT_PUBLIC_FIREBASE_API_KEY=${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}" >> .env.production
+          echo "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=${{ secrets.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}" >> .env.production
+          echo "NEXT_PUBLIC_FIREBASE_APP_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}" >> .env.production
+          echo "NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID }}" >> .env.production
+          echo "NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID }}" >> .env.production
+          echo "NEXT_PUBLIC_FIREBASE_PROJECT_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}" >> .env.production
+          echo "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=${{ secrets.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}" >> .env.production
+          echo "NEXT_PUBLIC_FIREBASE_VAPID_KEY=${{ secrets.NEXT_PUBLIC_FIREBASE_VAPID_KEY }}" >> .env.production
+          echo "FIREBASE_ADMIN_CREDENTIALS='${{ secrets.FIREBASE_ADMIN_CREDENTIALS }}'" >> .env.production
+
+          echo "" >> .env.production
+          echo "# ANALYTICS" >> .env.production
+          echo "NEXT_PUBLIC_YANDEX_METRIKA_ID=${{ secrets.NEXT_PUBLIC_YANDEX_METRIKA_ID }}" >> .env.production
+
+          echo "✅ .env.production generated successfully"
 
       - name: Generate Prisma client
         run: pnpm exec prisma generate
+
       - name: Build application
         run: pnpm run build
 
