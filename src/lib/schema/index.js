@@ -61,7 +61,7 @@ export const ChangePasswordSchema = z.object({
 })
 
 export const ResetPasswordSchema = z.object({
-  phone: z.string().min(1, 'Phone number is required'),
-  code: z.string().min(1, 'SMS code is required'),
+  phone: z.string().min(10, 'Phone number is required'),
+  code: z.string().min(4, 'SMS code is required'),
   password: z.string().min(6, 'Password must be at least 6 characters'),
 })
