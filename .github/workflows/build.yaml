@@ -76,65 +76,115 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      # - name: Generate .env.production from GitHub secrets
+      #   run: |
+      #     {
+      #       echo "# APP SETTINGS"
+      #       echo "PORT=3000"
+      #       echo "NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL}"
+      #       echo "NEXT_PUBLIC_STATIC_URL=${NEXT_PUBLIC_STATIC_URL}"
+      #       echo "NEXT_PUBLIC_MAXMIND_DB_PATH=${NEXT_PUBLIC_MAXMIND_DB_PATH}"
+      #       echo "NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH=${NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH}"
+      #       echo "NEXT_PUBLIC_BANNER_TWO_RENDER_WIDTH=${NEXT_PUBLIC_BANNER_TWO_RENDER_WIDTH}"
+
+      #       echo ""
+      #       echo "# AUTH"
+      #       echo "AUTH_SECRET=${AUTH_SECRET}"
+      #       echo "AUTH_TRUST_HOST=${AUTH_TRUST_HOST}"
+      #       echo "AUTH_URL=${AUTH_URL}"
+      #       echo "GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}"
+      #       echo "GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}"
+      #       echo "YANDEX_CLIENT_ID=${YANDEX_CLIENT_ID}"
+      #       echo "YANDEX_CLIENT_SECRET=${YANDEX_CLIENT_SECRET}"
+
+      #       echo ""
+      #       echo "# DATABASE"
+      #       echo "DATABASE_URL=${DATABASE_URL}"
+      #       echo "NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}"
+      #       echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}"
+
+      #       echo ""
+      #       echo "# PAYMENT"
+      #       echo "NEXT_PUBLIC_CLICK_SERVICE_ID=${NEXT_PUBLIC_CLICK_SERVICE_ID}"
+      #       echo "NEXT_PUBLIC_CLICK_EXPENSE_SERVICE_ID=${NEXT_PUBLIC_CLICK_EXPENSE_SERVICE_ID}"
+      #       echo "NEXT_PUBLIC_CLICK_MERCHANT_ID=${NEXT_PUBLIC_CLICK_MERCHANT_ID}"
+      #       echo "NEXT_PUBLIC_PAYME_ID=${NEXT_PUBLIC_PAYME_ID}"
+      #       echo "NEXT_PUBLIC_PAYME_EXPENSE_ID=${NEXT_PUBLIC_PAYME_EXPENSE_ID}"
+
+      #       echo ""
+      #       echo "# SITE CONFIG"
+      #       echo "NEXT_PUBLIC_ALLOWED_DOMAINS=${NEXT_PUBLIC_ALLOWED_DOMAINS}"
+
+      #       echo ""
+      #       echo "# FIREBASE"
+      #       echo "NEXT_PUBLIC_FIREBASE_API_KEY=${NEXT_PUBLIC_FIREBASE_API_KEY}"
+      #       echo "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=${NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN}"
+      #       echo "NEXT_PUBLIC_FIREBASE_APP_ID=${NEXT_PUBLIC_FIREBASE_APP_ID}"
+      #       echo "NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=${NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID}"
+      #       echo "NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=${NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID}"
+      #       echo "NEXT_PUBLIC_FIREBASE_PROJECT_ID=${NEXT_PUBLIC_FIREBASE_PROJECT_ID}"
+      #       echo "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=${NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET}"
+      #       echo "NEXT_PUBLIC_FIREBASE_VAPID_KEY=${NEXT_PUBLIC_FIREBASE_VAPID_KEY}"
+      #       echo "FIREBASE_ADMIN_CREDENTIALS='${FIREBASE_ADMIN_CREDENTIALS}'"
+
+      #       echo ""
+      #       echo "# ANALYTICS"
+      #       echo "NEXT_PUBLIC_YANDEX_METRIKA_ID=${NEXT_PUBLIC_YANDEX_METRIKA_ID}"
+      #     } > .env.production
+
+      #     echo "✅ .env.production generated successfully"
       - name: Generate .env.production from GitHub secrets
-        shell: bash
+        shell: pwsh
         run: |
-          {
-            echo "# APP SETTINGS"
-            echo "PORT=3000"
-            echo "NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL}"
-            echo "NEXT_PUBLIC_STATIC_URL=${NEXT_PUBLIC_STATIC_URL}"
-            echo "NEXT_PUBLIC_MAXMIND_DB_PATH=${NEXT_PUBLIC_MAXMIND_DB_PATH}"
-            echo "NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH=${NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH}"
-            echo "NEXT_PUBLIC_BANNER_TWO_RENDER_WIDTH=${NEXT_PUBLIC_BANNER_TWO_RENDER_WIDTH}"
+          @"
+            # APP SETTINGS
+            PORT=3000
+            NEXT_PUBLIC_URL=$env:NEXT_PUBLIC_URL
+            NEXT_PUBLIC_STATIC_URL=$env:NEXT_PUBLIC_STATIC_URL
+            NEXT_PUBLIC_MAXMIND_DB_PATH=$env:NEXT_PUBLIC_MAXMIND_DB_PATH
+            NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH=$env:NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH
+            NEXT_PUBLIC_BANNER_TWO_RENDER_WIDTH=$env:NEXT_PUBLIC_BANNER_TWO_RENDER_WIDTH
 
-            echo ""
-            echo "# AUTH"
-            echo "AUTH_SECRET=${AUTH_SECRET}"
-            echo "AUTH_TRUST_HOST=${AUTH_TRUST_HOST}"
-            echo "AUTH_URL=${AUTH_URL}"
-            echo "GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}"
-            echo "GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}"
-            echo "YANDEX_CLIENT_ID=${YANDEX_CLIENT_ID}"
-            echo "YANDEX_CLIENT_SECRET=${YANDEX_CLIENT_SECRET}"
+            # AUTH
+            AUTH_SECRET=$env:AUTH_SECRET
+            AUTH_TRUST_HOST=$env:AUTH_TRUST_HOST
+            AUTH_URL=$env:AUTH_URL
+            GOOGLE_CLIENT_ID=$env:GOOGLE_CLIENT_ID
+            GOOGLE_CLIENT_SECRET=$env:GOOGLE_CLIENT_SECRET
+            YANDEX_CLIENT_ID=$env:YANDEX_CLIENT_ID
+            YANDEX_CLIENT_SECRET=$env:YANDEX_CLIENT_SECRET
 
-            echo ""
-            echo "# DATABASE"
-            echo "DATABASE_URL=${DATABASE_URL}"
-            echo "NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}"
-            echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}"
+            # DATABASE
+            DATABASE_URL=$env:DATABASE_URL
+            NEXT_PUBLIC_SUPABASE_URL=$env:NEXT_PUBLIC_SUPABASE_URL
+            NEXT_PUBLIC_SUPABASE_ANON_KEY=$env:NEXT_PUBLIC_SUPABASE_ANON_KEY
 
-            echo ""
-            echo "# PAYMENT"
-            echo "NEXT_PUBLIC_CLICK_SERVICE_ID=${NEXT_PUBLIC_CLICK_SERVICE_ID}"
-            echo "NEXT_PUBLIC_CLICK_EXPENSE_SERVICE_ID=${NEXT_PUBLIC_CLICK_EXPENSE_SERVICE_ID}"
-            echo "NEXT_PUBLIC_CLICK_MERCHANT_ID=${NEXT_PUBLIC_CLICK_MERCHANT_ID}"
-            echo "NEXT_PUBLIC_PAYME_ID=${NEXT_PUBLIC_PAYME_ID}"
-            echo "NEXT_PUBLIC_PAYME_EXPENSE_ID=${NEXT_PUBLIC_PAYME_EXPENSE_ID}"
+            # PAYMENT
+            NEXT_PUBLIC_CLICK_SERVICE_ID=$env:NEXT_PUBLIC_CLICK_SERVICE_ID
+            NEXT_PUBLIC_CLICK_EXPENSE_SERVICE_ID=$env:NEXT_PUBLIC_CLICK_EXPENSE_SERVICE_ID
+            NEXT_PUBLIC_CLICK_MERCHANT_ID=$env:NEXT_PUBLIC_CLICK_MERCHANT_ID
+            NEXT_PUBLIC_PAYME_ID=$env:NEXT_PUBLIC_PAYME_ID
+            NEXT_PUBLIC_PAYME_EXPENSE_ID=$env:NEXT_PUBLIC_PAYME_EXPENSE_ID
 
-            echo ""
-            echo "# SITE CONFIG"
-            echo "NEXT_PUBLIC_ALLOWED_DOMAINS=${NEXT_PUBLIC_ALLOWED_DOMAINS}"
+            # SITE CONFIG
+            NEXT_PUBLIC_ALLOWED_DOMAINS=$env:NEXT_PUBLIC_ALLOWED_DOMAINS
 
-            echo ""
-            echo "# FIREBASE"
-            echo "NEXT_PUBLIC_FIREBASE_API_KEY=${NEXT_PUBLIC_FIREBASE_API_KEY}"
-            echo "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=${NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN}"
-            echo "NEXT_PUBLIC_FIREBASE_APP_ID=${NEXT_PUBLIC_FIREBASE_APP_ID}"
-            echo "NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=${NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID}"
-            echo "NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=${NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID}"
-            echo "NEXT_PUBLIC_FIREBASE_PROJECT_ID=${NEXT_PUBLIC_FIREBASE_PROJECT_ID}"
-            echo "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=${NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET}"
-            echo "NEXT_PUBLIC_FIREBASE_VAPID_KEY=${NEXT_PUBLIC_FIREBASE_VAPID_KEY}"
-            echo "FIREBASE_ADMIN_CREDENTIALS='${FIREBASE_ADMIN_CREDENTIALS}'"
+            # FIREBASE
+            NEXT_PUBLIC_FIREBASE_API_KEY=$env:NEXT_PUBLIC_FIREBASE_API_KEY
+            NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=$env:NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+            NEXT_PUBLIC_FIREBASE_APP_ID=$env:NEXT_PUBLIC_FIREBASE_APP_ID
+            NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=$env:NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
+            NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=$env:NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
+            NEXT_PUBLIC_FIREBASE_PROJECT_ID=$env:NEXT_PUBLIC_FIREBASE_PROJECT_ID
+            NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=$env:NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+            NEXT_PUBLIC_FIREBASE_VAPID_KEY=$env:NEXT_PUBLIC_FIREBASE_VAPID_KEY
+            FIREBASE_ADMIN_CREDENTIALS=$env:FIREBASE_ADMIN_CREDENTIALS
 
-            echo ""
-            echo "# ANALYTICS"
-            echo "NEXT_PUBLIC_YANDEX_METRIKA_ID=${NEXT_PUBLIC_YANDEX_METRIKA_ID}"
-          } > .env.production
+            # ANALYTICS
+            NEXT_PUBLIC_YANDEX_METRIKA_ID=$env:NEXT_PUBLIC_YANDEX_METRIKA_ID
+          "@ | Out-File -Encoding utf8 .env.production
 
-          echo "✅ .env.production generated successfully"
-
+          Write-Host "✅ .env.production generated successfully"
       - name: Generate Prisma client
         run: pnpm exec prisma generate
       - name: Build application
