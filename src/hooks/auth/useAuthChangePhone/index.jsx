@@ -3,8 +3,8 @@ import { toast } from 'sonner'
 import { supabase } from '../../../lib/supabaseClient'
 import { useTranslation } from 'react-i18next'
 import { useSendOTP } from '../useSendOTP'
-import { signIn } from 'next-auth/react'
 import { useSession } from 'next-auth/react'
+import axios from 'axios'
 
 export const useAuthChangePhone = () => {
   const [error, setError] = useState(null)
@@ -66,10 +66,19 @@ export const useAuthChangePhone = () => {
           return handleError('An unknown error occurred')
         }
 
-        await signIn('credentials', {
+        // Step 2: Verify password using custom API route
+        const verifyRes = await axios.post('/api/verify-password', {
           phone,
           password,
         })
+
+        const verifyData = verifyRes.data
+        console.log('verifyData', verifyData)
+        if (!verifyData.success) {
+          return handleError(
+            verifyData?.error || 'Parol noto‘g‘ri yoki foydalanuvchi topilmadi'
+          )
+        }
 
         // Step 3 Set new phone to new_phone col
         const obj = {

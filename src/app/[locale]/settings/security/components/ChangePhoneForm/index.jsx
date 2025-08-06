@@ -39,7 +39,7 @@ export default function ChangePhoneForm() {
       return toast.error(t("Telefon raqam noto'g'ri"))
     }
 
-    const status = await updatePhone({
+    await updatePhone({
       phone_new: phone,
       password,
       agent,
@@ -48,13 +48,6 @@ export default function ChangePhoneForm() {
       phone: user?.phone,
       cb: () => setModalOpen(true),
     })
-
-    if (status) {
-      setTimeout(() => {
-        setPassword('')
-        setPhone('')
-      }, 1000)
-    }
   }
 
   return (
@@ -64,6 +57,15 @@ export default function ChangePhoneForm() {
         setModalOpen={setModalOpen}
         isModalOpen={isModalOpen}
         is_update={true}
+        cb={() => {
+          setModalOpen(false)
+          setPassword('')
+          setPhone('')
+          toast.success(t('Telefon raqami muvaffaqiyatli o‘zgartirildi'), {
+            duration: 3000,
+            richColors: true,
+          })
+        }}
       />
       <form
         onSubmit={handleSubmit}
