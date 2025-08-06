@@ -33,7 +33,7 @@ jobs:
 
       - name: Generate .env.production from GitHub Secrets
         run: |
-          echo "PORT=3000" > .env.production
+          echo "PORT=${{ vars.PORT }}" > .env.production
 
           echo "# APP SETTINGS" >> .env.production
           echo "NEXT_PUBLIC_URL=${{ vars.NEXT_PUBLIC_URL }}" >> .env.production
@@ -80,7 +80,7 @@ jobs:
           echo "NEXT_PUBLIC_FIREBASE_PROJECT_ID=${{ vars.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}" >> .env.production
           echo "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=${{ vars.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}" >> .env.production
           echo "NEXT_PUBLIC_FIREBASE_VAPID_KEY=${{ vars.NEXT_PUBLIC_FIREBASE_VAPID_KEY }}" >> .env.production
-          echo "FIREBASE_ADMIN_CREDENTIALS='${{ secrets.FIREBASE_ADMIN_CREDENTIALS }}'" >> .env.production
+          echo "FIREBASE_ADMIN_CREDENTIALS=`${{ secrets.FIREBASE_ADMIN_CREDENTIALS }}`" >> .env.production
 
           echo "" >> .env.production
           echo "# ANALYTICS" >> .env.production
