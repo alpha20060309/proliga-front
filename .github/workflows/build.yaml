@@ -96,6 +96,4 @@ jobs:
 
       - name: Restart application with PM2
         run: |
-          pm2 delete proliga 2>/dev/null || true
           pm2 start pnpm --name proliga -- start
-          pm2 save
