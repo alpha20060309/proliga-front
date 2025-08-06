@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: "pnpm"
+          cache: 'pnpm'
 
       - name: Setup PNPM
         uses: pnpm/action-setup@v2
@@ -30,14 +30,13 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-        working-directory: proliga-front
 
-      - name: Load environment variables from envs.txt
+      - name: Load environment variables into .env.production
         run: |
-          # Export each non-commented line in envs.txt into the GitHub Actions env
+          echo "# Auto-generated .env.production" > .env.production
           while IFS='=' read -r name value; do
             if [[ ! "$name" =~ ^# && -n "$name" ]]; then
-              echo "$name=$value" >> "$GITHUB_ENV"
+              echo "$name=$value" >> .env.production
             fi
           done < envs.txt
 
