@@ -30,6 +30,7 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+        working-directory: proliga-front
 
       - name: Load environment variables from envs.txt
         run: |
