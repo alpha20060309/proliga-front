@@ -32,9 +32,9 @@ jobs:
         run: ls -R
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile --prefer-offline
 
-      - name: Load environment variables into .env.production
+      - name: Generate .env.production from envs.txt
         run: |
           echo "# Auto-generated .env.production" > .env.production
           while IFS='=' read -r name value; do
@@ -42,6 +42,7 @@ jobs:
               echo "$name=$value" >> .env.production
             fi
           done < envs.txt
+        shell: bash
 
       - name: Build application
         run: pnpm run build
