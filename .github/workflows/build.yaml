@@ -28,27 +28,20 @@ jobs:
           version: 10.13.1
           run_install: false
 
-      - name: List files in workspace
-        run: ls -R
-
       - name: Install dependencies
         run: pnpm install
 
-      - name: Generate .env.production from envs.txt
+      - name: Generate .env.production from GitHub secrets
+        shell: pwsh
         run: |
-          echo "# Auto-generated .env.production" > .env.production
-          while IFS='=' read -r name value; do
-            if [[ ! "$name" =~ ^# && -n "$name" ]]; then
-              echo "$name=$value" >> .env.production
-            fi
-          done < envs.txt
-        shell: bash
-
-      - name: Build application
-        run: pnpm run build
+          "# Auto-generated .env.production" | Out-File -FilePath .env.production -Encoding utf8
+          $env:NEXT_PUBLIC_API_URL    | ForEach-Object { "NEXT_PUBLIC_API_URL=$_" }    | Out-File .env.production -Append -Encoding utf8
+          $env:NEXT_PUBLIC_SECRET_KEY | ForEach-Object { "NEXT_PUBLIC_SECRET_KEY=$_" } | Out-File .env.production -Append -Encoding utf8
 
       - name: Generate Prisma client
         run: pnpm exec prisma generate
+      - name: Build application
+        run: pnpm run build
 
       - name: Restart application with PM2
         run: |
