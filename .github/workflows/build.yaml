@@ -28,8 +28,11 @@ jobs:
           version: 8
           run_install: false
 
+      - name: List files in workspace
+        run: ls -R
+
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
       - name: Load environment variables into .env.production
         run: |
