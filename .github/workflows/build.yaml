@@ -55,7 +55,7 @@ jobs:
           # Confirmation and optional debugging (remove cat for production runs)
           Write-Host "✅ .env.production generated successfully from Base64 secret"
           Write-Host "--- Content of .env.production (first few lines for debug) ---"
-          Get-Content -Head 10 .env.production
+          Get-Content -Head 3 .env.production
           Write-Host "----------------------------------------------------"
         shell: pwsh
 
@@ -71,5 +71,5 @@ jobs:
         run: pnpm run build
         shell: pwsh
       - name: Restart application with PM2
-        run: pm2 start cmd.exe --name proliga -- /c "pnpm start"
+        run: pm2 start -- npm -- start --name proliga-front --update-env
         shell: pwsh
