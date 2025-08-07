@@ -31,9 +31,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Generate .env.production from GitHub Secrets
-        run: |
-          echo "${{ secrets.PRODUCTION }}" > .env.production
+      - name: Copy .env.production from local path
+        run: cp R:/Projects/smarts/proliga-front/env.production .env.production
 
       - name: Generate Prisma client
         run: pnpm exec prisma generate
