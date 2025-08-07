@@ -29,7 +29,7 @@ jobs:
           run_install: false
 
       - name: Create .env.production from GitHub Secret
-        run: echo "${{ secrets.PRODUCTION }}" > .env.production
+        run: printf "%s" "${{ secrets.PRODUCTION_ENV }}" > .env.production
 
       - name: Install dependencies
         run: pnpm install
@@ -38,7 +38,7 @@ jobs:
         run: pnpm exec prisma generate
 
       - name: Build application
-        run: pnpm run build
+        run: pnpm run build 
 
       - name: Restart application with PM2
         run: pm2 start pnpm --name proliga -- start
