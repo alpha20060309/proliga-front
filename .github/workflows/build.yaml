@@ -33,9 +33,8 @@ jobs:
 
       - name: Generate .env.production from GitHub Secrets
         run: |
-          echo "${{ secrets.PRODUCTION }}" > .env.production
+          printf '%s' "${{ secrets.PRODUCTION }}" > .env.production
           echo "✅ .env.production generated successfully"
-          cat .env.production
 
       - name: Install dependencies
         run: pnpm install
