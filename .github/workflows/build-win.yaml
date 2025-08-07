@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     name: Build App
-    runs-on: self-hosted
+    runs-on: [self-hosted, windows]
     environment: production
 
     steps:

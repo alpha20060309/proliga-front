@@ -1,0 +1,77 @@
+name: Build and Deploy (Self-Hosted Ubuntu)
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build App
+    runs-on: [self-hosted, linux]
+    environment: production
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
+          run_install: false
+
+      - name: Install PM2 globally
+        run: pnpm add -g pm2
+        shell: pwsh
+
+      # - name: Generate .env.production from base64 GitHub Secret // works with LINUX
+      #   run: |
+      #     echo "${{ secrets.PRODUCTION_BASE64 }}" | base64 -d > .env.production
+      #     echo "✅ .env.production created from base64"
+      - name: Generate .env.production from Base64 GitHub Secret // work with WINDOWS
+        run: |
+          # 1. Access the Base64 encoded secret string from GitHub Actions.
+          $envContentBase64 = "${{ secrets.PRODUCTION_BASE64 }}"
+
+          # 2. Decode the Base64 string to a byte array.
+          $bytes = [System.Convert]::FromBase64String($envContentBase64)
+
+          # 3. Convert the byte array back to a string using UTF8 encoding.
+          $decodedString = [System.Text.Encoding]::UTF8.GetString($bytes)
+
+          # 4. Write the decoded string to the .env.production file.
+          #    -FilePath ".env.production" specifies the output file.
+          #    -Encoding utf8NoBOM is crucial for Node.js applications on Windows to prevent BOM issues.
+          $decodedString | Out-File -FilePath ".env.production" -Encoding utf8NoBOM
+
+          # Confirmation and optional debugging (remove cat for production runs)
+          Write-Host "✅ .env.production generated successfully from Base64 secret"
+          Write-Host "--- Content of .env.production (first few lines for debug) ---"
+          Get-Content -Head 3 .env.production
+          Write-Host "----------------------------------------------------"
+        shell: pwsh
+
+      - name: Install dependencies
+        run: pnpm install
+        shell: pwsh
+
+      - name: Generate Prisma client
+        run: pnpm exec prisma generate
+        shell: pwsh
+
+      - name: Build application
+        run: pnpm run build
+        shell: pwsh
+      - name: Restart application with PM2
+        # This is the step with the crucial PM2_HOME fix applied.
+        run: 'pm2 restart ecosystem.config.js'
+        shell: pwsh
