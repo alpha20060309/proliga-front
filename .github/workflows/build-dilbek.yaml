@@ -1,0 +1,55 @@
+name: Build and Deploy (Self-Hosted Windows)
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build & Restart App
+    runs-on: self-hosted
+
+    environment: production
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.15.0
+          cache: 'pnpm'
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10.13.1
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install
+
+      # ✅ Copy .env.production from hardcoded path
+      - name: Use existing .env.production
+        shell: cmd
+        run: |
+          copy "D:\FSystem\DEV\Git\ProligaUZ\Proliga\.env.production" .env.production
+          echo ✅ Copied .env.production to workspace
+          type .env.production
+
+      - name: Generate Prisma client
+        run: pnpm exec prisma generate
+
+      - name: Build application
+        run: pnpm run build
+
+      # ✅ Restart application with PM2 safely
+      - name: Restart application with PM2
+        run: |
+          npx pm2 delete proliga || echo "No old process"
+          npx pm2 start ./scripts/start-server.js --name proliga
+          npx pm2 save
