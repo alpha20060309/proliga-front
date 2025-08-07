@@ -27,23 +27,11 @@ jobs:
           version: 10.13.1
           run_install: false
 
-      # - name: Generate .env.production from GitHub Secrets
-      #   run: |
-      #     echo "${{ secrets.PRODUCTION }}" > .env.production
-      #     echo "✅ .env.production generated successfully"
-      #     cat .env.production
       - name: Generate .env.production from GitHub Secrets
-        # CRITICAL: Use PowerShell's Out-File to write the secret content.
-        # This will correctly handle newlines and special characters within the secret.
-        # -Encoding utf8NoBOM is crucial for .env files in Node.js environments on Windows.
         run: |
-          "${{ secrets.PRODUCTION }}" | Out-File -FilePath ".env.production" -Encoding utf8NoBOM
-          Write-Host "✅ .env.production generated successfully"
-          # Optional: Verify content. REMOVE FOR PRODUCTION!
-          Write-Host "--- Content of .env.production (first few lines) ---"
-          Get-Content -Head 5 .env.production
-          Write-Host "----------------------------------------------------"
-        shell: pwsh
+          echo "${{ secrets.PRODUCTION }}" > .env.production
+          echo "✅ .env.production generated successfully"
+          cat .env.production
       - name: Install dependencies
         run: pnpm install
 
