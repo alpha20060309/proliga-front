@@ -6,7 +6,6 @@ on:
       - main
       - master
   workflow_dispatch:
-    
 
 jobs:
   build:
@@ -33,7 +32,7 @@ jobs:
       - name: Install PM2 globally
         run: pnpm add -g pm2
         shell: pwsh
-        
+
       # - name: Generate .env.production from base64 GitHub Secret // works with LINUX
       #   run: |
       #     echo "${{ secrets.PRODUCTION_BASE64 }}" | base64 -d > .env.production
@@ -64,35 +63,15 @@ jobs:
       - name: Install dependencies
         run: pnpm install
         shell: pwsh
-        
+
       - name: Generate Prisma client
         run: pnpm exec prisma generate
         shell: pwsh
-        
+
       - name: Build application
         run: pnpm run build
         shell: pwsh
       - name: Restart application with PM2
         # This is the step with the crucial PM2_HOME fix applied.
-        env:
-          PM2_HOME: ${{ github.workspace }}/.pm2_data # Points to a sub-directory in your repo's checkout
-        run: |
-          # Verify the variable is not null before using it (debugging line)
-          if ($Env:PM2_HOME -eq $null) {
-            Write-Error "PM2_HOME is null! Cannot proceed."
-            exit 1
-          }
-          Write-Host "PM2_HOME is set to: $Env:PM2_HOME" # Debugging line
-
-          # Create the PM2_HOME directory if it doesn't exist.
-          New-Item -ItemType Directory -Force -Path $Env:PM2_HOME
-
-          # Delete existing process.
-          npx pm2 delete proliga -s || Write-Host "No old process 'proliga' found, or delete command completed silently."
-
-          # Start the application.
-          npx pm2 start ./scripts/start-server.js --name proliga
-
-          # Save current PM2 process list.
-          npx pm2 save
-        shell: pwsh # <--- Essential for Windows execution
+        run: 'pm2 restart ecosystem.config.js'
+        shell: pwsh
