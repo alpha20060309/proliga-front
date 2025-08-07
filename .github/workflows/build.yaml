@@ -74,6 +74,21 @@ jobs:
         shell: pwsh
       - name: Restart application with PM2
         run: |
-          npx pm2 delete proliga || echo "No old process"
+          # Create the PM2_HOME directory if it doesn't exist.
+          # PM2 usually creates it, but explicit creation with -Force can prevent subtle permission issues.
+          New-Item -ItemType Directory -Force -Path $Env:PM2_HOME
+
+          # Delete existing process.
+          # 'npx pm2 delete proliga -s' uses the silent flag to prevent errors if the process isn't found.
+          # The '|| Write-Host' provides a PowerShell-friendly way to output if the delete command might have failed
+          # (though with -s, it usually just exits with 0 anyway if not found).
+          npx pm2 delete proliga -s || Write-Host "No old process 'proliga' found, or delete command completed silently."
+
+          # Start the application.
+          # Ensure './scripts/start-server.js' path is correct relative to repository root.
+          # PM2 will auto-detect the Node.js interpreter if it's in the PATH (set by actions/setup-node).
           npx pm2 start ./scripts/start-server.js --name proliga
+
+          # Save current PM2 process list.
           npx pm2 save
+        shell: pwsh
