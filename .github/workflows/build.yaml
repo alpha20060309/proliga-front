@@ -33,12 +33,42 @@ jobs:
         # It's run with 'pwsh' because this is a Windows command to interact with WSL.
         run: wsl -d Ubuntu -u root ls -la /tmp
         shell: pwsh
-      - name: Create .env.production from GitHub Secret
+      - name: Generate .env.production from GitHub Secrets
         run: |
-          cat > .env.production << EOF
-          ${{ secrets.PRODUCTION }}
-          EOF
-        shell: bash
+          echo "PORT=${{ vars.PORT }}" > .env.production
+          echo "NEXT_PUBLIC_URL=${{ vars.NEXT_PUBLIC_URL }}" >> .env.production
+          echo "NEXT_PUBLIC_STATIC_URL=${{ vars.NEXT_PUBLIC_STATIC_URL }}" >> .env.production
+          echo "NEXT_PUBLIC_MAXMIND_DB_PATH=${{ vars.NEXT_PUBLIC_MAXMIND_DB_PATH }}" >> .env.production
+          echo "NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH=${{ vars.NEXT_PUBLIC_BANNER_ONE_RENDER_WIDTH }}" >> .env.production
+          echo "NEXT_PUBLIC_BANNER_TWO_RENDER_WIDTH=${{ vars.NEXT_PUBLIC_BANNER_TWO_RENDER_WIDTH }}" >> .env.production
+          echo "AUTH_SECRET=${{ secrets.AUTH_SECRET }}" >> .env.production
+          echo "AUTH_TRUST_HOST=${{ vars.AUTH_TRUST_HOST }}" >> .env.production
+          echo "AUTH_URL=${{ vars.AUTH_URL }}" >> .env.production
+          echo "GOOGLE_CLIENT_ID=${{ vars.GOOGLE_CLIENT_ID }}" >> .env.production
+          echo "GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}" >> .env.production
+          echo "YANDEX_CLIENT_ID=${{ vars.YANDEX_CLIENT_ID }}" >> .env.production
+          echo "YANDEX_CLIENT_SECRET=${{ secrets.YANDEX_CLIENT_SECRET }}" >> .env.production
+          echo "DATABASE_URL=${{ vars.DATABASE_URL }}" >> .env.production
+          echo "NEXT_PUBLIC_SUPABASE_URL=${{ vars.NEXT_PUBLIC_SUPABASE_URL }}" >> .env.production
+          echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}" >> .env.production
+          echo "NEXT_PUBLIC_CLICK_SERVICE_ID=${{ vars.NEXT_PUBLIC_CLICK_SERVICE_ID }}" >> .env.production
+          echo "NEXT_PUBLIC_CLICK_EXPENSE_SERVICE_ID=${{ vars.NEXT_PUBLIC_CLICK_EXPENSE_SERVICE_ID }}" >> .env.production
+          echo "NEXT_PUBLIC_CLICK_MERCHANT_ID=${{ vars.NEXT_PUBLIC_CLICK_MERCHANT_ID }}" >> .env.production
+          echo "NEXT_PUBLIC_PAYME_ID=${{ vars.NEXT_PUBLIC_PAYME_ID }}" >> .env.production
+          echo "NEXT_PUBLIC_PAYME_EXPENSE_ID=${{ vars.NEXT_PUBLIC_PAYME_EXPENSE_ID }}" >> .env.production
+          echo "NEXT_PUBLIC_ALLOWED_DOMAINS=${{ vars.NEXT_PUBLIC_ALLOWED_DOMAINS }}" >> .env.production
+          echo "NEXT_PUBLIC_FIREBASE_API_KEY=${{ vars.NEXT_PUBLIC_FIREBASE_API_KEY }}" >> .env.production
+          echo "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=${{ vars.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}" >> .env.production
+          echo "NEXT_PUBLIC_FIREBASE_APP_ID=${{ vars.NEXT_PUBLIC_FIREBASE_APP_ID }}" >> .env.production
+          echo "NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=${{ vars.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID }}" >> .env.production
+          echo "NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=${{ vars.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID }}" >> .env.production
+          echo "NEXT_PUBLIC_FIREBASE_PROJECT_ID=${{ vars.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}" >> .env.production
+          echo "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=${{ vars.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}" >> .env.production
+          echo "NEXT_PUBLIC_FIREBASE_VAPID_KEY=${{ vars.NEXT_PUBLIC_FIREBASE_VAPID_KEY }}" >> .env.production
+          echo "FIREBASE_ADMIN_CREDENTIALS='${{ secrets.FIREBASE_ADMIN_CREDENTIALS }}'" >> .env.production
+          echo "NEXT_PUBLIC_YANDEX_METRIKA_ID=${{ secrets.NEXT_PUBLIC_YANDEX_METRIKA_ID }}" >> .env.production
+
+          echo "✅ .env.production generated successfully"
 
       - name: Install dependencies
         run: pnpm install
