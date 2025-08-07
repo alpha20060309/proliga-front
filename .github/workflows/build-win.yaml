@@ -1,4 +1,4 @@
-name: Build and Deploy (Self-Hosted Ubuntu)
+name: Build and Deploy (Self-Hosted WINDOWS)
 
 on:
   push:
@@ -70,8 +70,4 @@ jobs:
 
       - name: Build application
         run: pnpm run build
-        shell: pwsh
-      - name: Restart application with PM2
-        # This is the step with the crucial PM2_HOME fix applied.
-        run: 'pm2 restart ecosystem.config.js'
         shell: pwsh
