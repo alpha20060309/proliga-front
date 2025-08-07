@@ -27,7 +27,12 @@ jobs:
         with:
           version: 10.13.1
           run_install: false
-
+      - name: Ensure Ubuntu WSL is running
+        # This command will start the 'Ubuntu' WSL distribution if it's stopped.
+        # It runs a simple no-op command inside WSL to trigger it.
+        # It's run with 'pwsh' because this is a Windows command to interact with WSL.
+        run: wsl -d Ubuntu -u root ls -la /tmp
+        shell: pwsh
       - name: Create .env.production from GitHub Secret
         run: |
           cat > .env.production << EOF
