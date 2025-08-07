@@ -31,10 +31,10 @@ jobs:
       - name: Install PM2 globally
         run: pnpm add -g pm2
 
-      - name: Generate .env.production from GitHub Secrets
+      - name: Generate .env.production from base64 GitHub Secret
         run: |
-          printf '%s' "${{ secrets.PRODUCTION }}" > .env.production
-          echo "✅ .env.production generated successfully"
+          echo "${{ secrets.PRODUCTION_BASE64 }}" | base64 -d > .env.production
+          echo "✅ .env.production created from base64"
 
       - name: Install dependencies
         run: pnpm install
