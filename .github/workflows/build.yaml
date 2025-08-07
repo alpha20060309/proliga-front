@@ -71,5 +71,7 @@ jobs:
         run: pnpm run build
         shell: pwsh
       - name: Restart application with PM2
-        run: pm2 start -- npm -- start --name proliga-front --update-env
-        shell: pwsh
+        run: |
+          npx pm2 delete proliga || echo "No old process"
+          npx pm2 start ./scripts/start-server.js --name proliga
+          npx pm2 save
