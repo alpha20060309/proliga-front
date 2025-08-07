@@ -30,20 +30,15 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
-        working-directory: proliga-front
 
       - name: Copy .env.production from local path
         run: cp R:/Projects/smarts/proliga-front/env.production .env.production
-        working-directory: proliga-front
 
       - name: Generate Prisma client
         run: pnpm exec prisma generate
-        working-directory: proliga-front
 
       - name: Build application
         run: pnpm run build
-        working-directory: proliga-front
 
       - name: Restart application with PM2
         run: pm2 start pnpm --name proliga -- start
-        working-directory: proliga-front
