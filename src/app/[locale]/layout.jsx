@@ -10,9 +10,9 @@ import Footer from 'shared/Footer'
 import initTranslations from 'lib/i18n'
 import RootProvider from 'providers/Root.provider'
 import TranslationsProvider from 'providers/Translations.provider'
-import { generateMetadata } from './metadata'
-
-export { generateMetadata }
+export { generateMetadata, viewport } from './metadata'
+import { GoogleAnalytics } from '@next/third-parties/google'
+import { YandexMetricaProvider } from 'next-yandex-metrica'
 
 export default async function RootLayout({ children, params }) {
   const session = await auth()
@@ -47,14 +47,29 @@ export default async function RootLayout({ children, params }) {
               fontVariables
             )}
           >
-            <TranslationsProvider locale={locale} resources={resources}>
-              <RootProvider>
-                <Navbar />
-                {children}
-                <Footer />
-              </RootProvider>
-            </TranslationsProvider>
+            <YandexMetricaProvider
+              // eslint-disable-next-line no-undef
+              tagID={process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID || ''}
+              initParameters={{
+                clickmap: true,
+                trackLinks: true,
+                accurateTrackBounce: true,
+              }}
+              router="app"
+            >
+              <TranslationsProvider locale={locale} resources={resources}>
+                <RootProvider>
+                  <Navbar />
+                  {children}
+                  <Footer />
+                </RootProvider>
+              </TranslationsProvider>
+            </YandexMetricaProvider>
           </body>
+          <GoogleAnalytics
+            // eslint-disable-next-line no-undef
+            gaId={process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID || ''}
+          />
         </html>
       </ViewTransitions>
     </>
