@@ -5,14 +5,18 @@ import { selectUser } from 'lib/features/auth/auth.selector'
 import { useSelector } from 'react-redux'
 import { FaYandex } from 'react-icons/fa'
 import { useTranslation } from 'react-i18next'
+import { analytics } from 'utils/analytics.util'
+import { useMetrica } from 'next-yandex-metrica'
 
 const YandexSignIn = () => {
   const { t } = useTranslation()
   const user = useSelector(selectUser)
+  const { reachGoal } = useMetrica()
 
   const handleYandexSignIn = async () => {
     if (!user?.id) {
       localStorage.setItem('sign-in-method', SUPABASE_PROVIDERS.YANDEX)
+      reachGoal(analytics.login, { type: SUPABASE_PROVIDERS.YANDEX })
       await signIn('yandex', {
         redirect: true,
         // eslint-disable-next-line no-undef
