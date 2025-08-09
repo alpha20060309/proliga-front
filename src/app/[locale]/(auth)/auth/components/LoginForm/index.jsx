@@ -20,6 +20,8 @@ import { useSession } from 'next-auth/react'
 import { useSendOTP } from 'hooks/auth/useSendOTP'
 import { Loader2 } from 'lucide-react'
 import { Card, CardHeader, CardTitle, CardContent } from 'components/ui/card'
+import { useMetrica } from 'next-yandex-metrica'
+import { analytics } from 'utils/analytics.util'
 
 const LoginForm = ({ setShouldRedirect }) => {
   const { t } = useTranslation()
@@ -34,6 +36,7 @@ const LoginForm = ({ setShouldRedirect }) => {
   const { sendOTP } = useSendOTP()
   const [isPending, startTransition] = useTransition()
   const { update } = useSession()
+  const { reachGoal } = useMetrica()
 
   const can_send_sms =
     config[CONFIG_KEY.can_send_sms]?.value.toLowerCase() === 'true' || false
@@ -91,6 +94,7 @@ const LoginForm = ({ setShouldRedirect }) => {
             })
           }
           localStorage.removeItem('sign-in-method')
+          reachGoal(analytics.login)
           toast.success(t('Tizimga muvaffaqiyatli kirdingiz'))
         }
         // eslint-disable-next-line no-unused-vars

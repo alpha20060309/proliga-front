@@ -11,10 +11,11 @@ import { useBuyPackageWithClick } from 'hooks/payment/useBuyPackageWithClick'
 import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
 import { selectCurrentPackage } from 'lib/features/package/package.selector'
 import { selectUser } from 'lib/features/auth/auth.selector'
-import { useSession } from 'next-auth/react'
 import { Loader } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { supabase } from 'lib/supabaseClient'
+import { useMetrica } from 'next-yandex-metrica'
+import { analytics } from 'utils/analytics.util'
 
 const ConfirmPaymentTab = ({ paymentOption }) => {
   const { lastVisitedTeam } = useSelector((store) => store.currentTeam)
@@ -23,6 +24,7 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
   const currentTeam = useSelector(selectCurrentTeam)
   const user = useSelector(selectUser)
   const [balance, setBalance] = useState(user?.balance || 0)
+  const { reachGoal } = useMetrica()
 
   useEffect(() => {
     const fetchBalance = async () => {
@@ -40,7 +42,6 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
     }
     fetchBalance()
   }, [user?.id])
-  const { update } = useSession()
 
   const { t } = useTranslation()
   const { buyPackageWithWallet, isLoading } = useBuyPackageWithWallet()
@@ -63,6 +64,10 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
         package_id: currentPackage?.id,
         team_id: currentTeam?.id,
       })
+      reachGoal(analytics.buyPackage, {
+        type: PAYMENT_OPTIONS.WALLET,
+        amount: currentPackage?.price,
+      })
     }
     if (paymentOption === PAYMENT_OPTIONS.PAYME) {
       buyPackageWithPayme({
@@ -71,13 +76,18 @@ const ConfirmPaymentTab = ({ paymentOption }) => {
         currentTeam,
         lang,
       })
+      reachGoal(analytics.buyPackage, {
+        type: PAYMENT_OPTIONS.PAYME,
+        amount: currentPackage?.price,
+      })
     }
     if (paymentOption === PAYMENT_OPTIONS.CLICKUP) {
       buyPackageWithClick({ user, currentPackage, currentTeam })
+      reachGoal(analytics.buyPackage, {
+        type: PAYMENT_OPTIONS.CLICKUP,
+        amount: currentPackage?.price,
+      })
     }
-    await update({
-      updated_at: new Date(),
-    })
   }
 
   return (

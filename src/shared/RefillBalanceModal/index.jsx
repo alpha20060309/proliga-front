@@ -25,6 +25,8 @@ import { ToggleGroup, ToggleGroupItem } from 'components/ui/toggle-group'
 import { useTheme } from 'next-themes'
 import { DEFAULT_BALANCE } from 'utils/config.global'
 const PREDEFINED_AMOUNTS = [50000, 100000, 200000, 500000]
+import { analytics } from 'utils/analytics.util'
+import { useMetrica } from 'next-yandex-metrica'
 
 const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
   const { t } = useTranslation()
@@ -32,6 +34,7 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
   const user = useSelector(selectUser)
   const config = useSelector(selectSystemConfig)
   const { lang } = useSelector((store) => store.systemLanguage)
+  const { reachGoal } = useMetrica()
 
   const { redirectToClick } = useRedirectToClick()
   const { redirectToPayme } = useRedirectToPayme()
@@ -71,9 +74,17 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
 
     if (paymentOption === PAYMENT_OPTIONS.CLICKUP) {
       redirectToClick({ amount, user })
+      reachGoal(analytics.increaseBalance, {
+        type: PAYMENT_OPTIONS.CLICKUP,
+        amount,
+      })
     }
     if (paymentOption === PAYMENT_OPTIONS.PAYME) {
       redirectToPayme({ amount, lang, user })
+      reachGoal(analytics.increaseBalance, {
+        type: PAYMENT_OPTIONS.PAYME,
+        amount,
+      })
     }
   }
 
@@ -178,21 +189,14 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
               </span>
             </div>
             <p className="text-muted-foreground text-xs">
-              {t('Minimal: $ so`m').replace(
-                '$',
-                formatNumber(DEFAULT_BALANCE)
-              )}
+              {t('Minimal: $ so`m').replace('$', formatNumber(DEFAULT_BALANCE))}
             </p>
           </div>
           <Button
             type="submit"
             size="lg"
             className="h-12 border text-base font-bold"
-            disabled={
-              !paymentOption ||
-              !amount ||
-              +amount < DEFAULT_BALANCE
-            }
+            disabled={!paymentOption || !amount || +amount < DEFAULT_BALANCE}
           >
             {t("To'lash")}
           </Button>

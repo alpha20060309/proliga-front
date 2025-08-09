@@ -38,9 +38,12 @@ import {
   StadiumSelectTrigger,
   StadiumSaveButton,
 } from 'components/Game/Stadium'
+import { useMetrica } from 'next-yandex-metrica'
+import { analytics } from 'utils/analytics.util'
 
 const TransferStadiumForm = () => {
   const { t } = useTranslation()
+  const { reachGoal } = useMetrica()
   const dispatch = useDispatch()
   const teamConcat = useSelector(selectTeamConcat)
   const currentCompetition = useSelector(selectCurrentCompetition)
@@ -143,12 +146,14 @@ const TransferStadiumForm = () => {
         team_id: currentTeam.id,
         is_team_created: currentTeam?.is_team_created,
       })
+      reachGoal(analytics.teamCreate)
     } else {
       await updateTourTeam({
         team_id: currentTeam.id,
         tour_id: currentTour.id,
         count_of_transfers: countOfTransfers,
       })
+      reachGoal(analytics.teamUpdate)
     }
 
     await updateTeamPlayers({
