@@ -1,7 +1,7 @@
 'use server'
 
 import { LoginSchema } from 'lib/schema'
-import { signIn } from 'app/api/auth/[...nextauth]/route'
+import { signIn } from 'app/auth'
 import { getUserByPhone } from 'lib/utils/auth.util'
 import { supabase } from 'lib/supabaseClient'
 
