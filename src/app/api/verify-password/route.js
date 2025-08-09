@@ -8,7 +8,6 @@ export async function POST(request) {
     if (!phone || !password) {
       return NextResponse.json({ error: 'Missing phone or password' }, { status: 400 })
     }
-    console.log('phone', phone)
     // Query user by phone
     const { data: user, error } = await supabase
       .from('user')
@@ -16,8 +15,7 @@ export async function POST(request) {
       .eq('phone', phone)
       .is('deleted_at', null)
       .single()
-    console.log('user', user)
-    console.log('error', error)
+
     if (error || !user) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 })
     }

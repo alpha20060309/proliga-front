@@ -22,7 +22,7 @@ const parseBool = (v, d = false) => v === 'true' ? true : v === 'false' ? false 
 messaging.onBackgroundMessage((payload) => {
   //  --- split title from the other keys
   const { title = '', ...raw } = payload.data || {};
-  console.log("title", title);
+
   const options = {
     body: raw.body,
     icon: raw.icon || 'favicon-32x32.png',

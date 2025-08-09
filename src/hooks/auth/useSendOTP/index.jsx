@@ -55,7 +55,6 @@ export const useSendOTP = () => {
         }
 
         if (data?.status !== 200) {
-          console.log("executed")
           setError(data?.message)
           toast.error(data?.message, { richColors: true })
           return { error }
