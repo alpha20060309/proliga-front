@@ -22,6 +22,8 @@ import { register } from 'actions/register.action'
 import { Card, CardHeader, CardTitle, CardContent } from 'components/ui/card'
 import { Label } from 'components/ui/label'
 import { Checkbox } from 'components/ui/checkbox'
+import { useMetrica } from 'next-yandex-metrica'
+import { analytics } from 'utils/analytics.util'
 
 const SignUpForm = ({ setShouldRedirect }) => {
   const { t } = useTranslation()
@@ -39,6 +41,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
   const config = useSelector(selectSystemConfig)
   const app_version = config[CONFIG_KEY.app_version]?.value ?? ''
   const { sendOTP } = useSendOTP()
+  const { reachGoal } = useMetrica()
 
   const [isPending, startTransition] = useTransition()
 
@@ -66,6 +69,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
     if (phone.length !== 13) {
       return toast.error(t("Telefon raqam noto'g'ri"))
     }
+
     localStorage.setItem('sign-in-method', 'sign-up')
     startTransition(async () => {
       try {
@@ -97,6 +101,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
               shouldRedirect: true,
               redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(res.phone)}`,
             })
+            reachGoal(analytics.signUp)
           }
         }
         // eslint-disable-next-line no-unused-vars

@@ -5,18 +5,27 @@ import { useTranslation } from 'react-i18next'
 import { setClubModal } from 'lib/features/teamPlayer/teamPlayer.slice'
 import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
 import MotionNumber from 'components/MotionNumber'
+import { useMetrica } from 'next-yandex-metrica'
+import { analytics } from 'utils/analytics.util'
+import { PACKAGE_TYPE } from 'utils/packages.util'
 
 export default function TeamMaxClubMembers() {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const currentTeam = useSelector(selectCurrentTeam)
   const { clubModal } = useSelector((state) => state.teamPlayer)
+  const { reachGoal } = useMetrica()
+
+  const handleClick = () => {
+    reachGoal(analytics.seePackage, { type: PACKAGE_TYPE.single_club_count })
+    dispatch(setClubModal(!clubModal))
+  }
 
   return (
     <>
       <div
         className="group w-full cursor-pointer capitalize lg:w-auto"
-        onClick={() => dispatch(setClubModal(!clubModal))}
+        onClick={handleClick}
       >
         <header className="text-muted-foreground group-hover:text-foreground flex transition-all group-hover:underline">
           <h3

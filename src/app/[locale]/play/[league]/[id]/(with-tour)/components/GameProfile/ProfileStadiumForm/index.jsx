@@ -21,8 +21,11 @@ import {
   StadiumSelectTrigger,
   StadiumSaveButton,
 } from 'components/Game/Stadium'
+import { useMetrica } from 'next-yandex-metrica'
+import { analytics } from 'utils/analytics.util'
 
 const ProfileStadiumForm = () => {
+  const { reachGoal } = useMetrica()
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const currentTeam = useSelector(selectCurrentTeam)
@@ -69,6 +72,7 @@ const ProfileStadiumForm = () => {
       user,
       currentCompetition,
     })
+    reachGoal(analytics.changeCaptain)
   }
 
   const validPlayers = () => {

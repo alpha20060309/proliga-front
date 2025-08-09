@@ -6,9 +6,13 @@ import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector
 import { selectCurrentTourTeam } from 'lib/features/tourTeam/tourTeam.selector'
 import MotionNumber from 'components/MotionNumber'
 import { MoveUp } from 'lucide-react'
+import { useMetrica } from 'next-yandex-metrica'
+import { analytics } from 'utils/analytics.util'
+import { PACKAGE_TYPE } from 'utils/packages.util'
 
 const TeamMaxTransfers = () => {
   const dispatch = useDispatch()
+  const { reachGoal } = useMetrica
   const { transferModal } = useSelector((store) => store.currentTeam)
   const currentTeam = useSelector(selectCurrentTeam)
   const currentTourTeam = useSelector(selectCurrentTourTeam)
@@ -20,11 +24,15 @@ const TeamMaxTransfers = () => {
   const maxTransfersFromOneTeam = Number(currentTeam?.count_of_transfers ?? 2)
   const currentTransferCount = maxTransfersFromOneTeam - currentCountOfTransfers
 
+  const handleClick = () => {
+    reachGoal(analytics.seePackage, { type: PACKAGE_TYPE.transfer_count })
+    dispatch(setTransferModal(!transferModal))
+  }
   return (
     <>
       <div
         className="group w-full cursor-pointer capitalize lg:w-auto"
-        onClick={() => dispatch(setTransferModal(!transferModal))}
+        onClick={handleClick}
       >
         <header className="text-muted-foreground group-hover:text-foreground flex cursor-pointer transition-all group-hover:underline">
           <h3
