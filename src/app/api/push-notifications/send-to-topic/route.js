@@ -35,7 +35,6 @@ export async function POST(request) {
       messageId: response,
     })
   } catch (error) {
-    console.log(error)
     return NextResponse.json(
       {
         success: false,

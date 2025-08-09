@@ -73,7 +73,6 @@ export const useAuthChangePhone = () => {
         })
 
         const verifyData = verifyRes.data
-        console.log('verifyData', verifyData)
         if (!verifyData.success) {
           return handleError(
             verifyData?.error || 'Parol noto‘g‘ri yoki foydalanuvchi topilmadi'
