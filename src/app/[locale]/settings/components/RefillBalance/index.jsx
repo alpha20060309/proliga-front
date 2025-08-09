@@ -35,7 +35,9 @@ const RefillBalance = () => {
 
       setBalance(data?.balance / 100 || 0)
     }
-    fetchBalance()
+    if (user?.id) {
+      fetchBalance()
+    }
   }, [user?.id])
 
   return (

@@ -6,14 +6,25 @@ import { signIn } from 'next-auth/react'
 import { selectUser } from 'lib/features/auth/auth.selector'
 import { useSelector } from 'react-redux'
 import * as React from 'react'
+import { analytics } from 'utils/analytics.util'
+import { useMetrica } from 'next-yandex-metrica'
+import * as gtag from 'lib/analytics/gtag'
 
 const GoogleSignIn = ({ className, iconClassName }) => {
+  const { reachGoal } = useMetrica()
   const { t } = useTranslation()
   const user = useSelector(selectUser)
 
   const handleGoogleSignIn = async () => {
     if (!user?.id) {
       localStorage.setItem('sign-in-method', SUPABASE_PROVIDERS.GOOGLE)
+      reachGoal(analytics.login, { type: SUPABASE_PROVIDERS.GOOGLE })
+      gtag.event({
+        action: 'social_login',
+        category: 'engagement',
+        label: 'Sign in/up with Google',
+        value: 1,
+      })
       await signIn('google', {
         redirect: true,
         // eslint-disable-next-line no-undef

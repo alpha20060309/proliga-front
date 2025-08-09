@@ -18,6 +18,7 @@ import {
 } from 'lib/features/systemNotification/systemNotification.slice'
 import { SUPABASE_EVENT_TYPE } from 'lib/supabaseClient'
 import { Bell } from 'lucide-react'
+import { selectUser } from 'lib/features/auth/auth.selector'
 
 const Notification = () => {
   const dispatch = useDispatch()
@@ -28,6 +29,7 @@ const Notification = () => {
   const [unreadCount, setUnreadCount] = useState(0)
   const [isOnline, setIsOnline] = useState(true)
   const systemNotifications = useSelector(selectNotifications)
+  const user = useSelector(selectUser)
 
   const handleOpen = () => {
     setNotificationsOpen(!isNotificationsOpen)
@@ -123,7 +125,7 @@ const Notification = () => {
         <Bell
           className={`hover:text-accent text-foreground size-5 select-none`}
         />
-        {unreadCount > 0 && (
+        {user?.id && unreadCount > 0 && (
           <Badge
             variant="destructive"
             className={cn(

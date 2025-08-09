@@ -1,7 +1,7 @@
 import { Link } from 'next-view-transitions'
 import Image from 'next/image'
 import initTranslations from 'lib/i18n'
-import { auth } from 'app/api/auth/[...nextauth]/route'
+import { auth } from 'app/auth'
 
 const Hero = async ({ params }) => {
   const { locale } = await params
