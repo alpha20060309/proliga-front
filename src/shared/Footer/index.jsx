@@ -28,8 +28,12 @@ const Footer = () => {
   ]
 
   const legal = [
-    { href: '/regulation', label: t('Qoidalar') },
-    { href: '/user-agreement', label: t('Foydalanuvchi shartnomasi') },
+    { href: '/regulation', label: t('Qoidalar'), ariaLabel: 'Game Rules' },
+    {
+      href: '/user-agreement',
+      label: t('Foydalanuvchi shartnomasi'),
+      ariaLabel: 'Privacy Policy',
+    },
   ]
 
   if (
@@ -66,6 +70,7 @@ const Footer = () => {
                 <Link
                   key={link.href}
                   href={link.href}
+                  aria-label={link.ariaLabel}
                   className="hover:text-primary transition-colors duration-200"
                 >
                   {link.label}
