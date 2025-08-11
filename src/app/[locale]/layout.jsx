@@ -54,6 +54,8 @@ export default async function RootLayout({ children, params }) {
                 clickmap: true,
                 trackLinks: true,
                 accurateTrackBounce: true,
+                ecommerce: 'dataLayer',
+                webvisor: true,
               }}
               router="app"
             >

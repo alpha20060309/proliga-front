@@ -12,7 +12,7 @@ import { PACKAGE_TYPE } from 'utils/packages.util'
 
 const TeamMaxTransfers = () => {
   const dispatch = useDispatch()
-  const { reachGoal } = useMetrica
+  const { reachGoal } = useMetrica()
   const { transferModal } = useSelector((store) => store.currentTeam)
   const currentTeam = useSelector(selectCurrentTeam)
   const currentTourTeam = useSelector(selectCurrentTourTeam)
