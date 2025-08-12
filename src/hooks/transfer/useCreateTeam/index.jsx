@@ -51,7 +51,6 @@ export const useCreateTeam = () => {
             competition_id,
             user_id: user.id,
           })
-          .is('deleted_at', null)
           .select()
           .single()
 
