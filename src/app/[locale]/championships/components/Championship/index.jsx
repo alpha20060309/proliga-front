@@ -47,8 +47,7 @@ const Championship = ({ game }) => {
 
   const cardVariants = useMemo(() => {
     if (!game?.is_active) return 'border-muted-foreground/40 cursor-default'
-    if (currentGame)
-      return 'border-foreground/70 dark:border-accent/70 hover:border-primary cursor-pointer'
+    if (currentGame) return 'border-accent hover:border-primary cursor-pointer'
     return game.can_register
       ? 'border-accent/50 hover:border-primary cursor-pointer '
       : 'border-muted-foreground/40 cursor-default'
@@ -59,7 +58,7 @@ const Championship = ({ game }) => {
       <Card
         className={cn(
           'bg-card relative flex h-32 items-start overflow-hidden rounded-lg border shadow',
-          'justify-center border-2 px-4 transition-all',
+          'justify-center border-4 px-4 transition-all',
           cardVariants
         )}
         onClick={handleClick}

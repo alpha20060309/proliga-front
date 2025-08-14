@@ -31,6 +31,7 @@ import { fetchTeamPackages } from 'lib/features/payExpense/payExpense.thunk'
 export default function PlayLayout({ children }) {
   const path = usePathname()
   const [isModalOpen, setModalOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const { league, id } = useParams()
   const user = useSelector(selectUser)
   const dispatch = useDispatch()
@@ -55,6 +56,7 @@ export default function PlayLayout({ children }) {
   const { isLoading: isLoadingNews } = useSelector((state) => state.news)
   const { isLoading: isLoadingClub } = useSelector((state) => state.club)
 
+  // Render nothing (or a minimal placeholder matching server) until mounted
   const isLoading =
     isLoadingPlayer ||
     isLoadingTeam ||
@@ -65,6 +67,8 @@ export default function PlayLayout({ children }) {
     isLoadingCompetition ||
     isLoadingNews ||
     isLoadingClub
+
+  useEffect(() => setMounted(true), [])
 
   useEffect(() => {
     dispatch(fetchCompetition())
@@ -147,6 +151,8 @@ export default function PlayLayout({ children }) {
       )
     }
   }, [league, dispatch, currentTeam?.registered_tour_id])
+
+  if (!mounted) return null
 
   if (isLoading) {
     return <Spinner />

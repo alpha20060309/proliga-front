@@ -829,6 +829,7 @@ model tour_team {
   deleted_by                 Int?
   name                       String?      @db.VarChar(64)
   is_last                    Boolean?     @default(false)
+  formation                  forms?       @default(f4_3_3)
   competition                competition? @relation(fields: [competition_id], references: [id], onUpdate: SetNull)
   season                     season?      @relation(fields: [season_id], references: [id], onUpdate: SetNull)
   team                       team?        @relation(fields: [team_id], references: [id], onUpdate: SetNull)

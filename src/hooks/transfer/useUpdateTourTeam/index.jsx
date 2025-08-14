@@ -14,7 +14,7 @@ export const useUpdateTourTeam = () => {
   const { t } = useTranslation()
 
   const updateTourTeam = useCallback(
-    async ({ team_id, tour_id, count_of_transfers }) => {
+    async ({ team_id, tour_id, count_of_transfers, formation }) => {
       setIsLoading(false)
       setError(null)
 
@@ -38,11 +38,11 @@ export const useUpdateTourTeam = () => {
 
         const { data, error } = await supabase
           .from('tour_team')
-          .update({ current_count_of_transfers: count_of_transfers })
+          .update({ current_count_of_transfers: count_of_transfers, formation })
           .eq('team_id', team_id)
           .eq('tour_id', tour_id)
           .is('deleted_at', null)
-          .select('*')
+          .select()
 
         if (error) {
           setError(

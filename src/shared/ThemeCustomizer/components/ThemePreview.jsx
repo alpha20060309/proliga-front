@@ -1,7 +1,7 @@
 import {
   DEFAULT_DARK_THEME,
   DEFAULT_LIGHT_THEME,
-} from 'utils/default-theme.util'
+} from 'utils/defaultTheme.util'
 
 const ThemePreview = ({ theme }) => {
   const commonPreviewSize = 'h-8 w-8' // Slightly smaller size
