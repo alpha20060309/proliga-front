@@ -40,6 +40,9 @@ import {
 } from 'components/Game/Stadium'
 import { useMetrica } from 'next-yandex-metrica'
 import { analytics } from 'utils/analytics.util'
+import { validTeamStructure } from 'utils/validTeamStructure.util'
+import { validPlayers } from 'utils/validPlayers.util'
+import { currentFormation } from 'utils/currentFormation.util'
 
 const TransferStadiumForm = () => {
   const { t } = useTranslation()
@@ -104,7 +107,7 @@ const TransferStadiumForm = () => {
     const curTeamPlayersId = []
     const captains = []
 
-    if (!validPlayers()) return
+    if (!validPlayers(teamConcat, t)) return
 
     prevTeam.forEach((p) => p.name && prevTeamPlayersId.push(p.player_id))
 
@@ -123,11 +126,19 @@ const TransferStadiumForm = () => {
       return
     }
 
-    if (!validTeamStructure()) return
+    if (!validTeamStructure(playersCount, t)) return
+
+    const formation = currentFormation(playersCount, t)
+
+    if (!formation) {
+      toast.error(t('Jamoa formatsiyasi notogri'))
+      return
+    }
 
     let difference = curTeamPlayersId.filter(
       (x) => !prevTeamPlayersId.includes(x)
     )
+
     const countOfTransfers =
       (difference.length || 0) + currentTourTeam?.current_count_of_transfers
 
@@ -152,6 +163,7 @@ const TransferStadiumForm = () => {
         team_id: currentTeam.id,
         tour_id: currentTour.id,
         count_of_transfers: countOfTransfers,
+        formation,
       })
       reachGoal(analytics.teamUpdate)
     }
@@ -175,45 +187,6 @@ const TransferStadiumForm = () => {
       toggleTeamCreateBtns(true)
     }
   }, [currentTeam])
-
-  const validPlayers = () => {
-    let valid = true
-
-    teamConcat.forEach((player) => {
-      if (!player.name || !player.price) {
-        // toast.warning(
-        //   t('identifikatori bolgan va holatida bolgan oyinchi yaroqsiz')
-        //     .replace('$', player?.id)
-        //     .replace('*', getCorrentPlayerPosition(player?.position, lang))
-        // )
-        return (valid = false)
-      }
-    })
-    !valid &&
-      toast.warning(
-        t(
-          'Jamoa to‘liq tuzilmagan. Jamoani saqlash uchun barcha pozitsiyalarni to‘ldiring.'
-        ),
-        { richColors: true }
-      )
-    return valid
-  }
-
-  const validTeamStructure = () => {
-    if (
-      playersCount.GOA !== 1 ||
-      playersCount.DEF < 3 ||
-      playersCount.DEF > 5 ||
-      playersCount.MID < 3 ||
-      playersCount.MID > 5 ||
-      playersCount.STR < 2 ||
-      playersCount.STR > 3
-    ) {
-      toast.error(t('Jamoa formatsiyasi notogri'))
-      return false
-    }
-    return true
-  }
 
   if (currentTour?.status !== TOUR_STATUS.notStartedTransfer) {
     return null

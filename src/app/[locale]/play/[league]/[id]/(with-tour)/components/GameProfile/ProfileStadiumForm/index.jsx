@@ -23,6 +23,8 @@ import {
 } from 'components/Game/Stadium'
 import { useMetrica } from 'next-yandex-metrica'
 import { analytics } from 'utils/analytics.util'
+import { validTeamStructure } from 'utils/validTeamStructure.util'
+import { validPlayers } from 'utils/validPlayers.util'
 
 const ProfileStadiumForm = () => {
   const { reachGoal } = useMetrica()
@@ -50,7 +52,7 @@ const ProfileStadiumForm = () => {
     e.preventDefault()
 
     const captains = []
-    if (!validPlayers()) return
+    if (!validPlayers(teamConcat, t)) return
 
     teamConcat.forEach((player) => {
       if (player.is_captain) {
@@ -63,7 +65,7 @@ const ProfileStadiumForm = () => {
       return
     }
 
-    if (!validTeamStructure()) return
+    if (!validTeamStructure(playersCount, t)) return
 
     await updateTeamCaptains({
       team: teamConcat,
@@ -73,45 +75,6 @@ const ProfileStadiumForm = () => {
       currentCompetition,
     })
     reachGoal(analytics.changeCaptain)
-  }
-
-  const validPlayers = () => {
-    let valid = true
-
-    teamConcat.forEach((player) => {
-      if (!player.name || !player.price) {
-        // toast.warning(
-        //   t('identifikatori bolgan va holatida bolgan oyinchi yaroqsiz')
-        //     .replace('$', player?.id)
-        //     .replace('*', getCorrentPlayerPosition(player?.position, lang))
-        // )
-        return (valid = false)
-      }
-    })
-    !valid &&
-      toast.warning(
-        t(
-          'Jamoa to‘liq tuzilmagan. Jamoani saqlash uchun barcha pozitsiyalarni to‘ldiring.'
-        ),
-        { richColors: true }
-      )
-    return valid
-  }
-
-  const validTeamStructure = () => {
-    if (
-      playersCount.GOA !== 1 ||
-      playersCount.DEF < 3 ||
-      playersCount.DEF > 5 ||
-      playersCount.MID < 3 ||
-      playersCount.MID > 5 ||
-      playersCount.STR < 2 ||
-      playersCount.STR > 3
-    ) {
-      toast.error(t('Jamoa formatsiyasi notogri'))
-      return false
-    }
-    return true
   }
 
   if (currentTour?.status !== TOUR_STATUS.notStartedTransfer) {
