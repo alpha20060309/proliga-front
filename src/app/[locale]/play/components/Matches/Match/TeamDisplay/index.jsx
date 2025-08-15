@@ -15,7 +15,6 @@ const MatchTeamDisplay = ({
         "xs:gap-x-2 flex h-full w-[35%] items-center gap-x-1",
         alignment === "right" &&
           "w-1/3 flex-row-reverse items-center space-x-reverse",
-        isWinner && "font-bold",
       )}
     >
       <div
