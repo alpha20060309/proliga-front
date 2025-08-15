@@ -56,9 +56,18 @@ const GameBrief = () => {
   const teamBalance = +(currentTeam?.balance || 0) - +(teamPrice || 0);
 
   useEffect(() => {
-    if (tours.length > 0 && currentTourIndex > 0) {
+    if (
+      tours.length > 0 &&
+      typeof currentTourIndex === "number" &&
+      currentTourIndex >= 0
+    ) {
       const nextTour = tours[currentTourIndex + 1];
       setNextTour(nextTour);
+    }
+  }, [currentTourIndex, tours, tourTeams]);
+
+  useEffect(() => {
+    if (tours.length > 0 && currentTourIndex > 0) {
       const prevTour = tours[currentTourIndex - 1];
       setPrevTour(prevTour);
       const prevTourTeam = tourTeams.find((t) => t.tour_id === prevTour.id);

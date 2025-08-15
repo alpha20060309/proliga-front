@@ -40,7 +40,11 @@ const GameBrief = () => {
   const teamBalance = +(currentTeam?.balance || 0) - +(teamPrice || 0);
 
   useEffect(() => {
-    if (tours.length > 0) {
+    if (
+      tours.length > 0 &&
+      typeof currentTourIndex === "number" &&
+      currentTourIndex >= 0
+    ) {
       const nextTour = tours[currentTourIndex + 1];
       setNextTour(nextTour);
     }

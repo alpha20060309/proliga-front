@@ -170,8 +170,6 @@ const TransferStadiumForm = () => {
     const filteredTours = tours
       .filter((tour) => tour.order >= tourTeamTourOrder)
       .map((t) => t.id);
-    console.log(tourTeamTourOrder);
-    console.log(filteredTours);
 
     if (!currentTeam?.is_team_created) {
       await updateTeam({
