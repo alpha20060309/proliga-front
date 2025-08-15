@@ -26,6 +26,8 @@
     "db:push:prod": "dotenv -e .env.production -- npx prisma db push",
     "db:seed:prod": "dotenv -e .env.production -- npx prisma db seed",
     "db:generate": "npx prisma generate",
+    "format:write": "prettier --write \"src/**/*.{js,ts,json,css,md}\"",
+    "format:check": "prettier --check \"src/**/*.{js,ts,json,css,md}\"",
     "serve-images": "node ./scripts/serve-images.js"
   },
   "prisma": {

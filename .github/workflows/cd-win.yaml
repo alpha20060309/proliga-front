@@ -2,9 +2,7 @@ name: Build and Deploy (Self-Hosted WINDOWS)
 
 on:
   push:
-    branches:
-      - main
-      - master
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -21,7 +19,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 22
-          cache: 'pnpm'
+          cache: "pnpm"
 
       - name: Setup PNPM
         uses: pnpm/action-setup@v2
