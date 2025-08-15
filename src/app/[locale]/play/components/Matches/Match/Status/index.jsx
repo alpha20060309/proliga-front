@@ -1,9 +1,9 @@
-import { Badge } from 'components/ui/badge'
-import { useTranslation } from 'react-i18next'
-import { MATCH_STATUS } from 'utils/match.util'
+import { Badge } from "components/ui/badge";
+import { useTranslation } from "react-i18next";
+import { MATCH_STATUS } from "utils/match.util";
 
 const MatchStatus = ({ status, homeScore, awayScore }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   switch (status) {
     case MATCH_STATUS.NOT_STARTED:
@@ -12,9 +12,9 @@ const MatchStatus = ({ status, homeScore, awayScore }) => {
           variant="secondary"
           className="bg-card text-2xs text-foreground py-px font-normal sm:text-xs"
         >
-          {t('Boshlanmagan')}
+          {t("Boshlanmagan")}
         </Badge>
-      )
+      );
     case MATCH_STATUS.INPROCESS:
       return (
         <Badge
@@ -23,7 +23,7 @@ const MatchStatus = ({ status, homeScore, awayScore }) => {
         >
           {homeScore} - {awayScore}
         </Badge>
-      )
+      );
     case MATCH_STATUS.FINISHED:
       return (
         <Badge
@@ -32,9 +32,9 @@ const MatchStatus = ({ status, homeScore, awayScore }) => {
         >
           {homeScore} - {awayScore}
         </Badge>
-      )
+      );
     default:
-      return null
+      return null;
   }
-}
-export default MatchStatus
+};
+export default MatchStatus;

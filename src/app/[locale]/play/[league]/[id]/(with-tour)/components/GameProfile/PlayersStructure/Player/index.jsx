@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import Image from 'next/image'
-import { selectPlayerPoint } from 'lib/features/playerPoint/playerPoint.selector'
-import { setPlayerInfoModal } from 'lib/features/teamPlayer/teamPlayer.slice'
-import { setCurrentPlayer } from 'lib/features/player/player.slice'
-import { getCorrectName } from 'utils/getCorrectName.util'
-import { memo } from 'react'
-import { Info } from 'lucide-react'
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Image from "next/image";
+import { selectPlayerPoint } from "lib/features/playerPoint/playerPoint.selector";
+import { setPlayerInfoModal } from "lib/features/teamPlayer/teamPlayer.slice";
+import { setCurrentPlayer } from "lib/features/player/player.slice";
+import { getCorrectName } from "utils/getCorrectName.util";
+import { memo } from "react";
+import { Info } from "lucide-react";
 import {
   PlayerContainer,
   PlayerImage,
@@ -16,40 +16,40 @@ import {
   PlayerButtonsContainer,
   PlayerButton,
   PlayerPoint,
-} from 'components/Game/Player'
+} from "components/Game/Player";
 
 const Player = ({ player }) => {
-  const dispatch = useDispatch()
-  const playerPoint = useSelector(selectPlayerPoint)
-  const [currentPlayerPoint, setCurrentPlayerPoint] = useState(null)
-  const { lang } = useSelector((store) => store.systemLanguage)
+  const dispatch = useDispatch();
+  const playerPoint = useSelector(selectPlayerPoint);
+  const [currentPlayerPoint, setCurrentPlayerPoint] = useState(null);
+  const { lang } = useSelector((store) => store.systemLanguage);
 
   useEffect(() => {
     if (playerPoint?.length > 0) {
       setCurrentPlayerPoint(
-        playerPoint.find((item) => item.player_id === player.player_id)
-      )
+        playerPoint.find((item) => item.player_id === player.player_id),
+      );
     } else {
-      setCurrentPlayerPoint(null)
+      setCurrentPlayerPoint(null);
     }
-  }, [playerPoint, player])
+  }, [playerPoint, player]);
 
   const imageErr = (e) => {
-    e.target.src = '/icons/player.svg'
-  }
+    e.target.src = "/icons/player.svg";
+  };
 
   const handleInfoModal = () => {
-    dispatch(setCurrentPlayer(player?.player_id))
-    dispatch(setPlayerInfoModal(true))
-  }
+    dispatch(setCurrentPlayer(player?.player_id));
+    dispatch(setPlayerInfoModal(true));
+  };
 
   const name = getCorrectName({
     lang,
     uz: player?.player?.name,
     ru: player?.player?.name_ru,
-  })
+  });
 
-  const lastName = name?.split(' ')[1] ?? ''
+  const lastName = name?.split(" ")[1] ?? "";
 
   return (
     <PlayerContainer>
@@ -73,11 +73,11 @@ const Player = ({ player }) => {
             imageErr={imageErr}
             player={player}
           />
-          <PlayerName>{lastName === '' ? name : lastName}</PlayerName>
+          <PlayerName>{lastName === "" ? name : lastName}</PlayerName>
           <PlayerButtonsContainer>
             <PlayerButton
               onClick={handleInfoModal}
-              className={'rounded-full p-0'}
+              className={"rounded-full p-0"}
             >
               <Info className="text-foreground group-hover:text-accent-foreground size-4 sm:size-5" />
             </PlayerButton>
@@ -90,7 +90,7 @@ const Player = ({ player }) => {
         </>
       )}
     </PlayerContainer>
-  )
-}
+  );
+};
 
-export default memo(Player)
+export default memo(Player);

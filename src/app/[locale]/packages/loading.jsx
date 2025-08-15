@@ -1,21 +1,21 @@
-import { PACKAGE_TYPE } from 'utils/packages.util'
-import { Card, CardHeader, CardContent, CardTitle } from 'components/ui/card'
-import { Separator } from 'components/ui/separator'
-import { Skeleton } from 'components/ui/skeleton'
-import { Zap, Users, CircleDollarSign } from 'lucide-react'
+import { PACKAGE_TYPE } from "utils/packages.util";
+import { Card, CardHeader, CardContent, CardTitle } from "components/ui/card";
+import { Separator } from "components/ui/separator";
+import { Skeleton } from "components/ui/skeleton";
+import { Zap, Users, CircleDollarSign } from "lucide-react";
 
 const PackageIcon = ({ type }) => {
   switch (type) {
     case PACKAGE_TYPE.team_balance:
-      return <CircleDollarSign className="text-accent h-6 w-6" />
+      return <CircleDollarSign className="text-accent h-6 w-6" />;
     case PACKAGE_TYPE.transfer_count:
-      return <Zap className="text-accent h-6 w-6" />
+      return <Zap className="text-accent h-6 w-6" />;
     case PACKAGE_TYPE.single_club_count:
-      return <Users className="text-accent h-6 w-6" />
+      return <Users className="text-accent h-6 w-6" />;
     default:
-      return null
+      return null;
   }
-}
+};
 
 const PackagesSkeleton = () => {
   return (
@@ -56,7 +56,7 @@ const PackagesSkeleton = () => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PackagesSkeleton
+export default PackagesSkeleton;

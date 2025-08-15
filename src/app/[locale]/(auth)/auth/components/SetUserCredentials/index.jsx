@@ -1,72 +1,72 @@
-'use client'
+"use client";
 
-import { useEffect, useState, useTransition, useMemo } from 'react'
+import { useEffect, useState, useTransition, useMemo } from "react";
 import {
   Dialog,
   DialogContent,
   DialogTitle,
   DialogDescription,
-} from 'components/ui/dialog'
-import { Button } from 'components/ui/button'
-import { PhoneInput } from 'components/PhoneInput'
-import { Label } from 'components/ui/label'
-import { Loader2, Mail } from 'lucide-react'
-import { memo } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
-import { setPhoneModal } from 'lib/features/auth/auth.slice'
+} from "components/ui/dialog";
+import { Button } from "components/ui/button";
+import { PhoneInput } from "components/PhoneInput";
+import { Label } from "components/ui/label";
+import { Loader2, Mail } from "lucide-react";
+import { memo } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { setPhoneModal } from "lib/features/auth/auth.slice";
 import {
   selectAgent,
   selectGeo,
   selectUser,
-} from 'lib/features/auth/auth.selector'
-import { toast } from 'sonner'
-import { selectSystemConfig } from 'lib/features/systemConfig/systemConfig.selector'
-import { CONFIG_KEY } from 'utils/config.util'
-import { Input } from 'components/ui/input'
-import { useSetUserCredentials } from 'hooks/auth/useSetUserCredentials'
-import { useSession } from 'next-auth/react'
+} from "lib/features/auth/auth.selector";
+import { toast } from "sonner";
+import { selectSystemConfig } from "lib/features/systemConfig/systemConfig.selector";
+import { CONFIG_KEY } from "utils/config.util";
+import { Input } from "components/ui/input";
+import { useSetUserCredentials } from "hooks/auth/useSetUserCredentials";
+import { useSession } from "next-auth/react";
 
 function SetUserCredentials() {
-  const dispatch = useDispatch()
-  const { phoneModal, fingerprint } = useSelector((store) => store.auth)
-  const { t } = useTranslation()
-  const { data: session } = useSession()
-  const user = useSelector(selectUser)
-  const agent = useSelector(selectAgent)
-  const geo = useSelector(selectGeo)
-  const [phone, setPhone] = useState('')
-  const [email, setEmail] = useState('')
+  const dispatch = useDispatch();
+  const { phoneModal, fingerprint } = useSelector((store) => store.auth);
+  const { t } = useTranslation();
+  const { data: session } = useSession();
+  const user = useSelector(selectUser);
+  const agent = useSelector(selectAgent);
+  const geo = useSelector(selectGeo);
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const { setUserCredentials, isLoading: tableLoading } =
-    useSetUserCredentials()
-  const config = useSelector(selectSystemConfig)
-  const app_version = config[CONFIG_KEY.app_version]?.value || ''
-  const [isPending, startTransition] = useTransition()
+    useSetUserCredentials();
+  const config = useSelector(selectSystemConfig);
+  const app_version = config[CONFIG_KEY.app_version]?.value || "";
+  const [isPending, startTransition] = useTransition();
 
   const isLoading = useMemo(
     () => isPending || tableLoading,
-    [isPending, tableLoading]
-  )
+    [isPending, tableLoading],
+  );
 
   const setModalOpen = () => {
-    user?.phone && user?.email && dispatch(setPhoneModal(false))
-  }
+    user?.phone && user?.email && dispatch(setPhoneModal(false));
+  };
 
   useEffect(() => {
     if (session?.user) {
-      setPhone(session?.user?.phone || '')
-      setEmail(session?.user?.email || '')
+      setPhone(session?.user?.phone || "");
+      setEmail(session?.user?.email || "");
     }
-  }, [session?.user])
+  }, [session?.user]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!email || !phone) {
-      return toast.error(t("Barcha maydonlar to'ldirilishi shart"))
+      return toast.error(t("Barcha maydonlar to'ldirilishi shart"));
     }
     if (!user?.id) {
-      return toast.warning(t('Please login first'))
+      return toast.warning(t("Please login first"));
     }
     startTransition(async () => {
       await setUserCredentials({
@@ -77,13 +77,13 @@ function SetUserCredentials() {
         geo,
         fingerprint,
         cb: () => {
-          localStorage.removeItem('sign-in-method')
-          localStorage.setItem('app_version', app_version)
-          dispatch(setPhoneModal(false))
+          localStorage.removeItem("sign-in-method");
+          localStorage.setItem("app_version", app_version);
+          dispatch(setPhoneModal(false));
         },
-      })
-    })
-  }
+      });
+    });
+  };
 
   return (
     <Dialog open={user?.id && phoneModal} onOpenChange={setModalOpen}>
@@ -91,20 +91,20 @@ function SetUserCredentials() {
         showCloseButton={false}
         className="bg-background text-foreground w-[98%] max-w-md rounded-xl p-5 sm:p-6"
       >
-        <DialogTitle>{t('Enter your credentials.')}</DialogTitle>
+        <DialogTitle>{t("Enter your credentials.")}</DialogTitle>
         <DialogDescription>
           {t(
-            'To complete your registration, please link your credentials with your account. This step is mandatory.'
+            "To complete your registration, please link your credentials with your account. This step is mandatory.",
           )}
         </DialogDescription>
         <form onSubmit={handleSubmit} className="space-y-4">
           <section className="space-y-2">
             <div className="relative space-y-1">
-              <Label htmlFor="set-phone">{t('Telefon raqam')}:</Label>
+              <Label htmlFor="set-phone">{t("Telefon raqam")}:</Label>
               <PhoneInput
                 id="set-phone"
                 name="phone"
-                placeholder={'99-999-99-99'}
+                placeholder={"99-999-99-99"}
                 defaultCountry="UZ"
                 className="bg-background text-foreground border-border placeholder:text-muted-foreground h-10"
                 value={phone}
@@ -112,7 +112,7 @@ function SetUserCredentials() {
               />
             </div>
             <div className="relative space-y-1">
-              <Label htmlFor="email">{t('Elektron pochta')}:</Label>
+              <Label htmlFor="email">{t("Elektron pochta")}:</Label>
               <Input
                 type="email"
                 name="email"
@@ -133,13 +133,13 @@ function SetUserCredentials() {
             {isLoading ? (
               <Loader2 className="size-6 animate-spin" />
             ) : (
-              t('Tasdiqlash')
+              t("Tasdiqlash")
             )}
           </Button>
         </form>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
 
-export default memo(SetUserCredentials)
+export default memo(SetUserCredentials);

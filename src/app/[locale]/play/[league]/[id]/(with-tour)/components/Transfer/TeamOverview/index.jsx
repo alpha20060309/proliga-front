@@ -1,8 +1,8 @@
-import TeamMaxTransfers from './TeamMaxTransfers'
-import TeamPrice from './TeamPrice'
-import TeamBalance from './TeamBalance'
-import TeamMaxClubMembers from './TeamMaxClubMembers'
-import { CardHeader } from 'components/ui/card'
+import TeamMaxTransfers from "./TeamMaxTransfers";
+import TeamPrice from "./TeamPrice";
+import TeamBalance from "./TeamBalance";
+import TeamMaxClubMembers from "./TeamMaxClubMembers";
+import { CardHeader } from "components/ui/card";
 
 const TeamOverview = () => {
   return (
@@ -12,7 +12,7 @@ const TeamOverview = () => {
       <TeamMaxTransfers />
       <TeamMaxClubMembers />
     </CardHeader>
-  )
-}
+  );
+};
 
-export default TeamOverview
+export default TeamOverview;

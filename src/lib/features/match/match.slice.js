@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { matchExtraReducer } from './match.extraReducer'
+import { createSlice } from "@reduxjs/toolkit";
+import { matchExtraReducer } from "./match.extraReducer";
 
 const initialState = {
   matches: [],
@@ -8,22 +8,22 @@ const initialState = {
   count: 0,
   isModalOpen: false,
   error: null,
-}
+};
 
 const matchesSlice = createSlice({
-  name: 'match',
+  name: "match",
   initialState,
   reducers: {
     setCurrentMatch: (state, action) => {
-      state.currentMatch = action.payload
+      state.currentMatch = action.payload;
     },
     setMatchModalOpen: (state, action) => {
-      state.isModalOpen = action.payload
+      state.isModalOpen = action.payload;
     },
   },
   extraReducers: matchExtraReducer,
-})
+});
 
-export const { setCurrentMatch, setMatchModalOpen } = matchesSlice.actions
+export const { setCurrentMatch, setMatchModalOpen } = matchesSlice.actions;
 
-export default matchesSlice.reducer
+export default matchesSlice.reducer;

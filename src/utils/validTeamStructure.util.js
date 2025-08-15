@@ -1,5 +1,13 @@
-import { toast } from "sonner"
-import { MIN_DEF_VALUE, MAX_DEF_VALUE, CORRECT_GOA_VALUE, MAX_MID_VALUE, MIN_STR_VALUE, MAX_STR_VALUE, MIN_MID_VALUE } from "./config.global"
+import { toast } from "sonner";
+import {
+  MIN_DEF_VALUE,
+  MAX_DEF_VALUE,
+  CORRECT_GOA_VALUE,
+  MAX_MID_VALUE,
+  MIN_STR_VALUE,
+  MAX_STR_VALUE,
+  MIN_MID_VALUE,
+} from "./config.global";
 
 export const validTeamStructure = (playersCount, t) => {
   if (
@@ -11,8 +19,8 @@ export const validTeamStructure = (playersCount, t) => {
     playersCount.STR < MIN_STR_VALUE ||
     playersCount.STR > MAX_STR_VALUE
   ) {
-    toast.error(t('Jamoa formatsiyasi notogri'))
-    return false
+    toast.error(t("Jamoa formatsiyasi notogri"));
+    return false;
   }
-  return true
-}
+  return true;
+};

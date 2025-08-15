@@ -1,47 +1,43 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useTranslation } from 'react-i18next'
-import PlayerStatisticsTable from './Table'
-import PlayerPhoto from './PlayerPhoto'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-} from 'components/ui/dialog'
-import { selectPlayerPoint } from 'lib/features/playerPoint/playerPoint.selector'
-import { getCorrentPlayerPosition } from 'utils/getCorrectPlayerPosition.utils'
-import { setPlayerInfoModal } from 'lib/features/teamPlayer/teamPlayer.slice'
-import { selectCurrentPlayer } from 'lib/features/player/player.selector'
-import { memo } from 'react'
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import PlayerStatisticsTable from "./Table";
+import PlayerPhoto from "./PlayerPhoto";
+import { Dialog, DialogContent, DialogDescription } from "components/ui/dialog";
+import { selectPlayerPoint } from "lib/features/playerPoint/playerPoint.selector";
+import { getCorrentPlayerPosition } from "utils/getCorrectPlayerPosition.utils";
+import { setPlayerInfoModal } from "lib/features/teamPlayer/teamPlayer.slice";
+import { selectCurrentPlayer } from "lib/features/player/player.selector";
+import { memo } from "react";
 
 const PlayerInfo = () => {
-  const dispatch = useDispatch()
-  const currentPlayer = useSelector(selectCurrentPlayer)
-  const { infoModal } = useSelector((store) => store.teamPlayer)
-  const { lang } = useSelector((store) => store.systemLanguage)
-  const playerPoint = useSelector(selectPlayerPoint)
-  const [matches, setMatches] = useState([])
-  const { t } = useTranslation()
+  const dispatch = useDispatch();
+  const currentPlayer = useSelector(selectCurrentPlayer);
+  const { infoModal } = useSelector((store) => store.teamPlayer);
+  const { lang } = useSelector((store) => store.systemLanguage);
+  const playerPoint = useSelector(selectPlayerPoint);
+  const [matches, setMatches] = useState([]);
+  const { t } = useTranslation();
 
   const setModalOpen = () => {
-    dispatch(setPlayerInfoModal(false))
-  }
+    dispatch(setPlayerInfoModal(false));
+  };
 
   useEffect(() => {
     if (playerPoint?.length > 0) {
-      setMatches([])
+      setMatches([]);
       playerPoint.forEach((item) => {
         if (
           item.player_id === currentPlayer?.id &&
           item?.player_result_id?.played_min > 0
         ) {
-          setMatches((prevMatch) => [...prevMatch, item])
+          setMatches((prevMatch) => [...prevMatch, item]);
         }
-      })
+      });
     }
-  }, [currentPlayer, playerPoint])
+  }, [currentPlayer, playerPoint]);
 
   return (
     <Dialog open={infoModal && currentPlayer?.id} onOpenChange={setModalOpen}>
@@ -51,41 +47,41 @@ const PlayerInfo = () => {
           position={getCorrentPlayerPosition(
             currentPlayer?.position,
             lang,
-            'full'
+            "full",
           )}
         />
         <PlayerStatisticsTable matches={matches} />
         <div className="mt-auto flex flex-wrap justify-center gap-x-1 gap-y-0 text-xs text-nowrap md:gap-x-2 md:text-sm">
           <div>
-            <span>{t("QO'")}</span> - {t('Quriq Oyin')},
+            <span>{t("QO'")}</span> - {t("Quriq Oyin")},
           </div>
           <div>
-            <span>{t('QP')}</span> - {t('Qaytarilagian Penalti')},
+            <span>{t("QP")}</span> - {t("Qaytarilagian Penalti")},
           </div>
           <div>
-            <span>{t('AG')}</span> - {t('Avto Gol')},
+            <span>{t("AG")}</span> - {t("Avto Gol")},
           </div>
           <div>
-            <span>{t("O'2")}</span> -{' '}
-            {t('O‘tkazib yuborilgan har 2 to‘p farqi')},
+            <span>{t("O'2")}</span> -{" "}
+            {t("O‘tkazib yuborilgan har 2 to‘p farqi")},
           </div>
           <div>
-            <span>{t('G')}</span> - {t('Gol')},
+            <span>{t("G")}</span> - {t("Gol")},
           </div>
           <div>
-            <span>{t('GA')}</span> - {t('Gol Assist')},
+            <span>{t("GA")}</span> - {t("Gol Assist")},
           </div>
           <div>
-            <span>{t('SK')}</span> - {t('Sariq kartochka')},
+            <span>{t("SK")}</span> - {t("Sariq kartochka")},
           </div>
           <div>
-            <span>{t('QZ')}</span> - {t('Qizil kartochka')},
+            <span>{t("QZ")}</span> - {t("Qizil kartochka")},
           </div>
           <div>
-            <span>{t('MIN')}</span> - {t('Daqiqani o‘yinda o‘tkazdi')},
+            <span>{t("MIN")}</span> - {t("Daqiqani o‘yinda o‘tkazdi")},
           </div>
           <div>
-            <span>{t('O')}</span> - {t('Ochko')}
+            <span>{t("O")}</span> - {t("Ochko")}
           </div>
         </div>
         <DialogDescription className="sr-only">
@@ -93,7 +89,7 @@ const PlayerInfo = () => {
         </DialogDescription>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default memo(PlayerInfo)
+export default memo(PlayerInfo);

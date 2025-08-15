@@ -3,7 +3,7 @@ const Spinner = () => {
     <div className="flex min-h-screen items-center justify-center">
       <span className="loader" />
     </div>
-  )
-}
+  );
+};
 
-export default Spinner
+export default Spinner;

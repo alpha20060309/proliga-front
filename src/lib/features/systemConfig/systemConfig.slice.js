@@ -1,16 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { systemConfigExtraReducer } from './systemConfig.extraReducer'
+import { createSlice } from "@reduxjs/toolkit";
+import { systemConfigExtraReducer } from "./systemConfig.extraReducer";
 
 const initialState = {
   config: {},
   isLoading: false,
   error: null,
-}
+};
 
 const systemConfigSlice = createSlice({
-  name: 'systemConfig',
+  name: "systemConfig",
   initialState,
   extraReducers: systemConfigExtraReducer,
-})
+});
 
-export default systemConfigSlice.reducer
+export default systemConfigSlice.reducer;

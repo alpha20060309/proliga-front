@@ -1,46 +1,46 @@
-'use client'
+"use client";
 
-import BalanceTable from './components/BalanceTable'
-import PackagesTable from './components/PackagesTable'
-import { useDispatch, useSelector } from 'react-redux'
-import { useTranslation } from 'react-i18next'
-import { useEffect, useState } from 'react'
-import { fetchPayBalance } from 'lib/features/payBalance/payBalance.thunk'
-import { fetchPayExpenses } from 'lib/features/payExpense/payExpense.thunk'
-import { selectUser } from 'lib/features/auth/auth.selector'
-import { Wallet, Boxes, RefreshCcw } from 'lucide-react'
-import { selectExpenses } from 'lib/features/payExpense/payExpense.selector'
-import { selectBalances } from 'lib/features/payBalance/payBalance.selector'
-import { Button } from 'components/ui/button'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from 'components/ui/tabs'
+import BalanceTable from "./components/BalanceTable";
+import PackagesTable from "./components/PackagesTable";
+import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
+import { fetchPayBalance } from "lib/features/payBalance/payBalance.thunk";
+import { fetchPayExpenses } from "lib/features/payExpense/payExpense.thunk";
+import { selectUser } from "lib/features/auth/auth.selector";
+import { Wallet, Boxes, RefreshCcw } from "lucide-react";
+import { selectExpenses } from "lib/features/payExpense/payExpense.selector";
+import { selectBalances } from "lib/features/payBalance/payBalance.selector";
+import { Button } from "components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "components/ui/tabs";
 
 const CabinetTransactionsHistory = () => {
-  const dispatch = useDispatch()
-  const { t } = useTranslation()
-  const [currentTab, setCurrentTab] = useState(TRANSACTION_TABS.BALANCE)
-  const user = useSelector(selectUser)
-  const expenses = useSelector(selectExpenses)
-  const balances = useSelector(selectBalances)
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const [currentTab, setCurrentTab] = useState(TRANSACTION_TABS.BALANCE);
+  const user = useSelector(selectUser);
+  const expenses = useSelector(selectExpenses);
+  const balances = useSelector(selectBalances);
 
   useEffect(() => {
     if (user?.id && expenses?.length === 0 && balances?.length === 0) {
       Promise.all([
         dispatch(fetchPayBalance({ user_id: user?.id })),
         dispatch(fetchPayExpenses({ user_id: user?.id })),
-      ])
+      ]);
     }
-  }, [dispatch, user, expenses?.length, balances?.length])
+  }, [dispatch, user, expenses?.length, balances?.length]);
 
   const refreshData = () => {
     switch (currentTab) {
       case TRANSACTION_TABS.BALANCE:
-        return dispatch(fetchPayBalance({ user_id: user?.id }))
+        return dispatch(fetchPayBalance({ user_id: user?.id }));
       case TRANSACTION_TABS.EXPENSES:
-        return dispatch(fetchPayExpenses({ user_id: user?.id }))
+        return dispatch(fetchPayExpenses({ user_id: user?.id }));
       default:
-        break
+        break;
     }
-  }
+  };
 
   return (
     <Tabs
@@ -50,17 +50,17 @@ const CabinetTransactionsHistory = () => {
     >
       <div className="mb-2 flex flex-col gap-2 sm:mb-0 sm:justify-between justify-center md:flex-row">
         <h3 className="text-foreground text-xl font-bold tracking-tight">
-          {t('Xarajatlar tarixi')}
+          {t("Xarajatlar tarixi")}
         </h3>
 
         <TabsList className="w-full sm:w-auto">
           <TabsTrigger className="w-40" value={TRANSACTION_TABS.BALANCE}>
             <Wallet className="mr-2 h-4 w-4" />
-            {t('Balans')}
+            {t("Balans")}
           </TabsTrigger>
           <TabsTrigger className="w-40" value={TRANSACTION_TABS.EXPENSES}>
             <Boxes className="mr-2 h-4 w-4" />
-            {t('Paketlar')}
+            {t("Paketlar")}
           </TabsTrigger>
         </TabsList>
         <Button
@@ -73,24 +73,24 @@ const CabinetTransactionsHistory = () => {
         </Button>
       </div>
       <TabsContent
-        className={'flex min-h-128 flex-col justify-between'}
+        className={"flex min-h-128 flex-col justify-between"}
         value={TRANSACTION_TABS.BALANCE}
       >
         <BalanceTable />
       </TabsContent>
       <TabsContent
         value={TRANSACTION_TABS.EXPENSES}
-        className={'flex min-h-128 flex-col justify-between'}
+        className={"flex min-h-128 flex-col justify-between"}
       >
         <PackagesTable />
       </TabsContent>
     </Tabs>
-  )
-}
+  );
+};
 
 const TRANSACTION_TABS = {
-  BALANCE: 'balance',
-  EXPENSES: 'expenses',
-}
+  BALANCE: "balance",
+  EXPENSES: "expenses",
+};
 
-export default CabinetTransactionsHistory
+export default CabinetTransactionsHistory;

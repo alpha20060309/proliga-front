@@ -1,4 +1,4 @@
-import { Skeleton } from 'components/ui/skeleton'
+import { Skeleton } from "components/ui/skeleton";
 
 export function ChampionshipSkeleton() {
   return (
@@ -9,5 +9,5 @@ export function ChampionshipSkeleton() {
         <Skeleton className="h-4 w-full sm:h-5" />
       </div>
     </div>
-  )
+  );
 }

@@ -1,5 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { rootReducer } from './root.reducer'
+import { configureStore } from "@reduxjs/toolkit";
+import { rootReducer } from "./root.reducer";
 
 const store = configureStore({
   reducer: rootReducer,
@@ -8,6 +8,6 @@ const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: false,
     }),
-})
+});
 
-export default store
+export default store;

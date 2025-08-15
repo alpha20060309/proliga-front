@@ -1,4 +1,4 @@
-import PlayFooter from './components/PlayFooter'
+import PlayFooter from "./components/PlayFooter";
 
 const PlayLayout = async ({ children }) => {
   return (
@@ -6,7 +6,7 @@ const PlayLayout = async ({ children }) => {
       {children}
       <PlayFooter />
     </main>
-  )
-}
+  );
+};
 
-export default PlayLayout
+export default PlayLayout;

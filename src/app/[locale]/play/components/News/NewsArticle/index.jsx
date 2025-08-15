@@ -3,28 +3,28 @@ import {
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from 'components/ui/dialog'
-import { CalendarDays, Eye } from 'lucide-react'
-import { ScrollArea } from 'components/ui/scroll-area'
-import { useTranslation } from 'react-i18next'
-import { getCorrectName } from 'utils/getCorrectName.util'
-import { useDispatch, useSelector } from 'react-redux'
-import { formatDate, formatViews } from 'utils/formatDate.util'
-import { selectCurrentNews } from 'lib/features/news/news.selector'
-import { setNewsModal } from 'lib/features/news/news.slice'
-import { memo } from 'react'
+} from "components/ui/dialog";
+import { CalendarDays, Eye } from "lucide-react";
+import { ScrollArea } from "components/ui/scroll-area";
+import { useTranslation } from "react-i18next";
+import { getCorrectName } from "utils/getCorrectName.util";
+import { useDispatch, useSelector } from "react-redux";
+import { formatDate, formatViews } from "utils/formatDate.util";
+import { selectCurrentNews } from "lib/features/news/news.selector";
+import { setNewsModal } from "lib/features/news/news.slice";
+import { memo } from "react";
 
 function NewsArticle() {
-  const dispatch = useDispatch()
-  const currentNews = useSelector(selectCurrentNews)
-  const { isModalOpen } = useSelector((store) => store.news)
-  const { lang } = useSelector((store) => store.systemLanguage)
-  const { t } = useTranslation()
-  const date = formatDate(currentNews?.created_at, 'news')
+  const dispatch = useDispatch();
+  const currentNews = useSelector(selectCurrentNews);
+  const { isModalOpen } = useSelector((store) => store.news);
+  const { lang } = useSelector((store) => store.systemLanguage);
+  const { t } = useTranslation();
+  const date = formatDate(currentNews?.created_at, "news");
 
   const setModalOpen = () => {
-    dispatch(setNewsModal(false))
-  }
+    dispatch(setNewsModal(false));
+  };
 
   return (
     <Dialog open={isModalOpen && currentNews?.id} onOpenChange={setModalOpen}>
@@ -46,7 +46,7 @@ function NewsArticle() {
           <div className="flex items-center">
             <Eye className="text-muted-foreground mr-1 size-5" />
             <span className="text-foreground/80">
-              {formatViews(currentNews?.view_count || 0)} {t('views')}
+              {formatViews(currentNews?.view_count || 0)} {t("views")}
             </span>
           </div>
         </div>
@@ -68,6 +68,6 @@ function NewsArticle() {
         </DialogDescription>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
-export default memo(NewsArticle)
+export default memo(NewsArticle);

@@ -1,19 +1,19 @@
-import { fetchBanners } from './banner.thunk'
+import { fetchBanners } from "./banner.thunk";
 
 export const bannerExtraReducer = (builder) => {
   builder
     .addCase(fetchBanners.pending, (state) => {
-      state.isLoading = true
+      state.isLoading = true;
     })
     .addCase(fetchBanners.fulfilled, (state, action) => {
-      state.banners = []
+      state.banners = [];
       if (action.payload.data?.length > 0) {
-        state.banners = action.payload.data
+        state.banners = action.payload.data;
       }
-      state.isLoading = false
+      state.isLoading = false;
     })
     .addCase(fetchBanners.rejected, (state, action) => {
-      state.isLoading = false
-      state.error = action?.error ?? null
-    })
-}
+      state.isLoading = false;
+      state.error = action?.error ?? null;
+    });
+};

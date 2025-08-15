@@ -1,5 +1,5 @@
-import { Skeleton } from 'components/ui/skeleton'
-import { PaginationSkeleton } from 'components/Table/Pagination/Server'
+import { Skeleton } from "components/ui/skeleton";
+import { PaginationSkeleton } from "components/Table/Pagination/Server";
 
 function TableSkeleton({ rows }) {
   return (
@@ -21,20 +21,18 @@ function TableSkeleton({ rows }) {
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 export function JournalSkeleton({ rows }) {
   return (
     <>
       <TableSkeleton rows={rows} />
-      <PaginationSkeleton
-        className={'h-full items-end'}
-      />
+      <PaginationSkeleton className={"h-full items-end"} />
     </>
-  )
+  );
 }
 
 export default function Loading() {
-  return <JournalSkeleton rows={8} />
+  return <JournalSkeleton rows={8} />;
 }

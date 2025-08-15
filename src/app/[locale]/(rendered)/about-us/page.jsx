@@ -1,12 +1,12 @@
-import { getPage } from 'actions/getHTMLPage.action'
-import { getCorrectName } from 'utils/getCorrectName.util'
+import { getPage } from "actions/getHTMLPage.action";
+import { getCorrectName } from "utils/getCorrectName.util";
 
 const AboutUs = async ({ params }) => {
-  const { locale } = await params
-  const { data, error } = await getPage('about-us')
+  const { locale } = await params;
+  const { data, error } = await getPage("about-us");
 
   if (error) {
-    return <div>{error?.message}</div>
+    return <div>{error?.message}</div>;
   }
 
   return (
@@ -16,7 +16,7 @@ const AboutUs = async ({ params }) => {
         __html: getCorrectName({ lang: locale, ru: data?.ru, uz: data?.uz }),
       }}
     />
-  )
-}
+  );
+};
 
-export default AboutUs
+export default AboutUs;

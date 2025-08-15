@@ -1,8 +1,8 @@
-import Image from 'next/image'
-import { useTranslation } from 'react-i18next'
+import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 const CreateTeamSlide = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   return (
     <div className="flex w-full flex-col items-center justify-between gap-4 md:flex-row md:gap-0 lg:gap-0">
@@ -12,7 +12,7 @@ const CreateTeamSlide = () => {
             {t("jamoa yig'ing")}
           </h2>
           <p className="xs:text-sm text-muted-foreground max-w-lg text-xs lg:text-base xl:text-lg">
-            {t('promotion_text')}
+            {t("promotion_text")}
           </p>
           <div className="relative hidden h-full w-full self-start md:block">
             <Image
@@ -38,7 +38,7 @@ const CreateTeamSlide = () => {
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CreateTeamSlide
+export default CreateTeamSlide;

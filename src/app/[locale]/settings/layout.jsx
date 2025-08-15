@@ -1,7 +1,7 @@
-import Gutter from 'components/Gutter'
-import Image from 'next/image'
-import SettingsNavigation from './components/Navigation'
-import { Card, CardContent } from 'components/ui/card'
+import Gutter from "components/Gutter";
+import Image from "next/image";
+import SettingsNavigation from "./components/Navigation";
+import { Card, CardContent } from "components/ui/card";
 
 export default function SettingsLayout({ children }) {
   return (
@@ -20,13 +20,13 @@ export default function SettingsLayout({ children }) {
       <Gutter mobileFriendly>
         <main className="flex h-full min-h-176 flex-col gap-2 lg:min-h-152 lg:flex-row">
           <SettingsNavigation />
-          <Card className={'w-full'}>
-            <CardContent className={'flex flex-col gap-2'}>
+          <Card className={"w-full"}>
+            <CardContent className={"flex flex-col gap-2"}>
               {children}
             </CardContent>
           </Card>
         </main>
       </Gutter>
     </main>
-  )
+  );
 }

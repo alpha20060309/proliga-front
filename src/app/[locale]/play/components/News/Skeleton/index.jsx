@@ -1,7 +1,7 @@
-import { Skeleton } from 'components/ui/skeleton'
-import { CalendarDays, Eye } from 'lucide-react'
-import { PaginationSkeleton } from 'components/Table/Pagination/Server'
-import { Card, CardContent, CardFooter, CardHeader } from 'components/ui/card'
+import { Skeleton } from "components/ui/skeleton";
+import { CalendarDays, Eye } from "lucide-react";
+import { PaginationSkeleton } from "components/Table/Pagination/Server";
+import { Card, CardContent, CardFooter, CardHeader } from "components/ui/card";
 
 function ArticleSkeleton() {
   return (
@@ -29,7 +29,7 @@ function ArticleSkeleton() {
         </div>
       </section>
     </article>
-  )
+  );
 }
 
 export function NewsSkeleton({ count = 5, paginationCount = 5 }) {
@@ -48,5 +48,5 @@ export function NewsSkeleton({ count = 5, paginationCount = 5 }) {
         <PaginationSkeleton count={paginationCount} className="w-full" />
       </CardFooter>
     </Card>
-  )
+  );
 }

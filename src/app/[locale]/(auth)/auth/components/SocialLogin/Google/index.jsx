@@ -1,52 +1,52 @@
-import { Button } from 'components/ui/button'
-import { useTranslation } from 'react-i18next'
-import { cn } from 'lib/utils'
-import { SUPABASE_PROVIDERS } from 'lib/supabaseClient'
-import { signIn } from 'next-auth/react'
-import { selectUser } from 'lib/features/auth/auth.selector'
-import { useSelector } from 'react-redux'
-import * as React from 'react'
-import { analytics } from 'utils/analytics.util'
-import { useMetrica } from 'next-yandex-metrica'
-import * as gtag from 'lib/analytics/gtag'
+import { Button } from "components/ui/button";
+import { useTranslation } from "react-i18next";
+import { cn } from "lib/utils";
+import { SUPABASE_PROVIDERS } from "lib/supabaseClient";
+import { signIn } from "next-auth/react";
+import { selectUser } from "lib/features/auth/auth.selector";
+import { useSelector } from "react-redux";
+import * as React from "react";
+import { analytics } from "utils/analytics.util";
+import { useMetrica } from "next-yandex-metrica";
+import * as gtag from "lib/analytics/gtag";
 
 const GoogleSignIn = ({ className, iconClassName }) => {
-  const { reachGoal } = useMetrica()
-  const { t } = useTranslation()
-  const user = useSelector(selectUser)
+  const { reachGoal } = useMetrica();
+  const { t } = useTranslation();
+  const user = useSelector(selectUser);
 
   const handleGoogleSignIn = async () => {
     if (!user?.id) {
-      localStorage.setItem('sign-in-method', SUPABASE_PROVIDERS.GOOGLE)
-      reachGoal(analytics.login, { type: SUPABASE_PROVIDERS.GOOGLE })
+      localStorage.setItem("sign-in-method", SUPABASE_PROVIDERS.GOOGLE);
+      reachGoal(analytics.login, { type: SUPABASE_PROVIDERS.GOOGLE });
       gtag.event({
-        action: 'social_login',
-        category: 'engagement',
-        label: 'Sign in/up with Google',
+        action: "social_login",
+        category: "engagement",
+        label: "Sign in/up with Google",
         value: 1,
-      })
-      await signIn('google', {
+      });
+      await signIn("google", {
         redirect: true,
         // eslint-disable-next-line no-undef
-        redirectTo: process.env.NEXT_PUBLIC_URL + '/auth?success=true',
-      })
+        redirectTo: process.env.NEXT_PUBLIC_URL + "/auth?success=true",
+      });
     }
-  }
+  };
 
   return (
     <Button
       variant="outline"
       className={cn(
-        'text-foreground dark:hover:text-accent w-1/2 p-0',
-        className
+        "text-foreground dark:hover:text-accent w-1/2 p-0",
+        className,
       )}
       onClick={handleGoogleSignIn}
     >
-      <Google className={cn('mr-2 size-4', iconClassName)} />
-      {t('Google')}
+      <Google className={cn("mr-2 size-4", iconClassName)} />
+      {t("Google")}
     </Button>
-  )
-}
+  );
+};
 
 const Google = (props) => (
   <svg
@@ -74,6 +74,6 @@ const Google = (props) => (
       fill="#EB4335"
     />
   </svg>
-)
+);
 
-export default GoogleSignIn
+export default GoogleSignIn;

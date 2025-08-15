@@ -3,15 +3,15 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from 'components/ui/dialog'
-import { useSelector } from 'react-redux'
-import { getCorrectName } from 'utils/getCorrectName.util'
-import { ScrollArea } from 'components/ui/scroll-area'
-import { DialogDescription } from '@radix-ui/react-dialog'
+} from "components/ui/dialog";
+import { useSelector } from "react-redux";
+import { getCorrectName } from "utils/getCorrectName.util";
+import { ScrollArea } from "components/ui/scroll-area";
+import { DialogDescription } from "@radix-ui/react-dialog";
 
 const NotificationModal = ({ isOpen, onOpenChange, notification }) => {
-  const { lang } = useSelector((store) => store.systemLanguage)
-  if (!notification) return null
+  const { lang } = useSelector((store) => store.systemLanguage);
+  if (!notification) return null;
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
@@ -42,7 +42,7 @@ const NotificationModal = ({ isOpen, onOpenChange, notification }) => {
         </DialogDescription>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default NotificationModal
+export default NotificationModal;

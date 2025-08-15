@@ -1,14 +1,14 @@
-import { Tabs, Tab } from '@mui/material'
-import Box from '@mui/material/Box'
-import { styled } from '@mui/material'
-import { getCorrectName } from 'utils/getCorrectName.util'
-import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
-import { getTourName } from 'utils/tour.util'
+import { Tabs, Tab } from "@mui/material";
+import Box from "@mui/material/Box";
+import { styled } from "@mui/material";
+import { getCorrectName } from "utils/getCorrectName.util";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { getTourName } from "utils/tour.util";
 
 export const GameTab = ({ item }) => {
-  const { lang } = useSelector((state) => state.systemLanguage)
-  const { t } = useTranslation()
+  const { lang } = useSelector((state) => state.systemLanguage);
+  const { t } = useTranslation();
 
   return (
     <div className="flex min-h-18 flex-col items-center justify-start gap-0.5 pt-2 sm:min-h-18 xl:pt-1">
@@ -19,8 +19,8 @@ export const GameTab = ({ item }) => {
         {getTourName(item.status, t)}
       </p>
     </div>
-  )
-}
+  );
+};
 
 export const StyledTabs = styled((props) => (
   <Tabs
@@ -30,47 +30,47 @@ export const StyledTabs = styled((props) => (
         ...props.slotProps?.indicator,
         style: {
           ...props.slotProps?.indicator?.style,
-          backgroundColor: 'var(--color-primary)',
+          backgroundColor: "var(--color-primary)",
         },
       },
     }}
   />
-))({})
+))({});
 
 export const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
   ({ theme }) => ({
-    textTransform: 'none',
+    textTransform: "none",
     fontWeight: theme.typography.fontWeightRegular,
     fontSize: theme.typography.pxToRem(14),
     minWidth: 0,
-    letterSpacing: 'var(--letter-spacing)',
+    letterSpacing: "var(--letter-spacing)",
     padding: 0,
-    overflow: 'unset',
-    fontFamily: 'var(--font-sans)',
-    color: 'var(--color-foreground)',
-    '&.Mui-selected': {
-      backgroundColor: 'rgb(from var(--color-foreground) r g b / 0.1)',
-      borderRadius: 'var(--radius-sm)',
+    overflow: "unset",
+    fontFamily: "var(--font-sans)",
+    color: "var(--color-foreground)",
+    "&.Mui-selected": {
+      backgroundColor: "rgb(from var(--color-foreground) r g b / 0.1)",
+      borderRadius: "var(--radius-sm)",
     },
-    '&.Mui-disabled': {
+    "&.Mui-disabled": {
       opacity: 0.5,
     },
-  })
-)
+  }),
+);
 
 export const CustomBox = ({ children }) => {
   return (
     <Box
       sx={{
-        width: '100%',
-        bgcolor: 'var(--card)',
-        color: 'var(--card-foreground)',
-        height: 'auto',
-        borderRadius: 'var(--radius)',
-        minHeight: '64px',
+        width: "100%",
+        bgcolor: "var(--card)",
+        color: "var(--card-foreground)",
+        height: "auto",
+        borderRadius: "var(--radius)",
+        minHeight: "64px",
       }}
     >
       {children}
     </Box>
-  )
-}
+  );
+};

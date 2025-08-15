@@ -1,44 +1,44 @@
-'use client'
+"use client";
 
-import { selectPlayerPoint } from 'lib/features/playerPoint/playerPoint.selector'
-import { useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
-import Image from 'next/image'
-import { getCorrectName } from 'utils/getCorrectName.util'
-import { memo } from 'react'
+import { selectPlayerPoint } from "lib/features/playerPoint/playerPoint.selector";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { getCorrectName } from "utils/getCorrectName.util";
+import { memo } from "react";
 import {
   PlayerContainer,
   PlayerImage,
   PlayerName,
   PlayerPoint,
-} from 'components/Game/Player'
+} from "components/Game/Player";
 
 const Player = ({ player }) => {
-  const { lang } = useSelector((store) => store.systemLanguage)
-  const playerPoint = useSelector(selectPlayerPoint)
-  const [currentPlayerPoint, setCurrentPlayerPoint] = useState(null)
+  const { lang } = useSelector((store) => store.systemLanguage);
+  const playerPoint = useSelector(selectPlayerPoint);
+  const [currentPlayerPoint, setCurrentPlayerPoint] = useState(null);
 
   useEffect(() => {
     if (playerPoint?.length > 0) {
       setCurrentPlayerPoint(
-        playerPoint.find((item) => item.player_id === player.player_id)
-      )
+        playerPoint.find((item) => item.player_id === player.player_id),
+      );
     } else {
-      setCurrentPlayerPoint(null)
+      setCurrentPlayerPoint(null);
     }
-  }, [playerPoint, player])
+  }, [playerPoint, player]);
 
   const imageErr = (e) => {
-    e.target.src = '/icons/player.svg'
-  }
+    e.target.src = "/icons/player.svg";
+  };
 
   const name = getCorrectName({
     lang,
     uz: player?.player?.name,
     ru: player?.player?.name_ru,
-  })
+  });
 
-  const lastName = name?.split(' ')[1] ?? ''
+  const lastName = name?.split(" ")[1] ?? "";
 
   return (
     <PlayerContainer>
@@ -58,11 +58,11 @@ const Player = ({ player }) => {
         <>
           <PlayerImage
             tShirt={player?.club?.form_img}
-            handleInfoModal={() => { }}
+            handleInfoModal={() => {}}
             imageErr={imageErr}
             player={player}
           />
-          <PlayerName>{lastName === '' ? name : lastName}</PlayerName>
+          <PlayerName>{lastName === "" ? name : lastName}</PlayerName>
           <PlayerPoint>
             {player.is_captain
               ? (currentPlayerPoint?.point ?? 0) * 2
@@ -71,7 +71,7 @@ const Player = ({ player }) => {
         </>
       )}
     </PlayerContainer>
-  )
-}
+  );
+};
 
-export default memo(Player)
+export default memo(Player);

@@ -6,11 +6,11 @@ export const eventVariants = {
     transition: {
       delay: i * 0.1,
       duration: 0.3,
-      type: 'spring',
+      type: "spring",
       stiffness: 75,
     },
   }),
-}
+};
 
 export const refreshButtonVariants = {
   hidden: { opacity: 0, scale: 0.8 },
@@ -19,7 +19,7 @@ export const refreshButtonVariants = {
     scale: 1,
     transition: {
       delay: 0.5,
-      type: 'spring',
+      type: "spring",
       stiffness: 200,
       damping: 10,
     },
@@ -29,4 +29,4 @@ export const refreshButtonVariants = {
     transition: { duration: 0.3 },
   },
   tap: { scale: 0.9 },
-}
+};

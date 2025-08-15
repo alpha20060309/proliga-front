@@ -3,37 +3,37 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from 'components/ui/tooltip'
-import { useTranslation } from 'react-i18next'
-import { formatDate } from 'utils/formatDate.util'
-import { useDispatch, useSelector } from 'react-redux'
+} from "components/ui/tooltip";
+import { useTranslation } from "react-i18next";
+import { formatDate } from "utils/formatDate.util";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setCurrentMatch,
   setMatchModalOpen,
-} from 'lib/features/match/match.slice'
-import { getCorrectName } from 'utils/getCorrectName.util'
-import { memo } from 'react'
-import MatchStatus from './Status'
-import MatchTeamDisplay from './TeamDisplay'
+} from "lib/features/match/match.slice";
+import { getCorrectName } from "utils/getCorrectName.util";
+import { memo } from "react";
+import MatchStatus from "./Status";
+import MatchTeamDisplay from "./TeamDisplay";
 
 const Match = ({ match }) => {
-  const dispatch = useDispatch()
-  const { lang } = useSelector((store) => store.systemLanguage)
-  const { t } = useTranslation()
-  const homeClub = match?.home_club_id ?? null
-  const awayClub = match?.away_club_id ?? null
-  const date = formatDate(match?.started_date, 'matches')
+  const dispatch = useDispatch();
+  const { lang } = useSelector((store) => store.systemLanguage);
+  const { t } = useTranslation();
+  const homeClub = match?.home_club_id ?? null;
+  const awayClub = match?.away_club_id ?? null;
+  const date = formatDate(match?.started_date, "matches");
 
-  const homeScore = parseInt(match?.home_club_result) || 0
-  const awayScore = parseInt(match?.away_club_result) || 0
-  const isHomeWinner = homeScore > awayScore
-  const isAwayWinner = awayScore > homeScore
-  const isDraw = match?.status === 'finished' && homeScore === awayScore
+  const homeScore = parseInt(match?.home_club_result) || 0;
+  const awayScore = parseInt(match?.away_club_result) || 0;
+  const isHomeWinner = homeScore > awayScore;
+  const isAwayWinner = awayScore > homeScore;
+  const isDraw = match?.status === "finished" && homeScore === awayScore;
 
   const handleClick = () => {
-    dispatch(setCurrentMatch(match))
-    dispatch(setMatchModalOpen(true))
-  }
+    dispatch(setCurrentMatch(match));
+    dispatch(setMatchModalOpen(true));
+  };
 
   return (
     <article
@@ -63,7 +63,7 @@ const Match = ({ match }) => {
               <time>{date}</time>
             </TooltipTrigger>
             <TooltipContent>
-              <p>{t('Match start time')}</p>
+              <p>{t("Match start time")}</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
@@ -81,7 +81,7 @@ const Match = ({ match }) => {
         match={match}
       />
     </article>
-  )
-}
+  );
+};
 
-export default memo(Match)
+export default memo(Match);

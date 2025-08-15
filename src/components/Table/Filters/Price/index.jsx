@@ -1,47 +1,43 @@
-'use client'
+"use client";
 
-import React from 'react'
-import { Button } from 'components/ui/button'
-import { Input } from 'components/ui/input'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from 'components/ui/popover'
-import { Separator } from 'components/ui/separator'
-import { Slider } from 'components/ui/slider'
-import { XCircle } from 'lucide-react'
-import { useTranslation } from 'react-i18next'
+import React from "react";
+import { Button } from "components/ui/button";
+import { Input } from "components/ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from "components/ui/popover";
+import { Separator } from "components/ui/separator";
+import { Slider } from "components/ui/slider";
+import { XCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
-const PriceFilter = ({ column, columnFilterValue, title = 'Narx' }) => {
-  const { t } = useTranslation()
-  const id = React.useId()
+const PriceFilter = ({ column, columnFilterValue, title = "Narx" }) => {
+  const { t } = useTranslation();
+  const id = React.useId();
 
   const getValidRange = React.useCallback(
     (value, fallback) =>
       Array.isArray(value) &&
       value.length === 2 &&
-      value.every((v) => typeof v === 'number')
+      value.every((v) => typeof v === "number")
         ? value
         : fallback,
-    []
-  )
+    [],
+  );
 
-  const defaultRange = column?.columnDef?.meta?.range
-  const unit = column?.columnDef?.meta?.unit
+  const defaultRange = column?.columnDef?.meta?.range;
+  const unit = column?.columnDef?.meta?.unit;
 
   const { min, max, step } = React.useMemo(() => {
     let minValue = 5,
-      maxValue = 16
+      maxValue = 16;
     if (getValidRange(defaultRange)) {
-      ;[minValue, maxValue] = defaultRange
+      [minValue, maxValue] = defaultRange;
     } else {
-      const values = column?.getFacetedMinMaxValues?.()
+      const values = column?.getFacetedMinMaxValues?.();
       if (getValidRange(values)) {
-        ;[minValue, maxValue] = values
+        [minValue, maxValue] = values;
       }
     }
-    const rangeSize = maxValue - minValue
+    const rangeSize = maxValue - minValue;
     return {
       min: minValue,
       max: maxValue,
@@ -51,31 +47,31 @@ const PriceFilter = ({ column, columnFilterValue, title = 'Narx' }) => {
           : rangeSize <= 100
             ? Math.ceil(rangeSize / 20)
             : Math.ceil(rangeSize / 50),
-    }
-  }, [column, defaultRange, getValidRange])
+    };
+  }, [column, defaultRange, getValidRange]);
 
-  const range = getValidRange(columnFilterValue, [min, max])
+  const range = getValidRange(columnFilterValue, [min, max]);
 
   const formatValue = (v) =>
-    v.toLocaleString(undefined, { maximumFractionDigits: 0 })
+    v.toLocaleString(undefined, { maximumFractionDigits: 0 });
 
   const handleInputChange = (idx) => (e) => {
-    const val = Number(e.target.value)
-    if (Number.isNaN(val)) return
-    const next = [...range]
-    next[idx] = val
-    if (next[0] > next[1] || next[0] < min || next[1] > max) return
-    column.setFilterValue(next)
-  }
+    const val = Number(e.target.value);
+    if (Number.isNaN(val)) return;
+    const next = [...range];
+    next[idx] = val;
+    if (next[0] > next[1] || next[0] < min || next[1] > max) return;
+    column.setFilterValue(next);
+  };
 
   const handleSliderChange = (value) => {
-    if (getValidRange(value)) column.setFilterValue(value)
-  }
+    if (getValidRange(value)) column.setFilterValue(value);
+  };
 
   const handleReset = (e) => {
-    if (e?.target instanceof HTMLDivElement) e.stopPropagation()
-    column.setFilterValue(undefined)
-  }
+    if (e?.target instanceof HTMLDivElement) e.stopPropagation();
+    column.setFilterValue(undefined);
+  };
 
   return (
     <Popover>
@@ -99,7 +95,7 @@ const PriceFilter = ({ column, columnFilterValue, title = 'Narx' }) => {
               className="focus-visible:ring-ring rounded-sm opacity-70 transition-opacity hover:opacity-100 focus-visible:ring-1 focus-visible:outline-none"
               onClick={handleReset}
               onKeyDown={(e) =>
-                (e.key === 'Enter' || e.key === ' ') && handleReset(e)
+                (e.key === "Enter" || e.key === " ") && handleReset(e)
               }
             >
               <XCircle className="h-4 w-4" />
@@ -110,7 +106,7 @@ const PriceFilter = ({ column, columnFilterValue, title = 'Narx' }) => {
             <>
               <Separator orientation="vertical" className="mx-0.5 h-4" />
               {formatValue(range[0])} - {formatValue(range[1])}
-              {unit ? ` ${unit}` : ''}
+              {unit ? ` ${unit}` : ""}
             </>
           )}
         </Button>
@@ -132,7 +128,7 @@ const PriceFilter = ({ column, columnFilterValue, title = 'Narx' }) => {
                 max={max}
                 value={range[0]}
                 onChange={handleInputChange(0)}
-                className={`h-8 w-24${unit ? 'pr-8' : ''} text-foreground`}
+                className={`h-8 w-24${unit ? "pr-8" : ""} text-foreground`}
                 aria-label={`Minimum ${t(title)}`}
                 tabIndex={0}
               />
@@ -155,7 +151,7 @@ const PriceFilter = ({ column, columnFilterValue, title = 'Narx' }) => {
                 max={max}
                 value={range[1]}
                 onChange={handleInputChange(1)}
-                className={`h-8 w-24${unit ? 'pr-8' : ''} text-foreground`}
+                className={`h-8 w-24${unit ? "pr-8" : ""} text-foreground`}
                 aria-label={`Maximum ${t(title)}`}
                 tabIndex={0}
               />
@@ -185,11 +181,11 @@ const PriceFilter = ({ column, columnFilterValue, title = 'Narx' }) => {
           onClick={handleReset}
           tabIndex={0}
         >
-          {t('Tozalash')}
+          {t("Tozalash")}
         </Button>
       </PopoverContent>
     </Popover>
-  )
-}
+  );
+};
 
-export default PriceFilter
+export default PriceFilter;

@@ -1,23 +1,23 @@
-import { DialogTitle } from '@radix-ui/react-dialog'
-import { getUrl } from 'utils/static.util'
-import { User, DollarSign, Percent } from 'lucide-react'
-import { useTranslation } from 'react-i18next'
-import { getCorrectName } from 'utils/getCorrectName.util'
-import { useSelector } from 'react-redux'
+import { DialogTitle } from "@radix-ui/react-dialog";
+import { getUrl } from "utils/static.util";
+import { User, DollarSign, Percent } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { getCorrectName } from "utils/getCorrectName.util";
+import { useSelector } from "react-redux";
 
 const PlayerPhoto = ({ currentPlayer, position }) => {
-  const { t } = useTranslation()
-  const { lang } = useSelector((store) => store.systemLanguage)
+  const { t } = useTranslation();
+  const { lang } = useSelector((store) => store.systemLanguage);
 
   return (
     <section className="flex gap-2">
       <div className="size-24 shrink-0 sm:size-32 lg:size-36">
         <img
-          src={getUrl(currentPlayer?.image) || ''}
+          src={getUrl(currentPlayer?.image) || ""}
           alt="player image"
           loading="lazy"
           onError={(e) =>
-            (e.currentTarget.src = '/images/placeholder-user.webp')
+            (e.currentTarget.src = "/images/placeholder-user.webp")
           }
           className="h-full w-full rounded-lg object-cover object-center shadow-md"
         />
@@ -33,13 +33,13 @@ const PlayerPhoto = ({ currentPlayer, position }) => {
           </DialogTitle>
           <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
             <img
-              src={getUrl(currentPlayer?.club?.logo_img) || ''}
+              src={getUrl(currentPlayer?.club?.logo_img) || ""}
               alt="home club"
               width={20}
               height={20}
               draggable={false}
               loading="lazy"
-              onError={(e) => (e.currentTarget.src = '/icons/football.svg')}
+              onError={(e) => (e.currentTarget.src = "/icons/football.svg")}
               className="bg-secondary size-5 rounded-full md:size-6 lg:size-7"
             />
             <p className="text-foreground text-sm font-medium md:text-base">
@@ -59,40 +59,40 @@ const PlayerPhoto = ({ currentPlayer, position }) => {
           <SmallerStat
             icon={<DollarSign className="size-4" />}
             value={currentPlayer?.price}
-            label={t('Narx')}
+            label={t("Narx")}
           />
           <SmallerStat
             icn={<User className="size-4" />}
             value={currentPlayer?.point}
-            label={t('Ochko')}
+            label={t("Ochko")}
           />
           <SmallerStat
             icon={<Percent className="size-4" />}
             value={`${currentPlayer?.percentage}%`}
-            label={t('Sotib Olgan')}
+            label={t("Sotib Olgan")}
           />
         </div>
         <div className="hidden grid-cols-3 gap-2 sm:grid">
           <Stat
             icon={<DollarSign className="size-4" />}
             value={currentPlayer?.price}
-            label={t('Narx')}
+            label={t("Narx")}
           />
           <Stat
             icon={<User className="size-4" />}
             value={currentPlayer?.point}
-            label={t('Ochko')}
+            label={t("Ochko")}
           />
           <Stat
             icon={<Percent className="size-4" />}
             value={`${currentPlayer?.percentage}%`}
-            label={t('Sotib Olgan')}
+            label={t("Sotib Olgan")}
           />
         </div>
       </section>
     </section>
-  )
-}
+  );
+};
 
 const Stat = ({ icon, value, label }) => (
   <div className="bg-card flex items-center gap-1.5 rounded-md p-1.5 text-xs sm:p-2 sm:text-sm">
@@ -104,13 +104,13 @@ const Stat = ({ icon, value, label }) => (
       <p className="text-muted-foreground text-xs">{label}</p>
     </div>
   </div>
-)
+);
 
 const SmallerStat = ({ value, label }) => (
   <div className="bg-cardy-1 xs:py-2 flex items-center justify-between gap-1 rounded-md text-xs">
     <p className="text-3xs text-muted-foreground leading-tight">{label}</p>
     <p className="text-foreground leading-tight font-semibold">{value ?? 0}</p>
   </div>
-)
+);
 
-export default PlayerPhoto
+export default PlayerPhoto;

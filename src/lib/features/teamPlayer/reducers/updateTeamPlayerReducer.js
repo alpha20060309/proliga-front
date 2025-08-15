@@ -1,6 +1,6 @@
-import { PLAYER_POSITION } from 'utils/player.util';
-import { toast } from 'sonner';
-import { DEFAULT_SAME_TEAM_PLAYERS } from 'utils/config.global';
+import { PLAYER_POSITION } from "utils/player.util";
+import { toast } from "sonner";
+import { DEFAULT_SAME_TEAM_PLAYERS } from "utils/config.global";
 
 export const updateTeamPlayerReducer = (state, action) => {
   const {
@@ -36,7 +36,7 @@ export const updateTeamPlayerReducer = (state, action) => {
     ];
 
     allPlayers.forEach((p) => {
-      const clubId = p?.club?.id ?? '';
+      const clubId = p?.club?.id ?? "";
       if (p.name) {
         duplicatesMap[clubId] = (duplicatesMap[clubId] || 0) + 1;
       }
@@ -69,9 +69,11 @@ export const updateTeamPlayerReducer = (state, action) => {
   // --- Start of Validation and Logic ---
 
   // 1. Check if the player is already in the team
-  const isPlayerAlreadyInTeam = teamConcat.some((p) => p.player_id === player.id);
+  const isPlayerAlreadyInTeam = teamConcat.some(
+    (p) => p.player_id === player.id,
+  );
   if (isPlayerAlreadyInTeam) {
-    toast.warning(t('Ushbu oyinchi allaqachon oyinda!'));
+    toast.warning(t("Ushbu oyinchi allaqachon oyinda!"));
     return state;
   }
 
@@ -82,16 +84,16 @@ export const updateTeamPlayerReducer = (state, action) => {
 
   // 2. Check if adding this player exceeds the max players from the same club
   if (currentDuplicatesMap[newPlayerClubId] === max_same_team_players) {
-    toast.warning(t('Max players count reached from the same club!'));
+    toast.warning(t("Max players count reached from the same club!"));
     return { ...state, transferModal: false };
   }
 
   if (currentDuplicatesMap[newPlayerClubId] >= maxPlayersFromOneTeam) {
     toast.warning(
       t("Ushbu klubdan $ ta oyinchi qo'shib bo'lmaydi!").replace(
-        '$',
-        maxPlayersFromOneTeam
-      )
+        "$",
+        maxPlayersFromOneTeam,
+      ),
     );
     return {
       ...state,
@@ -106,16 +108,16 @@ export const updateTeamPlayerReducer = (state, action) => {
 
   switch (player.position) {
     case PLAYER_POSITION.GOA:
-      targetPositionArrayName = 'GOA';
+      targetPositionArrayName = "GOA";
       break;
     case PLAYER_POSITION.DEF:
-      targetPositionArrayName = 'DEF';
+      targetPositionArrayName = "DEF";
       break;
     case PLAYER_POSITION.MID:
-      targetPositionArrayName = 'MID';
+      targetPositionArrayName = "MID";
       break;
     case PLAYER_POSITION.STR:
-      targetPositionArrayName = 'STR';
+      targetPositionArrayName = "STR";
       break;
     default:
       // Should not happen if PLAYER_POSITION is exhaustive
@@ -124,7 +126,8 @@ export const updateTeamPlayerReducer = (state, action) => {
 
   const currentPlayersInPosition = updatedState[targetPositionArrayName];
   const emptyPlayerInPosition = currentPlayersInPosition.find((p) => !p.name);
-  const playersCountInPosition = updatedState.playersCount[targetPositionArrayName];
+  const playersCountInPosition =
+    updatedState.playersCount[targetPositionArrayName];
 
   // Logic for adding a player to an empty slot
   // Ensure there's an empty slot and the position's capacity isn't exceeded

@@ -1,11 +1,11 @@
-'use client'
+"use client";
 
-import { Provider } from 'react-redux'
-import store from 'lib/store.global'
-import { memo } from 'react'
+import { Provider } from "react-redux";
+import store from "lib/store.global";
+import { memo } from "react";
 
 const ReduxProvider = ({ children }) => {
-  return <Provider store={store}>{children}</Provider>
-}
+  return <Provider store={store}>{children}</Provider>;
+};
 
-export default memo(ReduxProvider)
+export default memo(ReduxProvider);

@@ -1,24 +1,24 @@
-import WalletPaymentOption from './Wallet'
-import ClickUpPaymentOption from './ClickUp'
-import PaymePaymentOption from './Payme'
-import { useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import RefillBalance from 'shared/RefillBalanceModal'
-import { useSelector } from 'react-redux'
-import { CONFIG_KEY } from 'utils/config.util'
-import { selectSystemConfig } from 'lib/features/systemConfig/systemConfig.selector'
+import WalletPaymentOption from "./Wallet";
+import ClickUpPaymentOption from "./ClickUp";
+import PaymePaymentOption from "./Payme";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import RefillBalance from "shared/RefillBalanceModal";
+import { useSelector } from "react-redux";
+import { CONFIG_KEY } from "utils/config.util";
+import { selectSystemConfig } from "lib/features/systemConfig/systemConfig.selector";
 
 const PaymentOptions = ({ paymentOption, setPaymentOption }) => {
-  const { t } = useTranslation()
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const active = 'border-accent bg-background'
-  const passive = 'border-muted-foreground hover:border-accent/80'
-  const config = useSelector(selectSystemConfig)
+  const { t } = useTranslation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const active = "border-accent bg-background";
+  const passive = "border-muted-foreground hover:border-accent/80";
+  const config = useSelector(selectSystemConfig);
 
   const checkout_payme =
-    config[CONFIG_KEY.checkout_payme]?.value.toLowerCase() === 'true' || null
+    config[CONFIG_KEY.checkout_payme]?.value.toLowerCase() === "true" || null;
   const checkout_click =
-    config[CONFIG_KEY.checkout_click]?.value.toLowerCase() === 'true' || null
+    config[CONFIG_KEY.checkout_click]?.value.toLowerCase() === "true" || null;
 
   return (
     <div className="mt-2 mb-4">
@@ -60,7 +60,7 @@ const PaymentOptions = ({ paymentOption, setPaymentOption }) => {
         setIsModalOpen={setIsModalOpen}
       />
     </div>
-  )
-}
+  );
+};
 
-export default PaymentOptions
+export default PaymentOptions;

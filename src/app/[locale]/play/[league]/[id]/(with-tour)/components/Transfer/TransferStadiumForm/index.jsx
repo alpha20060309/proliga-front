@@ -1,171 +1,175 @@
-import { useSelector, useDispatch } from 'react-redux'
-import { toast } from 'sonner'
-import { useEffect, useMemo } from 'react'
-import { useUpdateTeamPlayers } from 'hooks/transfer/useUpdateTeamPlayers'
-import { setCaptain } from 'lib/features/teamPlayer/teamPlayer.slice'
-import { useState } from 'react'
-import { useUpdateTeam } from 'hooks/transfer/useUpdateTeam'
-import { setTab } from 'lib/features/tour/tour.slice'
-import { TABS } from 'utils/tabs.util'
-import { revertTeamPlayers } from 'lib/features/teamPlayer/teamPlayer.slice'
-import { useTranslation } from 'react-i18next'
-import { useUpdateTourTeam } from 'hooks/transfer/useUpdateTourTeam'
-import { useAutoGenerateTeamPlayers } from 'hooks/transfer/useAutoGenerateTeamPlayers'
+import { useSelector, useDispatch } from "react-redux";
+import { toast } from "sonner";
+import { useEffect, useMemo } from "react";
+import { useUpdateTeamPlayers } from "hooks/transfer/useUpdateTeamPlayers";
+import { setCaptain } from "lib/features/teamPlayer/teamPlayer.slice";
+import { useState } from "react";
+import { useUpdateTeam } from "hooks/transfer/useUpdateTeam";
+import { setTab } from "lib/features/tour/tour.slice";
+import { TABS } from "utils/tabs.util";
+import { revertTeamPlayers } from "lib/features/teamPlayer/teamPlayer.slice";
+import { useTranslation } from "react-i18next";
+import { useUpdateTourTeam } from "hooks/transfer/useUpdateTourTeam";
+import { useAutoGenerateTeamPlayers } from "hooks/transfer/useAutoGenerateTeamPlayers";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectValue,
-} from 'components/ui/select'
-import { Button } from 'components/ui/button'
-import { setTransferModal } from 'lib/features/currentTeam/currentTeam.slice'
-import { CONFIG_KEY } from 'utils/config.util'
+} from "components/ui/select";
+import { Button } from "components/ui/button";
+import { setTransferModal } from "lib/features/currentTeam/currentTeam.slice";
+import { CONFIG_KEY } from "utils/config.util";
 import {
   selectPrevTeam,
   selectTeamConcat,
-} from 'lib/features/teamPlayer/teamPlayer.selector'
-import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
-import { selectCurrentTourTeam } from 'lib/features/tourTeam/tourTeam.selector'
-import { selectCurrentTour } from 'lib/features/tour/tour.selector'
-import { selectCurrentCompetition } from 'lib/features/competition/competition.selector'
-import { selectUser } from 'lib/features/auth/auth.selector'
-import { selectPlayers } from 'lib/features/player/player.selector'
-import { getCorrectName } from 'utils/getCorrectName.util'
-import { selectSystemConfig } from 'lib/features/systemConfig/systemConfig.selector'
-import { Loader2, Undo2, Compass } from 'lucide-react'
-import { TOUR_STATUS } from 'utils/tour.util'
+} from "lib/features/teamPlayer/teamPlayer.selector";
+import { selectCurrentTeam } from "lib/features/currentTeam/currentTeam.selector";
+import { selectCurrentTourTeam } from "lib/features/tourTeam/tourTeam.selector";
+import { selectCurrentTour } from "lib/features/tour/tour.selector";
+import { selectCurrentCompetition } from "lib/features/competition/competition.selector";
+import { selectUser } from "lib/features/auth/auth.selector";
+import { selectPlayers } from "lib/features/player/player.selector";
+import { getCorrectName } from "utils/getCorrectName.util";
+import { selectSystemConfig } from "lib/features/systemConfig/systemConfig.selector";
+import { Loader2, Undo2, Compass } from "lucide-react";
+import { TOUR_STATUS } from "utils/tour.util";
 import {
   StadiumSelectTrigger,
   StadiumSaveButton,
-} from 'components/Game/Stadium'
-import { useMetrica } from 'next-yandex-metrica'
-import { analytics } from 'utils/analytics.util'
-import { validTeamStructure } from 'utils/validTeamStructure.util'
-import { validPlayers } from 'utils/validPlayers.util'
-import { currentFormation } from 'utils/currentFormation.util'
+} from "components/Game/Stadium";
+import { useMetrica } from "next-yandex-metrica";
+import { analytics } from "utils/analytics.util";
+import { validTeamStructure } from "utils/validTeamStructure.util";
+import { validPlayers } from "utils/validPlayers.util";
+import { currentFormation } from "utils/currentFormation.util";
 
 const TransferStadiumForm = () => {
-  const { t } = useTranslation()
-  const { reachGoal } = useMetrica()
-  const dispatch = useDispatch()
-  const teamConcat = useSelector(selectTeamConcat)
-  const currentCompetition = useSelector(selectCurrentCompetition)
-  const user = useSelector(selectUser)
-  const currentTeam = useSelector(selectCurrentTeam)
-  const currentTour = useSelector(selectCurrentTour)
-  const players = useSelector(selectPlayers)
-  const currentTourTeam = useSelector(selectCurrentTourTeam)
-  const { playersCount, teamPrice } = useSelector((state) => state.teamPlayer)
-  const prevTeam = useSelector(selectPrevTeam)
-  const { lang } = useSelector((state) => state.systemLanguage)
-  const config = useSelector(selectSystemConfig)
+  const { t } = useTranslation();
+  const { reachGoal } = useMetrica();
+  const dispatch = useDispatch();
+  const teamConcat = useSelector(selectTeamConcat);
+  const currentCompetition = useSelector(selectCurrentCompetition);
+  const user = useSelector(selectUser);
+  const currentTeam = useSelector(selectCurrentTeam);
+  const currentTour = useSelector(selectCurrentTour);
+  const players = useSelector(selectPlayers);
+  const currentTourTeam = useSelector(selectCurrentTourTeam);
+  const { playersCount, teamPrice } = useSelector((state) => state.teamPlayer);
+  const prevTeam = useSelector(selectPrevTeam);
+  const { lang } = useSelector((state) => state.systemLanguage);
+  const config = useSelector(selectSystemConfig);
 
-  const [teamCreateBtns, toggleTeamCreateBtns] = useState(false)
+  const [teamCreateBtns, toggleTeamCreateBtns] = useState(false);
 
   const transfer_show_modals =
-    config[CONFIG_KEY.transfer_show_modals]?.value?.toLowerCase() === 'true'
+    config[CONFIG_KEY.transfer_show_modals]?.value?.toLowerCase() === "true";
   const {
     updateTeamPlayers,
     isLoading: playersLoading,
     error: playersError,
-  } = useUpdateTeamPlayers()
+  } = useUpdateTeamPlayers();
   const {
     updateTourTeam,
     isLoading: tourTeamLoading,
     error: tourTeamError,
-  } = useUpdateTourTeam()
+  } = useUpdateTourTeam();
   const {
     generateTeamPlayers,
     isLoading: teamPlayersLoading,
     error: teamPlayersError,
-  } = useAutoGenerateTeamPlayers()
+  } = useAutoGenerateTeamPlayers();
   const {
     updateTeam,
     isLoading: teamLoading,
     error: teamError,
-  } = useUpdateTeam()
+  } = useUpdateTeam();
 
   const isLoading = useMemo(
     () =>
       playersLoading || tourTeamLoading || teamPlayersLoading || teamLoading,
-    [playersLoading, tourTeamLoading, teamPlayersLoading, teamLoading]
-  )
+    [playersLoading, tourTeamLoading, teamPlayersLoading, teamLoading],
+  );
 
   const error = useMemo(
     () => playersError || tourTeamError || teamPlayersError || teamError,
-    [playersError, tourTeamError, teamPlayersError, teamError]
-  )
+    [playersError, tourTeamError, teamPlayersError, teamError],
+  );
 
   const handleAutoGenerateTeamPlayers = async () => {
-    await generateTeamPlayers({ team_id: currentTeam.id, players, currentTeam })
-  }
+    await generateTeamPlayers({
+      team_id: currentTeam.id,
+      players,
+      currentTeam,
+    });
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const prevTeamPlayersId = []
-    const curTeamPlayersId = []
-    const captains = []
+    const prevTeamPlayersId = [];
+    const curTeamPlayersId = [];
+    const captains = [];
 
-    if (!validPlayers(teamConcat, t)) return
+    if (!validPlayers(teamConcat, t)) return;
 
-    prevTeam.forEach((p) => p.name && prevTeamPlayersId.push(p.player_id))
+    prevTeam.forEach((p) => p.name && prevTeamPlayersId.push(p.player_id));
 
     teamConcat.forEach((player) => {
-      player.is_captain && captains.push(player.player_id)
-      player.name && curTeamPlayersId.push(player.player_id)
-    })
+      player.is_captain && captains.push(player.player_id);
+      player.name && curTeamPlayersId.push(player.player_id);
+    });
 
     if (captains.length !== 1) {
-      toast.warning(t('Kapitan tanlanmagan'))
-      return
+      toast.warning(t("Kapitan tanlanmagan"));
+      return;
     }
 
     if ((currentTeam?.balance || 0) < teamPrice) {
-      toast.error(t('Balansingiz yetarli emas'))
-      return
+      toast.error(t("Balansingiz yetarli emas"));
+      return;
     }
 
-    if (!validTeamStructure(playersCount, t)) return
+    if (!validTeamStructure(playersCount, t)) return;
 
-    const formation = currentFormation(playersCount, t)
+    const formation = currentFormation(playersCount, t);
 
     if (!formation) {
-      toast.error(t('Jamoa formatsiyasi notogri'))
-      return
+      toast.error(t("Jamoa formatsiyasi notogri"));
+      return;
     }
 
     let difference = curTeamPlayersId.filter(
-      (x) => !prevTeamPlayersId.includes(x)
-    )
+      (x) => !prevTeamPlayersId.includes(x),
+    );
 
     const countOfTransfers =
-      (difference.length || 0) + currentTourTeam?.current_count_of_transfers
+      (difference.length || 0) + currentTourTeam?.current_count_of_transfers;
 
     if (
       currentTeam?.is_team_created &&
       currentTeam?.count_of_transfers < countOfTransfers
     ) {
-      toast.error(t('Siz limitdan oshiq transfer amalga oshiraolmaysiz'))
-      dispatch(revertTeamPlayers())
-      transfer_show_modals && dispatch(setTransferModal(true))
-      return
+      toast.error(t("Siz limitdan oshiq transfer amalga oshiraolmaysiz"));
+      dispatch(revertTeamPlayers());
+      transfer_show_modals && dispatch(setTransferModal(true));
+      return;
     }
 
     if (!currentTeam?.is_team_created) {
       await updateTeam({
         team_id: currentTeam.id,
         is_team_created: currentTeam?.is_team_created,
-      })
-      reachGoal(analytics.teamCreate)
+      });
+      reachGoal(analytics.teamCreate);
     } else {
       await updateTourTeam({
         team_id: currentTeam.id,
         tour_id: currentTour.id,
         count_of_transfers: countOfTransfers,
         formation,
-      })
-      reachGoal(analytics.teamUpdate)
+      });
+      reachGoal(analytics.teamUpdate);
     }
 
     await updateTeamPlayers({
@@ -174,22 +178,22 @@ const TransferStadiumForm = () => {
       tour_id: currentTour.id,
       user,
       currentCompetition,
-    })
+    });
 
     if (!error && !isLoading) {
-      dispatch(setTab(TABS.GameProfile))
-      toast.success(t('Jamoa muvaffaqiyatli yangilandi'))
+      dispatch(setTab(TABS.GameProfile));
+      toast.success(t("Jamoa muvaffaqiyatli yangilandi"));
     }
-  }
+  };
 
   useEffect(() => {
     if (currentTeam?.is_team_created === false) {
-      toggleTeamCreateBtns(true)
+      toggleTeamCreateBtns(true);
     }
-  }, [currentTeam])
+  }, [currentTeam]);
 
   if (currentTour?.status !== TOUR_STATUS.notStartedTransfer) {
-    return null
+    return null;
   }
 
   return (
@@ -200,11 +204,11 @@ const TransferStadiumForm = () => {
       <Select
         name="formation"
         id="formation"
-        value={teamConcat.find((player) => player.is_captain)?.player_id ?? ''}
+        value={teamConcat.find((player) => player.is_captain)?.player_id ?? ""}
         onValueChange={(value) => dispatch(setCaptain(value))}
       >
         <StadiumSelectTrigger>
-          <SelectValue placeholder={t('Kapitan tanlang')} />
+          <SelectValue placeholder={t("Kapitan tanlang")} />
         </StadiumSelectTrigger>
         <SelectContent>
           {teamConcat.map(
@@ -221,7 +225,7 @@ const TransferStadiumForm = () => {
                     ru: player?.player?.name_ru,
                   })}
                 </SelectItem>
-              )
+              ),
           )}
         </SelectContent>
       </Select>
@@ -242,7 +246,7 @@ const TransferStadiumForm = () => {
           variant="default"
           size="icon"
           onClick={() => dispatch(revertTeamPlayers())}
-          title={t('orqaga qaytish')}
+          title={t("orqaga qaytish")}
           className="bg-card text-foreground hover:border-primary border-border hover:text-accent-foreground flex size-10 items-center justify-center gap-1 border transition-all"
         >
           <Undo2 className="size-6" />
@@ -252,11 +256,11 @@ const TransferStadiumForm = () => {
         {isLoading ? (
           <Loader2 className="text-foreground mx-auto size-6 animate-spin" />
         ) : (
-          t('Saqlash')
+          t("Saqlash")
         )}
       </StadiumSaveButton>
     </form>
-  )
-}
+  );
+};
 
-export default TransferStadiumForm
+export default TransferStadiumForm;

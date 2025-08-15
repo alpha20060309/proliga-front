@@ -1,15 +1,15 @@
-import { supabase } from 'lib/supabaseClient'
-import { useState, useCallback } from 'react'
-import { toast } from 'sonner'
-import { useTranslation } from 'react-i18next'
-import { useSession } from 'next-auth/react'
-import axios from 'axios'
+import { supabase } from "lib/supabaseClient";
+import { useState, useCallback } from "react";
+import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
+import { useSession } from "next-auth/react";
+import axios from "axios";
 
 export const useCreateUserTheme = () => {
-  const [error, setError] = useState(null)
-  const [isLoading, setIsLoading] = useState(false)
-  const { t } = useTranslation()
-  const { update } = useSession()
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const { t } = useTranslation();
+  const { update } = useSession();
 
   const createUserTheme = useCallback(
     async ({
@@ -18,38 +18,38 @@ export const useCreateUserTheme = () => {
       name_ru,
       dark_theme,
       light_theme,
-      cb = () => { },
+      cb = () => {},
     }) => {
       try {
-        setIsLoading(true)
-        setError('')
+        setIsLoading(true);
+        setError("");
 
         const res = await axios.post(
           // eslint-disable-next-line no-undef
-          process.env.NEXT_PUBLIC_URL + '/api/theme/set-user',
+          process.env.NEXT_PUBLIC_URL + "/api/theme/set-user",
           {
             user_id,
             dark_theme,
             light_theme,
-          }
-        )
+          },
+        );
 
         if (res.status !== 200) {
           setError(
             res.error instanceof Error
               ? res.error.message
-              : t('An unknown error occurred')
-          )
+              : t("An unknown error occurred"),
+          );
           toast.error(
             res.error instanceof Error
               ? res.error.message
-              : t('An unknown error occurred')
-          )
-          return
+              : t("An unknown error occurred"),
+          );
+          return;
         }
 
         const { data, error } = await supabase
-          .from('theme')
+          .from("theme")
           .insert({
             name,
             name_ru,
@@ -58,57 +58,57 @@ export const useCreateUserTheme = () => {
             light_theme,
           })
           .select()
-          .single()
+          .single();
 
         if (error) {
           setError(
             error instanceof Error
               ? error.message
-              : t('An unknown error occurred')
-          )
+              : t("An unknown error occurred"),
+          );
           toast.error(
             error instanceof Error
               ? error.message
-              : t('An unknown error occurred')
-          )
-          return
+              : t("An unknown error occurred"),
+          );
+          return;
         }
 
         const { error: userError } = await supabase
-          .from('user')
+          .from("user")
           .update({
             user_theme_id: data?.id,
             theme_id: null,
           })
-          .eq('id', user_id)
+          .eq("id", user_id);
 
         if (userError) {
-          setError(userError.message)
-          toast.error(userError.message)
-          return
+          setError(userError.message);
+          toast.error(userError.message);
+          return;
         }
 
-        cb()
+        cb();
         await update({
           user_theme_id: data?.id,
           theme_id: null,
-        })
+        });
       } catch (error) {
         setError(
           error instanceof Error
             ? error.message
-            : t('An unknown error occurred')
-        )
+            : t("An unknown error occurred"),
+        );
         toast.error(
           error instanceof Error
             ? error.message
-            : t('An unknown error occurred')
-        )
+            : t("An unknown error occurred"),
+        );
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
     },
-    [t, update]
-  )
-  return { createUserTheme, isLoading, error }
-}
+    [t, update],
+  );
+  return { createUserTheme, isLoading, error };
+};

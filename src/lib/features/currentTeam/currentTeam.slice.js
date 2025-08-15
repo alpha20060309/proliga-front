@@ -1,35 +1,35 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { currentTeamExtraReducer } from './currentTeam.extraReducer'
+import { createSlice } from "@reduxjs/toolkit";
+import { currentTeamExtraReducer } from "./currentTeam.extraReducer";
 
 const initialState = {
   currentTeam: {},
-  lastVisitedTeam: '',
+  lastVisitedTeam: "",
   balanceModal: false,
   transferModal: false,
   isLoading: false,
   error: null,
-}
+};
 
 const currentTeamSlice = createSlice({
-  name: 'currentTeam',
+  name: "currentTeam",
   initialState,
   reducers: {
     setLastVisitedTeam: (state, action) => {
-      state.lastVisitedTeam = action.payload
+      state.lastVisitedTeam = action.payload;
     },
     setIsTeamCreated: (state, action) => {
-      state.currentTeam.is_team_created = action.payload
+      state.currentTeam.is_team_created = action.payload;
     },
     setBalanceModal: (state, action) => {
-      state.balanceModal = action.payload
+      state.balanceModal = action.payload;
     },
     setTransferModal: (state, action) => {
-      state.transferModal = action.payload
+      state.transferModal = action.payload;
     },
     resetCurrentTeam: () => initialState,
   },
   extraReducers: currentTeamExtraReducer,
-})
+});
 
 export const {
   setLastVisitedTeam,
@@ -37,6 +37,6 @@ export const {
   setBalanceModal,
   setTransferModal,
   resetCurrentTeam,
-} = currentTeamSlice.actions
+} = currentTeamSlice.actions;
 
-export default currentTeamSlice.reducer
+export default currentTeamSlice.reducer;

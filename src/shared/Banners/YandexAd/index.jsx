@@ -1,7 +1,7 @@
-import Script from 'next/script'
+import Script from "next/script";
 
 export default function YandexAd({ blockId, type = null }) {
-  const renderToId = `yandex_rtb_${blockId}`
+  const renderToId = `yandex_rtb_${blockId}`;
 
   return (
     <div>
@@ -18,7 +18,7 @@ export default function YandexAd({ blockId, type = null }) {
                   renderTo: "${renderToId}",
                   async: true
                 };
-                if (${type ? `"${type}"` : 'null'}) {
+                if (${type ? `"${type}"` : "null"}) {
                   config.type = "${type}";
                 }
                 Ya.Context.AdvManager.render(config);
@@ -32,9 +32,9 @@ export default function YandexAd({ blockId, type = null }) {
             })(window, document, "yandexContextAsyncCallbacks");
           `,
         }}
-        onError={(e) => console.error('Yandex script failed to load:', e)}
+        onError={(e) => console.error("Yandex script failed to load:", e)}
       />
       <div id={renderToId}></div>
     </div>
-  )
+  );
 }

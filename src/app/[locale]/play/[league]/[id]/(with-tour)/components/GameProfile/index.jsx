@@ -1,15 +1,15 @@
-'use client'
+"use client";
 
-import ProfileStadiumForm from './ProfileStadiumForm'
-import ProfilePlayersStructure from './PlayersStructure'
-import GameBrief from './GameBrief'
-import PlayerInfo from './PlayerInfo'
-import { memo } from 'react'
-import { GameWrapper } from 'components/Game/Wrapper'
+import ProfileStadiumForm from "./ProfileStadiumForm";
+import ProfilePlayersStructure from "./PlayersStructure";
+import GameBrief from "./GameBrief";
+import PlayerInfo from "./PlayerInfo";
+import { memo } from "react";
+import { GameWrapper } from "components/Game/Wrapper";
 import {
   StadiumContainer,
   StadiumSectionWrapper,
-} from 'components/Game/Stadium'
+} from "components/Game/Stadium";
 
 const GameProfile = () => {
   return (
@@ -25,7 +25,7 @@ const GameProfile = () => {
       </GameWrapper>
       <PlayerInfo />
     </>
-  )
-}
+  );
+};
 
-export default memo(GameProfile)
+export default memo(GameProfile);

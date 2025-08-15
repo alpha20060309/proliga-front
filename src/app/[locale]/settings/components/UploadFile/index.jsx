@@ -1,13 +1,13 @@
-'use client'
+"use client";
 
 import {
   DialogContent,
   DialogTitle,
   Dialog,
   DialogDescription,
-} from 'components/ui/dialog'
-import { UppyUploader } from './Uploader'
-import { memo } from 'react'
+} from "components/ui/dialog";
+import { UppyUploader } from "./Uploader";
+import { memo } from "react";
 
 const UploadFile = ({ isModalOpen, setModalOpen }) => {
   return (
@@ -21,7 +21,7 @@ const UploadFile = ({ isModalOpen, setModalOpen }) => {
         <DialogDescription className="hidden">Upload Photos</DialogDescription>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default memo(UploadFile)
+export default memo(UploadFile);

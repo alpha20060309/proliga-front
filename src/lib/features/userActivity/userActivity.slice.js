@@ -1,17 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { userActivityExtraReducer } from './userActivity.extraReducer'
+import { createSlice } from "@reduxjs/toolkit";
+import { userActivityExtraReducer } from "./userActivity.extraReducer";
 
 const initialState = {
   activities: [],
   isLoading: false,
   count: 0,
   error: null,
-}
+};
 
 const userActivity = createSlice({
-  name: 'userActivity',
+  name: "userActivity",
   initialState,
   extraReducers: userActivityExtraReducer,
-})
+});
 
-export default userActivity.reducer
+export default userActivity.reducer;

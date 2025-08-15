@@ -1,57 +1,57 @@
-'use client'
+"use client";
 
-import React from 'react'
-import { useTheme } from 'next-themes'
+import React from "react";
+import { useTheme } from "next-themes";
 import {
   Accordion,
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from 'components/ui/accordion'
-import { colorKeys, toVarName } from 'utils/colors.util'
-import { useDispatch, useSelector } from 'react-redux'
-import { setLightTheme, setDarkTheme } from 'lib/features/theme/theme.slice'
-import { useTranslation } from 'react-i18next'
+} from "components/ui/accordion";
+import { colorKeys, toVarName } from "utils/colors.util";
+import { useDispatch, useSelector } from "react-redux";
+import { setLightTheme, setDarkTheme } from "lib/features/theme/theme.slice";
+import { useTranslation } from "react-i18next";
 import {
   selectDarkTheme,
   selectLightTheme,
-} from 'lib/features/theme/theme.selector'
+} from "lib/features/theme/theme.selector";
 
 const ColorModifier = () => {
-  const { resolvedTheme } = useTheme()
-  const { t } = useTranslation()
-  const dispatch = useDispatch()
-  const darkTheme = useSelector(selectDarkTheme)
-  const lightTheme = useSelector(selectLightTheme)
+  const { resolvedTheme } = useTheme();
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const darkTheme = useSelector(selectDarkTheme);
+  const lightTheme = useSelector(selectLightTheme);
 
   const handleChange = (key, color) => {
-    document.documentElement.style.setProperty(toVarName(key), color)
-    resolvedTheme === 'dark'
+    document.documentElement.style.setProperty(toVarName(key), color);
+    resolvedTheme === "dark"
       ? dispatch(
           setDarkTheme({
-            type: 'colors',
+            type: "colors",
             data: { ...darkTheme.colors, [key]: color },
-          })
+          }),
         )
       : dispatch(
           setLightTheme({
-            type: 'colors',
+            type: "colors",
             data: { ...lightTheme.colors, [key]: color },
-          })
-        )
-  }
+          }),
+        );
+  };
 
   const formatColor = (color) => {
     // If color is in shorthand format (e.g., #fd0), expand to full format
     if (/^#([0-9a-f]{3})$/i.test(color)) {
       return color
-        .split('')
+        .split("")
         .map((char) => char + char)
-        .join('')
-        .replace('##', '#')
+        .join("")
+        .replace("##", "#");
     }
-    return color || '#000000' // Ensure a default valid color string
-  }
+    return color || "#000000"; // Ensure a default valid color string
+  };
 
   const renderColorPicker = (key) => (
     <div
@@ -59,7 +59,7 @@ const ColorModifier = () => {
       className="flex items-center justify-between space-x-2 rounded-md bg-[#2D2D2D] p-2.5"
     >
       <label htmlFor={key} className="flex-1 text-xs text-[#B0B0B0] capitalize">
-        {t(key.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()))}
+        {t(key.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()))}
       </label>
       <div className="flex items-center space-x-2">
         {(darkTheme?.colors && Object.keys(darkTheme?.colors).length > 0) ||
@@ -69,29 +69,29 @@ const ColorModifier = () => {
               type="color"
               id={key}
               value={formatColor(
-                resolvedTheme === 'dark'
-                  ? darkTheme?.colors[key] || '#000000'
-                  : lightTheme?.colors[key] || '#000000'
+                resolvedTheme === "dark"
+                  ? darkTheme?.colors[key] || "#000000"
+                  : lightTheme?.colors[key] || "#000000",
               )}
               onChange={(e) => handleChange(key, e.target.value)}
               className="h-7 w-7 cursor-pointer appearance-none rounded-[4px] border-none bg-transparent p-0"
             />
             <span className="w-20 rounded-[4px] bg-[#353535] p-1 text-center font-mono text-xs text-[#A0A0A0] select-all">
               {formatColor(
-                resolvedTheme === 'dark'
-                  ? darkTheme?.colors[key] || '#000000'
-                  : lightTheme?.colors[key] || '#000000'
+                resolvedTheme === "dark"
+                  ? darkTheme?.colors[key] || "#000000"
+                  : lightTheme?.colors[key] || "#000000",
               )}
             </span>
           </>
         ) : (
           <span className="w-20 rounded-[4px] bg-[#353535] p-1 text-center font-mono text-xs text-[#A0A0A0] select-all">
-            {t('No color found')}
+            {t("No color found")}
           </span>
         )}
       </div>
     </div>
-  )
+  );
 
   return (
     <Accordion
@@ -114,7 +114,7 @@ const ColorModifier = () => {
         </AccordionItem>
       ))}
     </Accordion>
-  )
-}
+  );
+};
 
-export default ColorModifier
+export default ColorModifier;

@@ -1,6 +1,6 @@
-import { createDraftSafeSelector } from '@reduxjs/toolkit'
+import { createDraftSafeSelector } from "@reduxjs/toolkit";
 
 export const selectNotifications = createDraftSafeSelector(
   (state) => state.systemNotifications,
-  (systemNotifications) => systemNotifications.notifications
-)
+  (systemNotifications) => systemNotifications.notifications,
+);
