@@ -14,7 +14,7 @@ export const useUpdateTourTeam = () => {
   const { t } = useTranslation();
 
   const updateTourTeam = useCallback(
-    async ({ team_id, tour_id, count_of_transfers, formation }) => {
+    async ({ team_id, tour_id, count_of_transfers, formation, tours }) => {
       setIsLoading(false);
       setError(null);
 
@@ -36,9 +36,31 @@ export const useUpdateTourTeam = () => {
       try {
         setIsLoading(true);
 
+        const { error: tourTeamError } = await supabase
+          .from("tour_team")
+          .update({ formation })
+          .eq("team_id", team_id)
+          .in("tour_id", tours)
+          .is("deleted_at", null)
+          .select();
+
+        if (tourTeamError) {
+          setError(
+            tourTeamError instanceof Error
+              ? tourTeamError.message
+              : t("An unknown error occurred"),
+          );
+          toast.error(
+            tourTeamError instanceof Error
+              ? tourTeamError.message
+              : t("An unknown error occurred"),
+          );
+          return;
+        }
+
         const { data, error } = await supabase
           .from("tour_team")
-          .update({ current_count_of_transfers: count_of_transfers, formation })
+          .update({ current_count_of_transfers: count_of_transfers })
           .eq("team_id", team_id)
           .eq("tour_id", tour_id)
           .is("deleted_at", null)

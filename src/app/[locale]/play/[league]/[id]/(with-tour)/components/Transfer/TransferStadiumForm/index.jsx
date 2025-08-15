@@ -43,6 +43,7 @@ import { analytics } from "utils/analytics.util";
 import { validTeamStructure } from "utils/validTeamStructure.util";
 import { validPlayers } from "utils/validPlayers.util";
 import { currentFormation } from "utils/currentFormation.util";
+import { selectTours } from "lib/features/tour/tour.selector";
 
 const TransferStadiumForm = () => {
   const { t } = useTranslation();
@@ -59,6 +60,7 @@ const TransferStadiumForm = () => {
   const prevTeam = useSelector(selectPrevTeam);
   const { lang } = useSelector((state) => state.systemLanguage);
   const config = useSelector(selectSystemConfig);
+  const tours = useSelector(selectTours);
 
   const [teamCreateBtns, toggleTeamCreateBtns] = useState(false);
 
@@ -156,6 +158,21 @@ const TransferStadiumForm = () => {
       return;
     }
 
+    const tourTeamTourOrder = tours.find(
+      (tour) => tour.id === currentTour.id,
+    )?.order;
+
+    if (!tourTeamTourOrder) {
+      toast.error(t("Tur ma'lumotlari topilmadi"));
+      return;
+    }
+
+    const filteredTours = tours
+      .filter((tour) => tour.order >= tourTeamTourOrder)
+      .map((t) => t.id);
+    console.log(tourTeamTourOrder);
+    console.log(filteredTours);
+
     if (!currentTeam?.is_team_created) {
       await updateTeam({
         team_id: currentTeam.id,
@@ -168,6 +185,7 @@ const TransferStadiumForm = () => {
         tour_id: currentTour.id,
         count_of_transfers: countOfTransfers,
         formation,
+        tours: filteredTours,
       });
       reachGoal(analytics.teamUpdate);
     }
