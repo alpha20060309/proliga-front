@@ -15,6 +15,7 @@ import { getCorrectName } from "utils/getCorrectName.util";
 import { memo } from "react";
 import MatchStatus from "./Status";
 import MatchTeamDisplay from "./TeamDisplay";
+import { MATCH_STATUS } from "utils/match.util";
 
 const Match = ({ match }) => {
   const dispatch = useDispatch();
@@ -57,16 +58,18 @@ const Match = ({ match }) => {
           homeScore={homeScore}
           awayScore={awayScore}
         />
-        <TooltipProvider>
-          <Tooltip className="m-0 p-0">
-            <TooltipTrigger className="text-muted-foreground text-xs leading-3 font-medium tracking-wider">
-              <time>{date}</time>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>{t("Match start time")}</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        {match?.status === MATCH_STATUS.NOT_STARTED && (
+          <TooltipProvider>
+            <Tooltip className="m-0 p-0">
+              <TooltipTrigger className="text-muted-foreground text-xs leading-3 font-medium tracking-wider">
+                <time>{date}</time>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{t("Match start time")}</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        )}
       </div>
       <MatchTeamDisplay
         name={getCorrectName({

@@ -10,7 +10,7 @@ const MatchStatus = ({ status, homeScore, awayScore }) => {
       return (
         <Badge
           variant="secondary"
-          className="bg-card text-2xs text-foreground py-px font-normal sm:text-xs"
+          className="bg-card text-2xs text-foreground py-px font-normal sm:text-xs "
         >
           {t("Boshlanmagan")}
         </Badge>
@@ -19,7 +19,7 @@ const MatchStatus = ({ status, homeScore, awayScore }) => {
       return (
         <Badge
           variant="default"
-          className="text-2xs text-foreground animate-pulse py-px font-normal sm:text-xs"
+          className="text-xs text-accent-foreground animate-pulse py-px font-normal sm:text-sm"
         >
           {homeScore} - {awayScore}
         </Badge>
@@ -28,7 +28,7 @@ const MatchStatus = ({ status, homeScore, awayScore }) => {
       return (
         <Badge
           variant="outline"
-          className="text-2xs text-foreground py-px font-normal sm:text-xs"
+          className="text-2xs text-foreground py-px font-normal sm:text-xs md:text-sm"
         >
           {homeScore} - {awayScore}
         </Badge>
