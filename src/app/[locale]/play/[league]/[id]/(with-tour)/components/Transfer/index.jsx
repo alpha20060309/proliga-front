@@ -1,13 +1,13 @@
-import PlayersStructure from './PlayersStructure'
-import PlayersTable from './PlayersTable'
-import TransferStadiumForm from './TransferStadiumForm'
-import PlayerTransfer from './PlayerTransfer'
-import { memo } from 'react'
-import { GameWrapper } from 'components/Game/Wrapper'
+import PlayersStructure from "./PlayersStructure";
+import PlayersTable from "./PlayersTable";
+import TransferStadiumForm from "./TransferStadiumForm";
+import PlayerTransfer from "./PlayerTransfer";
+import { memo } from "react";
+import { GameWrapper } from "components/Game/Wrapper";
 import {
   StadiumContainer,
   StadiumSectionWrapper,
-} from 'components/Game/Stadium'
+} from "components/Game/Stadium";
 
 const Transfer = () => {
   return (
@@ -23,7 +23,7 @@ const Transfer = () => {
       </GameWrapper>
       <PlayerTransfer />
     </>
-  )
-}
+  );
+};
 
-export default memo(Transfer)
+export default memo(Transfer);

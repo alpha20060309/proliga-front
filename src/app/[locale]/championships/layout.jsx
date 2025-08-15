@@ -1,5 +1,5 @@
-import Gutter from 'components/Gutter'
-import Image from 'next/image'
+import Gutter from "components/Gutter";
+import Image from "next/image";
 
 const ChampionshipsLayout = ({ children }) => {
   return (
@@ -17,7 +17,7 @@ const ChampionshipsLayout = ({ children }) => {
       </div>
       <Gutter>{children}</Gutter>
     </main>
-  )
-}
+  );
+};
 
-export default ChampionshipsLayout
+export default ChampionshipsLayout;

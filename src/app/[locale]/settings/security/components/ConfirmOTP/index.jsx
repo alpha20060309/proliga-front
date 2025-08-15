@@ -1,22 +1,22 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { InputOTP, InputOTPGroup, InputOTPSlot } from 'components/ui/input-otp'
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "components/ui/input-otp";
 import {
   DialogContent,
   DialogTitle,
   Dialog,
   DialogDescription,
-} from 'components/ui/dialog'
-import { useConfirmOTP } from 'hooks/auth/useConfirmOTP'
-import { useSelector } from 'react-redux'
-import ResendOTP from './ResendOTP'
-import { useSendOTP } from 'hooks/auth/useSendOTP'
-import { Button } from 'components/ui/button'
-import { toast } from 'sonner'
-import { selectUser } from 'lib/features/auth/auth.selector'
-import { Loader2 } from 'lucide-react'
+} from "components/ui/dialog";
+import { useConfirmOTP } from "hooks/auth/useConfirmOTP";
+import { useSelector } from "react-redux";
+import ResendOTP from "./ResendOTP";
+import { useSendOTP } from "hooks/auth/useSendOTP";
+import { Button } from "components/ui/button";
+import { toast } from "sonner";
+import { selectUser } from "lib/features/auth/auth.selector";
+import { Loader2 } from "lucide-react";
 
 const ConfirmOTPModal = ({
   isModalOpen,
@@ -26,20 +26,20 @@ const ConfirmOTPModal = ({
   phone,
   is_update = false,
 }) => {
-  const [code, setCode] = useState('')
-  const { t } = useTranslation()
-  const { confirmOTP, isLoading: confirmLoading } = useConfirmOTP()
-  const { isLoading: sendLoading } = useSendOTP()
-  const user = useSelector(selectUser)
+  const [code, setCode] = useState("");
+  const { t } = useTranslation();
+  const { confirmOTP, isLoading: confirmLoading } = useConfirmOTP();
+  const { isLoading: sendLoading } = useSendOTP();
+  const user = useSelector(selectUser);
 
-  const isLoading = confirmLoading || sendLoading
+  const isLoading = confirmLoading || sendLoading;
 
   const handleConfirm = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (code.length !== 6) {
-      toast.warning('Kod 6 ta harf bolishi shart!')
-      return
+      toast.warning("Kod 6 ta harf bolishi shart!");
+      return;
     }
     if (defaultHook) {
       await confirmOTP({
@@ -48,15 +48,15 @@ const ConfirmOTPModal = ({
         phone,
         is_update,
         cb: () => {
-          setCode('')
-          setModalOpen(false)
-          cb(true)
+          setCode("");
+          setModalOpen(false);
+          cb(true);
         },
-      })
+      });
     } else {
-      cb(code)
+      cb(code);
     }
-  }
+  };
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setModalOpen}>
@@ -67,10 +67,10 @@ const ConfirmOTPModal = ({
         >
           <div>
             <DialogTitle className="text-lg font-semibold tracking-tight">
-              {t('SMS Kod Tasdiqlash')}
+              {t("SMS Kod Tasdiqlash")}
             </DialogTitle>
             <DialogDescription className="text-muted-foreground mt-1 text-sm">
-              {t('Telefon raqamingizga yuborilgan 6 xonali kodni kiriting.')}
+              {t("Telefon raqamingizga yuborilgan 6 xonali kodni kiriting.")}
             </DialogDescription>
           </div>
 
@@ -101,13 +101,13 @@ const ConfirmOTPModal = ({
             {isLoading ? (
               <Loader2 className="text-primary-foreground size-5 animate-spin" />
             ) : (
-              t('Tasdiqlash')
+              t("Tasdiqlash")
             )}
           </Button>
         </form>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default ConfirmOTPModal
+export default ConfirmOTPModal;

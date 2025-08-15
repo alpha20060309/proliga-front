@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { authExtraReducer } from './auth.extraReducer'
+import { createSlice } from "@reduxjs/toolkit";
+import { authExtraReducer } from "./auth.extraReducer";
 
 const initialState = {
   fingerprint: null,
@@ -9,33 +9,33 @@ const initialState = {
   geoError: null,
   geoLoading: false,
   phoneModal: false,
-}
+};
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
     setUserTable: (state, action) => {
-      state.user = action.payload
+      state.user = action.payload;
     },
     setUserPhoto: (state, action) => {
-      state.user.image = action.payload
+      state.user.image = action.payload;
     },
     setFingerprint: (state, action) => {
-      state.fingerprint = action.payload
+      state.fingerprint = action.payload;
     },
     setGeo: (state, action) => {
-      state.geo = action.payload
+      state.geo = action.payload;
     },
     setAgent: (state, action) => {
-      state.agent = action.payload
+      state.agent = action.payload;
     },
     setPhoneModal: (state, action) => {
-      state.phoneModal = action.payload
+      state.phoneModal = action.payload;
     },
   },
   extraReducers: authExtraReducer,
-})
+});
 
 export const {
   setUserAuth,
@@ -45,6 +45,6 @@ export const {
   setGeo,
   setAgent,
   setPhoneModal,
-} = authSlice.actions
+} = authSlice.actions;
 
-export default authSlice.reducer
+export default authSlice.reducer;

@@ -1,12 +1,12 @@
-import { getCorrectName } from 'utils/getCorrectName.util'
-import { getPage } from 'actions/getHTMLPage.action'
+import { getCorrectName } from "utils/getCorrectName.util";
+import { getPage } from "actions/getHTMLPage.action";
 
 const UserAgreement = async ({ params }) => {
-  const { locale } = await params
-  const { data, error } = await getPage('user-agreement')
+  const { locale } = await params;
+  const { data, error } = await getPage("user-agreement");
 
   if (error) {
-    return <div>{error?.message}</div>
+    return <div>{error?.message}</div>;
   }
 
   return (
@@ -16,7 +16,7 @@ const UserAgreement = async ({ params }) => {
         __html: getCorrectName({ lang: locale, uz: data?.uz, ru: data?.ru }),
       }}
     />
-  )
-}
+  );
+};
 
-export default UserAgreement
+export default UserAgreement;

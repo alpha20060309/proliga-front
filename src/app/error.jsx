@@ -1,46 +1,46 @@
-'use client'
-import { Link, useTransitionRouter } from 'next-view-transitions'
-import { Button } from 'components/ui/button'
-import { Card } from 'components/ui/card'
-import { useEffect } from 'react'
-import './globals.css'
+"use client";
+import { Link, useTransitionRouter } from "next-view-transitions";
+import { Button } from "components/ui/button";
+import { Card } from "components/ui/card";
+import { useEffect } from "react";
+import "./globals.css";
 
 export default function Error({ reset }) {
-  const router = useTransitionRouter()
+  const router = useTransitionRouter();
 
   useEffect(() => {
     if (
-      typeof window === 'undefined' ||
-      typeof navigator === 'undefined' ||
+      typeof window === "undefined" ||
+      typeof navigator === "undefined" ||
       !router
     ) {
       console.warn(
-        'Required objects (window, navigator, or router) are not available'
-      )
-      return
+        "Required objects (window, navigator, or router) are not available",
+      );
+      return;
     }
 
     const handleOffline = () => {
-      if (typeof navigator.onLine === 'undefined') {
-        console.warn('navigator.onLine is not available')
-        return
+      if (typeof navigator.onLine === "undefined") {
+        console.warn("navigator.onLine is not available");
+        return;
       }
 
       if (!navigator.onLine) {
-        router.push('/offline')
+        router.push("/offline");
       }
-    }
+    };
 
-    handleOffline()
+    handleOffline();
 
-    window.addEventListener('online', handleOffline)
-    window.addEventListener('offline', handleOffline)
+    window.addEventListener("online", handleOffline);
+    window.addEventListener("offline", handleOffline);
 
     return () => {
-      window.removeEventListener('online', handleOffline)
-      window.removeEventListener('offline', handleOffline)
-    }
-  }, [router])
+      window.removeEventListener("online", handleOffline);
+      window.removeEventListener("offline", handleOffline);
+    };
+  }, [router]);
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-gray-50 p-4 dark:bg-neutral-900">
@@ -83,5 +83,5 @@ export default function Error({ reset }) {
         </div>
       </Card>
     </main>
-  )
+  );
 }

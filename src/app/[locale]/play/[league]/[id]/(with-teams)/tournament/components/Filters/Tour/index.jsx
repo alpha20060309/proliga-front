@@ -1,19 +1,19 @@
-import { useSelector } from 'react-redux'
+import { useSelector } from "react-redux";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from 'components/ui/select'
-import { selectTours } from 'lib/features/tour/tour.selector'
-import { getCorrectName } from 'utils/getCorrectName.util'
-import { memo } from 'react'
+} from "components/ui/select";
+import { selectTours } from "lib/features/tour/tour.selector";
+import { getCorrectName } from "utils/getCorrectName.util";
+import { memo } from "react";
 
 const TourFilter = memo(({ tour, setTour }) => {
-  const tours = useSelector(selectTours)
-  const { teamsLoading } = useSelector((state) => state.team)
-  const { lang } = useSelector((store) => store.systemLanguage)
+  const tours = useSelector(selectTours);
+  const { teamsLoading } = useSelector((state) => state.team);
+  const { lang } = useSelector((store) => store.systemLanguage);
 
   return (
     <Select
@@ -32,9 +32,9 @@ const TourFilter = memo(({ tour, setTour }) => {
         ))}
       </SelectContent>
     </Select>
-  )
-})
+  );
+});
 
-TourFilter.displayName = 'TourFilter'
+TourFilter.displayName = "TourFilter";
 
-export default TourFilter
+export default TourFilter;

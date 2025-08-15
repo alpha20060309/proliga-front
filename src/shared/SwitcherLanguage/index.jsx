@@ -1,50 +1,52 @@
-'use client'
+"use client";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from 'components/ui/dropdown-menu'
-import Image from 'next/image'
-import { LANGUAGE } from 'utils/languages.util'
-import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
-import { setLanguage } from 'lib/features/systemLanguage/systemLanguage.slice'
-import { Globe } from 'lucide-react'
-import { useRouter, usePathname } from 'next/navigation'
-import { setLanguageCookie } from 'utils/setLanguageCookie'
-import i18nConfig from 'lib/i18n.config'
-import { useEffect } from 'react'
+} from "components/ui/dropdown-menu";
+import Image from "next/image";
+import { LANGUAGE } from "utils/languages.util";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { setLanguage } from "lib/features/systemLanguage/systemLanguage.slice";
+import { Globe } from "lucide-react";
+import { useRouter, usePathname } from "next/navigation";
+import { setLanguageCookie } from "utils/setLanguageCookie";
+import i18nConfig from "lib/i18n.config";
+import { useEffect } from "react";
 
 const ChangeLanguageDropdown = () => {
-  const dispatch = useDispatch()
-  const { lang } = useSelector((store) => store.systemLanguage)
-  const { i18n } = useTranslation()
-  const currentLocale = i18n.language
-  const router = useRouter()
-  const currentPathname = usePathname()
+  const dispatch = useDispatch();
+  const { lang } = useSelector((store) => store.systemLanguage);
+  const { i18n } = useTranslation();
+  const currentLocale = i18n.language;
+  const router = useRouter();
+  const currentPathname = usePathname();
 
   useEffect(() => {
     if (i18n.language !== lang) {
-      dispatch(setLanguage({ lang: i18n.language }))
+      dispatch(setLanguage({ lang: i18n.language }));
     }
-  }, [lang, i18n.language, dispatch])
+  }, [lang, i18n.language, dispatch]);
 
   const handleChange = async (newLocale) => {
-    setLanguageCookie(newLocale)
-    dispatch(setLanguage({ lang: newLocale }))
+    setLanguageCookie(newLocale);
+    dispatch(setLanguage({ lang: newLocale }));
 
     if (
       currentLocale === i18nConfig.defaultLocale &&
       !i18nConfig.prefixDefault
     ) {
-      router.push('/' + newLocale + currentPathname)
+      router.push("/" + newLocale + currentPathname);
     } else {
-      router.push(currentPathname.replace(`/${currentLocale}`, `/${newLocale}`))
+      router.push(
+        currentPathname.replace(`/${currentLocale}`, `/${newLocale}`),
+      );
     }
 
-    router.refresh()
-  }
+    router.refresh();
+  };
 
   return (
     <DropdownMenu>
@@ -57,10 +59,10 @@ const ChangeLanguageDropdown = () => {
           <Image
             src={
               lang === LANGUAGE.uz
-                ? '/icons/uzbekistan.svg'
-                : '/icons/russia.svg'
+                ? "/icons/uzbekistan.svg"
+                : "/icons/russia.svg"
             }
-            alt={lang === LANGUAGE.uz ? 'uzbekistan' : 'russia'}
+            alt={lang === LANGUAGE.uz ? "uzbekistan" : "russia"}
             width={16}
             height={16}
             className="size-4"
@@ -98,7 +100,7 @@ const ChangeLanguageDropdown = () => {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
-}
+  );
+};
 
-export default ChangeLanguageDropdown
+export default ChangeLanguageDropdown;

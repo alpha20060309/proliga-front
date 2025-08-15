@@ -1,10 +1,10 @@
-import Image from 'next/image'
+import Image from "next/image";
 import {
   Card,
   CardContent,
   CardTitle,
   CardDescription,
-} from 'components/ui/card'
+} from "components/ui/card";
 
 const PromotionGatherPoints = ({ t }) => {
   return (
@@ -12,7 +12,7 @@ const PromotionGatherPoints = ({ t }) => {
       <CardContent className="flex w-full flex-col justify-between gap-4 px-0 md:flex-row lg:gap-0">
         <div className="my-auto flex flex-col gap-2 sm:gap-4 md:gap-8">
           <CardTitle className="xs:text-xl text-lg font-bold uppercase md:text-2xl xl:text-3xl">
-            {t('Ochkolar yiging')}
+            {t("Ochkolar yiging")}
           </CardTitle>
           <CardDescription className="xs:text-base max-w-lg text-sm md:max-w-lg md:text-lg lg:text-lg xl:max-w-xl xl:text-xl">
             {t("Har bir o'yinchi")}
@@ -30,7 +30,7 @@ const PromotionGatherPoints = ({ t }) => {
         </div>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
-export default PromotionGatherPoints
+export default PromotionGatherPoints;

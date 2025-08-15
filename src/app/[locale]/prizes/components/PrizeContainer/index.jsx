@@ -1,39 +1,41 @@
-import { getCorrectName } from 'utils/getCorrectName.util'
-import Prize from '../Prize'
-import { getUrl } from 'utils/static.util'
-import { Card, CardContent, CardHeader, CardTitle } from 'components/ui/card'
-import { supabase } from 'lib/supabaseClient'
-import { unstable_cache } from 'next/cache'
-import { FETCH_REVALIDATE } from 'utils/config.global'
+import { getCorrectName } from "utils/getCorrectName.util";
+import Prize from "../Prize";
+import { getUrl } from "utils/static.util";
+import { Card, CardContent, CardHeader, CardTitle } from "components/ui/card";
+import { supabase } from "lib/supabaseClient";
+import { unstable_cache } from "next/cache";
+import { FETCH_REVALIDATE } from "utils/config.global";
 
 const fetchPrizesByCompetition = unstable_cache(
   async (competitionId) => {
     try {
       const { data: prizes, error } = await supabase
-        .from('prize')
-        .select('*')
-        .eq('is_active', true)
-        .eq('competition_id', competitionId)
-        .is('deleted_at', null)
-        .order('order', { ascending: true })
+        .from("prize")
+        .select("*")
+        .eq("is_active", true)
+        .eq("competition_id", competitionId)
+        .is("deleted_at", null)
+        .order("order", { ascending: true });
 
-      return { data: prizes, error }
+      return { data: prizes, error };
     } catch (error) {
-      return { error: error.message }
+      return { error: error.message };
     }
   },
-  ['fetchPrizesByCompetition'],
+  ["fetchPrizesByCompetition"],
   {
-    tags: ['fetchPrizesByCompetition'],
+    tags: ["fetchPrizesByCompetition"],
     revalidate: FETCH_REVALIDATE,
-  }
-)
+  },
+);
 
 const PrizeContainer = async ({ competition, locale, t }) => {
-  const { data: prizes, error } = await fetchPrizesByCompetition(competition.id)
-  if (error || prizes.length === 0) return <></>
+  const { data: prizes, error } = await fetchPrizesByCompetition(
+    competition.id,
+  );
+  if (error || prizes.length === 0) return <></>;
 
-  const orderedPrizes = [prizes[1], prizes[0], prizes[2]]
+  const orderedPrizes = [prizes[1], prizes[0], prizes[2]];
 
   return (
     <Card className="border-border w-full">
@@ -66,7 +68,7 @@ const PrizeContainer = async ({ competition, locale, t }) => {
         </div>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
-export default PrizeContainer
+export default PrizeContainer;

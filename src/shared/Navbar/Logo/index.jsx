@@ -1,12 +1,12 @@
-import Image from 'next/image'
-import { useTheme } from 'next-themes'
+import Image from "next/image";
+import { useTheme } from "next-themes";
 
 const NavbarLogo = () => {
-  const { resolvedTheme } = useTheme()
+  const { resolvedTheme } = useTheme();
 
-  return resolvedTheme === 'dark' ? (
+  return resolvedTheme === "dark" ? (
     <Image
-      src={'/icons/proliga-full-dark.svg'}
+      src={"/icons/proliga-full-dark.svg"}
       priority={true}
       quality={100}
       alt="Proliga"
@@ -17,7 +17,7 @@ const NavbarLogo = () => {
     />
   ) : (
     <Image
-      src={'/icons/proliga-full-light.svg'}
+      src={"/icons/proliga-full-light.svg"}
       priority={true}
       quality={100}
       alt="Proliga"
@@ -26,7 +26,7 @@ const NavbarLogo = () => {
       draggable={false}
       className="xs:w-32 w-28 cursor-pointer md:w-36"
     />
-  )
-}
+  );
+};
 
-export default NavbarLogo
+export default NavbarLogo;

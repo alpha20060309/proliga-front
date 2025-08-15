@@ -1,24 +1,24 @@
-import { MATCH_EVENTS } from 'utils/match.util'
-import { RefreshCcw } from 'lucide-react'
+import { MATCH_EVENTS } from "utils/match.util";
+import { RefreshCcw } from "lucide-react";
 
 const MatchEventIcon = ({ type }) => {
   switch (type) {
     case MATCH_EVENTS.GOAL:
-      return <FootballIcon className="fill-foreground size-7" />
+      return <FootballIcon className="fill-foreground size-7" />;
     case MATCH_EVENTS.MISSED_PENALTY:
-      return <MissedPenaltyIcon className="fill-foreground size-7" />
+      return <MissedPenaltyIcon className="fill-foreground size-7" />;
     case MATCH_EVENTS.HIT_PENALTY:
-      return <HitPenaltyIcon className="fill-foreground size-7" />
+      return <HitPenaltyIcon className="fill-foreground size-7" />;
     case MATCH_EVENTS.TRANSFER:
-      return <RefreshCcw className="text-foreground size-7" />
+      return <RefreshCcw className="text-foreground size-7" />;
     case MATCH_EVENTS.RED_CARD:
-      return <SoccerCardIcon className="fill-destructive size-7" />
+      return <SoccerCardIcon className="fill-destructive size-7" />;
     case MATCH_EVENTS.YELLOW_CARD:
-      return <SoccerCardIcon className="fill-warning size-7" />
+      return <SoccerCardIcon className="fill-warning size-7" />;
     default:
-      return null
+      return null;
   }
-}
+};
 
 const HitPenaltyIcon = ({ className }) => {
   return (
@@ -43,8 +43,8 @@ const HitPenaltyIcon = ({ className }) => {
       <rect x="20" y="3" width="2" height="12" rx="0.375" fill="inherit" />
       <rect x="9" y="15" width="6" height="6" rx="3" fill="inherit" />
     </svg>
-  )
-}
+  );
+};
 
 const MissedPenaltyIcon = ({ className }) => {
   return (
@@ -82,8 +82,8 @@ const MissedPenaltyIcon = ({ className }) => {
         fill="inherit"
       />
     </svg>
-  )
-}
+  );
+};
 const SoccerCardIcon = ({ className }) => {
   return (
     <svg
@@ -105,8 +105,8 @@ const SoccerCardIcon = ({ className }) => {
         />
       </g>
     </svg>
-  )
-}
+  );
+};
 
 const FootballIcon = ({ className }) => {
   return (
@@ -125,7 +125,7 @@ const FootballIcon = ({ className }) => {
         fill="inherit"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default MatchEventIcon
+export default MatchEventIcon;

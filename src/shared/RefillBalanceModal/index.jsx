@@ -1,99 +1,99 @@
-'use client'
+"use client";
 
-import { useState, memo } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useState, memo } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from 'components/ui/dialog'
-import { Input } from 'components/ui/input'
-import { toast } from 'sonner'
-import { PAYMENT_OPTIONS } from 'utils/paymentOptions.util'
-import { useSelector } from 'react-redux'
-import { useRedirectToClick } from 'hooks/payment/useRedirectToClick'
-import { useRedirectToPayme } from 'hooks/payment/useRedirectToPayme'
-import { CONFIG_KEY } from 'utils/config.util'
-import { selectUser } from 'lib/features/auth/auth.selector'
-import { selectSystemConfig } from 'lib/features/systemConfig/systemConfig.selector'
-import { Button } from 'components/ui/button'
-import { Label } from 'components/ui/label'
-import Image from 'next/image'
-import { ToggleGroup, ToggleGroupItem } from 'components/ui/toggle-group'
-import { useTheme } from 'next-themes'
-import { DEFAULT_BALANCE } from 'utils/config.global'
-const PREDEFINED_AMOUNTS = [50000, 100000, 200000, 500000]
-import { analytics } from 'utils/analytics.util'
-import { useMetrica } from 'next-yandex-metrica'
+} from "components/ui/dialog";
+import { Input } from "components/ui/input";
+import { toast } from "sonner";
+import { PAYMENT_OPTIONS } from "utils/paymentOptions.util";
+import { useSelector } from "react-redux";
+import { useRedirectToClick } from "hooks/payment/useRedirectToClick";
+import { useRedirectToPayme } from "hooks/payment/useRedirectToPayme";
+import { CONFIG_KEY } from "utils/config.util";
+import { selectUser } from "lib/features/auth/auth.selector";
+import { selectSystemConfig } from "lib/features/systemConfig/systemConfig.selector";
+import { Button } from "components/ui/button";
+import { Label } from "components/ui/label";
+import Image from "next/image";
+import { ToggleGroup, ToggleGroupItem } from "components/ui/toggle-group";
+import { useTheme } from "next-themes";
+import { DEFAULT_BALANCE } from "utils/config.global";
+const PREDEFINED_AMOUNTS = [50000, 100000, 200000, 500000];
+import { analytics } from "utils/analytics.util";
+import { useMetrica } from "next-yandex-metrica";
 
 const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
-  const { t } = useTranslation()
-  const { resolvedTheme } = useTheme()
-  const user = useSelector(selectUser)
-  const config = useSelector(selectSystemConfig)
-  const { lang } = useSelector((store) => store.systemLanguage)
-  const { reachGoal } = useMetrica()
+  const { t } = useTranslation();
+  const { resolvedTheme } = useTheme();
+  const user = useSelector(selectUser);
+  const config = useSelector(selectSystemConfig);
+  const { lang } = useSelector((store) => store.systemLanguage);
+  const { reachGoal } = useMetrica();
 
-  const { redirectToClick } = useRedirectToClick()
-  const { redirectToPayme } = useRedirectToPayme()
+  const { redirectToClick } = useRedirectToClick();
+  const { redirectToPayme } = useRedirectToPayme();
 
   const cabinet_payme =
-    config[CONFIG_KEY.cabinet_payme]?.value.toLowerCase() === 'true' || false
+    config[CONFIG_KEY.cabinet_payme]?.value.toLowerCase() === "true" || false;
   const cabinet_click =
-    config[CONFIG_KEY.cabinet_click]?.value.toLowerCase() === 'true' || false
-  const [paymentOption, setPaymentOption] = useState(null)
-  const [amount, setAmount] = useState('')
+    config[CONFIG_KEY.cabinet_click]?.value.toLowerCase() === "true" || false;
+  const [paymentOption, setPaymentOption] = useState(null);
+  const [amount, setAmount] = useState("");
 
   const formatNumber = (num) => {
-    if (typeof num !== 'number' || !num) return '0'
-    return new Intl.NumberFormat('ru-RU').format(num)
-  }
+    if (typeof num !== "number" || !num) return "0";
+    return new Intl.NumberFormat("ru-RU").format(num);
+  };
 
   const handleSetAmount = (newAmount) => {
-    setAmount(String(newAmount))
-  }
+    setAmount(String(newAmount));
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!paymentOption) {
-      return toast.warning(t("Iltimos to'lov usulini tanlang"))
+      return toast.warning(t("Iltimos to'lov usulini tanlang"));
     }
 
     if (+amount < 100) {
       toast.warning(
-        t("Hisobni kamida $ so'm ga toldirish lozim").replace('$', '100')
-      )
-      return
+        t("Hisobni kamida $ so'm ga toldirish lozim").replace("$", "100"),
+      );
+      return;
     }
     if (!user?.id) {
-      return toast.error(t("Siz ro'yxatdan o'tmagansiz"))
+      return toast.error(t("Siz ro'yxatdan o'tmagansiz"));
     }
 
     if (paymentOption === PAYMENT_OPTIONS.CLICKUP) {
-      redirectToClick({ amount, user })
+      redirectToClick({ amount, user });
       reachGoal(analytics.increaseBalance, {
         type: PAYMENT_OPTIONS.CLICKUP,
         amount,
-      })
+      });
     }
     if (paymentOption === PAYMENT_OPTIONS.PAYME) {
-      redirectToPayme({ amount, lang, user })
+      redirectToPayme({ amount, lang, user });
       reachGoal(analytics.increaseBalance, {
         type: PAYMENT_OPTIONS.PAYME,
         amount,
-      })
+      });
     }
-  }
+  };
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
       <DialogContent className="text-foreground max-h-[90vh] w-[98%] max-w-lg overflow-y-auto rounded-xl p-4 sm:max-w-lg xl:p-6">
         <DialogHeader>
           <DialogTitle className="text-lg font-bold sm:text-xl">
-            {t('Balansni toldirish')}
+            {t("Balansni toldirish")}
           </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="flex flex-col gap-6 py-4">
@@ -105,7 +105,7 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
               type="single"
               value={paymentOption}
               onValueChange={(value) => {
-                if (value) setPaymentOption(value)
+                if (value) setPaymentOption(value);
               }}
               className="grid grid-cols-2 gap-3"
             >
@@ -116,7 +116,7 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
                   className="data-[state=on]:bg-background flex h-16 w-28 flex-col gap-2 rounded-lg border-2 p-4 data-[state=on]:border-[#0cbbbc]"
                 >
                   <Image
-                    src={'/icons/payme.svg'}
+                    src={"/icons/payme.svg"}
                     width={80}
                     height={24}
                     alt="payme"
@@ -132,9 +132,9 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
                 >
                   <Image
                     src={
-                      resolvedTheme === 'dark'
-                        ? '/icons/click-up.svg'
-                        : '/icons/click-up-dark.svg'
+                      resolvedTheme === "dark"
+                        ? "/icons/click-up.svg"
+                        : "/icons/click-up-dark.svg"
                     }
                     width={80}
                     height={24}
@@ -153,14 +153,14 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
 
           <div className="w-full space-y-3">
             <Label className="text-sm font-medium sm:text-base">
-              {t('Summani tanlang')}
+              {t("Summani tanlang")}
             </Label>
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
               {PREDEFINED_AMOUNTS.map((predefinedAmount) => (
                 <Button
                   key={predefinedAmount}
                   type="button"
-                  variant={+amount === predefinedAmount ? 'default' : 'outline'}
+                  variant={+amount === predefinedAmount ? "default" : "outline"}
                   onClick={() => handleSetAmount(predefinedAmount)}
                   className="h-12 text-base"
                 >
@@ -178,7 +178,7 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
               <Input
                 type="number"
                 id="money"
-                placeholder={t('Summani kiriting...')}
+                placeholder={t("Summani kiriting...")}
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 name="money"
@@ -189,7 +189,7 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
               </span>
             </div>
             <p className="text-muted-foreground text-xs">
-              {t('Minimal: $ so`m').replace('$', formatNumber(DEFAULT_BALANCE))}
+              {t("Minimal: $ so`m").replace("$", formatNumber(DEFAULT_BALANCE))}
             </p>
           </div>
           <Button
@@ -206,7 +206,7 @@ const RefillBalance = ({ isModalOpen, setIsModalOpen }) => {
         </DialogDescription>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default memo(RefillBalance)
+export default memo(RefillBalance);

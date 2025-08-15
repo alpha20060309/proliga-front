@@ -1,5 +1,5 @@
-import { Skeleton } from 'components/ui/skeleton'
-import { Card, CardContent, CardHeader } from 'components/ui/card'
+import { Skeleton } from "components/ui/skeleton";
+import { Card, CardContent, CardHeader } from "components/ui/card";
 
 const TopTeamsSkeleton = () => {
   return (
@@ -7,8 +7,8 @@ const TopTeamsSkeleton = () => {
       <TopTeams />
       <TopPlayers />
     </div>
-  )
-}
+  );
+};
 
 const TopTeams = () => {
   return (
@@ -22,8 +22,8 @@ const TopTeams = () => {
         ))}
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
 const TeamPlaceSkeleton = () => {
   return (
@@ -38,8 +38,8 @@ const TeamPlaceSkeleton = () => {
       </div>
       <Skeleton className="bg-accent absolute right-0 bottom-0 size-6 rounded-tl-lg rounded-br-lg" />
     </div>
-  )
-}
+  );
+};
 
 const TopPlayers = () => {
   return (
@@ -53,8 +53,8 @@ const TopPlayers = () => {
         ))}
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
 const PlayerPlaceSkeleton = () => {
   return (
@@ -69,7 +69,7 @@ const PlayerPlaceSkeleton = () => {
       </div>
       <Skeleton className="bg-accent absolute right-0 bottom-0 size-6 rounded-tl-lg rounded-br-lg" />
     </div>
-  )
-}
+  );
+};
 
-export default TopTeamsSkeleton
+export default TopTeamsSkeleton;

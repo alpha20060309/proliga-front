@@ -1,12 +1,12 @@
-import { LANGUAGE } from './languages.util'
+import { LANGUAGE } from "./languages.util";
 
 export const getCorrectName = ({ lang, ru, uz }) => {
   switch (lang) {
     case LANGUAGE.uz:
-      return uz
+      return uz;
     case LANGUAGE.ru:
-      return ru
+      return ru;
     default:
-      return null
+      return null;
   }
-}
+};

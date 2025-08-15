@@ -1,40 +1,40 @@
-'use client'
+"use client";
 
-import { Dialog, DialogContent } from 'components/ui/dialog'
-import { DialogDescription } from '@radix-ui/react-dialog'
-import { useDispatch, useSelector } from 'react-redux'
-import { setMatchModalOpen } from 'lib/features/match/match.slice'
-import { selectCurrentMatch } from 'lib/features/match/match.selector'
-import MatchEventHeader from './Header'
-import MatchEventScore from './Score'
-import { motion, AnimatePresence } from 'framer-motion'
-import { RefreshCcw } from 'lucide-react'
-import { refreshButtonVariants } from './animations.styles'
-import { useEffect } from 'react'
-import { fetchMatchEvents } from 'lib/features/matchEvent/matchEvent.thunk'
-import MatchEventContent from './Content'
-import { memo } from 'react'
+import { Dialog, DialogContent } from "components/ui/dialog";
+import { DialogDescription } from "@radix-ui/react-dialog";
+import { useDispatch, useSelector } from "react-redux";
+import { setMatchModalOpen } from "lib/features/match/match.slice";
+import { selectCurrentMatch } from "lib/features/match/match.selector";
+import MatchEventHeader from "./Header";
+import MatchEventScore from "./Score";
+import { motion, AnimatePresence } from "framer-motion";
+import { RefreshCcw } from "lucide-react";
+import { refreshButtonVariants } from "./animations.styles";
+import { useEffect } from "react";
+import { fetchMatchEvents } from "lib/features/matchEvent/matchEvent.thunk";
+import MatchEventContent from "./Content";
+import { memo } from "react";
 
 function MatchEventModal() {
-  const dispatch = useDispatch()
-  const { isModalOpen } = useSelector((store) => store.match)
-  const currentMatch = useSelector(selectCurrentMatch)
+  const dispatch = useDispatch();
+  const { isModalOpen } = useSelector((store) => store.match);
+  const currentMatch = useSelector(selectCurrentMatch);
 
   const setModalOpen = () => {
-    dispatch(setMatchModalOpen(false))
-  }
+    dispatch(setMatchModalOpen(false));
+  };
 
   useEffect(() => {
     if (isModalOpen && currentMatch?.id) {
-      dispatch(fetchMatchEvents({ match_id: currentMatch?.id }))
+      dispatch(fetchMatchEvents({ match_id: currentMatch?.id }));
     }
-  }, [dispatch, isModalOpen, currentMatch])
+  }, [dispatch, isModalOpen, currentMatch]);
 
   const handleRefresh = () => {
     if (isModalOpen && currentMatch?.id) {
-      dispatch(fetchMatchEvents({ match_id: currentMatch?.id }))
+      dispatch(fetchMatchEvents({ match_id: currentMatch?.id }));
     }
-  }
+  };
 
   return (
     <Dialog open={isModalOpen && currentMatch?.id} onOpenChange={setModalOpen}>
@@ -64,7 +64,7 @@ function MatchEventModal() {
         </AnimatePresence>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
 
-export default memo(MatchEventModal)
+export default memo(MatchEventModal);

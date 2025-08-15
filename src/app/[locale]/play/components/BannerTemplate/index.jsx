@@ -1,5 +1,5 @@
-import LeftSideBanner from 'shared/Banners/LeftSide'
-import RightSideBanner from 'shared/Banners/RightSide'
+import LeftSideBanner from "shared/Banners/LeftSide";
+import RightSideBanner from "shared/Banners/RightSide";
 
 export default function BannerTemplate({ children }) {
   return (
@@ -8,5 +8,5 @@ export default function BannerTemplate({ children }) {
       {children}
       <RightSideBanner />
     </div>
-  )
+  );
 }

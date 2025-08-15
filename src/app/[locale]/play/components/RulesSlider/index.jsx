@@ -1,17 +1,17 @@
-'use client'
+"use client";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from 'components/ui/carousel'
-import CreateTeamSlide from './CreateTeamSlide'
-import GatherPointsSlide from './GatherPointsSlide'
-import MakeTransfersSlide from './MakeTransfersSlide'
-import CompeteSlide from './CompeteSlide'
-import RulesSliderTitle from './RulesSliderTitle'
-import WinPrizesSlide from './WinPrizesSlide'
+} from "components/ui/carousel";
+import CreateTeamSlide from "./CreateTeamSlide";
+import GatherPointsSlide from "./GatherPointsSlide";
+import MakeTransfersSlide from "./MakeTransfersSlide";
+import CompeteSlide from "./CompeteSlide";
+import RulesSliderTitle from "./RulesSliderTitle";
+import WinPrizesSlide from "./WinPrizesSlide";
 
 function RulesSlider() {
   return (
@@ -40,7 +40,7 @@ function RulesSlider() {
       <CarouselPrevious className="hover:bg-accent dark:hover:bg-accent/50 left-4" />
       <CarouselNext className="hover:bg-accent dark:hover:bg-accent/50 right-4" />
     </Carousel>
-  )
+  );
 }
 
-export default RulesSlider
+export default RulesSlider;

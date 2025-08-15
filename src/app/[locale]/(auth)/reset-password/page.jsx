@@ -1,4 +1,4 @@
-import ResetPasswordForm from './ResetPasswordForm'
+import ResetPasswordForm from "./ResetPasswordForm";
 
 const ResetPassword = () => {
   return (
@@ -7,7 +7,7 @@ const ResetPassword = () => {
         <ResetPasswordForm />
       </section>
     </main>
-  )
-}
+  );
+};
 
-export default ResetPassword
+export default ResetPassword;

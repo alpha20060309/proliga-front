@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { newsExtraReducer } from './news.extraReducer'
+import { createSlice } from "@reduxjs/toolkit";
+import { newsExtraReducer } from "./news.extraReducer";
 
 const initialState = {
   news: [],
@@ -8,30 +8,30 @@ const initialState = {
   isLoading: false,
   error: null,
   count: 0,
-}
+};
 
 const newsSlice = createSlice({
-  name: 'news',
+  name: "news",
   initialState,
   reducers: {
     incrementNewsView: (state, action) => {
-      const { news_id } = action.payload
-      const news = state.news.find((news) => news.id === news_id)
+      const { news_id } = action.payload;
+      const news = state.news.find((news) => news.id === news_id);
       if (news) {
-        news.view_count++
+        news.view_count++;
       }
     },
     setNewsModal: (state, action) => {
-      state.isModalOpen = action.payload
+      state.isModalOpen = action.payload;
     },
     setCurrentNews: (state, action) => {
-      state.currentNews = action.payload
+      state.currentNews = action.payload;
     },
   },
   extraReducers: newsExtraReducer,
-})
+});
 
 export const { incrementNewsView, setNewsModal, setCurrentNews } =
-  newsSlice.actions
+  newsSlice.actions;
 
-export default newsSlice.reducer
+export default newsSlice.reducer;

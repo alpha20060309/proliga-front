@@ -1,30 +1,30 @@
-import NameFilter from 'components/Table/Filters/Name'
-import ClubsFilter from 'components/Table/Filters/Clubs'
+import NameFilter from "components/Table/Filters/Name";
+import ClubsFilter from "components/Table/Filters/Clubs";
 
 function StatisticsTableFilters({ column }) {
-  const { filterVariant } = column.columnDef.meta ?? {}
-  const columnFilterValue = column.getFilterValue()
+  const { filterVariant } = column.columnDef.meta ?? {};
+  const columnFilterValue = column.getFilterValue();
 
   switch (filterVariant) {
-    case 'name':
+    case "name":
       return (
         <NameFilter
           column={column}
-          className={'w-full max-w-64'}
+          className={"w-full max-w-64"}
           columnFilterValue={columnFilterValue}
         />
-      )
-    case 'club':
+      );
+    case "club":
       return (
         <ClubsFilter
           column={column}
           columnFilterValue={columnFilterValue}
           className="w-full max-w-40"
         />
-      )
+      );
     default:
-      return null
+      return null;
   }
 }
 
-export default StatisticsTableFilters
+export default StatisticsTableFilters;

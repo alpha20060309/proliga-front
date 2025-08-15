@@ -1,6 +1,6 @@
-import { createDraftSafeSelector } from '@reduxjs/toolkit'
+import { createDraftSafeSelector } from "@reduxjs/toolkit";
 
 export const selectCurrentTeam = createDraftSafeSelector(
   (state) => state.currentTeam,
-  (team) => team.currentTeam
-)
+  (team) => team.currentTeam,
+);

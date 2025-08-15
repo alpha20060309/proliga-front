@@ -1,4 +1,4 @@
 export const LANGUAGE = {
-  uz: 'uz',
-  ru: 'ru',
-}
+  uz: "uz",
+  ru: "ru",
+};

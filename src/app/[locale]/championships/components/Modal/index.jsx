@@ -1,44 +1,44 @@
-import Image from 'next/image'
-import { useCreateTeam } from 'hooks/transfer/useCreateTeam'
-import { useState } from 'react'
-import { FORMATIONS } from 'utils/formations.util'
-import { useTransitionRouter } from 'next-view-transitions'
-import { useSelector } from 'react-redux'
-import { useTranslation } from 'react-i18next'
+import Image from "next/image";
+import { useCreateTeam } from "hooks/transfer/useCreateTeam";
+import { useState } from "react";
+import { FORMATIONS } from "utils/formations.util";
+import { useTransitionRouter } from "next-view-transitions";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import {
   DialogContent,
   DialogTitle,
   Dialog,
   DialogDescription,
-} from 'components/ui/dialog'
-import { Input } from 'components/ui/input'
+} from "components/ui/dialog";
+import { Input } from "components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from 'components/ui/select'
-import { Button } from 'components/ui/button'
-import { Label } from 'components/ui/label'
-import { validateTeamName } from 'utils/validateTeamName.util'
-import { selectUser } from 'lib/features/auth/auth.selector'
-import { Loader2 } from 'lucide-react'
+} from "components/ui/select";
+import { Button } from "components/ui/button";
+import { Label } from "components/ui/label";
+import { validateTeamName } from "utils/validateTeamName.util";
+import { selectUser } from "lib/features/auth/auth.selector";
+import { Loader2 } from "lucide-react";
 
 const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
-  const router = useTransitionRouter()
-  const { t } = useTranslation()
-  const [title, setTitle] = useState('')
-  const [formation, setFormation] = useState(FORMATIONS['4-3-3'])
-  const user = useSelector(selectUser)
+  const router = useTransitionRouter();
+  const { t } = useTranslation();
+  const [title, setTitle] = useState("");
+  const [formation, setFormation] = useState(FORMATIONS["4-3-3"]);
+  const user = useSelector(selectUser);
 
-  const { createTeam, isLoading } = useCreateTeam()
+  const { createTeam, isLoading } = useCreateTeam();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    const isValid = validateTeamName(title, t)
+    e.preventDefault();
+    const isValid = validateTeamName(title, t);
 
-    if (!isValid) return
+    if (!isValid) return;
 
     await createTeam({
       title,
@@ -46,11 +46,11 @@ const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
       competition_id: competition.id,
       user,
       cb: (game) => {
-        toggleModal()
-        router.push(`/play/${game.competition_id}/${game.id}/transfer`)
+        toggleModal();
+        router.push(`/play/${game.competition_id}/${game.id}/transfer`);
       },
-    })
-  }
+    });
+  };
 
   return (
     <Dialog onOpenChange={toggleModal} open={isModalOpen}>
@@ -65,10 +65,10 @@ const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
             className="mx-auto mb-2 size-16"
           />
           <DialogTitle className="text-foreground xs:text-2xl text-xl font-bold sm:text-3xl lg:text-4xl">
-            {t('Jamoa yarating')}
+            {t("Jamoa yarating")}
           </DialogTitle>
           <DialogDescription className="text-muted-foreground mt-1 text-sm sm:mt-2 sm:text-base">
-            {t('Join the league and lead your team to victory!')}
+            {t("Join the league and lead your team to victory!")}
           </DialogDescription>
         </div>
         <form
@@ -82,14 +82,14 @@ const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
               className="text-sm font-semibold sm:text-base"
               htmlFor="team-title"
             >
-              {t('Jamoa Ismi')}
+              {t("Jamoa Ismi")}
             </Label>
             <Input
               type="text"
               id="team-title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder={t('Enter your team name')}
+              placeholder={t("Enter your team name")}
               className="border-input bg-background text-foreground placeholder:text-muted-foreground focus:border-ring focus:ring-ring h-10 w-full rounded-md border-2 p-2 text-sm focus:ring-2 focus:outline-hidden sm:h-12 sm:p-3 sm:text-base"
             />
           </div>
@@ -98,10 +98,10 @@ const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
               className="text-sm font-semibold sm:text-base"
               htmlFor="formation"
             >
-              {t('Taktika')}
+              {t("Taktika")}
             </Label>
             <Select
-              defaultValue={FORMATIONS['4-3-3']}
+              defaultValue={FORMATIONS["4-3-3"]}
               onValueChange={(value) => setFormation(value)}
             >
               <SelectTrigger className="border-input bg-background text-foreground focus:border-ring/50 focus:ring-ring w-full rounded-md border-2 p-2 text-sm outline-hidden focus:ring-2 data-[size=default]:h-10 sm:p-3 sm:text-base sm:data-[size=default]:h-12">
@@ -128,13 +128,13 @@ const CompetitionModal = ({ toggleModal, competition, isModalOpen }) => {
             {isLoading ? (
               <Loader2 className="mx-auto size-5 animate-spin sm:size-6" />
             ) : (
-              <>{t('Tasdiqlash')}</>
+              <>{t("Tasdiqlash")}</>
             )}
           </Button>
         </form>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default CompetitionModal
+export default CompetitionModal;

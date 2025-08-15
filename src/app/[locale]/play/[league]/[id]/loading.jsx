@@ -1,7 +1,7 @@
-import Spinner from 'components/Spinner'
+import Spinner from "components/Spinner";
 
 const PlayLoading = () => {
-  return <Spinner />
-}
+  return <Spinner />;
+};
 
-export default PlayLoading
+export default PlayLoading;

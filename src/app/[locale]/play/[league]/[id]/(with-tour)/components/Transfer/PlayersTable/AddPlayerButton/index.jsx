@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
-import { toast } from 'sonner'
-import { useDispatch, useSelector } from 'react-redux'
-import { setBalanceModal } from 'lib/features/currentTeam/currentTeam.slice'
-import { CONFIG_KEY } from 'utils/config.util'
-import { useTranslation } from 'react-i18next'
-import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
-import { cn } from 'lib/utils'
-import { selectSystemConfig } from 'lib/features/systemConfig/systemConfig.selector'
-import { Plus, Check, X } from 'lucide-react'
+import { toast } from "sonner";
+import { useDispatch, useSelector } from "react-redux";
+import { setBalanceModal } from "lib/features/currentTeam/currentTeam.slice";
+import { CONFIG_KEY } from "utils/config.util";
+import { useTranslation } from "react-i18next";
+import { selectCurrentTeam } from "lib/features/currentTeam/currentTeam.selector";
+import { cn } from "lib/utils";
+import { selectSystemConfig } from "lib/features/systemConfig/systemConfig.selector";
+import { Plus, Check, X } from "lucide-react";
 
 const AddPlayerButton = ({
   player,
@@ -17,29 +17,29 @@ const AddPlayerButton = ({
   teamConcat,
   totalPlayersCount,
 }) => {
-  const { t } = useTranslation()
-  const dispatch = useDispatch()
-  const condition = teamBalance >= player.price
-  const isPlayerInTeam = teamConcat.find((p) => p.player_id == +player?.id)
-  const currentTeam = useSelector(selectCurrentTeam)
-  const config = useSelector(selectSystemConfig)
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const condition = teamBalance >= player.price;
+  const isPlayerInTeam = teamConcat.find((p) => p.player_id == +player?.id);
+  const currentTeam = useSelector(selectCurrentTeam);
+  const config = useSelector(selectSystemConfig);
 
   const transfer_show_modals =
-    config[CONFIG_KEY.transfer_show_modals]?.value?.toLowerCase() === 'true'
-  const max_balance = +config[CONFIG_KEY.max_balance]?.value
+    config[CONFIG_KEY.transfer_show_modals]?.value?.toLowerCase() === "true";
+  const max_balance = +config[CONFIG_KEY.max_balance]?.value;
 
   const handleClick = () => {
     if (condition) {
-      handleAddPlayer(player)
+      handleAddPlayer(player);
     } else {
       if (currentTeam?.balance === max_balance) {
-        toast.info(t('Max balance has been reached!'))
+        toast.info(t("Max balance has been reached!"));
       } else {
-        toast.info(t('Not enough balance.'))
-        transfer_show_modals && dispatch(setBalanceModal(true))
+        toast.info(t("Not enough balance."));
+        transfer_show_modals && dispatch(setBalanceModal(true));
       }
     }
-  }
+  };
 
   if (isPlayerInTeam) {
     return (
@@ -49,7 +49,7 @@ const AddPlayerButton = ({
       >
         <Check className="border-foreground dark:border-success dark:bg-background dark:text-success bg-success text-foreground size-5 rounded border p-1 shadow-sm select-none sm:size-6" />
       </button>
-    )
+    );
   } else if (!isPlayerInTeam && totalPlayersCount < 11) {
     return (
       <button
@@ -59,14 +59,14 @@ const AddPlayerButton = ({
       >
         <Plus
           className={cn(
-            'bg-background size-5 rounded border p-1 shadow-sm select-none sm:size-6 dark:bg-transparent',
+            "bg-background size-5 rounded border p-1 shadow-sm select-none sm:size-6 dark:bg-transparent",
             condition
-              ? 'bg-primary text-primary-foreground border-foreground dark:text-primary dark:border-primary'
-              : 'text-muted-foreground border-muted-foreground'
+              ? "bg-primary text-primary-foreground border-foreground dark:text-primary dark:border-primary"
+              : "text-muted-foreground border-muted-foreground",
           )}
         />
       </button>
-    )
+    );
   } else if (!isPlayerInTeam && totalPlayersCount >= 11) {
     return (
       <button
@@ -75,8 +75,8 @@ const AddPlayerButton = ({
       >
         <X className="border-muted-foreground text-muted-foreground size-5 rounded border p-1 shadow-sm select-none sm:size-6" />
       </button>
-    )
+    );
   }
-}
+};
 
-export default AddPlayerButton
+export default AddPlayerButton;

@@ -1,6 +1,6 @@
-import { createDraftSafeSelector } from '@reduxjs/toolkit'
+import { createDraftSafeSelector } from "@reduxjs/toolkit";
 
 export const selectSystemConfig = createDraftSafeSelector(
   (state) => state.systemConfig,
-  (systemConfig) => systemConfig.config
-)
+  (systemConfig) => systemConfig.config,
+);

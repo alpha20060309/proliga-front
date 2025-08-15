@@ -1,58 +1,60 @@
-import { createAsyncThunk } from '@reduxjs/toolkit'
-import { supabase } from 'lib/supabaseClient'
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { supabase } from "lib/supabaseClient";
 
 export const fetchPlayers = createAsyncThunk(
-  'players/fetchPlayers',
+  "players/fetchPlayers",
   async ({ competition_id }) => {
     const { data, error, count } = await supabase
-      .from('player')
-      .select('*, club(id, name, slug, name_ru, logo_img, form_img)', { count: 'estimated' })
-      .eq('competition_id', competition_id)
-      .is('deleted_at', null)
-      .limit(1000)
+      .from("player")
+      .select("*, club(id, name, slug, name_ru, logo_img, form_img)", {
+        count: "estimated",
+      })
+      .eq("competition_id", competition_id)
+      .is("deleted_at", null)
+      .limit(1000);
 
     if (error) {
-      throw error
+      throw error;
     }
 
-    return { data, count }
-  }
-)
+    return { data, count };
+  },
+);
 export const fetchAdditionalPlayers = createAsyncThunk(
-  'players/fetchAdditionalPlayers',
+  "players/fetchAdditionalPlayers",
   async ({ competition_id, page }) => {
-    let from = page * 1000
-    let to = from + 1000 - 1
+    let from = page * 1000;
+    let to = from + 1000 - 1;
 
     const { data, error } = await supabase
-      .from('player')
-      .select('*, club(id, name, slug, name_ru, logo_img)')
-      .eq('competition_id', competition_id)
-      .is('deleted_at', null)
+      .from("player")
+      .select("*, club(id, name, slug, name_ru, logo_img)")
+      .eq("competition_id", competition_id)
+      .is("deleted_at", null)
       .limit(1000)
-      .range(from, to)
+      .range(from, to);
 
     if (error) {
-      throw error
+      throw error;
     }
 
-    return { data, page: page * 1000 }
-  }
-)
+    return { data, page: page * 1000 };
+  },
+);
 
 export const fetchTopPlayers = createAsyncThunk(
-  'players/fetchTopPlayers',
+  "players/fetchTopPlayers",
   async ({ competition_id }) => {
     const { data, error } = await supabase
-      .rpc('get__player_point_desc', {
+      .rpc("get__player_point_desc", {
         comp_id: competition_id,
       })
-      .limit(3)
+      .limit(3);
 
     if (error) {
-      throw error
+      throw error;
     }
 
-    return { data }
-  }
-)
+    return { data };
+  },
+);

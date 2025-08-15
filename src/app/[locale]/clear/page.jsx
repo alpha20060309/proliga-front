@@ -1,16 +1,16 @@
-'use client'
+"use client";
 
-import { useEffect } from 'react'
-import { useLogOut } from 'hooks/auth/useLogOut'
+import { useEffect } from "react";
+import { useLogOut } from "hooks/auth/useLogOut";
 
 function Clear() {
-  const { logOut } = useLogOut()
+  const { logOut } = useLogOut();
 
   useEffect(() => {
-    logOut()
-  }, [logOut])
+    logOut();
+  }, [logOut]);
 
-  return <div className="h-svh" />
+  return <div className="h-svh" />;
 }
 
-export default Clear
+export default Clear;

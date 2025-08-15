@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { teamsExtraReducer } from './team.extraReducer'
+import { createSlice } from "@reduxjs/toolkit";
+import { teamsExtraReducer } from "./team.extraReducer";
 
 const initialState = {
   allTeams: [],
@@ -12,37 +12,37 @@ const initialState = {
   teams: [],
   isLoading: false,
   error: null,
-}
+};
 
 const teamsSlice = createSlice({
-  name: 'team',
+  name: "team",
   initialState,
   reducers: {
     setTeams: (state, action) => {
-      state.teams = action.payload
+      state.teams = action.payload;
     },
     setAllTeams: (state, action) => {
-      state.allTeams = action.payload
+      state.allTeams = action.payload;
     },
     setCount: (state, action) => {
-      state.teamsCount = action.payload
+      state.teamsCount = action.payload;
     },
     addGameToTeam: (state, action) => {
       if (action.payload) {
-        state.teams.push(action.payload)
+        state.teams.push(action.payload);
       }
     },
     resetTeams: () => initialState,
     resetSearchResults: (state) => {
-      state.searchResults = []
-      state.searchCount = 0
-      state.searchError = null
+      state.searchResults = [];
+      state.searchCount = 0;
+      state.searchError = null;
     },
   },
   extraReducers: teamsExtraReducer,
-})
+});
 
 export const { setTeams, addGameToTeam, resetTeams, resetSearchResults } =
-  teamsSlice.actions
+  teamsSlice.actions;
 
-export default teamsSlice.reducer
+export default teamsSlice.reducer;

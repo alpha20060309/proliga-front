@@ -1,5 +1,5 @@
-import Gutter from 'components/Gutter'
-import Image from 'next/image'
+import Gutter from "components/Gutter";
+import Image from "next/image";
 
 export default function TeamViewLayout({ children }) {
   return (
@@ -17,5 +17,5 @@ export default function TeamViewLayout({ children }) {
       </div>
       <Gutter mobileFriendly>{children}</Gutter>
     </div>
-  )
+  );
 }

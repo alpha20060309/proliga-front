@@ -1,66 +1,66 @@
-'use client'
+"use client";
 
 import {
   StyledTab,
   StyledTabs,
   GameTab,
   CustomBox,
-} from 'components/StyledTabs'
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { TOUR_STATUS } from 'utils/tour.util'
-import { setCurrentTourIndex } from 'lib/features/tour/tour.slice'
-import { setCurrentTourTeam } from 'lib/features/tourTeam/tourTeam.slice'
+} from "components/StyledTabs";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { TOUR_STATUS } from "utils/tour.util";
+import { setCurrentTourIndex } from "lib/features/tour/tour.slice";
+import { setCurrentTourTeam } from "lib/features/tourTeam/tourTeam.slice";
 import {
   selectRegisteredTour,
   selectTours,
-} from 'lib/features/tour/tour.selector'
-import { emptyTeamPlayers } from 'lib/features/teamPlayer/teamPlayer.slice'
-import { tabsClasses } from '@mui/material'
-import { selectCurrentTeam } from 'lib/features/currentTeam/currentTeam.selector'
-import { useTransitionRouter } from 'next-view-transitions'
-import { selectCurrentCompetition } from 'lib/features/competition/competition.selector'
-import { TABS } from 'utils/tabs.util'
-import { usePathname } from 'next/navigation'
+} from "lib/features/tour/tour.selector";
+import { emptyTeamPlayers } from "lib/features/teamPlayer/teamPlayer.slice";
+import { tabsClasses } from "@mui/material";
+import { selectCurrentTeam } from "lib/features/currentTeam/currentTeam.selector";
+import { useTransitionRouter } from "next-view-transitions";
+import { selectCurrentCompetition } from "lib/features/competition/competition.selector";
+import { TABS } from "utils/tabs.util";
+import { usePathname } from "next/navigation";
 
 export default function TourTabs() {
-  const path = usePathname()
-  const dispatch = useDispatch()
-  const router = useTransitionRouter()
-  const selectedTours = useSelector(selectTours)
-  const currentCompetition = useSelector(selectCurrentCompetition)
-  const { currentTourIndex } = useSelector((state) => state.tour)
-  const registeredTour = useSelector(selectRegisteredTour)
-  const currentTeam = useSelector(selectCurrentTeam)
-  const [gameTab, setGameTab] = useState('')
+  const path = usePathname();
+  const dispatch = useDispatch();
+  const router = useTransitionRouter();
+  const selectedTours = useSelector(selectTours);
+  const currentCompetition = useSelector(selectCurrentCompetition);
+  const { currentTourIndex } = useSelector((state) => state.tour);
+  const registeredTour = useSelector(selectRegisteredTour);
+  const currentTeam = useSelector(selectCurrentTeam);
+  const [gameTab, setGameTab] = useState("");
 
   useEffect(() => {
-    const pathLength = path.split('/').length
+    const pathLength = path.split("/").length;
 
-    if (path.includes('play') && pathLength === 6) {
+    if (path.includes("play") && pathLength === 6) {
       Object.keys(TABS).forEach((tab) => {
         if (path.includes(TABS[tab])) {
-          setGameTab(TABS[tab])
+          setGameTab(TABS[tab]);
         }
-      })
+      });
     } else {
-      setGameTab(TABS.GameProfile)
+      setGameTab(TABS.GameProfile);
     }
-  }, [path])
+  }, [path]);
 
   const handleClick = (index, item) => {
     if (currentTourIndex !== index) {
-      dispatch(emptyTeamPlayers())
+      dispatch(emptyTeamPlayers());
     }
     if (
       gameTab === TABS.Transfer &&
       item.status !== TOUR_STATUS.notStartedTransfer
     ) {
-      router.push(`/play/${currentCompetition?.id}/${currentTeam?.id}`)
+      router.push(`/play/${currentCompetition?.id}/${currentTeam?.id}`);
     }
-    dispatch(setCurrentTourTeam(index))
-    dispatch(setCurrentTourIndex(index))
-  }
+    dispatch(setCurrentTourTeam(index));
+    dispatch(setCurrentTourIndex(index));
+  };
 
   return (
     <CustomBox>
@@ -73,7 +73,7 @@ export default function TourTabs() {
         aria-label="tour tabs"
         sx={{
           [`& .${tabsClasses.scrollButtons}`]: {
-            '&.Mui-disabled': { opacity: 0.4 },
+            "&.Mui-disabled": { opacity: 0.4 },
           },
         }}
       >
@@ -93,5 +93,5 @@ export default function TourTabs() {
         ))}
       </StyledTabs>
     </CustomBox>
-  )
+  );
 }

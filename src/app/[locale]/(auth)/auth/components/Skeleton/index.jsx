@@ -1,5 +1,5 @@
-import { Skeleton } from 'components/ui/skeleton'
-import { Card, CardHeader, CardTitle, CardContent } from 'components/ui/card'
+import { Skeleton } from "components/ui/skeleton";
+import { Card, CardHeader, CardTitle, CardContent } from "components/ui/card";
 
 const AuthSkeleton = () => {
   return (
@@ -7,8 +7,8 @@ const AuthSkeleton = () => {
       <AuthTabsSkeleton />
       <LoginFormSkeleton />
     </section>
-  )
-}
+  );
+};
 
 export const LoginFormSkeleton = () => {
   return (
@@ -40,8 +40,8 @@ export const LoginFormSkeleton = () => {
         </div>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
 export const SignUpFormSkeleton = () => {
   return (
@@ -84,8 +84,8 @@ export const SignUpFormSkeleton = () => {
         </div>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
 export const AuthTabsSkeleton = () => {
   return (
@@ -93,7 +93,7 @@ export const AuthTabsSkeleton = () => {
       <Skeleton className="h-8 flex-1 rounded" />
       <Skeleton className="h-8 flex-1 rounded" />
     </div>
-  )
-}
+  );
+};
 
-export default AuthSkeleton
+export default AuthSkeleton;

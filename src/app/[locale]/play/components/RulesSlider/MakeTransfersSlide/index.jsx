@@ -1,15 +1,15 @@
-import { useTranslation } from 'react-i18next'
-import { ArrowRightLeft } from 'lucide-react'
+import { useTranslation } from "react-i18next";
+import { ArrowRightLeft } from "lucide-react";
 
 const MakeTransfersSlide = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   return (
     <article className="align-center flex flex-col gap-4">
       <h2 className="carousel-header xs:justify-start xs:text-start self-center text-center font-bold uppercase">
-        {t('Transferlarni amalga oshiring')}
+        {t("Transferlarni amalga oshiring")}
       </h2>
       <p className="xs:text-sm text-muted-foreground self-center text-center text-xs md:w-3/4 lg:text-base xl:mt-8 xl:text-lg">
-        {t('Agar sizning jamoangizdagi')}
+        {t("Agar sizning jamoangizdagi")}
       </p>
       <div className="mx-auto flex w-full flex-1 items-center justify-center gap-6 md:w-auto md:flex-row">
         <img
@@ -25,7 +25,7 @@ const MakeTransfersSlide = () => {
         />
       </div>
     </article>
-  )
-}
+  );
+};
 
-export default MakeTransfersSlide
+export default MakeTransfersSlide;

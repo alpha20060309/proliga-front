@@ -1,25 +1,25 @@
-import { selectTopTeams } from 'lib/features/team/team.selector'
-import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
-import { cn } from 'lib/utils'
-import Image from 'next/image'
-import { Card, CardContent, CardTitle, CardHeader } from 'components/ui/card'
+import { selectTopTeams } from "lib/features/team/team.selector";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { cn } from "lib/utils";
+import Image from "next/image";
+import { Card, CardContent, CardTitle, CardHeader } from "components/ui/card";
 
 const RankingTeams = () => {
-  const { t } = useTranslation()
-  const topTeams = useSelector(selectTopTeams)
+  const { t } = useTranslation();
+  const topTeams = useSelector(selectTopTeams);
 
   return (
     <Card className="border-border w-full gap-2 py-4">
       <CardHeader className="flex flex-row items-center justify-between px-4">
         <CardTitle className="text-xl font-bold">
-          {t('Eng kuchli top 3 jamoalar')}
+          {t("Eng kuchli top 3 jamoalar")}
         </CardTitle>
       </CardHeader>
       <CardContent
         className={cn(
-          'mt-4 h-auto min-h-32 grid-cols-2 gap-2 px-4 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3',
-          topTeams?.length > 0 && 'grid'
+          "mt-4 h-auto min-h-32 grid-cols-2 gap-2 px-4 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3",
+          topTeams?.length > 0 && "grid",
         )}
       >
         {topTeams?.length > 0 ? (
@@ -31,8 +31,8 @@ const RankingTeams = () => {
         )}
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
 const TeamPlace = ({ team, index }) => {
   return (
@@ -46,11 +46,11 @@ const TeamPlace = ({ team, index }) => {
           className="size-6 md:size-8"
         />
         <span className="bg-primary text-primary-foreground flex h-6 w-12 items-center justify-center rounded-full text-xs font-bold sm:text-sm">
-          {team?.team_point ?? '00'}
+          {team?.team_point ?? "00"}
         </span>
       </div>
       <h4 className="text-card-foreground line-clamp-2 max-w-28 text-sm font-bold break-words">
-        {team?.team_name ?? 'team'}
+        {team?.team_name ?? "team"}
       </h4>
       <p className="text-card-foreground line-clamp-2 max-w-28 text-sm font-medium break-words">
         {team?.user_name}
@@ -59,7 +59,7 @@ const TeamPlace = ({ team, index }) => {
         {index + 1}
       </span>
     </div>
-  )
-}
+  );
+};
 
-export default RankingTeams
+export default RankingTeams;

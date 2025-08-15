@@ -1,65 +1,65 @@
-import { LANGUAGE } from './languages.util'
-import { PLAYER_POSITION } from './player.util'
+import { LANGUAGE } from "./languages.util";
+import { PLAYER_POSITION } from "./player.util";
 
-export const getCorrentPlayerPosition = (position, lang, type = 'short') => {
-  if (type === 'short') {
+export const getCorrentPlayerPosition = (position, lang, type = "short") => {
+  if (type === "short") {
     if (lang === LANGUAGE.uz) {
       switch (position) {
         case PLAYER_POSITION.GOA:
-          return 'DR'
+          return "DR";
         case PLAYER_POSITION.DEF:
-          return 'HM'
+          return "HM";
         case PLAYER_POSITION.MID:
-          return 'YH'
+          return "YH";
         case PLAYER_POSITION.STR:
-          return 'HJ'
+          return "HJ";
         default:
-          return position
+          return position;
       }
     }
     if (lang === LANGUAGE.ru) {
       switch (position) {
         case PLAYER_POSITION.GOA:
-          return 'ВР'
+          return "ВР";
         case PLAYER_POSITION.DEF:
-          return 'ЗЩ'
+          return "ЗЩ";
         case PLAYER_POSITION.MID:
-          return 'ПЗ'
+          return "ПЗ";
         case PLAYER_POSITION.STR:
-          return 'НП'
+          return "НП";
         default:
-          return position
+          return position;
       }
     }
   }
-  if (type === 'full') {
+  if (type === "full") {
     if (lang === LANGUAGE.uz) {
       switch (position) {
         case PLAYER_POSITION.GOA:
-          return 'Darvozabon'
+          return "Darvozabon";
         case PLAYER_POSITION.DEF:
-          return 'Himoyachi'
+          return "Himoyachi";
         case PLAYER_POSITION.MID:
-          return 'Yarim Himoyachi'
+          return "Yarim Himoyachi";
         case PLAYER_POSITION.STR:
-          return 'Hujumchi'
+          return "Hujumchi";
         default:
-          return position
+          return position;
       }
     }
     if (lang === LANGUAGE.ru) {
       switch (position) {
         case PLAYER_POSITION.GOA:
-          return 'Вратарь'
+          return "Вратарь";
         case PLAYER_POSITION.DEF:
-          return 'Защитник'
+          return "Защитник";
         case PLAYER_POSITION.MID:
-          return 'Полузащитник'
+          return "Полузащитник";
         case PLAYER_POSITION.STR:
-          return 'Нападающий'
+          return "Нападающий";
         default:
-          return position
+          return position;
       }
     }
   }
-}
+};

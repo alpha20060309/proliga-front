@@ -1,12 +1,12 @@
-import { getPage } from 'actions/getHTMLPage.action'
-import { getCorrectName } from 'utils/getCorrectName.util'
+import { getPage } from "actions/getHTMLPage.action";
+import { getCorrectName } from "utils/getCorrectName.util";
 
 const Regulation = async ({ params }) => {
-  const { locale } = await params
-  const { data, error } = await getPage('qoida')
+  const { locale } = await params;
+  const { data, error } = await getPage("qoida");
 
   if (error) {
-    return <div>{error?.message}</div>
+    return <div>{error?.message}</div>;
   }
 
   return (
@@ -16,7 +16,7 @@ const Regulation = async ({ params }) => {
         __html: getCorrectName({ lang: locale, uz: data?.uz, ru: data?.ru }),
       }}
     />
-  )
-}
+  );
+};
 
-export default Regulation
+export default Regulation;

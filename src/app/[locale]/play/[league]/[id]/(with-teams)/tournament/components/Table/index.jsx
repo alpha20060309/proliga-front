@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import {
   flexRender,
@@ -6,36 +6,36 @@ import {
   getFilteredRowModel,
   getSortedRowModel,
   useReactTable,
-} from '@tanstack/react-table'
-import Head from 'components/Table/Head'
+} from "@tanstack/react-table";
+import Head from "components/Table/Head";
 
-import { useSelector } from 'react-redux'
-import { createColumnHelper } from '@tanstack/react-table'
-import { useTranslation } from 'react-i18next'
-import { selectAllTeams } from 'lib/features/team/team.selector'
-import capitalize from 'lodash/capitalize'
-import { Table } from 'components/ui/table'
-import Body from 'components/Table/Body'
-import { Link } from 'next-view-transitions'
+import { useSelector } from "react-redux";
+import { createColumnHelper } from "@tanstack/react-table";
+import { useTranslation } from "react-i18next";
+import { selectAllTeams } from "lib/features/team/team.selector";
+import capitalize from "lodash/capitalize";
+import { Table } from "components/ui/table";
+import Body from "components/Table/Body";
+import { Link } from "next-view-transitions";
 
-const columnHelper = createColumnHelper()
-import { selectCurrentCompetition } from 'lib/features/competition/competition.selector'
+const columnHelper = createColumnHelper();
+import { selectCurrentCompetition } from "lib/features/competition/competition.selector";
 
 function TournamentTable({ showUserTourTeam }) {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
-  const allTeams = useSelector(selectAllTeams)
+  const allTeams = useSelector(selectAllTeams);
 
-  const currentCompetition = useSelector(selectCurrentCompetition)
+  const currentCompetition = useSelector(selectCurrentCompetition);
 
   const columns = [
-    columnHelper.accessor('', {
-      accessorFn: (row) => row?.team?.order ?? '',
+    columnHelper.accessor("", {
+      accessorFn: (row) => row?.team?.order ?? "",
       header: capitalize(t("O'RIN")),
-      id: 'Id',
+      id: "Id",
     }),
-    columnHelper.accessor('name', {
-      accessorFn: (row) => row?.team?.name ?? '',
+    columnHelper.accessor("name", {
+      accessorFn: (row) => row?.team?.name ?? "",
       cell: (info) => (
         <Link
           href={`/team-view/${currentCompetition?.id}/${info?.row?.original?.team?.id ?? 0}`}
@@ -43,24 +43,24 @@ function TournamentTable({ showUserTourTeam }) {
           {info.getValue()}
         </Link>
       ),
-      header: t('Jamoa'),
+      header: t("Jamoa"),
     }),
-    columnHelper.accessor('user', {
-      accessorFn: (row) => row?.user_id?.name ?? '',
-      header: t('Foydalanuvchi'),
+    columnHelper.accessor("user", {
+      accessorFn: (row) => row?.user_id?.name ?? "",
+      header: t("Foydalanuvchi"),
     }),
-    columnHelper.accessor('point', {
+    columnHelper.accessor("point", {
       accessorFn: (row) => row?.point,
-      id: 'point',
+      id: "point",
       cell: (info) => info.getValue(),
-      header: t('Tur'),
+      header: t("Tur"),
     }),
-    columnHelper.accessor('team-point', {
+    columnHelper.accessor("team-point", {
       accessorFn: (row) => row?.team?.point,
-      id: 'hammasi',
-      header: t('Hammasi'),
+      id: "hammasi",
+      header: t("Hammasi"),
     }),
-  ]
+  ];
 
   const table = useReactTable({
     columns,
@@ -68,7 +68,7 @@ function TournamentTable({ showUserTourTeam }) {
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-  })
+  });
 
   return (
     <Table className="text-foreground h-auto w-full min-w-72 table-auto text-xs sm:text-sm">
@@ -79,7 +79,7 @@ function TournamentTable({ showUserTourTeam }) {
         showUserTourTeam={showUserTourTeam}
       />
     </Table>
-  )
+  );
 }
 
-export default TournamentTable
+export default TournamentTable;

@@ -1,10 +1,10 @@
-import Gutter from 'components/Gutter'
-import RulesSlider from '../RulesSlider'
-import Matches from '../Matches'
-import News from '../News'
-import MiniBanner from 'shared/Banners/Mini'
-import BigBanner from 'shared/Banners/Big'
-import { memo } from 'react'
+import Gutter from "components/Gutter";
+import RulesSlider from "../RulesSlider";
+import Matches from "../Matches";
+import News from "../News";
+import MiniBanner from "shared/Banners/Mini";
+import BigBanner from "shared/Banners/Big";
+import { memo } from "react";
 
 const PlayFooter = () => {
   return (
@@ -19,7 +19,7 @@ const PlayFooter = () => {
       </section>
       <RulesSlider />
     </Gutter>
-  )
-}
+  );
+};
 
-export default memo(PlayFooter)
+export default memo(PlayFooter);

@@ -1,27 +1,27 @@
-import Player from './Player'
-import { useSelector } from 'react-redux'
-import { memo } from 'react'
+import Player from "./Player";
+import { useSelector } from "react-redux";
+import { memo } from "react";
 import {
   selectDEF,
   selectGOA,
   selectMID,
   selectSTR,
-} from 'lib/features/teamPlayer/teamPlayer.selector'
+} from "lib/features/teamPlayer/teamPlayer.selector";
 import {
   PlayersStructureContainer,
   GOAContainer,
   DEFContainer,
   MIDContainer,
   STRContainer,
-} from 'components/Game/Player'
-import { StadiumSpinner } from 'components/Game/Stadium'
+} from "components/Game/Player";
+import { StadiumSpinner } from "components/Game/Stadium";
 
 const ProfilePlayersStructure = () => {
-  const { isLoading } = useSelector((state) => state.teamPlayer)
-  const GOA = useSelector(selectGOA)
-  const DEF = useSelector(selectDEF)
-  const MID = useSelector(selectMID)
-  const STR = useSelector(selectSTR)
+  const { isLoading } = useSelector((state) => state.teamPlayer);
+  const GOA = useSelector(selectGOA);
+  const DEF = useSelector(selectDEF);
+  const MID = useSelector(selectMID);
+  const STR = useSelector(selectSTR);
 
   return (
     <PlayersStructureContainer>
@@ -52,7 +52,7 @@ const ProfilePlayersStructure = () => {
         </>
       )}
     </PlayersStructureContainer>
-  )
-}
+  );
+};
 
-export default memo(ProfilePlayersStructure)
+export default memo(ProfilePlayersStructure);

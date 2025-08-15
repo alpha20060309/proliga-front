@@ -1,4 +1,4 @@
-import { Skeleton } from 'components/ui/skeleton'
+import { Skeleton } from "components/ui/skeleton";
 import {
   Table,
   TableHeader,
@@ -6,7 +6,7 @@ import {
   TableHead,
   TableBody,
   TableCell,
-} from 'components/ui/table'
+} from "components/ui/table";
 
 const CabinetTransactionsSkeleton = ({ rows = 10, cols = 4 }) => {
   return (
@@ -17,8 +17,8 @@ const CabinetTransactionsSkeleton = ({ rows = 10, cols = 4 }) => {
       </Table>
       <CabinetTransactionsSkeletonPagination />
     </div>
-  )
-}
+  );
+};
 
 const CabinetTransactionsSkeletonBody = ({ cols = 5, rows = 9 }) => {
   return (
@@ -39,8 +39,8 @@ const CabinetTransactionsSkeletonBody = ({ cols = 5, rows = 9 }) => {
         </TableRow>
       ))}
     </TableBody>
-  )
-}
+  );
+};
 
 const CabinetTransactionsSkeletonHead = ({ cols = 5 }) => {
   return (
@@ -56,8 +56,8 @@ const CabinetTransactionsSkeletonHead = ({ cols = 5 }) => {
         ))}
       </TableRow>
     </TableHeader>
-  )
-}
+  );
+};
 
 const CabinetTransactionsSkeletonPagination = () => {
   return (
@@ -66,7 +66,7 @@ const CabinetTransactionsSkeletonPagination = () => {
         <Skeleton key={index} className="size-6 rounded-sm md:size-8" />
       ))}
     </section>
-  )
-}
+  );
+};
 
-export default CabinetTransactionsSkeleton
+export default CabinetTransactionsSkeleton;

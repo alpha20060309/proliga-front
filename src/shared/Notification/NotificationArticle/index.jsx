@@ -1,10 +1,10 @@
-import { useSelector } from 'react-redux'
-import { getCorrectName } from 'utils/getCorrectName.util'
-import { formatDate } from 'utils/formatDate.util'
+import { useSelector } from "react-redux";
+import { getCorrectName } from "utils/getCorrectName.util";
+import { formatDate } from "utils/formatDate.util";
 
 const NotificationArticle = ({ notification, handleNotificationClick }) => {
-  const { lang } = useSelector((store) => store.systemLanguage)
-  const date = new Date(notification?.published_at ?? new Date())
+  const { lang } = useSelector((store) => store.systemLanguage);
+  const date = new Date(notification?.published_at ?? new Date());
 
   return (
     <div
@@ -22,11 +22,11 @@ const NotificationArticle = ({ notification, handleNotificationClick }) => {
           })}
         </p>
         <p className="text-muted-foreground text-xs">
-          {formatDate(date, 'notifications')}
+          {formatDate(date, "notifications")}
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default NotificationArticle
+export default NotificationArticle;

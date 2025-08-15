@@ -1,32 +1,32 @@
-'use client'
+"use client";
 
-import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
-import { PACKAGE_TYPE } from 'utils/packages.util'
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { PACKAGE_TYPE } from "utils/packages.util";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from 'components/ui/dialog'
-import { setBalanceModal } from 'lib/features/currentTeam/currentTeam.slice'
-import { Badge } from 'components/ui/badge'
-import { Coins, InfoIcon } from 'lucide-react'
+} from "components/ui/dialog";
+import { setBalanceModal } from "lib/features/currentTeam/currentTeam.slice";
+import { Badge } from "components/ui/badge";
+import { Coins, InfoIcon } from "lucide-react";
 import {
   HoverCardTrigger,
   HoverCard,
   HoverCardContent,
-} from 'components/ui/hover-card'
-import { selectPackages } from 'lib/features/package/package.selector'
-import { DEFAULT_BALANCE } from 'utils/config.global'
-import PackageModalLink from '../../PackageModalLink'
+} from "components/ui/hover-card";
+import { selectPackages } from "lib/features/package/package.selector";
+import { DEFAULT_BALANCE } from "utils/config.global";
+import PackageModalLink from "../../PackageModalLink";
 
 const TeamBalanceModal = () => {
-  const dispatch = useDispatch()
-  const packages = useSelector(selectPackages)
-  const { t } = useTranslation()
-  const { balanceModal } = useSelector((store) => store.currentTeam)
+  const dispatch = useDispatch();
+  const packages = useSelector(selectPackages);
+  const { t } = useTranslation();
+  const { balanceModal } = useSelector((store) => store.currentTeam);
 
   return (
     <Dialog
@@ -36,19 +36,19 @@ const TeamBalanceModal = () => {
       <DialogContent className="max-h-[92%] w-full max-w-full overflow-auto rounded-lg p-4 sm:max-w-md xl:max-w-lg xl:p-6">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold lg:text-2xl">
-            {t('Boost Your Team Balance!')}
+            {t("Boost Your Team Balance!")}
           </DialogTitle>
           <HoverCard>
             <HoverCardTrigger asChild>
               <DialogDescription className="flex cursor-help items-center text-sm lg:text-base">
                 {t(
-                  'Increase your spending power for better players and strategies'
+                  "Increase your spending power for better players and strategies",
                 )}
                 <InfoIcon className="ml-1 h-4 w-4" />
               </DialogDescription>
             </HoverCardTrigger>
             <HoverCardContent className="w-80">
-              <p className="text-sm">{t('balance modal info')}</p>
+              <p className="text-sm">{t("balance modal info")}</p>
             </HoverCardContent>
           </HoverCard>
         </DialogHeader>
@@ -62,16 +62,16 @@ const TeamBalanceModal = () => {
                   onClick={() => dispatch(setBalanceModal(false))}
                 >
                   <Badge variant="secondary" className="text-foreground mb-2">
-                    +{item.amount - DEFAULT_BALANCE} {t('Coins')}
+                    +{item.amount - DEFAULT_BALANCE} {t("Coins")}
                   </Badge>
                   <h3 className="text-foreground text-lg font-semibold">
-                    {t('Increase your balance!')}
+                    {t("Increase your balance!")}
                   </h3>
                   <p className="text-muted-foreground text-sm">
-                    {t('Add coins to your balance').replace('$', item.amount)}
+                    {t("Add coins to your balance").replace("$", item.amount)}
                   </p>
                 </PackageModalLink>
-              )
+              ),
           )}
         </div>
         <div className="mt-6 flex items-center justify-center space-x-2 text-sm">
@@ -82,7 +82,7 @@ const TeamBalanceModal = () => {
         </div>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default TeamBalanceModal
+export default TeamBalanceModal;

@@ -1,33 +1,33 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { tourTeamExtraReducer } from './tourTeam.extraReducer'
+import { createSlice } from "@reduxjs/toolkit";
+import { tourTeamExtraReducer } from "./tourTeam.extraReducer";
 
 const initialState = {
   tourTeams: [],
   currentTourTeam: {},
   isLoading: false,
   error: null,
-}
+};
 
 const tourTeamSlice = createSlice({
-  name: 'tourTeam',
+  name: "tourTeam",
   initialState,
   reducers: {
     setCurrentTourTeam: (state, action) => {
-      const tour = action.payload
+      const tour = action.payload;
       if (action.payload?.id) {
         state.currentTourTeam = state.tourTeams.find(
-          (t) => +t.tour_id === +tour.id
-        )
+          (t) => +t.tour_id === +tour.id,
+        );
       }
     },
     setCurrentTourTeamTransfersCount: (state, action) => {
-      state.currentTourTeam.current_count_of_transfers = action.payload
+      state.currentTourTeam.current_count_of_transfers = action.payload;
     },
   },
   extraReducers: tourTeamExtraReducer,
-})
+});
 
 export const { setCurrentTourTeam, setCurrentTourTeamTransfersCount } =
-  tourTeamSlice.actions
+  tourTeamSlice.actions;
 
-export default tourTeamSlice.reducer
+export default tourTeamSlice.reducer;

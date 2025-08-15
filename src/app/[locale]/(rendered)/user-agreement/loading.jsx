@@ -1,7 +1,7 @@
-import PageSkeleton from 'components/PageSkeleton'
+import PageSkeleton from "components/PageSkeleton";
 
 const Loading = () => {
-  return <PageSkeleton />
-}
+  return <PageSkeleton />;
+};
 
-export default Loading
+export default Loading;

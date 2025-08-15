@@ -1,16 +1,16 @@
-import { createDraftSafeSelector } from '@reduxjs/toolkit'
+import { createDraftSafeSelector } from "@reduxjs/toolkit";
 
 export const selectThemes = createDraftSafeSelector(
   (state) => state.theme,
-  (theme) => theme.themes
-)
+  (theme) => theme.themes,
+);
 
 export const selectDarkTheme = createDraftSafeSelector(
   (state) => state.theme,
-  (theme) => theme.darkTheme
-)
+  (theme) => theme.darkTheme,
+);
 
 export const selectLightTheme = createDraftSafeSelector(
   (state) => state.theme,
-  (theme) => theme.lightTheme
-)
+  (theme) => theme.lightTheme,
+);

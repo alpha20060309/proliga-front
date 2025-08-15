@@ -1,30 +1,30 @@
-import Image from 'next/image'
-import { Button } from 'components/ui/button'
-import { Share2 } from 'lucide-react'
-import { cn } from 'lib/utils'
-import { toast } from 'sonner'
-import { useTranslation } from 'react-i18next'
-import { SelectTrigger } from 'components/ui/select'
-import { Loader } from 'lucide-react'
+import Image from "next/image";
+import { Button } from "components/ui/button";
+import { Share2 } from "lucide-react";
+import { cn } from "lib/utils";
+import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
+import { SelectTrigger } from "components/ui/select";
+import { Loader } from "lucide-react";
 
 export const StadiumContainer = ({ children, hideShareButton = false }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   const handleCopy = (value) => {
-    navigator.clipboard.writeText(value)
-    toast.info(t('Buferga muvaffaqiyatli nusxalandi!'))
-  }
+    navigator.clipboard.writeText(value);
+    toast.info(t("Buferga muvaffaqiyatli nusxalandi!"));
+  };
 
   const handleShare = async () => {
     if (navigator.share) {
       await navigator.share({
-        title: 'Fantasy Football',
-        url: window.location.href.replace('play', 'team-view'),
-      })
+        title: "Fantasy Football",
+        url: window.location.href.replace("play", "team-view"),
+      });
     } else {
-      handleCopy(window.location.href.replace('play', 'team-view'))
+      handleCopy(window.location.href.replace("play", "team-view"));
     }
-  }
+  };
 
   return (
     <section className="relative h-auto w-full">
@@ -40,9 +40,9 @@ export const StadiumContainer = ({ children, hideShareButton = false }) => {
       {!hideShareButton && (
         <Button
           onClick={handleShare}
-          variant={'ghost'}
+          variant={"ghost"}
           className={cn(
-            'border-primary xs:bottom-4 xs:right-4 absolute right-3 bottom-3 z-20 size-6 cursor-pointer rounded-sm border bg-transparent p-0 sm:right-5 sm:bottom-5 md:size-7'
+            "border-primary xs:bottom-4 xs:right-4 absolute right-3 bottom-3 z-20 size-6 cursor-pointer rounded-sm border bg-transparent p-0 sm:right-5 sm:bottom-5 md:size-7",
           )}
           aria-label="Share"
         >
@@ -51,15 +51,15 @@ export const StadiumContainer = ({ children, hideShareButton = false }) => {
       )}
       {children}
     </section>
-  )
-}
+  );
+};
 
 export function StadiumSectionWrapper({ children }) {
   return (
     <div className="xs:px-0 mx-auto flex h-full w-full max-w-lg grow flex-col px-2 lg:mx-0 lg:w-1/2 lg:max-w-2xl xl:grow-0">
       {children}
     </div>
-  )
+  );
 }
 
 export function StadiumSelectTrigger({ children, ...props }) {
@@ -70,7 +70,7 @@ export function StadiumSelectTrigger({ children, ...props }) {
     >
       {children}
     </SelectTrigger>
-  )
+  );
 }
 
 export function StadiumSaveButton({ children, ...props }) {
@@ -81,7 +81,7 @@ export function StadiumSaveButton({ children, ...props }) {
     >
       {children}
     </Button>
-  )
+  );
 }
 
 export function StadiumSpinner() {
@@ -89,5 +89,5 @@ export function StadiumSpinner() {
     <div className="absolute right-0 bottom-0 left-0 mx-auto flex h-full items-center justify-center self-center rounded-md">
       <Loader className="mx-auto size-10 text-white animate-spin sm:size-12" />
     </div>
-  )
+  );
 }

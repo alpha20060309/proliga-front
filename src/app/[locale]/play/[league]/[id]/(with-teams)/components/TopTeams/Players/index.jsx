@@ -1,19 +1,19 @@
-import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
-import { selectTopPlayers } from 'lib/features/player/player.selector'
-import { getUrl } from 'utils/static.util'
-import { getCorrectName } from 'utils/getCorrectName.util'
-import { Card, CardContent, CardHeader, CardTitle } from 'components/ui/card'
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { selectTopPlayers } from "lib/features/player/player.selector";
+import { getUrl } from "utils/static.util";
+import { getCorrectName } from "utils/getCorrectName.util";
+import { Card, CardContent, CardHeader, CardTitle } from "components/ui/card";
 
 const RankingPlayers = () => {
-  const { t } = useTranslation()
-  const topPlayers = useSelector(selectTopPlayers)
+  const { t } = useTranslation();
+  const topPlayers = useSelector(selectTopPlayers);
 
   return (
     <Card className="border-border w-full gap-2 py-4">
       <CardHeader className="flex flex-row items-center justify-between px-4">
         <CardTitle className="text-xl font-bold">
-          {t('Eng kuchli top 3 - futbolchilar')}
+          {t("Eng kuchli top 3 - futbolchilar")}
         </CardTitle>
       </CardHeader>
       <CardContent className="mt-4 grid grid-cols-2 gap-2 px-4 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
@@ -26,15 +26,15 @@ const RankingPlayers = () => {
             />
           ))
         ) : (
-          <div>{t('Oyinchilar yoq')}</div>
+          <div>{t("Oyinchilar yoq")}</div>
         )}
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
 const PlayerPlace = ({ player, index }) => {
-  const { lang } = useSelector((store) => store.systemLanguage)
+  const { lang } = useSelector((store) => store.systemLanguage);
 
   return (
     <div className="bg-secondary relative min-h-32 rounded-sm p-2">
@@ -44,7 +44,7 @@ const PlayerPlace = ({ player, index }) => {
           alt="player"
           width={24}
           height={24}
-          onError={(e) => (e.target.src = '/images/placeholder-user.webp')}
+          onError={(e) => (e.target.src = "/images/placeholder-user.webp")}
           className="size-6 rounded-full object-cover md:size-8"
         />
         <span className="bg-primary text-primary-foreground flex h-6 w-12 items-center justify-center rounded-full text-xs font-bold sm:text-sm">
@@ -65,7 +65,7 @@ const PlayerPlace = ({ player, index }) => {
         {index + 1}
       </span>
     </div>
-  )
-}
+  );
+};
 
-export default RankingPlayers
+export default RankingPlayers;

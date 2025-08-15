@@ -1,76 +1,76 @@
-'use client'
+"use client";
 
-import { Link } from 'next-view-transitions'
-import { useState, useTransition } from 'react'
-import { useSelector } from 'react-redux'
-import { PhoneInput } from 'components/PhoneInput'
-import { useTranslation } from 'react-i18next'
-import { toast } from 'sonner'
-import { CONFIG_KEY } from 'utils/config.util'
-import { Button } from 'components/ui/button'
-import { Eye, EyeOff, Lock, Mail, Loader2 } from 'lucide-react'
-import { selectAgent, selectGeo } from 'lib/features/auth/auth.selector'
-import { isEmail } from 'validator'
-import { cn } from 'lib/utils'
-import { memo } from 'react'
-import { selectSystemConfig } from 'lib/features/systemConfig/systemConfig.selector'
-import SocialLogin from '../SocialLogin'
-import { Input } from 'components/ui/input'
-import { useSession } from 'next-auth/react'
-import { useSendOTP } from 'hooks/auth/useSendOTP'
-import { register } from 'actions/register.action'
-import { Card, CardHeader, CardTitle, CardContent } from 'components/ui/card'
-import { Label } from 'components/ui/label'
-import { Checkbox } from 'components/ui/checkbox'
-import { useMetrica } from 'next-yandex-metrica'
-import { analytics } from 'utils/analytics.util'
+import { Link } from "next-view-transitions";
+import { useState, useTransition } from "react";
+import { useSelector } from "react-redux";
+import { PhoneInput } from "components/PhoneInput";
+import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
+import { CONFIG_KEY } from "utils/config.util";
+import { Button } from "components/ui/button";
+import { Eye, EyeOff, Lock, Mail, Loader2 } from "lucide-react";
+import { selectAgent, selectGeo } from "lib/features/auth/auth.selector";
+import { isEmail } from "validator";
+import { cn } from "lib/utils";
+import { memo } from "react";
+import { selectSystemConfig } from "lib/features/systemConfig/systemConfig.selector";
+import SocialLogin from "../SocialLogin";
+import { Input } from "components/ui/input";
+import { useSession } from "next-auth/react";
+import { useSendOTP } from "hooks/auth/useSendOTP";
+import { register } from "actions/register.action";
+import { Card, CardHeader, CardTitle, CardContent } from "components/ui/card";
+import { Label } from "components/ui/label";
+import { Checkbox } from "components/ui/checkbox";
+import { useMetrica } from "next-yandex-metrica";
+import { analytics } from "utils/analytics.util";
 
 const SignUpForm = ({ setShouldRedirect }) => {
-  const { t } = useTranslation()
-  const { update } = useSession()
-  const { fingerprint } = useSelector((store) => store.auth)
-  const geo = useSelector(selectGeo)
-  const agent = useSelector(selectAgent)
-  const [phone, setPhone] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const [showPassword, setShowPassword] = useState(false)
-  const [agreement, setAgreement] = useState(false)
-  const config = useSelector(selectSystemConfig)
-  const app_version = config[CONFIG_KEY.app_version]?.value ?? ''
-  const { sendOTP } = useSendOTP()
-  const { reachGoal } = useMetrica()
+  const { t } = useTranslation();
+  const { update } = useSession();
+  const { fingerprint } = useSelector((store) => store.auth);
+  const geo = useSelector(selectGeo);
+  const agent = useSelector(selectAgent);
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [agreement, setAgreement] = useState(false);
+  const config = useSelector(selectSystemConfig);
+  const app_version = config[CONFIG_KEY.app_version]?.value ?? "";
+  const { sendOTP } = useSendOTP();
+  const { reachGoal } = useMetrica();
 
-  const [isPending, startTransition] = useTransition()
+  const [isPending, startTransition] = useTransition();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!agreement) {
-      return toast.error(t('Iltimos qoidalarga rozilik berin'))
+      return toast.error(t("Iltimos qoidalarga rozilik berin"));
     }
     if (!email || !password || !confirmPassword) {
-      return toast.error(t("Barcha maydonlar to'ldirilishi shart"))
+      return toast.error(t("Barcha maydonlar to'ldirilishi shart"));
     }
     if (!isEmail(email)) {
-      return toast.error(t('Your email is incorrect.'))
+      return toast.error(t("Your email is incorrect."));
     }
     if (password !== confirmPassword) {
-      return toast.error(t('Parollar mos kelmadi'))
+      return toast.error(t("Parollar mos kelmadi"));
     }
     if (password.length < 6) {
-      return toast.error(t("Parol 6 ta belgidan kam bo'lmasligi kerak"))
+      return toast.error(t("Parol 6 ta belgidan kam bo'lmasligi kerak"));
     }
-    if (phone.slice(0, 4) !== '+998') {
-      return toast.error(t("Phone number must start with '+998'."))
+    if (phone.slice(0, 4) !== "+998") {
+      return toast.error(t("Phone number must start with '+998'."));
     }
     if (phone.length !== 13) {
-      return toast.error(t("Telefon raqam noto'g'ri"))
+      return toast.error(t("Telefon raqam noto'g'ri"));
     }
 
-    localStorage.setItem('sign-in-method', 'sign-up')
+    localStorage.setItem("sign-in-method", "sign-up");
     startTransition(async () => {
       try {
         const res = await register({
@@ -83,33 +83,35 @@ const SignUpForm = ({ setShouldRedirect }) => {
             agent,
             fingerprint,
           },
-        })
+        });
 
         if (res?.error) {
-          return toast.error(t(res.error))
+          return toast.error(t(res.error));
         }
-        const { phone_verified, success } = res
+        const { phone_verified, success } = res;
 
         if (success) {
-          await update({ phone_verified })
-          localStorage.setItem('app_version', app_version)
+          await update({ phone_verified });
+          localStorage.setItem("app_version", app_version);
 
           if (!phone_verified && res?.phone) {
-            toast.info(t('We are redirecting you to an sms confirmation page!'))
+            toast.info(
+              t("We are redirecting you to an sms confirmation page!"),
+            );
             await sendOTP({
               phone,
               shouldRedirect: true,
               redirectTo: `/confirm-otp?redirect=/championships&phone=${encodeURIComponent(res.phone)}`,
-            })
-            reachGoal(analytics.signUp)
+            });
+            reachGoal(analytics.signUp);
           }
         }
         // eslint-disable-next-line no-unused-vars
       } catch (error) {
-        toast.error(t('An unknown error occurred'))
+        toast.error(t("An unknown error occurred"));
       }
-    })
-  }
+    });
+  };
 
   return (
     <Card className="dark:bg-card/70 border-foreground/50">
@@ -122,12 +124,12 @@ const SignUpForm = ({ setShouldRedirect }) => {
         <form onSubmit={handleSubmit} className="flex w-full flex-col gap-2">
           <div className="relative flex flex-col gap-1">
             <Label htmlFor="phone" className="text-xs md:text-base">
-              {t('Telefon raqam')}:
+              {t("Telefon raqam")}:
             </Label>
             <PhoneInput
               id="phone"
               name="phone"
-              placeholder={t('99-999-99-99')}
+              placeholder={t("99-999-99-99")}
               defaultCountry="UZ"
               className="text-foreground border-foreground/20 placeholder:text-muted h-10 rounded border"
               value={phone}
@@ -136,7 +138,7 @@ const SignUpForm = ({ setShouldRedirect }) => {
           </div>
           <div className="relative flex flex-col gap-1">
             <Label htmlFor="email" className="text-xs md:text-base">
-              {t('Elektron pochta')}:
+              {t("Elektron pochta")}:
             </Label>
             <div className="relative">
               <Input
@@ -154,11 +156,11 @@ const SignUpForm = ({ setShouldRedirect }) => {
           </div>
           <div className="relative flex flex-col gap-1">
             <Label htmlFor="confirmPassword" className="text-xs md:text-base">
-              {t('Parol')}:
+              {t("Parol")}:
             </Label>
             <div className="relative">
               <Input
-                type={showPassword ? 'text' : 'password'}
+                type={showPassword ? "text" : "password"}
                 name="confirmPassword"
                 autoComplete="new-password"
                 id="confirmPassword"
@@ -185,11 +187,11 @@ const SignUpForm = ({ setShouldRedirect }) => {
           </div>
           <div className="relative flex flex-col gap-1">
             <Label htmlFor="password" className="text-xs md:text-base">
-              {t('Parol tasdiqlash')}:
+              {t("Parol tasdiqlash")}:
             </Label>
             <div className="relative">
               <Input
-                type={showConfirmPassword ? 'text' : 'password'}
+                type={showConfirmPassword ? "text" : "password"}
                 name="password"
                 id="password"
                 placeholder="********"
@@ -219,17 +221,17 @@ const SignUpForm = ({ setShouldRedirect }) => {
               id="agreement"
               checked={agreement}
               onCheckedChange={(checked) => setAgreement(checked)}
-              className={'border-foreground/20 bg-background'}
+              className={"border-foreground/20 bg-background"}
             />
             <Label
               htmlFor="agreement"
               className="text-muted-foreground cursor-pointer select-none"
             >
-              {t('Men')}{' '}
+              {t("Men")}{" "}
               <Link href="/user-agreement" className="underline">
-                {t('qoidalar')}
-              </Link>{' '}
-              {t('bilan tanishib chiqdim va ularga roziman')}
+                {t("qoidalar")}
+              </Link>{" "}
+              {t("bilan tanishib chiqdim va ularga roziman")}
             </Label>
           </div>
           <Button
@@ -237,22 +239,22 @@ const SignUpForm = ({ setShouldRedirect }) => {
             disabled={isPending}
             variant="outline"
             className={cn(
-              'text-foreground dark:border-accent/80 dark:hover:border-accent border-accent hover:bg-accent dark:hover:text-accent',
-              'h-12 w-full font-bold transition-all duration-300',
-              isPending && 'bg-accent text-accent-foreground'
+              "text-foreground dark:border-accent/80 dark:hover:border-accent border-accent hover:bg-accent dark:hover:text-accent",
+              "h-12 w-full font-bold transition-all duration-300",
+              isPending && "bg-accent text-accent-foreground",
             )}
           >
             {isPending ? (
               <Loader2 className="text-foreground mx-auto size-6 animate-spin" />
             ) : (
-              t('Akkaunt Ochish')
+              t("Akkaunt Ochish")
             )}
           </Button>
         </form>
         <SocialLogin setShouldRedirect={setShouldRedirect} />
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
-export default memo(SignUpForm)
+export default memo(SignUpForm);

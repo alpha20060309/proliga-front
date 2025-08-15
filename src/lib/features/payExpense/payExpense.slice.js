@@ -1,17 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { payExpenseExtraReducer } from './payExpense.extraReducer'
+import { createSlice } from "@reduxjs/toolkit";
+import { payExpenseExtraReducer } from "./payExpense.extraReducer";
 
 const initialState = {
   expenses: [],
   teamPackages: {},
   isLoading: false,
   error: null,
-}
+};
 
 const payExpenseSlice = createSlice({
-  name: 'payExpense',
+  name: "payExpense",
   initialState,
   extraReducers: payExpenseExtraReducer,
-})
+});
 
-export default payExpenseSlice.reducer
+export default payExpenseSlice.reducer;

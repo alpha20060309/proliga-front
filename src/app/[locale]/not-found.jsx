@@ -1,7 +1,7 @@
-import '../globals.css'
-import { Link } from 'next-view-transitions'
-import { Button } from 'components/ui/button'
-import { Card } from 'components/ui/card'
+import "../globals.css";
+import { Link } from "next-view-transitions";
+import { Button } from "components/ui/button";
+import { Card } from "components/ui/card";
 
 export default function NotFound() {
   return (
@@ -36,5 +36,5 @@ export default function NotFound() {
         </div>
       </Card>
     </div>
-  )
+  );
 }

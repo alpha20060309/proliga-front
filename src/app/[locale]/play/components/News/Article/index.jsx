@@ -1,26 +1,26 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { formatDate, formatViews } from 'utils/formatDate.util'
-import { CalendarDays, Eye } from 'lucide-react'
-import { getCorrectName } from 'utils/getCorrectName.util'
-import { useUpdateNewsView } from 'hooks/system/useUpdateNewsView'
-import { getUrl } from 'utils/static.util'
-import { setCurrentNews, setNewsModal } from 'lib/features/news/news.slice'
-import { memo, useMemo } from 'react'
+import { useDispatch, useSelector } from "react-redux";
+import { formatDate, formatViews } from "utils/formatDate.util";
+import { CalendarDays, Eye } from "lucide-react";
+import { getCorrectName } from "utils/getCorrectName.util";
+import { useUpdateNewsView } from "hooks/system/useUpdateNewsView";
+import { getUrl } from "utils/static.util";
+import { setCurrentNews, setNewsModal } from "lib/features/news/news.slice";
+import { memo, useMemo } from "react";
 
 const Article = ({ item }) => {
-  const dispatch = useDispatch()
-  const { lang } = useSelector((store) => store.systemLanguage)
-  const { updateNewsView } = useUpdateNewsView()
+  const dispatch = useDispatch();
+  const { lang } = useSelector((store) => store.systemLanguage);
+  const { updateNewsView } = useUpdateNewsView();
   const date = useMemo(
-    () => formatDate(item?.created_at, 'news'),
-    [item?.created_at]
-  )
+    () => formatDate(item?.created_at, "news"),
+    [item?.created_at],
+  );
 
   const handleClick = () => {
-    dispatch(setCurrentNews(item))
-    dispatch(setNewsModal(true))
-    setTimeout(async () => await updateNewsView(item?.id), 3000)
-  }
+    dispatch(setCurrentNews(item));
+    dispatch(setNewsModal(true));
+    setTimeout(async () => await updateNewsView(item?.id), 3000);
+  };
 
   return (
     <article
@@ -29,7 +29,7 @@ const Article = ({ item }) => {
     >
       <section className="my-auto flex aspect-4/3 h-full w-24 shrink-0 items-center justify-center md:w-32">
         <img
-          src={getUrl(item?.image) || ''}
+          src={getUrl(item?.image) || ""}
           alt={item.name}
           className="h-full w-full rounded-sm object-cover object-center shadow-md"
         />
@@ -52,7 +52,7 @@ const Article = ({ item }) => {
         </div>
       </section>
     </article>
-  )
-}
+  );
+};
 
-export default memo(Article)
+export default memo(Article);

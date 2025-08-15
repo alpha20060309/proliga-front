@@ -1,10 +1,10 @@
-import { CompeteTable } from './CompeteTable'
+import { CompeteTable } from "./CompeteTable";
 import {
   Card,
   CardContent,
   CardTitle,
   CardDescription,
-} from 'components/ui/card'
+} from "components/ui/card";
 
 const PromotionCompete = ({ t }) => {
   return (
@@ -15,15 +15,15 @@ const PromotionCompete = ({ t }) => {
         </div>
         <div className="flex flex-1 flex-col items-start gap-2 sm:gap-4 md:gap-8">
           <CardTitle className="xs:text-xl text-lg font-bold uppercase md:text-2xl xl:text-3xl">
-            {t('Raqobatlashing')}
+            {t("Raqobatlashing")}
           </CardTitle>
           <CardDescription className="xs:text-base max-w-lg text-sm md:text-lg lg:text-lg xl:text-xl">
-            {t('Boshqa foydalanuvchilar')}
+            {t("Boshqa foydalanuvchilar")}
           </CardDescription>
         </div>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
-export default PromotionCompete
+export default PromotionCompete;

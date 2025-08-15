@@ -1,5 +1,5 @@
-import { Skeleton } from 'components/ui/skeleton'
-import { PaginationSkeleton } from 'components/Table/Pagination/Server'
+import { Skeleton } from "components/ui/skeleton";
+import { PaginationSkeleton } from "components/Table/Pagination/Server";
 import {
   Table,
   TableHeader,
@@ -7,7 +7,7 @@ import {
   TableHead,
   TableBody,
   TableCell,
-} from 'components/ui/table'
+} from "components/ui/table";
 
 const TournamentTableSkeleton = ({ rows = 10, cols = 5, paginationCount }) => {
   return (
@@ -45,12 +45,12 @@ const TournamentTableSkeleton = ({ rows = 10, cols = 5, paginationCount }) => {
       </Table>
       <PaginationSkeleton
         count={paginationCount}
-        className={'mt-auto h-min w-full'}
+        className={"mt-auto h-min w-full"}
       />
     </>
-  )
-}
+  );
+};
 
 export default function Loading() {
-  return <TournamentTableSkeleton rows={10} cols={5} paginationCount={5} />
+  return <TournamentTableSkeleton rows={10} cols={5} paginationCount={5} />;
 }

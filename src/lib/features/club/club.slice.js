@@ -1,17 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { clubExtraReducer } from './club.extraReducer'
+import { createSlice } from "@reduxjs/toolkit";
+import { clubExtraReducer } from "./club.extraReducer";
 
 const initialState = {
   clubs: [],
   isLoading: false,
   error: null,
-}
+};
 
 const clubSlice = createSlice({
-  name: 'club',
+  name: "club",
   initialState,
   reducers: {},
   extraReducers: clubExtraReducer,
-})
+});
 
-export default clubSlice.reducer
+export default clubSlice.reducer;

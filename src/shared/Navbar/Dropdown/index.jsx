@@ -1,23 +1,23 @@
-import { Popover, PopoverTrigger } from 'components/ui/popover'
-import { useState } from 'react'
-import Avatar from 'shared/Avatar'
-import { useSelector } from 'react-redux'
-import { selectUser } from 'lib/features/auth/auth.selector'
-import { Trophy, Settings, LogOut, LogIn } from 'lucide-react'
-import { useLogOut } from 'hooks/auth/useLogOut'
-import { useTranslation } from 'react-i18next'
-import { PopoverContent } from 'components/ui/popover'
-import { Link } from 'next-view-transitions'
+import { Popover, PopoverTrigger } from "components/ui/popover";
+import { useState } from "react";
+import Avatar from "shared/Avatar";
+import { useSelector } from "react-redux";
+import { selectUser } from "lib/features/auth/auth.selector";
+import { Trophy, Settings, LogOut, LogIn } from "lucide-react";
+import { useLogOut } from "hooks/auth/useLogOut";
+import { useTranslation } from "react-i18next";
+import { PopoverContent } from "components/ui/popover";
+import { Link } from "next-view-transitions";
 
 const Dropdown = ({ setDropdownOpen }) => {
-  const { logOut } = useLogOut()
-  const { t } = useTranslation()
-  const user = useSelector(selectUser)
+  const { logOut } = useLogOut();
+  const { t } = useTranslation();
+  const user = useSelector(selectUser);
 
   const handleLogOut = async () => {
-    await logOut()
-    setDropdownOpen(false)
-  }
+    await logOut();
+    setDropdownOpen(false);
+  };
 
   return (
     <PopoverContent
@@ -26,31 +26,31 @@ const Dropdown = ({ setDropdownOpen }) => {
     >
       <NavLink onClick={() => setDropdownOpen(false)} href="/championships">
         <Trophy className="h-6 w-6" />
-        <p>{t('Chempionatlar')}</p>
+        <p>{t("Chempionatlar")}</p>
       </NavLink>
       {user?.id ? (
         <>
           <NavLink onClick={() => setDropdownOpen(false)} href="/settings">
             <Settings className="h-6 w-6" />
-            <p>{t('Sozlamalar')}</p>
+            <p>{t("Sozlamalar")}</p>
           </NavLink>
           <div
             onClick={handleLogOut}
             className="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground bg-destructive/50 text-sidebar-foreground group flex h-full w-full cursor-pointer gap-2 rounded px-1 py-1.5 transition-colors"
           >
             <LogOut className="h-6 w-6" />
-            <p>{t('Tizimdan chiqish')}</p>
+            <p>{t("Tizimdan chiqish")}</p>
           </div>
         </>
       ) : (
         <NavLink onClick={() => setDropdownOpen(false)} href="/auth">
           <LogIn className="h-6 w-6" />
-          <p>{t('Tizimga kirish_2')}</p>
+          <p>{t("Tizimga kirish_2")}</p>
         </NavLink>
       )}
     </PopoverContent>
-  )
-}
+  );
+};
 
 const NavLink = ({ children, href, onClick }) => {
   return (
@@ -61,12 +61,12 @@ const NavLink = ({ children, href, onClick }) => {
     >
       {children}
     </Link>
-  )
-}
+  );
+};
 
 const NavigationDropdown = () => {
-  const [isDropdownOpen, setDropdownOpen] = useState(false)
-  const user = useSelector(selectUser)
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const user = useSelector(selectUser);
 
   return (
     <Popover open={isDropdownOpen} onOpenChange={setDropdownOpen}>
@@ -75,7 +75,7 @@ const NavigationDropdown = () => {
       </PopoverTrigger>
       <Dropdown setDropdownOpen={setDropdownOpen} />
     </Popover>
-  )
-}
+  );
+};
 
-export default NavigationDropdown
+export default NavigationDropdown;

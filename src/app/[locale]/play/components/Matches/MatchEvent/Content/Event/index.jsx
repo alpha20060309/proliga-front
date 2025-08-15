@@ -1,32 +1,32 @@
-import { MATCH_EVENTS } from 'utils/match.util'
-import { useSelector } from 'react-redux'
-import { useTranslation } from 'react-i18next'
-import { motion } from 'framer-motion'
-import { getCorrectName } from 'utils/getCorrectName.util'
-import { eventVariants } from '../../animations.styles'
-import { cn } from 'lib/utils'
-import { selectCurrentMatch } from 'lib/features/match/match.selector'
-import MatchEventIcon from './Icon'
-import { memo } from 'react'
+import { MATCH_EVENTS } from "utils/match.util";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
+import { getCorrectName } from "utils/getCorrectName.util";
+import { eventVariants } from "../../animations.styles";
+import { cn } from "lib/utils";
+import { selectCurrentMatch } from "lib/features/match/match.selector";
+import MatchEventIcon from "./Icon";
+import { memo } from "react";
 
 const MatchEvent = ({ event, index }) => {
-  const { t } = useTranslation()
-  const { lang } = useSelector((store) => store.systemLanguage)
-  const currentMatch = useSelector(selectCurrentMatch)
+  const { t } = useTranslation();
+  const { lang } = useSelector((store) => store.systemLanguage);
+  const currentMatch = useSelector(selectCurrentMatch);
 
-  const hasSecondName = checkHasSecondName(event?.event_type)
-  const hasName = checkHasName(event?.event_type)
-  const isTextOnly = checkIsTextOnly(event?.event_type)
+  const hasSecondName = checkHasSecondName(event?.event_type);
+  const hasName = checkHasName(event?.event_type);
+  const isTextOnly = checkIsTextOnly(event?.event_type);
   let isHome = checkIsHome({
     event,
     isTextOnly,
     hasName,
     hasSecondName,
     currentMatch,
-  })
+  });
 
   if (isTextOnly) {
-    isHome = true
+    isHome = true;
   }
 
   if (
@@ -34,26 +34,26 @@ const MatchEvent = ({ event, index }) => {
     currentMatch?.home_club_id?.id === event.player_id?.club?.id &&
     currentMatch?.home_club_id?.id === event.second_player_id?.club?.id
   ) {
-    isHome = true
+    isHome = true;
   }
   if (hasName && event.player_id?.club?.id === currentMatch?.home_club_id?.id) {
-    isHome = true
+    isHome = true;
   }
 
   const renderHeader = (type) => {
     switch (type) {
       case MATCH_EVENTS.FIRST_TIME_START:
-        return t('Match Start')
+        return t("Match Start");
       case MATCH_EVENTS.FIRST_TIME_END:
-        return t('Halftime')
+        return t("Halftime");
       case MATCH_EVENTS.SECOND_TIME_START:
-        return t('2nd Match Start')
+        return t("2nd Match Start");
       case MATCH_EVENTS.SECOND_TIME_END:
-        return t('Game Ends')
+        return t("Game Ends");
       default:
-        return null
+        return null;
     }
-  }
+  };
 
   return (
     <motion.div
@@ -62,8 +62,8 @@ const MatchEvent = ({ event, index }) => {
       animate="visible"
       custom={index}
       className={cn(
-        'flex items-center justify-center',
-        isTextOnly ? 'flex-col' : isHome ? 'flex-row' : 'flex-row-reverse'
+        "flex items-center justify-center",
+        isTextOnly ? "flex-col" : isHome ? "flex-row" : "flex-row-reverse",
       )}
     >
       {isTextOnly ? (
@@ -74,15 +74,15 @@ const MatchEvent = ({ event, index }) => {
         <>
           <div
             className={cn(
-              'w-5/12',
-              isHome ? 'pr-4 text-right' : 'pl-4 text-left'
+              "w-5/12",
+              isHome ? "pr-4 text-right" : "pl-4 text-left",
             )}
           >
             {hasName && (
               <div
                 className={cn(
-                  'text-foreground text-sm md:text-base',
-                  event.event_type === MATCH_EVENTS.TRANSFER && 'text-success'
+                  "text-foreground text-sm md:text-base",
+                  event.event_type === MATCH_EVENTS.TRANSFER && "text-success",
                 )}
               >
                 {getCorrectName({
@@ -95,8 +95,8 @@ const MatchEvent = ({ event, index }) => {
             {event?.second_player_id && hasSecondName && (
               <div
                 className={cn(
-                  'text-muted-foreground text-xs md:text-sm',
-                  event.event_type === MATCH_EVENTS.TRANSFER && 'text-error'
+                  "text-muted-foreground text-xs md:text-sm",
+                  event.event_type === MATCH_EVENTS.TRANSFER && "text-error",
                 )}
               >
                 {getCorrectName({
@@ -114,8 +114,8 @@ const MatchEvent = ({ event, index }) => {
           </div>
           <div
             className={cn(
-              'w-5/12',
-              isHome ? 'pl-4 text-left' : 'pr-4 text-right'
+              "w-5/12",
+              isHome ? "pl-4 text-left" : "pr-4 text-right",
             )}
           >
             <div className="text-foreground/70 text-sm">{event.minute}`</div>
@@ -123,8 +123,8 @@ const MatchEvent = ({ event, index }) => {
         </>
       )}
     </motion.div>
-  )
-}
+  );
+};
 
 const checkIsTextOnly = (event_type) => {
   switch (event_type) {
@@ -132,11 +132,11 @@ const checkIsTextOnly = (event_type) => {
     case MATCH_EVENTS.FIRST_TIME_END:
     case MATCH_EVENTS.SECOND_TIME_START:
     case MATCH_EVENTS.SECOND_TIME_END:
-      return true
+      return true;
     default:
-      return false
+      return false;
   }
-}
+};
 
 const checkHasName = (event_type) => {
   switch (event_type) {
@@ -146,20 +146,20 @@ const checkHasName = (event_type) => {
     case MATCH_EVENTS.HIT_PENALTY:
     case MATCH_EVENTS.RED_CARD:
     case MATCH_EVENTS.YELLOW_CARD:
-      return true
+      return true;
     default:
-      return false
+      return false;
   }
-}
+};
 const checkHasSecondName = (event_type) => {
   switch (event_type) {
     case MATCH_EVENTS.TRANSFER:
     case MATCH_EVENTS.GOAL:
-      return true
+      return true;
     default:
-      return false
+      return false;
   }
-}
+};
 
 const checkIsHome = ({
   event,
@@ -168,18 +168,18 @@ const checkIsHome = ({
   hasName,
   currentMatch,
 }) => {
-  if (isTextOnly) return true
+  if (isTextOnly) return true;
   if (
     hasSecondName &&
     currentMatch?.home_club_id?.id === event.player_id?.club?.id &&
     currentMatch?.home_club_id?.id === event.second_player_id?.club?.id
   ) {
-    return true
+    return true;
   }
   if (hasName && event.player_id?.club?.id === currentMatch?.home_club_id?.id) {
-    return true
+    return true;
   }
-  return false
-}
+  return false;
+};
 
-export default memo(MatchEvent)
+export default memo(MatchEvent);

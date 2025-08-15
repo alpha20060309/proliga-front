@@ -1,6 +1,6 @@
-import { createDraftSafeSelector } from '@reduxjs/toolkit'
+import { createDraftSafeSelector } from "@reduxjs/toolkit";
 
 export const selectExpenses = createDraftSafeSelector(
   (state) => state.payExpense,
-  (payExpense) => payExpense.expenses
-)
+  (payExpense) => payExpense.expenses,
+);

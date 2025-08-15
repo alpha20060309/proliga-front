@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import { SessionProvider } from 'next-auth/react'
-import { memo } from 'react'
+import { SessionProvider } from "next-auth/react";
+import { memo } from "react";
 const AuthSessionProvider = ({ children }) => {
   return (
     <SessionProvider
@@ -11,7 +11,7 @@ const AuthSessionProvider = ({ children }) => {
     >
       {children}
     </SessionProvider>
-  )
-}
+  );
+};
 
-export default memo(AuthSessionProvider)
+export default memo(AuthSessionProvider);

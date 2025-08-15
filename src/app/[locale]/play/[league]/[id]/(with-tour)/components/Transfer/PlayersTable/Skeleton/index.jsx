@@ -1,5 +1,5 @@
-import { Skeleton } from 'components/ui/skeleton'
-import { Card, CardContent, CardFooter } from 'components/ui/card'
+import { Skeleton } from "components/ui/skeleton";
+import { Card, CardContent, CardFooter } from "components/ui/card";
 import {
   Table,
   TableBody,
@@ -7,13 +7,13 @@ import {
   TableHeader,
   TableRow,
   TableCell,
-} from 'components/ui/table'
+} from "components/ui/table";
 
 const PlayersTableSkeleton = () => {
   return (
     <Card
       className={
-        'border-border mx-auto h-min w-full max-w-lg gap-2 py-4 lg:w-[55%] lg:max-w-2xl xl:gap-0.5'
+        "border-border mx-auto h-min w-full max-w-lg gap-2 py-4 lg:w-[55%] lg:max-w-2xl xl:gap-0.5"
       }
     >
       <TeamOverviewSkeleton />
@@ -28,8 +28,8 @@ const PlayersTableSkeleton = () => {
         <TransferTablePaginationSkeleton />
       </CardFooter>
     </Card>
-  )
-}
+  );
+};
 
 const TeamOverviewSkeleton = () => {
   return (
@@ -40,8 +40,8 @@ const TeamOverviewSkeleton = () => {
         <Skeleton className="h-4 w-1/4" />
       </div>
     </div>
-  )
-}
+  );
+};
 
 const TransferTableBodySkeleton = () => {
   return (
@@ -62,8 +62,8 @@ const TransferTableBodySkeleton = () => {
         </TableRow>
       ))}
     </TableBody>
-  )
-}
+  );
+};
 
 const TransferTableFiltersSkeleton = () => {
   return (
@@ -72,8 +72,8 @@ const TransferTableFiltersSkeleton = () => {
         <Skeleton key={index} className="h-8 w-full" />
       ))}
     </div>
-  )
-}
+  );
+};
 
 const TransferTableHeadSkeleton = () => {
   return (
@@ -86,8 +86,8 @@ const TransferTableHeadSkeleton = () => {
         ))}
       </TableRow>
     </TableHeader>
-  )
-}
+  );
+};
 
 const TransferTablePaginationSkeleton = () => {
   return (
@@ -96,7 +96,7 @@ const TransferTablePaginationSkeleton = () => {
         <Skeleton key={index} className="h-8 w-8 rounded-sm" />
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default PlayersTableSkeleton
+export default PlayersTableSkeleton;

@@ -1,5 +1,5 @@
-import { Skeleton } from 'components/ui/skeleton'
-import { Card, CardContent, CardHeader } from 'components/ui/card'
+import { Skeleton } from "components/ui/skeleton";
+import { Card, CardContent, CardHeader } from "components/ui/card";
 
 export function PrizesSkeleton({ count = 4 }) {
   return (
@@ -11,7 +11,7 @@ export function PrizesSkeleton({ count = 4 }) {
         ))}
       </section>
     </>
-  )
+  );
 }
 
 export function PrizeSkeleton() {
@@ -21,7 +21,7 @@ export function PrizeSkeleton() {
       <Skeleton className="bg-muted h-full min-h-64 min-w-64 flex-1 rounded-xl lg:min-h-80 lg:min-w-80 xl:min-h-96 xl:min-w-96" />
       <Skeleton className="bg-muted mt-2 h-6 w-16" />
     </div>
-  )
+  );
 }
 
 export function CompetitionSkeleton() {
@@ -37,9 +37,9 @@ export function CompetitionSkeleton() {
         <PrizeSkeleton />
       </CardContent>
     </Card>
-  )
+  );
 }
 
 export default function PrizesLoading() {
-  return <PrizesSkeleton />
+  return <PrizesSkeleton />;
 }
