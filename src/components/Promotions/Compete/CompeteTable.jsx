@@ -46,7 +46,6 @@ export function CompeteTable({ className }) {
     },
     {
       enableSorting: false,
-
       accessorKey: "team",
       header: t("Jamoa"),
       cell: ({ row }) => <div>{row.getValue("team")}</div>,

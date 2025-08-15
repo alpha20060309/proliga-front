@@ -199,7 +199,7 @@ function PlayersTable() {
       header: t("Ochko"),
     }),
     columnHelper.accessor("position", {
-      accessorFn: (row) => row.position,
+      accessorFn: (row) => row?.position,
       id: "position",
       header: t("Poz"),
       cell: (info) => <>{getCorrentPlayerPosition(info.getValue(), lang)}</>,
