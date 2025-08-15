@@ -1,4 +1,4 @@
-import PositionsFilter from "./Positions";
+import PositionsFilter from "components/Table/Filters/Position";
 import NameFilter from "components/Table/Filters/Name";
 import ClubsFilter from "components/Table/Filters/Clubs";
 import PriceFilter from "components/Table/Filters/Price";

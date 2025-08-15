@@ -34,12 +34,15 @@ function StatisticsTable() {
 
   const columns = [
     columnHelper.accessor("player_id.position", {
-      accessorFn: (row) => getCorrentPlayerPosition(row?.position, lang),
-      id: "player-position",
-      header: t("POZ"),
+      accessorFn: (row) => row?.position,
+      id: "position",
+      header: t("Poz"),
+      cell: (info) => <>{getCorrentPlayerPosition(info.getValue(), lang)}</>,
       meta: {
         title: t("O‘yinchining pozitsiyasi"),
+        filterVariant: "position",
       },
+      enableSorting: false,
     }),
     columnHelper.accessor("player_id.name", {
       accessorFn: (row) =>
@@ -50,6 +53,7 @@ function StatisticsTable() {
         title: t("O'yinchini toliq ismi"),
         filterVariant: "name",
       },
+      enableSorting: false,
     }),
     columnHelper.accessor("club.name", {
       accessorFn: (row) =>
@@ -70,6 +74,7 @@ function StatisticsTable() {
       meta: {
         filterVariant: "club",
       },
+      enableSorting: false,
     }),
     columnHelper.accessor("ochko", {
       accessorFn: (row) => row?.point,
@@ -145,7 +150,7 @@ function StatisticsTable() {
 
   return (
     <>
-      <section className="flex gap-1">
+      <section className="grid grid-cols-2 sm:grid-cols-3 gap-1 w-full max-w-144">
         {table
           .getHeaderGroups()
           .map((headerGroup) =>

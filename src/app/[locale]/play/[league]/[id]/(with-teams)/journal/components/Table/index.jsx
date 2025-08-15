@@ -36,6 +36,7 @@ function JournalTable() {
       id: "name",
       accessorFn: (row) =>
         getCorrectName({ lang, uz: row?.name_uz, ru: row?.name_ru }),
+      enableSorting: false,
     }),
   ];
 

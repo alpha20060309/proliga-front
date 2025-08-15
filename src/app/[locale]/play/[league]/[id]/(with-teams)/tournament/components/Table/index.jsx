@@ -44,10 +44,12 @@ function TournamentTable({ showUserTourTeam }) {
         </Link>
       ),
       header: t("Jamoa"),
+      enableSorting: false,
     }),
     columnHelper.accessor("user", {
       accessorFn: (row) => row?.user_id?.name ?? "",
       header: t("Foydalanuvchi"),
+      enableSorting: false,
     }),
     columnHelper.accessor("point", {
       accessorFn: (row) => row?.point,
