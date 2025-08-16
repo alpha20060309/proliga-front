@@ -49,7 +49,7 @@ const WinPrizesSlide = () => {
         </p>
       </div>
       <div className="z grid grid-cols-2 grid-rows-2 justify-center gap-2 sm:flex sm:grid-rows-1 md:gap-4 xl:gap-8">
-        {prizes.map(
+        {prizes?.map(
           (prize) =>
             prize?.competition_id.id === competition_id &&
             prize?.is_active && <Prize prize={prize} key={prize?.id} />,
@@ -67,7 +67,7 @@ const Prize = ({ prize }) => {
     <div
       className={cn(
         "flex min-w-24 flex-1 flex-col items-center justify-center md:max-w-80",
-        prize.order === 3 &&
+        prize?.order === 3 &&
           "col-span-2 mx-auto max-w-[50%] sm:col-span-1 sm:mx-0 sm:max-w-max",
       )}
     >
@@ -84,7 +84,7 @@ const Prize = ({ prize }) => {
         />
       </div>
       <p>
-        <span className="font-bold md:text-xl">{prize.order} </span>
+        <span className="font-bold md:text-xl">{prize?.order} </span>
         {t("O'RIN")}
       </p>
     </div>
