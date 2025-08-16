@@ -14,7 +14,8 @@ export const fetchTeamPlayers = createAsyncThunk(
       .eq("competition_id", competition_id)
       .limit(11)
       .is("deleted_at", null)
-      .order("id");
+      .order("position")
+      .order("name");
 
     if (error) {
       throw error;
