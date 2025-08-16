@@ -17,4 +17,5 @@ export const CONFIG_KEY = {
   provider_facebook: "provider_facebook",
   seo_title: "seo_title",
   seo_description: "seo_description",
+  show_points: "show_points",
 };
