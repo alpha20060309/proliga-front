@@ -33,7 +33,7 @@ const PrizeContainer = async ({ competition, locale, t }) => {
   const { data: prizes, error } = await fetchPrizesByCompetition(
     competition.id,
   );
-  if (error || prizes.length === 0) return <></>;
+  if (error || prizes?.length === 0) return <></>;
 
   const orderedPrizes = [prizes[1], prizes[0], prizes[2]];
 
@@ -58,12 +58,12 @@ const PrizeContainer = async ({ competition, locale, t }) => {
       <CardContent>
         <div className="hidden grid-cols-1 grid-rows-3 gap-2 lg:grid lg:grid-cols-3 lg:grid-rows-1">
           {orderedPrizes.map((prize) => (
-            <Prize prize={prize} key={prize.id} locale={locale} t={t} />
+            <Prize prize={prize} key={prize?.id} locale={locale} t={t} />
           ))}
         </div>
         <div className="grid grid-cols-1 grid-rows-3 gap-2 lg:hidden lg:grid-cols-3 lg:grid-rows-1">
           {prizes.map((prize) => (
-            <Prize prize={prize} key={prize.id} locale={locale} t={t} />
+            <Prize prize={prize} key={prize?.id} locale={locale} t={t} />
           ))}
         </div>
       </CardContent>

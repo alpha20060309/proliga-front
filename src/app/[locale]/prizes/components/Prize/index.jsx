@@ -6,7 +6,7 @@ const Prize = ({ prize, locale, t }) => {
   return (
     <div className={cn("flex min-h-96 flex-col items-center transition-all")}>
       <p className="text-lg">
-        <span className="font-bold">{prize.order + " "}</span>
+        <span className="font-bold">{prize?.order + " "}</span>
         {t("O'RIN")}
       </p>
       <img
@@ -15,9 +15,9 @@ const Prize = ({ prize, locale, t }) => {
         alt={prize?.name}
         className={cn(
           "aspect-square object-contain p-2 md:p-4 bg-white rounded-xl",
-          prize.order === 1 && "scale-100",
-          prize.order === 2 && "scale-100 lg:scale-90",
-          prize.order === 3 && "scale-100 lg:scale-80",
+          prize?.order === 1 && "scale-100",
+          prize?.order === 2 && "scale-100 lg:scale-90",
+          prize?.order === 3 && "scale-100 lg:scale-80",
         )}
       />
       <p className="text-xl lg:text-lg">
