@@ -129,7 +129,9 @@ export const swapTeamPlayerReducer = (state, action) => {
     return state;
   }
 
-  if (state.duplicatesMap[clubId] > maxTeamPlayers) {
+  const counter = previousPlayer?.club?.id === player.club.id ? 0 : 1;
+
+  if (state.duplicatesMap[clubId] > maxTeamPlayers - counter) {
     showClubLimitWarning();
     return state;
   }
