@@ -27,6 +27,7 @@ const initialState = {
   prevTeam: [],
   error: null,
   isLoading: false,
+  ids: [],
 };
 
 const teamPlayersSlice = createSlice({

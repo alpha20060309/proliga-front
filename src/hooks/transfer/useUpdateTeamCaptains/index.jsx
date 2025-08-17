@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { toast } from "sonner";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { supabase } from "../../../lib/supabaseClient";
 import { fetchTeamPlayers } from "lib/features/teamPlayer/teamPlayer.thunk";
 import { useTranslation } from "react-i18next";
@@ -10,6 +10,7 @@ export const useUpdateTeamCaptains = () => {
   const dispatch = useDispatch();
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { ids } = useSelector((store) => store.teamPlayer);
 
   const updateTeamCaptains = useCallback(
     async ({ team, team_id, tour_id, currentCompetition, user }) => {
@@ -26,11 +27,26 @@ export const useUpdateTeamCaptains = () => {
           user_id: user.id,
           is_captain: player.is_captain,
         }));
+        const newTeamIds = team.map((p) => p.id);
+
+        // Compare ids array with newTeamIds to ensure they have the same values
+        const areIdsEqual =
+          JSON.stringify([...ids].sort()) ===
+          JSON.stringify([...newTeamIds].sort());
+
+        if (!areIdsEqual) {
+          setError("Jamoa formatsiyasi notogri");
+          return toast.error(t("Jamoa formatsiyasi notogri"));
+        }
+
+        if (newTeam?.length !== 11) {
+          setError("Incorrect team");
+          return toast.error(t("Jamoa formatsiyasi notogri"));
+        }
 
         const { data, error } = await supabase
           .from("team_player")
           .upsert(newTeam)
-          .is("deleted_at", null)
           .select();
 
         if (error) {
@@ -71,7 +87,7 @@ export const useUpdateTeamCaptains = () => {
         setIsLoading(false);
       }
     },
-    [dispatch, t],
+    [dispatch, t, ids],
   );
   return { updateTeamCaptains, isLoading, error };
 };

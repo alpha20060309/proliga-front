@@ -10,11 +10,16 @@ export const teamPlayerExtraReducer = (builder) => {
 
       const teamData = team.reduce(
         (acc, player) => {
-          const { position, club, name, price } = player;
+          const { position, club, name, price, id } = player;
 
           if (position && acc[position]) {
             acc[position].push(player);
             acc.teamPrice += price || 0;
+            
+            // Add player ID to ids array
+            if (id) {
+              acc.ids.push(id);
+            }
 
             if (name) {
               const clubSlug = club?.id ?? "";
@@ -33,6 +38,7 @@ export const teamPlayerExtraReducer = (builder) => {
           playersCount: { GOA: 0, DEF: 0, MID: 0, STR: 0 },
           teamPrice: 0,
           duplicatesMap: {},
+          ids: [],
         },
       );
 
@@ -43,6 +49,7 @@ export const teamPlayerExtraReducer = (builder) => {
       state.playersCount = teamData.playersCount;
       state.teamPrice = teamData.teamPrice;
       state.duplicatesMap = teamData.duplicatesMap;
+      state.ids = teamData.ids;
 
       state.prevTeam = team;
       state.transferModal = false;
