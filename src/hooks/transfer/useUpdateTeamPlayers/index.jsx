@@ -28,7 +28,7 @@ export const useUpdateTeamPlayers = () => {
           user_id: user.id,
           is_captain: player.is_captain,
         }));
-        console.log(newTeam);
+
         const newTeamIds = team.map((p) => p.id);
 
         // Compare ids array with newTeamIds to ensure they have the same values
