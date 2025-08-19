@@ -286,9 +286,9 @@ model match_event {
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model news {
   id           Int       @id @default(autoincrement())
-  name         String?   @db.VarChar(64)
+  name         String?   @db.VarChar(255)
   desc         String?
-  image        String?   @db.VarChar(128)
+  image        String?   @db.VarChar(255)
   author_id    Int?
   created_at   DateTime? @default(now()) @db.Timestamptz(6)
   updated_at   DateTime? @default(now()) @db.Timestamptz(6)
@@ -296,7 +296,7 @@ model news {
   created_by   Int?
   updated_by   Int?
   deleted_by   Int?
-  name_ru      String?   @db.VarChar(64)
+  name_ru      String?   @db.VarChar(255)
   view_count   Int?      @default(0)
   published_at DateTime? @db.Timestamptz(6)
   desc_ru      String?
@@ -539,6 +539,7 @@ model player_result {
   @@index([player_id, match_id, tour_id], map: "idx_player_result_player_match_tour")
   @@index([season_id], map: "idx_player_result_season_id")
   @@index([tour_id], map: "idx_player_result_tour_id")
+  @@index([player_id], map: "idx_player_result_player_id")
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -1097,6 +1098,7 @@ enum config_key {
   secret_jwt
   seo_title
   seo_description
+  show_points
 }
 
 enum config_type {
@@ -1144,6 +1146,8 @@ enum match_event_type {
   second_time_start
   second_time_end
   match_end
+  autogoal
+  blocked_penalty
 }
 
 enum match_status {
