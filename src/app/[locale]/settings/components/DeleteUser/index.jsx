@@ -8,7 +8,7 @@ import {
 import { Button } from "components/ui/button";
 import ConfirmationModal from "components/ConfirmationModal";
 import { Trash } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectUser } from "lib/features/auth/auth.selector";
 import { supabase } from "lib/supabaseClient";
@@ -20,8 +20,36 @@ const DeleteUser = () => {
   const user = useSelector(selectUser);
   const [isModalOpen, setModalOpen] = useState(false);
   const { logOut } = useLogOut();
+  const [oldUser, setOldUser] = useState(null);
+
+  useEffect(() => {
+    const fetchOldUser = async () => {
+      if (!user?.phone) return;
+      const { data, error } = await supabase
+        .from("user")
+        .select("id, phone")
+        .eq("phone", "deleted_" + user.phone)
+        .single();
+
+      if (error) {
+        return;
+      }
+      if (data) {
+        setOldUser(data);
+      }
+    };
+
+    fetchOldUser();
+  }, [user?.phone, t]);
 
   const handleDelete = async () => {
+    if (oldUser?.phone) {
+      return toast.error(
+        t(
+          "You cannot delete your account because you have already deleted it.",
+        ),
+      );
+    }
     if (!user?.id) return;
     try {
       await supabase
@@ -60,7 +88,9 @@ const DeleteUser = () => {
         <Button
           variant="outline"
           size="icon"
-          className="border-destructive text-destructive hover:bg-destructive/10 hover:text-foreground"
+          className={
+            "border-destructive text-destructive hover:bg-destructive/10 hover:text-foreground"
+          }
           onClick={() => setModalOpen(true)}
         >
           <Trash className="h-4 w-4" />
