@@ -13,6 +13,8 @@ import TranslationsProvider from "providers/Translations.provider";
 export { generateMetadata, viewport } from "./metadata";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { YandexMetricaProvider } from "next-yandex-metrica";
+import { signOut } from "next-auth/react";
+import { DELETION_PREFIX } from "utils/config.global";
 
 export default async function RootLayout({ children, params }) {
   const session = await auth();
@@ -33,6 +35,10 @@ export default async function RootLayout({ children, params }) {
   }
   const themeURL = `${staticBaseUrl}${themePath}`;
 
+  const userPhone = session?.user?.phone || "";
+  if (userPhone && userPhone.startsWith(DELETION_PREFIX)) {
+    await signOut({ redirect: true });
+  }
   return (
     <>
       <Toaster />

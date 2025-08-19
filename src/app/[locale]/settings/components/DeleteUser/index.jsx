@@ -14,6 +14,7 @@ import { selectUser } from "lib/features/auth/auth.selector";
 import { supabase } from "lib/supabaseClient";
 import { toast } from "sonner";
 import { useLogOut } from "hooks/auth/useLogOut";
+import { DELETION_PREFIX } from "utils/config.global";
 
 const DeleteUser = () => {
   const { t } = useTranslation();
@@ -28,7 +29,7 @@ const DeleteUser = () => {
       const { data, error } = await supabase
         .from("user")
         .select("id, phone")
-        .eq("phone", "deleted_" + user.phone)
+        .eq("phone", DELETION_PREFIX + user.phone)
         .single();
 
       if (error) {
@@ -56,8 +57,8 @@ const DeleteUser = () => {
         .from("user")
         .update({
           deleted_at: new Date().toISOString(),
-          phone: "deleted_" + user.phone,
-          email: "deleted_" + user.email,
+          phone: DELETION_PREFIX + user.phone,
+          email: DELETION_PREFIX + user.email,
         })
         .eq("id", user.id)
         .single();

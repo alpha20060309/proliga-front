@@ -18,3 +18,5 @@ export const MAX_MID_VALUE = 5;
 
 export const MIN_STR_VALUE = 2;
 export const MAX_STR_VALUE = 3;
+
+export const DELETION_PREFIX = "deleted_";
