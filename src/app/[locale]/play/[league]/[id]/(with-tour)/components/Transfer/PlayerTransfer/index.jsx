@@ -11,7 +11,9 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { setPlayerTransferModal } from "lib/features/teamPlayer/teamPlayer.slice";
 import { selectCurrentPlayer } from "lib/features/player/player.selector";
-import { memo } from "react";
+import { memo, useEffect } from "react";
+import { supabase } from "lib/supabaseClient";
+import { overrideCurrentPlayer } from "lib/features/player/player.slice";
 
 const PlayerTransfer = () => {
   const dispatch = useDispatch();
@@ -23,9 +25,30 @@ const PlayerTransfer = () => {
     dispatch(setPlayerTransferModal(false));
   };
 
+  useEffect(() => {
+    const fetchPlayer = async () => {
+      const { data, error } = await supabase
+        .from("player")
+        .select("*, club(id, name, slug, name_ru, logo_img, form_img)")
+        .eq("id", currentPlayer.id)
+        .single();
+
+      if (error) {
+        console.log(error);
+      }
+
+      if (data) {
+        dispatch(overrideCurrentPlayer(data));
+      }
+    };
+    if (transferModal && currentPlayer?.id && !currentPlayer?.price) {
+      fetchPlayer();
+    }
+  }, [transferModal, currentPlayer, dispatch]);
+
   return (
     <Dialog
-      open={transferModal && currentPlayer?.id}
+      open={transferModal && currentPlayer?.id && currentPlayer?.price}
       onOpenChange={setModalOpen}
     >
       <DialogContent

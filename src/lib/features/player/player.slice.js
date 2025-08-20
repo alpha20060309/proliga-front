@@ -18,12 +18,16 @@ export const playersSlice = createSlice({
   reducers: {
     setCurrentPlayer: (state, action) => {
       state.currentPlayer =
-        state.players.find((p) => p.id === action.payload) ?? {};
+        state.players.find((p) => p.id === action.payload) ?? { id: action.payload };
+    },
+    overrideCurrentPlayer: (state, action) => {
+      state.currentPlayer = action.payload;
     },
   },
   extraReducers: playerExtraReducer,
 });
 
-export const { setCurrentPlayer } = playersSlice.actions;
+export const { setCurrentPlayer, overrideCurrentPlayer } =
+  playersSlice.actions;
 
 export default playersSlice.reducer;

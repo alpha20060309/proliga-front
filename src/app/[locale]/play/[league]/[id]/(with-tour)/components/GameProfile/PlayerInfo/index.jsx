@@ -11,6 +11,8 @@ import { getCorrentPlayerPosition } from "utils/getCorrectPlayerPosition.utils";
 import { setPlayerInfoModal } from "lib/features/teamPlayer/teamPlayer.slice";
 import { selectCurrentPlayer } from "lib/features/player/player.selector";
 import { memo } from "react";
+import { supabase } from "lib/supabaseClient";
+import { overrideCurrentPlayer } from "lib/features/player/player.slice";
 
 const PlayerInfo = () => {
   const dispatch = useDispatch();
@@ -39,8 +41,32 @@ const PlayerInfo = () => {
     }
   }, [currentPlayer, playerPoint]);
 
+  useEffect(() => {
+    const fetchPlayer = async () => {
+      const { data, error } = await supabase
+        .from("player")
+        .select("*, club(id, name, slug, name_ru, logo_img, form_img)")
+        .eq("id", currentPlayer.id)
+        .single();
+
+      if (error) {
+        console.log(error);
+      }
+
+      if (data) {
+        dispatch(overrideCurrentPlayer(data));
+      }
+    };
+    if (infoModal && currentPlayer?.id && !currentPlayer?.price) {
+      fetchPlayer();
+    }
+  }, [infoModal, currentPlayer, dispatch]);
+
   return (
-    <Dialog open={infoModal && currentPlayer?.id} onOpenChange={setModalOpen}>
+    <Dialog
+      open={infoModal && currentPlayer?.id && currentPlayer?.price}
+      onOpenChange={setModalOpen}
+    >
       <DialogContent className="overflox-y-auto xs:mx-auto border-border 2xl:max-w-6xl: flex max-h-[90vh] min-h-[50vh] w-full max-w-4xl flex-col gap-4 overflow-y-auto rounded-xl sm:max-w-3xl lg:max-w-4xl xl:max-w-5xl">
         <PlayerPhoto
           currentPlayer={currentPlayer}
