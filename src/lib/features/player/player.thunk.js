@@ -58,3 +58,26 @@ export const fetchTopPlayers = createAsyncThunk(
     return { data };
   },
 );
+
+export const fetchPlayerMatches = createAsyncThunk(
+  "player/fetchPlayerMatches",
+  async ({ competition_id, player_id }) => {
+
+    const { data, error } = await supabase
+      .from("player_point")
+      .select(
+        "id, point, player_id, match_id(*), player_result_id(*), tour_id(id, name, name_ru)"
+      )
+      .eq("competition_id", competition_id)
+      .eq("player_id", player_id)
+      .is("deleted_at", null)
+      .not("player_result_id", "is", null)
+      .gt("player_result_id.played_min", 1);
+
+    if (error) {
+      throw error;
+    }
+
+    return { data };
+  },
+);

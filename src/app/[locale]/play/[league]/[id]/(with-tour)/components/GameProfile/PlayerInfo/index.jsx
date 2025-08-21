@@ -1,45 +1,44 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import PlayerStatisticsTable from "./Table";
 import PlayerPhoto from "./PlayerPhoto";
 import { Dialog, DialogContent, DialogDescription } from "components/ui/dialog";
-import { selectPlayerPoint } from "lib/features/playerPoint/playerPoint.selector";
 import { getCorrentPlayerPosition } from "utils/getCorrectPlayerPosition.utils";
 import { setPlayerInfoModal } from "lib/features/teamPlayer/teamPlayer.slice";
-import { selectCurrentPlayer } from "lib/features/player/player.selector";
+import {
+  selectCurrentPlayer,
+  selectPlayerMatches,
+} from "lib/features/player/player.selector";
 import { memo } from "react";
 import { supabase } from "lib/supabaseClient";
 import { overrideCurrentPlayer } from "lib/features/player/player.slice";
+import { fetchPlayerMatches } from "lib/features/player/player.thunk";
+import { usePathname } from "next/navigation";
 
 const PlayerInfo = () => {
+  const path = usePathname();
   const dispatch = useDispatch();
   const currentPlayer = useSelector(selectCurrentPlayer);
   const { infoModal } = useSelector((store) => store.teamPlayer);
   const { lang } = useSelector((store) => store.systemLanguage);
-  const playerPoint = useSelector(selectPlayerPoint);
-  const [matches, setMatches] = useState([]);
+  const matches = useSelector(selectPlayerMatches);
   const { t } = useTranslation();
+  const competition_id = +path.split("/")[3] || 0;
 
   const setModalOpen = () => {
     dispatch(setPlayerInfoModal(false));
   };
 
   useEffect(() => {
-    if (playerPoint?.length > 0) {
-      setMatches([]);
-      playerPoint.forEach((item) => {
-        if (
-          item.player_id === currentPlayer?.id &&
-          item?.player_result_id?.played_min > 0
-        ) {
-          setMatches((prevMatch) => [...prevMatch, item]);
-        }
-      });
+    if (infoModal && currentPlayer?.id) {
+      dispatch(
+        fetchPlayerMatches({ player_id: currentPlayer?.id, competition_id }),
+      );
     }
-  }, [currentPlayer, playerPoint]);
+  }, [infoModal, currentPlayer?.id, dispatch, competition_id]);
 
   useEffect(() => {
     const fetchPlayer = async () => {

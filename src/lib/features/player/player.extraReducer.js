@@ -2,6 +2,7 @@ import {
   fetchPlayers,
   fetchTopPlayers,
   fetchAdditionalPlayers,
+  fetchPlayerMatches,
 } from "./player.thunk";
 
 export const playerExtraReducer = (builder) => {
@@ -49,5 +50,16 @@ export const playerExtraReducer = (builder) => {
     .addCase(fetchTopPlayers.rejected, (state, action) => {
       state.topPlayersError = action?.error ?? null;
       state.topPlayersLoading = false;
+    })
+    .addCase(fetchPlayerMatches.pending, (state) => {
+      state.matchesLoading = true;
+    })
+    .addCase(fetchPlayerMatches.fulfilled, (state, action) => {
+      state.currentPlayerMatches = action.payload?.data || [];
+      state.matchesLoading = false;
+    })
+    .addCase(fetchPlayerMatches.rejected, (state, action) => {
+      state.matchesError = action?.error ?? null;
+      state.matchesLoading = false;
     });
 };

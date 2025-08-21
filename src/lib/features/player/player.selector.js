@@ -14,3 +14,8 @@ export const selectCurrentPlayer = createDraftSafeSelector(
   (store) => store.player,
   (player) => player.currentPlayer,
 );
+
+export const selectPlayerMatches = createDraftSafeSelector(
+  (store) => store.player,
+  (player) => player.currentPlayerMatches,
+);

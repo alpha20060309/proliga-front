@@ -7,7 +7,10 @@ const initialState = {
   topPlayersError: null,
   currentPlayer: {},
   players: [],
+  currentPlayerMatches: [],
   isLoading: false,
+  matchesLoading: false,
+  matchesError: null,
   error: null,
   count: 0,
 };
