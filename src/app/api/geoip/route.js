@@ -8,8 +8,7 @@ let reader = null;
 
 async function initializeReader() {
   if (!reader) {
-    // eslint-disable-next-line no-undef
-    const dbPath = path.resolve(process.env.NEXT_PUBLIC_MAXMIND_DB_PATH || "");
+    const dbPath = path.join("public", 'data', 'GeoLite2-City.mmdb');
     try {
       const stats = await fs.stat(dbPath);
       if (stats.isDirectory()) {

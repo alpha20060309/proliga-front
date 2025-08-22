@@ -1,0 +1,30 @@
+# Node modules
+node_modules
+static
+# Build output
+.next
+dist
+build
+out
+
+# Git
+.git
+.gitignore
+
+# Logs
+*.log
+logs/
+
+# Environment files (optional, include only what’s needed)
+.env
+.env.local
+.env.development
+*.env
+
+# Docker-related files
+Dockerfile
+.dockerignore
+
+# Miscellaneous
+coverage
+*.md

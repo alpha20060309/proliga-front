@@ -75,6 +75,7 @@ For a more detailed structure, see `tree.txt`.
    NEXT_PUBLIC_CLICK_SERVICE_ID=your_click_id
    NEXT_PUBLIC_PAYME_ID=your_payme_id
    ```
+5. cat .env.production | base64 // if necessary
 
 ### 💻 Development
 
