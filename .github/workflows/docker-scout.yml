@@ -33,16 +33,16 @@ jobs:
           tags: |
             type=raw,value=main
 
-      # Run Docker Scout with CVE checks, recommendations, and comparison
+      # Run Docker Scout for CVE and recommendations only
       - name: Docker Scout
         id: docker-scout
         uses: docker/scout-action@v1
         with:
-          organization: komoliddin
-          command: cves,recommendations,compare
+          command: cves,recommendations
           image: ${{ steps.meta.outputs.tags }}
           to-latest: true
           ignore-base: true
           ignore-unchanged: true
           only-fixed: true
+          organization: komoliddin
           github-token: ${{ secrets.TOKEN }}
