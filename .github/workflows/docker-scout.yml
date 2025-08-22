@@ -9,7 +9,7 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
-      # Checkout the repository
+      # Checkout repository
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -17,14 +17,14 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # Log in to Docker Hub (required if the image is private)
+      # Log in to Docker Hub
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # Extract Docker image metadata (sets outputs.tags)
+      # Generate metadata for the image
       - name: Extract Docker metadata
         id: meta
         uses: docker/metadata-action@v5
@@ -33,15 +33,15 @@ jobs:
           tags: |
             type=raw,value=main
 
-      # Scan the Docker image using Docker Scout
+      # Run Docker Scout with CVE checks, recommendations, and comparison
       - name: Docker Scout
         id: docker-scout
         uses: docker/scout-action@v1
         with:
-          command: compare
+          command: cves,recommendations,compare
           image: ${{ steps.meta.outputs.tags }}
-          to: "docker.io/komoliddin/proliga-front:main"
+          to-latest: true
+          ignore-base: true
           ignore-unchanged: true
-          only-severities: critical,high
-          write-comment: true
+          only-fixed: true
           github-token: ${{ secrets.TOKEN }}
