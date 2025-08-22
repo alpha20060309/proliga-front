@@ -38,6 +38,7 @@ COPY package.json pnpm-lock.yaml ./
 # Install pnpm globally
 RUN npm i -g pnpm
 
+RUN npm i -g dotenv-cli
 # Install only production dependencies
 RUN pnpm i --prod
 
@@ -52,11 +53,14 @@ COPY .env.production ./
 # Generate Prisma client in production
 RUN npx prisma generate
 
+# Fix permissions for appuser on .next directory
+RUN chown -R appuser:appgroup /app/.next
+
 # Set non-root user
 USER appuser
 
 # Expose port (Next.js default)
-EXPOSE 3000
+EXPOSE 3030
 
 # Set environment for production
 ENV NODE_ENV=production
