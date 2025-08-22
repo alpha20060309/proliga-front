@@ -38,6 +38,7 @@ jobs:
         id: docker-scout
         uses: docker/scout-action@v1
         with:
+          organization: komoliddin
           command: cves,recommendations,compare
           image: ${{ steps.meta.outputs.tags }}
           to-latest: true
